@@ -1,11 +1,37 @@
+# Dependencies
 node_modules/
-.expo/
+
+# Build output
 dist/
-.DS_Store
-*.log
-.env
-.env.local
-ios/
-android/
+.expo/
 .turbo
 
+# Native build folders
+ios/
+android/
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+npm-debug.log*
+
+# Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Lock files (each package manages its own)
+package-lock.json
+
+# Next.js (docs)
+docs/.next/
+docs/out/

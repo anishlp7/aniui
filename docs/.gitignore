@@ -1,10 +1,28 @@
+# Dependencies
 node_modules/
-.expo/
-dist/
-.DS_Store
-*.log
+
+# Next.js build
+.next/
+out/
+
+# Environment
 .env
 .env.local
-ios/
-android/
-.turbo
+.env.*.local
+
+# OS files
+.DS_Store
+
+# Logs
+*.log
+npm-debug.log*
+
+# TypeScript
+*.tsbuildinfo
+next-env.d.ts
+
+# Vercel
+.vercel
+
+# Lock file
+package-lock.json
