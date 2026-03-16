@@ -79,7 +79,7 @@ export async function generateCommand(
   logger.break();
 
   // Determine output path
-  let outputPath = opts.output;
+  let outputPath: string = opts.output ?? "";
   if (!outputPath) {
     const response = await prompts({
       type: "text",
