@@ -2,6 +2,8 @@ import { Command } from "commander";
 import { initCommand } from "./commands/init";
 import { addCommand } from "./commands/add";
 import { themeCommand } from "./commands/theme";
+import { mcpCommand } from "./commands/mcp";
+import { generateCommand } from "./commands/generate";
 
 const pkg = require("../../package.json");
 
@@ -30,6 +32,22 @@ program
   .description("Change the theme preset")
   .action(async () => {
     await themeCommand();
+  });
+
+program
+  .command("mcp")
+  .description("Print MCP server configuration for AI tools")
+  .action(async () => {
+    await mcpCommand();
+  });
+
+program
+  .command("generate")
+  .description("Generate a screen using AI (requires ANTHROPIC_API_KEY)")
+  .argument("<description>", "describe the screen to generate")
+  .option("-o, --output <path>", "output file path")
+  .action(async (description: string, opts: { output?: string }) => {
+    await generateCommand(description, opts);
   });
 
 program.parse();
