@@ -5,10 +5,21 @@
   "description": "AniUI MCP server — expose component registry, theme tokens, and code examples to AI tools",
   "license": "MIT",
   "author": "Anish",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/anishlp7/aniui",
+    "directory": "mcp"
+  },
+  "homepage": "https://aniui.dev",
+  "bugs": "https://github.com/anishlp7/aniui/issues",
   "main": "dist/index.js",
   "bin": {
     "aniui-mcp": "./dist/index.js"
   },
+  "files": [
+    "dist",
+    "package.json"
+  ],
   "scripts": {
     "build": "tsc",
     "dev": "tsc --watch"

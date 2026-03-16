@@ -4,9 +4,26 @@
   "description": "Beautiful React Native components. Copy. Paste. Ship.",
   "license": "MIT",
   "author": "Anish",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/anishlp7/aniui"
+  },
+  "homepage": "https://aniui.dev",
+  "bugs": "https://github.com/anishlp7/aniui/issues",
+  "keywords": [
+    "react-native",
+    "nativewind",
+    "tailwind",
+    "ui",
+    "components",
+    "expo",
+    "shadcn"
+  ],
   "bin": {
     "aniui": "./dist/bin/index.js"
   },
+  "main": "dist/src/index.js",
+  "types": "dist/src/index.d.ts",
   "files": [
     "dist",
     "components",
@@ -15,19 +32,24 @@
   ],
   "scripts": {
     "build": "tsc",
-    "dev": "tsc --watch"
+    "dev": "tsc --watch",
+    "test": "vitest run",
+    "test:watch": "vitest"
   },
   "dependencies": {
-    "@anthropic-ai/sdk": "^0.52.0",
     "chalk": "^4.1.2",
     "commander": "^12.0.0",
     "fs-extra": "^11.2.0",
     "prompts": "^2.4.2"
   },
+  "optionalDependencies": {
+    "@anthropic-ai/sdk": "^0.52.0"
+  },
   "devDependencies": {
     "@types/fs-extra": "^11.0.0",
     "@types/node": "^20.0.0",
     "@types/prompts": "^2.4.0",
-    "typescript": "^5.5.0"
+    "typescript": "^5.5.0",
+    "vitest": "^4.1.0"
   }
 }

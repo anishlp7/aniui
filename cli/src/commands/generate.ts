@@ -1,7 +1,6 @@
 import path from "path";
 import fs from "fs-extra";
 import prompts from "prompts";
-import Anthropic from "@anthropic-ai/sdk";
 import { logger } from "../utils/logger";
 import { buildSystemPrompt } from "../prompts/system";
 
@@ -32,6 +31,16 @@ export async function generateCommand(
   const systemPrompt = await buildSystemPrompt();
 
   // Call Claude API
+  let Anthropic: typeof import("@anthropic-ai/sdk").default;
+  try {
+    Anthropic = (await import("@anthropic-ai/sdk")).default;
+  } catch {
+    logger.error("@anthropic-ai/sdk is not installed.");
+    logger.info("Install it to use the generate command:");
+    logger.info("  npm install @anthropic-ai/sdk");
+    process.exit(1);
+  }
+
   const client = new Anthropic({ apiKey });
 
   logger.info("Generating with Claude...");

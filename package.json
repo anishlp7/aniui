@@ -6,7 +6,11 @@
   "license": "MIT",
   "author": "Anish",
   "scripts": {
+    "build": "cd cli && npm run build && cd ../mcp && npm run build",
+    "test": "cd cli && npm test",
     "build:cli": "cd cli && npm run build",
-    "dev:cli": "cd cli && npm run dev"
+    "build:mcp": "cd mcp && npm run build",
+    "dev:cli": "cd cli && npm run dev",
+    "dev:docs": "cd docs && npm run dev"
   }
 }
