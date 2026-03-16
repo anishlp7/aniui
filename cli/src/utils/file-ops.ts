@@ -15,6 +15,10 @@ export async function copyComponent(
   const fileName = path.basename(componentFile);
   const destPath = path.join(destDir, fileName);
 
+  if (!await fs.pathExists(srcPath)) {
+    throw new Error(`Component source not found: ${srcPath}`);
+  }
+
   await fs.ensureDir(destDir);
 
   let content = await fs.readFile(srcPath, "utf-8");
@@ -33,6 +37,11 @@ export async function copyTemplate(
 ): Promise<void> {
   const packageRoot = getPackageRoot();
   const srcPath = path.join(packageRoot, "templates", templateName);
+
+  if (!await fs.pathExists(srcPath)) {
+    throw new Error(`Template not found: ${srcPath}`);
+  }
+
   await fs.ensureDir(path.dirname(destPath));
   await fs.copy(srcPath, destPath);
 }
@@ -40,6 +49,11 @@ export async function copyTemplate(
 export async function copyUtilFile(destPath: string): Promise<void> {
   const packageRoot = getPackageRoot();
   const srcPath = path.join(packageRoot, "lib", "utils.ts");
+
+  if (!await fs.pathExists(srcPath)) {
+    throw new Error(`Utility file not found: ${srcPath}`);
+  }
+
   await fs.ensureDir(path.dirname(destPath));
   await fs.copy(srcPath, destPath);
 }

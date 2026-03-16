@@ -71,7 +71,12 @@ export async function addCommand(names: string[]): Promise<void> {
       continue;
     }
 
-    await copyComponent(entry.file, componentsDir, utilPath);
+    try {
+      await copyComponent(entry.file, componentsDir, utilPath);
+    } catch (err) {
+      logger.error(`Failed to copy ${name}: ${err instanceof Error ? err.message : String(err)}`);
+      continue;
+    }
     created.push(name);
 
     for (const dep of entry.dependencies) {

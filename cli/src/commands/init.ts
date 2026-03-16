@@ -2,7 +2,7 @@ import path from "path";
 import fs from "fs-extra";
 import prompts from "prompts";
 import { detectProject, getInstallCommand, getDlxCommand } from "../utils/detect-project";
-import { copyTemplate, copyUtilFile } from "../utils/file-ops";
+import { copyTemplate, copyUtilFile, getPackageRoot } from "../utils/file-ops";
 import { logger } from "../utils/logger";
 
 const THEME_PRESETS: Record<string, Record<string, string>> = {
@@ -143,8 +143,4 @@ export async function initCommand(): Promise<void> {
   logger.info("2. Add components:");
   logger.info(`   ${getDlxCommand(pm, "aniui add button card text")}`);
   logger.break();
-}
-
-function getPackageRoot(): string {
-  return path.resolve(__dirname, "..", "..");
 }

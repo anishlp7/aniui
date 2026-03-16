@@ -8,9 +8,5 @@
   "scripts": {
     "build:cli": "cd cli && npm run build",
     "dev:cli": "cd cli && npm run dev"
-  },
-  "dependencies": {
-    "@tailwindcss/postcss": "^4.2.1",
-    "tailwindcss": "^4.2.1"
   }
 }

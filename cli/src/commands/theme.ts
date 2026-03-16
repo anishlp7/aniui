@@ -107,20 +107,28 @@ export async function themeCommand(): Promise<void> {
   let css = await fs.readFile(globalCssPath, "utf-8");
   const theme = THEMES[response.theme];
 
-  // Apply light theme overrides
-  for (const [varName, value] of Object.entries(theme.light)) {
-    const escaped = varName.replace("--", "\\-\\-");
-    const regex = new RegExp(`(${escaped}:\\s*)[^;]+`, "g");
-    css = css.replace(regex, `$1${value}`);
+  // Split CSS into :root and .dark sections to apply overrides independently
+  const darkBlockMatch = css.match(/(\.dark\s*\{)([\s\S]*?)(\})/);
+  const rootBlockMatch = css.match(/(:root\s*\{)([\s\S]*?)(\})/);
+
+  if (rootBlockMatch) {
+    let rootContent = rootBlockMatch[2];
+    for (const [varName, value] of Object.entries(theme.light)) {
+      const escaped = varName.replace("--", "\\-\\-");
+      const regex = new RegExp(`(${escaped}:\\s*)[^;]+`, "g");
+      rootContent = rootContent.replace(regex, `$1${value}`);
+    }
+    css = css.replace(rootBlockMatch[2], rootContent);
   }
 
-  // Apply dark theme overrides
-  for (const [varName, value] of Object.entries(theme.dark)) {
-    const escaped = varName.replace("--", "\\-\\-");
-    // Only replace within .dark block — simple approach: replace all occurrences
-    // Since dark values differ from light, this works for the primary overrides
-    const regex = new RegExp(`(${escaped}:\\s*)[^;]+`, "g");
-    css = css.replace(regex, `$1${value}`);
+  if (darkBlockMatch) {
+    let darkContent = darkBlockMatch[2];
+    for (const [varName, value] of Object.entries(theme.dark)) {
+      const escaped = varName.replace("--", "\\-\\-");
+      const regex = new RegExp(`(${escaped}:\\s*)[^;]+`, "g");
+      darkContent = darkContent.replace(regex, `$1${value}`);
+    }
+    css = css.replace(darkBlockMatch[2], darkContent);
   }
 
   await fs.writeFile(globalCssPath, css, "utf-8");

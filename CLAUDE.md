@@ -93,16 +93,21 @@ aniui/
 │       ├── alert.tsx
 │       ├── switch.tsx
 │       ├── checkbox.tsx
-│       ├── skeleton.tsx
+│       ├── textarea.tsx
 │       ├── label.tsx
+│       ├── spinner.tsx
 │       ├── progress.tsx
 │       ├── radio-group.tsx
 │       ├── list.tsx
+│       ├── skeleton.tsx
 │       ├── accordion.tsx
 │       ├── tabs.tsx
 │       ├── dialog.tsx
+│       ├── alert-dialog.tsx
 │       ├── toast.tsx
 │       ├── collapsible.tsx
+│       ├── tooltip.tsx
+│       ├── popover.tsx
 │       ├── bottom-sheet.tsx
 │       ├── action-sheet.tsx
 │       ├── select.tsx
@@ -211,38 +216,42 @@ Build these FIRST:
 | 1 | button | Pressable | default, secondary, outline, ghost, destructive × sm, md, lg | ~60 |
 | 2 | text | Text | h1, h2, h3, h4, p, lead, large, small, muted | ~45 |
 | 3 | input | TextInput | default, ghost × sm, md, lg | ~55 |
-| 4 | card | View | Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter (compound) | ~65 |
+| 4 | textarea | TextInput | Multi-line text input | ~38 |
+| 5 | card | View | Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter (compound) | ~65 |
 | 5 | badge | View+Text | default, secondary, outline, destructive | ~35 |
 | 6 | separator | View | horizontal, vertical | ~15 |
 | 7 | avatar | Image+View | sm, md, lg (with fallback initials) | ~50 |
 | 8 | alert | View+Text | default, destructive, success, warning | ~50 |
-| 9 | label | Text | (styled label for form fields) | ~15 |
-| 10 | skeleton | View | (animated pulse via opacity) | ~30 |
+| 10 | label | Text | (styled label for form fields) | ~15 |
 | 11 | switch | Switch | (themed wrapper around RN Switch) | ~30 |
 | 12 | checkbox | Pressable | checked, unchecked, disabled | ~45 |
 | 13 | radio-group | Pressable | (group context + radio items) | ~60 |
 | 14 | progress | View | (percentage bar) | ~30 |
-| 15 | list | View | (styled list items — NOT FlatList wrapper) | ~40 |
+| 15 | spinner | ActivityIndicator | sm, md, lg sizes | ~39 |
+| 16 | list | View | (styled list items — NOT FlatList wrapper) | ~40 |
 
 ### Tier 2: Needs react-native-reanimated v3
 
 | # | Component | Animation | Lines |
 |---|-----------|-----------|-------|
-| 16 | accordion | Height expand/collapse | ~70 |
-| 17 | tabs | Indicator slide | ~65 |
-| 18 | collapsible | Height animate | ~40 |
-| 19 | toast | Slide in/out + auto dismiss | ~75 |
-| 20 | dialog | Fade + scale overlay | ~80 |
-| 21 | tooltip | Fade in/out + position | ~50 |
+| 17 | skeleton | Animated pulse via opacity | ~42 |
+| 18 | accordion | Height expand/collapse | ~68 |
+| 19 | tabs | Indicator slide | ~86 |
+| 20 | collapsible | Height animate | ~80 |
+| 21 | toast | Slide in/out + auto dismiss | ~74 |
+| 22 | dialog | Fade + scale overlay | ~77 |
+| 23 | alert-dialog | Fade + zoom confirmation dialog | ~63 |
+| 24 | tooltip | Fade in/out + position | ~44 |
+| 25 | popover | Contextual overlay content | ~92 |
 
 ### Tier 3: Needs external packages
 
 | # | Component | Extra Dep | Lines |
 |---|-----------|-----------|-------|
-| 22 | bottom-sheet | @gorhom/bottom-sheet | ~55 |
-| 23 | action-sheet | @gorhom/bottom-sheet | ~50 |
-| 24 | select | @gorhom/bottom-sheet | ~70 |
-| 25 | date-picker | @react-native-community/datetimepicker | ~45 |
+| 26 | bottom-sheet | @gorhom/bottom-sheet | ~45 |
+| 27 | action-sheet | @gorhom/bottom-sheet | ~50 |
+| 28 | select | @gorhom/bottom-sheet | ~92 |
+| 29 | date-picker | @react-native-community/datetimepicker | ~64 |
 
 ## Theme System
 
@@ -391,8 +400,15 @@ module.exports = {
 
 ## Component Registry
 
+The source of truth for the component registry is `cli/src/registry.ts`. It maps each component name to its file, description, npm dependencies, registry dependencies, and tier.
+
+**Key rules for registry entries:**
+- Tier 1 components: dependencies should only include `clsx`, `tailwind-merge`, and optionally `class-variance-authority`
+- Tier 2 components: MUST include `react-native-reanimated` in dependencies
+- Tier 3 components: MUST include their external package (e.g. `@gorhom/bottom-sheet`)
+- `registryDependencies` lists other AniUI components that are auto-installed alongside
+
 ```typescript
-// cli/src/registry.ts
 export type ComponentEntry = {
   name: string;
   file: string;
@@ -400,177 +416,6 @@ export type ComponentEntry = {
   dependencies: string[];        // npm packages user needs
   registryDependencies: string[]; // other AniUI components needed
   tier: 1 | 2 | 3;
-};
-
-export const registry: Record<string, ComponentEntry> = {
-  button: {
-    name: "Button",
-    file: "components/ui/button.tsx",
-    description: "A pressable button with variants",
-    dependencies: ["class-variance-authority", "clsx", "tailwind-merge"],
-    registryDependencies: [],
-    tier: 1,
-  },
-  text: {
-    name: "Text",
-    file: "components/ui/text.tsx",
-    description: "Typography component with heading and body variants",
-    dependencies: ["class-variance-authority", "clsx", "tailwind-merge"],
-    registryDependencies: [],
-    tier: 1,
-  },
-  input: {
-    name: "Input",
-    file: "components/ui/input.tsx",
-    description: "Text input with variants and states",
-    dependencies: ["class-variance-authority", "clsx", "tailwind-merge"],
-    registryDependencies: [],
-    tier: 1,
-  },
-  card: {
-    name: "Card",
-    file: "components/ui/card.tsx",
-    description: "Card container with header, content, footer",
-    dependencies: ["clsx", "tailwind-merge"],
-    registryDependencies: ["text"],
-    tier: 1,
-  },
-  badge: {
-    name: "Badge",
-    file: "components/ui/badge.tsx",
-    description: "Small status indicator",
-    dependencies: ["class-variance-authority", "clsx", "tailwind-merge"],
-    registryDependencies: [],
-    tier: 1,
-  },
-  separator: {
-    name: "Separator",
-    file: "components/ui/separator.tsx",
-    description: "Visual divider",
-    dependencies: ["clsx", "tailwind-merge"],
-    registryDependencies: [],
-    tier: 1,
-  },
-  avatar: {
-    name: "Avatar",
-    file: "components/ui/avatar.tsx",
-    description: "User avatar with image and fallback",
-    dependencies: ["class-variance-authority", "clsx", "tailwind-merge"],
-    registryDependencies: [],
-    tier: 1,
-  },
-  alert: {
-    name: "Alert",
-    file: "components/ui/alert.tsx",
-    description: "Alert message with variants",
-    dependencies: ["class-variance-authority", "clsx", "tailwind-merge"],
-    registryDependencies: [],
-    tier: 1,
-  },
-  label: {
-    name: "Label",
-    file: "components/ui/label.tsx",
-    description: "Form field label",
-    dependencies: ["clsx", "tailwind-merge"],
-    registryDependencies: [],
-    tier: 1,
-  },
-  skeleton: {
-    name: "Skeleton",
-    file: "components/ui/skeleton.tsx",
-    description: "Loading placeholder",
-    dependencies: ["clsx", "tailwind-merge"],
-    registryDependencies: [],
-    tier: 1,
-  },
-  switch: {
-    name: "Switch",
-    file: "components/ui/switch.tsx",
-    description: "Toggle switch",
-    dependencies: ["clsx", "tailwind-merge"],
-    registryDependencies: [],
-    tier: 1,
-  },
-  checkbox: {
-    name: "Checkbox",
-    file: "components/ui/checkbox.tsx",
-    description: "Checkbox with checked state",
-    dependencies: ["clsx", "tailwind-merge"],
-    registryDependencies: [],
-    tier: 1,
-  },
-  "radio-group": {
-    name: "RadioGroup",
-    file: "components/ui/radio-group.tsx",
-    description: "Radio button group",
-    dependencies: ["clsx", "tailwind-merge"],
-    registryDependencies: [],
-    tier: 1,
-  },
-  progress: {
-    name: "Progress",
-    file: "components/ui/progress.tsx",
-    description: "Progress bar",
-    dependencies: ["clsx", "tailwind-merge"],
-    registryDependencies: [],
-    tier: 1,
-  },
-  list: {
-    name: "List",
-    file: "components/ui/list.tsx",
-    description: "Styled list items",
-    dependencies: ["clsx", "tailwind-merge"],
-    registryDependencies: [],
-    tier: 1,
-  },
-  accordion: {
-    name: "Accordion",
-    file: "components/ui/accordion.tsx",
-    description: "Expandable content sections",
-    dependencies: ["clsx", "tailwind-merge"],
-    registryDependencies: [],
-    tier: 2,
-  },
-  tabs: {
-    name: "Tabs",
-    file: "components/ui/tabs.tsx",
-    description: "Tab navigation",
-    dependencies: ["clsx", "tailwind-merge"],
-    registryDependencies: [],
-    tier: 2,
-  },
-  dialog: {
-    name: "Dialog",
-    file: "components/ui/dialog.tsx",
-    description: "Modal dialog overlay",
-    dependencies: ["clsx", "tailwind-merge"],
-    registryDependencies: [],
-    tier: 2,
-  },
-  toast: {
-    name: "Toast",
-    file: "components/ui/toast.tsx",
-    description: "Notification toast",
-    dependencies: ["clsx", "tailwind-merge"],
-    registryDependencies: [],
-    tier: 2,
-  },
-  "bottom-sheet": {
-    name: "BottomSheet",
-    file: "components/ui/bottom-sheet.tsx",
-    description: "Bottom sheet overlay",
-    dependencies: ["@gorhom/bottom-sheet", "react-native-gesture-handler", "clsx", "tailwind-merge"],
-    registryDependencies: [],
-    tier: 3,
-  },
-  select: {
-    name: "Select",
-    file: "components/ui/select.tsx",
-    description: "Dropdown select",
-    dependencies: ["@gorhom/bottom-sheet", "react-native-gesture-handler", "clsx", "tailwind-merge"],
-    registryDependencies: ["bottom-sheet"],
-    tier: 3,
-  },
 };
 ```
 

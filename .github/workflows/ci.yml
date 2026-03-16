@@ -1,0 +1,98 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  typecheck:
+    name: TypeScript Check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install CLI dependencies
+        working-directory: cli
+        run: npm ci
+
+      - name: TypeScript typecheck (CLI)
+        working-directory: cli
+        run: npx tsc --noEmit
+
+  validate-registry:
+    name: Validate Registry
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Check all registry component files exist
+        run: |
+          node -e "
+            const { registry } = require('./cli/src/registry.ts') || {};
+            // Simple file existence check
+            const fs = require('fs');
+            const entries = Object.entries(JSON.parse(fs.readFileSync('/dev/stdin', 'utf-8')));
+          " <<< "$(node -e "
+            const fs = require('fs');
+            const content = fs.readFileSync('cli/src/registry.ts', 'utf-8');
+            const files = [...content.matchAll(/file:\s*\"([^\"]+)\"/g)].map(m => m[1]);
+            const missing = files.filter(f => !fs.existsSync(f));
+            if (missing.length > 0) {
+              console.error('Missing component files:', missing.join(', '));
+              process.exit(1);
+            }
+            console.log('All', files.length, 'component files exist');
+          ")"
+
+  lint-components:
+    name: Lint Components
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: No StyleSheet.create usage
+        run: |
+          if grep -r "StyleSheet.create" components/; then
+            echo "ERROR: StyleSheet.create found in components!"
+            exit 1
+          fi
+          echo "OK: No StyleSheet.create found"
+
+      - name: No default exports
+        run: |
+          if grep -r "export default" components/; then
+            echo "ERROR: Default exports found in components!"
+            exit 1
+          fi
+          echo "OK: No default exports found"
+
+      - name: No any types
+        run: |
+          if grep -rn ": any" components/ --include="*.tsx" --include="*.ts" | grep -v "node_modules"; then
+            echo "ERROR: 'any' type found in components!"
+            exit 1
+          fi
+          echo "OK: No 'any' types found"
+
+      - name: All components under 120 lines
+        run: |
+          failed=0
+          for f in components/ui/*.tsx; do
+            lines=$(wc -l < "$f")
+            if [ "$lines" -gt 120 ]; then
+              echo "ERROR: $f has $lines lines (max 120)"
+              failed=1
+            fi
+          done
+          if [ "$failed" -eq 1 ]; then exit 1; fi
+          echo "OK: All components within line limits"
