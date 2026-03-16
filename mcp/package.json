@@ -1,0 +1,24 @@
+{
+  "name": "@aniui/mcp",
+  "version": "0.1.0",
+  "type": "module",
+  "description": "AniUI MCP server — expose component registry, theme tokens, and code examples to AI tools",
+  "license": "MIT",
+  "author": "Anish",
+  "main": "dist/index.js",
+  "bin": {
+    "aniui-mcp": "./dist/index.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.12.1",
+    "zod": "^3.23.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "typescript": "^5.5.0"
+  }
+}
