@@ -1,0 +1,257 @@
+# AniUI — Cursor Rules
+# shadcn/ui for React Native. Mobile-only. NativeWind v4 + Tailwind v3.
+
+## Hard Rules
+1. NEVER use StyleSheet.create(). ALL styling via NativeWind className.
+2. NEVER use default exports. Named exports only.
+3. NEVER use `any` type. Strict TypeScript.
+4. NEVER install components as npm deps. Components are source files in components/ui/.
+5. Always support className prop. Always spread ...props last.
+6. Always set accessibilityRole on interactive elements.
+7. Always wrap text inside Pressable in <Text>.
+8. Min touch target: min-h-12 min-w-12 (48dp) on Pressable.
+9. Import cn from "@/lib/utils" for className merging.
+10. Mobile only — iOS + Android. No web.
+
+## cn() Pattern
+```tsx
+import { cn } from "@/lib/utils";
+// Usage: merge base styles with user overrides
+<View className={cn("rounded-md bg-card p-4", className)} />
+```
+
+## Theme Tokens (Tailwind classes)
+Colors from CSS variables in global.css. Use these class prefixes:
+- bg-background, text-foreground (page background/text)
+- bg-primary, text-primary-foreground (buttons, CTA)
+- bg-secondary, text-secondary-foreground (secondary actions)
+- bg-muted, text-muted-foreground (disabled, subtle)
+- bg-accent, text-accent-foreground (highlights)
+- bg-destructive, text-destructive-foreground (danger/error)
+- bg-card, text-card-foreground (card surfaces)
+- border-border (borders)
+- bg-input (input backgrounds)
+- ring (focus ring)
+
+Dark mode: automatic via .dark class in global.css.
+
+## Component Catalog (29 components)
+
+### Tier 1 — Core (no extra deps)
+
+**Button** — `import { Button } from "@/components/ui/button"`
+- variants: default, secondary, outline, ghost, destructive
+- sizes: sm, md, lg
+- children must be a string
+```tsx
+<Button variant="outline" size="lg" onPress={() => {}}>Click me</Button>
+```
+
+**Text** — `import { Text } from "@/components/ui/text"`
+- variants: h1, h2, h3, h4, p, lead, large, small, muted
+```tsx
+<Text variant="h2">Title</Text>
+<Text variant="muted">Subtitle text</Text>
+```
+
+**Input** — `import { Input } from "@/components/ui/input"`
+- variants: default, ghost
+- sizes: sm, md, lg
+```tsx
+<Input placeholder="Email" variant="default" />
+```
+
+**Textarea** — `import { Textarea } from "@/components/ui/textarea"`
+- variants: default, ghost
+```tsx
+<Textarea placeholder="Write a message..." numberOfLines={4} />
+```
+
+**Card** — `import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from "@/components/ui/card"`
+```tsx
+<Card>
+  <CardHeader><CardTitle>Title</CardTitle></CardHeader>
+  <CardContent>{/* content */}</CardContent>
+</Card>
+```
+
+**Badge** — `import { Badge } from "@/components/ui/badge"`
+- variants: default, secondary, outline, destructive
+```tsx
+<Badge variant="secondary"><Text className="text-xs">New</Text></Badge>
+```
+
+**Separator** — `import { Separator } from "@/components/ui/separator"`
+- orientation prop: "horizontal" (default), "vertical"
+```tsx
+<Separator />
+```
+
+**Avatar** — `import { Avatar } from "@/components/ui/avatar"`
+- sizes: sm, md, lg
+- props: source (ImageSourcePropType), fallback (string)
+```tsx
+<Avatar source={{ uri: "https://..." }} fallback="AL" size="lg" />
+```
+
+**Alert** — `import { Alert, AlertDescription } from "@/components/ui/alert"`
+- variants: default, destructive, success, warning
+```tsx
+<Alert variant="success"><AlertDescription>Saved!</AlertDescription></Alert>
+```
+
+**Label** — `import { Label } from "@/components/ui/label"`
+```tsx
+<Label>Email address</Label>
+```
+
+**Switch** — `import { Switch } from "@/components/ui/switch"`
+```tsx
+<Switch value={isOn} onValueChange={setIsOn} />
+```
+
+**Checkbox** — `import { Checkbox } from "@/components/ui/checkbox"`
+- props: checked, onCheckedChange, disabled
+```tsx
+<Checkbox checked={agreed} onCheckedChange={setAgreed} />
+```
+
+**Radio Group** — `import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"`
+```tsx
+<RadioGroup value={plan} onValueChange={setPlan}>
+  <RadioGroupItem value="free" label="Free" />
+  <RadioGroupItem value="pro" label="Pro" />
+</RadioGroup>
+```
+
+**Progress** — `import { Progress } from "@/components/ui/progress"`
+```tsx
+<Progress value={65} />
+```
+
+**Spinner** — `import { Spinner } from "@/components/ui/spinner"`
+- sizes: sm, md, lg
+```tsx
+<Spinner size="md" />
+```
+
+**List** — `import { List, ListItem, ListItemTitle, ListItemDescription } from "@/components/ui/list"`
+```tsx
+<List>
+  <ListItem><ListItemTitle>Settings</ListItemTitle></ListItem>
+</List>
+```
+
+### Tier 2 — Animated (needs react-native-reanimated)
+
+**Skeleton** — `import { Skeleton } from "@/components/ui/skeleton"`
+```tsx
+<Skeleton className="h-12 w-full rounded-md" />
+```
+
+**Accordion** — `import { Accordion, AccordionItem } from "@/components/ui/accordion"`
+```tsx
+<Accordion>
+  <AccordionItem title="FAQ Question">Answer content</AccordionItem>
+</Accordion>
+```
+
+**Tabs** — `import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs"`
+```tsx
+<Tabs defaultValue="tab1">
+  <TabsList><TabsTrigger value="tab1">Tab 1</TabsTrigger></TabsList>
+  <TabsContent value="tab1">{/* content */}</TabsContent>
+</Tabs>
+```
+
+**Collapsible** — `import { Collapsible, CollapsibleTrigger, CollapsibleContent } from "@/components/ui/collapsible"`
+```tsx
+<Collapsible>
+  <CollapsibleTrigger>Toggle</CollapsibleTrigger>
+  <CollapsibleContent>Hidden content</CollapsibleContent>
+</Collapsible>
+```
+
+**Toast** — `import { ToastProvider, useToast } from "@/components/ui/toast"`
+- variants: default, destructive, success
+```tsx
+const { show } = useToast();
+show({ title: "Saved!", variant: "success" });
+```
+
+**Dialog** — `import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter } from "@/components/ui/dialog"`
+```tsx
+<Dialog open={open} onOpenChange={setOpen}>
+  <DialogContent><DialogHeader><DialogTitle>Confirm</DialogTitle></DialogHeader></DialogContent>
+</Dialog>
+```
+
+**Alert Dialog** — `import { AlertDialog, AlertDialogContent, AlertDialogHeader, AlertDialogTitle, AlertDialogDescription, AlertDialogFooter, AlertDialogAction, AlertDialogCancel } from "@/components/ui/alert-dialog"`
+```tsx
+<AlertDialog open={open} onOpenChange={setOpen}>
+  <AlertDialogContent>
+    <AlertDialogHeader><AlertDialogTitle>Are you sure?</AlertDialogTitle></AlertDialogHeader>
+    <AlertDialogFooter>
+      <AlertDialogCancel onPress={() => setOpen(false)}>Cancel</AlertDialogCancel>
+      <AlertDialogAction onPress={handleConfirm}>Continue</AlertDialogAction>
+    </AlertDialogFooter>
+  </AlertDialogContent>
+</AlertDialog>
+```
+
+**Tooltip** — `import { Tooltip } from "@/components/ui/tooltip"`
+- side: "top", "bottom"
+```tsx
+<Tooltip content="Help text" side="top">{trigger}</Tooltip>
+```
+
+**Popover** — `import { Popover, PopoverTrigger, PopoverContent } from "@/components/ui/popover"`
+```tsx
+<Popover>
+  <PopoverTrigger><Button>Open</Button></PopoverTrigger>
+  <PopoverContent>Popover content</PopoverContent>
+</Popover>
+```
+
+### Tier 3 — Native (extra packages)
+
+**Bottom Sheet** — `import { BottomSheet } from "@/components/ui/bottom-sheet"` (needs @gorhom/bottom-sheet)
+```tsx
+<BottomSheet ref={sheetRef} snapPoints={["25%", "50%"]}>{content}</BottomSheet>
+```
+
+**Action Sheet** — `import { ActionSheet } from "@/components/ui/action-sheet"` (needs @gorhom/bottom-sheet)
+
+**Select** — `import { Select } from "@/components/ui/select"` (needs @gorhom/bottom-sheet)
+```tsx
+<Select options={[{ label: "Option 1", value: "1" }]} value={val} onValueChange={setVal} placeholder="Pick one" />
+```
+
+**Date Picker** — `import { DatePicker } from "@/components/ui/date-picker"` (needs @react-native-community/datetimepicker)
+- mode: "date", "time", "datetime"
+```tsx
+<DatePicker value={date} onChange={setDate} mode="date" />
+```
+
+## New Component Template
+```tsx
+import React from "react";
+import { View } from "react-native";
+import { cva, type VariantProps } from "class-variance-authority";
+import { cn } from "@/lib/utils";
+
+const myComponentVariants = cva("base-styles", {
+  variants: { variant: { default: "..." } },
+  defaultVariants: { variant: "default" },
+});
+
+export interface MyComponentProps
+  extends React.ComponentPropsWithoutRef<typeof View>,
+    VariantProps<typeof myComponentVariants> {
+  className?: string;
+}
+
+export function MyComponent({ variant, className, ...props }: MyComponentProps) {
+  return <View className={cn(myComponentVariants({ variant }), className)} {...props} />;
+}
+```
