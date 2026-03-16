@@ -40,6 +40,12 @@ export const registry: Record<string, ComponentEntry> = {
   "action-sheet": { name: "ActionSheet", file: "components/ui/action-sheet.tsx", description: "Action sheet with options", dependencies: ["@gorhom/bottom-sheet", "react-native-gesture-handler", "clsx", "tailwind-merge"], registryDependencies: ["bottom-sheet"], tier: 3 },
   select: { name: "Select", file: "components/ui/select.tsx", description: "Dropdown select", dependencies: ["@gorhom/bottom-sheet", "react-native-gesture-handler", "clsx", "tailwind-merge"], registryDependencies: ["bottom-sheet"], tier: 3 },
   "date-picker": { name: "DatePicker", file: "components/ui/date-picker.tsx", description: "Date and time picker", dependencies: ["@react-native-community/datetimepicker", "clsx", "tailwind-merge"], registryDependencies: [], tier: 3 },
+  slider: { name: "Slider", file: "components/ui/slider.tsx", description: "Draggable slider for numeric values", dependencies: ["class-variance-authority", "clsx", "tailwind-merge"], registryDependencies: [], tier: 1 },
+  toggle: { name: "Toggle", file: "components/ui/toggle.tsx", description: "Two-state toggle button", dependencies: ["class-variance-authority", "clsx", "tailwind-merge"], registryDependencies: [], tier: 1 },
+  "toggle-group": { name: "ToggleGroup", file: "components/ui/toggle-group.tsx", description: "Group of exclusive toggle buttons", dependencies: ["class-variance-authority", "clsx", "tailwind-merge"], registryDependencies: ["toggle"], tier: 1 },
+  drawer: { name: "Drawer", file: "components/ui/drawer.tsx", description: "Slide-in side navigation panel", dependencies: ["react-native-reanimated", "clsx", "tailwind-merge"], registryDependencies: [], tier: 2 },
+  "input-otp": { name: "InputOTP", file: "components/ui/input-otp.tsx", description: "One-time password input with individual cells", dependencies: ["clsx", "tailwind-merge"], registryDependencies: [], tier: 1 },
+  table: { name: "Table", file: "components/ui/table.tsx", description: "Data table with header, body, rows, and cells", dependencies: ["clsx", "tailwind-merge"], registryDependencies: [], tier: 1 },
 };
 
 export function getComponentNames(): string[] {

@@ -1,0 +1,79 @@
+# AniUI — React Native Component Library
+
+> shadcn/ui for React Native. Beautiful. Minimal. Yours.
+
+AniUI is a copy-paste component library for React Native. Components are source files, not npm packages. Users own the code.
+
+## Rules
+- ALL styling via NativeWind className — NEVER use StyleSheet.create()
+- Named exports only — no default exports
+- Import cn from @/lib/utils
+- Import components from @/components/ui/{name}
+- Use SafeAreaView from react-native-safe-area-context as root wrapper
+- Set accessibilityRole on interactive elements
+- Strict TypeScript — no `any` types
+
+## Installation
+npx aniui init
+npx aniui add button text input card
+
+## Components (35 total)
+
+### Tier 1 — Core (no extra deps)
+- Button: `import { Button } from "@/components/ui/button"` — variant: default|secondary|outline|ghost|destructive, size: sm|md|lg
+- Text: `import { Text } from "@/components/ui/text"` — variant: h1|h2|h3|h4|p|lead|large|small|muted
+- Input: `import { Input } from "@/components/ui/input"` — variant: default|ghost, size: sm|md|lg
+- Textarea: `import { Textarea } from "@/components/ui/textarea"` — Multi-line text input
+- Card: `import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from "@/components/ui/card"`
+- Badge: `import { Badge } from "@/components/ui/badge"` — variant: default|secondary|outline|destructive
+- Separator: `import { Separator } from "@/components/ui/separator"` — orientation: horizontal|vertical
+- Avatar: `import { Avatar } from "@/components/ui/avatar"` — size: sm|md|lg, with fallback initials
+- Alert: `import { Alert } from "@/components/ui/alert"` — variant: default|destructive|success|warning
+- Label: `import { Label } from "@/components/ui/label"` — Form field label
+- Switch: `import { Switch } from "@/components/ui/switch"` — Themed toggle switch
+- Checkbox: `import { Checkbox } from "@/components/ui/checkbox"` — checked|unchecked|disabled
+- RadioGroup: `import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"`
+- Progress: `import { Progress } from "@/components/ui/progress"` — Percentage bar
+- Spinner: `import { Spinner } from "@/components/ui/spinner"` — size: sm|md|lg
+- List: `import { List, ListItem } from "@/components/ui/list"` — Styled list items
+- Slider: `import { Slider } from "@/components/ui/slider"` — Draggable numeric slider
+- Toggle: `import { Toggle } from "@/components/ui/toggle"` — Two-state toggle button
+- ToggleGroup: `import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group"` — Exclusive selection group
+- InputOTP: `import { InputOTP } from "@/components/ui/input-otp"` — OTP verification input
+- Table: `import { Table, TableHeader, TableBody, TableRow, TableHead, TableCell } from "@/components/ui/table"`
+
+### Tier 2 — Animated (needs react-native-reanimated)
+- Skeleton: `import { Skeleton } from "@/components/ui/skeleton"` — Animated loading placeholder
+- Accordion: `import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@/components/ui/accordion"`
+- Tabs: `import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs"`
+- Collapsible: `import { Collapsible, CollapsibleTrigger, CollapsibleContent } from "@/components/ui/collapsible"`
+- Toast: `import { ToastProvider, useToast } from "@/components/ui/toast"` — Auto-dismiss notifications
+- Dialog: `import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter } from "@/components/ui/dialog"`
+- AlertDialog: `import { AlertDialog, AlertDialogContent, AlertDialogHeader, AlertDialogTitle, AlertDialogDescription, AlertDialogFooter, AlertDialogAction, AlertDialogCancel } from "@/components/ui/alert-dialog"`
+- Tooltip: `import { Tooltip } from "@/components/ui/tooltip"` — Fade-in tooltip on press
+- Popover: `import { Popover, PopoverTrigger, PopoverContent } from "@/components/ui/popover"`
+- Drawer: `import { Drawer, DrawerContent } from "@/components/ui/drawer"` — Slide-in side panel
+
+### Tier 3 — Native (needs extra packages)
+- BottomSheet: `import { BottomSheet } from "@/components/ui/bottom-sheet"` — needs @gorhom/bottom-sheet
+- ActionSheet: `import { ActionSheet } from "@/components/ui/action-sheet"` — needs @gorhom/bottom-sheet
+- Select: `import { Select } from "@/components/ui/select"` — needs @gorhom/bottom-sheet
+- DatePicker: `import { DatePicker } from "@/components/ui/date-picker"` — needs @react-native-community/datetimepicker
+
+## Theme Tokens
+Available as Tailwind classes via CSS variables:
+- bg-background / text-foreground
+- bg-primary / text-primary-foreground
+- bg-secondary / text-secondary-foreground
+- bg-muted / text-muted-foreground
+- bg-accent / text-accent-foreground
+- bg-destructive / text-destructive-foreground
+- bg-card / text-card-foreground
+- border-border, bg-input, ring-ring
+
+Dark mode is automatic via .dark class.
+
+## Links
+- Docs: https://aniui.dev
+- GitHub: https://github.com/anishlp7/aniui
+- npm: https://www.npmjs.com/package/@aniui/cli
