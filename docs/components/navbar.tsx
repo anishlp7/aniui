@@ -112,6 +112,15 @@ export function Navbar() {
             <Link href="/docs/installation" className="block text-sm text-muted-foreground hover:text-foreground" onClick={() => setMobileOpen(false)}>
               Installation
             </Link>
+            <Link href="/docs/cli" className="block text-sm text-muted-foreground hover:text-foreground" onClick={() => setMobileOpen(false)}>
+              CLI
+            </Link>
+            <Link href="/docs/theming" className="block text-sm text-muted-foreground hover:text-foreground" onClick={() => setMobileOpen(false)}>
+              Theming
+            </Link>
+            <Link href="/docs/dark-mode" className="block text-sm text-muted-foreground hover:text-foreground" onClick={() => setMobileOpen(false)}>
+              Dark Mode
+            </Link>
             <div className="border-t border-border pt-4 mt-4">
               <p className="text-xs font-semibold text-foreground mb-2">Tier 1 - Core</p>
               <Link href="/docs/button" className="block text-sm text-muted-foreground hover:text-foreground" onClick={() => setMobileOpen(false)}>

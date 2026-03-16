@@ -11,6 +11,9 @@ const sidebarItems = [
     items: [
       { title: "Introduction", href: "/docs" },
       { title: "Installation", href: "/docs/installation" },
+      { title: "CLI", href: "/docs/cli" },
+      { title: "Theming", href: "/docs/theming" },
+      { title: "Dark Mode", href: "/docs/dark-mode" },
     ],
   },
   {
