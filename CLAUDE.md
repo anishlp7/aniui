@@ -387,7 +387,7 @@ module.exports = {
   "dependencies": {
     "commander": "^12.0.0",
     "prompts": "^2.4.2",
-    "chalk": "^5.3.0",
+    "chalk": "^4.1.2",
     "fs-extra": "^11.2.0"
   },
   "devDependencies": {
