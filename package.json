@@ -1,0 +1,16 @@
+{
+  "name": "aniui-repo",
+  "version": "0.1.0",
+  "private": true,
+  "description": "AniUI monorepo — Beautiful React Native components",
+  "license": "MIT",
+  "author": "Anish",
+  "scripts": {
+    "build:cli": "cd cli && npm run build",
+    "dev:cli": "cd cli && npm run dev"
+  },
+  "dependencies": {
+    "@tailwindcss/postcss": "^4.2.1",
+    "tailwindcss": "^4.2.1"
+  }
+}
