@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Documentation
+    url: https://aniui.dev
+    about: Check the docs before opening an issue.
+  - name: GitHub Discussions
+    url: https://github.com/anishlp7/aniui/discussions
+    about: Ask questions and share ideas.
