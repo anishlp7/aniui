@@ -5,9 +5,11 @@ import React, { useState } from "react";
 interface ComponentPlaygroundProps {
   code: string;
   children: React.ReactNode;
+  /** Use "inline" for overlay components (dialog, drawer, toast) that escape containment */
+  variant?: "phone" | "inline";
 }
 
-export function ComponentPlayground({ code, children }: ComponentPlaygroundProps) {
+export function ComponentPlayground({ code, children, variant = "phone" }: ComponentPlaygroundProps) {
   const [copied, setCopied] = useState(false);
 
   const handleCopy = () => {
@@ -18,13 +20,37 @@ export function ComponentPlayground({ code, children }: ComponentPlaygroundProps
 
   return (
     <div className="w-full rounded-lg border border-border overflow-hidden">
-      <div className="flex min-h-[200px] items-center justify-center bg-background p-10">
-        {children}
+      {/* Preview area */}
+      <div className="flex items-center justify-center bg-[repeating-linear-gradient(45deg,var(--color-secondary)_0,var(--color-secondary)_1px,transparent_0,transparent_50%)] bg-[length:6px_6px] bg-secondary/20 p-8">
+        {variant === "phone" ? (
+          /* Phone frame mockup */
+          <div className="relative w-[320px] rounded-[2.5rem] border-[3px] border-foreground/10 bg-background shadow-xl overflow-hidden">
+            {/* Dynamic Island */}
+            <div className="flex justify-center pt-2 pb-1 bg-background">
+              <div className="h-[22px] w-[90px] rounded-full bg-foreground/10" />
+            </div>
+            {/* Screen content */}
+            <div className="px-5 py-4 min-h-[200px] flex items-center justify-center">
+              {children}
+            </div>
+            {/* Home indicator */}
+            <div className="flex justify-center pb-2 pt-1 bg-background">
+              <div className="h-1 w-28 rounded-full bg-foreground/15" />
+            </div>
+          </div>
+        ) : (
+          /* Inline preview for overlay components */
+          <div className="w-full min-h-[200px] flex items-center justify-center rounded-lg bg-background p-6">
+            {children}
+          </div>
+        )}
       </div>
+
+      {/* Code section */}
       <div className="relative border-t border-border">
         <button
           onClick={handleCopy}
-          className="absolute right-3 top-3 rounded-md border border-border bg-background px-2.5 py-1 text-xs text-muted-foreground hover:bg-accent hover:text-accent-foreground transition-colors"
+          className="absolute right-3 top-3 rounded-md border border-border bg-background px-2.5 py-1 text-xs text-muted-foreground hover:bg-accent hover:text-accent-foreground transition-colors z-10 cursor-pointer"
         >
           {copied ? "Copied!" : "Copy"}
         </button>

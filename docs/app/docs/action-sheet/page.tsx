@@ -114,17 +114,14 @@ export default function ActionSheetPage() {
 
       {/* Preview */}
       <ComponentPlayground code={usageCode}>
-        <div className="flex items-center gap-4">
-          <PreviewActionSheet
-            title="Choose an action"
-            actions={[
-              { label: "Edit", onPress: () => {} },
-              { label: "Share", onPress: () => {} },
-              { label: "Delete", onPress: () => {}, destructive: true },
-            ]}
-            onCancel={() => {}}
-          />
-        </div>
+        <PreviewActionSheet
+          title="Choose an action"
+          actions={[
+            { label: "Edit" },
+            { label: "Share" },
+            { label: "Delete", destructive: true },
+          ]}
+        />
       </ComponentPlayground>
 
       {/* Installation */}

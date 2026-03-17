@@ -64,7 +64,7 @@ export function WelcomeScreen() {
 
 ## Components
 
-**35 components** across three tiers.
+**37 components** across three tiers.
 
 ### Tier 1 — Core
 
@@ -93,6 +93,8 @@ Zero extra dependencies. Uses React Native core + NativeWind + CVA.
 | [Toggle Group](https://aniui.dev/docs/toggle-group) | Exclusive selection group |
 | [Input OTP](https://aniui.dev/docs/input-otp) | OTP verification input with individual cells |
 | [Table](https://aniui.dev/docs/table) | Data table with header, body, rows, and cells |
+| [Calendar](https://aniui.dev/docs/calendar) | Month grid with single date and range selection |
+| [Date Picker](https://aniui.dev/docs/date-picker) | Calendar popup picker with range support |
 
 ### Tier 2 — Animated
 
@@ -120,7 +122,6 @@ Requires additional native packages.
 | [Bottom Sheet](https://aniui.dev/docs/bottom-sheet) | `@gorhom/bottom-sheet` |
 | [Action Sheet](https://aniui.dev/docs/action-sheet) | `@gorhom/bottom-sheet` |
 | [Select](https://aniui.dev/docs/select) | `@gorhom/bottom-sheet` |
-| [Date Picker](https://aniui.dev/docs/date-picker) | `@react-native-community/datetimepicker` |
 
 ## Prerequisites
 
@@ -135,7 +136,6 @@ npm install react-native-reanimated
 
 # For Tier 3 components (as needed)
 npm install @gorhom/bottom-sheet react-native-gesture-handler
-npm install @react-native-community/datetimepicker
 ```
 
 **Supported platforms:**

@@ -1,32 +1,9 @@
 "use client";
 
-import React, { useState } from "react";
-import { PreviewDialog, PreviewDialogContent, PreviewDialogHeader, PreviewDialogTitle, PreviewDialogDescription, PreviewDialogFooter } from "@/components/preview/dialog";
+import React from "react";
+import { PreviewDialogDemo } from "@/components/preview/dialog";
 import { ComponentPlayground } from "@/components/component-playground";
 import { CodeBlock } from "@/components/code-block";
-
-function DialogDemo() {
-  const [open, setOpen] = useState(false);
-  return (
-    <>
-      <button onClick={() => setOpen(true)} className="inline-flex items-center justify-center rounded-md bg-primary text-primary-foreground px-4 py-2 text-sm font-medium hover:bg-primary/90 transition-colors cursor-pointer">
-        Open Dialog
-      </button>
-      <PreviewDialog open={open} onOpenChange={setOpen}>
-        <PreviewDialogContent>
-          <PreviewDialogHeader>
-            <PreviewDialogTitle>Are you sure?</PreviewDialogTitle>
-            <PreviewDialogDescription>This action cannot be undone.</PreviewDialogDescription>
-          </PreviewDialogHeader>
-          <PreviewDialogFooter>
-            <button onClick={() => setOpen(false)} className="inline-flex items-center justify-center rounded-md border border-input bg-transparent px-4 py-2 text-sm font-medium hover:bg-accent transition-colors cursor-pointer">Cancel</button>
-            <button onClick={() => setOpen(false)} className="inline-flex items-center justify-center rounded-md bg-primary text-primary-foreground px-4 py-2 text-sm font-medium hover:bg-primary/90 transition-colors cursor-pointer">Confirm</button>
-          </PreviewDialogFooter>
-        </PreviewDialogContent>
-      </PreviewDialog>
-    </>
-  );
-}
 
 const installCode = `npx aniui add dialog`;
 
@@ -147,9 +124,7 @@ export default function DialogPage() {
 
       {/* Preview */}
       <ComponentPlayground code={usageCode}>
-        <div className="flex items-center gap-4">
-          <DialogDemo />
-        </div>
+        <PreviewDialogDemo />
       </ComponentPlayground>
 
       {/* Installation */}

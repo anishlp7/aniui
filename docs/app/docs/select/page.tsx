@@ -134,16 +134,15 @@ export default function SelectPage() {
 
       {/* Preview */}
       <ComponentPlayground code={usageCode}>
-        <div className="w-full max-w-sm">
-          <PreviewSelect
-            options={[
-              { label: "Apple", value: "apple" },
-              { label: "Banana", value: "banana" },
-              { label: "Cherry", value: "cherry" },
-            ]}
-            placeholder="Pick a fruit..."
-          />
-        </div>
+        <PreviewSelect
+          options={[
+            { label: "Apple", value: "apple" },
+            { label: "Banana", value: "banana" },
+            { label: "Cherry", value: "cherry" },
+            { label: "Grape", value: "grape" },
+          ]}
+          placeholder="Pick a fruit..."
+        />
       </ComponentPlayground>
 
       {/* Installation */}

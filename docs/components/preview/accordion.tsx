@@ -3,6 +3,14 @@
 import React, { createContext, useContext, useState } from "react";
 import { cn } from "@/lib/utils";
 
+function ChevronDown({ className }: { className?: string }) {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
+      <path d="M6 9l6 6 6-6" />
+    </svg>
+  );
+}
+
 const AccordionContext = createContext<{
   expanded: string | null;
   toggle: (value: string) => void;
@@ -43,7 +51,7 @@ export function PreviewAccordionItem({ value, trigger, className, children, ...p
         aria-expanded={isOpen}
       >
         <span className="text-base font-medium text-foreground">{trigger}</span>
-        <span className={cn("text-muted-foreground text-lg transition-transform", isOpen && "rotate-45")}>+</span>
+        <ChevronDown className={cn("text-muted-foreground transition-transform duration-200", isOpen && "rotate-180")} />
       </button>
       <div
         className={cn(

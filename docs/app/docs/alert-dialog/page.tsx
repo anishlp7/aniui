@@ -1,16 +1,6 @@
 "use client";
 
-import { useState } from "react";
-import {
-  PreviewAlertDialog,
-  PreviewAlertDialogContent,
-  PreviewAlertDialogHeader,
-  PreviewAlertDialogTitle,
-  PreviewAlertDialogDescription,
-  PreviewAlertDialogFooter,
-  PreviewAlertDialogAction,
-  PreviewAlertDialogCancel,
-} from "@/components/preview/alert-dialog";
+import { PreviewAlertDialogDemo } from "@/components/preview/alert-dialog";
 import { ComponentPlayground } from "@/components/component-playground";
 import { CodeBlock } from "@/components/code-block";
 
@@ -169,37 +159,6 @@ export function AlertDialogCancel({ className, children, ...props }: AlertDialog
   );
 }`;
 
-function AlertDialogDemo() {
-  const [open, setOpen] = useState(false);
-
-  return (
-    <div className="flex flex-wrap items-center gap-4">
-      <button
-        onClick={() => setOpen(true)}
-        className="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2.5 text-sm font-medium text-primary-foreground hover:bg-primary/90"
-      >
-        Delete Account
-      </button>
-      {open && (
-        <PreviewAlertDialog open={open} onOpenChange={setOpen}>
-          <PreviewAlertDialogContent>
-            <PreviewAlertDialogHeader>
-              <PreviewAlertDialogTitle>Are you sure?</PreviewAlertDialogTitle>
-              <PreviewAlertDialogDescription>
-                This action cannot be undone. This will permanently delete your account.
-              </PreviewAlertDialogDescription>
-            </PreviewAlertDialogHeader>
-            <PreviewAlertDialogFooter>
-              <PreviewAlertDialogCancel onClick={() => setOpen(false)}>Cancel</PreviewAlertDialogCancel>
-              <PreviewAlertDialogAction onClick={() => setOpen(false)}>Continue</PreviewAlertDialogAction>
-            </PreviewAlertDialogFooter>
-          </PreviewAlertDialogContent>
-        </PreviewAlertDialog>
-      )}
-    </div>
-  );
-}
-
 export default function AlertDialogPage() {
   return (
     <div className="space-y-10">
@@ -213,7 +172,7 @@ export default function AlertDialogPage() {
 
       {/* Preview */}
       <ComponentPlayground code={usageCode}>
-        <AlertDialogDemo />
+        <PreviewAlertDialogDemo />
       </ComponentPlayground>
 
       {/* Installation */}

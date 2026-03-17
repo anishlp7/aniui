@@ -3,23 +3,49 @@ updates:
   - package-ecosystem: "npm"
     directory: "/cli"
     schedule:
-      interval: "weekly"
-    open-pull-requests-limit: 5
+      interval: "monthly"
+    open-pull-requests-limit: 3
+    versioning-strategy: increase-if-necessary
+    groups:
+      cli-deps:
+        patterns: ["*"]
+    ignore:
+      - dependency-name: "chalk"
+        versions: [">=5.0.0"]
+      - dependency-name: "commander"
+        versions: [">=13.0.0"]
 
   - package-ecosystem: "npm"
     directory: "/mcp"
     schedule:
-      interval: "weekly"
-    open-pull-requests-limit: 5
+      interval: "monthly"
+    open-pull-requests-limit: 3
+    versioning-strategy: increase-if-necessary
+    groups:
+      mcp-deps:
+        patterns: ["*"]
+    ignore:
+      - dependency-name: "zod"
+        versions: [">=4.0.0"]
 
   - package-ecosystem: "npm"
     directory: "/docs"
     schedule:
-      interval: "weekly"
-    open-pull-requests-limit: 5
+      interval: "monthly"
+    open-pull-requests-limit: 3
+    versioning-strategy: increase-if-necessary
+    groups:
+      docs-deps:
+        patterns: ["*"]
+    ignore:
+      - dependency-name: "eslint"
+        versions: [">=10.0.0"]
 
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
-      interval: "weekly"
-    open-pull-requests-limit: 3
+      interval: "monthly"
+    open-pull-requests-limit: 2
+    groups:
+      gh-actions:
+        patterns: ["*"]

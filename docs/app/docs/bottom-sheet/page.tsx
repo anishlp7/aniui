@@ -85,9 +85,7 @@ export default function BottomSheetPage() {
 
       {/* Preview */}
       <ComponentPlayground code={usageCode}>
-        <div className="flex items-center gap-4">
-          <PreviewBottomSheet />
-        </div>
+        <PreviewBottomSheet />
       </ComponentPlayground>
 
       {/* Installation */}

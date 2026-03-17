@@ -17,7 +17,7 @@ AniUI is a copy-paste component library for React Native. Components are source 
 npx aniui init
 npx aniui add button text input card
 
-## Components (35 total)
+## Components (37 total)
 
 ### Tier 1 — Core (no extra deps)
 - Button: `import { Button } from "@/components/ui/button"` — variant: default|secondary|outline|ghost|destructive, size: sm|md|lg
@@ -54,11 +54,13 @@ npx aniui add button text input card
 - Popover: `import { Popover, PopoverTrigger, PopoverContent } from "@/components/ui/popover"`
 - Drawer: `import { Drawer, DrawerContent } from "@/components/ui/drawer"` — Slide-in side panel
 
+- Calendar: `import { Calendar } from "@/components/ui/calendar"` — Month grid with single date and range selection
+- DatePicker: `import { DatePicker, DateRangePicker } from "@/components/ui/date-picker"` — Calendar popup picker with range support
+
 ### Tier 3 — Native (needs extra packages)
 - BottomSheet: `import { BottomSheet } from "@/components/ui/bottom-sheet"` — needs @gorhom/bottom-sheet
 - ActionSheet: `import { ActionSheet } from "@/components/ui/action-sheet"` — needs @gorhom/bottom-sheet
 - Select: `import { Select } from "@/components/ui/select"` — needs @gorhom/bottom-sheet
-- DatePicker: `import { DatePicker } from "@/components/ui/date-picker"` — needs @react-native-community/datetimepicker
 
 ## Theme Tokens
 Available as Tailwind classes via CSS variables:

@@ -1,11 +1,6 @@
 "use client";
 
-import { useState } from "react";
-import {
-  PreviewPopover,
-  PreviewPopoverTrigger,
-  PreviewPopoverContent,
-} from "@/components/preview/popover";
+import { PreviewPopoverDemo } from "@/components/preview/popover";
 import { ComponentPlayground } from "@/components/component-playground";
 import { CodeBlock } from "@/components/code-block";
 
@@ -126,32 +121,6 @@ export function PopoverContent({ className, children, componentType: _ct, ...pro
 
 PopoverContent.defaultProps = { componentType: "content" };`;
 
-function PopoverDemo() {
-  const [open, setOpen] = useState(false);
-
-  return (
-    <div className="flex flex-wrap items-center gap-4">
-      <PreviewPopover open={open} onOpenChange={setOpen}>
-        <PreviewPopoverTrigger>
-          <button
-            onClick={() => setOpen(!open)}
-            className="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2.5 text-sm font-medium text-primary-foreground hover:bg-primary/90"
-          >
-            Open Popover
-          </button>
-        </PreviewPopoverTrigger>
-        {open && (
-          <PreviewPopoverContent>
-            <p className="text-sm text-card-foreground">
-              This is the popover content. Place anything here.
-            </p>
-          </PreviewPopoverContent>
-        )}
-      </PreviewPopover>
-    </div>
-  );
-}
-
 export default function PopoverPage() {
   return (
     <div className="space-y-10">
@@ -165,7 +134,7 @@ export default function PopoverPage() {
 
       {/* Preview */}
       <ComponentPlayground code={usageCode}>
-        <PopoverDemo />
+        <PreviewPopoverDemo />
       </ComponentPlayground>
 
       {/* Installation */}

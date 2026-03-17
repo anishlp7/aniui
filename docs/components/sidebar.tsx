@@ -28,7 +28,6 @@ const sidebarItems = [
       { title: "Avatar", href: "/docs/avatar" },
       { title: "Alert", href: "/docs/alert" },
       { title: "Label", href: "/docs/label" },
-      { title: "Skeleton", href: "/docs/skeleton" },
       { title: "Switch", href: "/docs/switch" },
       { title: "Checkbox", href: "/docs/checkbox" },
       { title: "Radio Group", href: "/docs/radio-group" },
@@ -41,11 +40,14 @@ const sidebarItems = [
       { title: "Toggle Group", href: "/docs/toggle-group" },
       { title: "Input OTP", href: "/docs/input-otp" },
       { title: "Table", href: "/docs/table" },
+      { title: "Calendar", href: "/docs/calendar" },
+      { title: "Date Picker", href: "/docs/date-picker" },
     ],
   },
   {
     title: "Components (Tier 2 - Animated)",
     items: [
+      { title: "Skeleton", href: "/docs/skeleton" },
       { title: "Accordion", href: "/docs/accordion" },
       { title: "Tabs", href: "/docs/tabs" },
       { title: "Collapsible", href: "/docs/collapsible" },
@@ -63,7 +65,6 @@ const sidebarItems = [
       { title: "Bottom Sheet", href: "/docs/bottom-sheet" },
       { title: "Action Sheet", href: "/docs/action-sheet" },
       { title: "Select", href: "/docs/select" },
-      { title: "Date Picker", href: "/docs/date-picker" },
     ],
   },
 ];
@@ -72,7 +73,7 @@ export function Sidebar() {
   const pathname = usePathname();
 
   return (
-    <aside className="fixed top-14 left-0 z-30 hidden h-[calc(100vh-3.5rem)] w-64 shrink-0 overflow-y-auto border-r border-border bg-background md:block">
+    <aside className="fixed top-14 left-0 z-30 hidden h-[calc(100vh-3.5rem)] w-64 shrink-0 overflow-y-auto border-r border-border bg-background md:block scrollbar-hidden">
       <nav className="space-y-6 p-6">
         {sidebarItems.map((section) => (
           <div key={section.title}>

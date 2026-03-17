@@ -150,9 +150,6 @@ export function Navbar() {
               <Link href="/docs/label" className="block text-sm text-muted-foreground hover:text-foreground mt-2" onClick={() => setMobileOpen(false)}>
                 Label
               </Link>
-              <Link href="/docs/skeleton" className="block text-sm text-muted-foreground hover:text-foreground mt-2" onClick={() => setMobileOpen(false)}>
-                Skeleton
-              </Link>
               <Link href="/docs/switch" className="block text-sm text-muted-foreground hover:text-foreground mt-2" onClick={() => setMobileOpen(false)}>
                 Switch
               </Link>
@@ -189,10 +186,19 @@ export function Navbar() {
               <Link href="/docs/table" className="block text-sm text-muted-foreground hover:text-foreground mt-2" onClick={() => setMobileOpen(false)}>
                 Table
               </Link>
+              <Link href="/docs/calendar" className="block text-sm text-muted-foreground hover:text-foreground mt-2" onClick={() => setMobileOpen(false)}>
+                Calendar
+              </Link>
+              <Link href="/docs/date-picker" className="block text-sm text-muted-foreground hover:text-foreground mt-2" onClick={() => setMobileOpen(false)}>
+                Date Picker
+              </Link>
             </div>
             <div className="border-t border-border pt-4 mt-4">
               <p className="text-xs font-semibold text-foreground mb-2">Tier 2 - Animated</p>
-              <Link href="/docs/accordion" className="block text-sm text-muted-foreground hover:text-foreground" onClick={() => setMobileOpen(false)}>
+              <Link href="/docs/skeleton" className="block text-sm text-muted-foreground hover:text-foreground" onClick={() => setMobileOpen(false)}>
+                Skeleton
+              </Link>
+              <Link href="/docs/accordion" className="block text-sm text-muted-foreground hover:text-foreground mt-2" onClick={() => setMobileOpen(false)}>
                 Accordion
               </Link>
               <Link href="/docs/tabs" className="block text-sm text-muted-foreground hover:text-foreground mt-2" onClick={() => setMobileOpen(false)}>
@@ -230,9 +236,6 @@ export function Navbar() {
               </Link>
               <Link href="/docs/select" className="block text-sm text-muted-foreground hover:text-foreground mt-2" onClick={() => setMobileOpen(false)}>
                 Select
-              </Link>
-              <Link href="/docs/date-picker" className="block text-sm text-muted-foreground hover:text-foreground mt-2" onClick={() => setMobileOpen(false)}>
-                Date Picker
               </Link>
             </div>
           </nav>

@@ -31,11 +31,14 @@ export function PreviewToastProvider({ children }: PreviewToastProviderProps) {
 
   return (
     <ToastContext.Provider value={{ toast }}>
-      {children}
-      <div className="fixed top-4 right-4 z-50 flex flex-col gap-2">
-        {toasts.map((t) => (
-          <PreviewToastItem key={t.id} data={t} onDismiss={() => dismiss(t.id)} />
-        ))}
+      <div className="relative">
+        {children}
+        {/* Toast container — absolute within phone frame, not fixed */}
+        <div className="absolute top-2 left-2 right-2 z-50 flex flex-col gap-2">
+          {toasts.map((t) => (
+            <PreviewToastItem key={t.id} data={t} onDismiss={() => dismiss(t.id)} />
+          ))}
+        </div>
       </div>
     </ToastContext.Provider>
   );
@@ -54,7 +57,7 @@ function PreviewToastItem({ data, onDismiss }: { data: ToastData; onDismiss: () 
   return (
     <div
       className={cn(
-        "rounded-lg border p-4 shadow-lg cursor-pointer animate-in slide-in-from-top-2 min-w-64",
+        "rounded-lg border p-3 shadow-lg cursor-pointer animate-in slide-in-from-top-2",
         variantStyles[variant]
       )}
       onClick={onDismiss}
