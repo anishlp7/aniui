@@ -43,7 +43,7 @@
     "prompts": "^2.4.2"
   },
   "optionalDependencies": {
-    "@anthropic-ai/sdk": "^0.52.0"
+    "@anthropic-ai/sdk": "^0.79.0"
   },
   "devDependencies": {
     "@types/fs-extra": "^11.0.0",
