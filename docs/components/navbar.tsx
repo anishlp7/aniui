@@ -174,6 +174,21 @@ export function Navbar() {
               <Link href="/docs/list" className="block text-sm text-muted-foreground hover:text-foreground mt-2" onClick={() => setMobileOpen(false)}>
                 List
               </Link>
+              <Link href="/docs/slider" className="block text-sm text-muted-foreground hover:text-foreground mt-2" onClick={() => setMobileOpen(false)}>
+                Slider
+              </Link>
+              <Link href="/docs/toggle" className="block text-sm text-muted-foreground hover:text-foreground mt-2" onClick={() => setMobileOpen(false)}>
+                Toggle
+              </Link>
+              <Link href="/docs/toggle-group" className="block text-sm text-muted-foreground hover:text-foreground mt-2" onClick={() => setMobileOpen(false)}>
+                Toggle Group
+              </Link>
+              <Link href="/docs/input-otp" className="block text-sm text-muted-foreground hover:text-foreground mt-2" onClick={() => setMobileOpen(false)}>
+                Input OTP
+              </Link>
+              <Link href="/docs/table" className="block text-sm text-muted-foreground hover:text-foreground mt-2" onClick={() => setMobileOpen(false)}>
+                Table
+              </Link>
             </div>
             <div className="border-t border-border pt-4 mt-4">
               <p className="text-xs font-semibold text-foreground mb-2">Tier 2 - Animated</p>
@@ -200,6 +215,9 @@ export function Navbar() {
               </Link>
               <Link href="/docs/popover" className="block text-sm text-muted-foreground hover:text-foreground mt-2" onClick={() => setMobileOpen(false)}>
                 Popover
+              </Link>
+              <Link href="/docs/drawer" className="block text-sm text-muted-foreground hover:text-foreground mt-2" onClick={() => setMobileOpen(false)}>
+                Drawer
               </Link>
             </div>
             <div className="border-t border-border pt-4 mt-4">

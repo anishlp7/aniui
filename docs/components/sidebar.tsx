@@ -36,6 +36,11 @@ const sidebarItems = [
       { title: "Spinner", href: "/docs/spinner" },
       { title: "Textarea", href: "/docs/textarea" },
       { title: "List", href: "/docs/list" },
+      { title: "Slider", href: "/docs/slider" },
+      { title: "Toggle", href: "/docs/toggle" },
+      { title: "Toggle Group", href: "/docs/toggle-group" },
+      { title: "Input OTP", href: "/docs/input-otp" },
+      { title: "Table", href: "/docs/table" },
     ],
   },
   {
@@ -49,6 +54,7 @@ const sidebarItems = [
       { title: "Alert Dialog", href: "/docs/alert-dialog" },
       { title: "Tooltip", href: "/docs/tooltip" },
       { title: "Popover", href: "/docs/popover" },
+      { title: "Drawer", href: "/docs/drawer" },
     ],
   },
   {

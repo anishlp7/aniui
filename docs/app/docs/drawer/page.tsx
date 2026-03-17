@@ -1,0 +1,222 @@
+"use client";
+
+import { PreviewDrawer } from "@/components/preview/drawer";
+import { ComponentPlayground } from "@/components/component-playground";
+import { CodeBlock } from "@/components/code-block";
+
+const installCode = `npx aniui add drawer`;
+
+const usageCode = `import { Drawer, DrawerContent } from "@/components/ui/drawer";
+
+export function MyScreen() {
+  const [open, setOpen] = React.useState(false);
+
+  return (
+    <>
+      <Button onPress={() => setOpen(true)}>Open Drawer</Button>
+      <Drawer open={open} onOpenChange={setOpen}>
+        <DrawerContent>
+          <Text>Drawer content here</Text>
+        </DrawerContent>
+      </Drawer>
+    </>
+  );
+}`;
+
+const leftDrawerCode = `<Drawer open={open} onOpenChange={setOpen} side="left">
+  <DrawerContent>
+    <Text>Left drawer content</Text>
+  </DrawerContent>
+</Drawer>`;
+
+const rightDrawerCode = `<Drawer open={open} onOpenChange={setOpen} side="right">
+  <DrawerContent>
+    <Text>Right drawer content</Text>
+  </DrawerContent>
+</Drawer>`;
+
+const sourceCode = `import React, { useEffect } from "react";
+import { View, Pressable, Modal } from "react-native";
+import Animated, { useSharedValue, useAnimatedStyle, withTiming, runOnJS } from "react-native-reanimated";
+import { cn } from "@/lib/utils";
+
+export interface DrawerProps {
+  open: boolean;
+  onOpenChange: (open: boolean) => void;
+  side?: "left" | "right";
+  children: React.ReactNode;
+}
+
+export function Drawer({ open, onOpenChange, side = "left", children }: DrawerProps) {
+  const translate = useSharedValue(side === "left" ? -300 : 300);
+  const opacity = useSharedValue(0);
+
+  useEffect(() => {
+    translate.value = withTiming(open ? 0 : (side === "left" ? -300 : 300), { duration: 250 });
+    opacity.value = withTiming(open ? 0.5 : 0, { duration: 250 });
+  }, [open, side, translate, opacity]);
+
+  const overlayStyle = useAnimatedStyle(() => ({ opacity: opacity.value }));
+  const drawerStyle = useAnimatedStyle(() => ({
+    transform: [{ translateX: translate.value }],
+  }));
+
+  const close = () => onOpenChange(false);
+
+  return (
+    <Modal visible={open} transparent animationType="none" onRequestClose={close}>
+      <Pressable className="absolute inset-0" onPress={close} accessible={false}>
+        <Animated.View className="flex-1 bg-black" style={overlayStyle} />
+      </Pressable>
+      <Animated.View
+        className={cn(
+          "absolute top-0 bottom-0 w-72 bg-background border-border",
+          side === "left" ? "left-0 border-r" : "right-0 border-l"
+        )}
+        style={drawerStyle}
+        accessibilityRole="menu"
+      >
+        {children}
+      </Animated.View>
+    </Modal>
+  );
+}
+
+export interface DrawerContentProps extends React.ComponentPropsWithoutRef<typeof View> {
+  className?: string;
+  children?: React.ReactNode;
+}
+
+export function DrawerContent({ className, ...props }: DrawerContentProps) {
+  return <View className={cn("flex-1 p-4", className)} {...props} />;
+}`;
+
+export default function DrawerPage() {
+  return (
+    <div className="space-y-10">
+      {/* Header */}
+      <div>
+        <h1 className="text-3xl font-bold tracking-tight text-foreground">Drawer</h1>
+        <p className="mt-2 text-lg text-muted-foreground">
+          A sliding panel that emerges from the left or right edge of the screen, ideal for navigation menus and side content.
+        </p>
+        <p className="mt-1 text-sm text-muted-foreground">
+          Requires <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">react-native-reanimated</code> (Tier 2).
+        </p>
+      </div>
+
+      {/* Preview */}
+      <ComponentPlayground code={usageCode}>
+        <div className="flex flex-wrap items-center gap-4">
+          <PreviewDrawer />
+        </div>
+      </ComponentPlayground>
+
+      {/* Installation */}
+      <div className="space-y-4">
+        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Installation</h2>
+        <CodeBlock code={installCode} />
+      </div>
+
+      {/* Usage */}
+      <div className="space-y-4">
+        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Usage</h2>
+        <CodeBlock code={usageCode} title="app/index.tsx" />
+      </div>
+
+      {/* Left Drawer */}
+      <div className="space-y-4">
+        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Left Drawer (Default)</h2>
+        <ComponentPlayground code={leftDrawerCode}>
+          <div className="flex flex-wrap items-center gap-3">
+            <PreviewDrawer side="left" />
+          </div>
+        </ComponentPlayground>
+      </div>
+
+      {/* Right Drawer */}
+      <div className="space-y-4">
+        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Right Drawer</h2>
+        <ComponentPlayground code={rightDrawerCode}>
+          <div className="flex flex-wrap items-center gap-3">
+            <PreviewDrawer side="right" />
+          </div>
+        </ComponentPlayground>
+      </div>
+
+      {/* Props - Drawer */}
+      <div className="space-y-4">
+        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Props</h2>
+        <h3 className="text-lg font-medium text-foreground">Drawer</h3>
+        <div className="overflow-x-auto rounded-lg border border-border">
+          <table className="w-full text-sm">
+            <thead>
+              <tr className="border-b border-border bg-secondary/50">
+                <th className="px-4 py-3 text-left font-medium text-foreground">Prop</th>
+                <th className="px-4 py-3 text-left font-medium text-foreground">Type</th>
+                <th className="px-4 py-3 text-left font-medium text-foreground">Default</th>
+              </tr>
+            </thead>
+            <tbody className="text-muted-foreground">
+              <tr className="border-b border-border">
+                <td className="px-4 py-3 font-mono text-xs text-foreground">open</td>
+                <td className="px-4 py-3 font-mono text-xs">boolean</td>
+                <td className="px-4 py-3 font-mono text-xs">required</td>
+              </tr>
+              <tr className="border-b border-border">
+                <td className="px-4 py-3 font-mono text-xs text-foreground">onOpenChange</td>
+                <td className="px-4 py-3 font-mono text-xs">{`(open: boolean) => void`}</td>
+                <td className="px-4 py-3 font-mono text-xs">required</td>
+              </tr>
+              <tr className="border-b border-border">
+                <td className="px-4 py-3 font-mono text-xs text-foreground">side</td>
+                <td className="px-4 py-3 font-mono text-xs">{`"left" | "right"`}</td>
+                <td className="px-4 py-3 font-mono text-xs">{`"left"`}</td>
+              </tr>
+              <tr>
+                <td className="px-4 py-3 font-mono text-xs text-foreground">children</td>
+                <td className="px-4 py-3 font-mono text-xs">ReactNode</td>
+                <td className="px-4 py-3 font-mono text-xs">required</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        {/* Props - DrawerContent */}
+        <h3 className="text-lg font-medium text-foreground mt-6">DrawerContent</h3>
+        <div className="overflow-x-auto rounded-lg border border-border">
+          <table className="w-full text-sm">
+            <thead>
+              <tr className="border-b border-border bg-secondary/50">
+                <th className="px-4 py-3 text-left font-medium text-foreground">Prop</th>
+                <th className="px-4 py-3 text-left font-medium text-foreground">Type</th>
+                <th className="px-4 py-3 text-left font-medium text-foreground">Default</th>
+              </tr>
+            </thead>
+            <tbody className="text-muted-foreground">
+              <tr className="border-b border-border">
+                <td className="px-4 py-3 font-mono text-xs text-foreground">className</td>
+                <td className="px-4 py-3 font-mono text-xs">string</td>
+                <td className="px-4 py-3 font-mono text-xs">-</td>
+              </tr>
+              <tr>
+                <td className="px-4 py-3 font-mono text-xs text-foreground">children</td>
+                <td className="px-4 py-3 font-mono text-xs">ReactNode</td>
+                <td className="px-4 py-3 font-mono text-xs">-</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p className="text-sm text-muted-foreground">
+          DrawerContent also accepts all <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">View</code> props from React Native.
+        </p>
+      </div>
+
+      {/* Source */}
+      <div className="space-y-4">
+        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Source</h2>
+        <CodeBlock code={sourceCode} title="components/ui/drawer.tsx" />
+      </div>
+    </div>
+  );
+}
