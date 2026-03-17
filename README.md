@@ -7,7 +7,7 @@
 </p>
 
 <p align="center">
-  <a href="https://www.npmjs.com/package/@aniui/cli"><img src="https://img.shields.io/npm/v/aniui?style=flat-square&color=000" alt="npm version" /></a>
+  <a href="https://www.npmjs.com/package/@aniui/cli"><img src="https://img.shields.io/npm/v/@aniui/cli?style=flat-square&color=000" alt="npm version" /></a>
   <a href="https://github.com/anishlp7/aniui/blob/main/LICENSE"><img src="https://img.shields.io/github/license/anishlp7/aniui?style=flat-square&color=000" alt="license" /></a>
   <img src="https://img.shields.io/badge/platform-iOS%20%7C%20Android-000?style=flat-square" alt="platform" />
   <img src="https://img.shields.io/badge/Expo%20SDK-53%20%7C%2054-000?style=flat-square" alt="expo" />
@@ -17,7 +17,8 @@
   <a href="#quick-start">Quick Start</a> &nbsp;&bull;&nbsp;
   <a href="#components">Components</a> &nbsp;&bull;&nbsp;
   <a href="#documentation">Docs</a> &nbsp;&bull;&nbsp;
-  <a href="#philosophy">Philosophy</a>
+  <a href="#philosophy">Philosophy</a> &nbsp;&bull;&nbsp;
+  <a href="#contributing">Contributing</a>
 </p>
 
 ---
@@ -63,7 +64,7 @@ export function WelcomeScreen() {
 
 ## Components
 
-**29 components** across three tiers.
+**35 components** across three tiers.
 
 ### Tier 1 — Core
 
@@ -71,23 +72,27 @@ Zero extra dependencies. Uses React Native core + NativeWind + CVA.
 
 | Component | Description |
 |-----------|-------------|
-| [Button](docs/button) | Pressable with 5 variants and 3 sizes |
-| [Text](docs/text) | Typography with h1–h4, p, lead, large, small, muted |
-| [Input](docs/input) | Text input with default and ghost variants |
-| [Textarea](docs/textarea) | Multi-line text input |
-| [Card](docs/card) | Card with Header, Title, Description, Content, Footer |
-| [Badge](docs/badge) | Status indicator with 4 variants |
-| [Separator](docs/separator) | Horizontal or vertical divider |
-| [Avatar](docs/avatar) | Image with fallback initials, 3 sizes |
-| [Alert](docs/alert) | Alert with default, destructive, success, warning |
-| [Label](docs/label) | Form field label |
-| [Skeleton](docs/skeleton) | Animated loading placeholder |
-| [Switch](docs/switch) | Themed toggle switch |
-| [Checkbox](docs/checkbox) | Checkbox with checked/unchecked/disabled |
-| [Radio Group](docs/radio-group) | Radio button group with context |
-| [Progress](docs/progress) | Progress bar |
-| [Spinner](docs/spinner) | Loading spinner with 3 sizes |
-| [List](docs/list) | Styled list with ListItem, Title, Description |
+| [Button](https://aniui.dev/docs/button) | Pressable with 5 variants and 3 sizes |
+| [Text](https://aniui.dev/docs/text) | Typography with h1–h4, p, lead, large, small, muted |
+| [Input](https://aniui.dev/docs/input) | Text input with default and ghost variants |
+| [Textarea](https://aniui.dev/docs/textarea) | Multi-line text input |
+| [Card](https://aniui.dev/docs/card) | Card with Header, Title, Description, Content, Footer |
+| [Badge](https://aniui.dev/docs/badge) | Status indicator with 4 variants |
+| [Separator](https://aniui.dev/docs/separator) | Horizontal or vertical divider |
+| [Avatar](https://aniui.dev/docs/avatar) | Image with fallback initials, 3 sizes |
+| [Alert](https://aniui.dev/docs/alert) | Alert with default, destructive, success, warning |
+| [Label](https://aniui.dev/docs/label) | Form field label |
+| [Switch](https://aniui.dev/docs/switch) | Themed toggle switch |
+| [Checkbox](https://aniui.dev/docs/checkbox) | Checkbox with checked/unchecked/disabled |
+| [Radio Group](https://aniui.dev/docs/radio-group) | Radio button group with context |
+| [Progress](https://aniui.dev/docs/progress) | Progress bar |
+| [Spinner](https://aniui.dev/docs/spinner) | Loading spinner with 3 sizes |
+| [List](https://aniui.dev/docs/list) | Styled list with ListItem, Title, Description |
+| [Slider](https://aniui.dev/docs/slider) | Draggable slider for numeric values |
+| [Toggle](https://aniui.dev/docs/toggle) | Two-state toggle button with variants |
+| [Toggle Group](https://aniui.dev/docs/toggle-group) | Exclusive selection group |
+| [Input OTP](https://aniui.dev/docs/input-otp) | OTP verification input with individual cells |
+| [Table](https://aniui.dev/docs/table) | Data table with header, body, rows, and cells |
 
 ### Tier 2 — Animated
 
@@ -95,14 +100,16 @@ Requires `react-native-reanimated` v3 for smooth animations.
 
 | Component | Animation |
 |-----------|-----------|
-| [Accordion](docs/accordion) | Expand/collapse with height animation |
-| [Tabs](docs/tabs) | Tab navigation with indicator transition |
-| [Collapsible](docs/collapsible) | Animated show/hide content |
-| [Toast](docs/toast) | Slide-in notification with auto-dismiss |
-| [Dialog](docs/dialog) | Modal with fade + scale overlay |
-| [Alert Dialog](docs/alert-dialog) | Confirmation dialog with Action/Cancel |
-| [Tooltip](docs/tooltip) | Fade-in tooltip on press |
-| [Popover](docs/popover) | Contextual overlay content |
+| [Skeleton](https://aniui.dev/docs/skeleton) | Animated pulse via opacity |
+| [Accordion](https://aniui.dev/docs/accordion) | Expand/collapse with height animation |
+| [Tabs](https://aniui.dev/docs/tabs) | Tab navigation with indicator transition |
+| [Collapsible](https://aniui.dev/docs/collapsible) | Animated show/hide content |
+| [Toast](https://aniui.dev/docs/toast) | Slide-in notification with auto-dismiss |
+| [Dialog](https://aniui.dev/docs/dialog) | Modal with fade + scale overlay |
+| [Alert Dialog](https://aniui.dev/docs/alert-dialog) | Confirmation dialog with Action/Cancel |
+| [Tooltip](https://aniui.dev/docs/tooltip) | Fade-in tooltip on press |
+| [Popover](https://aniui.dev/docs/popover) | Contextual overlay content |
+| [Drawer](https://aniui.dev/docs/drawer) | Slide-in side navigation panel |
 
 ### Tier 3 — Native
 
@@ -110,10 +117,10 @@ Requires additional native packages.
 
 | Component | Extra Dependency |
 |-----------|-----------------|
-| [Bottom Sheet](docs/bottom-sheet) | `@gorhom/bottom-sheet` |
-| [Action Sheet](docs/action-sheet) | `@gorhom/bottom-sheet` |
-| [Select](docs/select) | `@gorhom/bottom-sheet` |
-| [Date Picker](docs/date-picker) | `@react-native-community/datetimepicker` |
+| [Bottom Sheet](https://aniui.dev/docs/bottom-sheet) | `@gorhom/bottom-sheet` |
+| [Action Sheet](https://aniui.dev/docs/action-sheet) | `@gorhom/bottom-sheet` |
+| [Select](https://aniui.dev/docs/select) | `@gorhom/bottom-sheet` |
+| [Date Picker](https://aniui.dev/docs/date-picker) | `@react-native-community/datetimepicker` |
 
 ## Prerequisites
 
@@ -202,26 +209,20 @@ your-project/
 
 ## Contributing
 
-Contributions are welcome. Please read the [CLAUDE.md](CLAUDE.md) for component guidelines, coding standards, and the quality checklist every component must pass before merging.
+Contributions are welcome! Please read the [contributing guide](CONTRIBUTING.md) and [component guidelines](CLAUDE.md) before submitting a PR.
 
 ```bash
 # Clone the repo
 git clone https://github.com/anishlp7/aniui.git
 cd aniui
 
-# Install docs dependencies
-cd docs && npm install
+# Run tests
+cd cli && npm install && npm test
 
 # Start the docs dev server
-npm run dev
+cd ../docs && npm install && npm run dev
 ```
 
 ## License
 
 MIT. See [LICENSE](LICENSE).
-
----
-
-<p align="center">
-  Built by <a href="https://github.com/anishlp7">Anish</a>
-</p>
