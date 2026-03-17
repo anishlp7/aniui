@@ -1,63 +1,97 @@
 import React, { useState } from "react";
-import { Pressable, Text, Platform } from "react-native";
-import DateTimePicker, { type DateTimePickerEvent } from "@react-native-community/datetimepicker";
+import { View, Text, Pressable, Modal } from "react-native";
 import { cn } from "@/lib/utils";
+import { Calendar } from "@/components/ui/calendar";
 
 export interface DatePickerProps {
   className?: string;
   value?: Date;
   onChange?: (date: Date) => void;
-  mode?: "date" | "time" | "datetime";
   placeholder?: string;
+  min?: Date;
+  max?: Date;
+  formatDate?: (date: Date) => string;
 }
 
-export function DatePicker({
-  className,
-  value,
-  onChange,
-  mode = "date",
-  placeholder = "Select date...",
-}: DatePickerProps) {
-  const [show, setShow] = useState(false);
-  const [internalDate, setInternalDate] = useState(value ?? new Date());
-  const currentDate = value ?? internalDate;
+export function DatePicker({ className, value, onChange, placeholder = "Select date...", min, max, formatDate }: DatePickerProps) {
+  const [open, setOpen] = useState(false);
 
-  const handleChange = (_event: DateTimePickerEvent, selectedDate?: Date) => {
-    if (Platform.OS === "android") setShow(false);
-    if (selectedDate) {
-      setInternalDate(selectedDate);
-      onChange?.(selectedDate);
-    }
-  };
+  const display = value
+    ? (formatDate ?? ((d: Date) => d.toLocaleDateString()))(value)
+    : placeholder;
 
-  const formatDate = (date: Date) => {
-    if (mode === "time") return date.toLocaleTimeString();
-    if (mode === "datetime") return date.toLocaleString();
-    return date.toLocaleDateString();
+  const handleSelect = (date: Date) => {
+    onChange?.(date);
+    setOpen(false);
   };
 
   return (
     <>
       <Pressable
-        className={cn(
-          "flex-row items-center rounded-md border border-input bg-background px-4 min-h-12",
-          className
-        )}
-        onPress={() => setShow(true)}
+        className={cn("flex-row items-center rounded-md border border-input bg-background px-4 min-h-12", className)}
+        onPress={() => setOpen(true)}
         accessible={true}
         accessibilityRole="button"
       >
-        <Text className={cn("text-base", value ? "text-foreground" : "text-muted-foreground")}>
-          {value ? formatDate(currentDate) : placeholder}
+        <Text className={cn("flex-1 text-base", value ? "text-foreground" : "text-muted-foreground")}>
+          {display}
         </Text>
+        <Text className="text-muted-foreground text-xs">{"▾"}</Text>
       </Pressable>
-      {show && (
-        <DateTimePicker
-          value={currentDate}
-          mode={mode === "datetime" ? "date" : mode}
-          onChange={handleChange}
-        />
-      )}
+      <Modal visible={open} transparent animationType="fade" onRequestClose={() => setOpen(false)}>
+        <Pressable className="flex-1 items-center justify-center bg-black/50" onPress={() => setOpen(false)}>
+          <Pressable onPress={() => {}} className="mx-6 rounded-xl bg-card p-2 shadow-xl">
+            <Calendar selected={value} onSelect={handleSelect} min={min} max={max} />
+            <Pressable onPress={() => setOpen(false)} className="mt-1 mb-2 items-center py-2" accessibilityRole="button">
+              <Text className="text-sm font-medium text-muted-foreground">Cancel</Text>
+            </Pressable>
+          </Pressable>
+        </Pressable>
+      </Modal>
+    </>
+  );
+}
+
+export interface DateRangePickerProps {
+  className?: string;
+  startDate?: Date;
+  endDate?: Date;
+  onRangeChange?: (start: Date, end: Date | undefined) => void;
+  placeholder?: string;
+  min?: Date;
+  max?: Date;
+}
+
+export function DateRangePicker({ className, startDate, endDate, onRangeChange, placeholder = "Select range...", min, max }: DateRangePickerProps) {
+  const [open, setOpen] = useState(false);
+
+  const display = startDate
+    ? `${startDate.toLocaleDateString()}${endDate ? ` - ${endDate.toLocaleDateString()}` : ""}`
+    : placeholder;
+
+  return (
+    <>
+      <Pressable
+        className={cn("flex-row items-center rounded-md border border-input bg-background px-4 min-h-12", className)}
+        onPress={() => setOpen(true)}
+        accessible={true}
+        accessibilityRole="button"
+      >
+        <Text className={cn("flex-1 text-base", startDate ? "text-foreground" : "text-muted-foreground")}>
+          {display}
+        </Text>
+        <Text className="text-muted-foreground text-xs">{"▾"}</Text>
+      </Pressable>
+      <Modal visible={open} transparent animationType="fade" onRequestClose={() => setOpen(false)}>
+        <Pressable className="flex-1 items-center justify-center bg-black/50" onPress={() => setOpen(false)}>
+          <Pressable onPress={() => {}} className="mx-6 rounded-xl bg-card p-2 shadow-xl">
+            <Calendar rangeStart={startDate} rangeEnd={endDate} onRangeChange={onRangeChange} min={min} max={max} />
+            <Pressable onPress={() => setOpen(false)} className="mt-1 mb-2 items-center py-2" accessibilityRole="button">
+              <Text className="text-sm font-medium text-muted-foreground">Done</Text>
+            </Pressable>
+          </Pressable>
+        </Pressable>
+      </Modal>
     </>
   );
 }
