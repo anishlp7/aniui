@@ -14,34 +14,19 @@ export interface CalendarProps {
 }
 
 const DAYS = ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"];
-
-function isSameDay(a: Date, b: Date) {
-  return a.getFullYear() === b.getFullYear() && a.getMonth() === b.getMonth() && a.getDate() === b.getDate();
-}
-
-function inRange(d: Date, start?: Date, end?: Date) {
-  if (!start || !end) return false;
-  const t = d.getTime();
-  return t >= start.getTime() && t <= end.getTime();
-}
+const same = (a: Date, b: Date) => a.getFullYear() === b.getFullYear() && a.getMonth() === b.getMonth() && a.getDate() === b.getDate();
 
 export function Calendar({ className, selected, onSelect, rangeStart, rangeEnd, onRangeChange, min, max }: CalendarProps) {
   const [viewing, setViewing] = useState(() => selected ?? rangeStart ?? new Date());
-  const year = viewing.getFullYear();
-  const month = viewing.getMonth();
-
+  const year = viewing.getFullYear(), month = viewing.getMonth();
   const firstDay = new Date(year, month, 1).getDay();
   const daysInMonth = new Date(year, month + 1, 0).getDate();
-  const cells: (number | null)[] = Array(firstDay).fill(null);
-  for (let d = 1; d <= daysInMonth; d++) cells.push(d);
-
-  const prev = () => setViewing(new Date(year, month - 1, 1));
-  const next = () => setViewing(new Date(year, month + 1, 1));
+  const cells: (number | null)[] = [...Array(firstDay).fill(null), ...Array.from({ length: daysInMonth }, (_, i) => i + 1)];
+  const label = new Date(year, month).toLocaleString("default", { month: "long", year: "numeric" });
 
   const handlePress = (day: number) => {
     const date = new Date(year, month, day);
-    if (min && date < min) return;
-    if (max && date > max) return;
+    if ((min && date < min) || (max && date > max)) return;
     if (onRangeChange) {
       if (!rangeStart || rangeEnd || date < rangeStart) onRangeChange(date, undefined);
       else onRangeChange(rangeStart, date);
@@ -49,53 +34,34 @@ export function Calendar({ className, selected, onSelect, rangeStart, rangeEnd, 
     onSelect?.(date);
   };
 
-  const monthLabel = new Date(year, month).toLocaleString("default", { month: "long", year: "numeric" });
-
   return (
     <View className={cn("rounded-lg bg-background p-3", className)}>
       <View className="flex-row items-center justify-between mb-3">
-        <Pressable onPress={prev} className="h-9 w-9 items-center justify-center rounded-md" accessibilityRole="button" accessibilityLabel="Previous month">
+        <Pressable onPress={() => setViewing(new Date(year, month - 1, 1))} className="h-9 w-9 items-center justify-center rounded-md" accessibilityRole="button" accessibilityLabel="Previous month">
           <Text className="text-base text-muted-foreground">{"\u2039"}</Text>
         </Pressable>
-        <Text className="text-sm font-semibold text-foreground">{monthLabel}</Text>
-        <Pressable onPress={next} className="h-9 w-9 items-center justify-center rounded-md" accessibilityRole="button" accessibilityLabel="Next month">
+        <Text className="text-sm font-semibold text-foreground">{label}</Text>
+        <Pressable onPress={() => setViewing(new Date(year, month + 1, 1))} className="h-9 w-9 items-center justify-center rounded-md" accessibilityRole="button" accessibilityLabel="Next month">
           <Text className="text-base text-muted-foreground">{"\u203A"}</Text>
         </Pressable>
       </View>
       <View className="flex-row mb-1">
-        {DAYS.map((d) => (
-          <View key={d} className="flex-1 items-center py-1">
-            <Text className="text-xs font-medium text-muted-foreground">{d}</Text>
-          </View>
-        ))}
+        {DAYS.map((d) => <View key={d} className="flex-1 items-center py-1"><Text className="text-xs font-medium text-muted-foreground">{d}</Text></View>)}
       </View>
       <View className="flex-row flex-wrap">
         {cells.map((day, i) => {
           if (day === null) return <View key={`e-${i}`} className="w-[14.28%] h-9" />;
           const date = new Date(year, month, day);
-          const isSelected = selected && isSameDay(date, selected);
-          const isRangeStart = rangeStart && isSameDay(date, rangeStart);
-          const isRangeEnd = rangeEnd && isSameDay(date, rangeEnd);
-          const isInRange = inRange(date, rangeStart, rangeEnd);
-          const isToday = isSameDay(date, new Date());
-          const disabled = (min && date < min) || (max && date > max);
+          const sel = selected && same(date, selected);
+          const rs = rangeStart && same(date, rangeStart);
+          const re = rangeEnd && same(date, rangeEnd);
+          const inR = rangeStart && rangeEnd && date.getTime() >= rangeStart.getTime() && date.getTime() <= rangeEnd.getTime();
+          const today = same(date, new Date());
+          const off = (min && date < min) || (max && date > max);
           return (
             <View key={day} className="w-[14.28%] items-center">
-              <Pressable
-                onPress={() => handlePress(day)}
-                disabled={!!disabled}
-                className={cn(
-                  "h-9 w-9 items-center justify-center rounded-full",
-                  isSelected || isRangeStart || isRangeEnd ? "bg-primary" : isInRange ? "bg-accent" : "",
-                  isToday && !isSelected && "border border-primary",
-                  disabled && "opacity-30"
-                )}
-                accessibilityRole="button"
-                accessibilityLabel={`${monthLabel} ${day}`}
-              >
-                <Text className={cn("text-sm", isSelected || isRangeStart || isRangeEnd ? "text-primary-foreground font-semibold" : "text-foreground")}>
-                  {day}
-                </Text>
+              <Pressable onPress={() => handlePress(day)} disabled={!!off} className={cn("h-9 w-9 items-center justify-center rounded-full", sel || rs || re ? "bg-primary" : inR ? "bg-accent" : "", today && !sel && "border border-primary", off && "opacity-30")} accessibilityRole="button" accessibilityLabel={`${label} ${day}`}>
+                <Text className={cn("text-sm", sel || rs || re ? "text-primary-foreground font-semibold" : "text-foreground")}>{day}</Text>
               </Pressable>
             </View>
           );

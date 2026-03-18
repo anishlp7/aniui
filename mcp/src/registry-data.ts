@@ -25,7 +25,7 @@ export const registry: Record<string, ComponentEntry> = {
   checkbox: { name: "Checkbox", file: "components/ui/checkbox.tsx", description: "Checkbox with checked state", dependencies: ["clsx", "tailwind-merge"], registryDependencies: [], tier: 1 },
   "radio-group": { name: "RadioGroup", file: "components/ui/radio-group.tsx", description: "Radio button group", dependencies: ["clsx", "tailwind-merge"], registryDependencies: [], tier: 1 },
   progress: { name: "Progress", file: "components/ui/progress.tsx", description: "Progress bar", dependencies: ["clsx", "tailwind-merge"], registryDependencies: [], tier: 1 },
-  spinner: { name: "Spinner", file: "components/ui/spinner.tsx", description: "Loading spinner with sizes", dependencies: ["class-variance-authority", "clsx", "tailwind-merge"], registryDependencies: [], tier: 1 },
+  spinner: { name: "Spinner", file: "components/ui/spinner.tsx", description: "Loading spinner with sizes", dependencies: ["clsx", "tailwind-merge"], registryDependencies: [], tier: 1 },
   list: { name: "List", file: "components/ui/list.tsx", description: "Styled list items", dependencies: ["clsx", "tailwind-merge"], registryDependencies: [], tier: 1 },
   skeleton: { name: "Skeleton", file: "components/ui/skeleton.tsx", description: "Animated loading placeholder", dependencies: ["react-native-reanimated", "clsx", "tailwind-merge"], registryDependencies: [], tier: 2 },
   accordion: { name: "Accordion", file: "components/ui/accordion.tsx", description: "Expandable content sections", dependencies: ["react-native-reanimated", "clsx", "tailwind-merge"], registryDependencies: [], tier: 2 },

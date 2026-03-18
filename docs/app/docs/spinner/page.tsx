@@ -18,36 +18,21 @@ const sizesCode = `<Spinner size="sm" />
 
 const sourceCode = `import React from "react";
 import { ActivityIndicator, View } from "react-native";
-import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
-
-const spinnerVariants = cva("items-center justify-center", {
-  variants: {
-    size: {
-      sm: "",
-      md: "",
-      lg: "",
-    },
-  },
-  defaultVariants: {
-    size: "md",
-  },
-});
 
 const sizeMap = { sm: "small", md: "small", lg: "large" } as const;
 
-export interface SpinnerProps
-  extends React.ComponentPropsWithoutRef<typeof View>,
-    VariantProps<typeof spinnerVariants> {
+export interface SpinnerProps extends React.ComponentPropsWithoutRef<typeof View> {
   className?: string;
+  size?: "sm" | "md" | "lg";
   color?: string;
 }
 
-export function Spinner({ size, color, className, ...props }: SpinnerProps) {
+export function Spinner({ size = "md", color, className, ...props }: SpinnerProps) {
   return (
-    <View className={cn(spinnerVariants({ size }), className)} {...props}>
+    <View className={cn("items-center justify-center", className)} {...props}>
       <ActivityIndicator
-        size={sizeMap[size ?? "md"]}
+        size={sizeMap[size]}
         color={color ?? "hsl(240, 5.9%, 10%)"}
         accessibilityRole="progressbar"
       />

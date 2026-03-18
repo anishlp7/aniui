@@ -63,41 +63,40 @@ export interface DatePickerProps {
   formatDate?: (date: Date) => string;
 }
 
+function PickerShell({ open, onClose, children }: { open: boolean; onClose: () => void; children: React.ReactNode }) {
+  return (
+    <Modal visible={open} transparent animationType="fade" onRequestClose={onClose}>
+      <Pressable className="flex-1 items-center justify-center bg-black/50" onPress={onClose}>
+        <Pressable onPress={() => {}} className="mx-6 rounded-xl bg-card p-2 shadow-xl">
+          {children}
+          <Pressable onPress={onClose} className="mt-1 mb-2 items-center py-2" accessibilityRole="button">
+            <Text className="text-sm font-medium text-muted-foreground">Cancel</Text>
+          </Pressable>
+        </Pressable>
+      </Pressable>
+    </Modal>
+  );
+}
+
+function TriggerButton({ label, hasValue, className, onPress }: { label: string; hasValue: boolean; className?: string; onPress: () => void }) {
+  return (
+    <Pressable className={cn("flex-row items-center rounded-md border border-input bg-background px-4 min-h-12", className)} onPress={onPress} accessible={true} accessibilityRole="button">
+      <Text className={cn("flex-1 text-base", hasValue ? "text-foreground" : "text-muted-foreground")}>{label}</Text>
+      <Text className="text-muted-foreground text-xs">{"▾"}</Text>
+    </Pressable>
+  );
+}
+
 export function DatePicker({ className, value, onChange, placeholder = "Select date...", min, max, formatDate }: DatePickerProps) {
   const [open, setOpen] = useState(false);
-
-  const display = value
-    ? (formatDate ?? ((d: Date) => d.toLocaleDateString()))(value)
-    : placeholder;
-
-  const handleSelect = (date: Date) => {
-    onChange?.(date);
-    setOpen(false);
-  };
+  const display = value ? (formatDate ?? ((d: Date) => d.toLocaleDateString()))(value) : placeholder;
 
   return (
     <>
-      <Pressable
-        className={cn("flex-row items-center rounded-md border border-input bg-background px-4 min-h-12", className)}
-        onPress={() => setOpen(true)}
-        accessible={true}
-        accessibilityRole="button"
-      >
-        <Text className={cn("flex-1 text-base", value ? "text-foreground" : "text-muted-foreground")}>
-          {display}
-        </Text>
-        <Text className="text-muted-foreground text-xs">{"▾"}</Text>
-      </Pressable>
-      <Modal visible={open} transparent animationType="fade" onRequestClose={() => setOpen(false)}>
-        <Pressable className="flex-1 items-center justify-center bg-black/50" onPress={() => setOpen(false)}>
-          <Pressable onPress={() => {}} className="mx-6 rounded-xl bg-card p-2 shadow-xl">
-            <Calendar selected={value} onSelect={handleSelect} min={min} max={max} />
-            <Pressable onPress={() => setOpen(false)} className="mt-1 mb-2 items-center py-2" accessibilityRole="button">
-              <Text className="text-sm font-medium text-muted-foreground">Cancel</Text>
-            </Pressable>
-          </Pressable>
-        </Pressable>
-      </Modal>
+      <TriggerButton label={display} hasValue={!!value} className={className} onPress={() => setOpen(true)} />
+      <PickerShell open={open} onClose={() => setOpen(false)}>
+        <Calendar selected={value} onSelect={(d) => { onChange?.(d); setOpen(false); }} min={min} max={max} />
+      </PickerShell>
     </>
   );
 }
@@ -114,34 +113,14 @@ export interface DateRangePickerProps {
 
 export function DateRangePicker({ className, startDate, endDate, onRangeChange, placeholder = "Select range...", min, max }: DateRangePickerProps) {
   const [open, setOpen] = useState(false);
-
-  const display = startDate
-    ? \`\${startDate.toLocaleDateString()}\${endDate ? \` - \${endDate.toLocaleDateString()}\` : ""}\`
-    : placeholder;
+  const display = startDate ? \`\${startDate.toLocaleDateString()}\${endDate ? \` - \${endDate.toLocaleDateString()}\` : ""}\` : placeholder;
 
   return (
     <>
-      <Pressable
-        className={cn("flex-row items-center rounded-md border border-input bg-background px-4 min-h-12", className)}
-        onPress={() => setOpen(true)}
-        accessible={true}
-        accessibilityRole="button"
-      >
-        <Text className={cn("flex-1 text-base", startDate ? "text-foreground" : "text-muted-foreground")}>
-          {display}
-        </Text>
-        <Text className="text-muted-foreground text-xs">{"▾"}</Text>
-      </Pressable>
-      <Modal visible={open} transparent animationType="fade" onRequestClose={() => setOpen(false)}>
-        <Pressable className="flex-1 items-center justify-center bg-black/50" onPress={() => setOpen(false)}>
-          <Pressable onPress={() => {}} className="mx-6 rounded-xl bg-card p-2 shadow-xl">
-            <Calendar rangeStart={startDate} rangeEnd={endDate} onRangeChange={onRangeChange} min={min} max={max} />
-            <Pressable onPress={() => setOpen(false)} className="mt-1 mb-2 items-center py-2" accessibilityRole="button">
-              <Text className="text-sm font-medium text-muted-foreground">Done</Text>
-            </Pressable>
-          </Pressable>
-        </Pressable>
-      </Modal>
+      <TriggerButton label={display} hasValue={!!startDate} className={className} onPress={() => setOpen(true)} />
+      <PickerShell open={open} onClose={() => setOpen(false)}>
+        <Calendar rangeStart={startDate} rangeEnd={endDate} onRangeChange={onRangeChange} min={min} max={max} />
+      </PickerShell>
     </>
   );
 }`;

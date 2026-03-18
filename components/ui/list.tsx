@@ -21,6 +21,7 @@ export function ListItem({ className, ...props }: ListItemProps) {
     <Pressable
       className={cn("flex-row items-center px-4 py-3 min-h-12 border-b border-border", className)}
       accessible={true}
+      accessibilityRole="button"
       {...props}
     />
   );

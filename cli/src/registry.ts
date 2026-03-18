@@ -132,7 +132,7 @@ export const registry: Record<string, ComponentEntry> = {
     name: "Spinner",
     file: "components/ui/spinner.tsx",
     description: "Loading spinner with sizes",
-    dependencies: ["class-variance-authority", "clsx", "tailwind-merge"],
+    dependencies: ["clsx", "tailwind-merge"],
     registryDependencies: [],
     tier: 1,
   },
