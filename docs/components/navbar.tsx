@@ -122,154 +122,60 @@ export function Navbar() {
               Dark Mode
             </Link>
             <div className="border-t border-border pt-4 mt-4">
-              <p className="text-xs font-semibold text-foreground mb-2">Tier 1 - Core</p>
-              <Link href="/docs/button" className="block text-sm text-muted-foreground hover:text-foreground" onClick={() => setMobileOpen(false)}>
-                Button
-              </Link>
-              <Link href="/docs/text" className="block text-sm text-muted-foreground hover:text-foreground mt-2" onClick={() => setMobileOpen(false)}>
-                Text
-              </Link>
-              <Link href="/docs/input" className="block text-sm text-muted-foreground hover:text-foreground mt-2" onClick={() => setMobileOpen(false)}>
-                Input
-              </Link>
-              <Link href="/docs/card" className="block text-sm text-muted-foreground hover:text-foreground mt-2" onClick={() => setMobileOpen(false)}>
-                Card
-              </Link>
-              <Link href="/docs/badge" className="block text-sm text-muted-foreground hover:text-foreground mt-2" onClick={() => setMobileOpen(false)}>
-                Badge
-              </Link>
-              <Link href="/docs/separator" className="block text-sm text-muted-foreground hover:text-foreground mt-2" onClick={() => setMobileOpen(false)}>
-                Separator
-              </Link>
-              <Link href="/docs/avatar" className="block text-sm text-muted-foreground hover:text-foreground mt-2" onClick={() => setMobileOpen(false)}>
-                Avatar
-              </Link>
-              <Link href="/docs/alert" className="block text-sm text-muted-foreground hover:text-foreground mt-2" onClick={() => setMobileOpen(false)}>
-                Alert
-              </Link>
-              <Link href="/docs/label" className="block text-sm text-muted-foreground hover:text-foreground mt-2" onClick={() => setMobileOpen(false)}>
-                Label
-              </Link>
-              <Link href="/docs/switch" className="block text-sm text-muted-foreground hover:text-foreground mt-2" onClick={() => setMobileOpen(false)}>
-                Switch
-              </Link>
-              <Link href="/docs/checkbox" className="block text-sm text-muted-foreground hover:text-foreground mt-2" onClick={() => setMobileOpen(false)}>
-                Checkbox
-              </Link>
-              <Link href="/docs/radio-group" className="block text-sm text-muted-foreground hover:text-foreground mt-2" onClick={() => setMobileOpen(false)}>
-                Radio Group
-              </Link>
-              <Link href="/docs/progress" className="block text-sm text-muted-foreground hover:text-foreground mt-2" onClick={() => setMobileOpen(false)}>
-                Progress
-              </Link>
-              <Link href="/docs/spinner" className="block text-sm text-muted-foreground hover:text-foreground mt-2" onClick={() => setMobileOpen(false)}>
-                Spinner
-              </Link>
-              <Link href="/docs/textarea" className="block text-sm text-muted-foreground hover:text-foreground mt-2" onClick={() => setMobileOpen(false)}>
-                Textarea
-              </Link>
-              <Link href="/docs/list" className="block text-sm text-muted-foreground hover:text-foreground mt-2" onClick={() => setMobileOpen(false)}>
-                List
-              </Link>
-              <Link href="/docs/slider" className="block text-sm text-muted-foreground hover:text-foreground mt-2" onClick={() => setMobileOpen(false)}>
-                Slider
-              </Link>
-              <Link href="/docs/toggle" className="block text-sm text-muted-foreground hover:text-foreground mt-2" onClick={() => setMobileOpen(false)}>
-                Toggle
-              </Link>
-              <Link href="/docs/toggle-group" className="block text-sm text-muted-foreground hover:text-foreground mt-2" onClick={() => setMobileOpen(false)}>
-                Toggle Group
-              </Link>
-              <Link href="/docs/input-otp" className="block text-sm text-muted-foreground hover:text-foreground mt-2" onClick={() => setMobileOpen(false)}>
-                Input OTP
-              </Link>
-              <Link href="/docs/table" className="block text-sm text-muted-foreground hover:text-foreground mt-2" onClick={() => setMobileOpen(false)}>
-                Table
-              </Link>
-              <Link href="/docs/calendar" className="block text-sm text-muted-foreground hover:text-foreground mt-2" onClick={() => setMobileOpen(false)}>
-                Calendar
-              </Link>
-              <Link href="/docs/date-picker" className="block text-sm text-muted-foreground hover:text-foreground mt-2" onClick={() => setMobileOpen(false)}>
-                Date Picker
-              </Link>
-              <Link href="/docs/search-bar" className="block text-sm text-muted-foreground hover:text-foreground mt-2" onClick={() => setMobileOpen(false)}>
-                SearchBar
-              </Link>
-              <Link href="/docs/chip" className="block text-sm text-muted-foreground hover:text-foreground mt-2" onClick={() => setMobileOpen(false)}>
-                Chip
-              </Link>
-              <Link href="/docs/fab" className="block text-sm text-muted-foreground hover:text-foreground mt-2" onClick={() => setMobileOpen(false)}>
-                FAB
-              </Link>
-              <Link href="/docs/empty-state" className="block text-sm text-muted-foreground hover:text-foreground mt-2" onClick={() => setMobileOpen(false)}>
-                EmptyState
-              </Link>
-              <Link href="/docs/image" className="block text-sm text-muted-foreground hover:text-foreground mt-2" onClick={() => setMobileOpen(false)}>
-                Image
-              </Link>
-              <Link href="/docs/segmented-control" className="block text-sm text-muted-foreground hover:text-foreground mt-2" onClick={() => setMobileOpen(false)}>
-                Segmented Control
-              </Link>
-              <Link href="/docs/carousel" className="block text-sm text-muted-foreground hover:text-foreground mt-2" onClick={() => setMobileOpen(false)}>
-                Carousel
-              </Link>
-              <Link href="/docs/rating" className="block text-sm text-muted-foreground hover:text-foreground mt-2" onClick={() => setMobileOpen(false)}>
-                Rating
-              </Link>
-              <Link href="/docs/stepper" className="block text-sm text-muted-foreground hover:text-foreground mt-2" onClick={() => setMobileOpen(false)}>
-                Stepper
-              </Link>
-              <Link href="/docs/banner" className="block text-sm text-muted-foreground hover:text-foreground mt-2" onClick={() => setMobileOpen(false)}>
-                Banner
-              </Link>
-            </div>
-            <div className="border-t border-border pt-4 mt-4">
-              <p className="text-xs font-semibold text-foreground mb-2">Tier 2 - Animated</p>
-              <Link href="/docs/skeleton" className="block text-sm text-muted-foreground hover:text-foreground" onClick={() => setMobileOpen(false)}>
-                Skeleton
-              </Link>
-              <Link href="/docs/accordion" className="block text-sm text-muted-foreground hover:text-foreground mt-2" onClick={() => setMobileOpen(false)}>
-                Accordion
-              </Link>
-              <Link href="/docs/tabs" className="block text-sm text-muted-foreground hover:text-foreground mt-2" onClick={() => setMobileOpen(false)}>
-                Tabs
-              </Link>
-              <Link href="/docs/collapsible" className="block text-sm text-muted-foreground hover:text-foreground mt-2" onClick={() => setMobileOpen(false)}>
-                Collapsible
-              </Link>
-              <Link href="/docs/toast" className="block text-sm text-muted-foreground hover:text-foreground mt-2" onClick={() => setMobileOpen(false)}>
-                Toast
-              </Link>
-              <Link href="/docs/dialog" className="block text-sm text-muted-foreground hover:text-foreground mt-2" onClick={() => setMobileOpen(false)}>
-                Dialog
-              </Link>
-              <Link href="/docs/alert-dialog" className="block text-sm text-muted-foreground hover:text-foreground mt-2" onClick={() => setMobileOpen(false)}>
-                Alert Dialog
-              </Link>
-              <Link href="/docs/tooltip" className="block text-sm text-muted-foreground hover:text-foreground mt-2" onClick={() => setMobileOpen(false)}>
-                Tooltip
-              </Link>
-              <Link href="/docs/popover" className="block text-sm text-muted-foreground hover:text-foreground mt-2" onClick={() => setMobileOpen(false)}>
-                Popover
-              </Link>
-              <Link href="/docs/drawer" className="block text-sm text-muted-foreground hover:text-foreground mt-2" onClick={() => setMobileOpen(false)}>
-                Drawer
-              </Link>
-              <Link href="/docs/dropdown-menu" className="block text-sm text-muted-foreground hover:text-foreground mt-2" onClick={() => setMobileOpen(false)}>
-                Dropdown Menu
-              </Link>
-            </div>
-            <div className="border-t border-border pt-4 mt-4">
-              <p className="text-xs font-semibold text-foreground mb-2">Tier 3 - Native</p>
-              <Link href="/docs/bottom-sheet" className="block text-sm text-muted-foreground hover:text-foreground" onClick={() => setMobileOpen(false)}>
-                Bottom Sheet
-              </Link>
-              <Link href="/docs/action-sheet" className="block text-sm text-muted-foreground hover:text-foreground mt-2" onClick={() => setMobileOpen(false)}>
-                Action Sheet
-              </Link>
-              <Link href="/docs/select" className="block text-sm text-muted-foreground hover:text-foreground mt-2" onClick={() => setMobileOpen(false)}>
-                Select
-              </Link>
+              <p className="text-xs font-semibold text-foreground mb-2">Components</p>
+              {[
+                ["Accordion", "/docs/accordion"],
+                ["Action Sheet", "/docs/action-sheet"],
+                ["Alert", "/docs/alert"],
+                ["Alert Dialog", "/docs/alert-dialog"],
+                ["Avatar", "/docs/avatar"],
+                ["Badge", "/docs/badge"],
+                ["Banner", "/docs/banner"],
+                ["Bottom Sheet", "/docs/bottom-sheet"],
+                ["Button", "/docs/button"],
+                ["Calendar", "/docs/calendar"],
+                ["Card", "/docs/card"],
+                ["Carousel", "/docs/carousel"],
+                ["Checkbox", "/docs/checkbox"],
+                ["Chip", "/docs/chip"],
+                ["Collapsible", "/docs/collapsible"],
+                ["Date Picker", "/docs/date-picker"],
+                ["Dialog", "/docs/dialog"],
+                ["Drawer", "/docs/drawer"],
+                ["Dropdown Menu", "/docs/dropdown-menu"],
+                ["Empty State", "/docs/empty-state"],
+                ["FAB", "/docs/fab"],
+                ["Image", "/docs/image"],
+                ["Input", "/docs/input"],
+                ["Input OTP", "/docs/input-otp"],
+                ["Label", "/docs/label"],
+                ["List", "/docs/list"],
+                ["Popover", "/docs/popover"],
+                ["Progress", "/docs/progress"],
+                ["Radio Group", "/docs/radio-group"],
+                ["Rating", "/docs/rating"],
+                ["Search Bar", "/docs/search-bar"],
+                ["Segmented Control", "/docs/segmented-control"],
+                ["Select", "/docs/select"],
+                ["Separator", "/docs/separator"],
+                ["Skeleton", "/docs/skeleton"],
+                ["Slider", "/docs/slider"],
+                ["Spinner", "/docs/spinner"],
+                ["Stepper", "/docs/stepper"],
+                ["Switch", "/docs/switch"],
+                ["Table", "/docs/table"],
+                ["Tabs", "/docs/tabs"],
+                ["Text", "/docs/text"],
+                ["Textarea", "/docs/textarea"],
+                ["Toast", "/docs/toast"],
+                ["Toggle", "/docs/toggle"],
+                ["Toggle Group", "/docs/toggle-group"],
+                ["Tooltip", "/docs/tooltip"],
+              ].map(([title, href], i) => (
+                <Link key={href} href={href} className={`block text-sm text-muted-foreground hover:text-foreground${i > 0 ? " mt-2" : ""}`} onClick={() => setMobileOpen(false)}>
+                  {title}
+                </Link>
+              ))}
             </div>
           </nav>
         </div>

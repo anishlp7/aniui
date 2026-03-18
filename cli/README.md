@@ -80,19 +80,9 @@ Switch theme presets: `default`, `blue`, `green`, `orange`, `rose`.
 
 ## Components
 
-**48 components** across three tiers.
+**48 components** — listed alphabetically. Each component's docs page tells you if it needs extra dependencies.
 
-### Tier 1 — Core (no extra deps)
-
-Button, Text, Input, Textarea, Card, Badge, Separator, Avatar, Alert, Label, Switch, Checkbox, Radio Group, Progress, Spinner, List, Slider, Toggle, Toggle Group, Input OTP, Table, Calendar, Date Picker, SearchBar, Chip, FAB, EmptyState, Image, Segmented Control, Carousel, Rating, Stepper, Banner
-
-### Tier 2 — Animated (needs react-native-reanimated)
-
-Skeleton, Accordion, Tabs, Collapsible, Toast, Dialog, Alert Dialog, Tooltip, Popover, Drawer, Dropdown Menu
-
-### Tier 3 — Native (needs extra packages)
-
-Bottom Sheet, Action Sheet, Select — powered by `@gorhom/bottom-sheet`
+Accordion, Action Sheet, Alert, Alert Dialog, Avatar, Badge, Banner, Bottom Sheet, Button, Calendar, Card, Carousel, Checkbox, Chip, Collapsible, Date Picker, Dialog, Drawer, Dropdown Menu, Empty State, FAB, Image, Input, Input OTP, Label, List, Popover, Progress, Radio Group, Rating, Search Bar, Segmented Control, Select, Separator, Skeleton, Slider, Spinner, Stepper, Switch, Table, Tabs, Text, Textarea, Toast, Toggle, Toggle Group, Tooltip
 
 ## Prerequisites
 

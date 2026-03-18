@@ -17,60 +17,55 @@ AniUI is a copy-paste component library for React Native. Components are source 
 npx aniui init
 npx aniui add button text input card
 
-## Components (48 total)
+## Components (48 total, alphabetical)
 
-### Tier 1 — Core (no extra deps)
-- Button: `import { Button } from "@/components/ui/button"` — variant: default|secondary|outline|ghost|destructive, size: sm|md|lg
-- Text: `import { Text } from "@/components/ui/text"` — variant: h1|h2|h3|h4|p|lead|large|small|muted
-- Input: `import { Input } from "@/components/ui/input"` — variant: default|ghost, size: sm|md|lg
-- Textarea: `import { Textarea } from "@/components/ui/textarea"` — Multi-line text input
-- Card: `import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from "@/components/ui/card"`
-- Badge: `import { Badge } from "@/components/ui/badge"` — variant: default|secondary|outline|destructive
-- Separator: `import { Separator } from "@/components/ui/separator"` — orientation: horizontal|vertical
-- Avatar: `import { Avatar } from "@/components/ui/avatar"` — size: sm|md|lg, with fallback initials
+- Accordion: `import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@/components/ui/accordion"` — needs react-native-reanimated
+- ActionSheet: `import { ActionSheet } from "@/components/ui/action-sheet"` — needs @gorhom/bottom-sheet
 - Alert: `import { Alert } from "@/components/ui/alert"` — variant: default|destructive|success|warning
-- Label: `import { Label } from "@/components/ui/label"` — Form field label
-- Switch: `import { Switch } from "@/components/ui/switch"` — Themed toggle switch
+- AlertDialog: `import { AlertDialog, AlertDialogContent, AlertDialogHeader, AlertDialogTitle, AlertDialogDescription, AlertDialogFooter, AlertDialogAction, AlertDialogCancel } from "@/components/ui/alert-dialog"` — needs react-native-reanimated
+- Avatar: `import { Avatar } from "@/components/ui/avatar"` — size: sm|md|lg, with fallback initials
+- Badge: `import { Badge } from "@/components/ui/badge"` — variant: default|secondary|outline|destructive
+- Banner: `import { Banner } from "@/components/ui/banner"` — variant: default|info|warning|destructive|success, dismiss, action
+- BottomSheet: `import { BottomSheet } from "@/components/ui/bottom-sheet"` — needs @gorhom/bottom-sheet
+- Button: `import { Button } from "@/components/ui/button"` — variant: default|secondary|outline|ghost|destructive, size: sm|md|lg
+- Calendar: `import { Calendar } from "@/components/ui/calendar"` — Month grid with single date and range selection
+- Card: `import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from "@/components/ui/card"`
+- Carousel: `import { Carousel } from "@/components/ui/carousel"` — FlatList-based horizontal carousel with pagination dots and autoPlay
 - Checkbox: `import { Checkbox } from "@/components/ui/checkbox"` — checked|unchecked|disabled
-- RadioGroup: `import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"`
-- Progress: `import { Progress } from "@/components/ui/progress"` — Percentage bar
-- Spinner: `import { Spinner } from "@/components/ui/spinner"` — size: sm|md|lg
+- Chip: `import { Chip } from "@/components/ui/chip"` — variant: default|secondary|outline|destructive, selected state, onClose
+- Collapsible: `import { Collapsible, CollapsibleTrigger, CollapsibleContent } from "@/components/ui/collapsible"` — needs react-native-reanimated
+- DatePicker: `import { DatePicker, DateRangePicker } from "@/components/ui/date-picker"` — Calendar popup picker with range support
+- Dialog: `import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter } from "@/components/ui/dialog"` — needs react-native-reanimated
+- Drawer: `import { Drawer, DrawerContent } from "@/components/ui/drawer"` — needs react-native-reanimated
+- DropdownMenu: `import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator } from "@/components/ui/dropdown-menu"` — needs react-native-reanimated
+- EmptyState: `import { EmptyState } from "@/components/ui/empty-state"` — Empty list/error placeholder with icon, title, description, action
+- FAB: `import { FAB } from "@/components/ui/fab"` — variant: default|secondary|destructive, position: bottom-right|bottom-left|bottom-center|none
+- Image: `import { Image } from "@/components/ui/image"` — Loading placeholder, error fallback, rounded variants
+- Input: `import { Input } from "@/components/ui/input"` — variant: default|ghost, size: sm|md|lg
+- InputOTP: `import { InputOTP } from "@/components/ui/input-otp"` — OTP verification input
+- Label: `import { Label } from "@/components/ui/label"` — Form field label
 - List: `import { List, ListItem } from "@/components/ui/list"` — Styled list items
+- Popover: `import { Popover, PopoverTrigger, PopoverContent } from "@/components/ui/popover"` — needs react-native-reanimated
+- Progress: `import { Progress } from "@/components/ui/progress"` — Percentage bar
+- RadioGroup: `import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"`
+- Rating: `import { Rating } from "@/components/ui/rating"` — Star rating, size: sm|md|lg, readOnly mode
+- SearchBar: `import { SearchBar } from "@/components/ui/search-bar"` — Search input with icon, clear, cancel
+- SegmentedControl: `import { SegmentedControl } from "@/components/ui/segmented-control"` — size: sm|md|lg
+- Select: `import { Select } from "@/components/ui/select"` — needs @gorhom/bottom-sheet
+- Separator: `import { Separator } from "@/components/ui/separator"` — orientation: horizontal|vertical
+- Skeleton: `import { Skeleton } from "@/components/ui/skeleton"` — needs react-native-reanimated
 - Slider: `import { Slider } from "@/components/ui/slider"` — Draggable numeric slider
+- Spinner: `import { Spinner } from "@/components/ui/spinner"` — size: sm|md|lg
+- Stepper: `import { Stepper } from "@/components/ui/stepper"` — Numeric +/- control, size: sm|md|lg, min/max/step
+- Switch: `import { Switch } from "@/components/ui/switch"` — Themed toggle switch
+- Table: `import { Table, TableHeader, TableBody, TableRow, TableHead, TableCell } from "@/components/ui/table"`
+- Tabs: `import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs"` — needs react-native-reanimated
+- Text: `import { Text } from "@/components/ui/text"` — variant: h1|h2|h3|h4|p|lead|large|small|muted
+- Textarea: `import { Textarea } from "@/components/ui/textarea"` — Multi-line text input
+- Toast: `import { ToastProvider, useToast } from "@/components/ui/toast"` — needs react-native-reanimated
 - Toggle: `import { Toggle } from "@/components/ui/toggle"` — Two-state toggle button
 - ToggleGroup: `import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group"` — Exclusive selection group
-- InputOTP: `import { InputOTP } from "@/components/ui/input-otp"` — OTP verification input
-- Table: `import { Table, TableHeader, TableBody, TableRow, TableHead, TableCell } from "@/components/ui/table"`
-- SearchBar: `import { SearchBar } from "@/components/ui/search-bar"` — Search input with icon, clear, cancel
-- Chip: `import { Chip } from "@/components/ui/chip"` — Interactive tag, variant: default|secondary|outline|destructive, selected state, onClose
-- FAB: `import { FAB } from "@/components/ui/fab"` — Floating action button, variant: default|secondary|destructive, position: bottom-right|bottom-left|bottom-center|none
-- EmptyState: `import { EmptyState } from "@/components/ui/empty-state"` — Empty list/error placeholder with icon, title, description, action
-- Calendar: `import { Calendar } from "@/components/ui/calendar"` — Month grid with single date and range selection
-- DatePicker: `import { DatePicker, DateRangePicker } from "@/components/ui/date-picker"` — Calendar popup picker with range support
-- Image: `import { Image } from "@/components/ui/image"` — Image with loading placeholder, error fallback, rounded variants
-- SegmentedControl: `import { SegmentedControl } from "@/components/ui/segmented-control"` — iOS-style segmented control, size: sm|md|lg
-- Carousel: `import { Carousel } from "@/components/ui/carousel"` — FlatList-based horizontal carousel with pagination dots and autoPlay
-- Rating: `import { Rating } from "@/components/ui/rating"` — Star rating, size: sm|md|lg, readOnly mode
-- Stepper: `import { Stepper } from "@/components/ui/stepper"` — Numeric +/- control, size: sm|md|lg, min/max/step
-- Banner: `import { Banner } from "@/components/ui/banner"` — Full-width banner, variant: default|info|warning|destructive|success, dismiss, action
-
-### Tier 2 — Animated (needs react-native-reanimated)
-- Skeleton: `import { Skeleton } from "@/components/ui/skeleton"` — Animated loading placeholder
-- Accordion: `import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@/components/ui/accordion"`
-- Tabs: `import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs"`
-- Collapsible: `import { Collapsible, CollapsibleTrigger, CollapsibleContent } from "@/components/ui/collapsible"`
-- Toast: `import { ToastProvider, useToast } from "@/components/ui/toast"` — Auto-dismiss notifications
-- Dialog: `import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter } from "@/components/ui/dialog"`
-- AlertDialog: `import { AlertDialog, AlertDialogContent, AlertDialogHeader, AlertDialogTitle, AlertDialogDescription, AlertDialogFooter, AlertDialogAction, AlertDialogCancel } from "@/components/ui/alert-dialog"`
-- Tooltip: `import { Tooltip } from "@/components/ui/tooltip"` — Fade-in tooltip on press
-- Popover: `import { Popover, PopoverTrigger, PopoverContent } from "@/components/ui/popover"`
-- Drawer: `import { Drawer, DrawerContent } from "@/components/ui/drawer"` — Slide-in side panel
-- DropdownMenu: `import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator } from "@/components/ui/dropdown-menu"` — Context menu with fade animation
-
-### Tier 3 — Native (needs extra packages)
-- BottomSheet: `import { BottomSheet } from "@/components/ui/bottom-sheet"` — needs @gorhom/bottom-sheet
-- ActionSheet: `import { ActionSheet } from "@/components/ui/action-sheet"` — needs @gorhom/bottom-sheet
-- Select: `import { Select } from "@/components/ui/select"` — needs @gorhom/bottom-sheet
+- Tooltip: `import { Tooltip } from "@/components/ui/tooltip"` — needs react-native-reanimated
 
 ## Theme Tokens
 Available as Tailwind classes via CSS variables:
