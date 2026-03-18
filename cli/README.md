@@ -80,15 +80,15 @@ Switch theme presets: `default`, `blue`, `green`, `orange`, `rose`.
 
 ## Components
 
-**41 components** across three tiers.
+**48 components** across three tiers.
 
 ### Tier 1 — Core (no extra deps)
 
-Button, Text, Input, Textarea, Card, Badge, Separator, Avatar, Alert, Label, Switch, Checkbox, Radio Group, Progress, Spinner, List, Slider, Toggle, Toggle Group, Input OTP, Table, Calendar, Date Picker, SearchBar, Chip, FAB, EmptyState
+Button, Text, Input, Textarea, Card, Badge, Separator, Avatar, Alert, Label, Switch, Checkbox, Radio Group, Progress, Spinner, List, Slider, Toggle, Toggle Group, Input OTP, Table, Calendar, Date Picker, SearchBar, Chip, FAB, EmptyState, Image, Segmented Control, Carousel, Rating, Stepper, Banner
 
 ### Tier 2 — Animated (needs react-native-reanimated)
 
-Skeleton, Accordion, Tabs, Collapsible, Toast, Dialog, Alert Dialog, Tooltip, Popover, Drawer
+Skeleton, Accordion, Tabs, Collapsible, Toast, Dialog, Alert Dialog, Tooltip, Popover, Drawer, Dropdown Menu
 
 ### Tier 3 — Native (needs extra packages)
 

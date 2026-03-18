@@ -64,7 +64,7 @@ export function WelcomeScreen() {
 
 ## Components
 
-**41 components** across three tiers.
+**48 components** across three tiers.
 
 ### Tier 1 — Core
 
@@ -99,6 +99,12 @@ Zero extra dependencies. Uses React Native core + NativeWind + CVA.
 | [Chip](https://aniui.dev/docs/chip) | Interactive tag for filters and multi-select |
 | [FAB](https://aniui.dev/docs/fab) | Floating action button with positioning |
 | [EmptyState](https://aniui.dev/docs/empty-state) | Placeholder for empty lists and error states |
+| [Image](https://aniui.dev/docs/image) | Image with loading, error fallback, rounded variants |
+| [Segmented Control](https://aniui.dev/docs/segmented-control) | iOS-style segmented control for view switching |
+| [Carousel](https://aniui.dev/docs/carousel) | Horizontal scrollable carousel with pagination dots |
+| [Rating](https://aniui.dev/docs/rating) | Star rating with interactive and read-only modes |
+| [Stepper](https://aniui.dev/docs/stepper) | Numeric increment/decrement with min/max/step |
+| [Banner](https://aniui.dev/docs/banner) | Full-width notification banner with variants and dismiss |
 
 ### Tier 2 — Animated
 
@@ -116,6 +122,7 @@ Requires `react-native-reanimated` v3 for smooth animations.
 | [Tooltip](https://aniui.dev/docs/tooltip) | Fade-in tooltip on press |
 | [Popover](https://aniui.dev/docs/popover) | Contextual overlay content |
 | [Drawer](https://aniui.dev/docs/drawer) | Slide-in side navigation panel |
+| [Dropdown Menu](https://aniui.dev/docs/dropdown-menu) | Context menu with fade animation |
 
 ### Tier 3 — Native
 

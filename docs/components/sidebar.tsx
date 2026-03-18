@@ -46,6 +46,12 @@ const sidebarItems = [
       { title: "Chip", href: "/docs/chip" },
       { title: "FAB", href: "/docs/fab" },
       { title: "EmptyState", href: "/docs/empty-state" },
+      { title: "Image", href: "/docs/image" },
+      { title: "Segmented Control", href: "/docs/segmented-control" },
+      { title: "Carousel", href: "/docs/carousel" },
+      { title: "Rating", href: "/docs/rating" },
+      { title: "Stepper", href: "/docs/stepper" },
+      { title: "Banner", href: "/docs/banner" },
     ],
   },
   {
@@ -61,6 +67,7 @@ const sidebarItems = [
       { title: "Tooltip", href: "/docs/tooltip" },
       { title: "Popover", href: "/docs/popover" },
       { title: "Drawer", href: "/docs/drawer" },
+      { title: "Dropdown Menu", href: "/docs/dropdown-menu" },
     ],
   },
   {

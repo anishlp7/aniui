@@ -17,7 +17,7 @@ AniUI is a copy-paste component library for React Native. Components are source 
 npx aniui init
 npx aniui add button text input card
 
-## Components (41 total)
+## Components (48 total)
 
 ### Tier 1 — Core (no extra deps)
 - Button: `import { Button } from "@/components/ui/button"` — variant: default|secondary|outline|ghost|destructive, size: sm|md|lg
@@ -47,6 +47,12 @@ npx aniui add button text input card
 - EmptyState: `import { EmptyState } from "@/components/ui/empty-state"` — Empty list/error placeholder with icon, title, description, action
 - Calendar: `import { Calendar } from "@/components/ui/calendar"` — Month grid with single date and range selection
 - DatePicker: `import { DatePicker, DateRangePicker } from "@/components/ui/date-picker"` — Calendar popup picker with range support
+- Image: `import { Image } from "@/components/ui/image"` — Image with loading placeholder, error fallback, rounded variants
+- SegmentedControl: `import { SegmentedControl } from "@/components/ui/segmented-control"` — iOS-style segmented control, size: sm|md|lg
+- Carousel: `import { Carousel } from "@/components/ui/carousel"` — FlatList-based horizontal carousel with pagination dots and autoPlay
+- Rating: `import { Rating } from "@/components/ui/rating"` — Star rating, size: sm|md|lg, readOnly mode
+- Stepper: `import { Stepper } from "@/components/ui/stepper"` — Numeric +/- control, size: sm|md|lg, min/max/step
+- Banner: `import { Banner } from "@/components/ui/banner"` — Full-width banner, variant: default|info|warning|destructive|success, dismiss, action
 
 ### Tier 2 — Animated (needs react-native-reanimated)
 - Skeleton: `import { Skeleton } from "@/components/ui/skeleton"` — Animated loading placeholder
@@ -59,6 +65,7 @@ npx aniui add button text input card
 - Tooltip: `import { Tooltip } from "@/components/ui/tooltip"` — Fade-in tooltip on press
 - Popover: `import { Popover, PopoverTrigger, PopoverContent } from "@/components/ui/popover"`
 - Drawer: `import { Drawer, DrawerContent } from "@/components/ui/drawer"` — Slide-in side panel
+- DropdownMenu: `import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator } from "@/components/ui/dropdown-menu"` — Context menu with fade animation
 
 ### Tier 3 — Native (needs extra packages)
 - BottomSheet: `import { BottomSheet } from "@/components/ui/bottom-sheet"` — needs @gorhom/bottom-sheet

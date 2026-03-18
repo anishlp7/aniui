@@ -51,6 +51,13 @@ export const registry: Record<string, ComponentEntry> = {
   chip: { name: "Chip", file: "components/ui/chip.tsx", description: "Interactive tag for filters and multi-select", dependencies: ["class-variance-authority", "clsx", "tailwind-merge"], registryDependencies: [], tier: 1 },
   fab: { name: "FAB", file: "components/ui/fab.tsx", description: "Floating action button for primary screen actions", dependencies: ["class-variance-authority", "clsx", "tailwind-merge"], registryDependencies: [], tier: 1 },
   "empty-state": { name: "EmptyState", file: "components/ui/empty-state.tsx", description: "Placeholder for empty screens and error states", dependencies: ["clsx", "tailwind-merge"], registryDependencies: [], tier: 1 },
+  "dropdown-menu": { name: "DropdownMenu", file: "components/ui/dropdown-menu.tsx", description: "Context menu with items, separators, and destructive actions", dependencies: ["react-native-reanimated", "clsx", "tailwind-merge"], registryDependencies: [], tier: 2 },
+  image: { name: "Image", file: "components/ui/image.tsx", description: "Image with loading placeholder, error fallback, and rounded variants", dependencies: ["class-variance-authority", "clsx", "tailwind-merge"], registryDependencies: [], tier: 1 },
+  "segmented-control": { name: "SegmentedControl", file: "components/ui/segmented-control.tsx", description: "iOS-style segmented control for view switching", dependencies: ["class-variance-authority", "clsx", "tailwind-merge"], registryDependencies: [], tier: 1 },
+  carousel: { name: "Carousel", file: "components/ui/carousel.tsx", description: "Horizontal scrollable carousel with pagination dots", dependencies: ["clsx", "tailwind-merge"], registryDependencies: [], tier: 1 },
+  rating: { name: "Rating", file: "components/ui/rating.tsx", description: "Star rating with interactive and read-only modes", dependencies: ["class-variance-authority", "clsx", "tailwind-merge"], registryDependencies: [], tier: 1 },
+  stepper: { name: "Stepper", file: "components/ui/stepper.tsx", description: "Numeric increment/decrement control with min/max/step", dependencies: ["class-variance-authority", "clsx", "tailwind-merge"], registryDependencies: [], tier: 1 },
+  banner: { name: "Banner", file: "components/ui/banner.tsx", description: "Full-width notification banner with variants and dismiss", dependencies: ["class-variance-authority", "clsx", "tailwind-merge"], registryDependencies: [], tier: 1 },
 };
 
 export function getComponentNames(): string[] {

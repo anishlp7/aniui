@@ -204,6 +204,24 @@ export function Navbar() {
               <Link href="/docs/empty-state" className="block text-sm text-muted-foreground hover:text-foreground mt-2" onClick={() => setMobileOpen(false)}>
                 EmptyState
               </Link>
+              <Link href="/docs/image" className="block text-sm text-muted-foreground hover:text-foreground mt-2" onClick={() => setMobileOpen(false)}>
+                Image
+              </Link>
+              <Link href="/docs/segmented-control" className="block text-sm text-muted-foreground hover:text-foreground mt-2" onClick={() => setMobileOpen(false)}>
+                Segmented Control
+              </Link>
+              <Link href="/docs/carousel" className="block text-sm text-muted-foreground hover:text-foreground mt-2" onClick={() => setMobileOpen(false)}>
+                Carousel
+              </Link>
+              <Link href="/docs/rating" className="block text-sm text-muted-foreground hover:text-foreground mt-2" onClick={() => setMobileOpen(false)}>
+                Rating
+              </Link>
+              <Link href="/docs/stepper" className="block text-sm text-muted-foreground hover:text-foreground mt-2" onClick={() => setMobileOpen(false)}>
+                Stepper
+              </Link>
+              <Link href="/docs/banner" className="block text-sm text-muted-foreground hover:text-foreground mt-2" onClick={() => setMobileOpen(false)}>
+                Banner
+              </Link>
             </div>
             <div className="border-t border-border pt-4 mt-4">
               <p className="text-xs font-semibold text-foreground mb-2">Tier 2 - Animated</p>
@@ -236,6 +254,9 @@ export function Navbar() {
               </Link>
               <Link href="/docs/drawer" className="block text-sm text-muted-foreground hover:text-foreground mt-2" onClick={() => setMobileOpen(false)}>
                 Drawer
+              </Link>
+              <Link href="/docs/dropdown-menu" className="block text-sm text-muted-foreground hover:text-foreground mt-2" onClick={() => setMobileOpen(false)}>
+                Dropdown Menu
               </Link>
             </div>
             <div className="border-t border-border pt-4 mt-4">
