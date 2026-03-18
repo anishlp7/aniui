@@ -1,0 +1,144 @@
+"use client";
+
+import React, { useState } from "react";
+import { PreviewRating } from "@/components/preview/rating";
+import { ComponentPlayground } from "@/components/component-playground";
+import { CodeBlock } from "@/components/code-block";
+
+const installCode = `npx aniui add rating`;
+
+const usageCode = `import { Rating } from "@/components/ui/rating";
+
+const [value, setValue] = useState(3);
+
+<Rating value={value} onChange={setValue} />`;
+
+const sizesCode = `<Rating size="sm" value={3} readOnly />
+<Rating size="md" value={3} readOnly />
+<Rating size="lg" value={3} readOnly />`;
+
+const readOnlyCode = `<Rating value={4} readOnly />
+<Rating value={2} max={10} readOnly />`;
+
+const sourceCode = `import React from "react";
+import { View, Pressable, Text } from "react-native";
+import { cva, type VariantProps } from "class-variance-authority";
+import { cn } from "@/lib/utils";
+
+const ratingVariants = cva("flex-row items-center", {
+  variants: {
+    size: {
+      sm: "gap-0.5",
+      md: "gap-1",
+      lg: "gap-1.5",
+    },
+  },
+  defaultVariants: { size: "md" },
+});
+
+const starSizes = { sm: "text-base", md: "text-xl", lg: "text-2xl" } as const;
+
+export interface RatingProps
+  extends React.ComponentPropsWithoutRef<typeof View>,
+    VariantProps<typeof ratingVariants> {
+  className?: string;
+  value: number;
+  max?: number;
+  onChange?: (value: number) => void;
+  readOnly?: boolean;
+}
+
+export function Rating({ size, className, value, max = 5, onChange, readOnly, ...props }: RatingProps) {
+  const s = size ?? "md";
+  return (
+    <View className={cn(ratingVariants({ size }), className)} accessibilityRole="adjustable" accessibilityValue={{ min: 0, max, now: value }} {...props}>
+      {Array.from({ length: max }, (_, i) => {
+        const filled = i < value;
+        const star = (
+          <Text className={cn(starSizes[s], filled ? "text-yellow-400" : "text-muted-foreground/30")}>★</Text>
+        );
+        return readOnly ? (
+          <View key={i}>{star}</View>
+        ) : (
+          <Pressable key={i} onPress={() => onChange?.(i + 1)} accessible={true} accessibilityRole="button" accessibilityLabel={\`\${i + 1} star\`}>
+            {star}
+          </Pressable>
+        );
+      })}
+    </View>
+  );
+}`;
+
+function InteractiveDemo() {
+  const [value, setValue] = useState(3);
+  return (
+    <div className="flex items-center gap-4">
+      <PreviewRating value={value} onChange={setValue} />
+      <span className="text-sm text-muted-foreground">{value} / 5</span>
+    </div>
+  );
+}
+
+export default function RatingPage() {
+  return (
+    <div className="space-y-12">
+      <div>
+        <h1 className="text-3xl font-bold mb-2">Rating</h1>
+        <p className="text-muted-foreground text-lg">Star rating component with interactive and read-only modes. Supports custom max value and sizes.</p>
+      </div>
+
+      <ComponentPlayground code={usageCode}>
+        <InteractiveDemo />
+      </ComponentPlayground>
+
+      <div>
+        <h2 className="text-xl font-semibold mb-3">Installation</h2>
+        <CodeBlock code={installCode} />
+      </div>
+
+      <div>
+        <h2 className="text-xl font-semibold mb-3">Sizes</h2>
+        <ComponentPlayground code={sizesCode}>
+          <div className="space-y-3">
+            <PreviewRating size="sm" value={3} readOnly />
+            <PreviewRating size="md" value={3} readOnly />
+            <PreviewRating size="lg" value={3} readOnly />
+          </div>
+        </ComponentPlayground>
+      </div>
+
+      <div>
+        <h2 className="text-xl font-semibold mb-3">Read-Only</h2>
+        <p className="text-sm text-muted-foreground mb-4">Use <code>readOnly</code> to display a non-interactive rating. Use <code>max</code> to customize the number of stars.</p>
+        <ComponentPlayground code={readOnlyCode}>
+          <div className="space-y-3">
+            <PreviewRating value={4} readOnly />
+            <PreviewRating value={2} max={10} readOnly />
+          </div>
+        </ComponentPlayground>
+      </div>
+
+      <div>
+        <h2 className="text-xl font-semibold mb-3">Props</h2>
+        <div className="overflow-x-auto">
+          <table className="w-full text-sm">
+            <thead><tr className="border-b"><th className="text-left py-2 pr-4">Prop</th><th className="text-left py-2 pr-4">Type</th><th className="text-left py-2">Default</th></tr></thead>
+            <tbody>
+              <tr className="border-b"><td className="py-2 pr-4 font-mono text-xs">value</td><td className="py-2 pr-4 font-mono text-xs">number</td><td className="py-2 font-mono text-xs">—</td></tr>
+              <tr className="border-b"><td className="py-2 pr-4 font-mono text-xs">max</td><td className="py-2 pr-4 font-mono text-xs">number</td><td className="py-2 font-mono text-xs">5</td></tr>
+              <tr className="border-b"><td className="py-2 pr-4 font-mono text-xs">onChange</td><td className="py-2 pr-4 font-mono text-xs">{`(value: number) => void`}</td><td className="py-2 font-mono text-xs">—</td></tr>
+              <tr className="border-b"><td className="py-2 pr-4 font-mono text-xs">readOnly</td><td className="py-2 pr-4 font-mono text-xs">boolean</td><td className="py-2 font-mono text-xs">false</td></tr>
+              <tr className="border-b"><td className="py-2 pr-4 font-mono text-xs">size</td><td className="py-2 pr-4 font-mono text-xs">{`"sm" | "md" | "lg"`}</td><td className="py-2 font-mono text-xs">{`"md"`}</td></tr>
+              <tr className="border-b"><td className="py-2 pr-4 font-mono text-xs">className</td><td className="py-2 pr-4 font-mono text-xs">string</td><td className="py-2 font-mono text-xs">—</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div>
+        <h2 className="text-xl font-semibold mb-3">Source</h2>
+        <CodeBlock code={sourceCode} title="components/ui/rating.tsx" />
+      </div>
+    </div>
+  );
+}
