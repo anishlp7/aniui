@@ -1,11 +1,10 @@
 "use client";
-
 import { PreviewAlertDialogDemo } from "@/components/preview/alert-dialog";
 import { ComponentPlayground } from "@/components/component-playground";
 import { CodeBlock } from "@/components/code-block";
+import { PropsTable, ComponentTable } from "@/components/props-table";
 
 const installCode = `npx aniui add alert-dialog`;
-
 const usageCode = `import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import {
@@ -21,7 +20,6 @@ import {
 
 export function MyScreen() {
   const [open, setOpen] = useState(false);
-
   return (
     <>
       <Button onPress={() => setOpen(true)}>Delete Account</Button>
@@ -42,7 +40,6 @@ export function MyScreen() {
     </>
   );
 }`;
-
 const sourceCode = `import React from "react";
 import { View, Pressable, Text, Modal } from "react-native";
 import Animated, { FadeIn, FadeOut, ZoomIn, ZoomOut } from "react-native-reanimated";
@@ -53,7 +50,6 @@ export interface AlertDialogProps {
   onOpenChange: (open: boolean) => void;
   children: React.ReactNode;
 }
-
 export function AlertDialog({ open, onOpenChange, children }: AlertDialogProps) {
   return (
     <Modal visible={open} transparent animationType="none" onRequestClose={() => onOpenChange(false)}>
@@ -69,12 +65,10 @@ export function AlertDialog({ open, onOpenChange, children }: AlertDialogProps) 
     </Modal>
   );
 }
-
 export interface AlertDialogContentProps extends React.ComponentPropsWithoutRef<typeof View> {
   className?: string;
   children?: React.ReactNode;
 }
-
 export function AlertDialogContent({ className, ...props }: AlertDialogContentProps) {
   return (
     <View
@@ -84,46 +78,36 @@ export function AlertDialogContent({ className, ...props }: AlertDialogContentPr
     />
   );
 }
-
 export interface AlertDialogHeaderProps extends React.ComponentPropsWithoutRef<typeof View> {
   className?: string;
   children?: React.ReactNode;
 }
-
 export function AlertDialogHeader({ className, ...props }: AlertDialogHeaderProps) {
   return <View className={cn("pb-4", className)} {...props} />;
 }
-
 export interface AlertDialogTitleProps extends React.ComponentPropsWithoutRef<typeof Text> {
   className?: string;
 }
-
 export function AlertDialogTitle({ className, ...props }: AlertDialogTitleProps) {
   return <Text className={cn("text-lg font-semibold text-card-foreground", className)} {...props} />;
 }
-
 export interface AlertDialogDescriptionProps extends React.ComponentPropsWithoutRef<typeof Text> {
   className?: string;
 }
-
 export function AlertDialogDescription({ className, ...props }: AlertDialogDescriptionProps) {
   return <Text className={cn("text-sm text-muted-foreground mt-1", className)} {...props} />;
 }
-
 export interface AlertDialogFooterProps extends React.ComponentPropsWithoutRef<typeof View> {
   className?: string;
   children?: React.ReactNode;
 }
-
 export function AlertDialogFooter({ className, ...props }: AlertDialogFooterProps) {
   return <View className={cn("flex-row justify-end gap-3 pt-4", className)} {...props} />;
 }
-
 export interface AlertDialogActionProps extends React.ComponentPropsWithoutRef<typeof Pressable> {
   className?: string;
   children: React.ReactNode;
 }
-
 export function AlertDialogAction({ className, children, ...props }: AlertDialogActionProps) {
   return (
     <Pressable
@@ -138,12 +122,10 @@ export function AlertDialogAction({ className, children, ...props }: AlertDialog
     </Pressable>
   );
 }
-
 export interface AlertDialogCancelProps extends React.ComponentPropsWithoutRef<typeof Pressable> {
   className?: string;
   children: React.ReactNode;
 }
-
 export function AlertDialogCancel({ className, children, ...props }: AlertDialogCancelProps) {
   return (
     <Pressable
@@ -158,7 +140,6 @@ export function AlertDialogCancel({ className, children, ...props }: AlertDialog
     </Pressable>
   );
 }`;
-
 export default function AlertDialogPage() {
   return (
     <div className="space-y-10">
@@ -169,12 +150,10 @@ export default function AlertDialogPage() {
           A modal dialog that interrupts the user with important content and expects a response.
         </p>
       </div>
-
       {/* Preview */}
       <ComponentPlayground code={usageCode}>
         <PreviewAlertDialogDemo />
       </ComponentPlayground>
-
       {/* Installation */}
       <div className="space-y-4">
         <h2 className="text-2xl font-semibold tracking-tight text-foreground">Installation</h2>
@@ -183,102 +162,41 @@ export default function AlertDialogPage() {
           This component requires <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">react-native-reanimated</code> to be installed in your project.
         </p>
       </div>
-
       {/* Usage */}
       <div className="space-y-4">
         <h2 className="text-2xl font-semibold tracking-tight text-foreground">Usage</h2>
         <CodeBlock code={usageCode} title="app/index.tsx" />
       </div>
-
       {/* Compound Components */}
       <div className="space-y-4">
         <h2 className="text-2xl font-semibold tracking-tight text-foreground">Components</h2>
         <p className="text-sm text-muted-foreground">
           AlertDialog is a compound component made up of several parts:
         </p>
-        <div className="overflow-x-auto rounded-lg border border-border">
-          <table className="w-full text-sm">
-            <thead>
-              <tr className="border-b border-border bg-secondary/50">
-                <th className="px-4 py-3 text-left font-medium text-foreground">Component</th>
-                <th className="px-4 py-3 text-left font-medium text-foreground">Description</th>
-              </tr>
-            </thead>
-            <tbody className="text-muted-foreground">
-              <tr className="border-b border-border">
-                <td className="px-4 py-3 font-mono text-xs text-foreground">AlertDialog</td>
-                <td className="px-4 py-3 text-xs">Root component that manages open state and renders the modal overlay.</td>
-              </tr>
-              <tr className="border-b border-border">
-                <td className="px-4 py-3 font-mono text-xs text-foreground">AlertDialogContent</td>
-                <td className="px-4 py-3 text-xs">The card container for dialog content.</td>
-              </tr>
-              <tr className="border-b border-border">
-                <td className="px-4 py-3 font-mono text-xs text-foreground">AlertDialogHeader</td>
-                <td className="px-4 py-3 text-xs">Wraps the title and description with spacing.</td>
-              </tr>
-              <tr className="border-b border-border">
-                <td className="px-4 py-3 font-mono text-xs text-foreground">AlertDialogTitle</td>
-                <td className="px-4 py-3 text-xs">The heading text of the dialog.</td>
-              </tr>
-              <tr className="border-b border-border">
-                <td className="px-4 py-3 font-mono text-xs text-foreground">AlertDialogDescription</td>
-                <td className="px-4 py-3 text-xs">Descriptive text explaining the action.</td>
-              </tr>
-              <tr className="border-b border-border">
-                <td className="px-4 py-3 font-mono text-xs text-foreground">AlertDialogFooter</td>
-                <td className="px-4 py-3 text-xs">Wraps action buttons with proper layout.</td>
-              </tr>
-              <tr className="border-b border-border">
-                <td className="px-4 py-3 font-mono text-xs text-foreground">AlertDialogAction</td>
-                <td className="px-4 py-3 text-xs">Primary action button (confirm).</td>
-              </tr>
-              <tr>
-                <td className="px-4 py-3 font-mono text-xs text-foreground">AlertDialogCancel</td>
-                <td className="px-4 py-3 text-xs">Secondary cancel button (dismiss).</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
+        <ComponentTable components={[
+          { name: "AlertDialog", description: "Root component that manages open state and renders the modal overlay." },
+          { name: "AlertDialogContent", description: "The card container for dialog content." },
+          { name: "AlertDialogHeader", description: "Wraps the title and description with spacing." },
+          { name: "AlertDialogTitle", description: "The heading text of the dialog." },
+          { name: "AlertDialogDescription", description: "Descriptive text explaining the action." },
+          { name: "AlertDialogFooter", description: "Wraps action buttons with proper layout." },
+          { name: "AlertDialogAction", description: "Primary action button (confirm)." },
+          { name: "AlertDialogCancel", description: "Secondary cancel button (dismiss)." },
+        ]} />
       </div>
-
       {/* Props */}
       <div className="space-y-4">
         <h2 className="text-2xl font-semibold tracking-tight text-foreground">Props</h2>
         <h3 className="text-lg font-medium text-foreground">AlertDialog</h3>
-        <div className="overflow-x-auto rounded-lg border border-border">
-          <table className="w-full text-sm">
-            <thead>
-              <tr className="border-b border-border bg-secondary/50">
-                <th className="px-4 py-3 text-left font-medium text-foreground">Prop</th>
-                <th className="px-4 py-3 text-left font-medium text-foreground">Type</th>
-                <th className="px-4 py-3 text-left font-medium text-foreground">Default</th>
-              </tr>
-            </thead>
-            <tbody className="text-muted-foreground">
-              <tr className="border-b border-border">
-                <td className="px-4 py-3 font-mono text-xs text-foreground">open</td>
-                <td className="px-4 py-3 font-mono text-xs">boolean</td>
-                <td className="px-4 py-3 font-mono text-xs">required</td>
-              </tr>
-              <tr className="border-b border-border">
-                <td className="px-4 py-3 font-mono text-xs text-foreground">onOpenChange</td>
-                <td className="px-4 py-3 font-mono text-xs">{`(open: boolean) => void`}</td>
-                <td className="px-4 py-3 font-mono text-xs">required</td>
-              </tr>
-              <tr>
-                <td className="px-4 py-3 font-mono text-xs text-foreground">children</td>
-                <td className="px-4 py-3 font-mono text-xs">React.ReactNode</td>
-                <td className="px-4 py-3 font-mono text-xs">required</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
+        <PropsTable props={[
+          { name: "open", type: "boolean", default: "required" },
+          { name: "onOpenChange", type: "(open: boolean) => void", default: "required" },
+          { name: "children", type: "React.ReactNode", default: "required" },
+        ]} />
         <p className="text-sm text-muted-foreground">
           Sub-components (<code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">AlertDialogContent</code>, <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">AlertDialogHeader</code>, etc.) accept <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">className</code> and their respective React Native base props.
         </p>
       </div>
-
       {/* Source */}
       <div className="space-y-4">
         <h2 className="text-2xl font-semibold tracking-tight text-foreground">Source</h2>

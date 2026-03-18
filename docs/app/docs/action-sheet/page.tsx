@@ -1,20 +1,17 @@
 "use client";
-
 import { PreviewActionSheet } from "@/components/preview/action-sheet";
 import { ComponentPlayground } from "@/components/component-playground";
 import { CodeBlock } from "@/components/code-block";
+import { PropsTable } from "@/components/props-table";
 
 const installCode = `npx aniui add action-sheet`;
-
 const depInstallCode = `npx expo install @gorhom/bottom-sheet react-native-gesture-handler react-native-reanimated`;
-
 const usageCode = `import { ActionSheet } from "@/components/ui/action-sheet";
 import { useRef } from "react";
 import GorhomBottomSheet from "@gorhom/bottom-sheet";
 
 export function MyScreen() {
   const sheetRef = useRef<GorhomBottomSheet>(null);
-
   return (
     <>
       <Button onPress={() => sheetRef.current?.expand()}>
@@ -33,7 +30,6 @@ export function MyScreen() {
     </>
   );
 }`;
-
 const sourceCode = `import React, { forwardRef, useCallback } from "react";
 import { View, Pressable, Text } from "react-native";
 import GorhomBottomSheet, { BottomSheetBackdrop, BottomSheetView } from "@gorhom/bottom-sheet";
@@ -44,14 +40,12 @@ export interface ActionSheetAction {
   onPress: () => void;
   destructive?: boolean;
 }
-
 export interface ActionSheetProps {
   className?: string;
   title?: string;
   actions: ActionSheetAction[];
   onCancel?: () => void;
 }
-
 export const ActionSheet = forwardRef<GorhomBottomSheet, ActionSheetProps>(
   ({ className, title, actions, onCancel }, ref) => {
     const renderBackdrop = useCallback(
@@ -60,7 +54,6 @@ export const ActionSheet = forwardRef<GorhomBottomSheet, ActionSheetProps>(
       ),
       []
     );
-
     return (
       <GorhomBottomSheet
         ref={ref}
@@ -98,9 +91,7 @@ export const ActionSheet = forwardRef<GorhomBottomSheet, ActionSheetProps>(
     );
   }
 );
-
 ActionSheet.displayName = "ActionSheet";`;
-
 export default function ActionSheetPage() {
   return (
     <div className="space-y-10">
@@ -111,7 +102,6 @@ export default function ActionSheetPage() {
           Action sheet with a list of actions, powered by @gorhom/bottom-sheet.
         </p>
       </div>
-
       {/* Preview */}
       <ComponentPlayground code={usageCode}>
         <PreviewActionSheet
@@ -123,7 +113,6 @@ export default function ActionSheetPage() {
           ]}
         />
       </ComponentPlayground>
-
       {/* Installation */}
       <div className="space-y-4">
         <h2 className="text-2xl font-semibold tracking-tight text-foreground">Installation</h2>
@@ -136,84 +125,30 @@ export default function ActionSheetPage() {
           You also need to wrap your app with <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">GestureHandlerRootView</code> from <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">react-native-gesture-handler</code>.
         </p>
       </div>
-
       {/* Usage */}
       <div className="space-y-4">
         <h2 className="text-2xl font-semibold tracking-tight text-foreground">Usage</h2>
         <CodeBlock code={usageCode} title="app/index.tsx" />
       </div>
-
       {/* Props */}
       <div className="space-y-4">
         <h2 className="text-2xl font-semibold tracking-tight text-foreground">Props</h2>
-        <div className="overflow-x-auto rounded-lg border border-border">
-          <table className="w-full text-sm">
-            <thead>
-              <tr className="border-b border-border bg-secondary/50">
-                <th className="px-4 py-3 text-left font-medium text-foreground">Prop</th>
-                <th className="px-4 py-3 text-left font-medium text-foreground">Type</th>
-                <th className="px-4 py-3 text-left font-medium text-foreground">Default</th>
-              </tr>
-            </thead>
-            <tbody className="text-muted-foreground">
-              <tr className="border-b border-border">
-                <td className="px-4 py-3 font-mono text-xs text-foreground">title</td>
-                <td className="px-4 py-3 font-mono text-xs">string</td>
-                <td className="px-4 py-3 font-mono text-xs">-</td>
-              </tr>
-              <tr className="border-b border-border">
-                <td className="px-4 py-3 font-mono text-xs text-foreground">actions</td>
-                <td className="px-4 py-3 font-mono text-xs">ActionSheetAction[]</td>
-                <td className="px-4 py-3 font-mono text-xs">required</td>
-              </tr>
-              <tr className="border-b border-border">
-                <td className="px-4 py-3 font-mono text-xs text-foreground">onCancel</td>
-                <td className="px-4 py-3 font-mono text-xs">{`() => void`}</td>
-                <td className="px-4 py-3 font-mono text-xs">-</td>
-              </tr>
-              <tr>
-                <td className="px-4 py-3 font-mono text-xs text-foreground">className</td>
-                <td className="px-4 py-3 font-mono text-xs">string</td>
-                <td className="px-4 py-3 font-mono text-xs">-</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-
+        <PropsTable props={[
+          { name: "title", type: "string" },
+          { name: "actions", type: "ActionSheetAction[]", default: "required" },
+          { name: "onCancel", type: "() => void" },
+          { name: "className", type: "string" },
+        ]} />
         <h3 className="text-lg font-medium text-foreground mt-6">ActionSheetAction</h3>
-        <div className="overflow-x-auto rounded-lg border border-border">
-          <table className="w-full text-sm">
-            <thead>
-              <tr className="border-b border-border bg-secondary/50">
-                <th className="px-4 py-3 text-left font-medium text-foreground">Property</th>
-                <th className="px-4 py-3 text-left font-medium text-foreground">Type</th>
-                <th className="px-4 py-3 text-left font-medium text-foreground">Default</th>
-              </tr>
-            </thead>
-            <tbody className="text-muted-foreground">
-              <tr className="border-b border-border">
-                <td className="px-4 py-3 font-mono text-xs text-foreground">label</td>
-                <td className="px-4 py-3 font-mono text-xs">string</td>
-                <td className="px-4 py-3 font-mono text-xs">required</td>
-              </tr>
-              <tr className="border-b border-border">
-                <td className="px-4 py-3 font-mono text-xs text-foreground">onPress</td>
-                <td className="px-4 py-3 font-mono text-xs">{`() => void`}</td>
-                <td className="px-4 py-3 font-mono text-xs">required</td>
-              </tr>
-              <tr>
-                <td className="px-4 py-3 font-mono text-xs text-foreground">destructive</td>
-                <td className="px-4 py-3 font-mono text-xs">boolean</td>
-                <td className="px-4 py-3 font-mono text-xs">false</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
+        <PropsTable props={[
+          { name: "label", type: "string", default: "required" },
+          { name: "onPress", type: "() => void", default: "required" },
+          { name: "destructive", type: "boolean", default: "false" },
+        ]} />
         <p className="text-sm text-muted-foreground">
           Use a ref to control the sheet imperatively. Call <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">expand()</code> to open and <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">close()</code> to dismiss.
         </p>
       </div>
-
       {/* Source */}
       <div className="space-y-4">
         <h2 className="text-2xl font-semibold tracking-tight text-foreground">Source</h2>

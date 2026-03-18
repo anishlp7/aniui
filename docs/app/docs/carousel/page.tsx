@@ -1,14 +1,12 @@
 "use client";
-
 import React from "react";
 import { PreviewCarousel } from "@/components/preview/carousel";
 import { ComponentPlayground } from "@/components/component-playground";
 import { CodeBlock } from "@/components/code-block";
+import { PropsTable } from "@/components/props-table";
 
 const installCode = `npx aniui add carousel`;
-
 const usageCode = `import { Carousel } from "@/components/ui/carousel";
-
 <Carousel
   data={[
     <View className="h-48 bg-primary rounded-lg items-center justify-center"><Text className="text-primary-foreground text-lg">Slide 1</Text></View>,
@@ -16,13 +14,11 @@ const usageCode = `import { Carousel } from "@/components/ui/carousel";
     <View className="h-48 bg-accent rounded-lg items-center justify-center"><Text className="text-accent-foreground text-lg">Slide 3</Text></View>,
   ]}
 />`;
-
 const autoPlayCode = `<Carousel
   data={slides}
   autoPlay
   interval={3000}
 />`;
-
 const sourceCode = `import React, { useRef, useState } from "react";
 import { View, FlatList, Dimensions } from "react-native";
 import { cn } from "@/lib/utils";
@@ -35,12 +31,10 @@ export interface CarouselProps extends React.ComponentPropsWithoutRef<typeof Vie
   autoPlay?: boolean;
   interval?: number;
 }
-
 export function Carousel({ className, data, itemWidth, showDots = true, autoPlay, interval = 3000, ...props }: CarouselProps) {
   const [active, setActive] = useState(0);
   const width = itemWidth ?? Dimensions.get("window").width;
   const ref = useRef<FlatList>(null);
-
   React.useEffect(() => {
     if (!autoPlay || data.length <= 1) return;
     const timer = setInterval(() => {
@@ -49,7 +43,6 @@ export function Carousel({ className, data, itemWidth, showDots = true, autoPlay
     }, interval);
     return () => clearInterval(timer);
   }, [autoPlay, active, data.length, interval, width]);
-
   return (
     <View className={cn("", className)} {...props}>
       <FlatList
@@ -72,13 +65,11 @@ export function Carousel({ className, data, itemWidth, showDots = true, autoPlay
     </View>
   );
 }`;
-
 const slides = [
   <div key="1" className="h-48 bg-primary rounded-lg flex items-center justify-center"><span className="text-primary-foreground text-lg font-medium">Slide 1</span></div>,
   <div key="2" className="h-48 bg-secondary rounded-lg flex items-center justify-center"><span className="text-secondary-foreground text-lg font-medium">Slide 2</span></div>,
   <div key="3" className="h-48 bg-accent rounded-lg flex items-center justify-center"><span className="text-accent-foreground text-lg font-medium">Slide 3</span></div>,
 ];
-
 export default function CarouselPage() {
   return (
     <div className="space-y-12">
@@ -86,18 +77,15 @@ export default function CarouselPage() {
         <h1 className="text-3xl font-bold mb-2">Carousel</h1>
         <p className="text-muted-foreground text-lg">Horizontal scrollable carousel with pagination dots and optional auto-play. Uses FlatList for performant scrolling.</p>
       </div>
-
       <ComponentPlayground code={usageCode}>
         <div className="max-w-md">
           <PreviewCarousel items={slides} />
         </div>
       </ComponentPlayground>
-
       <div>
         <h2 className="text-xl font-semibold mb-3">Installation</h2>
         <CodeBlock code={installCode} />
       </div>
-
       <div>
         <h2 className="text-xl font-semibold mb-3">Auto-Play</h2>
         <p className="text-sm text-muted-foreground mb-4">Set <code>autoPlay</code> to automatically cycle through slides. Configure the <code>interval</code> in milliseconds.</p>
@@ -107,24 +95,17 @@ export default function CarouselPage() {
           </div>
         </ComponentPlayground>
       </div>
-
       <div>
         <h2 className="text-xl font-semibold mb-3">Props</h2>
-        <div className="overflow-x-auto">
-          <table className="w-full text-sm">
-            <thead><tr className="border-b"><th className="text-left py-2 pr-4">Prop</th><th className="text-left py-2 pr-4">Type</th><th className="text-left py-2">Default</th></tr></thead>
-            <tbody>
-              <tr className="border-b"><td className="py-2 pr-4 font-mono text-xs">data</td><td className="py-2 pr-4 font-mono text-xs">ReactNode[]</td><td className="py-2 font-mono text-xs">—</td></tr>
-              <tr className="border-b"><td className="py-2 pr-4 font-mono text-xs">itemWidth</td><td className="py-2 pr-4 font-mono text-xs">number</td><td className="py-2 font-mono text-xs">screen width</td></tr>
-              <tr className="border-b"><td className="py-2 pr-4 font-mono text-xs">showDots</td><td className="py-2 pr-4 font-mono text-xs">boolean</td><td className="py-2 font-mono text-xs">true</td></tr>
-              <tr className="border-b"><td className="py-2 pr-4 font-mono text-xs">autoPlay</td><td className="py-2 pr-4 font-mono text-xs">boolean</td><td className="py-2 font-mono text-xs">false</td></tr>
-              <tr className="border-b"><td className="py-2 pr-4 font-mono text-xs">interval</td><td className="py-2 pr-4 font-mono text-xs">number</td><td className="py-2 font-mono text-xs">3000</td></tr>
-              <tr className="border-b"><td className="py-2 pr-4 font-mono text-xs">className</td><td className="py-2 pr-4 font-mono text-xs">string</td><td className="py-2 font-mono text-xs">—</td></tr>
-            </tbody>
-          </table>
-        </div>
+        <PropsTable props={[
+          { name: "data", type: "ReactNode[]" },
+          { name: "itemWidth", type: "number", default: "screen width" },
+          { name: "showDots", type: "boolean", default: "true" },
+          { name: "autoPlay", type: "boolean", default: "false" },
+          { name: "interval", type: "number", default: "3000" },
+          { name: "className", type: "string" },
+        ]} />
       </div>
-
       <div>
         <h2 className="text-xl font-semibold mb-3">Source</h2>
         <CodeBlock code={sourceCode} title="components/ui/carousel.tsx" />

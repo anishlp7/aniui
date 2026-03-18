@@ -1,11 +1,10 @@
 "use client";
-
 import { PreviewAccordion, PreviewAccordionItem } from "@/components/preview/accordion";
 import { ComponentPlayground } from "@/components/component-playground";
 import { CodeBlock } from "@/components/code-block";
+import { PropsTable, ComponentTable } from "@/components/props-table";
 
 const installCode = `npx aniui add accordion`;
-
 const usageCode = `import { Accordion, AccordionItem } from "@/components/ui/accordion";
 
 export function MyScreen() {
@@ -23,7 +22,6 @@ export function MyScreen() {
     </Accordion>
   );
 }`;
-
 const sourceCode = `import React, { createContext, useContext, useState } from "react";
 import { View, Pressable, Text } from "react-native";
 import Animated, { useAnimatedStyle, useSharedValue, withTiming } from "react-native-reanimated";
@@ -33,46 +31,38 @@ const AccordionContext = createContext<{
   expanded: string | null;
   toggle: (value: string) => void;
 }>({ expanded: null, toggle: () => {} });
-
 export interface AccordionProps extends React.ComponentPropsWithoutRef<typeof View> {
   className?: string;
   defaultValue?: string;
   children?: React.ReactNode;
 }
-
 export function Accordion({ className, defaultValue, children, ...props }: AccordionProps) {
   const [expanded, setExpanded] = useState<string | null>(defaultValue ?? null);
   const toggle = (value: string) => setExpanded((prev) => (prev === value ? null : value));
-
   return (
     <AccordionContext.Provider value={{ expanded, toggle }}>
       <View className={cn("", className)} {...props}>{children}</View>
     </AccordionContext.Provider>
   );
 }
-
 export interface AccordionItemProps extends React.ComponentPropsWithoutRef<typeof View> {
   className?: string;
   value: string;
   trigger: string;
   children?: React.ReactNode;
 }
-
 export function AccordionItem({ value, trigger, className, children, ...props }: AccordionItemProps) {
   const { expanded, toggle } = useContext(AccordionContext);
   const isOpen = expanded === value;
   const progress = useSharedValue(0);
-
   React.useEffect(() => {
     progress.value = withTiming(isOpen ? 1 : 0, { duration: 250 });
   }, [isOpen, progress]);
-
   const animatedStyle = useAnimatedStyle(() => ({
     height: progress.value === 0 ? 0 : undefined,
     opacity: progress.value,
     overflow: "hidden" as const,
   }));
-
   return (
     <View className={cn("border-b border-border", className)} {...props}>
       <Pressable
@@ -91,7 +81,6 @@ export function AccordionItem({ value, trigger, className, children, ...props }:
     </View>
   );
 }`;
-
 export default function AccordionPage() {
   return (
     <div className="space-y-10">
@@ -102,7 +91,6 @@ export default function AccordionPage() {
           Expandable content sections with animated height transitions.
         </p>
       </div>
-
       {/* Preview */}
       <ComponentPlayground code={usageCode}>
         <div className="w-full max-w-sm">
@@ -119,7 +107,6 @@ export default function AccordionPage() {
           </PreviewAccordion>
         </div>
       </ComponentPlayground>
-
       {/* Installation */}
       <div className="space-y-4">
         <h2 className="text-2xl font-semibold tracking-tight text-foreground">Installation</h2>
@@ -128,97 +115,34 @@ export default function AccordionPage() {
           This component requires <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">react-native-reanimated</code> for animations.
         </p>
       </div>
-
       {/* Usage */}
       <div className="space-y-4">
         <h2 className="text-2xl font-semibold tracking-tight text-foreground">Usage</h2>
         <CodeBlock code={usageCode} title="app/index.tsx" />
       </div>
-
       {/* Compound Components */}
       <div className="space-y-4">
         <h2 className="text-2xl font-semibold tracking-tight text-foreground">Compound Components</h2>
-        <div className="overflow-x-auto rounded-lg border border-border">
-          <table className="w-full text-sm">
-            <thead>
-              <tr className="border-b border-border bg-secondary/50">
-                <th className="px-4 py-3 text-left font-medium text-foreground">Component</th>
-                <th className="px-4 py-3 text-left font-medium text-foreground">Description</th>
-              </tr>
-            </thead>
-            <tbody className="text-muted-foreground">
-              <tr className="border-b border-border">
-                <td className="px-4 py-3 font-mono text-xs text-foreground">Accordion</td>
-                <td className="px-4 py-3 text-xs">Root container that manages expanded state</td>
-              </tr>
-              <tr>
-                <td className="px-4 py-3 font-mono text-xs text-foreground">AccordionItem</td>
-                <td className="px-4 py-3 text-xs">Individual collapsible section with trigger text</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
+        <ComponentTable components={[
+          { name: "Accordion", description: "Root container that manages expanded state" },
+          { name: "AccordionItem", description: "Individual collapsible section with trigger text" },
+        ]} />
       </div>
-
       {/* Props */}
       <div className="space-y-4">
         <h2 className="text-2xl font-semibold tracking-tight text-foreground">Props</h2>
         <h3 className="text-lg font-medium text-foreground">Accordion</h3>
-        <div className="overflow-x-auto rounded-lg border border-border">
-          <table className="w-full text-sm">
-            <thead>
-              <tr className="border-b border-border bg-secondary/50">
-                <th className="px-4 py-3 text-left font-medium text-foreground">Prop</th>
-                <th className="px-4 py-3 text-left font-medium text-foreground">Type</th>
-                <th className="px-4 py-3 text-left font-medium text-foreground">Default</th>
-              </tr>
-            </thead>
-            <tbody className="text-muted-foreground">
-              <tr className="border-b border-border">
-                <td className="px-4 py-3 font-mono text-xs text-foreground">defaultValue</td>
-                <td className="px-4 py-3 font-mono text-xs">string</td>
-                <td className="px-4 py-3 font-mono text-xs">-</td>
-              </tr>
-              <tr>
-                <td className="px-4 py-3 font-mono text-xs text-foreground">className</td>
-                <td className="px-4 py-3 font-mono text-xs">string</td>
-                <td className="px-4 py-3 font-mono text-xs">-</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-
+        <PropsTable props={[
+          { name: "defaultValue", type: "string" },
+          { name: "className", type: "string" },
+        ]} />
         <h3 className="text-lg font-medium text-foreground mt-6">AccordionItem</h3>
-        <div className="overflow-x-auto rounded-lg border border-border">
-          <table className="w-full text-sm">
-            <thead>
-              <tr className="border-b border-border bg-secondary/50">
-                <th className="px-4 py-3 text-left font-medium text-foreground">Prop</th>
-                <th className="px-4 py-3 text-left font-medium text-foreground">Type</th>
-                <th className="px-4 py-3 text-left font-medium text-foreground">Default</th>
-              </tr>
-            </thead>
-            <tbody className="text-muted-foreground">
-              <tr className="border-b border-border">
-                <td className="px-4 py-3 font-mono text-xs text-foreground">value</td>
-                <td className="px-4 py-3 font-mono text-xs">string</td>
-                <td className="px-4 py-3 font-mono text-xs">required</td>
-              </tr>
-              <tr className="border-b border-border">
-                <td className="px-4 py-3 font-mono text-xs text-foreground">trigger</td>
-                <td className="px-4 py-3 font-mono text-xs">string</td>
-                <td className="px-4 py-3 font-mono text-xs">required</td>
-              </tr>
-              <tr>
-                <td className="px-4 py-3 font-mono text-xs text-foreground">className</td>
-                <td className="px-4 py-3 font-mono text-xs">string</td>
-                <td className="px-4 py-3 font-mono text-xs">-</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
+        <PropsTable props={[
+          { name: "value", type: "string", default: "required" },
+          { name: "trigger", type: "string", default: "required" },
+          { name: "className", type: "string" },
+        ]} />
       </div>
-
       {/* Source */}
       <div className="space-y-4">
         <h2 className="text-2xl font-semibold tracking-tight text-foreground">Source</h2>

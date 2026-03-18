@@ -1,18 +1,16 @@
 "use client";
-
 import React from "react";
 import { PreviewDialogDemo } from "@/components/preview/dialog";
 import { ComponentPlayground } from "@/components/component-playground";
 import { CodeBlock } from "@/components/code-block";
+import { PropsTable, ComponentTable } from "@/components/props-table";
 
 const installCode = `npx aniui add dialog`;
-
 const usageCode = `import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter } from "@/components/ui/dialog";
 import { useState } from "react";
 
 export function MyScreen() {
   const [open, setOpen] = useState(false);
-
   return (
     <>
       <Button onPress={() => setOpen(true)}>Open Dialog</Button>
@@ -33,7 +31,6 @@ export function MyScreen() {
     </>
   );
 }`;
-
 const sourceCode = `import React from "react";
 import { View, Pressable, Text, Modal } from "react-native";
 import Animated, { FadeIn, FadeOut, ZoomIn, ZoomOut } from "react-native-reanimated";
@@ -44,7 +41,6 @@ export interface DialogProps {
   onOpenChange: (open: boolean) => void;
   children: React.ReactNode;
 }
-
 export function Dialog({ open, onOpenChange, children }: DialogProps) {
   return (
     <Modal visible={open} transparent animationType="none" onRequestClose={() => onOpenChange(false)}>
@@ -61,12 +57,10 @@ export function Dialog({ open, onOpenChange, children }: DialogProps) {
     </Modal>
   );
 }
-
 export interface DialogContentProps extends React.ComponentPropsWithoutRef<typeof View> {
   className?: string;
   children?: React.ReactNode;
 }
-
 export function DialogContent({ className, ...props }: DialogContentProps) {
   return (
     <View
@@ -76,41 +70,32 @@ export function DialogContent({ className, ...props }: DialogContentProps) {
     />
   );
 }
-
 export interface DialogHeaderProps extends React.ComponentPropsWithoutRef<typeof View> {
   className?: string;
   children?: React.ReactNode;
 }
-
 export function DialogHeader({ className, ...props }: DialogHeaderProps) {
   return <View className={cn("pb-4", className)} {...props} />;
 }
-
 export interface DialogTitleProps extends React.ComponentPropsWithoutRef<typeof Text> {
   className?: string;
 }
-
 export function DialogTitle({ className, ...props }: DialogTitleProps) {
   return <Text className={cn("text-lg font-semibold text-card-foreground", className)} {...props} />;
 }
-
 export interface DialogDescriptionProps extends React.ComponentPropsWithoutRef<typeof Text> {
   className?: string;
 }
-
 export function DialogDescription({ className, ...props }: DialogDescriptionProps) {
   return <Text className={cn("text-sm text-muted-foreground mt-1", className)} {...props} />;
 }
-
 export interface DialogFooterProps extends React.ComponentPropsWithoutRef<typeof View> {
   className?: string;
   children?: React.ReactNode;
 }
-
 export function DialogFooter({ className, ...props }: DialogFooterProps) {
   return <View className={cn("flex-row justify-end gap-3 pt-4", className)} {...props} />;
 }`;
-
 export default function DialogPage() {
   return (
     <div className="space-y-10">
@@ -121,12 +106,10 @@ export default function DialogPage() {
           Modal dialog overlay with fade and scale animations.
         </p>
       </div>
-
       {/* Preview */}
       <ComponentPlayground code={usageCode}>
         <PreviewDialogDemo />
       </ComponentPlayground>
-
       {/* Installation */}
       <div className="space-y-4">
         <h2 className="text-2xl font-semibold tracking-tight text-foreground">Installation</h2>
@@ -135,91 +118,36 @@ export default function DialogPage() {
           This component requires <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">react-native-reanimated</code> for fade and zoom animations.
         </p>
       </div>
-
       {/* Usage */}
       <div className="space-y-4">
         <h2 className="text-2xl font-semibold tracking-tight text-foreground">Usage</h2>
         <CodeBlock code={usageCode} title="app/index.tsx" />
       </div>
-
       {/* Compound Components */}
       <div className="space-y-4">
         <h2 className="text-2xl font-semibold tracking-tight text-foreground">Compound Components</h2>
-        <div className="overflow-x-auto rounded-lg border border-border">
-          <table className="w-full text-sm">
-            <thead>
-              <tr className="border-b border-border bg-secondary/50">
-                <th className="px-4 py-3 text-left font-medium text-foreground">Component</th>
-                <th className="px-4 py-3 text-left font-medium text-foreground">Description</th>
-              </tr>
-            </thead>
-            <tbody className="text-muted-foreground">
-              <tr className="border-b border-border">
-                <td className="px-4 py-3 font-mono text-xs text-foreground">Dialog</td>
-                <td className="px-4 py-3 text-xs">Root modal with backdrop and animations</td>
-              </tr>
-              <tr className="border-b border-border">
-                <td className="px-4 py-3 font-mono text-xs text-foreground">DialogContent</td>
-                <td className="px-4 py-3 text-xs">Card-style content container</td>
-              </tr>
-              <tr className="border-b border-border">
-                <td className="px-4 py-3 font-mono text-xs text-foreground">DialogHeader</td>
-                <td className="px-4 py-3 text-xs">Header section</td>
-              </tr>
-              <tr className="border-b border-border">
-                <td className="px-4 py-3 font-mono text-xs text-foreground">DialogTitle</td>
-                <td className="px-4 py-3 text-xs">Title text</td>
-              </tr>
-              <tr className="border-b border-border">
-                <td className="px-4 py-3 font-mono text-xs text-foreground">DialogDescription</td>
-                <td className="px-4 py-3 text-xs">Description text in muted color</td>
-              </tr>
-              <tr>
-                <td className="px-4 py-3 font-mono text-xs text-foreground">DialogFooter</td>
-                <td className="px-4 py-3 text-xs">Footer with row layout for action buttons</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
+        <ComponentTable components={[
+          { name: "Dialog", description: "Root modal with backdrop and animations" },
+          { name: "DialogContent", description: "Card-style content container" },
+          { name: "DialogHeader", description: "Header section" },
+          { name: "DialogTitle", description: "Title text" },
+          { name: "DialogDescription", description: "Description text in muted color" },
+          { name: "DialogFooter", description: "Footer with row layout for action buttons" },
+        ]} />
       </div>
-
       {/* Props */}
       <div className="space-y-4">
         <h2 className="text-2xl font-semibold tracking-tight text-foreground">Props</h2>
         <h3 className="text-lg font-medium text-foreground">Dialog</h3>
-        <div className="overflow-x-auto rounded-lg border border-border">
-          <table className="w-full text-sm">
-            <thead>
-              <tr className="border-b border-border bg-secondary/50">
-                <th className="px-4 py-3 text-left font-medium text-foreground">Prop</th>
-                <th className="px-4 py-3 text-left font-medium text-foreground">Type</th>
-                <th className="px-4 py-3 text-left font-medium text-foreground">Default</th>
-              </tr>
-            </thead>
-            <tbody className="text-muted-foreground">
-              <tr className="border-b border-border">
-                <td className="px-4 py-3 font-mono text-xs text-foreground">open</td>
-                <td className="px-4 py-3 font-mono text-xs">boolean</td>
-                <td className="px-4 py-3 font-mono text-xs">required</td>
-              </tr>
-              <tr className="border-b border-border">
-                <td className="px-4 py-3 font-mono text-xs text-foreground">onOpenChange</td>
-                <td className="px-4 py-3 font-mono text-xs">{`(open: boolean) => void`}</td>
-                <td className="px-4 py-3 font-mono text-xs">required</td>
-              </tr>
-              <tr>
-                <td className="px-4 py-3 font-mono text-xs text-foreground">children</td>
-                <td className="px-4 py-3 font-mono text-xs">React.ReactNode</td>
-                <td className="px-4 py-3 font-mono text-xs">required</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
+        <PropsTable props={[
+          { name: "open", type: "boolean", default: "required" },
+          { name: "onOpenChange", type: "(open: boolean) => void", default: "required" },
+          { name: "children", type: "React.ReactNode", default: "required" },
+        ]} />
         <p className="text-sm text-muted-foreground">
           Sub-components (<code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">DialogContent</code>, <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">DialogHeader</code>, etc.) accept <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">className</code> and their respective React Native base props.
         </p>
       </div>
-
       {/* Source */}
       <div className="space-y-4">
         <h2 className="text-2xl font-semibold tracking-tight text-foreground">Source</h2>

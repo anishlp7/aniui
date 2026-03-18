@@ -81,6 +81,9 @@ export function Navbar() {
             <Link href="/docs/button" className="text-muted-foreground hover:text-foreground transition-colors">
               Components
             </Link>
+            <Link href="/blocks" className="text-muted-foreground hover:text-foreground transition-colors">
+              Blocks
+            </Link>
           </nav>
 
           <div className="ml-auto flex items-center gap-2">
@@ -171,6 +174,30 @@ export function Navbar() {
                 ["Toggle", "/docs/toggle"],
                 ["Toggle Group", "/docs/toggle-group"],
                 ["Tooltip", "/docs/tooltip"],
+              ].map(([title, href], i) => (
+                <Link key={href} href={href} className={`block text-sm text-muted-foreground hover:text-foreground${i > 0 ? " mt-2" : ""}`} onClick={() => setMobileOpen(false)}>
+                  {title}
+                </Link>
+              ))}
+            </div>
+            <div className="border-t border-border pt-4 mt-4">
+              <p className="text-xs font-semibold text-foreground mb-2">Blocks</p>
+              {[
+                ["Login", "/blocks/login"],
+                ["Sign Up", "/blocks/signup"],
+                ["Forgot Password", "/blocks/forgot-password"],
+                ["Home Screen", "/blocks/home"],
+                ["Bottom Tabs", "/blocks/bottom-tabs"],
+                ["Drawer Navigation", "/blocks/drawer-nav"],
+                ["Profile", "/blocks/profile"],
+                ["Settings", "/blocks/settings"],
+                ["Onboarding", "/blocks/onboarding"],
+                ["Chat", "/blocks/chat"],
+                ["Product List", "/blocks/product-list"],
+                ["Product Detail", "/blocks/product-detail"],
+                ["Notifications", "/blocks/notifications"],
+                ["Pricing", "/blocks/pricing"],
+                ["Search", "/blocks/search"],
               ].map(([title, href], i) => (
                 <Link key={href} href={href} className={`block text-sm text-muted-foreground hover:text-foreground${i > 0 ? " mt-2" : ""}`} onClick={() => setMobileOpen(false)}>
                   {title}

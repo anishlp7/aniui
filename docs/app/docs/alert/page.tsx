@@ -1,11 +1,10 @@
 "use client";
-
 import { PreviewAlert } from "@/components/preview/alert";
 import { ComponentPlayground } from "@/components/component-playground";
 import { CodeBlock } from "@/components/code-block";
+import { PropsTable } from "@/components/props-table";
 
 const installCode = `npx aniui add alert`;
-
 const usageCode = `import { Alert, AlertDescription } from "@/components/ui/alert";
 
 export function MyScreen() {
@@ -17,7 +16,6 @@ export function MyScreen() {
     </Alert>
   );
 }`;
-
 const variantsCode = `<Alert variant="default" title="Default">
   <AlertDescription>This is a default alert.</AlertDescription>
 </Alert>
@@ -30,7 +28,6 @@ const variantsCode = `<Alert variant="default" title="Default">
 <Alert variant="warning" title="Warning">
   <AlertDescription>Please review before continuing.</AlertDescription>
 </Alert>`;
-
 const sourceCode = `import React from "react";
 import { View, Text } from "react-native";
 import { cva, type VariantProps } from "class-variance-authority";
@@ -49,7 +46,6 @@ const alertVariants = cva("rounded-lg border p-4", {
     variant: "default",
   },
 });
-
 const alertTitleVariants = cva("text-base font-semibold mb-1", {
   variants: {
     variant: {
@@ -61,7 +57,6 @@ const alertTitleVariants = cva("text-base font-semibold mb-1", {
   },
   defaultVariants: { variant: "default" },
 });
-
 export interface AlertProps
   extends React.ComponentPropsWithoutRef<typeof View>,
     VariantProps<typeof alertVariants> {
@@ -70,7 +65,6 @@ export interface AlertProps
   titleClassName?: string;
   children?: React.ReactNode;
 }
-
 export function Alert({ variant, className, title, titleClassName, children, ...props }: AlertProps) {
   return (
     <View className={cn(alertVariants({ variant }), className)} accessibilityRole="alert" {...props}>
@@ -79,15 +73,12 @@ export function Alert({ variant, className, title, titleClassName, children, ...
     </View>
   );
 }
-
 export interface AlertDescriptionProps extends React.ComponentPropsWithoutRef<typeof Text> {
   className?: string;
 }
-
 export function AlertDescription({ className, ...props }: AlertDescriptionProps) {
   return <Text className={cn("text-sm text-muted-foreground", className)} {...props} />;
 }`;
-
 export default function AlertPage() {
   return (
     <div className="space-y-10">
@@ -98,7 +89,6 @@ export default function AlertPage() {
           Alert message with multiple variants for different contexts.
         </p>
       </div>
-
       {/* Preview */}
       <ComponentPlayground code={usageCode}>
         <div className="w-full max-w-sm">
@@ -107,19 +97,16 @@ export default function AlertPage() {
           </PreviewAlert>
         </div>
       </ComponentPlayground>
-
       {/* Installation */}
       <div className="space-y-4">
         <h2 className="text-2xl font-semibold tracking-tight text-foreground">Installation</h2>
         <CodeBlock code={installCode} />
       </div>
-
       {/* Usage */}
       <div className="space-y-4">
         <h2 className="text-2xl font-semibold tracking-tight text-foreground">Usage</h2>
         <CodeBlock code={usageCode} title="app/index.tsx" />
       </div>
-
       {/* Variants */}
       <div className="space-y-4">
         <h2 className="text-2xl font-semibold tracking-tight text-foreground">Variants</h2>
@@ -132,56 +119,23 @@ export default function AlertPage() {
           </div>
         </ComponentPlayground>
       </div>
-
       {/* Props */}
       <div className="space-y-4">
         <h2 className="text-2xl font-semibold tracking-tight text-foreground">Props</h2>
         <p className="text-sm text-muted-foreground">
           This component exports <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">Alert</code> and <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">AlertDescription</code>.
         </p>
-        <div className="overflow-x-auto rounded-lg border border-border">
-          <table className="w-full text-sm">
-            <thead>
-              <tr className="border-b border-border bg-secondary/50">
-                <th className="px-4 py-3 text-left font-medium text-foreground">Prop</th>
-                <th className="px-4 py-3 text-left font-medium text-foreground">Type</th>
-                <th className="px-4 py-3 text-left font-medium text-foreground">Default</th>
-              </tr>
-            </thead>
-            <tbody className="text-muted-foreground">
-              <tr className="border-b border-border">
-                <td className="px-4 py-3 font-mono text-xs text-foreground">variant</td>
-                <td className="px-4 py-3 font-mono text-xs">{`"default" | "destructive" | "success" | "warning"`}</td>
-                <td className="px-4 py-3 font-mono text-xs">{`"default"`}</td>
-              </tr>
-              <tr className="border-b border-border">
-                <td className="px-4 py-3 font-mono text-xs text-foreground">title</td>
-                <td className="px-4 py-3 font-mono text-xs">string</td>
-                <td className="px-4 py-3 font-mono text-xs">-</td>
-              </tr>
-              <tr className="border-b border-border">
-                <td className="px-4 py-3 font-mono text-xs text-foreground">titleClassName</td>
-                <td className="px-4 py-3 font-mono text-xs">string</td>
-                <td className="px-4 py-3 font-mono text-xs">-</td>
-              </tr>
-              <tr className="border-b border-border">
-                <td className="px-4 py-3 font-mono text-xs text-foreground">className</td>
-                <td className="px-4 py-3 font-mono text-xs">string</td>
-                <td className="px-4 py-3 font-mono text-xs">-</td>
-              </tr>
-              <tr>
-                <td className="px-4 py-3 font-mono text-xs text-foreground">children</td>
-                <td className="px-4 py-3 font-mono text-xs">React.ReactNode</td>
-                <td className="px-4 py-3 font-mono text-xs">-</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
+        <PropsTable props={[
+          { name: "variant", type: "\"default\" | \"destructive\" | \"success\" | \"warning\"", default: "\"default\"" },
+          { name: "title", type: "string" },
+          { name: "titleClassName", type: "string" },
+          { name: "className", type: "string" },
+          { name: "children", type: "React.ReactNode" },
+        ]} />
         <p className="text-sm text-muted-foreground">
           Also accepts all <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">View</code> props from React Native.
         </p>
       </div>
-
       {/* Source */}
       <div className="space-y-4">
         <h2 className="text-2xl font-semibold tracking-tight text-foreground">Source</h2>

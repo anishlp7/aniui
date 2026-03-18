@@ -1,17 +1,15 @@
 "use client";
-
 import { PreviewDatePickerDemo, PreviewDateRangeDemo } from "@/components/preview/date-picker";
 import { ComponentPlayground } from "@/components/component-playground";
 import { CodeBlock } from "@/components/code-block";
+import { PropsTable } from "@/components/props-table";
 
 const installCode = `npx aniui add date-picker`;
-
 const usageCode = `import { DatePicker } from "@/components/ui/date-picker";
 import { useState } from "react";
 
 export function MyScreen() {
   const [date, setDate] = useState<Date | undefined>();
-
   return (
     <DatePicker
       value={date}
@@ -20,14 +18,12 @@ export function MyScreen() {
     />
   );
 }`;
-
 const rangeCode = `import { DateRangePicker } from "@/components/ui/date-picker";
 import { useState } from "react";
 
 export function MyScreen() {
   const [start, setStart] = useState<Date | undefined>();
   const [end, setEnd] = useState<Date | undefined>();
-
   return (
     <DateRangePicker
       startDate={start}
@@ -40,14 +36,12 @@ export function MyScreen() {
     />
   );
 }`;
-
 const constrainedCode = `<DatePicker
   value={date}
   onChange={setDate}
   min={new Date(2024, 0, 1)}
   max={new Date(2024, 11, 31)}
 />`;
-
 const sourceCode = `import React, { useState } from "react";
 import { View, Text, Pressable, Modal } from "react-native";
 import { cn } from "@/lib/utils";
@@ -62,7 +56,6 @@ export interface DatePickerProps {
   max?: Date;
   formatDate?: (date: Date) => string;
 }
-
 function PickerShell({ open, onClose, children }: { open: boolean; onClose: () => void; children: React.ReactNode }) {
   return (
     <Modal visible={open} transparent animationType="fade" onRequestClose={onClose}>
@@ -77,7 +70,6 @@ function PickerShell({ open, onClose, children }: { open: boolean; onClose: () =
     </Modal>
   );
 }
-
 function TriggerButton({ label, hasValue, className, onPress }: { label: string; hasValue: boolean; className?: string; onPress: () => void }) {
   return (
     <Pressable className={cn("flex-row items-center rounded-md border border-input bg-background px-4 min-h-12", className)} onPress={onPress} accessible={true} accessibilityRole="button">
@@ -86,11 +78,9 @@ function TriggerButton({ label, hasValue, className, onPress }: { label: string;
     </Pressable>
   );
 }
-
 export function DatePicker({ className, value, onChange, placeholder = "Select date...", min, max, formatDate }: DatePickerProps) {
   const [open, setOpen] = useState(false);
   const display = value ? (formatDate ?? ((d: Date) => d.toLocaleDateString()))(value) : placeholder;
-
   return (
     <>
       <TriggerButton label={display} hasValue={!!value} className={className} onPress={() => setOpen(true)} />
@@ -100,7 +90,6 @@ export function DatePicker({ className, value, onChange, placeholder = "Select d
     </>
   );
 }
-
 export interface DateRangePickerProps {
   className?: string;
   startDate?: Date;
@@ -110,11 +99,9 @@ export interface DateRangePickerProps {
   min?: Date;
   max?: Date;
 }
-
 export function DateRangePicker({ className, startDate, endDate, onRangeChange, placeholder = "Select range...", min, max }: DateRangePickerProps) {
   const [open, setOpen] = useState(false);
   const display = startDate ? \`\${startDate.toLocaleDateString()}\${endDate ? \` - \${endDate.toLocaleDateString()}\` : ""}\` : placeholder;
-
   return (
     <>
       <TriggerButton label={display} hasValue={!!startDate} className={className} onPress={() => setOpen(true)} />
@@ -124,7 +111,6 @@ export function DateRangePicker({ className, startDate, endDate, onRangeChange, 
     </>
   );
 }`;
-
 export default function DatePickerPage() {
   return (
     <div className="space-y-10">
@@ -135,12 +121,10 @@ export default function DatePickerPage() {
           Date picker with calendar popup. Supports single date and range selection.
         </p>
       </div>
-
       {/* Preview */}
       <ComponentPlayground code={usageCode}>
         <PreviewDatePickerDemo />
       </ComponentPlayground>
-
       {/* Installation */}
       <div className="space-y-4">
         <h2 className="text-2xl font-semibold tracking-tight text-foreground">Installation</h2>
@@ -149,13 +133,11 @@ export default function DatePickerPage() {
           The DatePicker depends on the Calendar component, which will be installed automatically.
         </p>
       </div>
-
       {/* Usage */}
       <div className="space-y-4">
         <h2 className="text-2xl font-semibold tracking-tight text-foreground">Usage</h2>
         <CodeBlock code={usageCode} title="app/index.tsx" />
       </div>
-
       {/* Range Selection */}
       <div className="space-y-4">
         <h2 className="text-2xl font-semibold tracking-tight text-foreground">Range Selection</h2>
@@ -166,7 +148,6 @@ export default function DatePickerPage() {
           <PreviewDateRangeDemo />
         </ComponentPlayground>
       </div>
-
       {/* Date Constraints */}
       <div className="space-y-4">
         <h2 className="text-2xl font-semibold tracking-tight text-foreground">Date Constraints</h2>
@@ -175,113 +156,32 @@ export default function DatePickerPage() {
         </p>
         <CodeBlock code={constrainedCode} title="app/index.tsx" />
       </div>
-
       {/* Props — DatePicker */}
       <div className="space-y-4">
         <h2 className="text-2xl font-semibold tracking-tight text-foreground">DatePicker Props</h2>
-        <div className="overflow-x-auto rounded-lg border border-border">
-          <table className="w-full text-sm">
-            <thead>
-              <tr className="border-b border-border bg-secondary/50">
-                <th className="px-4 py-3 text-left font-medium text-foreground">Prop</th>
-                <th className="px-4 py-3 text-left font-medium text-foreground">Type</th>
-                <th className="px-4 py-3 text-left font-medium text-foreground">Default</th>
-              </tr>
-            </thead>
-            <tbody className="text-muted-foreground">
-              <tr className="border-b border-border">
-                <td className="px-4 py-3 font-mono text-xs text-foreground">value</td>
-                <td className="px-4 py-3 font-mono text-xs">Date</td>
-                <td className="px-4 py-3 font-mono text-xs">-</td>
-              </tr>
-              <tr className="border-b border-border">
-                <td className="px-4 py-3 font-mono text-xs text-foreground">onChange</td>
-                <td className="px-4 py-3 font-mono text-xs">{`(date: Date) => void`}</td>
-                <td className="px-4 py-3 font-mono text-xs">-</td>
-              </tr>
-              <tr className="border-b border-border">
-                <td className="px-4 py-3 font-mono text-xs text-foreground">placeholder</td>
-                <td className="px-4 py-3 font-mono text-xs">string</td>
-                <td className="px-4 py-3 font-mono text-xs">{`"Select date..."`}</td>
-              </tr>
-              <tr className="border-b border-border">
-                <td className="px-4 py-3 font-mono text-xs text-foreground">min</td>
-                <td className="px-4 py-3 font-mono text-xs">Date</td>
-                <td className="px-4 py-3 font-mono text-xs">-</td>
-              </tr>
-              <tr className="border-b border-border">
-                <td className="px-4 py-3 font-mono text-xs text-foreground">max</td>
-                <td className="px-4 py-3 font-mono text-xs">Date</td>
-                <td className="px-4 py-3 font-mono text-xs">-</td>
-              </tr>
-              <tr className="border-b border-border">
-                <td className="px-4 py-3 font-mono text-xs text-foreground">formatDate</td>
-                <td className="px-4 py-3 font-mono text-xs">{`(date: Date) => string`}</td>
-                <td className="px-4 py-3 font-mono text-xs">toLocaleDateString</td>
-              </tr>
-              <tr>
-                <td className="px-4 py-3 font-mono text-xs text-foreground">className</td>
-                <td className="px-4 py-3 font-mono text-xs">string</td>
-                <td className="px-4 py-3 font-mono text-xs">-</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
+        <PropsTable props={[
+          { name: "value", type: "Date" },
+          { name: "onChange", type: "(date: Date) => void" },
+          { name: "placeholder", type: "string", default: "\"Select date...\"" },
+          { name: "min", type: "Date" },
+          { name: "max", type: "Date" },
+          { name: "formatDate", type: "(date: Date) => string", default: "toLocaleDateString" },
+          { name: "className", type: "string" },
+        ]} />
       </div>
-
       {/* Props — DateRangePicker */}
       <div className="space-y-4">
         <h2 className="text-2xl font-semibold tracking-tight text-foreground">DateRangePicker Props</h2>
-        <div className="overflow-x-auto rounded-lg border border-border">
-          <table className="w-full text-sm">
-            <thead>
-              <tr className="border-b border-border bg-secondary/50">
-                <th className="px-4 py-3 text-left font-medium text-foreground">Prop</th>
-                <th className="px-4 py-3 text-left font-medium text-foreground">Type</th>
-                <th className="px-4 py-3 text-left font-medium text-foreground">Default</th>
-              </tr>
-            </thead>
-            <tbody className="text-muted-foreground">
-              <tr className="border-b border-border">
-                <td className="px-4 py-3 font-mono text-xs text-foreground">startDate</td>
-                <td className="px-4 py-3 font-mono text-xs">Date</td>
-                <td className="px-4 py-3 font-mono text-xs">-</td>
-              </tr>
-              <tr className="border-b border-border">
-                <td className="px-4 py-3 font-mono text-xs text-foreground">endDate</td>
-                <td className="px-4 py-3 font-mono text-xs">Date</td>
-                <td className="px-4 py-3 font-mono text-xs">-</td>
-              </tr>
-              <tr className="border-b border-border">
-                <td className="px-4 py-3 font-mono text-xs text-foreground">onRangeChange</td>
-                <td className="px-4 py-3 font-mono text-xs">{`(start: Date, end: Date | undefined) => void`}</td>
-                <td className="px-4 py-3 font-mono text-xs">-</td>
-              </tr>
-              <tr className="border-b border-border">
-                <td className="px-4 py-3 font-mono text-xs text-foreground">placeholder</td>
-                <td className="px-4 py-3 font-mono text-xs">string</td>
-                <td className="px-4 py-3 font-mono text-xs">{`"Select range..."`}</td>
-              </tr>
-              <tr className="border-b border-border">
-                <td className="px-4 py-3 font-mono text-xs text-foreground">min</td>
-                <td className="px-4 py-3 font-mono text-xs">Date</td>
-                <td className="px-4 py-3 font-mono text-xs">-</td>
-              </tr>
-              <tr className="border-b border-border">
-                <td className="px-4 py-3 font-mono text-xs text-foreground">max</td>
-                <td className="px-4 py-3 font-mono text-xs">Date</td>
-                <td className="px-4 py-3 font-mono text-xs">-</td>
-              </tr>
-              <tr>
-                <td className="px-4 py-3 font-mono text-xs text-foreground">className</td>
-                <td className="px-4 py-3 font-mono text-xs">string</td>
-                <td className="px-4 py-3 font-mono text-xs">-</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
+        <PropsTable props={[
+          { name: "startDate", type: "Date" },
+          { name: "endDate", type: "Date" },
+          { name: "onRangeChange", type: "(start: Date, end: Date | undefined) => void" },
+          { name: "placeholder", type: "string", default: "\"Select range...\"" },
+          { name: "min", type: "Date" },
+          { name: "max", type: "Date" },
+          { name: "className", type: "string" },
+        ]} />
       </div>
-
       {/* Source */}
       <div className="space-y-4">
         <h2 className="text-2xl font-semibold tracking-tight text-foreground">Source</h2>

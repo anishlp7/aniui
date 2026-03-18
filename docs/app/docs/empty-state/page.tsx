@@ -1,42 +1,36 @@
 "use client";
-
 import React from "react";
 import { PreviewEmptyState } from "@/components/preview/empty-state";
 import { ComponentPlayground } from "@/components/component-playground";
 import { CodeBlock } from "@/components/code-block";
+import { PropsTable } from "@/components/props-table";
 
 const installCode = `npx aniui add empty-state`;
-
 const usageCode = `import { EmptyState } from "@/components/ui/empty-state";
 import { Ionicons } from "@expo/vector-icons";
-
 <EmptyState
   icon={<Ionicons name="search-outline" size={48} color="#a1a1aa" />}
   title="No results found"
   description="Try adjusting your search or filters to find what you're looking for."
   action={{ label: "Clear Filters", onPress: () => {} }}
 />`;
-
 const noResultsCode = `<EmptyState
   icon={<SearchIcon />}
   title="No results found"
   description="Try adjusting your search or filters."
   action={{ label: "Clear Filters", onPress: () => {} }}
 />`;
-
 const emptyListCode = `<EmptyState
   icon={<InboxIcon />}
   title="No messages yet"
   description="When you receive messages, they'll appear here."
 />`;
-
 const errorCode = `<EmptyState
   icon={<AlertIcon />}
   title="Something went wrong"
   description="We couldn't load your data. Please try again."
   action={{ label: "Retry", onPress: () => {} }}
 />`;
-
 const sourceCode = `import React from "react";
 import { View, Text, Pressable } from "react-native";
 import { cn } from "@/lib/utils";
@@ -48,7 +42,6 @@ export interface EmptyStateProps extends React.ComponentPropsWithoutRef<typeof V
   description?: string;
   action?: { label: string; onPress: () => void };
 }
-
 export function EmptyState({ className, icon, title, description, action, ...props }: EmptyStateProps) {
   return (
     <View className={cn("items-center justify-center px-8 py-16", className)} {...props}>
@@ -68,7 +61,6 @@ export function EmptyState({ className, icon, title, description, action, ...pro
     </View>
   );
 }`;
-
 function SearchIcon() {
   return (
     <svg className="h-12 w-12 text-muted-foreground" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
@@ -76,7 +68,6 @@ function SearchIcon() {
     </svg>
   );
 }
-
 function InboxIcon() {
   return (
     <svg className="h-12 w-12 text-muted-foreground" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
@@ -84,7 +75,6 @@ function InboxIcon() {
     </svg>
   );
 }
-
 function AlertIcon() {
   return (
     <svg className="h-12 w-12 text-destructive" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
@@ -92,7 +82,6 @@ function AlertIcon() {
     </svg>
   );
 }
-
 export default function EmptyStatePage() {
   return (
     <div className="space-y-12">
@@ -100,7 +89,6 @@ export default function EmptyStatePage() {
         <h1 className="text-3xl font-bold mb-2">EmptyState</h1>
         <p className="text-muted-foreground text-lg">A placeholder for empty screens, search results, and error states. Every list needs one.</p>
       </div>
-
       <ComponentPlayground code={usageCode}>
         <PreviewEmptyState
           icon={<SearchIcon />}
@@ -110,17 +98,14 @@ export default function EmptyStatePage() {
           onAction={() => {}}
         />
       </ComponentPlayground>
-
       <div>
         <h2 className="text-xl font-semibold mb-3">Installation</h2>
         <CodeBlock code={installCode} />
       </div>
-
       <div>
         <h2 className="text-xl font-semibold mb-3">Usage</h2>
         <CodeBlock code={usageCode} title="screen.tsx" />
       </div>
-
       <div>
         <h2 className="text-xl font-semibold mb-3">No Search Results</h2>
         <p className="text-sm text-muted-foreground mb-4">Show when a search or filter returns empty.</p>
@@ -134,7 +119,6 @@ export default function EmptyStatePage() {
           />
         </ComponentPlayground>
       </div>
-
       <div>
         <h2 className="text-xl font-semibold mb-3">Empty List</h2>
         <p className="text-sm text-muted-foreground mb-4">Show when a list has no items yet.</p>
@@ -146,7 +130,6 @@ export default function EmptyStatePage() {
           />
         </ComponentPlayground>
       </div>
-
       <div>
         <h2 className="text-xl font-semibold mb-3">Error State</h2>
         <p className="text-sm text-muted-foreground mb-4">Show when data fails to load, with a retry action.</p>
@@ -160,23 +143,16 @@ export default function EmptyStatePage() {
           />
         </ComponentPlayground>
       </div>
-
       <div>
         <h2 className="text-xl font-semibold mb-3">Props</h2>
-        <div className="overflow-x-auto">
-          <table className="w-full text-sm">
-            <thead><tr className="border-b"><th className="text-left py-2 pr-4">Prop</th><th className="text-left py-2 pr-4">Type</th><th className="text-left py-2">Default</th></tr></thead>
-            <tbody>
-              <tr className="border-b"><td className="py-2 pr-4 font-mono text-xs">title</td><td className="py-2 pr-4 font-mono text-xs">string</td><td className="py-2 font-mono text-xs">required</td></tr>
-              <tr className="border-b"><td className="py-2 pr-4 font-mono text-xs">description</td><td className="py-2 pr-4 font-mono text-xs">string</td><td className="py-2 font-mono text-xs">—</td></tr>
-              <tr className="border-b"><td className="py-2 pr-4 font-mono text-xs">icon</td><td className="py-2 pr-4 font-mono text-xs">ReactNode</td><td className="py-2 font-mono text-xs">—</td></tr>
-              <tr className="border-b"><td className="py-2 pr-4 font-mono text-xs">action</td><td className="py-2 pr-4 font-mono text-xs">{`{ label: string; onPress: () => void }`}</td><td className="py-2 font-mono text-xs">—</td></tr>
-              <tr className="border-b"><td className="py-2 pr-4 font-mono text-xs">className</td><td className="py-2 pr-4 font-mono text-xs">string</td><td className="py-2 font-mono text-xs">—</td></tr>
-            </tbody>
-          </table>
-        </div>
+        <PropsTable props={[
+          { name: "title", type: "string", default: "required" },
+          { name: "description", type: "string" },
+          { name: "icon", type: "ReactNode" },
+          { name: "action", type: "{ label: string; onPress: () => void }" },
+          { name: "className", type: "string" },
+        ]} />
       </div>
-
       <div>
         <h2 className="text-xl font-semibold mb-3">Source</h2>
         <CodeBlock code={sourceCode} title="components/ui/empty-state.tsx" />

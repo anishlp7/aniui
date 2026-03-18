@@ -1,11 +1,10 @@
 "use client";
-
 import { PreviewSeparator } from "@/components/preview/separator";
 import { ComponentPlayground } from "@/components/component-playground";
 import { CodeBlock } from "@/components/code-block";
+import { PropsTable } from "@/components/props-table";
 
 const installCode = `npx aniui add separator`;
-
 const usageCode = `import { Separator } from "@/components/ui/separator";
 
 export function MyScreen() {
@@ -17,10 +16,8 @@ export function MyScreen() {
     </View>
   );
 }`;
-
 const orientationCode = `<Separator orientation="horizontal" />
 <Separator orientation="vertical" />`;
-
 const sourceCode = `import React from "react";
 import { View } from "react-native";
 import { cn } from "@/lib/utils";
@@ -29,7 +26,6 @@ export interface SeparatorProps extends React.ComponentPropsWithoutRef<typeof Vi
   className?: string;
   orientation?: "horizontal" | "vertical";
 }
-
 export function Separator({ orientation = "horizontal", className, ...props }: SeparatorProps) {
   return (
     <View
@@ -42,7 +38,6 @@ export function Separator({ orientation = "horizontal", className, ...props }: S
     />
   );
 }`;
-
 export default function SeparatorPage() {
   return (
     <div className="space-y-10">
@@ -53,7 +48,6 @@ export default function SeparatorPage() {
           Visual divider for separating content sections.
         </p>
       </div>
-
       {/* Preview */}
       <ComponentPlayground code={usageCode}>
         <div className="space-y-4 w-full max-w-sm">
@@ -62,19 +56,16 @@ export default function SeparatorPage() {
           <p className="text-sm text-foreground">Below the separator</p>
         </div>
       </ComponentPlayground>
-
       {/* Installation */}
       <div className="space-y-4">
         <h2 className="text-2xl font-semibold tracking-tight text-foreground">Installation</h2>
         <CodeBlock code={installCode} />
       </div>
-
       {/* Usage */}
       <div className="space-y-4">
         <h2 className="text-2xl font-semibold tracking-tight text-foreground">Usage</h2>
         <CodeBlock code={usageCode} title="app/index.tsx" />
       </div>
-
       {/* Orientation */}
       <div className="space-y-4">
         <h2 className="text-2xl font-semibold tracking-tight text-foreground">Orientation</h2>
@@ -91,38 +82,17 @@ export default function SeparatorPage() {
           </div>
         </ComponentPlayground>
       </div>
-
       {/* Props */}
       <div className="space-y-4">
         <h2 className="text-2xl font-semibold tracking-tight text-foreground">Props</h2>
-        <div className="overflow-x-auto rounded-lg border border-border">
-          <table className="w-full text-sm">
-            <thead>
-              <tr className="border-b border-border bg-secondary/50">
-                <th className="px-4 py-3 text-left font-medium text-foreground">Prop</th>
-                <th className="px-4 py-3 text-left font-medium text-foreground">Type</th>
-                <th className="px-4 py-3 text-left font-medium text-foreground">Default</th>
-              </tr>
-            </thead>
-            <tbody className="text-muted-foreground">
-              <tr className="border-b border-border">
-                <td className="px-4 py-3 font-mono text-xs text-foreground">orientation</td>
-                <td className="px-4 py-3 font-mono text-xs">{`"horizontal" | "vertical"`}</td>
-                <td className="px-4 py-3 font-mono text-xs">{`"horizontal"`}</td>
-              </tr>
-              <tr>
-                <td className="px-4 py-3 font-mono text-xs text-foreground">className</td>
-                <td className="px-4 py-3 font-mono text-xs">string</td>
-                <td className="px-4 py-3 font-mono text-xs">-</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
+        <PropsTable props={[
+          { name: "orientation", type: "\"horizontal\" | \"vertical\"", default: "\"horizontal\"" },
+          { name: "className", type: "string" },
+        ]} />
         <p className="text-sm text-muted-foreground">
           Also accepts all <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">View</code> props from React Native.
         </p>
       </div>
-
       {/* Source */}
       <div className="space-y-4">
         <h2 className="text-2xl font-semibold tracking-tight text-foreground">Source</h2>

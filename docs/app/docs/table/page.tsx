@@ -1,11 +1,10 @@
 "use client";
-
 import { PreviewTable } from "@/components/preview/table";
 import { ComponentPlayground } from "@/components/component-playground";
 import { CodeBlock } from "@/components/code-block";
+import { PropsTable } from "@/components/props-table";
 
 const installCode = `npx aniui add table`;
-
 const usageCode = `import {
   Table,
   TableHeader,
@@ -40,7 +39,6 @@ export function MyScreen() {
     </Table>
   );
 }`;
-
 const previewCode = `<Table>
   <TableHeader>
     <TableRow>
@@ -67,14 +65,11 @@ const previewCode = `<Table>
     </TableRow>
   </TableBody>
 </Table>`;
-
 const sourceCode = `import React from "react";
 import { View, Text, ScrollView } from "react-native";
 import { cn } from "@/lib/utils";
-
 type ViewProps = React.ComponentPropsWithoutRef<typeof View> & { className?: string; children?: React.ReactNode };
 type TextProps = React.ComponentPropsWithoutRef<typeof Text> & { className?: string };
-
 export function Table({ className, children, ...props }: React.ComponentPropsWithoutRef<typeof ScrollView> & { className?: string; children?: React.ReactNode }) {
   return (
     <ScrollView horizontal className={cn("rounded-md border border-border", className)} {...props}>
@@ -82,31 +77,25 @@ export function Table({ className, children, ...props }: React.ComponentPropsWit
     </ScrollView>
   );
 }
-
 export function TableHeader({ className, ...props }: ViewProps) {
   return <View className={cn("bg-muted/50", className)} {...props} />;
 }
-
 export function TableBody({ className, ...props }: ViewProps) {
   return <View className={cn("", className)} {...props} />;
 }
-
 export function TableRow({ className, ...props }: ViewProps) {
   return <View className={cn("flex-row border-b border-border", className)} {...props} />;
 }
-
 export function TableHead({ className, ...props }: TextProps) {
   return (
     <Text className={cn("flex-1 px-4 py-3 text-sm font-medium text-muted-foreground", className)} {...props} />
   );
 }
-
 export function TableCell({ className, ...props }: TextProps) {
   return (
     <Text className={cn("flex-1 px-4 py-3 text-sm text-foreground", className)} {...props} />
   );
 }`;
-
 export default function TablePage() {
   return (
     <div className="space-y-10">
@@ -117,127 +106,56 @@ export default function TablePage() {
           A compound table component with header, body, rows, and cells for displaying structured data.
         </p>
       </div>
-
       {/* Preview */}
-      <ComponentPlayground code={previewCode}>
-        <div className="flex flex-wrap items-center gap-4">
-          <PreviewTable />
-        </div>
+      <ComponentPlayground code={previewCode} variant="inline">
+        <PreviewTable />
       </ComponentPlayground>
-
       {/* Installation */}
       <div className="space-y-4">
         <h2 className="text-2xl font-semibold tracking-tight text-foreground">Installation</h2>
         <CodeBlock code={installCode} />
       </div>
-
       {/* Usage */}
       <div className="space-y-4">
         <h2 className="text-2xl font-semibold tracking-tight text-foreground">Usage</h2>
         <CodeBlock code={usageCode} title="app/index.tsx" />
       </div>
-
       {/* Examples */}
       <div className="space-y-4">
         <h2 className="text-2xl font-semibold tracking-tight text-foreground">Examples</h2>
-
         <h3 className="text-lg font-medium text-foreground">Default</h3>
-        <ComponentPlayground code={previewCode}>
-          <div className="flex flex-wrap items-center gap-3">
-            <PreviewTable />
-          </div>
+        <ComponentPlayground code={previewCode} variant="inline">
+          <PreviewTable />
         </ComponentPlayground>
       </div>
-
       {/* Props */}
       <div className="space-y-4">
         <h2 className="text-2xl font-semibold tracking-tight text-foreground">Props</h2>
-
         <h3 className="text-lg font-medium text-foreground">Table</h3>
-        <div className="overflow-x-auto rounded-lg border border-border">
-          <table className="w-full text-sm">
-            <thead>
-              <tr className="border-b border-border bg-secondary/50">
-                <th className="px-4 py-3 text-left font-medium text-foreground">Prop</th>
-                <th className="px-4 py-3 text-left font-medium text-foreground">Type</th>
-                <th className="px-4 py-3 text-left font-medium text-foreground">Default</th>
-              </tr>
-            </thead>
-            <tbody className="text-muted-foreground">
-              <tr className="border-b border-border">
-                <td className="px-4 py-3 font-mono text-xs text-foreground">className</td>
-                <td className="px-4 py-3 font-mono text-xs">string</td>
-                <td className="px-4 py-3 font-mono text-xs">-</td>
-              </tr>
-              <tr>
-                <td className="px-4 py-3 font-mono text-xs text-foreground">children</td>
-                <td className="px-4 py-3 font-mono text-xs">ReactNode</td>
-                <td className="px-4 py-3 font-mono text-xs">-</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
+        <PropsTable props={[
+          { name: "className", type: "string" },
+          { name: "children", type: "ReactNode" },
+        ]} />
         <p className="text-sm text-muted-foreground">
           Also accepts all <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">ScrollView</code> props from React Native.
         </p>
-
         <h3 className="text-lg font-medium text-foreground">TableHeader / TableBody / TableRow</h3>
-        <div className="overflow-x-auto rounded-lg border border-border">
-          <table className="w-full text-sm">
-            <thead>
-              <tr className="border-b border-border bg-secondary/50">
-                <th className="px-4 py-3 text-left font-medium text-foreground">Prop</th>
-                <th className="px-4 py-3 text-left font-medium text-foreground">Type</th>
-                <th className="px-4 py-3 text-left font-medium text-foreground">Default</th>
-              </tr>
-            </thead>
-            <tbody className="text-muted-foreground">
-              <tr className="border-b border-border">
-                <td className="px-4 py-3 font-mono text-xs text-foreground">className</td>
-                <td className="px-4 py-3 font-mono text-xs">string</td>
-                <td className="px-4 py-3 font-mono text-xs">-</td>
-              </tr>
-              <tr>
-                <td className="px-4 py-3 font-mono text-xs text-foreground">children</td>
-                <td className="px-4 py-3 font-mono text-xs">ReactNode</td>
-                <td className="px-4 py-3 font-mono text-xs">-</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
+        <PropsTable props={[
+          { name: "className", type: "string" },
+          { name: "children", type: "ReactNode" },
+        ]} />
         <p className="text-sm text-muted-foreground">
           Also accepts all <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">View</code> props from React Native.
         </p>
-
         <h3 className="text-lg font-medium text-foreground">TableHead / TableCell</h3>
-        <div className="overflow-x-auto rounded-lg border border-border">
-          <table className="w-full text-sm">
-            <thead>
-              <tr className="border-b border-border bg-secondary/50">
-                <th className="px-4 py-3 text-left font-medium text-foreground">Prop</th>
-                <th className="px-4 py-3 text-left font-medium text-foreground">Type</th>
-                <th className="px-4 py-3 text-left font-medium text-foreground">Default</th>
-              </tr>
-            </thead>
-            <tbody className="text-muted-foreground">
-              <tr className="border-b border-border">
-                <td className="px-4 py-3 font-mono text-xs text-foreground">className</td>
-                <td className="px-4 py-3 font-mono text-xs">string</td>
-                <td className="px-4 py-3 font-mono text-xs">-</td>
-              </tr>
-              <tr>
-                <td className="px-4 py-3 font-mono text-xs text-foreground">children</td>
-                <td className="px-4 py-3 font-mono text-xs">ReactNode</td>
-                <td className="px-4 py-3 font-mono text-xs">-</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
+        <PropsTable props={[
+          { name: "className", type: "string" },
+          { name: "children", type: "ReactNode" },
+        ]} />
         <p className="text-sm text-muted-foreground">
           Also accepts all <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">Text</code> props from React Native.
         </p>
       </div>
-
       {/* Source */}
       <div className="space-y-4">
         <h2 className="text-2xl font-semibold tracking-tight text-foreground">Source</h2>

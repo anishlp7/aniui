@@ -1,20 +1,17 @@
 "use client";
-
 import { PreviewBottomSheet } from "@/components/preview/bottom-sheet";
 import { ComponentPlayground } from "@/components/component-playground";
 import { CodeBlock } from "@/components/code-block";
+import { PropsTable } from "@/components/props-table";
 
 const installCode = `npx aniui add bottom-sheet`;
-
 const depInstallCode = `npx expo install @gorhom/bottom-sheet react-native-gesture-handler react-native-reanimated`;
-
 const usageCode = `import { BottomSheet } from "@/components/ui/bottom-sheet";
 import { useRef } from "react";
 import GorhomBottomSheet from "@gorhom/bottom-sheet";
 
 export function MyScreen() {
   const sheetRef = useRef<GorhomBottomSheet>(null);
-
   return (
     <>
       <Button onPress={() => sheetRef.current?.expand()}>
@@ -26,7 +23,6 @@ export function MyScreen() {
     </>
   );
 }`;
-
 const sourceCode = `import React, { forwardRef, useCallback } from "react";
 import { View } from "react-native";
 import GorhomBottomSheet, {
@@ -41,7 +37,6 @@ export interface BottomSheetProps extends Partial<GorhomProps> {
   children: React.ReactNode;
   snapPoints?: (string | number)[];
 }
-
 export const BottomSheet = forwardRef<GorhomBottomSheet, BottomSheetProps>(
   ({ className, children, snapPoints = ["25%", "50%"], ...props }, ref) => {
     const renderBackdrop = useCallback(
@@ -50,7 +45,6 @@ export const BottomSheet = forwardRef<GorhomBottomSheet, BottomSheetProps>(
       ),
       []
     );
-
     return (
       <GorhomBottomSheet
         ref={ref}
@@ -69,9 +63,7 @@ export const BottomSheet = forwardRef<GorhomBottomSheet, BottomSheetProps>(
     );
   }
 );
-
 BottomSheet.displayName = "BottomSheet";`;
-
 export default function BottomSheetPage() {
   return (
     <div className="space-y-10">
@@ -82,12 +74,10 @@ export default function BottomSheetPage() {
           Bottom sheet overlay powered by @gorhom/bottom-sheet.
         </p>
       </div>
-
       {/* Preview */}
       <ComponentPlayground code={usageCode}>
         <PreviewBottomSheet />
       </ComponentPlayground>
-
       {/* Installation */}
       <div className="space-y-4">
         <h2 className="text-2xl font-semibold tracking-tight text-foreground">Installation</h2>
@@ -100,49 +90,23 @@ export default function BottomSheetPage() {
           You also need to wrap your app with <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">GestureHandlerRootView</code> from <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">react-native-gesture-handler</code>.
         </p>
       </div>
-
       {/* Usage */}
       <div className="space-y-4">
         <h2 className="text-2xl font-semibold tracking-tight text-foreground">Usage</h2>
         <CodeBlock code={usageCode} title="app/index.tsx" />
       </div>
-
       {/* Props */}
       <div className="space-y-4">
         <h2 className="text-2xl font-semibold tracking-tight text-foreground">Props</h2>
-        <div className="overflow-x-auto rounded-lg border border-border">
-          <table className="w-full text-sm">
-            <thead>
-              <tr className="border-b border-border bg-secondary/50">
-                <th className="px-4 py-3 text-left font-medium text-foreground">Prop</th>
-                <th className="px-4 py-3 text-left font-medium text-foreground">Type</th>
-                <th className="px-4 py-3 text-left font-medium text-foreground">Default</th>
-              </tr>
-            </thead>
-            <tbody className="text-muted-foreground">
-              <tr className="border-b border-border">
-                <td className="px-4 py-3 font-mono text-xs text-foreground">snapPoints</td>
-                <td className="px-4 py-3 font-mono text-xs">{`(string | number)[]`}</td>
-                <td className="px-4 py-3 font-mono text-xs">{`["25%", "50%"]`}</td>
-              </tr>
-              <tr className="border-b border-border">
-                <td className="px-4 py-3 font-mono text-xs text-foreground">className</td>
-                <td className="px-4 py-3 font-mono text-xs">string</td>
-                <td className="px-4 py-3 font-mono text-xs">-</td>
-              </tr>
-              <tr>
-                <td className="px-4 py-3 font-mono text-xs text-foreground">children</td>
-                <td className="px-4 py-3 font-mono text-xs">React.ReactNode</td>
-                <td className="px-4 py-3 font-mono text-xs">required</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
+        <PropsTable props={[
+          { name: "snapPoints", type: "(string | number)[]", default: "[\"25%\", \"50%\"]" },
+          { name: "className", type: "string" },
+          { name: "children", type: "React.ReactNode", default: "required" },
+        ]} />
         <p className="text-sm text-muted-foreground">
           Also accepts all <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">@gorhom/bottom-sheet</code> props. Use a ref to control the sheet imperatively with <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">expand()</code>, <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">close()</code>, and <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">snapToIndex()</code>.
         </p>
       </div>
-
       {/* Source */}
       <div className="space-y-4">
         <h2 className="text-2xl font-semibold tracking-tight text-foreground">Source</h2>

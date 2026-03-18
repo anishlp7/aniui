@@ -1,11 +1,10 @@
 "use client";
-
 import { PreviewProgress } from "@/components/preview/progress";
 import { ComponentPlayground } from "@/components/component-playground";
 import { CodeBlock } from "@/components/code-block";
+import { PropsTable } from "@/components/props-table";
 
 const installCode = `npx aniui add progress`;
-
 const usageCode = `import { Progress } from "@/components/ui/progress";
 
 export function MyScreen() {
@@ -13,13 +12,11 @@ export function MyScreen() {
     <Progress value={60} />
   );
 }`;
-
 const examplesCode = `<Progress value={0} />
 <Progress value={25} />
 <Progress value={50} />
 <Progress value={75} />
 <Progress value={100} />`;
-
 const sourceCode = `import React from "react";
 import { View } from "react-native";
 import { cn } from "@/lib/utils";
@@ -29,10 +26,8 @@ export interface ProgressProps extends React.ComponentPropsWithoutRef<typeof Vie
   value?: number;
   indicatorClassName?: string;
 }
-
 export function Progress({ value = 0, className, indicatorClassName, ...props }: ProgressProps) {
   const clampedValue = Math.min(100, Math.max(0, value));
-
   return (
     <View
       className={cn("h-2 w-full overflow-hidden rounded-full bg-secondary", className)}
@@ -47,7 +42,6 @@ export function Progress({ value = 0, className, indicatorClassName, ...props }:
     </View>
   );
 }`;
-
 export default function ProgressPage() {
   return (
     <div className="space-y-10">
@@ -58,26 +52,22 @@ export default function ProgressPage() {
           Progress bar indicating completion percentage.
         </p>
       </div>
-
       {/* Preview */}
       <ComponentPlayground code={usageCode}>
         <div className="w-full max-w-sm">
           <PreviewProgress value={60} />
         </div>
       </ComponentPlayground>
-
       {/* Installation */}
       <div className="space-y-4">
         <h2 className="text-2xl font-semibold tracking-tight text-foreground">Installation</h2>
         <CodeBlock code={installCode} />
       </div>
-
       {/* Usage */}
       <div className="space-y-4">
         <h2 className="text-2xl font-semibold tracking-tight text-foreground">Usage</h2>
         <CodeBlock code={usageCode} title="app/index.tsx" />
       </div>
-
       {/* Examples */}
       <div className="space-y-4">
         <h2 className="text-2xl font-semibold tracking-tight text-foreground">Examples</h2>
@@ -106,43 +96,18 @@ export default function ProgressPage() {
           </div>
         </ComponentPlayground>
       </div>
-
       {/* Props */}
       <div className="space-y-4">
         <h2 className="text-2xl font-semibold tracking-tight text-foreground">Props</h2>
-        <div className="overflow-x-auto rounded-lg border border-border">
-          <table className="w-full text-sm">
-            <thead>
-              <tr className="border-b border-border bg-secondary/50">
-                <th className="px-4 py-3 text-left font-medium text-foreground">Prop</th>
-                <th className="px-4 py-3 text-left font-medium text-foreground">Type</th>
-                <th className="px-4 py-3 text-left font-medium text-foreground">Default</th>
-              </tr>
-            </thead>
-            <tbody className="text-muted-foreground">
-              <tr className="border-b border-border">
-                <td className="px-4 py-3 font-mono text-xs text-foreground">value</td>
-                <td className="px-4 py-3 font-mono text-xs">number</td>
-                <td className="px-4 py-3 font-mono text-xs">0</td>
-              </tr>
-              <tr className="border-b border-border">
-                <td className="px-4 py-3 font-mono text-xs text-foreground">className</td>
-                <td className="px-4 py-3 font-mono text-xs">string</td>
-                <td className="px-4 py-3 font-mono text-xs">-</td>
-              </tr>
-              <tr>
-                <td className="px-4 py-3 font-mono text-xs text-foreground">indicatorClassName</td>
-                <td className="px-4 py-3 font-mono text-xs">string</td>
-                <td className="px-4 py-3 font-mono text-xs">-</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
+        <PropsTable props={[
+          { name: "value", type: "number", default: "0" },
+          { name: "className", type: "string" },
+          { name: "indicatorClassName", type: "string" },
+        ]} />
         <p className="text-sm text-muted-foreground">
           Also accepts all <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">View</code> props from React Native. Value is clamped between 0 and 100.
         </p>
       </div>
-
       {/* Source */}
       <div className="space-y-4">
         <h2 className="text-2xl font-semibold tracking-tight text-foreground">Source</h2>

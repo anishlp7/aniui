@@ -1,26 +1,22 @@
 "use client";
-
 import { PreviewCheckbox } from "@/components/preview/checkbox";
 import { ComponentPlayground } from "@/components/component-playground";
 import { CodeBlock } from "@/components/code-block";
+import { PropsTable } from "@/components/props-table";
 
 const installCode = `npx aniui add checkbox`;
-
 const usageCode = `import { Checkbox } from "@/components/ui/checkbox";
 import { useState } from "react";
 
 export function MyScreen() {
   const [checked, setChecked] = useState(false);
-
   return (
     <Checkbox checked={checked} onCheckedChange={setChecked} />
   );
 }`;
-
 const statesCode = `<Checkbox checked={false} />
 <Checkbox checked={true} />
 <Checkbox disabled />`;
-
 const sourceCode = `import React from "react";
 import { Pressable, Text } from "react-native";
 import { cn } from "@/lib/utils";
@@ -30,7 +26,6 @@ export interface CheckboxProps extends React.ComponentPropsWithoutRef<typeof Pre
   checked?: boolean;
   onCheckedChange?: (checked: boolean) => void;
 }
-
 export function Checkbox({ checked = false, onCheckedChange, className, disabled, ...props }: CheckboxProps) {
   return (
     <Pressable
@@ -51,7 +46,6 @@ export function Checkbox({ checked = false, onCheckedChange, className, disabled
     </Pressable>
   );
 }`;
-
 export default function CheckboxPage() {
   return (
     <div className="space-y-10">
@@ -62,26 +56,22 @@ export default function CheckboxPage() {
           Checkbox with checked, unchecked, and disabled states.
         </p>
       </div>
-
       {/* Preview */}
       <ComponentPlayground code={usageCode}>
         <div className="flex flex-wrap items-center gap-4">
           <PreviewCheckbox />
         </div>
       </ComponentPlayground>
-
       {/* Installation */}
       <div className="space-y-4">
         <h2 className="text-2xl font-semibold tracking-tight text-foreground">Installation</h2>
         <CodeBlock code={installCode} />
       </div>
-
       {/* Usage */}
       <div className="space-y-4">
         <h2 className="text-2xl font-semibold tracking-tight text-foreground">Usage</h2>
         <CodeBlock code={usageCode} title="app/index.tsx" />
       </div>
-
       {/* States */}
       <div className="space-y-4">
         <h2 className="text-2xl font-semibold tracking-tight text-foreground">States</h2>
@@ -102,48 +92,19 @@ export default function CheckboxPage() {
           </div>
         </ComponentPlayground>
       </div>
-
       {/* Props */}
       <div className="space-y-4">
         <h2 className="text-2xl font-semibold tracking-tight text-foreground">Props</h2>
-        <div className="overflow-x-auto rounded-lg border border-border">
-          <table className="w-full text-sm">
-            <thead>
-              <tr className="border-b border-border bg-secondary/50">
-                <th className="px-4 py-3 text-left font-medium text-foreground">Prop</th>
-                <th className="px-4 py-3 text-left font-medium text-foreground">Type</th>
-                <th className="px-4 py-3 text-left font-medium text-foreground">Default</th>
-              </tr>
-            </thead>
-            <tbody className="text-muted-foreground">
-              <tr className="border-b border-border">
-                <td className="px-4 py-3 font-mono text-xs text-foreground">checked</td>
-                <td className="px-4 py-3 font-mono text-xs">boolean</td>
-                <td className="px-4 py-3 font-mono text-xs">false</td>
-              </tr>
-              <tr className="border-b border-border">
-                <td className="px-4 py-3 font-mono text-xs text-foreground">onCheckedChange</td>
-                <td className="px-4 py-3 font-mono text-xs">{`(checked: boolean) => void`}</td>
-                <td className="px-4 py-3 font-mono text-xs">-</td>
-              </tr>
-              <tr className="border-b border-border">
-                <td className="px-4 py-3 font-mono text-xs text-foreground">disabled</td>
-                <td className="px-4 py-3 font-mono text-xs">boolean</td>
-                <td className="px-4 py-3 font-mono text-xs">false</td>
-              </tr>
-              <tr>
-                <td className="px-4 py-3 font-mono text-xs text-foreground">className</td>
-                <td className="px-4 py-3 font-mono text-xs">string</td>
-                <td className="px-4 py-3 font-mono text-xs">-</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
+        <PropsTable props={[
+          { name: "checked", type: "boolean", default: "false" },
+          { name: "onCheckedChange", type: "(checked: boolean) => void" },
+          { name: "disabled", type: "boolean", default: "false" },
+          { name: "className", type: "string" },
+        ]} />
         <p className="text-sm text-muted-foreground">
           Also accepts all <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">Pressable</code> props from React Native.
         </p>
       </div>
-
       {/* Source */}
       <div className="space-y-4">
         <h2 className="text-2xl font-semibold tracking-tight text-foreground">Source</h2>

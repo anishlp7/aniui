@@ -1,31 +1,26 @@
 "use client";
-
 import { PreviewToggle } from "@/components/preview/toggle";
 import { ComponentPlayground } from "@/components/component-playground";
 import { CodeBlock } from "@/components/code-block";
+import { PropsTable } from "@/components/props-table";
 
 const installCode = `npx aniui add toggle`;
-
 const usageCode = `import { Toggle } from "@/components/ui/toggle";
 import { useState } from "react";
 
 export function MyScreen() {
   const [bold, setBold] = useState(false);
-
   return (
     <Toggle pressed={bold} onPressedChange={setBold}>
       B
     </Toggle>
   );
 }`;
-
 const variantsCode = `<Toggle variant="default" pressed={false}>Default</Toggle>
 <Toggle variant="outline" pressed={false}>Outline</Toggle>`;
-
 const sizesCode = `<Toggle size="sm">S</Toggle>
 <Toggle size="md">M</Toggle>
 <Toggle size="lg">L</Toggle>`;
-
 const sourceCode = `import React from "react";
 import { Pressable, Text } from "react-native";
 import { cva, type VariantProps } from "class-variance-authority";
@@ -48,7 +43,6 @@ const toggleVariants = cva(
     defaultVariants: { variant: "default", size: "md" },
   }
 );
-
 export interface ToggleProps
   extends React.ComponentPropsWithoutRef<typeof Pressable>,
     VariantProps<typeof toggleVariants> {
@@ -57,7 +51,6 @@ export interface ToggleProps
   onPressedChange?: (pressed: boolean) => void;
   children: React.ReactNode;
 }
-
 export function Toggle({
   pressed = false, onPressedChange, variant, size, className, children, ...props
 }: ToggleProps) {
@@ -82,7 +75,6 @@ export function Toggle({
     </Pressable>
   );
 }`;
-
 export default function TogglePage() {
   return (
     <div className="space-y-10">
@@ -93,26 +85,24 @@ export default function TogglePage() {
           A two-state button that can be toggled on or off.
         </p>
       </div>
-
       {/* Preview */}
       <ComponentPlayground code={usageCode}>
-        <div className="flex flex-wrap items-center gap-4">
-          <PreviewToggle>B</PreviewToggle>
+        <div className="flex items-center gap-2">
+          <PreviewToggle pressed={true}><span className="font-bold">B</span></PreviewToggle>
+          <PreviewToggle><span className="italic">I</span></PreviewToggle>
+          <PreviewToggle><span className="underline">U</span></PreviewToggle>
         </div>
       </ComponentPlayground>
-
       {/* Installation */}
       <div className="space-y-4">
         <h2 className="text-2xl font-semibold tracking-tight text-foreground">Installation</h2>
         <CodeBlock code={installCode} />
       </div>
-
       {/* Usage */}
       <div className="space-y-4">
         <h2 className="text-2xl font-semibold tracking-tight text-foreground">Usage</h2>
         <CodeBlock code={usageCode} title="app/index.tsx" />
       </div>
-
       {/* Variants */}
       <div className="space-y-4">
         <h2 className="text-2xl font-semibold tracking-tight text-foreground">Variants</h2>
@@ -123,7 +113,6 @@ export default function TogglePage() {
           </div>
         </ComponentPlayground>
       </div>
-
       {/* Sizes */}
       <div className="space-y-4">
         <h2 className="text-2xl font-semibold tracking-tight text-foreground">Sizes</h2>
@@ -135,58 +124,21 @@ export default function TogglePage() {
           </div>
         </ComponentPlayground>
       </div>
-
       {/* Props */}
       <div className="space-y-4">
         <h2 className="text-2xl font-semibold tracking-tight text-foreground">Props</h2>
-        <div className="overflow-x-auto rounded-lg border border-border">
-          <table className="w-full text-sm">
-            <thead>
-              <tr className="border-b border-border bg-secondary/50">
-                <th className="px-4 py-3 text-left font-medium text-foreground">Prop</th>
-                <th className="px-4 py-3 text-left font-medium text-foreground">Type</th>
-                <th className="px-4 py-3 text-left font-medium text-foreground">Default</th>
-              </tr>
-            </thead>
-            <tbody className="text-muted-foreground">
-              <tr className="border-b border-border">
-                <td className="px-4 py-3 font-mono text-xs text-foreground">variant</td>
-                <td className="px-4 py-3 font-mono text-xs">{`"default" | "outline"`}</td>
-                <td className="px-4 py-3 font-mono text-xs">{`"default"`}</td>
-              </tr>
-              <tr className="border-b border-border">
-                <td className="px-4 py-3 font-mono text-xs text-foreground">size</td>
-                <td className="px-4 py-3 font-mono text-xs">{`"sm" | "md" | "lg"`}</td>
-                <td className="px-4 py-3 font-mono text-xs">{`"md"`}</td>
-              </tr>
-              <tr className="border-b border-border">
-                <td className="px-4 py-3 font-mono text-xs text-foreground">pressed</td>
-                <td className="px-4 py-3 font-mono text-xs">boolean</td>
-                <td className="px-4 py-3 font-mono text-xs">false</td>
-              </tr>
-              <tr className="border-b border-border">
-                <td className="px-4 py-3 font-mono text-xs text-foreground">onPressedChange</td>
-                <td className="px-4 py-3 font-mono text-xs">{`(pressed: boolean) => void`}</td>
-                <td className="px-4 py-3 font-mono text-xs">-</td>
-              </tr>
-              <tr className="border-b border-border">
-                <td className="px-4 py-3 font-mono text-xs text-foreground">className</td>
-                <td className="px-4 py-3 font-mono text-xs">string</td>
-                <td className="px-4 py-3 font-mono text-xs">-</td>
-              </tr>
-              <tr>
-                <td className="px-4 py-3 font-mono text-xs text-foreground">children</td>
-                <td className="px-4 py-3 font-mono text-xs">ReactNode</td>
-                <td className="px-4 py-3 font-mono text-xs">required</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
+        <PropsTable props={[
+          { name: "variant", type: "\"default\" | \"outline\"", default: "\"default\"" },
+          { name: "size", type: "\"sm\" | \"md\" | \"lg\"", default: "\"md\"" },
+          { name: "pressed", type: "boolean", default: "false" },
+          { name: "onPressedChange", type: "(pressed: boolean) => void" },
+          { name: "className", type: "string" },
+          { name: "children", type: "ReactNode", default: "required" },
+        ]} />
         <p className="text-sm text-muted-foreground">
           Also accepts all <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">Pressable</code> props from React Native.
         </p>
       </div>
-
       {/* Source */}
       <div className="space-y-4">
         <h2 className="text-2xl font-semibold tracking-tight text-foreground">Source</h2>

@@ -1,29 +1,23 @@
 "use client";
-
 import React from "react";
 import { PreviewFAB } from "@/components/preview/fab";
 import { ComponentPlayground } from "@/components/component-playground";
 import { CodeBlock } from "@/components/code-block";
+import { PropsTable } from "@/components/props-table";
 
 const installCode = `npx aniui add fab`;
-
 const usageCode = `import { FAB } from "@/components/ui/fab";
 import { Ionicons } from "@expo/vector-icons";
-
 // Basic FAB (bottom-right by default)
 <FAB icon={<Ionicons name="add" size={24} color="white" />} onPress={() => {}} />`;
-
 const variantsCode = `<FAB variant="default" icon={<PlusIcon />} />
 <FAB variant="secondary" icon={<PlusIcon />} />
 <FAB variant="destructive" icon={<TrashIcon />} />`;
-
 const sizesCode = `<FAB size="sm" icon={<PlusIcon />} />
 <FAB size="md" icon={<PlusIcon />} />
 <FAB size="lg" icon={<PlusIcon />} />`;
-
 const extendedCode = `<FAB icon={<PlusIcon />} label="New Post" onPress={() => {}} />
 <FAB variant="secondary" icon={<EditIcon />} label="Compose" />`;
-
 const positionCode = `// Wrap your screen in a relative container
 <View className="flex-1 relative">
   {/* Screen content */}
@@ -31,7 +25,6 @@ const positionCode = `// Wrap your screen in a relative container
   <FAB position="bottom-left" icon={<MenuIcon />} />
   <FAB position="bottom-center" icon={<PlusIcon />} />
 </View>`;
-
 const sourceCode = `import React from "react";
 import { Pressable, Text } from "react-native";
 import { cva, type VariantProps } from "class-variance-authority";
@@ -62,7 +55,6 @@ const fabVariants = cva(
     defaultVariants: { variant: "default", size: "md", position: "bottom-right" },
   }
 );
-
 const fabTextVariants = cva("font-semibold", {
   variants: {
     variant: {
@@ -73,7 +65,6 @@ const fabTextVariants = cva("font-semibold", {
   },
   defaultVariants: { variant: "default" },
 });
-
 export interface FABProps
   extends React.ComponentPropsWithoutRef<typeof Pressable>,
     VariantProps<typeof fabVariants> {
@@ -81,7 +72,6 @@ export interface FABProps
   icon?: React.ReactNode;
   label?: string;
 }
-
 export function FAB({ variant, size, position, className, icon, label, ...props }: FABProps) {
   return (
     <Pressable className={cn(fabVariants({ variant, size: label ? "extended" : size, position }), className)} accessible={true} accessibilityRole="button" accessibilityLabel={label ?? "Action button"} {...props}>
@@ -90,7 +80,6 @@ export function FAB({ variant, size, position, className, icon, label, ...props 
     </Pressable>
   );
 }`;
-
 function PlusIcon({ className }: { className?: string }) {
   return (
     <svg className={className ?? "h-6 w-6"} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
@@ -98,7 +87,6 @@ function PlusIcon({ className }: { className?: string }) {
     </svg>
   );
 }
-
 function EditIcon() {
   return (
     <svg className="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -106,7 +94,6 @@ function EditIcon() {
     </svg>
   );
 }
-
 function TrashIcon() {
   return (
     <svg className="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -114,7 +101,6 @@ function TrashIcon() {
     </svg>
   );
 }
-
 export default function FABPage() {
   return (
     <div className="space-y-12">
@@ -122,16 +108,13 @@ export default function FABPage() {
         <h1 className="text-3xl font-bold mb-2">FAB</h1>
         <p className="text-muted-foreground text-lg">A floating action button for primary screen actions. Positions itself absolutely within its container.</p>
       </div>
-
       <ComponentPlayground code={usageCode}>
         <PreviewFAB />
       </ComponentPlayground>
-
       <div>
         <h2 className="text-xl font-semibold mb-3">Installation</h2>
         <CodeBlock code={installCode} />
       </div>
-
       <div>
         <h2 className="text-xl font-semibold mb-3">Variants</h2>
         <ComponentPlayground code={variantsCode}>
@@ -142,7 +125,6 @@ export default function FABPage() {
           </div>
         </ComponentPlayground>
       </div>
-
       <div>
         <h2 className="text-xl font-semibold mb-3">Sizes</h2>
         <ComponentPlayground code={sizesCode}>
@@ -153,7 +135,6 @@ export default function FABPage() {
           </div>
         </ComponentPlayground>
       </div>
-
       <div>
         <h2 className="text-xl font-semibold mb-3">Extended FAB</h2>
         <p className="text-sm text-muted-foreground mb-4">Add a label for more descriptive actions. The FAB automatically switches to the extended size.</p>
@@ -164,30 +145,22 @@ export default function FABPage() {
           </div>
         </ComponentPlayground>
       </div>
-
       <div>
         <h2 className="text-xl font-semibold mb-3">Positioning</h2>
         <p className="text-sm text-muted-foreground mb-4">The FAB positions itself absolutely. Wrap your screen in a <code>relative</code> container.</p>
         <CodeBlock code={positionCode} title="screen.tsx" />
       </div>
-
       <div>
         <h2 className="text-xl font-semibold mb-3">Props</h2>
-        <div className="overflow-x-auto">
-          <table className="w-full text-sm">
-            <thead><tr className="border-b"><th className="text-left py-2 pr-4">Prop</th><th className="text-left py-2 pr-4">Type</th><th className="text-left py-2">Default</th></tr></thead>
-            <tbody>
-              <tr className="border-b"><td className="py-2 pr-4 font-mono text-xs">variant</td><td className="py-2 pr-4 font-mono text-xs">{`"default" | "secondary" | "destructive"`}</td><td className="py-2 font-mono text-xs">{`"default"`}</td></tr>
-              <tr className="border-b"><td className="py-2 pr-4 font-mono text-xs">size</td><td className="py-2 pr-4 font-mono text-xs">{`"sm" | "md" | "lg"`}</td><td className="py-2 font-mono text-xs">{`"md"`}</td></tr>
-              <tr className="border-b"><td className="py-2 pr-4 font-mono text-xs">position</td><td className="py-2 pr-4 font-mono text-xs">{`"bottom-right" | "bottom-left" | "bottom-center" | "none"`}</td><td className="py-2 font-mono text-xs">{`"bottom-right"`}</td></tr>
-              <tr className="border-b"><td className="py-2 pr-4 font-mono text-xs">icon</td><td className="py-2 pr-4 font-mono text-xs">ReactNode</td><td className="py-2 font-mono text-xs">—</td></tr>
-              <tr className="border-b"><td className="py-2 pr-4 font-mono text-xs">label</td><td className="py-2 pr-4 font-mono text-xs">string</td><td className="py-2 font-mono text-xs">—</td></tr>
-              <tr className="border-b"><td className="py-2 pr-4 font-mono text-xs">className</td><td className="py-2 pr-4 font-mono text-xs">string</td><td className="py-2 font-mono text-xs">—</td></tr>
-            </tbody>
-          </table>
-        </div>
+        <PropsTable props={[
+          { name: "variant", type: "\"default\" | \"secondary\" | \"destructive\"", default: "\"default\"" },
+          { name: "size", type: "\"sm\" | \"md\" | \"lg\"", default: "\"md\"" },
+          { name: "position", type: "\"bottom-right\" | \"bottom-left\" | \"bottom-center\" | \"none\"", default: "\"bottom-right\"" },
+          { name: "icon", type: "ReactNode" },
+          { name: "label", type: "string" },
+          { name: "className", type: "string" },
+        ]} />
       </div>
-
       <div>
         <h2 className="text-xl font-semibold mb-3">Source</h2>
         <CodeBlock code={sourceCode} title="components/ui/fab.tsx" />

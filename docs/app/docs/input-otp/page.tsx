@@ -1,17 +1,15 @@
 "use client";
-
 import { PreviewInputOTP } from "@/components/preview/input-otp";
 import { ComponentPlayground } from "@/components/component-playground";
 import { CodeBlock } from "@/components/code-block";
+import { PropsTable } from "@/components/props-table";
 
 const installCode = `npx aniui add input-otp`;
-
 const usageCode = `import { InputOTP } from "@/components/ui/input-otp";
 import { useState } from "react";
 
 export function MyScreen() {
   const [otp, setOtp] = useState("");
-
   return (
     <InputOTP
       length={6}
@@ -20,11 +18,8 @@ export function MyScreen() {
     />
   );
 }`;
-
 const defaultCode = `<InputOTP length={6} value={otp} onValueChange={setOtp} />`;
-
 const fourDigitCode = `<InputOTP length={4} value={pin} onValueChange={setPin} />`;
-
 const sourceCode = `import React, { useRef, useState } from "react";
 import { View, TextInput } from "react-native";
 import { cn } from "@/lib/utils";
@@ -35,12 +30,10 @@ export interface InputOTPProps extends React.ComponentPropsWithoutRef<typeof Vie
   value?: string;
   onValueChange?: (value: string) => void;
 }
-
 export function InputOTP({ length = 6, value = "", onValueChange, className, ...props }: InputOTPProps) {
   const refs = useRef<(TextInput | null)[]>([]);
   const [focused, setFocused] = useState(0);
   const digits = value.padEnd(length, "").slice(0, length).split("");
-
   const handleChange = (text: string, index: number) => {
     const char = text.slice(-1);
     const next = [...digits];
@@ -50,13 +43,11 @@ export function InputOTP({ length = 6, value = "", onValueChange, className, ...
       refs.current[index + 1]?.focus();
     }
   };
-
   const handleKeyPress = (key: string, index: number) => {
     if (key === "Backspace" && !digits[index] && index > 0) {
       refs.current[index - 1]?.focus();
     }
   };
-
   return (
     <View className={cn("flex-row gap-2", className)} accessibilityRole="none" {...props}>
       {digits.map((digit, i) => (
@@ -81,7 +72,6 @@ export function InputOTP({ length = 6, value = "", onValueChange, className, ...
     </View>
   );
 }`;
-
 export default function InputOtpPage() {
   return (
     <div className="space-y-10">
@@ -92,86 +82,53 @@ export default function InputOtpPage() {
           A one-time password input component with auto-focus and backspace navigation.
         </p>
       </div>
-
       {/* Preview */}
       <ComponentPlayground code={defaultCode}>
-        <div className="flex flex-wrap items-center gap-4">
-          <PreviewInputOTP />
+        <div className="flex flex-col items-center gap-3 w-full">
+          <p className="text-sm font-medium text-foreground">Enter verification code</p>
+          <PreviewInputOTP length={6} value="38" />
+          <p className="text-xs text-muted-foreground">We sent a code to your email</p>
         </div>
       </ComponentPlayground>
-
       {/* Installation */}
       <div className="space-y-4">
         <h2 className="text-2xl font-semibold tracking-tight text-foreground">Installation</h2>
         <CodeBlock code={installCode} />
       </div>
-
       {/* Usage */}
       <div className="space-y-4">
         <h2 className="text-2xl font-semibold tracking-tight text-foreground">Usage</h2>
         <CodeBlock code={usageCode} title="app/index.tsx" />
       </div>
-
       {/* Examples */}
       <div className="space-y-4">
         <h2 className="text-2xl font-semibold tracking-tight text-foreground">Examples</h2>
-
-        <h3 className="text-lg font-medium text-foreground">Default (6-digit)</h3>
+        <h3 className="text-lg font-medium text-foreground">6-digit verification code</h3>
         <ComponentPlayground code={defaultCode}>
-          <div className="flex flex-wrap items-center gap-3">
-            <PreviewInputOTP />
+          <div className="flex flex-col items-center gap-2 w-full">
+            <PreviewInputOTP length={6} value="492817" />
           </div>
         </ComponentPlayground>
-
-        <h3 className="text-lg font-medium text-foreground">4-digit OTP</h3>
+        <h3 className="text-lg font-medium text-foreground mt-4">4-digit PIN</h3>
         <ComponentPlayground code={fourDigitCode}>
-          <div className="flex flex-wrap items-center gap-3">
-            <PreviewInputOTP length={4} />
+          <div className="flex flex-col items-center gap-2 w-full">
+            <PreviewInputOTP length={4} value="1738" />
           </div>
         </ComponentPlayground>
       </div>
-
       {/* Props */}
       <div className="space-y-4">
         <h2 className="text-2xl font-semibold tracking-tight text-foreground">Props</h2>
-        <div className="overflow-x-auto rounded-lg border border-border">
-          <table className="w-full text-sm">
-            <thead>
-              <tr className="border-b border-border bg-secondary/50">
-                <th className="px-4 py-3 text-left font-medium text-foreground">Prop</th>
-                <th className="px-4 py-3 text-left font-medium text-foreground">Type</th>
-                <th className="px-4 py-3 text-left font-medium text-foreground">Default</th>
-              </tr>
-            </thead>
-            <tbody className="text-muted-foreground">
-              <tr className="border-b border-border">
-                <td className="px-4 py-3 font-mono text-xs text-foreground">length</td>
-                <td className="px-4 py-3 font-mono text-xs">number</td>
-                <td className="px-4 py-3 font-mono text-xs">6</td>
-              </tr>
-              <tr className="border-b border-border">
-                <td className="px-4 py-3 font-mono text-xs text-foreground">value</td>
-                <td className="px-4 py-3 font-mono text-xs">string</td>
-                <td className="px-4 py-3 font-mono text-xs">{`""`}</td>
-              </tr>
-              <tr className="border-b border-border">
-                <td className="px-4 py-3 font-mono text-xs text-foreground">onValueChange</td>
-                <td className="px-4 py-3 font-mono text-xs">{`(value: string) => void`}</td>
-                <td className="px-4 py-3 font-mono text-xs">-</td>
-              </tr>
-              <tr>
-                <td className="px-4 py-3 font-mono text-xs text-foreground">className</td>
-                <td className="px-4 py-3 font-mono text-xs">string</td>
-                <td className="px-4 py-3 font-mono text-xs">-</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
+        <PropsTable props={[
+          { name: "length", type: "number", default: "6" },
+          { name: "value", type: "string", default: "\"\"" },
+          { name: "onValueChange", type: "(value: string) => void" },
+          { name: "className", type: "string" },
+        ]} />
         <p className="text-sm text-muted-foreground">
           Also accepts all <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">View</code> props from React Native.
         </p>
       </div>
-
       {/* Source */}
       <div className="space-y-4">
         <h2 className="text-2xl font-semibold tracking-tight text-foreground">Source</h2>

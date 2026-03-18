@@ -1,17 +1,15 @@
 "use client";
-
 import { PreviewCalendar } from "@/components/preview/calendar";
 import { ComponentPlayground } from "@/components/component-playground";
 import { CodeBlock } from "@/components/code-block";
 import React, { useState } from "react";
+import { PropsTable } from "@/components/props-table";
 
 const installCode = `npx aniui add calendar`;
-
 const usageCode = `import { Calendar } from "@/components/ui/calendar";
 
 export function MyScreen() {
   const [date, setDate] = useState<Date | undefined>();
-
   return (
     <Calendar
       selected={date}
@@ -19,7 +17,6 @@ export function MyScreen() {
     />
   );
 }`;
-
 const rangeCode = `<Calendar
   rangeStart={start}
   rangeEnd={end}
@@ -28,14 +25,12 @@ const rangeCode = `<Calendar
     setEnd(e);
   }}
 />`;
-
 const constrainedCode = `<Calendar
   selected={date}
   onSelect={setDate}
   min={new Date(2024, 0, 1)}
   max={new Date(2024, 11, 31)}
 />`;
-
 const sourceCode = `import React, { useState } from "react";
 import { View, Text, Pressable } from "react-native";
 import { cn } from "@/lib/utils";
@@ -50,10 +45,8 @@ export interface CalendarProps {
   min?: Date;
   max?: Date;
 }
-
 const DAYS = ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"];
 const same = (a: Date, b: Date) => a.getFullYear() === b.getFullYear() && a.getMonth() === b.getMonth() && a.getDate() === b.getDate();
-
 export function Calendar({ className, selected, onSelect, rangeStart, rangeEnd, onRangeChange, min, max }: CalendarProps) {
   const [viewing, setViewing] = useState(() => selected ?? rangeStart ?? new Date());
   const year = viewing.getFullYear(), month = viewing.getMonth();
@@ -61,7 +54,6 @@ export function Calendar({ className, selected, onSelect, rangeStart, rangeEnd, 
   const daysInMonth = new Date(year, month + 1, 0).getDate();
   const cells: (number | null)[] = [...Array(firstDay).fill(null), ...Array.from({ length: daysInMonth }, (_, i) => i + 1)];
   const label = new Date(year, month).toLocaleString("default", { month: "long", year: "numeric" });
-
   const handlePress = (day: number) => {
     const date = new Date(year, month, day);
     if ((min && date < min) || (max && date > max)) return;
@@ -71,7 +63,6 @@ export function Calendar({ className, selected, onSelect, rangeStart, rangeEnd, 
     }
     onSelect?.(date);
   };
-
   return (
     <View className={cn("rounded-lg bg-background p-3", className)}>
       <View className="flex-row items-center justify-between mb-3">
@@ -108,11 +99,9 @@ export function Calendar({ className, selected, onSelect, rangeStart, rangeEnd, 
     </View>
   );
 }`;
-
 function RangeDemo() {
   const [start, setStart] = useState<Date | undefined>();
   const [end, setEnd] = useState<Date | undefined>();
-
   return (
     <div className="w-full">
       <PreviewCalendar
@@ -126,7 +115,6 @@ function RangeDemo() {
     </div>
   );
 }
-
 export default function CalendarPage() {
   return (
     <div className="space-y-10">
@@ -137,24 +125,20 @@ export default function CalendarPage() {
           A month grid calendar with single date and range selection.
         </p>
       </div>
-
       {/* Preview */}
       <ComponentPlayground code={usageCode}>
         <PreviewCalendar />
       </ComponentPlayground>
-
       {/* Installation */}
       <div className="space-y-4">
         <h2 className="text-2xl font-semibold tracking-tight text-foreground">Installation</h2>
         <CodeBlock code={installCode} />
       </div>
-
       {/* Usage */}
       <div className="space-y-4">
         <h2 className="text-2xl font-semibold tracking-tight text-foreground">Usage</h2>
         <CodeBlock code={usageCode} title="app/index.tsx" />
       </div>
-
       {/* Range Selection */}
       <div className="space-y-4">
         <h2 className="text-2xl font-semibold tracking-tight text-foreground">Range Selection</h2>
@@ -162,65 +146,20 @@ export default function CalendarPage() {
           <RangeDemo />
         </ComponentPlayground>
       </div>
-
       {/* Props */}
       <div className="space-y-4">
         <h2 className="text-2xl font-semibold tracking-tight text-foreground">Props</h2>
-        <div className="overflow-x-auto rounded-lg border border-border">
-          <table className="w-full text-sm">
-            <thead>
-              <tr className="border-b border-border bg-secondary/50">
-                <th className="px-4 py-3 text-left font-medium text-foreground">Prop</th>
-                <th className="px-4 py-3 text-left font-medium text-foreground">Type</th>
-                <th className="px-4 py-3 text-left font-medium text-foreground">Default</th>
-              </tr>
-            </thead>
-            <tbody className="text-muted-foreground">
-              <tr className="border-b border-border">
-                <td className="px-4 py-3 font-mono text-xs text-foreground">selected</td>
-                <td className="px-4 py-3 font-mono text-xs">Date</td>
-                <td className="px-4 py-3 font-mono text-xs">-</td>
-              </tr>
-              <tr className="border-b border-border">
-                <td className="px-4 py-3 font-mono text-xs text-foreground">onSelect</td>
-                <td className="px-4 py-3 font-mono text-xs">{`(date: Date) => void`}</td>
-                <td className="px-4 py-3 font-mono text-xs">-</td>
-              </tr>
-              <tr className="border-b border-border">
-                <td className="px-4 py-3 font-mono text-xs text-foreground">rangeStart</td>
-                <td className="px-4 py-3 font-mono text-xs">Date</td>
-                <td className="px-4 py-3 font-mono text-xs">-</td>
-              </tr>
-              <tr className="border-b border-border">
-                <td className="px-4 py-3 font-mono text-xs text-foreground">rangeEnd</td>
-                <td className="px-4 py-3 font-mono text-xs">Date</td>
-                <td className="px-4 py-3 font-mono text-xs">-</td>
-              </tr>
-              <tr className="border-b border-border">
-                <td className="px-4 py-3 font-mono text-xs text-foreground">onRangeChange</td>
-                <td className="px-4 py-3 font-mono text-xs">{`(start: Date, end: Date | undefined) => void`}</td>
-                <td className="px-4 py-3 font-mono text-xs">-</td>
-              </tr>
-              <tr className="border-b border-border">
-                <td className="px-4 py-3 font-mono text-xs text-foreground">min</td>
-                <td className="px-4 py-3 font-mono text-xs">Date</td>
-                <td className="px-4 py-3 font-mono text-xs">-</td>
-              </tr>
-              <tr className="border-b border-border">
-                <td className="px-4 py-3 font-mono text-xs text-foreground">max</td>
-                <td className="px-4 py-3 font-mono text-xs">Date</td>
-                <td className="px-4 py-3 font-mono text-xs">-</td>
-              </tr>
-              <tr>
-                <td className="px-4 py-3 font-mono text-xs text-foreground">className</td>
-                <td className="px-4 py-3 font-mono text-xs">string</td>
-                <td className="px-4 py-3 font-mono text-xs">-</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
+        <PropsTable props={[
+          { name: "selected", type: "Date" },
+          { name: "onSelect", type: "(date: Date) => void" },
+          { name: "rangeStart", type: "Date" },
+          { name: "rangeEnd", type: "Date" },
+          { name: "onRangeChange", type: "(start: Date, end: Date | undefined) => void" },
+          { name: "min", type: "Date" },
+          { name: "max", type: "Date" },
+          { name: "className", type: "string" },
+        ]} />
       </div>
-
       {/* Source */}
       <div className="space-y-4">
         <h2 className="text-2xl font-semibold tracking-tight text-foreground">Source</h2>

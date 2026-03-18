@@ -1,16 +1,14 @@
 "use client";
-
 import { PreviewToggleGroup, PreviewToggleGroupItem } from "@/components/preview/toggle-group";
 import { ComponentPlayground } from "@/components/component-playground";
 import { CodeBlock } from "@/components/code-block";
+import { PropsTable } from "@/components/props-table";
 
 const installCode = `npx aniui add toggle-group`;
-
 const usageCode = `import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 
 export function MyScreen() {
   const [value, setValue] = React.useState("center");
-
   return (
     <ToggleGroup value={value} onValueChange={setValue}>
       <ToggleGroupItem value="left">Left</ToggleGroupItem>
@@ -19,13 +17,11 @@ export function MyScreen() {
     </ToggleGroup>
   );
 }`;
-
 const exampleCode = `<ToggleGroup value={value} onValueChange={setValue}>
   <ToggleGroupItem value="left">Left</ToggleGroupItem>
   <ToggleGroupItem value="center">Center</ToggleGroupItem>
   <ToggleGroupItem value="right">Right</ToggleGroupItem>
 </ToggleGroup>`;
-
 const sourceCode = `import React, { createContext, useContext } from "react";
 import { View, Pressable, Text } from "react-native";
 import { cva, type VariantProps } from "class-variance-authority";
@@ -48,10 +44,8 @@ const itemVariants = cva(
     defaultVariants: { variant: "default", size: "md" },
   }
 );
-
 type GroupCtx = { value: string; onValueChange: (v: string) => void };
 const Ctx = createContext<GroupCtx>({ value: "", onValueChange: () => {} });
-
 export interface ToggleGroupProps
   extends React.ComponentPropsWithoutRef<typeof View>,
     VariantProps<typeof itemVariants> {
@@ -60,7 +54,6 @@ export interface ToggleGroupProps
   onValueChange: (value: string) => void;
   children: React.ReactNode;
 }
-
 export function ToggleGroup({ value, onValueChange, variant, size, className, children, ...props }: ToggleGroupProps) {
   return (
     <Ctx.Provider value={{ value, onValueChange }}>
@@ -70,13 +63,11 @@ export function ToggleGroup({ value, onValueChange, variant, size, className, ch
     </Ctx.Provider>
   );
 }
-
 export interface ToggleGroupItemProps extends React.ComponentPropsWithoutRef<typeof Pressable> {
   className?: string;
   value: string;
   children: React.ReactNode;
 }
-
 export function ToggleGroupItem({ value, className, children, ...props }: ToggleGroupItemProps) {
   const { value: selected, onValueChange } = useContext(Ctx);
   const active = selected === value;
@@ -97,7 +88,6 @@ export function ToggleGroupItem({ value, className, children, ...props }: Toggle
     </Pressable>
   );
 }`;
-
 export default function ToggleGroupPage() {
   return (
     <div className="space-y-10">
@@ -108,36 +98,32 @@ export default function ToggleGroupPage() {
           A group of toggle items where only one can be active at a time, perfect for selection controls like text alignment.
         </p>
       </div>
-
       {/* Preview */}
       <ComponentPlayground code={usageCode}>
         <div className="flex flex-wrap items-center gap-4">
-          <PreviewToggleGroup>
+          <PreviewToggleGroup value="center">
             <PreviewToggleGroupItem value="left">Left</PreviewToggleGroupItem>
             <PreviewToggleGroupItem value="center">Center</PreviewToggleGroupItem>
             <PreviewToggleGroupItem value="right">Right</PreviewToggleGroupItem>
           </PreviewToggleGroup>
         </div>
       </ComponentPlayground>
-
       {/* Installation */}
       <div className="space-y-4">
         <h2 className="text-2xl font-semibold tracking-tight text-foreground">Installation</h2>
         <CodeBlock code={installCode} />
       </div>
-
       {/* Usage */}
       <div className="space-y-4">
         <h2 className="text-2xl font-semibold tracking-tight text-foreground">Usage</h2>
         <CodeBlock code={usageCode} title="app/index.tsx" />
       </div>
-
       {/* Examples */}
       <div className="space-y-4">
         <h2 className="text-2xl font-semibold tracking-tight text-foreground">Examples</h2>
         <ComponentPlayground code={exampleCode}>
           <div className="flex flex-wrap items-center gap-3">
-            <PreviewToggleGroup>
+            <PreviewToggleGroup value="center">
               <PreviewToggleGroupItem value="left">Left</PreviewToggleGroupItem>
               <PreviewToggleGroupItem value="center">Center</PreviewToggleGroupItem>
               <PreviewToggleGroupItem value="right">Right</PreviewToggleGroupItem>
@@ -145,78 +131,29 @@ export default function ToggleGroupPage() {
           </div>
         </ComponentPlayground>
       </div>
-
       {/* Props - ToggleGroup */}
       <div className="space-y-4">
         <h2 className="text-2xl font-semibold tracking-tight text-foreground">Props</h2>
         <h3 className="text-lg font-medium text-foreground">ToggleGroup</h3>
-        <div className="overflow-x-auto rounded-lg border border-border">
-          <table className="w-full text-sm">
-            <thead>
-              <tr className="border-b border-border bg-secondary/50">
-                <th className="px-4 py-3 text-left font-medium text-foreground">Prop</th>
-                <th className="px-4 py-3 text-left font-medium text-foreground">Type</th>
-                <th className="px-4 py-3 text-left font-medium text-foreground">Default</th>
-              </tr>
-            </thead>
-            <tbody className="text-muted-foreground">
-              <tr className="border-b border-border">
-                <td className="px-4 py-3 font-mono text-xs text-foreground">value</td>
-                <td className="px-4 py-3 font-mono text-xs">string</td>
-                <td className="px-4 py-3 font-mono text-xs">required</td>
-              </tr>
-              <tr className="border-b border-border">
-                <td className="px-4 py-3 font-mono text-xs text-foreground">onValueChange</td>
-                <td className="px-4 py-3 font-mono text-xs">{`(value: string) => void`}</td>
-                <td className="px-4 py-3 font-mono text-xs">required</td>
-              </tr>
-              <tr>
-                <td className="px-4 py-3 font-mono text-xs text-foreground">className</td>
-                <td className="px-4 py-3 font-mono text-xs">string</td>
-                <td className="px-4 py-3 font-mono text-xs">-</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
+        <PropsTable props={[
+          { name: "value", type: "string", default: "required" },
+          { name: "onValueChange", type: "(value: string) => void", default: "required" },
+          { name: "className", type: "string" },
+        ]} />
         <p className="text-sm text-muted-foreground">
           Also accepts all <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">View</code> props from React Native.
         </p>
-
         {/* Props - ToggleGroupItem */}
         <h3 className="text-lg font-medium text-foreground mt-6">ToggleGroupItem</h3>
-        <div className="overflow-x-auto rounded-lg border border-border">
-          <table className="w-full text-sm">
-            <thead>
-              <tr className="border-b border-border bg-secondary/50">
-                <th className="px-4 py-3 text-left font-medium text-foreground">Prop</th>
-                <th className="px-4 py-3 text-left font-medium text-foreground">Type</th>
-                <th className="px-4 py-3 text-left font-medium text-foreground">Default</th>
-              </tr>
-            </thead>
-            <tbody className="text-muted-foreground">
-              <tr className="border-b border-border">
-                <td className="px-4 py-3 font-mono text-xs text-foreground">value</td>
-                <td className="px-4 py-3 font-mono text-xs">string</td>
-                <td className="px-4 py-3 font-mono text-xs">required</td>
-              </tr>
-              <tr className="border-b border-border">
-                <td className="px-4 py-3 font-mono text-xs text-foreground">className</td>
-                <td className="px-4 py-3 font-mono text-xs">string</td>
-                <td className="px-4 py-3 font-mono text-xs">-</td>
-              </tr>
-              <tr>
-                <td className="px-4 py-3 font-mono text-xs text-foreground">children</td>
-                <td className="px-4 py-3 font-mono text-xs">ReactNode</td>
-                <td className="px-4 py-3 font-mono text-xs">required</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
+        <PropsTable props={[
+          { name: "value", type: "string", default: "required" },
+          { name: "className", type: "string" },
+          { name: "children", type: "ReactNode", default: "required" },
+        ]} />
         <p className="text-sm text-muted-foreground">
           Also accepts all <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">Pressable</code> props from React Native.
         </p>
       </div>
-
       {/* Source */}
       <div className="space-y-4">
         <h2 className="text-2xl font-semibold tracking-tight text-foreground">Source</h2>

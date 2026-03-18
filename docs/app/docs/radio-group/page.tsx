@@ -1,17 +1,16 @@
 "use client";
-
+import { useState } from "react";
 import { PreviewRadioGroup, PreviewRadioGroupItem } from "@/components/preview/radio-group";
 import { ComponentPlayground } from "@/components/component-playground";
 import { CodeBlock } from "@/components/code-block";
+import { PropsTable, ComponentTable } from "@/components/props-table";
 
 const installCode = `npx aniui add radio-group`;
-
 const usageCode = `import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { useState } from "react";
 
 export function MyScreen() {
   const [value, setValue] = useState("option-1");
-
   return (
     <RadioGroup value={value} onValueChange={setValue}>
       <RadioGroupItem value="option-1" label="Option 1" />
@@ -20,7 +19,6 @@ export function MyScreen() {
     </RadioGroup>
   );
 }`;
-
 const sourceCode = `import React, { createContext, useContext } from "react";
 import { View, Pressable, Text } from "react-native";
 import { cn } from "@/lib/utils";
@@ -29,14 +27,12 @@ const RadioGroupContext = createContext<{
   value: string;
   onValueChange: (value: string) => void;
 }>({ value: "", onValueChange: () => {} });
-
 export interface RadioGroupProps extends React.ComponentPropsWithoutRef<typeof View> {
   className?: string;
   value: string;
   onValueChange: (value: string) => void;
   children?: React.ReactNode;
 }
-
 export function RadioGroup({ value, onValueChange, className, children, ...props }: RadioGroupProps) {
   return (
     <RadioGroupContext.Provider value={{ value, onValueChange }}>
@@ -46,17 +42,14 @@ export function RadioGroup({ value, onValueChange, className, children, ...props
     </RadioGroupContext.Provider>
   );
 }
-
 export interface RadioGroupItemProps extends React.ComponentPropsWithoutRef<typeof Pressable> {
   className?: string;
   value: string;
   label?: string;
 }
-
 export function RadioGroupItem({ value, label, className, ...props }: RadioGroupItemProps) {
   const { value: selected, onValueChange } = useContext(RadioGroupContext);
   const isSelected = value === selected;
-
   return (
     <Pressable
       className={cn("flex-row items-center gap-3 min-h-12 min-w-12", className)}
@@ -76,7 +69,18 @@ export function RadioGroupItem({ value, label, className, ...props }: RadioGroup
     </Pressable>
   );
 }`;
-
+function RadioGroupDemo() {
+  const [value, setValue] = useState("option-1");
+  return (
+    <div className="w-full max-w-sm">
+      <PreviewRadioGroup value={value} onValueChange={setValue}>
+        <PreviewRadioGroupItem value="option-1" label="Option 1" />
+        <PreviewRadioGroupItem value="option-2" label="Option 2" />
+        <PreviewRadioGroupItem value="option-3" label="Option 3" />
+      </PreviewRadioGroup>
+    </div>
+  );
+}
 export default function RadioGroupPage() {
   return (
     <div className="space-y-10">
@@ -87,122 +91,47 @@ export default function RadioGroupPage() {
           Radio button group for single-selection from a list of options.
         </p>
       </div>
-
       {/* Preview */}
       <ComponentPlayground code={usageCode}>
-        <div className="w-full max-w-sm">
-          <PreviewRadioGroup value="option-1" onValueChange={() => {}}>
-            <PreviewRadioGroupItem value="option-1" label="Option 1" />
-            <PreviewRadioGroupItem value="option-2" label="Option 2" />
-            <PreviewRadioGroupItem value="option-3" label="Option 3" />
-          </PreviewRadioGroup>
-        </div>
+        <RadioGroupDemo />
       </ComponentPlayground>
-
       {/* Installation */}
       <div className="space-y-4">
         <h2 className="text-2xl font-semibold tracking-tight text-foreground">Installation</h2>
         <CodeBlock code={installCode} />
       </div>
-
       {/* Usage */}
       <div className="space-y-4">
         <h2 className="text-2xl font-semibold tracking-tight text-foreground">Usage</h2>
         <CodeBlock code={usageCode} title="app/index.tsx" />
       </div>
-
       {/* Compound Components */}
       <div className="space-y-4">
         <h2 className="text-2xl font-semibold tracking-tight text-foreground">Compound Components</h2>
         <p className="text-sm text-muted-foreground">
           RadioGroup exports two components that work together:
         </p>
-        <div className="overflow-x-auto rounded-lg border border-border">
-          <table className="w-full text-sm">
-            <thead>
-              <tr className="border-b border-border bg-secondary/50">
-                <th className="px-4 py-3 text-left font-medium text-foreground">Component</th>
-                <th className="px-4 py-3 text-left font-medium text-foreground">Description</th>
-              </tr>
-            </thead>
-            <tbody className="text-muted-foreground">
-              <tr className="border-b border-border">
-                <td className="px-4 py-3 font-mono text-xs text-foreground">RadioGroup</td>
-                <td className="px-4 py-3 text-xs">Root container that manages selection state</td>
-              </tr>
-              <tr>
-                <td className="px-4 py-3 font-mono text-xs text-foreground">RadioGroupItem</td>
-                <td className="px-4 py-3 text-xs">Individual radio option with label</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
+        <ComponentTable components={[
+          { name: "RadioGroup", description: "Root container that manages selection state" },
+          { name: "RadioGroupItem", description: "Individual radio option with label" },
+        ]} />
       </div>
-
       {/* Props */}
       <div className="space-y-4">
         <h2 className="text-2xl font-semibold tracking-tight text-foreground">Props</h2>
         <h3 className="text-lg font-medium text-foreground">RadioGroup</h3>
-        <div className="overflow-x-auto rounded-lg border border-border">
-          <table className="w-full text-sm">
-            <thead>
-              <tr className="border-b border-border bg-secondary/50">
-                <th className="px-4 py-3 text-left font-medium text-foreground">Prop</th>
-                <th className="px-4 py-3 text-left font-medium text-foreground">Type</th>
-                <th className="px-4 py-3 text-left font-medium text-foreground">Default</th>
-              </tr>
-            </thead>
-            <tbody className="text-muted-foreground">
-              <tr className="border-b border-border">
-                <td className="px-4 py-3 font-mono text-xs text-foreground">value</td>
-                <td className="px-4 py-3 font-mono text-xs">string</td>
-                <td className="px-4 py-3 font-mono text-xs">required</td>
-              </tr>
-              <tr className="border-b border-border">
-                <td className="px-4 py-3 font-mono text-xs text-foreground">onValueChange</td>
-                <td className="px-4 py-3 font-mono text-xs">{`(value: string) => void`}</td>
-                <td className="px-4 py-3 font-mono text-xs">required</td>
-              </tr>
-              <tr>
-                <td className="px-4 py-3 font-mono text-xs text-foreground">className</td>
-                <td className="px-4 py-3 font-mono text-xs">string</td>
-                <td className="px-4 py-3 font-mono text-xs">-</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-
+        <PropsTable props={[
+          { name: "value", type: "string", default: "required" },
+          { name: "onValueChange", type: "(value: string) => void", default: "required" },
+          { name: "className", type: "string" },
+        ]} />
         <h3 className="text-lg font-medium text-foreground mt-6">RadioGroupItem</h3>
-        <div className="overflow-x-auto rounded-lg border border-border">
-          <table className="w-full text-sm">
-            <thead>
-              <tr className="border-b border-border bg-secondary/50">
-                <th className="px-4 py-3 text-left font-medium text-foreground">Prop</th>
-                <th className="px-4 py-3 text-left font-medium text-foreground">Type</th>
-                <th className="px-4 py-3 text-left font-medium text-foreground">Default</th>
-              </tr>
-            </thead>
-            <tbody className="text-muted-foreground">
-              <tr className="border-b border-border">
-                <td className="px-4 py-3 font-mono text-xs text-foreground">value</td>
-                <td className="px-4 py-3 font-mono text-xs">string</td>
-                <td className="px-4 py-3 font-mono text-xs">required</td>
-              </tr>
-              <tr className="border-b border-border">
-                <td className="px-4 py-3 font-mono text-xs text-foreground">label</td>
-                <td className="px-4 py-3 font-mono text-xs">string</td>
-                <td className="px-4 py-3 font-mono text-xs">-</td>
-              </tr>
-              <tr>
-                <td className="px-4 py-3 font-mono text-xs text-foreground">className</td>
-                <td className="px-4 py-3 font-mono text-xs">string</td>
-                <td className="px-4 py-3 font-mono text-xs">-</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
+        <PropsTable props={[
+          { name: "value", type: "string", default: "required" },
+          { name: "label", type: "string" },
+          { name: "className", type: "string" },
+        ]} />
       </div>
-
       {/* Source */}
       <div className="space-y-4">
         <h2 className="text-2xl font-semibold tracking-tight text-foreground">Source</h2>

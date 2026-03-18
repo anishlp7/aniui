@@ -1,12 +1,11 @@
 "use client";
-
 import React, { useState } from "react";
 import { PreviewSearchBar } from "@/components/preview/search-bar";
 import { ComponentPlayground } from "@/components/component-playground";
 import { CodeBlock } from "@/components/code-block";
+import { PropsTable } from "@/components/props-table";
 
 const installCode = `npx aniui add search-bar`;
-
 const usageCode = `import { SearchBar } from "@/components/ui/search-bar";
 
 function MyScreen() {
@@ -19,14 +18,11 @@ function MyScreen() {
     />
   );
 }`;
-
 const sizesCode = `<SearchBar size="sm" placeholder="Small search..." />
 <SearchBar size="md" placeholder="Medium search..." />
 <SearchBar size="lg" placeholder="Large search..." />`;
-
 const cancelCode = `const [query, setQuery] = useState("");
 const [focused, setFocused] = useState(false);
-
 <SearchBar
   value={query}
   onChangeText={setQuery}
@@ -35,7 +31,6 @@ const [focused, setFocused] = useState(false);
   showCancel={focused}
   onCancel={() => { setQuery(""); setFocused(false); }}
 />`;
-
 const sourceCode = `import React from "react";
 import { View, TextInput, Pressable, Text } from "react-native";
 import { cva, type VariantProps } from "class-variance-authority";
@@ -54,7 +49,6 @@ const searchBarVariants = cva(
     defaultVariants: { size: "md" },
   }
 );
-
 export interface SearchBarProps
   extends Omit<React.ComponentPropsWithoutRef<typeof TextInput>, "placeholderTextColor">,
     VariantProps<typeof searchBarVariants> {
@@ -63,7 +57,6 @@ export interface SearchBarProps
   showCancel?: boolean;
   onCancel?: () => void;
 }
-
 export function SearchBar({ size, className, value, onClear, showCancel, onCancel, ...props }: SearchBarProps) {
   return (
     <View className="flex-row items-center gap-2">
@@ -91,17 +84,14 @@ export function SearchBar({ size, className, value, onClear, showCancel, onCance
     </View>
   );
 }`;
-
 function SearchBarDemo() {
   const [query, setQuery] = useState("");
   return <PreviewSearchBar value={query} onChange={(e) => setQuery(e.target.value)} onClear={() => setQuery("")} />;
 }
-
 function CancelDemo() {
   const [query, setQuery] = useState("react native");
   return <PreviewSearchBar value={query} onChange={(e) => setQuery(e.target.value)} onClear={() => setQuery("")} showCancel onCancel={() => setQuery("")} />;
 }
-
 export default function SearchBarPage() {
   return (
     <div className="space-y-12">
@@ -109,21 +99,17 @@ export default function SearchBarPage() {
         <h1 className="text-3xl font-bold mb-2">SearchBar</h1>
         <p className="text-muted-foreground text-lg">A search input with icon, clear button, and optional cancel action.</p>
       </div>
-
       <ComponentPlayground code={usageCode}>
         <SearchBarDemo />
       </ComponentPlayground>
-
       <div>
         <h2 className="text-xl font-semibold mb-3">Installation</h2>
         <CodeBlock code={installCode} />
       </div>
-
       <div>
         <h2 className="text-xl font-semibold mb-3">Usage</h2>
         <CodeBlock code={usageCode} title="search-screen.tsx" />
       </div>
-
       <div>
         <h2 className="text-xl font-semibold mb-3">Sizes</h2>
         <p className="text-sm text-muted-foreground mb-4">Three sizes to fit different layouts.</p>
@@ -135,7 +121,6 @@ export default function SearchBarPage() {
           </div>
         </ComponentPlayground>
       </div>
-
       <div>
         <h2 className="text-xl font-semibold mb-3">With Cancel Button</h2>
         <p className="text-sm text-muted-foreground mb-4">Show a cancel button when the search bar is focused (iOS pattern).</p>
@@ -143,26 +128,19 @@ export default function SearchBarPage() {
           <CancelDemo />
         </ComponentPlayground>
       </div>
-
       <div>
         <h2 className="text-xl font-semibold mb-3">Props</h2>
-        <div className="overflow-x-auto">
-          <table className="w-full text-sm">
-            <thead><tr className="border-b"><th className="text-left py-2 pr-4">Prop</th><th className="text-left py-2 pr-4">Type</th><th className="text-left py-2">Default</th></tr></thead>
-            <tbody>
-              <tr className="border-b"><td className="py-2 pr-4 font-mono text-xs">size</td><td className="py-2 pr-4 font-mono text-xs">{`"sm" | "md" | "lg"`}</td><td className="py-2 font-mono text-xs">{`"md"`}</td></tr>
-              <tr className="border-b"><td className="py-2 pr-4 font-mono text-xs">value</td><td className="py-2 pr-4 font-mono text-xs">string</td><td className="py-2 font-mono text-xs">—</td></tr>
-              <tr className="border-b"><td className="py-2 pr-4 font-mono text-xs">onChangeText</td><td className="py-2 pr-4 font-mono text-xs">(text: string) =&gt; void</td><td className="py-2 font-mono text-xs">—</td></tr>
-              <tr className="border-b"><td className="py-2 pr-4 font-mono text-xs">onClear</td><td className="py-2 pr-4 font-mono text-xs">() =&gt; void</td><td className="py-2 font-mono text-xs">—</td></tr>
-              <tr className="border-b"><td className="py-2 pr-4 font-mono text-xs">showCancel</td><td className="py-2 pr-4 font-mono text-xs">boolean</td><td className="py-2 font-mono text-xs">false</td></tr>
-              <tr className="border-b"><td className="py-2 pr-4 font-mono text-xs">onCancel</td><td className="py-2 pr-4 font-mono text-xs">() =&gt; void</td><td className="py-2 font-mono text-xs">—</td></tr>
-              <tr className="border-b"><td className="py-2 pr-4 font-mono text-xs">placeholder</td><td className="py-2 pr-4 font-mono text-xs">string</td><td className="py-2 font-mono text-xs">{`"Search..."`}</td></tr>
-              <tr className="border-b"><td className="py-2 pr-4 font-mono text-xs">className</td><td className="py-2 pr-4 font-mono text-xs">string</td><td className="py-2 font-mono text-xs">—</td></tr>
-            </tbody>
-          </table>
-        </div>
+        <PropsTable props={[
+          { name: "size", type: "\"sm\" | \"md\" | \"lg\"", default: "\"md\"" },
+          { name: "value", type: "string" },
+          { name: "onChangeText", type: "(text: string) => void" },
+          { name: "onClear", type: "() => void" },
+          { name: "showCancel", type: "boolean", default: "false" },
+          { name: "onCancel", type: "() => void" },
+          { name: "placeholder", type: "string", default: "\"Search...\"" },
+          { name: "className", type: "string" },
+        ]} />
       </div>
-
       <div>
         <h2 className="text-xl font-semibold mb-3">Source</h2>
         <CodeBlock code={sourceCode} title="components/ui/search-bar.tsx" />

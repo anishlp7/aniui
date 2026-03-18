@@ -1,22 +1,18 @@
 "use client";
-
 import React, { useState } from "react";
 import { PreviewSegmentedControl } from "@/components/preview/segmented-control";
 import { ComponentPlayground } from "@/components/component-playground";
 import { CodeBlock } from "@/components/code-block";
+import { PropsTable } from "@/components/props-table";
 
 const installCode = `npx aniui add segmented-control`;
-
 const usageCode = `import { SegmentedControl } from "@/components/ui/segmented-control";
 
 const [view, setView] = useState("List");
-
 <SegmentedControl options={["List", "Grid", "Map"]} value={view} onValueChange={setView} />`;
-
 const sizesCode = `<SegmentedControl size="sm" options={["S", "M", "L"]} value={size} onValueChange={setSize} />
 <SegmentedControl size="md" options={["S", "M", "L"]} value={size} onValueChange={setSize} />
 <SegmentedControl size="lg" options={["S", "M", "L"]} value={size} onValueChange={setSize} />`;
-
 const sourceCode = `import React from "react";
 import { View, Pressable, Text } from "react-native";
 import { cva, type VariantProps } from "class-variance-authority";
@@ -32,7 +28,6 @@ const segmentVariants = cva("rounded-lg bg-muted p-1 flex-row", {
   },
   defaultVariants: { size: "md" },
 });
-
 export interface SegmentedControlProps
   extends React.ComponentPropsWithoutRef<typeof View>,
     VariantProps<typeof segmentVariants> {
@@ -41,7 +36,6 @@ export interface SegmentedControlProps
   value: string;
   onValueChange: (value: string) => void;
 }
-
 export function SegmentedControl({ size, className, options, value, onValueChange, ...props }: SegmentedControlProps) {
   return (
     <View className={cn(segmentVariants({ size }), className)} accessibilityRole="tablist" {...props}>
@@ -63,20 +57,27 @@ export function SegmentedControl({ size, className, options, value, onValueChang
     </View>
   );
 }`;
-
 function SizesDemo() {
-  const [sm, setSm] = useState("S");
-  const [md, setMd] = useState("M");
-  const [lg, setLg] = useState("L");
+  const [sm, setSm] = useState("Day");
+  const [md, setMd] = useState("Week");
+  const [lg, setLg] = useState("Month");
   return (
-    <div className="space-y-3 max-w-xs">
-      <PreviewSegmentedControl size="sm" options={["S", "M", "L"]} value={sm} onValueChange={setSm} />
-      <PreviewSegmentedControl size="md" options={["S", "M", "L"]} value={md} onValueChange={setMd} />
-      <PreviewSegmentedControl size="lg" options={["S", "M", "L"]} value={lg} onValueChange={setLg} />
+    <div className="w-full max-w-xs space-y-4">
+      <div className="space-y-1.5">
+        <p className="text-xs font-medium text-muted-foreground">Small</p>
+        <PreviewSegmentedControl size="sm" options={["Day", "Week", "Month"]} value={sm} onValueChange={setSm} />
+      </div>
+      <div className="space-y-1.5">
+        <p className="text-xs font-medium text-muted-foreground">Medium (default)</p>
+        <PreviewSegmentedControl size="md" options={["Day", "Week", "Month"]} value={md} onValueChange={setMd} />
+      </div>
+      <div className="space-y-1.5">
+        <p className="text-xs font-medium text-muted-foreground">Large</p>
+        <PreviewSegmentedControl size="lg" options={["Day", "Week", "Month"]} value={lg} onValueChange={setLg} />
+      </div>
     </div>
   );
 }
-
 export default function SegmentedControlPage() {
   const [view, setView] = useState("List");
   return (
@@ -85,41 +86,34 @@ export default function SegmentedControlPage() {
         <h1 className="text-3xl font-bold mb-2">Segmented Control</h1>
         <p className="text-muted-foreground text-lg">iOS-style segmented control for switching between views or filter options.</p>
       </div>
-
       <ComponentPlayground code={usageCode}>
-        <div className="max-w-xs">
+        <div className="w-full max-w-xs space-y-4">
           <PreviewSegmentedControl options={["List", "Grid", "Map"]} value={view} onValueChange={setView} />
+          <div className="rounded-lg border border-border bg-muted/30 px-4 py-6 text-center">
+            <p className="text-xs text-muted-foreground">Showing <span className="font-medium text-foreground">{view}</span> view</p>
+          </div>
         </div>
       </ComponentPlayground>
-
       <div>
         <h2 className="text-xl font-semibold mb-3">Installation</h2>
         <CodeBlock code={installCode} />
       </div>
-
       <div>
         <h2 className="text-xl font-semibold mb-3">Sizes</h2>
         <ComponentPlayground code={sizesCode}>
           <SizesDemo />
         </ComponentPlayground>
       </div>
-
       <div>
         <h2 className="text-xl font-semibold mb-3">Props</h2>
-        <div className="overflow-x-auto">
-          <table className="w-full text-sm">
-            <thead><tr className="border-b"><th className="text-left py-2 pr-4">Prop</th><th className="text-left py-2 pr-4">Type</th><th className="text-left py-2">Default</th></tr></thead>
-            <tbody>
-              <tr className="border-b"><td className="py-2 pr-4 font-mono text-xs">options</td><td className="py-2 pr-4 font-mono text-xs">string[]</td><td className="py-2 font-mono text-xs">—</td></tr>
-              <tr className="border-b"><td className="py-2 pr-4 font-mono text-xs">value</td><td className="py-2 pr-4 font-mono text-xs">string</td><td className="py-2 font-mono text-xs">—</td></tr>
-              <tr className="border-b"><td className="py-2 pr-4 font-mono text-xs">onValueChange</td><td className="py-2 pr-4 font-mono text-xs">{`(value: string) => void`}</td><td className="py-2 font-mono text-xs">—</td></tr>
-              <tr className="border-b"><td className="py-2 pr-4 font-mono text-xs">size</td><td className="py-2 pr-4 font-mono text-xs">{`"sm" | "md" | "lg"`}</td><td className="py-2 font-mono text-xs">{`"md"`}</td></tr>
-              <tr className="border-b"><td className="py-2 pr-4 font-mono text-xs">className</td><td className="py-2 pr-4 font-mono text-xs">string</td><td className="py-2 font-mono text-xs">—</td></tr>
-            </tbody>
-          </table>
-        </div>
+        <PropsTable props={[
+          { name: "options", type: "string[]" },
+          { name: "value", type: "string" },
+          { name: "onValueChange", type: "(value: string) => void" },
+          { name: "size", type: "\"sm\" | \"md\" | \"lg\"", default: "\"md\"" },
+          { name: "className", type: "string" },
+        ]} />
       </div>
-
       <div>
         <h2 className="text-xl font-semibold mb-3">Source</h2>
         <CodeBlock code={sourceCode} title="components/ui/segmented-control.tsx" />

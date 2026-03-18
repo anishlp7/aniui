@@ -68,6 +68,26 @@ const sidebarItems = [
       { title: "Tooltip", href: "/docs/tooltip" },
     ],
   },
+  {
+    title: "Blocks",
+    items: [
+      { title: "Login", href: "/blocks/login" },
+      { title: "Sign Up", href: "/blocks/signup" },
+      { title: "Forgot Password", href: "/blocks/forgot-password" },
+      { title: "Home Screen", href: "/blocks/home" },
+      { title: "Bottom Tabs", href: "/blocks/bottom-tabs" },
+      { title: "Drawer Navigation", href: "/blocks/drawer-nav" },
+      { title: "Profile", href: "/blocks/profile" },
+      { title: "Settings", href: "/blocks/settings" },
+      { title: "Onboarding", href: "/blocks/onboarding" },
+      { title: "Chat", href: "/blocks/chat" },
+      { title: "Product List", href: "/blocks/product-list" },
+      { title: "Product Detail", href: "/blocks/product-detail" },
+      { title: "Notifications", href: "/blocks/notifications" },
+      { title: "Pricing", href: "/blocks/pricing" },
+      { title: "Search", href: "/blocks/search" },
+    ],
+  },
 ];
 
 export function Sidebar() {

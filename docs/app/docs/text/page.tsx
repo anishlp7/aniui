@@ -1,11 +1,10 @@
 "use client";
-
 import { PreviewText } from "@/components/preview/text";
 import { ComponentPlayground } from "@/components/component-playground";
 import { CodeBlock } from "@/components/code-block";
+import { PropsTable } from "@/components/props-table";
 
 const installCode = `npx aniui add text`;
-
 const usageCode = `import { Text } from "@/components/ui/text";
 
 export function MyScreen() {
@@ -16,7 +15,6 @@ export function MyScreen() {
     </>
   );
 }`;
-
 const allVariantsCode = `<Text variant="h1">Heading 1</Text>
 <Text variant="h2">Heading 2</Text>
 <Text variant="h3">Heading 3</Text>
@@ -26,7 +24,6 @@ const allVariantsCode = `<Text variant="h1">Heading 1</Text>
 <Text variant="large">Large text</Text>
 <Text variant="small">Small text</Text>
 <Text variant="muted">Muted text</Text>`;
-
 const sourceCode = `import React from "react";
 import { Text as RNText } from "react-native";
 import { cva, type VariantProps } from "class-variance-authority";
@@ -48,13 +45,11 @@ const textVariants = cva("text-foreground", {
   },
   defaultVariants: { variant: "p" },
 });
-
 export interface TextProps
   extends React.ComponentPropsWithoutRef<typeof RNText>,
     VariantProps<typeof textVariants> {
   className?: string;
 }
-
 export function Text({ variant, className, ...props }: TextProps) {
   return (
     <RNText
@@ -63,7 +58,6 @@ export function Text({ variant, className, ...props }: TextProps) {
     />
   );
 }`;
-
 export default function TextPage() {
   return (
     <div className="space-y-10">
@@ -74,7 +68,6 @@ export default function TextPage() {
           Typography component with heading and body text variants.
         </p>
       </div>
-
       {/* Preview */}
       <ComponentPlayground code={usageCode}>
         <div className="space-y-2">
@@ -82,19 +75,16 @@ export default function TextPage() {
           <PreviewText variant="p">This is a paragraph of text.</PreviewText>
         </div>
       </ComponentPlayground>
-
       {/* Installation */}
       <div className="space-y-4">
         <h2 className="text-2xl font-semibold tracking-tight text-foreground">Installation</h2>
         <CodeBlock code={installCode} />
       </div>
-
       {/* Usage */}
       <div className="space-y-4">
         <h2 className="text-2xl font-semibold tracking-tight text-foreground">Usage</h2>
         <CodeBlock code={usageCode} title="app/index.tsx" />
       </div>
-
       {/* All Variants */}
       <div className="space-y-4">
         <h2 className="text-2xl font-semibold tracking-tight text-foreground">Variants</h2>
@@ -112,38 +102,17 @@ export default function TextPage() {
           </div>
         </ComponentPlayground>
       </div>
-
       {/* Props */}
       <div className="space-y-4">
         <h2 className="text-2xl font-semibold tracking-tight text-foreground">Props</h2>
-        <div className="overflow-x-auto rounded-lg border border-border">
-          <table className="w-full text-sm">
-            <thead>
-              <tr className="border-b border-border bg-secondary/50">
-                <th className="px-4 py-3 text-left font-medium text-foreground">Prop</th>
-                <th className="px-4 py-3 text-left font-medium text-foreground">Type</th>
-                <th className="px-4 py-3 text-left font-medium text-foreground">Default</th>
-              </tr>
-            </thead>
-            <tbody className="text-muted-foreground">
-              <tr className="border-b border-border">
-                <td className="px-4 py-3 font-mono text-xs text-foreground">variant</td>
-                <td className="px-4 py-3 font-mono text-xs">{`"h1" | "h2" | "h3" | "h4" | "p" | "lead" | "large" | "small" | "muted"`}</td>
-                <td className="px-4 py-3 font-mono text-xs">{`"p"`}</td>
-              </tr>
-              <tr>
-                <td className="px-4 py-3 font-mono text-xs text-foreground">className</td>
-                <td className="px-4 py-3 font-mono text-xs">string</td>
-                <td className="px-4 py-3 font-mono text-xs">-</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
+        <PropsTable props={[
+          { name: "variant", type: "\"h1\" | \"h2\" | \"h3\" | \"h4\" | \"p\" | \"lead\" | \"large\" | \"small\" | \"muted\"", default: "\"p\"" },
+          { name: "className", type: "string" },
+        ]} />
         <p className="text-sm text-muted-foreground">
           Also accepts all <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">Text</code> props from React Native.
         </p>
       </div>
-
       {/* Source */}
       <div className="space-y-4">
         <h2 className="text-2xl font-semibold tracking-tight text-foreground">Source</h2>

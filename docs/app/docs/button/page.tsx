@@ -1,8 +1,8 @@
 "use client";
-
 import { PreviewButton } from "@/components/preview/button";
 import { ComponentPlayground } from "@/components/component-playground";
 import { CodeBlock } from "@/components/code-block";
+import { PropsTable } from "@/components/props-table";
 
 function PlusIcon({ className }: { className?: string }) {
   return (
@@ -11,7 +11,6 @@ function PlusIcon({ className }: { className?: string }) {
     </svg>
   );
 }
-
 function HeartIcon({ className }: { className?: string }) {
   return (
     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
@@ -19,7 +18,6 @@ function HeartIcon({ className }: { className?: string }) {
     </svg>
   );
 }
-
 function SendIcon({ className }: { className?: string }) {
   return (
     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
@@ -27,7 +25,6 @@ function SendIcon({ className }: { className?: string }) {
     </svg>
   );
 }
-
 function TrashIcon({ className }: { className?: string }) {
   return (
     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
@@ -35,7 +32,6 @@ function TrashIcon({ className }: { className?: string }) {
     </svg>
   );
 }
-
 function SearchIcon({ className }: { className?: string }) {
   return (
     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
@@ -43,9 +39,7 @@ function SearchIcon({ className }: { className?: string }) {
     </svg>
   );
 }
-
 const installCode = `npx aniui add button`;
-
 const usageCode = `import { Button } from "@/components/ui/button";
 
 export function MyScreen() {
@@ -55,43 +49,33 @@ export function MyScreen() {
     </Button>
   );
 }`;
-
 const variantsCode = `<Button variant="default">Default</Button>
 <Button variant="secondary">Secondary</Button>
 <Button variant="outline">Outline</Button>
 <Button variant="ghost">Ghost</Button>
 <Button variant="destructive">Destructive</Button>
 <Button variant="link">Link</Button>`;
-
 const sizesCode = `<Button size="sm">Small</Button>
 <Button size="md">Medium</Button>
 <Button size="lg">Large</Button>`;
-
 const iconCode = `import { Ionicons } from "@expo/vector-icons";
-
 // Icon before text
 <Button icon={<Ionicons name="add" size={18} color="#fff" />}>
   Create
 </Button>
-
 // Icon after text
 <Button iconAfter={<Ionicons name="send" size={18} color="#fff" />}>
   Send
 </Button>
-
 // Icon only
 <Button size="icon" icon={<Ionicons name="heart" size={18} color="#fff" />} />`;
-
 const loadingCode = `<Button loading>Saving...</Button>
 <Button loading variant="outline">Loading</Button>
 <Button loading variant="destructive">Deleting</Button>`;
-
 const disabledCode = `<Button disabled>Disabled</Button>
 <Button disabled variant="outline">Disabled</Button>`;
-
 const blockCode = `<Button className="w-full">Full Width Button</Button>
 <Button className="w-full" variant="outline">Full Width Outline</Button>`;
-
 const sourceCode = `import React from "react";
 import { Pressable, Text, ActivityIndicator } from "react-native";
 import { cva, type VariantProps } from "class-variance-authority";
@@ -119,7 +103,6 @@ const buttonVariants = cva(
     defaultVariants: { variant: "default", size: "md" },
   }
 );
-
 const buttonTextVariants = cva("text-center font-medium", {
   variants: {
     variant: {
@@ -134,7 +117,6 @@ const buttonTextVariants = cva("text-center font-medium", {
   },
   defaultVariants: { variant: "default", size: "md" },
 });
-
 export interface ButtonProps
   extends React.ComponentPropsWithoutRef<typeof Pressable>,
     VariantProps<typeof buttonVariants> {
@@ -145,11 +127,9 @@ export interface ButtonProps
   iconAfter?: React.ReactNode;
   loading?: boolean;
 }
-
 export function Button({ variant, size, className, textClassName, children, icon, iconAfter, loading, disabled, ...props }: ButtonProps) {
   const isDisabled = disabled || loading;
   const light = variant === "default" || variant === "destructive";
-
   return (
     <Pressable
       className={cn(buttonVariants({ variant, size }), isDisabled && "opacity-50", className)}
@@ -168,7 +148,6 @@ export function Button({ variant, size, className, textClassName, children, icon
     </Pressable>
   );
 }`;
-
 export default function ButtonPage() {
   return (
     <div className="space-y-10">
@@ -179,26 +158,22 @@ export default function ButtonPage() {
           A pressable button with variants, sizes, icons, and loading states.
         </p>
       </div>
-
       {/* Preview */}
       <ComponentPlayground code={usageCode}>
         <div className="flex flex-wrap items-center gap-3">
           <PreviewButton>Click me</PreviewButton>
         </div>
       </ComponentPlayground>
-
       {/* Installation */}
       <div className="space-y-4">
         <h2 className="text-2xl font-semibold tracking-tight text-foreground">Installation</h2>
         <CodeBlock code={installCode} />
       </div>
-
       {/* Usage */}
       <div className="space-y-4">
         <h2 className="text-2xl font-semibold tracking-tight text-foreground">Usage</h2>
         <CodeBlock code={usageCode} title="app/index.tsx" />
       </div>
-
       {/* Variants */}
       <div className="space-y-4">
         <h2 className="text-2xl font-semibold tracking-tight text-foreground">Variants</h2>
@@ -216,7 +191,6 @@ export default function ButtonPage() {
           </div>
         </ComponentPlayground>
       </div>
-
       {/* Sizes */}
       <div className="space-y-4">
         <h2 className="text-2xl font-semibold tracking-tight text-foreground">Sizes</h2>
@@ -228,7 +202,6 @@ export default function ButtonPage() {
           </div>
         </ComponentPlayground>
       </div>
-
       {/* With Icons */}
       <div className="space-y-4">
         <h2 className="text-2xl font-semibold tracking-tight text-foreground">With Icons</h2>
@@ -247,7 +220,6 @@ export default function ButtonPage() {
           </div>
         </ComponentPlayground>
       </div>
-
       {/* Loading */}
       <div className="space-y-4">
         <h2 className="text-2xl font-semibold tracking-tight text-foreground">Loading</h2>
@@ -262,7 +234,6 @@ export default function ButtonPage() {
           </div>
         </ComponentPlayground>
       </div>
-
       {/* Disabled */}
       <div className="space-y-4">
         <h2 className="text-2xl font-semibold tracking-tight text-foreground">Disabled</h2>
@@ -274,7 +245,6 @@ export default function ButtonPage() {
           </div>
         </ComponentPlayground>
       </div>
-
       {/* Full Width */}
       <div className="space-y-4">
         <h2 className="text-2xl font-semibold tracking-tight text-foreground">Full Width</h2>
@@ -288,73 +258,24 @@ export default function ButtonPage() {
           </div>
         </ComponentPlayground>
       </div>
-
       {/* Props */}
       <div className="space-y-4">
         <h2 className="text-2xl font-semibold tracking-tight text-foreground">Props</h2>
-        <div className="overflow-x-auto rounded-lg border border-border">
-          <table className="w-full text-sm">
-            <thead>
-              <tr className="border-b border-border bg-secondary/50">
-                <th className="px-4 py-3 text-left font-medium text-foreground">Prop</th>
-                <th className="px-4 py-3 text-left font-medium text-foreground">Type</th>
-                <th className="px-4 py-3 text-left font-medium text-foreground">Default</th>
-              </tr>
-            </thead>
-            <tbody className="text-muted-foreground">
-              <tr className="border-b border-border">
-                <td className="px-4 py-3 font-mono text-xs text-foreground">variant</td>
-                <td className="px-4 py-3 font-mono text-xs">{`"default" | "secondary" | "outline" | "ghost" | "destructive" | "link"`}</td>
-                <td className="px-4 py-3 font-mono text-xs">{`"default"`}</td>
-              </tr>
-              <tr className="border-b border-border">
-                <td className="px-4 py-3 font-mono text-xs text-foreground">size</td>
-                <td className="px-4 py-3 font-mono text-xs">{`"sm" | "md" | "lg" | "icon"`}</td>
-                <td className="px-4 py-3 font-mono text-xs">{`"md"`}</td>
-              </tr>
-              <tr className="border-b border-border">
-                <td className="px-4 py-3 font-mono text-xs text-foreground">icon</td>
-                <td className="px-4 py-3 font-mono text-xs">React.ReactNode</td>
-                <td className="px-4 py-3 font-mono text-xs">-</td>
-              </tr>
-              <tr className="border-b border-border">
-                <td className="px-4 py-3 font-mono text-xs text-foreground">iconAfter</td>
-                <td className="px-4 py-3 font-mono text-xs">React.ReactNode</td>
-                <td className="px-4 py-3 font-mono text-xs">-</td>
-              </tr>
-              <tr className="border-b border-border">
-                <td className="px-4 py-3 font-mono text-xs text-foreground">loading</td>
-                <td className="px-4 py-3 font-mono text-xs">boolean</td>
-                <td className="px-4 py-3 font-mono text-xs">false</td>
-              </tr>
-              <tr className="border-b border-border">
-                <td className="px-4 py-3 font-mono text-xs text-foreground">disabled</td>
-                <td className="px-4 py-3 font-mono text-xs">boolean</td>
-                <td className="px-4 py-3 font-mono text-xs">false</td>
-              </tr>
-              <tr className="border-b border-border">
-                <td className="px-4 py-3 font-mono text-xs text-foreground">className</td>
-                <td className="px-4 py-3 font-mono text-xs">string</td>
-                <td className="px-4 py-3 font-mono text-xs">-</td>
-              </tr>
-              <tr className="border-b border-border">
-                <td className="px-4 py-3 font-mono text-xs text-foreground">textClassName</td>
-                <td className="px-4 py-3 font-mono text-xs">string</td>
-                <td className="px-4 py-3 font-mono text-xs">-</td>
-              </tr>
-              <tr>
-                <td className="px-4 py-3 font-mono text-xs text-foreground">children</td>
-                <td className="px-4 py-3 font-mono text-xs">string</td>
-                <td className="px-4 py-3 font-mono text-xs">-</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
+        <PropsTable props={[
+          { name: "variant", type: "\"default\" | \"secondary\" | \"outline\" | \"ghost\" | \"destructive\" | \"link\"", default: "\"default\"" },
+          { name: "size", type: "\"sm\" | \"md\" | \"lg\" | \"icon\"", default: "\"md\"" },
+          { name: "icon", type: "React.ReactNode" },
+          { name: "iconAfter", type: "React.ReactNode" },
+          { name: "loading", type: "boolean", default: "false" },
+          { name: "disabled", type: "boolean", default: "false" },
+          { name: "className", type: "string" },
+          { name: "textClassName", type: "string" },
+          { name: "children", type: "string" },
+        ]} />
         <p className="text-sm text-muted-foreground">
           Also accepts all <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">Pressable</code> props from React Native.
         </p>
       </div>
-
       {/* Source */}
       <div className="space-y-4">
         <h2 className="text-2xl font-semibold tracking-tight text-foreground">Source</h2>

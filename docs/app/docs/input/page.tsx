@@ -1,11 +1,10 @@
 "use client";
-
 import { PreviewInput } from "@/components/preview/input";
 import { ComponentPlayground } from "@/components/component-playground";
 import { CodeBlock } from "@/components/code-block";
+import { PropsTable } from "@/components/props-table";
 
 const installCode = `npx aniui add input`;
-
 const usageCode = `import { Input } from "@/components/ui/input";
 
 export function MyScreen() {
@@ -13,14 +12,11 @@ export function MyScreen() {
     <Input placeholder="Enter your email..." />
   );
 }`;
-
 const variantsCode = `<Input variant="default" placeholder="Default input" />
 <Input variant="ghost" placeholder="Ghost input" />`;
-
 const sizesCode = `<Input size="sm" placeholder="Small" />
 <Input size="md" placeholder="Medium" />
 <Input size="lg" placeholder="Large" />`;
-
 const sourceCode = `import React from "react";
 import { TextInput } from "react-native";
 import { cva, type VariantProps } from "class-variance-authority";
@@ -46,13 +42,11 @@ const inputVariants = cva(
     },
   }
 );
-
 export interface InputProps
   extends React.ComponentPropsWithoutRef<typeof TextInput>,
     VariantProps<typeof inputVariants> {
   className?: string;
 }
-
 export function Input({ variant, size, className, ...props }: InputProps) {
   return (
     <TextInput
@@ -62,7 +56,6 @@ export function Input({ variant, size, className, ...props }: InputProps) {
     />
   );
 }`;
-
 export default function InputPage() {
   return (
     <div className="space-y-10">
@@ -73,26 +66,22 @@ export default function InputPage() {
           Text input with variants and states.
         </p>
       </div>
-
       {/* Preview */}
       <ComponentPlayground code={usageCode}>
         <div className="flex flex-wrap items-center gap-4 w-full max-w-sm">
           <PreviewInput placeholder="Enter your email..." />
         </div>
       </ComponentPlayground>
-
       {/* Installation */}
       <div className="space-y-4">
         <h2 className="text-2xl font-semibold tracking-tight text-foreground">Installation</h2>
         <CodeBlock code={installCode} />
       </div>
-
       {/* Usage */}
       <div className="space-y-4">
         <h2 className="text-2xl font-semibold tracking-tight text-foreground">Usage</h2>
         <CodeBlock code={usageCode} title="app/index.tsx" />
       </div>
-
       {/* Variants */}
       <div className="space-y-4">
         <h2 className="text-2xl font-semibold tracking-tight text-foreground">Variants</h2>
@@ -103,7 +92,6 @@ export default function InputPage() {
           </div>
         </ComponentPlayground>
       </div>
-
       {/* Sizes */}
       <div className="space-y-4">
         <h2 className="text-2xl font-semibold tracking-tight text-foreground">Sizes</h2>
@@ -115,43 +103,18 @@ export default function InputPage() {
           </div>
         </ComponentPlayground>
       </div>
-
       {/* Props */}
       <div className="space-y-4">
         <h2 className="text-2xl font-semibold tracking-tight text-foreground">Props</h2>
-        <div className="overflow-x-auto rounded-lg border border-border">
-          <table className="w-full text-sm">
-            <thead>
-              <tr className="border-b border-border bg-secondary/50">
-                <th className="px-4 py-3 text-left font-medium text-foreground">Prop</th>
-                <th className="px-4 py-3 text-left font-medium text-foreground">Type</th>
-                <th className="px-4 py-3 text-left font-medium text-foreground">Default</th>
-              </tr>
-            </thead>
-            <tbody className="text-muted-foreground">
-              <tr className="border-b border-border">
-                <td className="px-4 py-3 font-mono text-xs text-foreground">variant</td>
-                <td className="px-4 py-3 font-mono text-xs">{`"default" | "ghost"`}</td>
-                <td className="px-4 py-3 font-mono text-xs">{`"default"`}</td>
-              </tr>
-              <tr className="border-b border-border">
-                <td className="px-4 py-3 font-mono text-xs text-foreground">size</td>
-                <td className="px-4 py-3 font-mono text-xs">{`"sm" | "md" | "lg"`}</td>
-                <td className="px-4 py-3 font-mono text-xs">{`"md"`}</td>
-              </tr>
-              <tr>
-                <td className="px-4 py-3 font-mono text-xs text-foreground">className</td>
-                <td className="px-4 py-3 font-mono text-xs">string</td>
-                <td className="px-4 py-3 font-mono text-xs">-</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
+        <PropsTable props={[
+          { name: "variant", type: "\"default\" | \"ghost\"", default: "\"default\"" },
+          { name: "size", type: "\"sm\" | \"md\" | \"lg\"", default: "\"md\"" },
+          { name: "className", type: "string" },
+        ]} />
         <p className="text-sm text-muted-foreground">
           Also accepts all <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">TextInput</code> props from React Native.
         </p>
       </div>
-
       {/* Source */}
       <div className="space-y-4">
         <h2 className="text-2xl font-semibold tracking-tight text-foreground">Source</h2>

@@ -1,11 +1,10 @@
 "use client";
-
 import { PreviewTextarea } from "@/components/preview/textarea";
 import { ComponentPlayground } from "@/components/component-playground";
 import { CodeBlock } from "@/components/code-block";
+import { PropsTable } from "@/components/props-table";
 
 const installCode = `npx aniui add textarea`;
-
 const usageCode = `import { Textarea } from "@/components/ui/textarea";
 
 export function MyScreen() {
@@ -16,10 +15,8 @@ export function MyScreen() {
     />
   );
 }`;
-
 const variantsCode = `<Textarea variant="default" placeholder="Default variant" />
 <Textarea variant="ghost" placeholder="Ghost variant" />`;
-
 const sourceCode = `import React from "react";
 import { TextInput } from "react-native";
 import { cva, type VariantProps } from "class-variance-authority";
@@ -39,13 +36,11 @@ const textareaVariants = cva(
     },
   }
 );
-
 export interface TextareaProps
   extends React.ComponentPropsWithoutRef<typeof TextInput>,
     VariantProps<typeof textareaVariants> {
   className?: string;
 }
-
 export function Textarea({ variant, className, ...props }: TextareaProps) {
   return (
     <TextInput
@@ -57,7 +52,6 @@ export function Textarea({ variant, className, ...props }: TextareaProps) {
     />
   );
 }`;
-
 export default function TextareaPage() {
   return (
     <div className="space-y-10">
@@ -68,26 +62,22 @@ export default function TextareaPage() {
           A multiline text input component with variants for forms and content entry.
         </p>
       </div>
-
       {/* Preview */}
       <ComponentPlayground code={usageCode}>
         <div className="flex flex-col gap-4 w-full max-w-sm">
           <PreviewTextarea placeholder="Type your message here..." />
         </div>
       </ComponentPlayground>
-
       {/* Installation */}
       <div className="space-y-4">
         <h2 className="text-2xl font-semibold tracking-tight text-foreground">Installation</h2>
         <CodeBlock code={installCode} />
       </div>
-
       {/* Usage */}
       <div className="space-y-4">
         <h2 className="text-2xl font-semibold tracking-tight text-foreground">Usage</h2>
         <CodeBlock code={usageCode} title="app/index.tsx" />
       </div>
-
       {/* Variants */}
       <div className="space-y-4">
         <h2 className="text-2xl font-semibold tracking-tight text-foreground">Variants</h2>
@@ -98,38 +88,17 @@ export default function TextareaPage() {
           </div>
         </ComponentPlayground>
       </div>
-
       {/* Props */}
       <div className="space-y-4">
         <h2 className="text-2xl font-semibold tracking-tight text-foreground">Props</h2>
-        <div className="overflow-x-auto rounded-lg border border-border">
-          <table className="w-full text-sm">
-            <thead>
-              <tr className="border-b border-border bg-secondary/50">
-                <th className="px-4 py-3 text-left font-medium text-foreground">Prop</th>
-                <th className="px-4 py-3 text-left font-medium text-foreground">Type</th>
-                <th className="px-4 py-3 text-left font-medium text-foreground">Default</th>
-              </tr>
-            </thead>
-            <tbody className="text-muted-foreground">
-              <tr className="border-b border-border">
-                <td className="px-4 py-3 font-mono text-xs text-foreground">variant</td>
-                <td className="px-4 py-3 font-mono text-xs">{`"default" | "ghost"`}</td>
-                <td className="px-4 py-3 font-mono text-xs">{`"default"`}</td>
-              </tr>
-              <tr>
-                <td className="px-4 py-3 font-mono text-xs text-foreground">className</td>
-                <td className="px-4 py-3 font-mono text-xs">string</td>
-                <td className="px-4 py-3 font-mono text-xs">-</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
+        <PropsTable props={[
+          { name: "variant", type: "\"default\" | \"ghost\"", default: "\"default\"" },
+          { name: "className", type: "string" },
+        ]} />
         <p className="text-sm text-muted-foreground">
           Also accepts all <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">TextInput</code> props from React Native.
         </p>
       </div>
-
       {/* Source */}
       <div className="space-y-4">
         <h2 className="text-2xl font-semibold tracking-tight text-foreground">Source</h2>
