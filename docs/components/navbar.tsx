@@ -192,6 +192,18 @@ export function Navbar() {
               <Link href="/docs/date-picker" className="block text-sm text-muted-foreground hover:text-foreground mt-2" onClick={() => setMobileOpen(false)}>
                 Date Picker
               </Link>
+              <Link href="/docs/search-bar" className="block text-sm text-muted-foreground hover:text-foreground mt-2" onClick={() => setMobileOpen(false)}>
+                SearchBar
+              </Link>
+              <Link href="/docs/chip" className="block text-sm text-muted-foreground hover:text-foreground mt-2" onClick={() => setMobileOpen(false)}>
+                Chip
+              </Link>
+              <Link href="/docs/fab" className="block text-sm text-muted-foreground hover:text-foreground mt-2" onClick={() => setMobileOpen(false)}>
+                FAB
+              </Link>
+              <Link href="/docs/empty-state" className="block text-sm text-muted-foreground hover:text-foreground mt-2" onClick={() => setMobileOpen(false)}>
+                EmptyState
+              </Link>
             </div>
             <div className="border-t border-border pt-4 mt-4">
               <p className="text-xs font-semibold text-foreground mb-2">Tier 2 - Animated</p>

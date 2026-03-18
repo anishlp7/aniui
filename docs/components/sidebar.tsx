@@ -42,6 +42,10 @@ const sidebarItems = [
       { title: "Table", href: "/docs/table" },
       { title: "Calendar", href: "/docs/calendar" },
       { title: "Date Picker", href: "/docs/date-picker" },
+      { title: "SearchBar", href: "/docs/search-bar" },
+      { title: "Chip", href: "/docs/chip" },
+      { title: "FAB", href: "/docs/fab" },
+      { title: "EmptyState", href: "/docs/empty-state" },
     ],
   },
   {

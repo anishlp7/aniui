@@ -64,7 +64,7 @@ export function WelcomeScreen() {
 
 ## Components
 
-**37 components** across three tiers.
+**41 components** across three tiers.
 
 ### Tier 1 — Core
 
@@ -95,6 +95,10 @@ Zero extra dependencies. Uses React Native core + NativeWind + CVA.
 | [Table](https://aniui.dev/docs/table) | Data table with header, body, rows, and cells |
 | [Calendar](https://aniui.dev/docs/calendar) | Month grid with single date and range selection |
 | [Date Picker](https://aniui.dev/docs/date-picker) | Calendar popup picker with range support |
+| [SearchBar](https://aniui.dev/docs/search-bar) | Search input with icon, clear, and cancel |
+| [Chip](https://aniui.dev/docs/chip) | Interactive tag for filters and multi-select |
+| [FAB](https://aniui.dev/docs/fab) | Floating action button with positioning |
+| [EmptyState](https://aniui.dev/docs/empty-state) | Placeholder for empty lists and error states |
 
 ### Tier 2 — Animated
 

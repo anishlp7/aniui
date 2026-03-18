@@ -296,6 +296,38 @@ export const registry: Record<string, ComponentEntry> = {
     registryDependencies: [],
     tier: 1,
   },
+  "search-bar": {
+    name: "SearchBar",
+    file: "components/ui/search-bar.tsx",
+    description: "Search input with icon, clear button, and cancel",
+    dependencies: ["class-variance-authority", "clsx", "tailwind-merge"],
+    registryDependencies: [],
+    tier: 1,
+  },
+  chip: {
+    name: "Chip",
+    file: "components/ui/chip.tsx",
+    description: "Interactive tag for filters and multi-select",
+    dependencies: ["class-variance-authority", "clsx", "tailwind-merge"],
+    registryDependencies: [],
+    tier: 1,
+  },
+  fab: {
+    name: "FAB",
+    file: "components/ui/fab.tsx",
+    description: "Floating action button for primary screen actions",
+    dependencies: ["class-variance-authority", "clsx", "tailwind-merge"],
+    registryDependencies: [],
+    tier: 1,
+  },
+  "empty-state": {
+    name: "EmptyState",
+    file: "components/ui/empty-state.tsx",
+    description: "Placeholder for empty screens and error states",
+    dependencies: ["clsx", "tailwind-merge"],
+    registryDependencies: [],
+    tier: 1,
+  },
 };
 
 export function getComponentNames(): string[] {

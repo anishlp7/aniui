@@ -17,7 +17,7 @@ AniUI is a copy-paste component library for React Native. Components are source 
 npx aniui init
 npx aniui add button text input card
 
-## Components (37 total)
+## Components (41 total)
 
 ### Tier 1 — Core (no extra deps)
 - Button: `import { Button } from "@/components/ui/button"` — variant: default|secondary|outline|ghost|destructive, size: sm|md|lg
@@ -41,6 +41,12 @@ npx aniui add button text input card
 - ToggleGroup: `import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group"` — Exclusive selection group
 - InputOTP: `import { InputOTP } from "@/components/ui/input-otp"` — OTP verification input
 - Table: `import { Table, TableHeader, TableBody, TableRow, TableHead, TableCell } from "@/components/ui/table"`
+- SearchBar: `import { SearchBar } from "@/components/ui/search-bar"` — Search input with icon, clear, cancel
+- Chip: `import { Chip } from "@/components/ui/chip"` — Interactive tag, variant: default|secondary|outline|destructive, selected state, onClose
+- FAB: `import { FAB } from "@/components/ui/fab"` — Floating action button, variant: default|secondary|destructive, position: bottom-right|bottom-left|bottom-center|none
+- EmptyState: `import { EmptyState } from "@/components/ui/empty-state"` — Empty list/error placeholder with icon, title, description, action
+- Calendar: `import { Calendar } from "@/components/ui/calendar"` — Month grid with single date and range selection
+- DatePicker: `import { DatePicker, DateRangePicker } from "@/components/ui/date-picker"` — Calendar popup picker with range support
 
 ### Tier 2 — Animated (needs react-native-reanimated)
 - Skeleton: `import { Skeleton } from "@/components/ui/skeleton"` — Animated loading placeholder
@@ -53,9 +59,6 @@ npx aniui add button text input card
 - Tooltip: `import { Tooltip } from "@/components/ui/tooltip"` — Fade-in tooltip on press
 - Popover: `import { Popover, PopoverTrigger, PopoverContent } from "@/components/ui/popover"`
 - Drawer: `import { Drawer, DrawerContent } from "@/components/ui/drawer"` — Slide-in side panel
-
-- Calendar: `import { Calendar } from "@/components/ui/calendar"` — Month grid with single date and range selection
-- DatePicker: `import { DatePicker, DateRangePicker } from "@/components/ui/date-picker"` — Calendar popup picker with range support
 
 ### Tier 3 — Native (needs extra packages)
 - BottomSheet: `import { BottomSheet } from "@/components/ui/bottom-sheet"` — needs @gorhom/bottom-sheet
