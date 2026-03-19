@@ -84,6 +84,9 @@ export function Navbar() {
             <Link href="/blocks" className="text-muted-foreground hover:text-foreground transition-colors">
               Blocks
             </Link>
+            <Link href="/themes" className="text-muted-foreground hover:text-foreground transition-colors">
+              Themes
+            </Link>
           </nav>
 
           <div className="ml-auto flex items-center gap-2">
