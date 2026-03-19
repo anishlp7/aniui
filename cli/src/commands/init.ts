@@ -126,7 +126,29 @@ export async function initCommand(): Promise<void> {
   await fs.ensureDir(componentsDir);
   logger.success(`Created ${path.relative(cwd, componentsDir)}/`);
 
-  // 6. Write .aniui.json config
+  // 6. Bare RN: set up metro.config.js and babel.config.js for NativeWind
+  if (project.type === "react-native-cli") {
+    const metroConfigPath = path.resolve(cwd, "metro.config.js");
+    if (await fs.pathExists(metroConfigPath)) {
+      logger.warn("metro.config.js already exists — wrap it with withNativeWind:");
+      logger.info('  const { withNativeWind } = require("nativewind/metro");');
+      logger.info('  module.exports = withNativeWind(config, { input: "./global.css" });');
+    } else {
+      await copyTemplate("metro.config.bare.js", metroConfigPath);
+      logger.success("Created metro.config.js (NativeWind configured)");
+    }
+
+    const babelConfigPath = path.resolve(cwd, "babel.config.js");
+    if (await fs.pathExists(babelConfigPath)) {
+      logger.warn('babel.config.js already exists — add "nativewind/babel" to presets:');
+      logger.info('  presets: [...existing, "nativewind/babel"]');
+    } else {
+      await copyTemplate("babel.config.bare.js", babelConfigPath);
+      logger.success("Created babel.config.js (NativeWind configured)");
+    }
+  }
+
+  // 7. Write .aniui.json config
   const config = {
     componentsDir: response.componentsDir,
     utilPath: response.utilPath,
@@ -140,7 +162,15 @@ export async function initCommand(): Promise<void> {
   logger.info("1. Import global.css in your app entry:");
   logger.info('   import "./global.css";');
   logger.break();
-  logger.info("2. Add components:");
+
+  if (project.type === "react-native-cli") {
+    logger.info("2. Verify metro.config.js uses withNativeWind (created above)");
+    logger.info("3. Verify babel.config.js includes nativewind/babel preset");
+    logger.break();
+    logger.info("4. Add components:");
+  } else {
+    logger.info("2. Add components:");
+  }
   logger.info(`   ${getDlxCommand(pm, "aniui add button card text")}`);
   logger.break();
 }
