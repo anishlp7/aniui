@@ -14,6 +14,7 @@ const sidebarItems = [
       { title: "CLI", href: "/docs/cli" },
       { title: "Theming", href: "/docs/theming" },
       { title: "Dark Mode", href: "/docs/dark-mode" },
+      { title: "Themes", href: "/themes" },
     ],
   },
   {

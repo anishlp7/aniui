@@ -124,6 +124,9 @@ export function Navbar() {
             <Link href="/docs/dark-mode" className="block text-sm text-muted-foreground hover:text-foreground" onClick={() => setMobileOpen(false)}>
               Dark Mode
             </Link>
+            <Link href="/themes" className="block text-sm text-muted-foreground hover:text-foreground mt-2" onClick={() => setMobileOpen(false)}>
+              Themes
+            </Link>
             <div className="border-t border-border pt-4 mt-4">
               <p className="text-xs font-semibold text-foreground mb-2">Components</p>
               {[
