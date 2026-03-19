@@ -4,13 +4,11 @@ import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js"
 import { z } from "zod";
 import fs from "fs/promises";
 import path from "path";
+import { fileURLToPath } from "url";
 import { registry, getComponentNames } from "./registry-data.js";
 
-const REPO_ROOT = path.resolve(
-  new URL(".", import.meta.url).pathname,
-  "..",
-  ".."
-);
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const REPO_ROOT = path.resolve(__dirname, "..", "..");
 
 const server = new McpServer({
   name: "aniui",
