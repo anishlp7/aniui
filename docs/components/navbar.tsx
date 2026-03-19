@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import { useTheme } from "./theme-provider";
+import { gettingStartedItems, componentItems, blockItems } from "@/lib/nav-data";
 
 function SunIcon() {
   return (
@@ -84,8 +85,8 @@ export function Navbar() {
             <Link href="/blocks" className="text-muted-foreground hover:text-foreground transition-colors">
               Blocks
             </Link>
-            <Link href="/themes" className="text-muted-foreground hover:text-foreground transition-colors">
-              Themes
+            <Link href="/create" className="text-muted-foreground hover:text-foreground transition-colors">
+              Create
             </Link>
           </nav>
 
@@ -112,101 +113,24 @@ export function Navbar() {
       {mobileOpen && (
         <div className="fixed inset-0 top-14 z-40 bg-background md:hidden">
           <nav className="space-y-4 p-6">
-            <Link href="/docs" className="block text-sm text-muted-foreground hover:text-foreground" onClick={() => setMobileOpen(false)}>
-              Introduction
-            </Link>
-            <Link href="/docs/installation" className="block text-sm text-muted-foreground hover:text-foreground" onClick={() => setMobileOpen(false)}>
-              Installation
-            </Link>
-            <Link href="/docs/cli" className="block text-sm text-muted-foreground hover:text-foreground" onClick={() => setMobileOpen(false)}>
-              CLI
-            </Link>
-            <Link href="/docs/theming" className="block text-sm text-muted-foreground hover:text-foreground" onClick={() => setMobileOpen(false)}>
-              Theming
-            </Link>
-            <Link href="/docs/dark-mode" className="block text-sm text-muted-foreground hover:text-foreground" onClick={() => setMobileOpen(false)}>
-              Dark Mode
-            </Link>
-            <Link href="/themes" className="block text-sm text-muted-foreground hover:text-foreground mt-2" onClick={() => setMobileOpen(false)}>
-              Themes
-            </Link>
+            {gettingStartedItems.map((item) => (
+              <Link key={item.href} href={item.href} className="block text-sm text-muted-foreground hover:text-foreground" onClick={() => setMobileOpen(false)}>
+                {item.title}
+              </Link>
+            ))}
             <div className="border-t border-border pt-4 mt-4">
               <p className="text-xs font-semibold text-foreground mb-2">Components</p>
-              {[
-                ["Accordion", "/docs/accordion"],
-                ["Action Sheet", "/docs/action-sheet"],
-                ["Alert", "/docs/alert"],
-                ["Alert Dialog", "/docs/alert-dialog"],
-                ["Avatar", "/docs/avatar"],
-                ["Badge", "/docs/badge"],
-                ["Banner", "/docs/banner"],
-                ["Bottom Sheet", "/docs/bottom-sheet"],
-                ["Button", "/docs/button"],
-                ["Calendar", "/docs/calendar"],
-                ["Card", "/docs/card"],
-                ["Carousel", "/docs/carousel"],
-                ["Checkbox", "/docs/checkbox"],
-                ["Chip", "/docs/chip"],
-                ["Collapsible", "/docs/collapsible"],
-                ["Date Picker", "/docs/date-picker"],
-                ["Dialog", "/docs/dialog"],
-                ["Drawer", "/docs/drawer"],
-                ["Dropdown Menu", "/docs/dropdown-menu"],
-                ["Empty State", "/docs/empty-state"],
-                ["FAB", "/docs/fab"],
-                ["Image", "/docs/image"],
-                ["Input", "/docs/input"],
-                ["Input OTP", "/docs/input-otp"],
-                ["Label", "/docs/label"],
-                ["List", "/docs/list"],
-                ["Popover", "/docs/popover"],
-                ["Progress", "/docs/progress"],
-                ["Radio Group", "/docs/radio-group"],
-                ["Rating", "/docs/rating"],
-                ["Search Bar", "/docs/search-bar"],
-                ["Segmented Control", "/docs/segmented-control"],
-                ["Select", "/docs/select"],
-                ["Separator", "/docs/separator"],
-                ["Skeleton", "/docs/skeleton"],
-                ["Slider", "/docs/slider"],
-                ["Spinner", "/docs/spinner"],
-                ["Stepper", "/docs/stepper"],
-                ["Switch", "/docs/switch"],
-                ["Table", "/docs/table"],
-                ["Tabs", "/docs/tabs"],
-                ["Text", "/docs/text"],
-                ["Textarea", "/docs/textarea"],
-                ["Toast", "/docs/toast"],
-                ["Toggle", "/docs/toggle"],
-                ["Toggle Group", "/docs/toggle-group"],
-                ["Tooltip", "/docs/tooltip"],
-              ].map(([title, href], i) => (
-                <Link key={href} href={href} className={`block text-sm text-muted-foreground hover:text-foreground${i > 0 ? " mt-2" : ""}`} onClick={() => setMobileOpen(false)}>
-                  {title}
+              {componentItems.map((item, i) => (
+                <Link key={item.href} href={item.href} className={`block text-sm text-muted-foreground hover:text-foreground${i > 0 ? " mt-2" : ""}`} onClick={() => setMobileOpen(false)}>
+                  {item.title}
                 </Link>
               ))}
             </div>
             <div className="border-t border-border pt-4 mt-4">
               <p className="text-xs font-semibold text-foreground mb-2">Blocks</p>
-              {[
-                ["Login", "/blocks/login"],
-                ["Sign Up", "/blocks/signup"],
-                ["Forgot Password", "/blocks/forgot-password"],
-                ["Home Screen", "/blocks/home"],
-                ["Bottom Tabs", "/blocks/bottom-tabs"],
-                ["Drawer Navigation", "/blocks/drawer-nav"],
-                ["Profile", "/blocks/profile"],
-                ["Settings", "/blocks/settings"],
-                ["Onboarding", "/blocks/onboarding"],
-                ["Chat", "/blocks/chat"],
-                ["Product List", "/blocks/product-list"],
-                ["Product Detail", "/blocks/product-detail"],
-                ["Notifications", "/blocks/notifications"],
-                ["Pricing", "/blocks/pricing"],
-                ["Search", "/blocks/search"],
-              ].map(([title, href], i) => (
-                <Link key={href} href={href} className={`block text-sm text-muted-foreground hover:text-foreground${i > 0 ? " mt-2" : ""}`} onClick={() => setMobileOpen(false)}>
-                  {title}
+              {blockItems.map((item, i) => (
+                <Link key={item.href} href={item.href} className={`block text-sm text-muted-foreground hover:text-foreground${i > 0 ? " mt-2" : ""}`} onClick={() => setMobileOpen(false)}>
+                  {item.title}
                 </Link>
               ))}
             </div>
