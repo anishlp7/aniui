@@ -28,7 +28,8 @@
     "dist",
     "components",
     "lib",
-    "templates"
+    "templates",
+    "blocks"
   ],
   "scripts": {
     "build": "tsc",

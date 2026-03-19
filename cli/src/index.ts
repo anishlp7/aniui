@@ -1,6 +1,7 @@
 import { Command } from "commander";
 import { initCommand } from "./commands/init";
 import { addCommand } from "./commands/add";
+import { addBlockCommand } from "./commands/add-block";
 import { themeCommand } from "./commands/theme";
 import { mcpCommand } from "./commands/mcp";
 import { generateCommand } from "./commands/generate";
@@ -25,6 +26,14 @@ program
   .argument("[names...]", "component names to add")
   .action(async (names: string[]) => {
     await addCommand(names);
+  });
+
+program
+  .command("add-block")
+  .description("Add pre-built screen templates to your project")
+  .argument("[names...]", "block names to add")
+  .action(async (names: string[]) => {
+    await addBlockCommand(names);
   });
 
 program
