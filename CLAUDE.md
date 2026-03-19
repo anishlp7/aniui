@@ -111,7 +111,25 @@ aniui/
 │       ├── bottom-sheet.tsx
 │       ├── action-sheet.tsx
 │       ├── select.tsx
-│       └── date-picker.tsx
+│       ├── date-picker.tsx
+│       ├── slider.tsx
+│       ├── toggle.tsx
+│       ├── toggle-group.tsx
+│       ├── drawer.tsx
+│       ├── input-otp.tsx
+│       ├── table.tsx
+│       ├── search-bar.tsx
+│       ├── chip.tsx
+│       ├── fab.tsx
+│       ├── empty-state.tsx
+│       ├── dropdown-menu.tsx
+│       ├── image.tsx
+│       ├── segmented-control.tsx
+│       ├── carousel.tsx
+│       ├── rating.tsx
+│       ├── stepper.tsx
+│       ├── banner.tsx
+│       └── calendar.tsx
 │
 ├── lib/                       # Shared utils — also copied to user's project
 │   └── utils.ts               # cn() helper — THE ONLY utility file
@@ -209,49 +227,65 @@ export function [Name]({ variant, size, className, ...props }: [Name]Props) {
 
 ### Tier 1: Zero extra dependencies (use RN core + NativeWind + cva only)
 
-Build these FIRST:
-
-| # | Component | Base | Variants | Lines |
-|---|-----------|------|----------|-------|
-| 1 | button | Pressable | default, secondary, outline, ghost, destructive × sm, md, lg | ~60 |
-| 2 | text | Text | h1, h2, h3, h4, p, lead, large, small, muted | ~45 |
-| 3 | input | TextInput | default, ghost × sm, md, lg | ~55 |
-| 4 | textarea | TextInput | Multi-line text input | ~38 |
-| 5 | card | View | Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter (compound) | ~65 |
-| 5 | badge | View+Text | default, secondary, outline, destructive | ~35 |
-| 6 | separator | View | horizontal, vertical | ~15 |
-| 7 | avatar | Image+View | sm, md, lg (with fallback initials) | ~50 |
-| 8 | alert | View+Text | default, destructive, success, warning | ~50 |
-| 10 | label | Text | (styled label for form fields) | ~15 |
-| 11 | switch | Switch | (themed wrapper around RN Switch) | ~30 |
-| 12 | checkbox | Pressable | checked, unchecked, disabled | ~45 |
-| 13 | radio-group | Pressable | (group context + radio items) | ~60 |
-| 14 | progress | View | (percentage bar) | ~30 |
-| 15 | spinner | ActivityIndicator | sm, md, lg sizes | ~39 |
-| 16 | list | View | (styled list items — NOT FlatList wrapper) | ~40 |
+| # | Component | Base | Variants / Notes |
+|---|-----------|------|------------------|
+| 1 | button | Pressable | default, secondary, outline, ghost, destructive × sm, md, lg |
+| 2 | text | Text | h1, h2, h3, h4, p, lead, large, small, muted |
+| 3 | input | TextInput | default, ghost × sm, md, lg |
+| 4 | textarea | TextInput | Multi-line text input |
+| 5 | card | View | Compound: Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter |
+| 6 | badge | View+Text | default, secondary, outline, destructive |
+| 7 | separator | View | horizontal, vertical |
+| 8 | avatar | Image+View | sm, md, lg (with fallback initials) |
+| 9 | alert | View+Text | default, destructive, success, warning |
+| 10 | label | Text | Styled label for form fields |
+| 11 | switch | Switch | Themed wrapper around RN Switch |
+| 12 | checkbox | Pressable | checked, unchecked, disabled |
+| 13 | radio-group | Pressable | Group context + radio items |
+| 14 | progress | View | Percentage bar |
+| 15 | spinner | ActivityIndicator | sm, md, lg |
+| 16 | list | View | Styled list items (NOT FlatList wrapper) |
+| 17 | chip | Pressable | Selectable tag/chip |
+| 18 | image | Image | Styled image with fallback |
+| 19 | empty-state | View | Placeholder for empty lists/screens |
+| 20 | fab | Pressable | Floating action button |
+| 21 | search-bar | TextInput | Search input with icon |
+| 22 | banner | View | Informational banner |
 
 ### Tier 2: Needs react-native-reanimated v3
 
-| # | Component | Animation | Lines |
-|---|-----------|-----------|-------|
-| 17 | skeleton | Animated pulse via opacity | ~42 |
-| 18 | accordion | Height expand/collapse | ~68 |
-| 19 | tabs | Indicator slide | ~86 |
-| 20 | collapsible | Height animate | ~80 |
-| 21 | toast | Slide in/out + auto dismiss | ~74 |
-| 22 | dialog | Fade + scale overlay | ~77 |
-| 23 | alert-dialog | Fade + zoom confirmation dialog | ~63 |
-| 24 | tooltip | Fade in/out + position | ~44 |
-| 25 | popover | Contextual overlay content | ~92 |
+| # | Component | Animation |
+|---|-----------|-----------|
+| 23 | skeleton | Animated pulse via opacity |
+| 24 | accordion | Height expand/collapse |
+| 25 | tabs | Indicator slide |
+| 26 | collapsible | Height animate |
+| 27 | toast | Slide in/out + auto dismiss |
+| 28 | dialog | Fade + scale overlay |
+| 29 | alert-dialog | Fade + zoom confirmation dialog |
+| 30 | tooltip | Fade in/out + position |
+| 31 | popover | Contextual overlay content |
+| 32 | slider | Animated thumb + track |
+| 33 | toggle | Pressable toggle button |
+| 34 | toggle-group | Multi-toggle group |
+| 35 | drawer | Slide-in drawer overlay |
+| 36 | input-otp | OTP code input |
+| 37 | table | Data table with rows/cells |
+| 38 | dropdown-menu | Animated dropdown |
+| 39 | segmented-control | Animated segment indicator |
+| 40 | carousel | Swipeable carousel |
+| 41 | rating | Star/icon rating |
+| 42 | stepper | Increment/decrement stepper |
 
 ### Tier 3: Needs external packages
 
-| # | Component | Extra Dep | Lines |
-|---|-----------|-----------|-------|
-| 26 | bottom-sheet | @gorhom/bottom-sheet | ~45 |
-| 27 | action-sheet | @gorhom/bottom-sheet | ~50 |
-| 28 | select | @gorhom/bottom-sheet | ~92 |
-| 29 | date-picker | @react-native-community/datetimepicker | ~64 |
+| # | Component | Extra Dep |
+|---|-----------|-----------|
+| 43 | bottom-sheet | @gorhom/bottom-sheet |
+| 44 | action-sheet | @gorhom/bottom-sheet |
+| 45 | select | @gorhom/bottom-sheet |
+| 46 | calendar | (standalone) |
+| 47 | date-picker | @react-native-community/datetimepicker |
 
 ## Theme System
 
@@ -371,8 +405,8 @@ module.exports = {
 
 ```json
 {
-  "name": "aniui",
-  "version": "0.1.0",
+  "name": "@aniui/cli",
+  "version": "0.1.2",
   "description": "Beautiful React Native components. Copy. Paste. Ship.",
   "license": "MIT",
   "bin": {
