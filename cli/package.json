@@ -46,6 +46,9 @@
   "optionalDependencies": {
     "@anthropic-ai/sdk": "^0.52.0"
   },
+  "engines": {
+    "node": ">=20.0.0"
+  },
   "devDependencies": {
     "@types/fs-extra": "^11.0.0",
     "@types/node": "^20.0.0",

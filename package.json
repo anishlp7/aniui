@@ -5,6 +5,12 @@
   "description": "AniUI monorepo — Beautiful React Native components",
   "license": "MIT",
   "author": "Anish",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/anishlp7/aniui"
+  },
+  "bugs": "https://github.com/anishlp7/aniui/issues",
+  "homepage": "https://aniui.dev",
   "scripts": {
     "build": "cd cli && npm run build && cd ../mcp && npm run build",
     "test": "cd cli && npm test",
