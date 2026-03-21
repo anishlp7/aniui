@@ -47,12 +47,11 @@ export default function HomePage() {
   const [customColor, setCustomColor] = useState<ColorDef | null>(null);
   const [selectedRadius, setSelectedRadius] = useState("0.75rem");
   const [previewMode, setPreviewMode] = useState<"light" | "dark">(theme);
-  const synced = useRef(false);
+  const userPickedMode = useRef(false);
 
   useEffect(() => {
-    if (!synced.current) {
+    if (!userPickedMode.current) {
       setPreviewMode(theme);
-      synced.current = true;
     }
   }, [theme]);
   const [copiedInstall, setCopiedInstall] = useState(false);
@@ -80,6 +79,7 @@ export default function HomePage() {
   };
 
   const handleShuffle = () => {
+    userPickedMode.current = true;
     const result = shuffleTheme(selectedRadius, previewMode);
     setCustomColor(result.color);
     setSelectedRadius(result.radius);
@@ -89,13 +89,12 @@ export default function HomePage() {
   return (
     <div className="mx-auto max-w-[1400px] px-6">
       {/* ── Hero ─── */}
-      <div className="flex flex-col items-center text-center pt-20 pb-16">
+      <div className="flex flex-col items-center text-center pt-16 pb-16">
         <Image
           src={theme === "dark" ? "/logo-dark.png" : "/logo-light.png"}
           alt="AniUI"
           width={150}
           height={150}
-          className="mb-6"
         />
         <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-foreground max-w-3xl leading-[1.1]">
           Beautiful React Native components.{" "}
@@ -191,7 +190,7 @@ export default function HomePage() {
             {(["light", "dark"] as const).map((mode) => (
               <button
                 key={mode}
-                onClick={() => setPreviewMode(mode)}
+                onClick={() => { userPickedMode.current = true; setPreviewMode(mode); }}
                 className={`h-7 px-3 rounded text-xs font-medium capitalize transition-colors cursor-pointer ${
                   previewMode === mode
                     ? "bg-foreground text-background"
@@ -234,6 +233,7 @@ export default function HomePage() {
           <ThemePreview vars={vars} radius={selectedRadius} />
         </div>
       </div>
+
     </div>
   );
 }
