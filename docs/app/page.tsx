@@ -89,13 +89,7 @@ export default function HomePage() {
   return (
     <div className="mx-auto max-w-[1400px] px-6">
       {/* ── Hero ─── */}
-      <div className="flex flex-col items-center text-center pt-16 pb-16">
-        <Image
-          src={theme === "dark" ? "/logo-dark.png" : "/logo-light.png"}
-          alt="AniUI"
-          width={150}
-          height={150}
-        />
+      <div className="flex flex-col items-center text-center pt-20 pb-16">
         <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-foreground max-w-3xl leading-[1.1]">
           Beautiful React Native components.{" "}
           <span className="bg-gradient-to-r from-foreground/70 to-foreground/30 bg-clip-text text-transparent">
