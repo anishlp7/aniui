@@ -2,7 +2,7 @@
   <picture>
     <source media="(prefers-color-scheme: dark)" srcset="docs/public/logo-dark.png" />
     <source media="(prefers-color-scheme: light)" srcset="docs/public/logo-light.png" />
-    <img alt="AniUI" src="docs/public/logo-light.png" width="80" />
+    <img alt="AniUI" src="docs/public/logo-light.png" width="150" />
   </picture>
 </p>
 
