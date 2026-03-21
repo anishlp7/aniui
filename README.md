@@ -1,6 +1,10 @@
-<h1 align="center">
-  AniUI
-</h1>
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="docs/public/logo-dark.png" />
+    <source media="(prefers-color-scheme: light)" srcset="docs/public/logo-light.png" />
+    <img alt="AniUI" src="docs/public/logo-light.png" width="80" />
+  </picture>
+</p>
 
 <p align="center">
   <strong>Beautiful React Native components. Copy. Paste. Ship.</strong>

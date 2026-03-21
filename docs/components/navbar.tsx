@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { useTheme } from "./theme-provider";
 import { gettingStartedItems, componentItems, blockItems } from "@/lib/nav-data";
@@ -71,8 +72,13 @@ export function Navbar() {
             {mobileOpen ? <CloseIcon /> : <MenuIcon />}
           </button>
 
-          <Link href="/" className="flex items-center gap-2 font-bold text-foreground mr-8">
-            <span className="text-lg">AniUI</span>
+          <Link href="/" className="flex items-center">
+            <Image
+              src={theme === "dark" ? "/logo-dark.png" : "/logo-light.png"}
+              alt="AniUI"
+              width={90}
+              height={90}
+            />
           </Link>
 
           <nav className="hidden md:flex items-center gap-6 text-sm">
