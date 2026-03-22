@@ -11,7 +11,7 @@ export function MyScreen() {
   return (
     <Avatar
       src="https://github.com/anishlp7.png"
-      fallback="CN"
+      fallback="AN"
     />
   );
 }`;
@@ -86,7 +86,7 @@ export default function AvatarPage() {
       {/* Preview */}
       <ComponentPlayground code={usageCode}>
         <div className="flex flex-wrap items-center gap-4">
-          <PreviewAvatar src="https://github.com/anishlp7.png" fallback="CN" />
+          <PreviewAvatar src="https://github.com/anishlp7.png" fallback="AN" />
         </div>
       </ComponentPlayground>
       {/* Installation */}
