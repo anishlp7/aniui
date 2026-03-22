@@ -18,7 +18,7 @@ export function Checkbox({ checked = false, onCheckedChange, className, disabled
         className
       )}
       accessibilityRole="checkbox"
-      accessibilityState={{ checked, disabled }}
+      accessibilityState={{ checked: !!checked, disabled: !!disabled }}
       accessible={true}
       onPress={() => onCheckedChange?.(!checked)}
       disabled={disabled}

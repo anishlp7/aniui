@@ -28,6 +28,9 @@ export async function copyComponent(
   const relativeUtil = getRelativeImportPath(destDir, utilPath);
   content = content.replace(/@\/lib\/utils/g, relativeUtil);
 
+  // Rewrite cross-component imports: @/components/ui/foo → ./foo
+  content = content.replace(/@\/components\/ui\//g, "./");
+
   await fs.writeFile(destPath, content, "utf-8");
   return destPath;
 }

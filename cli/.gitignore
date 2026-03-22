@@ -1,0 +1,7 @@
+dist/
+node_modules/
+# Copied from repo root during build (see copy-assets script)
+components/
+lib/
+templates/
+blocks/

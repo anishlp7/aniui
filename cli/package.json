@@ -1,6 +1,6 @@
 {
   "name": "@aniui/cli",
-  "version": "0.2.2",
+  "version": "0.2.5",
   "description": "Beautiful React Native components. Copy. Paste. Ship.",
   "license": "MIT",
   "author": "Anish",
@@ -32,7 +32,9 @@
     "blocks"
   ],
   "scripts": {
-    "build": "tsc",
+    "build": "tsc && npm run copy-assets",
+    "copy-assets": "rm -rf components lib templates blocks && cp -r ../components . && cp -r ../lib . && cp -r ../templates . && (cp -r ../blocks . 2>/dev/null || true)",
+    "prepublishOnly": "npm run build",
     "dev": "tsc --watch",
     "test": "vitest run",
     "test:watch": "vitest"

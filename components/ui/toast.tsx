@@ -1,6 +1,6 @@
 import React, { createContext, useCallback, useContext, useState } from "react";
 import { View, Text, Pressable } from "react-native";
-import Animated, { SlideInUp, SlideOutUp, FadeOut } from "react-native-reanimated";
+import Animated, { SlideInUp, SlideOutUp } from "react-native-reanimated";
 import { cn } from "@/lib/utils";
 
 type ToastVariant = "default" | "destructive" | "success";
@@ -52,7 +52,7 @@ function ToastItem({ data, onDismiss }: { data: ToastData; onDismiss: () => void
   const isDefault = variant === "default";
 
   return (
-    <Animated.View entering={SlideInUp.duration(300)} exiting={SlideOutUp.merge(FadeOut).duration(200)}>
+    <Animated.View entering={SlideInUp.duration(300)} exiting={SlideOutUp.duration(200)}>
       <Pressable
         className={cn("rounded-lg border p-4 shadow-lg", variantStyles[variant])}
         onPress={onDismiss}

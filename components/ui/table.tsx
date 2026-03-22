@@ -2,8 +2,8 @@ import React from "react";
 import { View, Text, ScrollView } from "react-native";
 import { cn } from "@/lib/utils";
 
-export type TableTableViewProps = React.ComponentPropsWithoutRef<typeof View> & { className?: string; children?: React.ReactNode };
-export type TableTableTextProps = React.ComponentPropsWithoutRef<typeof Text> & { className?: string };
+export type TableViewProps = React.ComponentPropsWithoutRef<typeof View> & { className?: string; children?: React.ReactNode };
+export type TableTextProps = React.ComponentPropsWithoutRef<typeof Text> & { className?: string };
 
 export function Table({ className, children, ...props }: React.ComponentPropsWithoutRef<typeof ScrollView> & { className?: string; children?: React.ReactNode }) {
   return (
