@@ -35,11 +35,11 @@ Built with [NativeWind](https://www.nativewind.dev) v4, [class-variance-authorit
 
 ```bash
 # Initialize AniUI in your project
-npx aniui init
+npx @aniui/cli init
 
 # Add components
-npx aniui add button
-npx aniui add card input text
+npx @aniui/cli add button
+npx @aniui/cli add card input text
 ```
 
 That's it. Components are copied to your `components/ui/` directory. Import and use them:

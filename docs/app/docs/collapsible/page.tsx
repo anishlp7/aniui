@@ -4,7 +4,7 @@ import { ComponentPlayground } from "@/components/component-playground";
 import { CodeBlock } from "@/components/code-block";
 import { PropsTable, ComponentTable } from "@/components/props-table";
 
-const installCode = `npx aniui add collapsible`;
+const installCode = `npx @aniui/cli add collapsible`;
 const usageCode = `import { Collapsible, CollapsibleTrigger, CollapsibleContent } from "@/components/ui/collapsible";
 
 export function MyScreen() {

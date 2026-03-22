@@ -4,7 +4,7 @@ import { ComponentPlayground } from "@/components/component-playground";
 import { CodeBlock } from "@/components/code-block";
 import { PropsTable } from "@/components/props-table";
 
-const installCode = `npx aniui add input-otp`;
+const installCode = `npx @aniui/cli add input-otp`;
 const usageCode = `import { InputOTP } from "@/components/ui/input-otp";
 import { useState } from "react";
 

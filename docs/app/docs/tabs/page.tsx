@@ -4,7 +4,7 @@ import { ComponentPlayground } from "@/components/component-playground";
 import { CodeBlock } from "@/components/code-block";
 import { PropsTable, ComponentTable } from "@/components/props-table";
 
-const installCode = `npx aniui add tabs`;
+const installCode = `npx @aniui/cli add tabs`;
 const usageCode = `import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 
 export function MyScreen() {

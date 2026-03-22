@@ -5,7 +5,7 @@ import { ComponentPlayground } from "@/components/component-playground";
 import { CodeBlock } from "@/components/code-block";
 import { PropsTable, ComponentTable } from "@/components/props-table";
 
-const installCode = `npx aniui add radio-group`;
+const installCode = `npx @aniui/cli add radio-group`;
 const usageCode = `import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { useState } from "react";
 

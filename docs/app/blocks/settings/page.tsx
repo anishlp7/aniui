@@ -344,7 +344,7 @@ export default function SettingsBlockPage() {
       {/* Installation */}
       <div className="space-y-3">
         <h2 className="text-xl font-semibold tracking-tight">Installation</h2>
-        <CodeBlock code={`npx aniui add text switch avatar separator`} />
+        <CodeBlock code={`npx @aniui/cli add text switch avatar separator`} />
       </div>
 
       {/* Source */}

@@ -5,7 +5,7 @@ import { ComponentPlayground } from "@/components/component-playground";
 import { CodeBlock } from "@/components/code-block";
 import { PropsTable } from "@/components/props-table";
 
-const installCode = `npx aniui add fab`;
+const installCode = `npx @aniui/cli add fab`;
 const usageCode = `import { FAB } from "@/components/ui/fab";
 import { Ionicons } from "@expo/vector-icons";
 // Basic FAB (bottom-right by default)

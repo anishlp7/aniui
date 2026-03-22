@@ -48,7 +48,7 @@ export default function ThemingPage() {
           Switch presets with the CLI. Each preset changes the primary color while keeping
           the neutral palette consistent:
         </p>
-        <CodeBlock code="npx aniui theme" />
+        <CodeBlock code="npx @aniui/cli theme" />
         <ul className="list-disc pl-6 space-y-1 text-muted-foreground">
           <li><strong className="text-foreground">Default</strong> — Neutral dark/light</li>
           <li><strong className="text-foreground">Blue</strong> — Primary: <span className="inline-block w-3 h-3 rounded-full bg-blue-500 align-middle" /> #3B82F6</li>

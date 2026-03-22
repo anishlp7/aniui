@@ -4,7 +4,7 @@ import { ComponentPlayground } from "@/components/component-playground";
 import { CodeBlock } from "@/components/code-block";
 import { PropsTable, ComponentTable } from "@/components/props-table";
 
-const installCode = `npx aniui add list`;
+const installCode = `npx @aniui/cli add list`;
 const usageCode = `import { List, ListItem, ListItemTitle, ListItemDescription } from "@/components/ui/list";
 
 export function MyScreen() {

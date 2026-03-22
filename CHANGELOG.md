@@ -6,7 +6,7 @@ All notable changes to this project will be documented in this file.
 
 ### Added
 
-- Bare React Native CLI support in `npx aniui init` (metro.config.js + babel.config.js auto-setup)
+- Bare React Native CLI support in `npx @aniui/cli init` (metro.config.js + babel.config.js auto-setup)
 - `examples/bare-rn-starter/` — complete bare RN starter kit with NativeWind configured
 - Templates for bare RN: `metro.config.bare.js`, `babel.config.bare.js`
 

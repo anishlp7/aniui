@@ -329,7 +329,7 @@ export default function LoginBlockPage() {
         <p className="text-sm text-muted-foreground mb-3">
           Install the required AniUI components using the CLI.
         </p>
-        <CodeBlock code={`npx aniui add button input text separator label`} />
+        <CodeBlock code={`npx @aniui/cli add button input text separator label`} />
         <p className="text-sm text-muted-foreground mt-3">
           Also requires <code className="text-xs bg-muted px-1.5 py-0.5 rounded font-mono">react-native-safe-area-context</code> for <code className="text-xs bg-muted px-1.5 py-0.5 rounded font-mono">SafeAreaView</code>.
         </p>

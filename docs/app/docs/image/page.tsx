@@ -5,7 +5,7 @@ import { ComponentPlayground } from "@/components/component-playground";
 import { CodeBlock } from "@/components/code-block";
 import { PropsTable } from "@/components/props-table";
 
-const installCode = `npx aniui add image`;
+const installCode = `npx @aniui/cli add image`;
 const usageCode = `import { Image } from "@/components/ui/image";
 <Image src="https://picsum.photos/400/300" alt="Sample" width={200} height={150} />`;
 const roundedCode = `<Image src="https://picsum.photos/200/200" rounded="none" width={100} height={100} />

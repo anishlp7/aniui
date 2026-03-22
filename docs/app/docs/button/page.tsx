@@ -39,7 +39,7 @@ function SearchIcon({ className }: { className?: string }) {
     </svg>
   );
 }
-const installCode = `npx aniui add button`;
+const installCode = `npx @aniui/cli add button`;
 const usageCode = `import { Button } from "@/components/ui/button";
 
 export function MyScreen() {

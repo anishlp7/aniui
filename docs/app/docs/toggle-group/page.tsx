@@ -18,7 +18,7 @@ function ToggleGroupDemo() {
   );
 }
 
-const installCode = `npx aniui add toggle-group`;
+const installCode = `npx @aniui/cli add toggle-group`;
 const usageCode = `import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 
 export function MyScreen() {

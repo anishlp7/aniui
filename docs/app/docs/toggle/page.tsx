@@ -42,7 +42,7 @@ function ToggleSizesDemo() {
   );
 }
 
-const installCode = `npx aniui add toggle`;
+const installCode = `npx @aniui/cli add toggle`;
 const usageCode = `import { Toggle } from "@/components/ui/toggle";
 import { useState } from "react";
 

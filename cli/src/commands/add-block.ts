@@ -41,7 +41,7 @@ export async function addBlockCommand(names: string[]): Promise<void> {
   const invalid = names.filter((n) => !blockRegistry[n]);
   if (invalid.length > 0) {
     logger.error(`Unknown block(s): ${invalid.join(", ")}`);
-    logger.info(`Run "npx aniui add-block" to see available blocks.`);
+    logger.info(`Run "npx @aniui/cli add-block" to see available blocks.`);
     process.exit(1);
   }
 
@@ -52,7 +52,7 @@ export async function addBlockCommand(names: string[]): Promise<void> {
 
   // Check if init has been run
   if (!await fs.pathExists(utilPath)) {
-    logger.error("AniUI is not initialized. Run `npx aniui init` first.");
+    logger.error("AniUI is not initialized. Run `npx @aniui/cli init` first.");
     process.exit(1);
   }
 

@@ -4,7 +4,7 @@ import { ComponentPlayground } from "@/components/component-playground";
 import { CodeBlock } from "@/components/code-block";
 import { PropsTable } from "@/components/props-table";
 
-const installCode = `npx aniui add tooltip`;
+const installCode = `npx @aniui/cli add tooltip`;
 const usageCode = `import { Tooltip } from "@/components/ui/tooltip";
 import { Text } from "react-native";
 

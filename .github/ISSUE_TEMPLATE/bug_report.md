@@ -10,7 +10,7 @@ assignees: ""
 A clear description of what the bug is.
 
 ## Steps to Reproduce
-1. Install component: `npx aniui add ...`
+1. Install component: `npx @aniui/cli add ...`
 2. Use it in a screen: `...`
 3. See error
 
@@ -25,7 +25,7 @@ What actually happened.
 - **React Native version:**
 - **Expo SDK version (if applicable):**
 - **NativeWind version:**
-- **AniUI CLI version:** (`npx aniui --version`)
+- **AniUI CLI version:** (`npx @aniui/cli --version`)
 
 ## Screenshots / Logs
 If applicable, add screenshots or error logs.

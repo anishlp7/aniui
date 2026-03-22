@@ -81,7 +81,7 @@ export async function themeCommand(): Promise<void> {
   const globalCssPath = path.join(cwd, "global.css");
 
   if (!await fs.pathExists(globalCssPath)) {
-    logger.error("global.css not found. Run `npx aniui init` first.");
+    logger.error("global.css not found. Run `npx @aniui/cli init` first.");
     process.exit(1);
   }
 

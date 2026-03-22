@@ -5,7 +5,7 @@ import { ComponentPlayground } from "@/components/component-playground";
 import { CodeBlock } from "@/components/code-block";
 import { PropsTable } from "@/components/props-table";
 
-const installCode = `npx aniui add chip`;
+const installCode = `npx @aniui/cli add chip`;
 const usageCode = `import { Chip } from "@/components/ui/chip";
 <Chip variant="default">React Native</Chip>
 <Chip variant="secondary">TypeScript</Chip>

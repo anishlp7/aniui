@@ -2,7 +2,8 @@ import path from "path";
 import fs from "fs-extra";
 
 export function getPackageRoot(): string {
-  return path.resolve(__dirname, "..", "..");
+  // Compiled path: dist/src/utils/file-ops.js → need 3 levels up to reach package root
+  return path.resolve(__dirname, "..", "..", "..");
 }
 
 export async function copyComponent(

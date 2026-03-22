@@ -37,7 +37,7 @@ function ToastDemo() {
     </PreviewToastProvider>
   );
 }
-const installCode = `npx aniui add toast`;
+const installCode = `npx @aniui/cli add toast`;
 const usageCode = `import { ToastProvider, useToast } from "@/components/ui/toast";
 // Wrap your app with ToastProvider
 export function App() {

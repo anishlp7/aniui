@@ -5,7 +5,7 @@ import { ComponentPlayground } from "@/components/component-playground";
 import { CodeBlock } from "@/components/code-block";
 import { PropsTable } from "@/components/props-table";
 
-const installCode = `npx aniui add rating`;
+const installCode = `npx @aniui/cli add rating`;
 const usageCode = `import { Rating } from "@/components/ui/rating";
 
 const [value, setValue] = useState(3);

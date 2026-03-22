@@ -5,7 +5,7 @@ import { ComponentPlayground } from "@/components/component-playground";
 import { CodeBlock } from "@/components/code-block";
 import { PropsTable } from "@/components/props-table";
 
-const installCode = `npx aniui add empty-state`;
+const installCode = `npx @aniui/cli add empty-state`;
 const usageCode = `import { EmptyState } from "@/components/ui/empty-state";
 import { Ionicons } from "@expo/vector-icons";
 <EmptyState

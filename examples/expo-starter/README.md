@@ -21,7 +21,7 @@ npm run android
 ## Adding More Components
 
 ```bash
-npx aniui add switch checkbox accordion dialog
+npx @aniui/cli add switch checkbox accordion dialog
 ```
 
 Components are copied as source files into `components/ui/`. You own the code.

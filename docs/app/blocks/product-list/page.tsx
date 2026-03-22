@@ -344,7 +344,7 @@ export default function ProductListBlockPage() {
       {/* Installation */}
       <div>
         <h2 className="text-xl font-semibold mb-3">Installation</h2>
-        <CodeBlock code={`npx aniui add text card badge`} />
+        <CodeBlock code={`npx @aniui/cli add text card badge`} />
         <p className="text-sm text-muted-foreground mt-3">
           Also requires <code className="text-xs bg-muted px-1.5 py-0.5 rounded">react-native-safe-area-context</code> for{" "}
           <code className="text-xs bg-muted px-1.5 py-0.5 rounded">SafeAreaView</code>.

@@ -4,7 +4,7 @@ import { ComponentPlayground } from "@/components/component-playground";
 import { CodeBlock } from "@/components/code-block";
 import { PropsTable } from "@/components/props-table";
 
-const installCode = `npx aniui add text`;
+const installCode = `npx @aniui/cli add text`;
 const usageCode = `import { Text } from "@/components/ui/text";
 
 export function MyScreen() {

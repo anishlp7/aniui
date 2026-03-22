@@ -5,7 +5,7 @@ import { ComponentPlayground } from "@/components/component-playground";
 import { CodeBlock } from "@/components/code-block";
 import { PropsTable, type PropDef } from "@/components/props-table";
 
-const installCode = `npx aniui add banner`;
+const installCode = `npx @aniui/cli add banner`;
 const usageCode = `import { Banner } from "@/components/ui/banner";
 <Banner variant="info" onDismiss={() => {}}>
   New version available. Update now for the latest features.

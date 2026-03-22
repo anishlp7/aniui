@@ -5,7 +5,7 @@ import { ComponentPlayground } from "@/components/component-playground";
 import { CodeBlock } from "@/components/code-block";
 import { PropsTable } from "@/components/props-table";
 
-const installCode = `npx aniui add search-bar`;
+const installCode = `npx @aniui/cli add search-bar`;
 const usageCode = `import { SearchBar } from "@/components/ui/search-bar";
 
 function MyScreen() {

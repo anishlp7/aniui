@@ -4,7 +4,7 @@ import { ComponentPlayground } from "@/components/component-playground";
 import { CodeBlock } from "@/components/code-block";
 import { PropsTable } from "@/components/props-table";
 
-const installCode = `npx aniui add switch`;
+const installCode = `npx @aniui/cli add switch`;
 const usageCode = `import { Switch } from "@/components/ui/switch";
 import { useState } from "react";
 

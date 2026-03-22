@@ -67,7 +67,7 @@ export default function HomePage() {
   };
 
   const handleCopyInstall = () => {
-    navigator.clipboard.writeText("npx aniui init");
+    navigator.clipboard.writeText("npx @aniui/cli init");
     setCopiedInstall(true);
     setTimeout(() => setCopiedInstall(false), 2000);
   };
@@ -122,7 +122,7 @@ export default function HomePage() {
           onClick={handleCopyInstall}
           className="mt-6 inline-flex items-center gap-3 rounded-lg border border-border bg-secondary/30 px-5 py-2.5 font-mono text-sm text-muted-foreground hover:bg-secondary/60 transition-colors cursor-pointer"
         >
-          <span><span className="text-foreground/40 select-none">$</span> npx aniui init</span>
+          <span><span className="text-foreground/40 select-none">$</span> npx @aniui/cli init</span>
           <span className="text-muted-foreground/60">
             {copiedInstall ? <CheckIcon /> : <CopyIcon />}
           </span>
@@ -132,8 +132,8 @@ export default function HomePage() {
       {/* ── How it works ─── */}
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 pb-16">
         {[
-          { step: "1", title: "Initialize", desc: "Run npx aniui init to set up theming, Tailwind config, and utilities in your Expo or bare RN project." },
-          { step: "2", title: "Add components", desc: "Pick what you need with npx aniui add button card dialog — source files are copied directly into your project." },
+          { step: "1", title: "Initialize", desc: "Run npx @aniui/cli init to set up theming, Tailwind config, and utilities in your Expo or bare RN project." },
+          { step: "2", title: "Add components", desc: "Pick what you need with npx @aniui/cli add button card dialog — source files are copied directly into your project." },
           { step: "3", title: "Make it yours", desc: "Every component is a single file you own. Customize variants, tweak styles, or extend freely — no lock-in." },
         ].map((item) => (
           <div key={item.step} className="rounded-lg border border-border bg-card p-6">

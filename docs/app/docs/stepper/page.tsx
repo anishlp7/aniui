@@ -5,7 +5,7 @@ import { ComponentPlayground } from "@/components/component-playground";
 import { CodeBlock } from "@/components/code-block";
 import { PropsTable } from "@/components/props-table";
 
-const installCode = `npx aniui add stepper`;
+const installCode = `npx @aniui/cli add stepper`;
 const usageCode = `import { Stepper } from "@/components/ui/stepper";
 
 const [count, setCount] = useState(1);

@@ -14,8 +14,8 @@ AniUI is a copy-paste component library for React Native. Components are source 
 - Strict TypeScript — no `any` types
 
 ## Installation
-npx aniui init
-npx aniui add button text input card
+npx @aniui/cli init
+npx @aniui/cli add button text input card
 
 ## Components (48 total, alphabetical)
 

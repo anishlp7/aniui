@@ -5,7 +5,7 @@ import { ComponentPlayground } from "@/components/component-playground";
 import { CodeBlock } from "@/components/code-block";
 import { PropsTable } from "@/components/props-table";
 
-const installCode = `npx aniui add segmented-control`;
+const installCode = `npx @aniui/cli add segmented-control`;
 const usageCode = `import { SegmentedControl } from "@/components/ui/segmented-control";
 
 const [view, setView] = useState("List");

@@ -4,7 +4,7 @@ import { ComponentPlayground } from "@/components/component-playground";
 import { CodeBlock } from "@/components/code-block";
 import { PropsTable } from "@/components/props-table";
 
-const installCode = `npx aniui add action-sheet`;
+const installCode = `npx @aniui/cli add action-sheet`;
 const depInstallCode = `npx expo install @gorhom/bottom-sheet react-native-gesture-handler react-native-reanimated`;
 const usageCode = `import { ActionSheet } from "@/components/ui/action-sheet";
 import { useRef } from "react";

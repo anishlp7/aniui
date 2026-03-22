@@ -5,7 +5,7 @@ import { ComponentPlayground } from "@/components/component-playground";
 import { CodeBlock } from "@/components/code-block";
 import { PropsTable } from "@/components/props-table";
 
-const installCode = `npx aniui add carousel`;
+const installCode = `npx @aniui/cli add carousel`;
 const usageCode = `import { Carousel } from "@/components/ui/carousel";
 <Carousel
   data={[

@@ -4,7 +4,7 @@ import { ComponentPlayground } from "@/components/component-playground";
 import { CodeBlock } from "@/components/code-block";
 import { PropsTable } from "@/components/props-table";
 
-const installCode = `npx aniui add progress`;
+const installCode = `npx @aniui/cli add progress`;
 const usageCode = `import { Progress } from "@/components/ui/progress";
 
 export function MyScreen() {

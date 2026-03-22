@@ -4,7 +4,7 @@ import { ComponentPlayground } from "@/components/component-playground";
 import { CodeBlock } from "@/components/code-block";
 import { PropsTable } from "@/components/props-table";
 
-const installCode = `npx aniui add checkbox`;
+const installCode = `npx @aniui/cli add checkbox`;
 const usageCode = `import { Checkbox } from "@/components/ui/checkbox";
 import { useState } from "react";
 

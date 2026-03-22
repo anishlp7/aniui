@@ -16,7 +16,7 @@ export default function CLIPage() {
           Initialize AniUI in your React Native project. Sets up the utility helper,
           global CSS theme, and Tailwind config.
         </p>
-        <CodeBlock code="npx aniui init" />
+        <CodeBlock code="npx @aniui/cli init" />
         <p className="text-muted-foreground">
           The init command will:
         </p>
@@ -33,17 +33,17 @@ export default function CLIPage() {
         <p className="text-muted-foreground">
           Add components to your project. Components are copied as source files — you own the code.
         </p>
-        <CodeBlock code="npx aniui add [component...]" />
+        <CodeBlock code="npx @aniui/cli add [component...]" />
         <p className="text-muted-foreground">Examples:</p>
         <CodeBlock
           code={`# Add a single component
-npx aniui add button
+npx @aniui/cli add button
 
 # Add multiple components
-npx aniui add button text input card
+npx @aniui/cli add button text input card
 
 # Add a component with dependencies (auto-resolved)
-npx aniui add select
+npx @aniui/cli add select
 # → also adds bottom-sheet (registry dependency)`}
         />
         <p className="text-muted-foreground">
@@ -55,7 +55,7 @@ npx aniui add select
         <p className="text-muted-foreground">
           Switch between theme presets. Updates the CSS variables in your <code className="rounded bg-secondary px-1.5 py-0.5 text-sm font-mono">global.css</code>.
         </p>
-        <CodeBlock code="npx aniui theme" />
+        <CodeBlock code="npx @aniui/cli theme" />
         <p className="text-muted-foreground">
           Available presets: <strong>Default</strong> (neutral), <strong>Blue</strong>, <strong>Green</strong>, <strong>Orange</strong>, <strong>Rose</strong>.
         </p>
@@ -66,10 +66,10 @@ npx aniui add select
         </p>
         <CodeBlock
           code={`# Generate a screen from a description
-npx aniui generate "login page with email and password"
+npx @aniui/cli generate "login page with email and password"
 
 # Specify output path
-npx aniui generate "settings page" -o app/settings.tsx`}
+npx @aniui/cli generate "settings page" -o app/settings.tsx`}
         />
         <p className="text-muted-foreground">
           The AI knows the full AniUI component catalog and generates screens using only
@@ -80,7 +80,7 @@ npx aniui generate "settings page" -o app/settings.tsx`}
         <p className="text-muted-foreground">
           Print the MCP server configuration for AI tools like Claude Desktop or Cursor.
         </p>
-        <CodeBlock code="npx aniui mcp" />
+        <CodeBlock code="npx @aniui/cli mcp" />
         <p className="text-muted-foreground">
           This outputs a JSON config block you can paste into your AI tool&apos;s MCP settings.
           The MCP server exposes component registry data, source code, usage patterns, and theme tokens.

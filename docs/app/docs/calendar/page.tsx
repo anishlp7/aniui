@@ -5,7 +5,7 @@ import { CodeBlock } from "@/components/code-block";
 import React, { useState } from "react";
 import { PropsTable } from "@/components/props-table";
 
-const installCode = `npx aniui add calendar`;
+const installCode = `npx @aniui/cli add calendar`;
 const usageCode = `import { Calendar } from "@/components/ui/calendar";
 
 export function MyScreen() {

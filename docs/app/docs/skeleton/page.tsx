@@ -4,7 +4,7 @@ import { ComponentPlayground } from "@/components/component-playground";
 import { CodeBlock } from "@/components/code-block";
 import { PropsTable } from "@/components/props-table";
 
-const installCode = `npx aniui add skeleton`;
+const installCode = `npx @aniui/cli add skeleton`;
 const usageCode = `import { Skeleton } from "@/components/ui/skeleton";
 
 export function MyScreen() {

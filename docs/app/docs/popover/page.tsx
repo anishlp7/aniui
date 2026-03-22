@@ -4,7 +4,7 @@ import { ComponentPlayground } from "@/components/component-playground";
 import { CodeBlock } from "@/components/code-block";
 import { PropsTable, ComponentTable } from "@/components/props-table";
 
-const installCode = `npx aniui add popover`;
+const installCode = `npx @aniui/cli add popover`;
 const usageCode = `import { Text } from "react-native";
 import {
   Popover,

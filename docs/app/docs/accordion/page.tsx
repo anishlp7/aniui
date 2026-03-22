@@ -4,7 +4,7 @@ import { ComponentPlayground } from "@/components/component-playground";
 import { CodeBlock } from "@/components/code-block";
 import { PropsTable, ComponentTable } from "@/components/props-table";
 
-const installCode = `npx aniui add accordion`;
+const installCode = `npx @aniui/cli add accordion`;
 const usageCode = `import { Accordion, AccordionItem } from "@/components/ui/accordion";
 
 export function MyScreen() {

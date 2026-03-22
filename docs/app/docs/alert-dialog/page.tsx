@@ -4,7 +4,7 @@ import { ComponentPlayground } from "@/components/component-playground";
 import { CodeBlock } from "@/components/code-block";
 import { PropsTable, ComponentTable } from "@/components/props-table";
 
-const installCode = `npx aniui add alert-dialog`;
+const installCode = `npx @aniui/cli add alert-dialog`;
 const usageCode = `import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import {

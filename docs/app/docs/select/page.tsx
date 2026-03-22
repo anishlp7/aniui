@@ -4,7 +4,7 @@ import { ComponentPlayground } from "@/components/component-playground";
 import { CodeBlock } from "@/components/code-block";
 import { PropsTable } from "@/components/props-table";
 
-const installCode = `npx aniui add select`;
+const installCode = `npx @aniui/cli add select`;
 const depInstallCode = `npx expo install @gorhom/bottom-sheet react-native-gesture-handler react-native-reanimated`;
 const usageCode = `import { Select } from "@/components/ui/select";
 import { useState } from "react";

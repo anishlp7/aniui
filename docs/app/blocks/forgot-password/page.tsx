@@ -310,7 +310,7 @@ export default function ForgotPasswordBlockPage() {
         <p className="text-sm text-muted-foreground mb-3">
           Add the required components to your project.
         </p>
-        <CodeBlock code={`npx aniui add button input text label`} />
+        <CodeBlock code={`npx @aniui/cli add button input text label`} />
         <p className="text-sm text-muted-foreground mt-3">
           Also requires{" "}
           <code className="text-xs bg-muted px-1.5 py-0.5 rounded font-mono">

@@ -345,7 +345,7 @@ export default function SignupBlockPage() {
 
       <div>
         <h2 className="text-xl font-semibold text-foreground mb-3">Installation</h2>
-        <CodeBlock code={`npx aniui add button input text separator label checkbox`} />
+        <CodeBlock code={`npx @aniui/cli add button input text separator label checkbox`} />
         <p className="text-sm text-muted-foreground mt-3">
           Also requires <code className="text-foreground font-mono text-xs bg-muted px-1.5 py-0.5 rounded">react-native-safe-area-context</code> for <code className="text-foreground font-mono text-xs bg-muted px-1.5 py-0.5 rounded">SafeAreaView</code>.
         </p>

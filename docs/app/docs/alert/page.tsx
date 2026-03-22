@@ -4,7 +4,7 @@ import { ComponentPlayground } from "@/components/component-playground";
 import { CodeBlock } from "@/components/code-block";
 import { PropsTable } from "@/components/props-table";
 
-const installCode = `npx aniui add alert`;
+const installCode = `npx @aniui/cli add alert`;
 const usageCode = `import { Alert, AlertDescription } from "@/components/ui/alert";
 
 export function MyScreen() {

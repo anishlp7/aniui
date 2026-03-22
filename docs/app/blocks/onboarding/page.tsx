@@ -267,7 +267,7 @@ export default function OnboardingBlockPage() {
 
       <div>
         <h2 className="text-xl font-semibold mb-3">Installation</h2>
-        <CodeBlock code={`npx aniui add text button`} />
+        <CodeBlock code={`npx @aniui/cli add text button`} />
         <p className="text-sm text-muted-foreground mt-3">
           Also requires <code>react-native-safe-area-context</code> for SafeAreaView.
         </p>

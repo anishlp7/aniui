@@ -26,14 +26,14 @@ npx pod-install`}
         <h2 className="text-2xl font-semibold tracking-tight pt-4">Quick Start</h2>
 
         <h3 className="text-lg font-semibold">1. Initialize AniUI</h3>
-        <CodeBlock code="npx aniui init" />
+        <CodeBlock code="npx @aniui/cli init" />
         <p className="text-muted-foreground">
           This will set up your project with the utility helper, global CSS theme,
           and Tailwind config.
         </p>
 
         <h3 className="text-lg font-semibold pt-2">2. Add components</h3>
-        <CodeBlock code="npx aniui add button text input card" />
+        <CodeBlock code="npx @aniui/cli add button text input card" />
         <p className="text-muted-foreground">
           Components are copied as source files into your <code className="rounded bg-secondary px-1.5 py-0.5 text-sm font-mono">components/ui/</code> directory.
         </p>

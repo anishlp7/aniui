@@ -297,7 +297,7 @@ export default function DrawerNavBlockPage() {
 
       <div>
         <h2 className="text-xl font-semibold mb-3">Installation</h2>
-        <CodeBlock code={`npx aniui add text avatar separator`} />
+        <CodeBlock code={`npx @aniui/cli add text avatar separator`} />
       </div>
 
       <div>

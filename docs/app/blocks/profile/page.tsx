@@ -284,7 +284,7 @@ export default function ProfileBlockPage() {
       {/* Installation */}
       <div>
         <h2 className="text-xl font-semibold mb-3">Installation</h2>
-        <CodeBlock code={`npx aniui add text avatar button separator badge`} />
+        <CodeBlock code={`npx @aniui/cli add text avatar button separator badge`} />
       </div>
 
       {/* Source */}

@@ -245,7 +245,7 @@ export default function HomeBlockPage() {
 
       <div>
         <h2 className="text-xl font-semibold mb-3">Installation</h2>
-        <CodeBlock code={`npx aniui add text card avatar badge button`} />
+        <CodeBlock code={`npx @aniui/cli add text card avatar badge button`} />
       </div>
 
       <div>

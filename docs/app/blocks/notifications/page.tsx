@@ -352,7 +352,7 @@ export default function NotificationsBlockPage() {
 
       <div>
         <h2 className="text-xl font-semibold mb-3">Installation</h2>
-        <CodeBlock code={`npx aniui add text separator badge`} />
+        <CodeBlock code={`npx @aniui/cli add text separator badge`} />
       </div>
 
       <div>

@@ -27,11 +27,11 @@ Built with [NativeWind](https://www.nativewind.dev) v4, [class-variance-authorit
 
 ```bash
 # Initialize AniUI in your project
-npx aniui init
+npx @aniui/cli init
 
 # Add components
-npx aniui add button
-npx aniui add card input text
+npx @aniui/cli add button
+npx @aniui/cli add card input text
 ```
 
 Components are copied to your `components/ui/` directory. Import and use them:
@@ -60,25 +60,25 @@ export function WelcomeScreen() {
 
 ## CLI Commands
 
-### `npx aniui init`
+### `npx @aniui/cli init`
 
 Sets up AniUI in your project:
 - Creates `lib/utils.ts` (the `cn()` helper)
 - Copies `global.css` with theme variables
 - Configures `tailwind.config.js` with AniUI tokens
 
-### `npx aniui add <components...>`
+### `npx @aniui/cli add <components...>`
 
 Copies component source files into your project:
 
 ```bash
-npx aniui add button text input card badge
+npx @aniui/cli add button text input card badge
 ```
 
 - Resolves dependencies automatically (e.g., `date-picker` installs `calendar`)
 - Lists any npm packages you need to install
 
-### `npx aniui theme <preset>`
+### `npx @aniui/cli theme <preset>`
 
 Switch theme presets: `default`, `blue`, `green`, `orange`, `rose`.
 

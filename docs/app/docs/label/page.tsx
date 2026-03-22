@@ -4,7 +4,7 @@ import { ComponentPlayground } from "@/components/component-playground";
 import { CodeBlock } from "@/components/code-block";
 import { PropsTable } from "@/components/props-table";
 
-const installCode = `npx aniui add label`;
+const installCode = `npx @aniui/cli add label`;
 const usageCode = `import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 

@@ -171,7 +171,7 @@ export default function ThemesPage() {
             </button>
 
             <p className="text-xs text-muted-foreground">
-              Or run <code className="rounded bg-secondary px-1 py-0.5 text-xs font-mono">npx aniui theme</code> from your project.
+              Or run <code className="rounded bg-secondary px-1 py-0.5 text-xs font-mono">npx @aniui/cli theme</code> from your project.
             </p>
           </div>
         </div>

@@ -4,7 +4,7 @@ import { ComponentPlayground } from "@/components/component-playground";
 import { CodeBlock } from "@/components/code-block";
 import { PropsTable } from "@/components/props-table";
 
-const installCode = `npx aniui add date-picker`;
+const installCode = `npx @aniui/cli add date-picker`;
 const usageCode = `import { DatePicker } from "@/components/ui/date-picker";
 import { useState } from "react";
 
