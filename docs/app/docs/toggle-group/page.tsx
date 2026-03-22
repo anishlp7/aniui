@@ -1,8 +1,22 @@
 "use client";
+import React, { useState } from "react";
 import { PreviewToggleGroup, PreviewToggleGroupItem } from "@/components/preview/toggle-group";
 import { ComponentPlayground } from "@/components/component-playground";
 import { CodeBlock } from "@/components/code-block";
 import { PropsTable } from "@/components/props-table";
+
+function ToggleGroupDemo() {
+  const [value, setValue] = useState("center");
+  return (
+    <div className="flex flex-wrap items-center gap-4">
+      <PreviewToggleGroup value={value} onValueChange={setValue}>
+        <PreviewToggleGroupItem value="left">Left</PreviewToggleGroupItem>
+        <PreviewToggleGroupItem value="center">Center</PreviewToggleGroupItem>
+        <PreviewToggleGroupItem value="right">Right</PreviewToggleGroupItem>
+      </PreviewToggleGroup>
+    </div>
+  );
+}
 
 const installCode = `npx aniui add toggle-group`;
 const usageCode = `import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
@@ -100,13 +114,7 @@ export default function ToggleGroupPage() {
       </div>
       {/* Preview */}
       <ComponentPlayground code={usageCode}>
-        <div className="flex flex-wrap items-center gap-4">
-          <PreviewToggleGroup value="center">
-            <PreviewToggleGroupItem value="left">Left</PreviewToggleGroupItem>
-            <PreviewToggleGroupItem value="center">Center</PreviewToggleGroupItem>
-            <PreviewToggleGroupItem value="right">Right</PreviewToggleGroupItem>
-          </PreviewToggleGroup>
-        </div>
+        <ToggleGroupDemo />
       </ComponentPlayground>
       {/* Installation */}
       <div className="space-y-4">

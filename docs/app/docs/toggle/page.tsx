@@ -1,8 +1,46 @@
 "use client";
+import React, { useState } from "react";
 import { PreviewToggle } from "@/components/preview/toggle";
 import { ComponentPlayground } from "@/components/component-playground";
 import { CodeBlock } from "@/components/code-block";
 import { PropsTable } from "@/components/props-table";
+
+function ToggleDemo() {
+  const [bold, setBold] = useState(true);
+  const [italic, setItalic] = useState(false);
+  const [underline, setUnderline] = useState(false);
+  return (
+    <div className="flex items-center gap-2">
+      <PreviewToggle pressed={bold} onPressedChange={setBold}><span className="font-bold">B</span></PreviewToggle>
+      <PreviewToggle pressed={italic} onPressedChange={setItalic}><span className="italic">I</span></PreviewToggle>
+      <PreviewToggle pressed={underline} onPressedChange={setUnderline}><span className="underline">U</span></PreviewToggle>
+    </div>
+  );
+}
+
+function ToggleVariantsDemo() {
+  const [a, setA] = useState(false);
+  const [b, setB] = useState(false);
+  return (
+    <div className="flex flex-wrap items-center gap-3">
+      <PreviewToggle variant="default" pressed={a} onPressedChange={setA}>Default</PreviewToggle>
+      <PreviewToggle variant="outline" pressed={b} onPressedChange={setB}>Outline</PreviewToggle>
+    </div>
+  );
+}
+
+function ToggleSizesDemo() {
+  const [a, setA] = useState(false);
+  const [b, setB] = useState(false);
+  const [c, setC] = useState(false);
+  return (
+    <div className="flex flex-wrap items-center gap-3">
+      <PreviewToggle size="sm" pressed={a} onPressedChange={setA}>S</PreviewToggle>
+      <PreviewToggle size="md" pressed={b} onPressedChange={setB}>M</PreviewToggle>
+      <PreviewToggle size="lg" pressed={c} onPressedChange={setC}>L</PreviewToggle>
+    </div>
+  );
+}
 
 const installCode = `npx aniui add toggle`;
 const usageCode = `import { Toggle } from "@/components/ui/toggle";
@@ -87,11 +125,7 @@ export default function TogglePage() {
       </div>
       {/* Preview */}
       <ComponentPlayground code={usageCode}>
-        <div className="flex items-center gap-2">
-          <PreviewToggle pressed={true}><span className="font-bold">B</span></PreviewToggle>
-          <PreviewToggle><span className="italic">I</span></PreviewToggle>
-          <PreviewToggle><span className="underline">U</span></PreviewToggle>
-        </div>
+        <ToggleDemo />
       </ComponentPlayground>
       {/* Installation */}
       <div className="space-y-4">
@@ -107,21 +141,14 @@ export default function TogglePage() {
       <div className="space-y-4">
         <h2 className="text-2xl font-semibold tracking-tight text-foreground">Variants</h2>
         <ComponentPlayground code={variantsCode}>
-          <div className="flex flex-wrap items-center gap-3">
-            <PreviewToggle variant="default">Default</PreviewToggle>
-            <PreviewToggle variant="outline">Outline</PreviewToggle>
-          </div>
+          <ToggleVariantsDemo />
         </ComponentPlayground>
       </div>
       {/* Sizes */}
       <div className="space-y-4">
         <h2 className="text-2xl font-semibold tracking-tight text-foreground">Sizes</h2>
         <ComponentPlayground code={sizesCode}>
-          <div className="flex flex-wrap items-center gap-3">
-            <PreviewToggle size="sm">S</PreviewToggle>
-            <PreviewToggle size="md">M</PreviewToggle>
-            <PreviewToggle size="lg">L</PreviewToggle>
-          </div>
+          <ToggleSizesDemo />
         </ComponentPlayground>
       </div>
       {/* Props */}
