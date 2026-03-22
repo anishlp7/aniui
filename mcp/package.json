@@ -18,10 +18,14 @@
   },
   "files": [
     "dist",
-    "package.json"
+    "components",
+    "lib",
+    "templates"
   ],
   "scripts": {
-    "build": "tsc",
+    "build": "tsc && npm run copy-assets",
+    "copy-assets": "rm -rf components lib templates && cp -r ../components . && cp -r ../lib . && cp -r ../templates .",
+    "prepublishOnly": "npm run build",
     "dev": "tsc --watch"
   },
   "dependencies": {

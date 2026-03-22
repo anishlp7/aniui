@@ -7,6 +7,7 @@ export const gettingStartedItems: NavItem[] = [
   { title: "Introduction", href: "/docs" },
   { title: "Installation", href: "/docs/installation" },
   { title: "CLI", href: "/docs/cli" },
+  { title: "MCP", href: "/docs/mcp" },
   { title: "Theming", href: "/docs/theming" },
   { title: "Dark Mode", href: "/docs/dark-mode" },
   { title: "Create", href: "/create" },

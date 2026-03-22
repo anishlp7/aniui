@@ -8,7 +8,8 @@ import { fileURLToPath } from "url";
 import { registry, getComponentNames } from "./registry-data.js";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const REPO_ROOT = path.resolve(__dirname, "..", "..");
+// When compiled, __dirname is dist/ — go up 1 level to package root
+const REPO_ROOT = path.resolve(__dirname, "..");
 
 const server = new McpServer({
   name: "aniui",
