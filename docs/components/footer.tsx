@@ -7,7 +7,7 @@ export function Footer() {
         <p className="flex items-center justify-center gap-1.5">
           Made with <Heart className="h-3.5 w-3.5 fill-red-500 text-red-500" /> by{" "}
           <a
-            href="https://anishl-portfolio.vercel.app/"
+            href="https://anishl.dev"
             target="_blank"
             rel="noopener noreferrer"
             className="font-medium text-foreground underline underline-offset-4 hover:text-foreground/80"
