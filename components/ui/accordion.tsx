@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useState } from "react";
 import { View, Pressable, Text } from "react-native";
-import Animated, { useAnimatedStyle, useSharedValue, withTiming } from "react-native-reanimated";
+import Animated, { FadeIn, FadeOut } from "react-native-reanimated";
 import { cn } from "@/lib/utils";
 
 const AccordionContext = createContext<{
@@ -35,17 +35,6 @@ export interface AccordionItemProps extends React.ComponentPropsWithoutRef<typeo
 export function AccordionItem({ value, trigger, className, children, ...props }: AccordionItemProps) {
   const { expanded, toggle } = useContext(AccordionContext);
   const isOpen = expanded === value;
-  const progress = useSharedValue(0);
-
-  React.useEffect(() => {
-    progress.value = withTiming(isOpen ? 1 : 0, { duration: 250 });
-  }, [isOpen, progress]);
-
-  const animatedStyle = useAnimatedStyle(() => ({
-    height: progress.value === 0 ? 0 : undefined,
-    opacity: progress.value,
-    overflow: "hidden" as const,
-  }));
 
   return (
     <View className={cn("border-b border-border", className)} {...props}>
@@ -59,9 +48,11 @@ export function AccordionItem({ value, trigger, className, children, ...props }:
         <Text className="text-base font-medium text-foreground flex-1">{trigger}</Text>
         <Text className="text-muted-foreground text-lg">{isOpen ? "−" : "+"}</Text>
       </Pressable>
-      <Animated.View style={animatedStyle}>
-        <View className="pb-4">{children}</View>
-      </Animated.View>
+      {isOpen && (
+        <Animated.View entering={FadeIn.duration(200)} exiting={FadeOut.duration(150)}>
+          <View className="pb-4">{children}</View>
+        </Animated.View>
+      )}
     </View>
   );
 }
