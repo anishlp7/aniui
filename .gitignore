@@ -35,3 +35,6 @@ package-lock.json
 # Next.js (docs)
 docs/.next/
 docs/out/
+
+# Private planning docs
+ROADMAP.md
