@@ -126,7 +126,20 @@ export async function initCommand(): Promise<void> {
   await fs.ensureDir(componentsDir);
   logger.success(`Created ${path.relative(cwd, componentsDir)}/`);
 
-  // 6. Bare RN: set up metro.config.js and babel.config.js for NativeWind
+  // 6. Set up metro.config.js for NativeWind
+  if (project.type === "expo") {
+    const metroConfigPath = path.resolve(cwd, "metro.config.js");
+    if (await fs.pathExists(metroConfigPath)) {
+      logger.warn("metro.config.js already exists — wrap it with withNativeWind:");
+      logger.info('  const { withNativeWind } = require("nativewind/metro");');
+      logger.info('  module.exports = withNativeWind(config, { input: "./global.css" });');
+    } else {
+      await copyTemplate("metro.config.expo.js", metroConfigPath);
+      logger.success("Created metro.config.js (NativeWind configured)");
+    }
+  }
+
+  // 7. Bare RN: set up metro.config.js and babel.config.js for NativeWind
   if (project.type === "react-native-cli") {
     const metroConfigPath = path.resolve(cwd, "metro.config.js");
     if (await fs.pathExists(metroConfigPath)) {
@@ -148,7 +161,7 @@ export async function initCommand(): Promise<void> {
     }
   }
 
-  // 7. Write .aniui.json config
+  // 8. Write .aniui.json config
   const config = {
     componentsDir: response.componentsDir,
     utilPath: response.utilPath,
@@ -169,7 +182,9 @@ export async function initCommand(): Promise<void> {
     logger.break();
     logger.info("4. Add components:");
   } else {
-    logger.info("2. Add components:");
+    logger.info("2. Verify metro.config.js uses withNativeWind (created above)");
+    logger.break();
+    logger.info("3. Add components:");
   }
   logger.info(`   ${getDlxCommand(pm, "aniui add button card text")}`);
   logger.break();
