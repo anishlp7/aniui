@@ -227,10 +227,10 @@ export const registry: Record<string, ComponentEntry> = {
   select: {
     name: "Select",
     file: "components/ui/select.tsx",
-    description: "Dropdown select",
-    dependencies: ["@gorhom/bottom-sheet", "react-native-gesture-handler", "clsx", "tailwind-merge"],
-    registryDependencies: ["bottom-sheet"],
-    tier: 3,
+    description: "Dropdown select with modal picker",
+    dependencies: ["react-native-reanimated", "clsx", "tailwind-merge"],
+    registryDependencies: [],
+    tier: 2,
   },
   calendar: {
     name: "Calendar",

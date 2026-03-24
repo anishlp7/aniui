@@ -63,7 +63,7 @@ export function PreviewSelect({ className, placeholder = "Select...", options, v
         </button>
       </div>
 
-      {/* Bottom sheet overlay — absolute, contained in phone frame */}
+      {/* Modal overlay — absolute, contained in phone frame */}
       {isOpen && (
         <div className="absolute inset-0 z-10 flex flex-col justify-end rounded-lg overflow-hidden">
           <div className="absolute inset-0 bg-black/50" onClick={() => setIsOpen(false)} />
@@ -73,7 +73,7 @@ export function PreviewSelect({ className, placeholder = "Select...", options, v
               <div className="h-1 w-10 rounded-full bg-muted-foreground/30" />
             </div>
             {/* Options */}
-            <div className="px-2 pb-6">
+            <div className="px-2 pb-6 max-h-[240px] overflow-y-auto">
               {options.map((option) => (
                 <button
                   key={option.value}
