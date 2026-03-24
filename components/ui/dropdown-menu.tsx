@@ -13,7 +13,9 @@ export function DropdownMenu({ children }: DropdownMenuProps) {
   const content = React.Children.toArray(children).find((c) => React.isValidElement(c) && c.type === DropdownMenuContent);
   return (
     <MenuCtx.Provider value={{ close: () => setOpen(false) }}>
-      <Pressable onPress={() => setOpen(true)} accessible={true} accessibilityRole="button">{trigger}</Pressable>
+      <Pressable onPress={() => setOpen(true)} accessible={true} accessibilityRole="button">
+        <View pointerEvents="none">{trigger}</View>
+      </Pressable>
       {open && (
         <Modal transparent animationType="none" onRequestClose={() => setOpen(false)}>
           <Pressable className="flex-1" onPress={() => setOpen(false)}>
