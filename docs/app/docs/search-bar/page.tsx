@@ -31,6 +31,14 @@ const [focused, setFocused] = useState(false);
   showCancel={focused}
   onCancel={() => { setQuery(""); setFocused(false); }}
 />`;
+const iconCode = `import { Ionicons } from "@expo/vector-icons";
+
+<SearchBar
+  icon={<Ionicons name="search" size={18} color="#71717a" style={{ marginRight: 8 }} />}
+  value={query}
+  onChangeText={setQuery}
+  onClear={() => setQuery("")}
+/>`;
 const sourceCode = `import React from "react";
 import { View, TextInput, Pressable, Text } from "react-native";
 import { cva, type VariantProps } from "class-variance-authority";
@@ -49,22 +57,29 @@ const searchBarVariants = cva(
     defaultVariants: { size: "md" },
   }
 );
+
+const iconSizes = { sm: 14, md: 16, lg: 20 } as const;
+
 export interface SearchBarProps
   extends Omit<React.ComponentPropsWithoutRef<typeof TextInput>, "placeholderTextColor">,
     VariantProps<typeof searchBarVariants> {
   className?: string;
+  icon?: React.ReactNode;
   onClear?: () => void;
   showCancel?: boolean;
   onCancel?: () => void;
 }
-export function SearchBar({ size, className, value, onClear, showCancel, onCancel, ...props }: SearchBarProps) {
+export function SearchBar({ size = "md", className, value, icon, onClear, showCancel, onCancel, ...props }: SearchBarProps) {
+  const iconSize = iconSizes[size ?? "md"];
   return (
     <View className="flex-row items-center gap-2">
       <View className={cn(searchBarVariants({ size }), className)}>
-        <Text className="text-muted-foreground mr-2 text-base">⌕</Text>
+        <View className="mr-2">
+          {icon ?? <Text style={{ fontSize: iconSize, color: "#71717a" }}>\\u2315</Text>}
+        </View>
         <TextInput
           className="flex-1 text-base text-foreground p-0"
-          placeholderTextColor="hsl(240,3.8%,46.1%)"
+          placeholderTextColor="#71717a"
           placeholder="Search..."
           value={value}
           accessibilityRole="search"
@@ -72,7 +87,7 @@ export function SearchBar({ size, className, value, onClear, showCancel, onCance
         />
         {value ? (
           <Pressable onPress={onClear} className="ml-1 h-5 w-5 items-center justify-center rounded-full bg-muted-foreground/20" accessible={true} accessibilityRole="button" accessibilityLabel="Clear search">
-            <Text className="text-xs text-muted-foreground">✕</Text>
+            <Text className="text-xs text-muted-foreground">\\u2715</Text>
           </Pressable>
         ) : null}
       </View>
@@ -129,11 +144,17 @@ export default function SearchBarPage() {
         </ComponentPlayground>
       </div>
       <div>
+        <h2 className="text-xl font-semibold mb-3">Custom Icon</h2>
+        <p className="text-sm text-muted-foreground mb-4">Pass any React element via the <code>icon</code> prop. The icon size adjusts automatically based on the <code>size</code> variant (sm: 14, md: 16, lg: 20).</p>
+        <CodeBlock code={iconCode} title="custom-icon.tsx" />
+      </div>
+      <div>
         <h2 className="text-xl font-semibold mb-3">Props</h2>
         <PropsTable props={[
           { name: "size", type: "\"sm\" | \"md\" | \"lg\"", default: "\"md\"" },
           { name: "value", type: "string" },
           { name: "onChangeText", type: "(text: string) => void" },
+          { name: "icon", type: "React.ReactNode", default: "search icon" },
           { name: "onClear", type: "() => void" },
           { name: "showCancel", type: "boolean", default: "false" },
           { name: "onCancel", type: "() => void" },

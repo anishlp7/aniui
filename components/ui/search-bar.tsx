@@ -17,23 +17,30 @@ const searchBarVariants = cva(
   }
 );
 
+const iconSizes = { sm: 14, md: 16, lg: 20 } as const;
+
 export interface SearchBarProps
   extends Omit<React.ComponentPropsWithoutRef<typeof TextInput>, "placeholderTextColor">,
     VariantProps<typeof searchBarVariants> {
   className?: string;
+  icon?: React.ReactNode;
   onClear?: () => void;
   showCancel?: boolean;
   onCancel?: () => void;
 }
 
-export function SearchBar({ size, className, value, onClear, showCancel, onCancel, ...props }: SearchBarProps) {
+export function SearchBar({ size = "md", className, value, icon, onClear, showCancel, onCancel, ...props }: SearchBarProps) {
+  const iconSize = iconSizes[size ?? "md"];
+
   return (
     <View className="flex-row items-center gap-2">
       <View className={cn(searchBarVariants({ size }), className)}>
-        <Text className="text-muted-foreground mr-2 text-base">⌕</Text>
+        <View className="mr-2">
+          {icon ?? <Text style={{ fontSize: iconSize, color: "#71717a" }}>&#x2315;</Text>}
+        </View>
         <TextInput
           className="flex-1 text-base text-foreground p-0"
-          placeholderTextColor="hsl(240,3.8%,46.1%)"
+          placeholderTextColor="#71717a"
           placeholder="Search..."
           value={value}
           accessibilityRole="search"
@@ -41,7 +48,7 @@ export function SearchBar({ size, className, value, onClear, showCancel, onCance
         />
         {value ? (
           <Pressable onPress={onClear} className="ml-1 h-5 w-5 items-center justify-center rounded-full bg-muted-foreground/20" accessible={true} accessibilityRole="button" accessibilityLabel="Clear search">
-            <Text className="text-xs text-muted-foreground">✕</Text>
+            <Text className="text-xs text-muted-foreground">&#x2715;</Text>
           </Pressable>
         ) : null}
       </View>
