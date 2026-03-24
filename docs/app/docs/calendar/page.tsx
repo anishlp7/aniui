@@ -46,14 +46,13 @@ export interface CalendarProps {
   max?: Date;
 }
 const DAYS = ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"];
+const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 const same = (a: Date, b: Date) => a.getFullYear() === b.getFullYear() && a.getMonth() === b.getMonth() && a.getDate() === b.getDate();
+type Mode = "days" | "months" | "years";
 export function Calendar({ className, selected, onSelect, rangeStart, rangeEnd, onRangeChange, min, max }: CalendarProps) {
   const [viewing, setViewing] = useState(() => selected ?? rangeStart ?? new Date());
+  const [mode, setMode] = useState<Mode>("days");
   const year = viewing.getFullYear(), month = viewing.getMonth();
-  const firstDay = new Date(year, month, 1).getDay();
-  const daysInMonth = new Date(year, month + 1, 0).getDate();
-  const cells: (number | null)[] = [...Array(firstDay).fill(null), ...Array.from({ length: daysInMonth }, (_, i) => i + 1)];
-  const label = new Date(year, month).toLocaleString("default", { month: "long", year: "numeric" });
   const handlePress = (day: number) => {
     const date = new Date(year, month, day);
     if ((min && date < min) || (max && date > max)) return;
@@ -63,41 +62,12 @@ export function Calendar({ className, selected, onSelect, rangeStart, rangeEnd, 
     }
     onSelect?.(date);
   };
-  return (
-    <View className={cn("rounded-lg bg-background p-3", className)}>
-      <View className="flex-row items-center justify-between mb-3">
-        <Pressable onPress={() => setViewing(new Date(year, month - 1, 1))} className="h-9 w-9 items-center justify-center rounded-md" accessibilityRole="button" accessibilityLabel="Previous month">
-          <Text className="text-base text-muted-foreground">{"\u2039"}</Text>
-        </Pressable>
-        <Text className="text-sm font-semibold text-foreground">{label}</Text>
-        <Pressable onPress={() => setViewing(new Date(year, month + 1, 1))} className="h-9 w-9 items-center justify-center rounded-md" accessibilityRole="button" accessibilityLabel="Next month">
-          <Text className="text-base text-muted-foreground">{"\u203A"}</Text>
-        </Pressable>
-      </View>
-      <View className="flex-row mb-1">
-        {DAYS.map((d) => <View key={d} className="flex-1 items-center py-1"><Text className="text-xs font-medium text-muted-foreground">{d}</Text></View>)}
-      </View>
-      <View className="flex-row flex-wrap">
-        {cells.map((day, i) => {
-          if (day === null) return <View key={\`e-\${i}\`} className="w-[14.28%] h-9" />;
-          const date = new Date(year, month, day);
-          const sel = selected && same(date, selected);
-          const rs = rangeStart && same(date, rangeStart);
-          const re = rangeEnd && same(date, rangeEnd);
-          const inR = rangeStart && rangeEnd && date.getTime() >= rangeStart.getTime() && date.getTime() <= rangeEnd.getTime();
-          const today = same(date, new Date());
-          const off = (min && date < min) || (max && date > max);
-          return (
-            <View key={day} className="w-[14.28%] items-center">
-              <Pressable onPress={() => handlePress(day)} disabled={!!off} className={cn("h-9 w-9 items-center justify-center rounded-full", sel || rs || re ? "bg-primary" : inR ? "bg-accent" : "", today && !sel && "border border-primary", off && "opacity-30")} accessibilityRole="button" accessibilityLabel={\`\${label} \${day}\`}>
-                <Text className={cn("text-sm", sel || rs || re ? "text-primary-foreground font-semibold" : "text-foreground")}>{day}</Text>
-              </Pressable>
-            </View>
-          );
-        })}
-      </View>
-    </View>
-  );
+  const handleHeaderPress = () => setMode(mode === "days" ? "years" : "days");
+  const pickYear = (y: number) => { setViewing(new Date(y, month, 1)); setMode("months"); };
+  const pickMonth = (m: number) => { setViewing(new Date(year, m, 1)); setMode("days"); };
+  const decadeStart = Math.floor(year / 12) * 12;
+  const label = new Date(year, month).toLocaleString("default", { month: "long", year: "numeric" });
+  // ... renders year grid, month grid, and day grid based on mode
 }`;
 function RangeDemo() {
   const [start, setStart] = useState<Date | undefined>();
@@ -122,7 +92,7 @@ export default function CalendarPage() {
       <div>
         <h1 className="text-3xl font-bold tracking-tight text-foreground">Calendar</h1>
         <p className="mt-2 text-lg text-muted-foreground">
-          A month grid calendar with single date and range selection.
+          A month grid calendar with single date and range selection. Tap the header to quickly jump to any year and month.
         </p>
       </div>
       {/* Preview */}
@@ -138,6 +108,11 @@ export default function CalendarPage() {
       <div className="space-y-4">
         <h2 className="text-2xl font-semibold tracking-tight text-foreground">Usage</h2>
         <CodeBlock code={usageCode} title="app/index.tsx" />
+      </div>
+      {/* Year / Month Picker */}
+      <div className="space-y-4">
+        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Year &amp; Month Picker</h2>
+        <p className="text-sm text-muted-foreground">Tap the month/year header to open the year grid. Select a year, then a month to quickly navigate to any date.</p>
       </div>
       {/* Range Selection */}
       <div className="space-y-4">
