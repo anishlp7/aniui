@@ -24,12 +24,12 @@ const stepperVariants = cva("flex-row items-center rounded-lg border border-inpu
     size: {
       sm: "h-9",
       md: "h-11",
-      lg: "h-13",
+      lg: "h-14",
     },
   },
   defaultVariants: { size: "md" },
 });
-const btnSizes = { sm: "w-9", md: "w-11", lg: "w-13" } as const;
+const btnSizes = { sm: "w-9", md: "w-11", lg: "w-14" } as const;
 export interface StepperProps
   extends React.ComponentPropsWithoutRef<typeof View>,
     VariantProps<typeof stepperVariants> {
