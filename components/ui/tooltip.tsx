@@ -23,7 +23,9 @@ export function Tooltip({ content, side = "top", className, children, ...props }
         accessibilityRole="button"
         accessibilityHint={content}
       >
-        {children}
+        <View pointerEvents="none">
+          {children}
+        </View>
       </Pressable>
       {visible && (
         <Animated.View
