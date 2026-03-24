@@ -161,7 +161,43 @@ export async function initCommand(): Promise<void> {
     }
   }
 
-  // 8. Write .aniui.json config
+  // 8. Configure jsxImportSource for NativeWind v4
+  const tsconfigPath = path.resolve(cwd, "tsconfig.json");
+  if (await fs.pathExists(tsconfigPath)) {
+    try {
+      const tsconfig = await fs.readJson(tsconfigPath);
+      if (!tsconfig.compilerOptions) {
+        tsconfig.compilerOptions = {};
+      }
+      if (tsconfig.compilerOptions.jsxImportSource !== "nativewind") {
+        tsconfig.compilerOptions.jsxImportSource = "nativewind";
+        await fs.writeJson(tsconfigPath, tsconfig, { spaces: 2 });
+        logger.success('Added jsxImportSource: "nativewind" to tsconfig.json');
+      }
+    } catch {
+      logger.warn("Could not update tsconfig.json — add jsxImportSource: \"nativewind\" to compilerOptions manually");
+    }
+  }
+
+  const babelConfigPath = path.resolve(cwd, "babel.config.js");
+  if (await fs.pathExists(babelConfigPath)) {
+    let babelContent = await fs.readFile(babelConfigPath, "utf-8");
+    if (!babelContent.includes("jsxImportSource")) {
+      // Replace bare "babel-preset-expo" with ["babel-preset-expo", { jsxImportSource: "nativewind" }]
+      const replaced = babelContent.replace(
+        /(['"])babel-preset-expo\1/,
+        '["babel-preset-expo", { jsxImportSource: "nativewind" }]'
+      );
+      if (replaced !== babelContent) {
+        await fs.writeFile(babelConfigPath, replaced, "utf-8");
+        logger.success('Added jsxImportSource: "nativewind" to babel.config.js');
+      } else {
+        logger.warn('Could not patch babel.config.js — add { jsxImportSource: "nativewind" } to babel-preset-expo options manually');
+      }
+    }
+  }
+
+  // 9. Write .aniui.json config
   const config = {
     componentsDir: response.componentsDir,
     utilPath: response.utilPath,
