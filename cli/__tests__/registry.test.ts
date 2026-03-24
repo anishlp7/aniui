@@ -29,7 +29,10 @@ describe("registry", () => {
     expect(fs.existsSync(filePath)).toBe(true);
   });
 
-  it.each(names)("%s has clsx and tailwind-merge in dependencies", (name) => {
+  // Components using inline styles have no clsx/tailwind-merge deps
+  const inlineStyleComponents = new Set(["segmented-control", "stepper"]);
+
+  it.each(names.filter((n) => !inlineStyleComponents.has(n)))("%s has clsx and tailwind-merge in dependencies", (name) => {
     const entry = registry[name];
     expect(entry.dependencies).toContain("clsx");
     expect(entry.dependencies).toContain("tailwind-merge");
@@ -63,8 +66,8 @@ describe("registry", () => {
 
 describe("resolveRegistryDeps", () => {
   it("resolves transitive dependencies", () => {
-    const resolved = resolveRegistryDeps(["select"]);
-    expect(resolved).toContain("select");
+    const resolved = resolveRegistryDeps(["action-sheet"]);
+    expect(resolved).toContain("action-sheet");
     expect(resolved).toContain("bottom-sheet");
   });
 

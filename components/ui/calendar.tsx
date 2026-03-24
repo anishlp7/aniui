@@ -3,20 +3,14 @@ import { View, Text, Pressable } from "react-native";
 import { cn } from "@/lib/utils";
 
 export interface CalendarProps {
-  className?: string;
-  selected?: Date;
-  onSelect?: (date: Date) => void;
-  rangeStart?: Date;
-  rangeEnd?: Date;
-  onRangeChange?: (start: Date, end: Date | undefined) => void;
-  min?: Date;
-  max?: Date;
+  className?: string; selected?: Date; onSelect?: (date: Date) => void;
+  rangeStart?: Date; rangeEnd?: Date; onRangeChange?: (start: Date, end: Date | undefined) => void;
+  min?: Date; max?: Date;
 }
 
 const DAYS = ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"];
 const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 const same = (a: Date, b: Date) => a.getFullYear() === b.getFullYear() && a.getMonth() === b.getMonth() && a.getDate() === b.getDate();
-
 type Mode = "days" | "months" | "years";
 
 export function Calendar({ className, selected, onSelect, rangeStart, rangeEnd, onRangeChange, min, max }: CalendarProps) {
@@ -33,38 +27,25 @@ export function Calendar({ className, selected, onSelect, rangeStart, rangeEnd, 
     }
     onSelect?.(date);
   };
-
   const handleHeaderPress = () => setMode(mode === "days" ? "years" : "days");
   const pickYear = (y: number) => { setViewing(new Date(y, month, 1)); setMode("months"); };
   const pickMonth = (m: number) => { setViewing(new Date(year, m, 1)); setMode("days"); };
-
   const decadeStart = Math.floor(year / 12) * 12;
   const label = new Date(year, month).toLocaleString("default", { month: "long", year: "numeric" });
 
   return (
     <View className={cn("rounded-lg bg-background p-3", className)}>
-      {/* Header */}
       <View className="flex-row items-center justify-between mb-3">
-        <Pressable
-          onPress={() => mode === "days" ? setViewing(new Date(year, month - 1, 1)) : mode === "months" ? setViewing(new Date(year - 1, month, 1)) : setViewing(new Date(decadeStart - 12, month, 1))}
-          className="h-9 w-9 items-center justify-center rounded-md" accessibilityRole="button" accessibilityLabel="Previous"
-        >
+        <Pressable onPress={() => mode === "days" ? setViewing(new Date(year, month - 1, 1)) : mode === "months" ? setViewing(new Date(year - 1, month, 1)) : setViewing(new Date(decadeStart - 12, month, 1))} className="h-9 w-9 items-center justify-center rounded-md" accessibilityRole="button" accessibilityLabel="Previous">
           <Text className="text-base text-muted-foreground">{"\u2039"}</Text>
         </Pressable>
         <Pressable onPress={handleHeaderPress} accessibilityRole="button">
-          <Text className="text-sm font-semibold text-foreground">
-            {mode === "days" ? label : mode === "months" ? `${year}` : `${decadeStart} – ${decadeStart + 11}`}
-          </Text>
+          <Text className="text-sm font-semibold text-foreground">{mode === "days" ? label : mode === "months" ? `${year}` : `${decadeStart} – ${decadeStart + 11}`}</Text>
         </Pressable>
-        <Pressable
-          onPress={() => mode === "days" ? setViewing(new Date(year, month + 1, 1)) : mode === "months" ? setViewing(new Date(year + 1, month, 1)) : setViewing(new Date(decadeStart + 12, month, 1))}
-          className="h-9 w-9 items-center justify-center rounded-md" accessibilityRole="button" accessibilityLabel="Next"
-        >
+        <Pressable onPress={() => mode === "days" ? setViewing(new Date(year, month + 1, 1)) : mode === "months" ? setViewing(new Date(year + 1, month, 1)) : setViewing(new Date(decadeStart + 12, month, 1))} className="h-9 w-9 items-center justify-center rounded-md" accessibilityRole="button" accessibilityLabel="Next">
           <Text className="text-base text-muted-foreground">{"\u203A"}</Text>
         </Pressable>
       </View>
-
-      {/* Year grid */}
       {mode === "years" && (
         <View className="flex-row flex-wrap">
           {Array.from({ length: 12 }, (_, i) => decadeStart + i).map((y) => (
