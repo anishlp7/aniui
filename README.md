@@ -18,6 +18,7 @@
 </p>
 
 <p align="center">
+  <a href="https://www.youtube.com/shorts/KxHLlLk8YkA">Demo</a> &nbsp;&bull;&nbsp;
   <a href="#quick-start">Quick Start</a> &nbsp;&bull;&nbsp;
   <a href="#components">Components</a> &nbsp;&bull;&nbsp;
   <a href="#documentation">Docs</a> &nbsp;&bull;&nbsp;
@@ -30,6 +31,8 @@
 AniUI is a [shadcn/ui](https://ui.shadcn.com)-inspired component library for **React Native**. Instead of installing a package, you copy component source files directly into your project. You own the code. Customize everything.
 
 Built with [NativeWind](https://www.nativewind.dev) v4, [class-variance-authority](https://cva.style), and strict TypeScript. Every component is a single file, styled with Tailwind classes, and works on both iOS and Android out of the box.
+
+**Demo:** [YouTube Short](https://www.youtube.com/shorts/KxHLlLk8YkA)
 
 ## Quick Start
 
