@@ -6,7 +6,7 @@ import { cn } from "@/lib/utils";
 
 const segmentVariants = cva("flex rounded-lg bg-muted p-1", {
   variants: {
-    size: { sm: "h-9", md: "h-11", lg: "h-13" },
+    size: { sm: "h-9", md: "h-11", lg: "h-14" },
   },
   defaultVariants: { size: "md" },
 });

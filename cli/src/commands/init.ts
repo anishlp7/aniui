@@ -126,7 +126,20 @@ export async function initCommand(): Promise<void> {
   await fs.ensureDir(componentsDir);
   logger.success(`Created ${path.relative(cwd, componentsDir)}/`);
 
-  // 6. Bare RN: set up metro.config.js and babel.config.js for NativeWind
+  // 6. Set up metro.config.js for NativeWind
+  if (project.type === "expo") {
+    const metroConfigPath = path.resolve(cwd, "metro.config.js");
+    if (await fs.pathExists(metroConfigPath)) {
+      logger.warn("metro.config.js already exists — wrap it with withNativeWind:");
+      logger.info('  const { withNativeWind } = require("nativewind/metro");');
+      logger.info('  module.exports = withNativeWind(config, { input: "./global.css" });');
+    } else {
+      await copyTemplate("metro.config.expo.js", metroConfigPath);
+      logger.success("Created metro.config.js (NativeWind configured)");
+    }
+  }
+
+  // 7. Bare RN: set up metro.config.js and babel.config.js for NativeWind
   if (project.type === "react-native-cli") {
     const metroConfigPath = path.resolve(cwd, "metro.config.js");
     if (await fs.pathExists(metroConfigPath)) {
@@ -148,7 +161,43 @@ export async function initCommand(): Promise<void> {
     }
   }
 
-  // 7. Write .aniui.json config
+  // 8. Configure jsxImportSource for NativeWind v4
+  const tsconfigPath = path.resolve(cwd, "tsconfig.json");
+  if (await fs.pathExists(tsconfigPath)) {
+    try {
+      const tsconfig = await fs.readJson(tsconfigPath);
+      if (!tsconfig.compilerOptions) {
+        tsconfig.compilerOptions = {};
+      }
+      if (tsconfig.compilerOptions.jsxImportSource !== "nativewind") {
+        tsconfig.compilerOptions.jsxImportSource = "nativewind";
+        await fs.writeJson(tsconfigPath, tsconfig, { spaces: 2 });
+        logger.success('Added jsxImportSource: "nativewind" to tsconfig.json');
+      }
+    } catch {
+      logger.warn("Could not update tsconfig.json — add jsxImportSource: \"nativewind\" to compilerOptions manually");
+    }
+  }
+
+  const babelConfigPath = path.resolve(cwd, "babel.config.js");
+  if (await fs.pathExists(babelConfigPath)) {
+    let babelContent = await fs.readFile(babelConfigPath, "utf-8");
+    if (!babelContent.includes("jsxImportSource")) {
+      // Replace bare "babel-preset-expo" with ["babel-preset-expo", { jsxImportSource: "nativewind" }]
+      const replaced = babelContent.replace(
+        /(['"])babel-preset-expo\1/,
+        '["babel-preset-expo", { jsxImportSource: "nativewind" }]'
+      );
+      if (replaced !== babelContent) {
+        await fs.writeFile(babelConfigPath, replaced, "utf-8");
+        logger.success('Added jsxImportSource: "nativewind" to babel.config.js');
+      } else {
+        logger.warn('Could not patch babel.config.js — add { jsxImportSource: "nativewind" } to babel-preset-expo options manually');
+      }
+    }
+  }
+
+  // 9. Write .aniui.json config
   const config = {
     componentsDir: response.componentsDir,
     utilPath: response.utilPath,
@@ -169,7 +218,9 @@ export async function initCommand(): Promise<void> {
     logger.break();
     logger.info("4. Add components:");
   } else {
-    logger.info("2. Add components:");
+    logger.info("2. Verify metro.config.js uses withNativeWind (created above)");
+    logger.break();
+    logger.info("3. Add components:");
   }
   logger.info(`   ${getDlxCommand(pm, "aniui add button card text")}`);
   logger.break();

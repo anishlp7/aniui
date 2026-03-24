@@ -34,7 +34,10 @@ describe("component source files", () => {
     expect(lines).toBeLessThanOrEqual(120);
   });
 
-  it.each(names)("%s imports cn from utils", (name) => {
+  // Components using inline styles don't need cn()
+  const noCnComponents = new Set(["segmented-control", "select", "stepper"]);
+
+  it.each(names.filter((n) => !noCnComponents.has(n)))("%s imports cn from utils", (name) => {
     const filePath = path.join(repoRoot, registry[name].file);
     const content = fs.readFileSync(filePath, "utf-8");
     expect(content).toMatch(/import.*\bcn\b.*from/);

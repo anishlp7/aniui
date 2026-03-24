@@ -18,9 +18,11 @@ const searchBarVariants = cva(
   }
 );
 
-function SearchIcon() {
+const iconSizes = { sm: 14, md: 16, lg: 20 } as const;
+
+function SearchIcon({ size = 16 }: { size?: number }) {
   return (
-    <svg className="h-4 w-4 text-muted-foreground mr-2 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <svg className="text-muted-foreground mr-2 shrink-0" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
       <circle cx="11" cy="11" r="8" />
       <path d="M21 21l-4.35-4.35" />
     </svg>
@@ -41,16 +43,19 @@ export interface PreviewSearchBarProps
   extends Omit<React.InputHTMLAttributes<HTMLInputElement>, "size">,
     VariantProps<typeof searchBarVariants> {
   className?: string;
+  icon?: React.ReactNode;
   onClear?: () => void;
   showCancel?: boolean;
   onCancel?: () => void;
 }
 
-export function PreviewSearchBar({ size, className, value, onClear, showCancel, onCancel, ...props }: PreviewSearchBarProps) {
+export function PreviewSearchBar({ size = "md", className, value, icon, onClear, showCancel, onCancel, ...props }: PreviewSearchBarProps) {
+  const iconSize = iconSizes[size ?? "md"];
+
   return (
     <div className="flex items-center gap-2">
       <div className={cn(searchBarVariants({ size }), className)}>
-        <SearchIcon />
+        {icon ?? <SearchIcon size={iconSize} />}
         <input
           className="flex-1 bg-transparent text-base text-foreground outline-none placeholder:text-muted-foreground"
           placeholder="Search..."

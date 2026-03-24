@@ -11,8 +11,8 @@ export interface InputOTPProps extends React.ComponentPropsWithoutRef<typeof Vie
 
 export function InputOTP({ length = 6, value = "", onValueChange, className, ...props }: InputOTPProps) {
   const refs = useRef<(TextInput | null)[]>([]);
-  const [focused, setFocused] = useState(0);
-  const digits = value.padEnd(length, "").slice(0, length).split("");
+  const [focused, setFocused] = useState(-1);
+  const digits = Array.from({ length }, (_, i) => value[i] ?? "");
 
   const handleChange = (text: string, index: number) => {
     const char = text.slice(-1);
@@ -36,14 +36,23 @@ export function InputOTP({ length = 6, value = "", onValueChange, className, ...
         <TextInput
           key={i}
           ref={(el) => { refs.current[i] = el; }}
-          className={cn(
-            "h-12 w-10 rounded-md border text-center text-lg font-semibold text-foreground bg-background",
-            focused === i ? "border-ring" : "border-input"
-          )}
+          style={{
+            height: 48,
+            width: 40,
+            borderRadius: 6,
+            borderWidth: focused === i ? 2 : 1,
+            borderColor: focused === i ? "#18181b" : "#e4e4e7",
+            backgroundColor: "#ffffff",
+            textAlign: "center" as const,
+            fontSize: 18,
+            fontWeight: "600",
+            color: "#09090b",
+          }}
           value={digit}
           onChangeText={(t) => handleChange(t, i)}
           onKeyPress={({ nativeEvent }) => handleKeyPress(nativeEvent.key, i)}
           onFocus={() => setFocused(i)}
+          onBlur={() => setFocused(-1)}
           keyboardType="number-pad"
           maxLength={1}
           selectTextOnFocus

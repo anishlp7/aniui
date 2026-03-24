@@ -30,7 +30,7 @@ const controlledCode = `const [open, setOpen] = useState(false);
 </Collapsible>`;
 const sourceCode = `import React, { createContext, useContext, useState } from "react";
 import { View, Pressable } from "react-native";
-import Animated, { useAnimatedStyle, useSharedValue, withTiming } from "react-native-reanimated";
+import Animated, { FadeIn, FadeOut } from "react-native-reanimated";
 import { cn } from "@/lib/utils";
 
 const CollapsibleContext = createContext<{ isOpen: boolean; toggle: () => void }>({
@@ -72,7 +72,9 @@ export function CollapsibleTrigger({ className, children, ...props }: Collapsibl
       accessibilityState={{ expanded: isOpen }}
       {...props}
     >
-      {children}
+      <View pointerEvents="none">
+        {children}
+      </View>
     </Pressable>
   );
 }
@@ -82,17 +84,9 @@ export interface CollapsibleContentProps extends React.ComponentPropsWithoutRef<
 }
 export function CollapsibleContent({ className, children, ...props }: CollapsibleContentProps) {
   const { isOpen } = useContext(CollapsibleContext);
-  const progress = useSharedValue(0);
-  React.useEffect(() => {
-    progress.value = withTiming(isOpen ? 1 : 0, { duration: 250 });
-  }, [isOpen, progress]);
-  const animatedStyle = useAnimatedStyle(() => ({
-    height: progress.value === 0 ? 0 : undefined,
-    opacity: progress.value,
-    overflow: "hidden" as const,
-  }));
+  if (!isOpen) return null;
   return (
-    <Animated.View style={animatedStyle}>
+    <Animated.View entering={FadeIn.duration(200)} exiting={FadeOut.duration(150)}>
       <View className={cn("", className)} {...props}>{children}</View>
     </Animated.View>
   );
