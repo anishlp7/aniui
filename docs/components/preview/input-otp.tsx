@@ -14,7 +14,7 @@ export function PreviewInputOTP({ length = 6, value: controlledValue, onValueCha
   const [internalValue, setInternalValue] = useState("");
   const val = controlledValue ?? internalValue;
   const refs = useRef<(HTMLInputElement | null)[]>([]);
-  const digits = val.padEnd(length, "").slice(0, length).split("");
+  const digits = Array.from({ length }, (_, i) => val[i] ?? "");
 
   const handleChange = (text: string, index: number) => {
     const char = text.slice(-1);
