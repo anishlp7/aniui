@@ -98,7 +98,7 @@ export function Navbar() {
 
           <div className="ml-auto flex items-center gap-2">
             <a
-              href="https://github.com/anish/aniui"
+              href="https://github.com/anishlp7/aniui"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center justify-center rounded-md p-2 text-muted-foreground hover:text-foreground hover:bg-accent transition-colors"
