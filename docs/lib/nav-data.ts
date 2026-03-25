@@ -63,6 +63,16 @@ export const componentItems: NavItem[] = [
   { title: "Tooltip", href: "/docs/tooltip" },
 ];
 
+export const chartItems: NavItem[] = [
+  { title: "Area Chart", href: "/charts/area-chart" },
+  { title: "Bar Chart", href: "/charts/bar-chart" },
+  { title: "Line Chart", href: "/charts/line-chart" },
+  { title: "Pie Chart", href: "/charts/pie-chart" },
+  { title: "Radar Chart", href: "/charts/radar-chart" },
+  { title: "Radial Chart", href: "/charts/radial-chart" },
+  { title: "Tooltip", href: "/charts/tooltip" },
+];
+
 export const blockItems: NavItem[] = [
   { title: "Login", href: "/blocks/login" },
   { title: "Sign Up", href: "/blocks/signup" },
@@ -84,5 +94,6 @@ export const blockItems: NavItem[] = [
 export const sidebarSections: NavSection[] = [
   { title: "Getting Started", items: gettingStartedItems },
   { title: "Components", items: componentItems },
+  { title: "Charts", items: chartItems },
   { title: "Blocks", items: blockItems },
 ];

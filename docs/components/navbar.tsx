@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useTheme } from "./theme-provider";
-import { gettingStartedItems, componentItems, blockItems } from "@/lib/nav-data";
+import { gettingStartedItems, componentItems, chartItems, blockItems } from "@/lib/nav-data";
 
 function SunIcon() {
   return (
@@ -88,6 +88,9 @@ export function Navbar() {
             <Link href="/docs/button" className="text-muted-foreground hover:text-foreground transition-colors">
               Components
             </Link>
+            <Link href="/charts" className="text-muted-foreground hover:text-foreground transition-colors">
+              Charts
+            </Link>
             <Link href="/blocks" className="text-muted-foreground hover:text-foreground transition-colors">
               Blocks
             </Link>
@@ -127,6 +130,14 @@ export function Navbar() {
             <div className="border-t border-border pt-4 mt-4">
               <p className="text-xs font-semibold text-foreground mb-2">Components</p>
               {componentItems.map((item, i) => (
+                <Link key={item.href} href={item.href} className={`block text-sm text-muted-foreground hover:text-foreground${i > 0 ? " mt-2" : ""}`} onClick={() => setMobileOpen(false)}>
+                  {item.title}
+                </Link>
+              ))}
+            </div>
+            <div className="border-t border-border pt-4 mt-4">
+              <p className="text-xs font-semibold text-foreground mb-2">Charts</p>
+              {chartItems.map((item, i) => (
                 <Link key={item.href} href={item.href} className={`block text-sm text-muted-foreground hover:text-foreground${i > 0 ? " mt-2" : ""}`} onClick={() => setMobileOpen(false)}>
                   {item.title}
                 </Link>
