@@ -41,13 +41,16 @@ export async function initCommand(): Promise<void> {
   }
 
   const pm = project.packageManager;
+  const gen = project.sdkGeneration;
   logger.success(`Detected ${project.type === "expo" ? "Expo" : "React Native CLI"} project`);
   logger.success(`Using ${pm} as package manager`);
+  logger.success(`SDK generation: ${gen === "v5" ? "NativeWind v5 + Tailwind v4" : "NativeWind v4 + Tailwind v3"}`);
 
   if (!project.hasNativewind) {
     logger.error("NativeWind is not installed.");
     logger.info("Install it first:");
-    logger.info(`  ${getInstallCommand(pm, ["nativewind", "tailwindcss@3", "class-variance-authority", "clsx", "tailwind-merge"])}`);
+    const twPkg = gen === "v5" ? "tailwindcss@4" : "tailwindcss@3";
+    logger.info(`  ${getInstallCommand(pm, ["nativewind", twPkg, "class-variance-authority", "clsx", "tailwind-merge"])}`);
     logger.info(`  ${getDlxCommand(pm, "pod-install")} (iOS only)`);
     logger.break();
     logger.info("See: https://www.nativewind.dev/getting-started/installation");
@@ -98,10 +101,12 @@ export async function initCommand(): Promise<void> {
   logger.success(`Created ${path.relative(cwd, utilPath)}`);
 
   // 2. Copy global.css with theme applied
-  let globalCss = await fs.readFile(
-    path.join(getPackageRoot(), "templates", "global.css"),
-    "utf-8"
-  );
+  const templateDir = path.join(getPackageRoot(), "templates", gen);
+  const templateFallback = path.join(getPackageRoot(), "templates");
+  const globalCssSource = await fs.pathExists(path.join(templateDir, "global.css"))
+    ? path.join(templateDir, "global.css")
+    : path.join(templateFallback, "global.css");
+  let globalCss = await fs.readFile(globalCssSource, "utf-8");
   const preset = THEME_PRESETS[response.theme] || THEME_PRESETS.default;
   for (const [varName, value] of Object.entries(preset)) {
     const regex = new RegExp(`(${varName.replace("--", "\\-\\-")}:\\s*)[^;]+`, "g");
@@ -110,16 +115,20 @@ export async function initCommand(): Promise<void> {
   await fs.writeFile(globalCssPath, globalCss, "utf-8");
   logger.success(`Created global.css (${response.theme} theme)`);
 
-  // 3. Copy or merge tailwind.config.js
-  if (await fs.pathExists(tailwindConfigPath)) {
-    logger.warn("tailwind.config.js already exists — skipping (merge manually if needed)");
+  // 3. Copy or merge tailwind.config.js (v4 only — v5 uses CSS-first config)
+  if (gen === "v4") {
+    if (await fs.pathExists(tailwindConfigPath)) {
+      logger.warn("tailwind.config.js already exists — skipping (merge manually if needed)");
+    } else {
+      await copyTemplate("tailwind.config.js", tailwindConfigPath, gen);
+      logger.success("Created tailwind.config.js");
+    }
   } else {
-    await copyTemplate("tailwind.config.js", tailwindConfigPath);
-    logger.success("Created tailwind.config.js");
+    logger.info("Tailwind v4 uses CSS-first configuration — theme tokens are in global.css");
   }
 
   // 4. Copy nativewind-env.d.ts
-  await copyTemplate("nativewind-env.d.ts", nativewindEnvPath);
+  await copyTemplate("nativewind-env.d.ts", nativewindEnvPath, gen);
   logger.success("Created nativewind-env.d.ts");
 
   // 5. Ensure components directory exists
@@ -134,7 +143,7 @@ export async function initCommand(): Promise<void> {
       logger.info('  const { withNativeWind } = require("nativewind/metro");');
       logger.info('  module.exports = withNativeWind(config, { input: "./global.css" });');
     } else {
-      await copyTemplate("metro.config.expo.js", metroConfigPath);
+      await copyTemplate("metro.config.expo.js", metroConfigPath, gen);
       logger.success("Created metro.config.js (NativeWind configured)");
     }
   }
@@ -147,7 +156,7 @@ export async function initCommand(): Promise<void> {
       logger.info('  const { withNativeWind } = require("nativewind/metro");');
       logger.info('  module.exports = withNativeWind(config, { input: "./global.css" });');
     } else {
-      await copyTemplate("metro.config.bare.js", metroConfigPath);
+      await copyTemplate("metro.config.bare.js", metroConfigPath, gen);
       logger.success("Created metro.config.js (NativeWind configured)");
     }
 
@@ -156,7 +165,7 @@ export async function initCommand(): Promise<void> {
       logger.warn('babel.config.js already exists — add "nativewind/babel" to presets:');
       logger.info('  presets: [...existing, "nativewind/babel"]');
     } else {
-      await copyTemplate("babel.config.bare.js", babelConfigPath);
+      await copyTemplate("babel.config.bare.js", babelConfigPath, gen);
       logger.success("Created babel.config.js (NativeWind configured)");
     }
   }

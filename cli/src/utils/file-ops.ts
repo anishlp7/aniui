@@ -37,10 +37,23 @@ export async function copyComponent(
 
 export async function copyTemplate(
   templateName: string,
-  destPath: string
+  destPath: string,
+  sdkGeneration?: "v4" | "v5"
 ): Promise<void> {
   const packageRoot = getPackageRoot();
-  const srcPath = path.join(packageRoot, "templates", templateName);
+
+  // Try versioned path first, fall back to root templates/
+  let srcPath: string;
+  if (sdkGeneration) {
+    const versionedPath = path.join(packageRoot, "templates", sdkGeneration, templateName);
+    if (await fs.pathExists(versionedPath)) {
+      srcPath = versionedPath;
+    } else {
+      srcPath = path.join(packageRoot, "templates", templateName);
+    }
+  } else {
+    srcPath = path.join(packageRoot, "templates", templateName);
+  }
 
   if (!await fs.pathExists(srcPath)) {
     throw new Error(`Template not found: ${srcPath}`);
