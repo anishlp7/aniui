@@ -33,8 +33,8 @@ DO NOT deviate from these versions. They are tested together.
     "react": ">=18.2.0",
     "react-native": ">=0.76.0",
     "nativewind": ">=4.2.1",
-    "tailwindcss": ">=3.4.17 <4.0.0",
-    "react-native-reanimated": ">=3.10.0 <4.0.0",
+    "tailwindcss": ">=3.4.17",
+    "react-native-reanimated": ">=3.10.0",
     "react-native-safe-area-context": ">=4.10.0"
   },
   "dependencies_for_components": {
@@ -45,15 +45,20 @@ DO NOT deviate from these versions. They are tested together.
 }
 ```
 
-**IMPORTANT:** NativeWind v4 uses Tailwind v3.x (NOT v4). Reanimated v3 (NOT v4). These are intentional for stability.
+**Dual SDK Support:** AniUI supports two generations:
+- **Expo SDK 54 (v4):** NativeWind v4 + Tailwind v3 + Reanimated v3 (Old + New Architecture)
+- **Expo SDK 55 (v5):** NativeWind v5 + Tailwind v4 + Reanimated v4 (New Architecture only)
+
+Components use `className`/`cn()`/`cva()` which work identically on both. The CLI auto-detects the SDK generation and uses the matching templates.
 
 ## Supported Platforms
 
-- Expo SDK 53, 54 (primary target: 54)
+- Expo SDK 54 (NativeWind v4 + Tailwind v3)
+- Expo SDK 55 (NativeWind v5 + Tailwind v4)
 - Bare React Native CLI 0.76+
 - iOS 15+, Android API 24+
-- New Architecture: supported
-- Old Architecture: supported (until Expo SDK 55 drops it)
+- New Architecture: supported on all SDKs
+- Old Architecture: supported on SDK 54 and earlier
 
 ## Repository Structure
 
