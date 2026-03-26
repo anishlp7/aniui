@@ -1,0 +1,18 @@
+{
+  "expo": {
+    "name": "AniUI Starter",
+    "slug": "aniui-starter",
+    "version": "1.0.0",
+    "scheme": "aniui-starter",
+    "platforms": ["ios", "android"],
+    "ios": {
+      "bundleIdentifier": "com.aniui.starter"
+    },
+    "android": {
+      "package": "com.aniui.starter"
+    },
+    "plugins": [
+      "expo-router"
+    ]
+  }
+}

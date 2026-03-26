@@ -1,0 +1,29 @@
+{
+  "name": "aniui-expo-55-starter",
+  "version": "0.1.0",
+  "private": true,
+  "main": "expo-router/entry",
+  "scripts": {
+    "start": "expo start",
+    "ios": "expo start --ios",
+    "android": "expo start --android"
+  },
+  "dependencies": {
+    "expo": "~55.0.0",
+    "expo-router": "~5.1.0",
+    "react": "19.0.0",
+    "react-native": "0.83.0",
+    "react-native-reanimated": "~4.0.0",
+    "react-native-safe-area-context": "~5.4.0",
+    "react-native-screens": "~4.11.0",
+    "nativewind": "^5.0.0",
+    "tailwindcss": "^4.0.0",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "tailwind-merge": "^2.6.0"
+  },
+  "devDependencies": {
+    "@types/react": "~19.0.0",
+    "typescript": "~5.8.0"
+  }
+}
