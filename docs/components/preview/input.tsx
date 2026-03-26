@@ -39,3 +39,60 @@ export function PreviewInput({ variant, size, className, ...props }: PreviewInpu
     />
   );
 }
+
+/* ── Icon wrapper preview ─────────────────────────────────── */
+
+function SearchIcon() {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-muted-foreground">
+      <circle cx="11" cy="11" r="8" /><line x1="21" y1="21" x2="16.65" y2="16.65" />
+    </svg>
+  );
+}
+
+function CloseIcon() {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-muted-foreground">
+      <line x1="18" y1="6" x2="6" y2="18" /><line x1="6" y1="6" x2="18" y2="18" />
+    </svg>
+  );
+}
+
+function EyeIcon() {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-muted-foreground">
+      <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" /><circle cx="12" cy="12" r="3" />
+    </svg>
+  );
+}
+
+export function PreviewInputLeadingIcon() {
+  return (
+    <div className={cn("flex items-center gap-2", inputVariants({ variant: "default", size: "md" }))}>
+      <SearchIcon />
+      <input className="flex-1 bg-transparent outline-none text-foreground placeholder:text-muted-foreground" placeholder="Search..." />
+    </div>
+  );
+}
+
+export function PreviewInputTrailingIcon() {
+  return (
+    <div className={cn("flex items-center gap-2", inputVariants({ variant: "default", size: "md" }))}>
+      <input className="flex-1 bg-transparent outline-none text-foreground placeholder:text-muted-foreground" placeholder="Type something..." defaultValue="Hello world" />
+      <button className="p-1 rounded hover:bg-accent transition-colors">
+        <CloseIcon />
+      </button>
+    </div>
+  );
+}
+
+export function PreviewInputPasswordToggle() {
+  return (
+    <div className={cn("flex items-center gap-2", inputVariants({ variant: "default", size: "md" }))}>
+      <input type="password" className="flex-1 bg-transparent outline-none text-foreground placeholder:text-muted-foreground" placeholder="Password" defaultValue="mysecretpass" />
+      <button className="p-1 rounded hover:bg-accent transition-colors">
+        <EyeIcon />
+      </button>
+    </div>
+  );
+}
