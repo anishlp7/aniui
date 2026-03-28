@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useState } from "react";
 import { View, Pressable, Text } from "react-native";
 import Animated, { FadeIn, FadeOut } from "react-native-reanimated";
-import { cn } from "@/lib/utils";
+import { cn } from "../../lib/utils";
 
 const AccordionContext = createContext<{
   expanded: string | null;

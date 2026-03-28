@@ -1,6 +1,6 @@
 import React from "react";
 import { ActivityIndicator, View } from "react-native";
-import { cn } from "@/lib/utils";
+import { cn } from "../../lib/utils";
 
 const sizeMap = { sm: "small", md: "small", lg: "large" } as const;
 

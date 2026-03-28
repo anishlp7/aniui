@@ -1,7 +1,7 @@
 import React, { forwardRef, useCallback } from "react";
 import { View, Pressable, Text } from "react-native";
 import GorhomBottomSheet, { BottomSheetBackdrop, BottomSheetView } from "@gorhom/bottom-sheet";
-import { cn } from "@/lib/utils";
+import { cn } from "../../lib/utils";
 
 export interface ActionSheetAction {
   label: string;

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { View, Text, Pressable, Modal } from "react-native";
-import { cn } from "@/lib/utils";
-import { Calendar } from "@/components/ui/calendar";
+import { cn } from "../../lib/utils";
+import { Calendar } from "./calendar";
 
 export interface DatePickerProps {
   className?: string;

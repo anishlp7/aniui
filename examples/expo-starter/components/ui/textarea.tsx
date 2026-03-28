@@ -1,7 +1,7 @@
 import React from "react";
 import { TextInput } from "react-native";
 import { cva, type VariantProps } from "class-variance-authority";
-import { cn } from "@/lib/utils";
+import { cn } from "../../lib/utils";
 
 const textareaVariants = cva(
   "rounded-md border text-foreground placeholder:text-muted-foreground align-top",

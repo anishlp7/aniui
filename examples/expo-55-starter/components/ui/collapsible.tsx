@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useState } from "react";
 import { View, Pressable } from "react-native";
 import Animated, { FadeIn, FadeOut } from "react-native-reanimated";
-import { cn } from "@/lib/utils";
+import { cn } from "../../lib/utils";
 
 const CollapsibleContext = createContext<{ isOpen: boolean; toggle: () => void }>({
   isOpen: false,

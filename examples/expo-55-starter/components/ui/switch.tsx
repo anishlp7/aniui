@@ -1,6 +1,6 @@
 import React from "react";
 import { View, Switch as RNSwitch, Platform } from "react-native";
-import { cn } from "@/lib/utils";
+import { cn } from "../../lib/utils";
 
 export interface SwitchProps extends React.ComponentPropsWithoutRef<typeof RNSwitch> {
   className?: string;

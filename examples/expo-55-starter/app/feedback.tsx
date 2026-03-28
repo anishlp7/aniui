@@ -267,7 +267,7 @@ function FeedbackContent() {
 export default function FeedbackScreen() {
   return (
     <ToastProvider>
-      <SafeAreaView className="flex-1 bg-background" edges={["bottom"]}>
+      <SafeAreaView style={{ flex: 1, backgroundColor: "hsl(0, 0%, 100%)" }} edges={["bottom"]}>
         <FeedbackContent />
       </SafeAreaView>
     </ToastProvider>

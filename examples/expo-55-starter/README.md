@@ -1,52 +1,56 @@
-# AniUI Expo 55 Starter
+# Welcome to your Expo app 👋
 
-A minimal Expo SDK 55 project pre-configured with AniUI, NativeWind v5, Tailwind CSS v4, and demo components.
+This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
 
-**Requirements:** New Architecture only (Expo SDK 55 dropped Old Architecture support).
+## Get started
 
-## Getting Started
+1. Install dependencies
+
+   ```bash
+   npm install
+   ```
+
+2. Start the app
+
+   ```bash
+   npx expo start
+   ```
+
+In the output, you'll find options to open the app in a
+
+- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
+- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
+- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
+- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+
+You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+
+## Get a fresh project
+
+When you're ready, run:
 
 ```bash
-# Install dependencies
-npm install
-
-# Start the dev server
-npx expo start
-
-# Run on iOS simulator
-npm run ios
-
-# Run on Android emulator
-npm run android
+npm run reset-project
 ```
 
-## Adding More Components
+This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
 
-```bash
-npx @aniui/cli add switch checkbox accordion dialog
-```
+### Other setup steps
 
-Components are copied as source files into `components/ui/`. You own the code.
+- To set up ESLint for linting, run `npx expo lint`, or follow our guide on ["Using ESLint and Prettier"](https://docs.expo.dev/guides/using-eslint/)
+- If you'd like to set up unit testing, follow our guide on ["Unit Testing with Jest"](https://docs.expo.dev/develop/unit-testing/)
+- Learn more about the TypeScript setup in this template in our guide on ["Using TypeScript"](https://docs.expo.dev/guides/typescript/)
 
-## Project Structure
+## Learn more
 
-```
-├── app/
-│   ├── _layout.tsx    # Root layout with expo-router
-│   └── index.tsx      # Demo screen
-├── components/ui/     # AniUI components
-├── lib/utils.ts       # cn() utility
-└── global.css         # Theme variables (Tailwind v4 CSS-first config)
-```
+To learn more about developing your project with Expo, look at the following resources:
 
-## Key Differences from SDK 54 Starter
+- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
+- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
 
-- **NativeWind v5** instead of v4
-- **Tailwind CSS v4** instead of v3 — uses `@import "tailwindcss"` and `@theme` directive
-- **No tailwind.config.js** — theme is configured in `global.css`
-- **Reanimated v4** — requires New Architecture
-- **React 19** and **React Native 0.83**
+## Join the community
 
-## Docs
+Join our community of developers creating universal apps.
 
-Full component docs at [aniui.dev](https://aniui.dev)
+- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
+- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.

@@ -1,6 +1,6 @@
 import React from "react";
 import { Pressable, View, Text } from "react-native";
-import { cn } from "@/lib/utils";
+import { cn } from "../../lib/utils";
 
 export interface CheckboxProps extends React.ComponentPropsWithoutRef<typeof Pressable> {
   className?: string;

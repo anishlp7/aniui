@@ -1,6 +1,6 @@
 import React from "react";
 import { View, Text } from "react-native";
-import { cn } from "@/lib/utils";
+import { cn } from "../../lib/utils";
 
 export interface CardProps extends React.ComponentPropsWithoutRef<typeof View> {
   className?: string;

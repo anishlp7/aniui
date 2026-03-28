@@ -18,7 +18,7 @@ export default function NavigationScreen() {
   const [collapsibleOpen, setCollapsibleOpen] = useState(false);
 
   return (
-    <SafeAreaView className="flex-1 bg-background" edges={["bottom"]}>
+    <SafeAreaView style={{ flex: 1, backgroundColor: "hsl(0, 0%, 100%)" }} edges={["bottom"]}>
       <ScrollView className="flex-1 px-4" contentContainerClassName="gap-4 py-6 pb-20">
         <Text variant="h2">Navigation</Text>
         <Text variant="muted">4 components for navigation and content organization.</Text>

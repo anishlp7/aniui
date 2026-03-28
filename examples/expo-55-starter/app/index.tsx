@@ -17,7 +17,7 @@ export default function HomeScreen() {
   const router = useRouter();
 
   return (
-    <SafeAreaView className="flex-1 bg-background">
+    <SafeAreaView style={{ flex: 1, backgroundColor: "hsl(0, 0%, 100%)" }}>
       <ScrollView className="flex-1 px-4" contentContainerClassName="gap-4 py-6">
         <Text variant="h2">AniUI Demo</Text>
         <Text variant="muted">54 components across 6 categories. Tap to explore.</Text>

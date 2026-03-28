@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { View, Pressable, Modal } from "react-native";
 import Animated, { useSharedValue, useAnimatedStyle, withTiming, runOnJS } from "react-native-reanimated";
-import { cn } from "@/lib/utils";
+import { cn } from "../../lib/utils";
 
 export interface DrawerProps {
   open: boolean;

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { View, Text, Pressable } from "react-native";
-import { cn } from "@/lib/utils";
+import { cn } from "../../lib/utils";
 
 export interface CalendarProps {
   className?: string; selected?: Date; onSelect?: (date: Date) => void;

@@ -3,24 +3,63 @@
 import { CodeBlock } from "@/components/code-block";
 
 const installSdk54 = `# Expo SDK 54 — NativeWind v4 + Tailwind v3
+
+# 1. Create project
+npx create-expo-app@latest my-app --template default@sdk-54
+cd my-app
+
+# 2. Install NativeWind + dependencies
+npm install nativewind tailwindcss@3 react-native-reanimated react-native-safe-area-context
+npm install class-variance-authority clsx tailwind-merge
+
+# 3. Create config files: babel.config.js, metro.config.js, tailwind.config.js, global.css
+# See Installation page for exact contents
+
+# 4. Run AniUI init (auto-detects SDK 54 → uses v4 templates)
 npx @aniui/cli init
-# CLI auto-detects SDK 54 → uses v4 templates`;
+
+# 5. Import global.css at the top of app/_layout.tsx (or App.tsx)
+# import "./global.css";
+
+# 6. Clear cache and start
+npx expo start -c`;
 
 const installSdk55 = `# Expo SDK 55 — NativeWind v5 + Tailwind v4
+
+# 1. Create project
+npx create-expo-app@latest my-app --template default@sdk-55
+cd my-app
+
+# 2. Install NativeWind v5 + dependencies
+npx expo install nativewind@preview react-native-css react-native-reanimated react-native-safe-area-context
+npx expo install --dev tailwindcss@4
+npm install class-variance-authority clsx tailwind-merge
+
+# 3. Create config files: babel.config.js, metro.config.js, global.css
+# Note: NO tailwind.config.js or postcss.config.js — NativeWind v5 handles CSS via metro
+# See Installation page for exact contents
+
+# 4. Run AniUI init (auto-detects SDK 55 → uses v5 templates)
 npx @aniui/cli init
-# CLI auto-detects SDK 55 → uses v5 templates`;
+
+# 5. Import global.css at the top of app/_layout.tsx (or App.tsx)
+# import "./global.css";
+
+# 6. Clear cache and start
+npx expo start -c`;
 
 const migrationSteps = `# 1. Update Expo SDK
 npx expo install expo@~55
 
-# 2. Update NativeWind + Tailwind
-npm install nativewind@5 tailwindcss@4
+# 2. Install NativeWind v5 + Tailwind v4 dependencies
+npx expo install nativewind@preview react-native-css react-native-reanimated react-native-safe-area-context
+npx expo install --dev tailwindcss@4
 
-# 3. Update Reanimated (if used)
-npm install react-native-reanimated@4
-
-# 4. Re-run aniui init to get v5 templates
+# 3. Re-run aniui init to get v5 templates
 npx @aniui/cli init
+# This creates: global.css (with @theme block), metro.config.js, babel.config.js
+
+# 4. Remove tailwind.config.js (no longer needed — config is in global.css)
 
 # 5. Components — NO changes needed!
 # className, cn(), cva() work identically on both versions.`;
@@ -37,6 +76,7 @@ const globalCssV4 = `/* Tailwind v3 / NativeWind v4 */
 
 const globalCssV5 = `/* Tailwind v4 / NativeWind v5 */
 @import "tailwindcss";
+@import "nativewind/theme";
 
 @theme {
   --color-background: hsl(var(--background));
@@ -173,6 +213,52 @@ export default function CompatibilityPage() {
         </div>
       </div>
 
+      {/* Required Config Files */}
+      <div className="space-y-4">
+        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Required Config Files</h2>
+        <p className="text-sm text-muted-foreground leading-relaxed">
+          The CLI creates all of these automatically. If styling isn&apos;t working, verify each file exists and is correct.
+        </p>
+        <div className="overflow-x-auto rounded-lg border border-border">
+          <table className="w-full text-sm">
+            <thead>
+              <tr className="bg-muted/50">
+                <th className="text-left p-3 font-medium text-foreground">File</th>
+                <th className="text-left p-3 font-medium text-foreground">Purpose</th>
+                <th className="text-left p-3 font-medium text-foreground">Critical Setting</th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-border">
+              <tr>
+                <td className="p-3"><code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">babel.config.js</code></td>
+                <td className="p-3 text-muted-foreground">Enables NativeWind JSX transform</td>
+                <td className="p-3"><code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">SDK 54: jsxImportSource: &quot;nativewind&quot;</code><br/><code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">SDK 55: &quot;nativewind/babel&quot; plugin</code></td>
+              </tr>
+              <tr>
+                <td className="p-3"><code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">metro.config.js</code></td>
+                <td className="p-3 text-muted-foreground">Processes CSS with NativeWind</td>
+                <td className="p-3"><code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">withNativeWind(config, &#123; input: &quot;./global.css&quot; &#125;)</code></td>
+              </tr>
+              <tr>
+                <td className="p-3"><code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">tsconfig.json</code></td>
+                <td className="p-3 text-muted-foreground">TypeScript className support</td>
+                <td className="p-3"><code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">SDK 54: &quot;nativewind&quot;</code><br/><code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">SDK 55: &quot;react-native-css&quot;</code></td>
+              </tr>
+              <tr>
+                <td className="p-3"><code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">global.css</code></td>
+                <td className="p-3 text-muted-foreground">Theme tokens + Tailwind directives</td>
+                <td className="p-3"><code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">--radius: 0.5rem</code> in :root and .dark</td>
+              </tr>
+              <tr>
+                <td className="p-3"><code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">tailwind.config.js</code></td>
+                <td className="p-3 text-muted-foreground">Theme colors + NativeWind preset</td>
+                <td className="p-3 text-muted-foreground">SDK 54 only (v5 uses CSS-first config)</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
       {/* Known Differences */}
       <div className="space-y-4">
         <h2 className="text-2xl font-semibold tracking-tight text-foreground">Known Differences</h2>
@@ -188,6 +274,11 @@ export default function CompatibilityPage() {
           <li className="flex items-start gap-2">
             <span className="text-foreground font-medium shrink-0">React 19:</span>
             SDK 55 uses React 19 which changes some lifecycle behaviors. AniUI components are compatible with both React 18 and 19.
+          </li>
+          <li className="flex items-start gap-2">
+            <span className="text-foreground font-medium shrink-0">React Compiler:</span>
+            Do NOT enable <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">&quot;reactCompiler&quot;: true</code> in app.json.
+            It breaks NativeWind&apos;s className transform, causing all styles to silently disappear.
           </li>
         </ul>
       </div>

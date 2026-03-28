@@ -60,7 +60,7 @@ const kpiProgress = [
 
 export default function ChartsScreen() {
   return (
-    <SafeAreaView className="flex-1 bg-background" edges={["bottom"]}>
+    <SafeAreaView style={{ flex: 1, backgroundColor: "hsl(0, 0%, 100%)" }} edges={["bottom"]}>
       <ScrollView className="flex-1 px-4" contentContainerClassName="gap-4 py-6 pb-20">
         <Text variant="h2">Charts</Text>
         <Text variant="muted">7 chart components built with react-native-svg.</Text>

@@ -1,7 +1,7 @@
 import React from "react";
 import { View, Pressable, Text, Modal } from "react-native";
 import Animated, { FadeIn, FadeOut, ZoomIn, ZoomOut } from "react-native-reanimated";
-import { cn } from "@/lib/utils";
+import { cn } from "../../lib/utils";
 
 export interface DialogProps {
   open: boolean;

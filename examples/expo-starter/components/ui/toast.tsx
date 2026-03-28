@@ -1,7 +1,7 @@
 import React, { createContext, useCallback, useContext, useState } from "react";
 import { View, Text, Pressable } from "react-native";
 import Animated, { SlideInUp, SlideOutUp } from "react-native-reanimated";
-import { cn } from "@/lib/utils";
+import { cn } from "../../lib/utils";
 
 type ToastVariant = "default" | "destructive" | "success";
 type ToastData = { id: string; title: string; description?: string; variant?: ToastVariant };

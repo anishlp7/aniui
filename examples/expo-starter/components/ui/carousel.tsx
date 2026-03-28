@@ -1,6 +1,6 @@
 import React, { useRef, useState } from "react";
 import { View, FlatList, Dimensions } from "react-native";
-import { cn } from "@/lib/utils";
+import { cn } from "../../lib/utils";
 
 export interface CarouselProps extends React.ComponentPropsWithoutRef<typeof View> {
   className?: string;

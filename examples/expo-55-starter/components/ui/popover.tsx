@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useState } from "react";
 import { View, Pressable, Modal } from "react-native";
 import Animated, { FadeIn, FadeOut } from "react-native-reanimated";
-import { cn } from "@/lib/utils";
+import { cn } from "../../lib/utils";
 
 const PopoverCtx = createContext<{ open: boolean; toggle: () => void; close: () => void }>({ open: false, toggle: () => {}, close: () => {} });
 

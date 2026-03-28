@@ -1,7 +1,7 @@
 import React from "react";
 import { View, TextInput, Pressable, Text } from "react-native";
 import { cva, type VariantProps } from "class-variance-authority";
-import { cn } from "@/lib/utils";
+import { cn } from "../../lib/utils";
 
 const searchBarVariants = cva(
   "flex-row items-center rounded-lg bg-muted px-3 min-h-12",

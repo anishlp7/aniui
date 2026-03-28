@@ -5,7 +5,7 @@ import GorhomBottomSheet, {
   BottomSheetBackdrop,
   BottomSheetView,
 } from "@gorhom/bottom-sheet";
-import { cn } from "@/lib/utils";
+import { cn } from "../../lib/utils";
 
 export interface BottomSheetProps extends Partial<GorhomProps> {
   className?: string;
