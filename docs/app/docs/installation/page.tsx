@@ -4,7 +4,7 @@ import { useState } from "react";
 import { CodeBlock } from "@/components/code-block";
 import Link from "next/link";
 
-type SDK = "54" | "55";
+type Platform = "expo54" | "expo55" | "bare";
 
 const babelConfigV4Code = `module.exports = function (api) {
   api.cache(true);
@@ -24,7 +24,25 @@ module.exports = function (api) {
   };
 };`;
 
+const babelConfigBareCode = `module.exports = {
+  presets: [
+    "module:@react-native/babel-preset",
+    "nativewind/babel",
+  ],
+  plugins: [
+    ["module-resolver", { alias: { "@": "." } }],
+    "react-native-reanimated/plugin",
+  ],
+};`;
+
 const metroConfigCode = `const { getDefaultConfig } = require("expo/metro-config");
+const { withNativeWind } = require("nativewind/metro");
+
+const config = getDefaultConfig(__dirname);
+
+module.exports = withNativeWind(config, { input: "./global.css" });`;
+
+const metroConfigBareCode = `const { getDefaultConfig } = require("@react-native/metro-config");
 const { withNativeWind } = require("nativewind/metro");
 
 const config = getDefaultConfig(__dirname);
@@ -182,29 +200,39 @@ const tsconfigV5Code = `// NativeWind v5: NO jsxImportSource needed
   }
 }`;
 
-function SDKSwitcher({ sdk, onSwitch }: { sdk: SDK; onSwitch: (s: SDK) => void }) {
+const tsconfigBareCode = `{
+  "compilerOptions": {
+    "strict": true,
+    "jsx": "react-native",
+    "moduleResolution": "bundler",
+    "paths": {
+      "@/*": ["./*"]
+    }
+  },
+  "include": ["**/*.ts", "**/*.tsx", "nativewind-env.d.ts"]
+}`;
+
+function PlatformSwitcher({ platform, onSwitch }: { platform: Platform; onSwitch: (p: Platform) => void }) {
+  const tabs: { key: Platform; label: string }[] = [
+    { key: "expo54", label: "Expo SDK 54" },
+    { key: "expo55", label: "Expo SDK 55" },
+    { key: "bare", label: "Bare React Native" },
+  ];
   return (
     <div className="flex rounded-lg border border-border p-1 bg-muted/30 w-fit">
-      <button
-        onClick={() => onSwitch("54")}
-        className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${
-          sdk === "54"
-            ? "bg-primary text-primary-foreground shadow-sm"
-            : "text-muted-foreground hover:text-foreground"
-        }`}
-      >
-        Expo SDK 54
-      </button>
-      <button
-        onClick={() => onSwitch("55")}
-        className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${
-          sdk === "55"
-            ? "bg-primary text-primary-foreground shadow-sm"
-            : "text-muted-foreground hover:text-foreground"
-        }`}
-      >
-        Expo SDK 55
-      </button>
+      {tabs.map((t) => (
+        <button
+          key={t.key}
+          onClick={() => onSwitch(t.key)}
+          className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${
+            platform === t.key
+              ? "bg-primary text-primary-foreground shadow-sm"
+              : "text-muted-foreground hover:text-foreground"
+          }`}
+        >
+          {t.label}
+        </button>
+      ))}
     </div>
   );
 }
@@ -355,8 +383,114 @@ npx expo run:android`} />
   );
 }
 
+function BareRNSteps() {
+  return (
+    <div className="space-y-6">
+      <div className="rounded-lg border border-border bg-muted/20 p-4">
+        <p className="text-sm font-medium text-foreground">NativeWind v4 + Tailwind v3 + Reanimated v3</p>
+        <p className="text-sm text-muted-foreground mt-1">React Native 0.76+ without Expo. Supports both Old and New Architecture.</p>
+      </div>
+
+      <h3 className="text-lg font-semibold">Step 1. Create a new project</h3>
+      <CodeBlock code={`npx @react-native-community/cli init MyApp
+cd MyApp`} />
+
+      <h3 className="text-lg font-semibold pt-2">Step 2. Install dependencies</h3>
+      <p className="text-muted-foreground">
+        NativeWind requires these core packages. Install them with your preferred package manager.
+      </p>
+      <CodeBlock code={`# Core styling
+npm install nativewind tailwindcss@3 react-native-reanimated react-native-worklets react-native-safe-area-context
+npm install class-variance-authority clsx tailwind-merge
+
+# Gesture handler + bottom sheet (required for Select, BottomSheet, ActionSheet)
+npm install react-native-gesture-handler @gorhom/bottom-sheet
+
+# Path alias support (so @/ imports work)
+npm install --save-dev babel-plugin-module-resolver
+
+# iOS only — install native pods
+cd ios && pod install && cd ..`} />
+
+      <h3 className="text-lg font-semibold pt-2">Step 3. Initialize AniUI</h3>
+      <p className="text-muted-foreground">
+        The CLI auto-detects bare React Native projects. It creates babel.config.js, metro.config.js,
+        tailwind.config.js, global.css, nativewind-env.d.ts, and lib/utils.ts.
+      </p>
+      <CodeBlock code="npx @aniui/cli init" />
+
+      <h3 className="text-lg font-semibold pt-2">Step 4. Import global.css</h3>
+      <p className="text-muted-foreground">
+        Add this import at the very top of your app entry file (usually App.tsx or index.js):
+      </p>
+      <CodeBlock title="App.tsx" code={`import "./global.css";
+import React from "react";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
+import { SafeAreaProvider } from "react-native-safe-area-context";
+import { BottomSheetModalProvider } from "@gorhom/bottom-sheet";
+
+export default function App() {
+  return (
+    <GestureHandlerRootView style={{ flex: 1 }}>
+      <SafeAreaProvider>
+        <BottomSheetModalProvider>
+          {/* your app content */}
+        </BottomSheetModalProvider>
+      </SafeAreaProvider>
+    </GestureHandlerRootView>
+  );
+}`} />
+
+      <h3 className="text-lg font-semibold pt-2">Step 5. Add components and start</h3>
+      <CodeBlock code={`npx @aniui/cli add button text input card
+
+# Start Metro bundler
+npm start -- --reset-cache
+
+# Run on device/simulator
+npm run ios
+npm run android`} />
+
+      <div className="rounded-lg border border-border bg-muted/30 p-4">
+        <p className="text-sm font-medium text-foreground mb-1">Path aliases</p>
+        <p className="text-sm text-muted-foreground">
+          AniUI components import from <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">@/lib/utils</code>.
+          The CLI rewrites these to relative paths automatically. If you want to use <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">@/</code> aliases,
+          add <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">babel-plugin-module-resolver</code> to your babel config.
+        </p>
+      </div>
+
+      <details className="rounded-lg border border-border">
+        <summary className="cursor-pointer p-4 text-sm font-medium text-foreground hover:bg-muted/30 transition-colors">
+          What does <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">aniui init</code> create?
+        </summary>
+        <div className="border-t border-border p-4 space-y-4">
+          <CodeBlock title="babel.config.js" code={babelConfigBareCode} />
+          <CodeBlock title="metro.config.js" code={metroConfigBareCode} />
+          <CodeBlock title="tailwind.config.js" code={tailwindConfigCode} />
+          <CodeBlock title="global.css" code={globalCssV4} />
+          <CodeBlock title="nativewind-env.d.ts" code={nativewindEnvCode} />
+          <CodeBlock title="tsconfig.json (reference)" code={tsconfigBareCode} />
+          <div className="rounded-lg border border-border bg-muted/30 p-4">
+            <p className="text-sm font-medium text-foreground mb-1">Key differences from Expo</p>
+            <ul className="text-sm text-muted-foreground space-y-1 mt-2">
+              <li>&bull; Metro config uses <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">@react-native/metro-config</code> instead of <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">expo/metro-config</code></li>
+              <li>&bull; Babel uses <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">module:@react-native/babel-preset</code> + <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">nativewind/babel</code></li>
+              <li>&bull; No <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">jsxImportSource</code> — use <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">nativewind/babel</code> preset instead</li>
+              <li>&bull; <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">react-native-worklets</code> must be installed separately (Reanimated v4 peer dep)</li>
+              <li>&bull; <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">babel-plugin-module-resolver</code> is needed for <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">@/</code> path aliases</li>
+              <li>&bull; Wrap your root with <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">BottomSheetModalProvider</code> for Select and bottom sheet components</li>
+              <li>&bull; You must run <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">pod install</code> after adding native dependencies</li>
+            </ul>
+          </div>
+        </div>
+      </details>
+    </div>
+  );
+}
+
 export default function InstallationPage() {
-  const [sdk, setSdk] = useState<SDK>("54");
+  const [platform, setPlatform] = useState<Platform>("expo54");
 
   return (
     <div className="space-y-8">
@@ -367,10 +501,12 @@ export default function InstallationPage() {
         </p>
       </div>
 
-      <SDKSwitcher sdk={sdk} onSwitch={setSdk} />
+      <PlatformSwitcher platform={platform} onSwitch={setPlatform} />
 
       <div className="space-y-6 text-foreground leading-7">
-        {sdk === "54" ? <SDK54Steps /> : <SDK55Steps />}
+        {platform === "expo54" && <SDK54Steps />}
+        {platform === "expo55" && <SDK55Steps />}
+        {platform === "bare" && <BareRNSteps />}
 
         {/* ==================== TROUBLESHOOTING ==================== */}
         <div className="border-t border-border my-8" />
@@ -380,15 +516,18 @@ export default function InstallationPage() {
           <div className="rounded-lg border border-destructive/50 bg-destructive/5 p-4">
             <p className="text-sm font-medium text-foreground mb-1">Styles not appearing / components render unstyled</p>
             <ul className="text-sm text-muted-foreground space-y-1 mt-2">
-              <li>1. <strong>SDK 54:</strong> Check <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">babel.config.js</code> has{" "}
+              <li>1. <strong>Expo SDK 54:</strong> Check <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">babel.config.js</code> has{" "}
                 <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">jsxImportSource: &quot;nativewind&quot;</code> in babel-preset-expo options</li>
-              <li>1. <strong>SDK 55:</strong> babel.config.js must NOT have{" "}
+              <li>1. <strong>Expo SDK 55:</strong> babel.config.js must NOT have{" "}
                 <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">jsxImportSource</code> or{" "}
                 <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">nativewind/babel</code> — withNativeWind in metro handles everything</li>
+              <li>1. <strong>Bare RN:</strong> Check <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">babel.config.js</code> has{" "}
+                <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">nativewind/babel</code> in presets</li>
               <li>2. Check <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">metro.config.js</code> wraps config with{" "}
                 <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">withNativeWind</code></li>
               <li>3. Check <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">global.css</code> is imported at the top of your app entry file</li>
-              <li>4. Clear Metro cache: <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">npx expo start -c</code></li>
+              <li>4. Clear Metro cache: <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">npx expo start -c</code> or{" "}
+                <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">npm start -- --reset-cache</code></li>
             </ul>
           </div>
 
@@ -436,6 +575,24 @@ export default function InstallationPage() {
               <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">react-native-safe-area-context</code> need{" "}
               <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">style</code> instead of{" "}
               <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">className</code> for layout props like flex.
+            </p>
+          </div>
+
+          <div className="rounded-lg border border-destructive/50 bg-destructive/5 p-4">
+            <p className="text-sm font-medium text-foreground mb-1">Bare RN: &quot;Unable to resolve nativewind/metro&quot;</p>
+            <p className="text-sm text-muted-foreground mt-1">
+              Make sure <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">nativewind</code> is installed as a dependency (not just devDependency).
+              Run <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">npm install nativewind</code> and restart Metro with{" "}
+              <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">--reset-cache</code>.
+            </p>
+          </div>
+
+          <div className="rounded-lg border border-destructive/50 bg-destructive/5 p-4">
+            <p className="text-sm font-medium text-foreground mb-1">Bare RN: Reanimated crash on app launch</p>
+            <p className="text-sm text-muted-foreground mt-1">
+              Ensure <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">react-native-reanimated/plugin</code> is the{" "}
+              <strong>last</strong> plugin in your babel.config.js plugins array. Then run{" "}
+              <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">cd ios && pod install</code> and rebuild.
             </p>
           </div>
 

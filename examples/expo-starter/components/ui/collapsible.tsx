@@ -1,45 +1,72 @@
-import { PropsWithChildren, useState } from 'react';
-import { StyleSheet, TouchableOpacity } from 'react-native';
+import React, { createContext, useContext, useState } from "react";
+import { View, Pressable } from "react-native";
+import Animated, { FadeIn, FadeOut } from "react-native-reanimated";
+import { cn } from "../../lib/utils";
 
-import { ThemedText } from '@/components/themed-text';
-import { ThemedView } from '@/components/themed-view';
-import { IconSymbol } from '@/components/ui/icon-symbol';
-import { Colors } from '@/constants/theme';
-import { useColorScheme } from '@/hooks/use-color-scheme';
+const CollapsibleContext = createContext<{ isOpen: boolean; toggle: () => void }>({
+  isOpen: false,
+  toggle: () => {},
+});
 
-export function Collapsible({ children, title }: PropsWithChildren & { title: string }) {
-  const [isOpen, setIsOpen] = useState(false);
-  const theme = useColorScheme() ?? 'light';
+export interface CollapsibleProps extends React.ComponentPropsWithoutRef<typeof View> {
+  className?: string;
+  open?: boolean;
+  onOpenChange?: (open: boolean) => void;
+  children?: React.ReactNode;
+}
+
+export function Collapsible({ open: controlledOpen, onOpenChange, className, children, ...props }: CollapsibleProps) {
+  const [uncontrolledOpen, setUncontrolledOpen] = useState(false);
+  const isOpen = controlledOpen ?? uncontrolledOpen;
+  const toggle = () => {
+    const next = !isOpen;
+    setUncontrolledOpen(next);
+    onOpenChange?.(next);
+  };
 
   return (
-    <ThemedView>
-      <TouchableOpacity
-        style={styles.heading}
-        onPress={() => setIsOpen((value) => !value)}
-        activeOpacity={0.8}>
-        <IconSymbol
-          name="chevron.right"
-          size={18}
-          weight="medium"
-          color={theme === 'light' ? Colors.light.icon : Colors.dark.icon}
-          style={{ transform: [{ rotate: isOpen ? '90deg' : '0deg' }] }}
-        />
-
-        <ThemedText type="defaultSemiBold">{title}</ThemedText>
-      </TouchableOpacity>
-      {isOpen && <ThemedView style={styles.content}>{children}</ThemedView>}
-    </ThemedView>
+    <CollapsibleContext.Provider value={{ isOpen, toggle }}>
+      <View className={cn("", className)} {...props}>{children}</View>
+    </CollapsibleContext.Provider>
   );
 }
 
-const styles = StyleSheet.create({
-  heading: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 6,
-  },
-  content: {
-    marginTop: 6,
-    marginLeft: 24,
-  },
-});
+export interface CollapsibleTriggerProps extends React.ComponentPropsWithoutRef<typeof Pressable> {
+  className?: string;
+  children?: React.ReactNode;
+}
+
+export function CollapsibleTrigger({ className, children, ...props }: CollapsibleTriggerProps) {
+  const { isOpen, toggle } = useContext(CollapsibleContext);
+  return (
+    <Pressable
+      className={cn("min-h-12 min-w-12", className)}
+      onPress={toggle}
+      accessible={true}
+      accessibilityRole="button"
+      accessibilityState={{ expanded: isOpen }}
+      {...props}
+    >
+      <View pointerEvents="none">
+        {children}
+      </View>
+    </Pressable>
+  );
+}
+
+export interface CollapsibleContentProps extends React.ComponentPropsWithoutRef<typeof View> {
+  className?: string;
+  children?: React.ReactNode;
+}
+
+export function CollapsibleContent({ className, children, ...props }: CollapsibleContentProps) {
+  const { isOpen } = useContext(CollapsibleContext);
+
+  if (!isOpen) return null;
+
+  return (
+    <Animated.View entering={FadeIn.duration(200)} exiting={FadeOut.duration(150)}>
+      <View className={cn("", className)} {...props}>{children}</View>
+    </Animated.View>
+  );
+}
