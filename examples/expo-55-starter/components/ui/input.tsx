@@ -1,5 +1,5 @@
 import React from "react";
-import { TextInput } from "react-native";
+import { View, TextInput } from "react-native";
 import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
@@ -28,14 +28,45 @@ export interface InputProps
   extends React.ComponentPropsWithoutRef<typeof TextInput>,
     VariantProps<typeof inputVariants> {
   className?: string;
+  leadingIcon?: React.ReactNode;
+  trailingIcon?: React.ReactNode;
 }
 
-export function Input({ variant, size, className, ...props }: InputProps) {
+export function Input({
+  variant,
+  size,
+  className,
+  leadingIcon,
+  trailingIcon,
+  ...props
+}: InputProps) {
+  const hasIcons = !!(leadingIcon || trailingIcon);
+
+  if (!hasIcons) {
+    return (
+      <TextInput
+        className={cn(inputVariants({ variant, size }), className)}
+        placeholderTextColor="hsl(240 3.8% 46.1%)"
+        {...props}
+      />
+    );
+  }
+
   return (
-    <TextInput
-      className={cn(inputVariants({ variant, size }), className)}
-      placeholderTextColor="hsl(240 3.8% 46.1%)"
-      {...props}
-    />
+    <View
+      className={cn(
+        "flex-row items-center",
+        inputVariants({ variant, size }),
+        className
+      )}
+    >
+      {leadingIcon && <View className="mr-2">{leadingIcon}</View>}
+      <TextInput
+        className="flex-1 text-foreground p-0 text-base"
+        placeholderTextColor="hsl(240 3.8% 46.1%)"
+        {...props}
+      />
+      {trailingIcon && <View className="ml-2">{trailingIcon}</View>}
+    </View>
   );
 }
