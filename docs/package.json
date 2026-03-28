@@ -17,6 +17,7 @@
     "react-dom": "19.2.3",
     "react-live": "^4.1.8",
     "react-native-web": "^0.21.2",
+    "recharts": "^2.15.0",
     "tailwind-merge": "^3.5.0"
   },
   "devDependencies": {

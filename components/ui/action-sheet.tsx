@@ -1,6 +1,10 @@
 import React, { forwardRef, useCallback } from "react";
 import { View, Pressable, Text } from "react-native";
-import GorhomBottomSheet, { BottomSheetBackdrop, BottomSheetView } from "@gorhom/bottom-sheet";
+import {
+  BottomSheetModal,
+  BottomSheetBackdrop,
+  BottomSheetView,
+} from "@gorhom/bottom-sheet";
 import { cn } from "@/lib/utils";
 
 export interface ActionSheetAction {
@@ -16,7 +20,7 @@ export interface ActionSheetProps {
   onCancel?: () => void;
 }
 
-export const ActionSheet = forwardRef<GorhomBottomSheet, ActionSheetProps>(
+export const ActionSheet = forwardRef<BottomSheetModal, ActionSheetProps>(
   ({ className, title, actions, onCancel }, ref) => {
     const renderBackdrop = useCallback(
       (backdropProps: React.ComponentProps<typeof BottomSheetBackdrop>) => (
@@ -26,9 +30,8 @@ export const ActionSheet = forwardRef<GorhomBottomSheet, ActionSheetProps>(
     );
 
     return (
-      <GorhomBottomSheet
+      <BottomSheetModal
         ref={ref}
-        index={-1}
         enableDynamicSizing
         enablePanDownToClose
         backdropComponent={renderBackdrop}
@@ -58,7 +61,7 @@ export const ActionSheet = forwardRef<GorhomBottomSheet, ActionSheetProps>(
             )}
           </View>
         </BottomSheetView>
-      </GorhomBottomSheet>
+      </BottomSheetModal>
     );
   }
 );

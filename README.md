@@ -14,7 +14,7 @@
   <a href="https://www.npmjs.com/package/@aniui/cli"><img src="https://img.shields.io/npm/v/@aniui/cli?style=flat-square&color=000" alt="npm version" /></a>
   <a href="https://github.com/anishlp7/aniui/blob/main/LICENSE"><img src="https://img.shields.io/github/license/anishlp7/aniui?style=flat-square&color=000" alt="license" /></a>
   <img src="https://img.shields.io/badge/platform-iOS%20%7C%20Android-000?style=flat-square" alt="platform" />
-  <img src="https://img.shields.io/badge/Expo%20SDK-53%20%7C%2054-000?style=flat-square" alt="expo" />
+  <img src="https://img.shields.io/badge/Expo%20SDK-53%20%7C%2054%20%7C%2055-000?style=flat-square" alt="expo" />
 </p>
 
 <p align="center">
@@ -30,9 +30,22 @@
 
 AniUI is a [shadcn/ui](https://ui.shadcn.com)-inspired component library for **React Native**. Instead of installing a package, you copy component source files directly into your project. You own the code. Customize everything.
 
-Built with [NativeWind](https://www.nativewind.dev) v4, [class-variance-authority](https://cva.style), and strict TypeScript. Every component is a single file, styled with Tailwind classes, and works on both iOS and Android out of the box.
+Built with [NativeWind](https://www.nativewind.dev), [class-variance-authority](https://cva.style), and strict TypeScript. Every component is a single file, styled with Tailwind classes, and works on both iOS and Android out of the box.
 
 **Demo:** [YouTube Short](https://www.youtube.com/shorts/KxHLlLk8YkA)
+
+## Compatibility
+
+| | Status |
+|---|---|
+| Expo | ✅ SDK 53, 54 & 55 |
+| Bare React Native | ✅ 0.76+ |
+| TypeScript | ✅ Strict |
+| JavaScript | ✅ Via CLI (`tsx: false`) |
+| New Architecture | ✅ |
+| Old Architecture | ✅ SDK 53/54 only |
+| iOS | ✅ 15+ |
+| Android | ✅ API 24+ |
 
 ## Quick Start
 
@@ -71,7 +84,7 @@ export function WelcomeScreen() {
 
 ## Components
 
-**48 components** — all listed alphabetically. Each component's docs page tells you if it needs extra dependencies.
+**54 components** — all listed alphabetically. Each component's docs page tells you if it needs extra dependencies.
 
 | Component | Description |
 |-----------|-------------|
@@ -138,11 +151,26 @@ npm install react-native-reanimated
 npm install @gorhom/bottom-sheet react-native-gesture-handler
 ```
 
-**Supported platforms:**
-- Expo SDK 53 & 54
-- Bare React Native CLI 0.76+
-- iOS 15+ / Android API 24+
-- New Architecture & Old Architecture
+**Supported platforms:** See [Compatibility](#compatibility) table above.
+
+## Production Ready
+
+| Area | Status |
+|------|--------|
+| 54 components | ✅ |
+| Unit tests (54 suites) | ✅ |
+| Accessibility audit | ✅ |
+| Performance benchmarks | ✅ |
+| CLI (`npx @aniui/cli add`) | ✅ |
+| MCP server | ✅ |
+| .cursorrules | ✅ |
+| Interactive docs site | ✅ |
+| Contributing guide | ✅ |
+| Issue templates | ✅ |
+| E2E tests (Detox) | 🔜 Coming |
+| CI/CD (GitHub Actions) | 🔜 Coming |
+| VS Code extension | 🔜 Coming |
+| Discord | 🔜 At 500 stars |
 
 ## Documentation
 

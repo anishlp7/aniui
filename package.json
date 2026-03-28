@@ -14,9 +14,46 @@
   "scripts": {
     "build": "cd cli && npm run build && cd ../mcp && npm run build",
     "test": "cd cli && npm test",
+    "test:components": "jest",
+    "test:a11y": "jest --testPathPattern=accessibility",
+    "test:perf": "jest --testPathPattern=performance",
+    "test:all": "npm test && jest",
+    "bundle-size": "node scripts/bundle-size.js",
     "build:cli": "cd cli && npm run build",
     "build:mcp": "cd mcp && npm run build",
     "dev:cli": "cd cli && npm run dev",
     "dev:docs": "cd docs && npm run dev"
+  },
+  "devDependencies": {
+    "@babel/preset-env": "^7.29.2",
+    "@babel/preset-flow": "^7.27.1",
+    "@babel/preset-react": "^7.28.5",
+    "@babel/preset-typescript": "^7.28.5",
+    "@gorhom/bottom-sheet": "^5.1.0",
+    "@react-native-community/datetimepicker": "^8.0.0",
+    "@testing-library/jest-native": "^5.4.3",
+    "@testing-library/react-native": "^12.9.0",
+    "@types/jest": "^29.5.0",
+    "@types/react": "~18.3.0",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "expo": "~54.0.0",
+    "jest": "^29.7.0",
+    "jest-expo": "~54.0.0",
+    "nativewind": "^4.2.1",
+    "react": "18.3.1",
+    "react-native": "0.79.2",
+    "react-native-gesture-handler": "~2.24.0",
+    "react-native-reanimated": "~3.17.0",
+    "react-native-safe-area-context": "~5.4.0",
+    "react-native-svg": "^15.11.0",
+    "react-test-renderer": "18.3.1",
+    "tailwind-merge": "^2.6.0",
+    "tailwindcss": "4",
+    "typescript": "~5.8.0"
+  },
+  "dependencies": {
+    "react-native-reanimated": "~4.1.1",
+    "react-native-safe-area-context": "~5.6.0"
   }
 }

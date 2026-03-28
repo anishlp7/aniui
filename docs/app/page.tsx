@@ -98,9 +98,17 @@ export default function HomePage() {
         </h1>
 
         <p className="mt-6 max-w-xl text-lg text-muted-foreground leading-relaxed">
-          35+ accessible components built with NativeWind and TypeScript.
+          54 accessible components built with NativeWind and TypeScript.
           No npm install — you own every line of code.
         </p>
+
+        <div className="flex flex-wrap items-center justify-center gap-2.5 mt-5">
+          {["Expo", "Bare RN", "TypeScript", "New Architecture"].map((label) => (
+            <span key={label} className="inline-flex items-center gap-1.5 rounded-full border border-border bg-secondary/40 px-3 py-1 text-xs font-medium text-muted-foreground">
+              <span className="text-green-500">✓</span> {label}
+            </span>
+          ))}
+        </div>
 
         <div className="flex flex-col sm:flex-row items-center gap-3 mt-8">
           <Link

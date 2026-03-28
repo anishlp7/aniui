@@ -7,8 +7,8 @@ dist/
 .turbo
 
 # Native build folders
-ios/
-android/
+/ios/
+/android/
 
 # Environment
 .env

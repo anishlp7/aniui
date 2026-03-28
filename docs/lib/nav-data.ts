@@ -6,10 +6,14 @@ export type NavSection = { title: string; items: NavItem[] };
 export const gettingStartedItems: NavItem[] = [
   { title: "Introduction", href: "/docs" },
   { title: "Installation", href: "/docs/installation" },
+  { title: "JavaScript", href: "/docs/javascript" },
   { title: "CLI", href: "/docs/cli" },
   { title: "MCP", href: "/docs/mcp" },
   { title: "Theming", href: "/docs/theming" },
   { title: "Dark Mode", href: "/docs/dark-mode" },
+  { title: "Compatibility", href: "/docs/compatibility" },
+  { title: "Android", href: "/docs/android" },
+  { title: "Changelog", href: "/docs/changelog" },
   { title: "Create", href: "/create" },
 ];
 
@@ -63,6 +67,16 @@ export const componentItems: NavItem[] = [
   { title: "Tooltip", href: "/docs/tooltip" },
 ];
 
+export const chartItems: NavItem[] = [
+  { title: "Area Chart", href: "/charts/area-chart" },
+  { title: "Bar Chart", href: "/charts/bar-chart" },
+  { title: "Line Chart", href: "/charts/line-chart" },
+  { title: "Pie Chart", href: "/charts/pie-chart" },
+  { title: "Radar Chart", href: "/charts/radar-chart" },
+  { title: "Radial Chart", href: "/charts/radial-chart" },
+  { title: "Tooltip", href: "/charts/tooltip" },
+];
+
 export const blockItems: NavItem[] = [
   { title: "Login", href: "/blocks/login" },
   { title: "Sign Up", href: "/blocks/signup" },
@@ -84,5 +98,6 @@ export const blockItems: NavItem[] = [
 export const sidebarSections: NavSection[] = [
   { title: "Getting Started", items: gettingStartedItems },
   { title: "Components", items: componentItems },
+  { title: "Charts", items: chartItems },
   { title: "Blocks", items: blockItems },
 ];

@@ -76,6 +76,106 @@ export default function ThemingPage() {
           No other config changes needed — Tailwind picks up the new values automatically
           since <code className="rounded bg-secondary px-1.5 py-0.5 text-sm font-mono">tailwind.config.js</code> references <code className="rounded bg-secondary px-1.5 py-0.5 text-sm font-mono">hsl(var(--primary))</code>.
         </p>
+
+        <h2 className="text-2xl font-semibold tracking-tight pt-4">How Tokens Flow</h2>
+        <p className="text-muted-foreground">
+          Understanding the full pipeline helps when debugging or extending themes:
+        </p>
+        <ol className="list-decimal pl-6 space-y-2 text-muted-foreground">
+          <li>
+            <strong className="text-foreground">global.css</strong> defines raw HSL values:{" "}
+            <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">--primary: 240 5.9% 10%</code>
+          </li>
+          <li>
+            <strong className="text-foreground">tailwind.config.js</strong> maps them to Tailwind colors:{" "}
+            <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">primary: &quot;hsl(var(--primary))&quot;</code>
+          </li>
+          <li>
+            <strong className="text-foreground">Components</strong> use Tailwind classes:{" "}
+            <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">bg-primary text-primary-foreground</code>
+          </li>
+          <li>
+            <strong className="text-foreground">NativeWind</strong> compiles these to native styles at build time via Metro
+          </li>
+        </ol>
+        <p className="text-muted-foreground">
+          Unlike web CSS where variables resolve at runtime, NativeWind processes CSS variables
+          through the Metro bundler at build time. This means changes to <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">global.css</code>{" "}
+          require a rebuild to take effect.
+        </p>
+
+        <h2 className="text-2xl font-semibold tracking-tight pt-4">Adding Custom Tokens</h2>
+        <p className="text-muted-foreground">
+          Need more semantic colors like <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">success</code> or{" "}
+          <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">info</code>? Add them in three steps:
+        </p>
+        <p className="text-sm font-medium text-foreground mt-4">1. Define the CSS variable in both light and dark modes:</p>
+        <CodeBlock
+          title="global.css"
+          code={`:root {
+  --success: 142 76% 36%;
+  --success-foreground: 0 0% 100%;
+  --info: 217 91% 60%;
+  --info-foreground: 0 0% 100%;
+}
+.dark {
+  --success: 142 76% 46%;
+  --success-foreground: 0 0% 100%;
+  --info: 217 91% 70%;
+  --info-foreground: 0 0% 100%;
+}`}
+        />
+        <p className="text-sm font-medium text-foreground mt-4">2. Map them in tailwind.config.js:</p>
+        <CodeBlock
+          title="tailwind.config.js"
+          code={`// Inside theme.extend.colors:
+success: {
+  DEFAULT: "hsl(var(--success))",
+  foreground: "hsl(var(--success-foreground))",
+},
+info: {
+  DEFAULT: "hsl(var(--info))",
+  foreground: "hsl(var(--info-foreground))",
+},`}
+        />
+        <p className="text-sm font-medium text-foreground mt-4">3. Use in your components:</p>
+        <CodeBlock
+          code={`<View className="bg-success rounded-md p-4">
+  <Text className="text-success-foreground">Payment successful!</Text>
+</View>`}
+        />
+
+        <h2 className="text-2xl font-semibold tracking-tight pt-4">Global Component Overrides</h2>
+        <p className="text-muted-foreground">
+          Since AniUI components are source files you own, you have two approaches for global styling changes:
+        </p>
+        <p className="text-sm font-medium text-foreground mt-4">Edit the component source directly:</p>
+        <p className="text-muted-foreground">
+          Change the <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">cva</code> base string
+          to affect all instances. For example, making all buttons fully rounded:
+        </p>
+        <CodeBlock
+          title="components/ui/button.tsx"
+          code={`// Change the base styles in buttonVariants:
+const buttonVariants = cva(
+  "flex-row items-center justify-center rounded-full min-h-12 min-w-12",
+  //                                     ^^^^^^^^^^^^
+  //                                     was: rounded-md
+  { ... }
+);`}
+        />
+        <p className="text-sm font-medium text-foreground mt-4">Create a wrapper component:</p>
+        <p className="text-muted-foreground">
+          For project-wide defaults without modifying the source:
+        </p>
+        <CodeBlock
+          code={`import { Button, ButtonProps } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
+
+export function AppButton({ className, ...props }: ButtonProps) {
+  return <Button className={cn("rounded-full", className)} {...props} />;
+}`}
+        />
       </div>
     </div>
   );

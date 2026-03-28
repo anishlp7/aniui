@@ -1,19 +1,19 @@
 import React, { forwardRef, useCallback } from "react";
 import { View } from "react-native";
-import GorhomBottomSheet, {
-  type BottomSheetProps as GorhomProps,
+import {
+  BottomSheetModal,
   BottomSheetBackdrop,
   BottomSheetView,
 } from "@gorhom/bottom-sheet";
 import { cn } from "@/lib/utils";
 
-export interface BottomSheetProps extends Partial<GorhomProps> {
+export interface BottomSheetProps {
   className?: string;
   children: React.ReactNode;
   snapPoints?: (string | number)[];
 }
 
-export const BottomSheet = forwardRef<GorhomBottomSheet, BottomSheetProps>(
+export const BottomSheet = forwardRef<BottomSheetModal, BottomSheetProps>(
   ({ className, children, snapPoints = ["25%", "50%"], ...props }, ref) => {
     const renderBackdrop = useCallback(
       (backdropProps: React.ComponentProps<typeof BottomSheetBackdrop>) => (
@@ -23,9 +23,8 @@ export const BottomSheet = forwardRef<GorhomBottomSheet, BottomSheetProps>(
     );
 
     return (
-      <GorhomBottomSheet
+      <BottomSheetModal
         ref={ref}
-        index={-1}
         snapPoints={snapPoints}
         enablePanDownToClose
         backdropComponent={renderBackdrop}
@@ -36,7 +35,7 @@ export const BottomSheet = forwardRef<GorhomBottomSheet, BottomSheetProps>(
         <BottomSheetView>
           <View className={cn("p-4", className)}>{children}</View>
         </BottomSheetView>
-      </GorhomBottomSheet>
+      </BottomSheetModal>
     );
   }
 );

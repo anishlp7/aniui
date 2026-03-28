@@ -1,0 +1,49 @@
+import React, { useRef, useState } from "react";
+import { View, FlatList, Dimensions } from "react-native";
+import { cn } from "../../lib/utils";
+
+export interface CarouselProps extends React.ComponentPropsWithoutRef<typeof View> {
+  className?: string;
+  data: React.ReactNode[];
+  itemWidth?: number;
+  showDots?: boolean;
+  autoPlay?: boolean;
+  interval?: number;
+}
+
+export function Carousel({ className, data, itemWidth, showDots = true, autoPlay, interval = 3000, ...props }: CarouselProps) {
+  const [active, setActive] = useState(0);
+  const width = itemWidth ?? Dimensions.get("window").width;
+  const ref = useRef<FlatList>(null);
+
+  React.useEffect(() => {
+    if (!autoPlay || data.length <= 1) return;
+    const timer = setInterval(() => {
+      const next = (active + 1) % data.length;
+      ref.current?.scrollToOffset({ offset: next * width, animated: true });
+    }, interval);
+    return () => clearInterval(timer);
+  }, [autoPlay, active, data.length, interval, width]);
+
+  return (
+    <View className={cn("", className)} {...props}>
+      <FlatList
+        ref={ref}
+        data={data}
+        horizontal
+        pagingEnabled
+        showsHorizontalScrollIndicator={false}
+        onMomentumScrollEnd={(e) => setActive(Math.round(e.nativeEvent.contentOffset.x / width))}
+        renderItem={({ item }) => <View style={{ width }}>{item}</View>}
+        keyExtractor={(_, i) => String(i)}
+      />
+      {showDots && data.length > 1 && (
+        <View className="flex-row items-center justify-center gap-1.5 mt-3">
+          {data.map((_, i) => (
+            <View key={i} className={cn("h-2 rounded-full", i === active ? "w-4 bg-primary" : "w-2 bg-muted-foreground/30")} />
+          ))}
+        </View>
+      )}
+    </View>
+  );
+}

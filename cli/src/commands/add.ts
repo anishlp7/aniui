@@ -9,6 +9,7 @@ interface AniUIConfig {
   componentsDir: string;
   utilPath: string;
   theme: string;
+  tsx?: boolean;
 }
 
 async function loadConfig(cwd: string): Promise<AniUIConfig | null> {
@@ -46,8 +47,9 @@ export async function addCommand(names: string[]): Promise<void> {
 
   // Load config or use defaults
   const config = await loadConfig(cwd);
+  const useTsx = config?.tsx !== false;
   const componentsDir = path.resolve(cwd, config?.componentsDir || "components/ui");
-  const utilPath = path.resolve(cwd, config?.utilPath || "lib/utils.ts");
+  const utilPath = path.resolve(cwd, config?.utilPath || (useTsx ? "lib/utils.ts" : "lib/utils.js"));
 
   // Check if init has been run
   if (!await fs.pathExists(utilPath)) {
@@ -64,7 +66,9 @@ export async function addCommand(names: string[]): Promise<void> {
 
   for (const name of allNames) {
     const entry = registry[name];
-    const destFile = path.join(componentsDir, path.basename(entry.file));
+    const baseFile = path.basename(entry.file);
+    const destFileName = useTsx ? baseFile : baseFile.replace(/\.tsx$/, ".jsx");
+    const destFile = path.join(componentsDir, destFileName);
 
     if (await fs.pathExists(destFile)) {
       skipped.push(name);
@@ -72,7 +76,7 @@ export async function addCommand(names: string[]): Promise<void> {
     }
 
     try {
-      await copyComponent(entry.file, componentsDir, utilPath);
+      await copyComponent(entry.file, componentsDir, utilPath, useTsx);
     } catch (err) {
       logger.error(`Failed to copy ${name}: ${err instanceof Error ? err.message : String(err)}`);
       continue;
@@ -138,6 +142,18 @@ export async function addCommand(names: string[]): Promise<void> {
     if (needsGorhom && !allDeps["@gorhom/bottom-sheet"]) {
       logger.info(`  ${getInstallCommand(pm, ["@gorhom/bottom-sheet", "react-native-gesture-handler"])}`);
     }
+    if (needsGorhom) {
+      logger.break();
+      logger.warn("Wrap your root layout with BottomSheetModalProvider (required for Select):");
+      logger.info('  import { GestureHandlerRootView } from "react-native-gesture-handler";');
+      logger.info('  import { BottomSheetModalProvider } from "@gorhom/bottom-sheet";');
+      logger.info("");
+      logger.info("  <GestureHandlerRootView style={{ flex: 1 }}>");
+      logger.info("    <BottomSheetModalProvider>");
+      logger.info("      {/* your app */}");
+      logger.info("    </BottomSheetModalProvider>");
+      logger.info("  </GestureHandlerRootView>");
+    }
     if (needsDatePicker && !allDeps["@react-native-community/datetimepicker"]) {
       logger.info(`  ${getInstallCommand(pm, ["@react-native-community/datetimepicker"])}`);
     }
@@ -148,6 +164,7 @@ export async function addCommand(names: string[]): Promise<void> {
     logger.break();
     logger.title("Import example:");
     const first = registry[created[0]];
+    const ext = useTsx ? ".tsx" : ".jsx";
     const importPath = config?.componentsDir
       ? `@/${config.componentsDir}/${path.basename(first.file, ".tsx")}`
       : `@/components/ui/${path.basename(first.file, ".tsx")}`;

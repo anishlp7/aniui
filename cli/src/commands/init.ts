@@ -41,13 +41,21 @@ export async function initCommand(): Promise<void> {
   }
 
   const pm = project.packageManager;
+  const gen = project.sdkGeneration;
   logger.success(`Detected ${project.type === "expo" ? "Expo" : "React Native CLI"} project`);
   logger.success(`Using ${pm} as package manager`);
+  logger.success(`SDK generation: ${gen === "v5" ? "NativeWind v5 + Tailwind v4" : "NativeWind v4 + Tailwind v3"}`);
 
   if (!project.hasNativewind) {
     logger.error("NativeWind is not installed.");
     logger.info("Install it first:");
-    logger.info(`  ${getInstallCommand(pm, ["nativewind", "tailwindcss@3", "class-variance-authority", "clsx", "tailwind-merge"])}`);
+    if (gen === "v5") {
+      logger.info(`  npx expo install nativewind@preview react-native-css react-native-reanimated react-native-safe-area-context`);
+      logger.info(`  npx expo install --dev tailwindcss@4`);
+      logger.info(`  ${getInstallCommand(pm, ["class-variance-authority", "clsx", "tailwind-merge"])}`);
+    } else {
+      logger.info(`  ${getInstallCommand(pm, ["nativewind", "tailwindcss@3", "react-native-reanimated", "react-native-safe-area-context", "class-variance-authority", "clsx", "tailwind-merge"])}`);
+    }
     logger.info(`  ${getDlxCommand(pm, "pod-install")} (iOS only)`);
     logger.break();
     logger.info("See: https://www.nativewind.dev/getting-started/installation");
@@ -80,7 +88,25 @@ export async function initCommand(): Promise<void> {
       ],
       initial: 0,
     },
+    {
+      type: "select",
+      name: "tsx",
+      message: "Would you like to use TypeScript?",
+      choices: [
+        { title: "Yes (recommended)", value: true },
+        { title: "No", value: false },
+      ],
+      initial: 0,
+    },
   ]);
+
+  if (response.tsx === false) {
+    logger.info("Components will be generated as .jsx files with types stripped automatically.");
+    // Adjust util path extension for JavaScript
+    if (response.utilPath && response.utilPath.endsWith(".ts")) {
+      response.utilPath = response.utilPath.replace(/\.ts$/, ".js");
+    }
+  }
 
   if (!response.componentsDir || !response.utilPath) {
     logger.warn("Setup cancelled.");
@@ -93,15 +119,18 @@ export async function initCommand(): Promise<void> {
   const tailwindConfigPath = path.resolve(cwd, "tailwind.config.js");
   const nativewindEnvPath = path.resolve(cwd, "nativewind-env.d.ts");
 
-  // 1. Copy lib/utils.ts
-  await copyUtilFile(utilPath);
+  // 1. Copy lib/utils.ts (or utils.js for JavaScript projects)
+  const useTsx = response.tsx !== false;
+  await copyUtilFile(utilPath, useTsx);
   logger.success(`Created ${path.relative(cwd, utilPath)}`);
 
   // 2. Copy global.css with theme applied
-  let globalCss = await fs.readFile(
-    path.join(getPackageRoot(), "templates", "global.css"),
-    "utf-8"
-  );
+  const templateDir = path.join(getPackageRoot(), "templates", gen);
+  const templateFallback = path.join(getPackageRoot(), "templates");
+  const globalCssSource = await fs.pathExists(path.join(templateDir, "global.css"))
+    ? path.join(templateDir, "global.css")
+    : path.join(templateFallback, "global.css");
+  let globalCss = await fs.readFile(globalCssSource, "utf-8");
   const preset = THEME_PRESETS[response.theme] || THEME_PRESETS.default;
   for (const [varName, value] of Object.entries(preset)) {
     const regex = new RegExp(`(${varName.replace("--", "\\-\\-")}:\\s*)[^;]+`, "g");
@@ -110,23 +139,36 @@ export async function initCommand(): Promise<void> {
   await fs.writeFile(globalCssPath, globalCss, "utf-8");
   logger.success(`Created global.css (${response.theme} theme)`);
 
-  // 3. Copy or merge tailwind.config.js
-  if (await fs.pathExists(tailwindConfigPath)) {
-    logger.warn("tailwind.config.js already exists — skipping (merge manually if needed)");
+  // 3. Copy or merge tailwind.config.js (v4 only — v5 uses CSS-first config)
+  if (gen === "v4") {
+    if (await fs.pathExists(tailwindConfigPath)) {
+      logger.warn("tailwind.config.js already exists — skipping (merge manually if needed)");
+    } else {
+      await copyTemplate("tailwind.config.js", tailwindConfigPath, gen);
+      logger.success("Created tailwind.config.js");
+    }
   } else {
-    await copyTemplate("tailwind.config.js", tailwindConfigPath);
-    logger.success("Created tailwind.config.js");
+    // v5: Create postcss.config.js (required for @tailwindcss/postcss to process @theme directives)
+    const postcssConfigPath = path.resolve(cwd, "postcss.config.js");
+    if (await fs.pathExists(postcssConfigPath)) {
+      logger.warn("postcss.config.js already exists — skipping");
+    } else {
+      const postcssContent = `module.exports = {\n  plugins: {\n    "@tailwindcss/postcss": {},\n  },\n};\n`;
+      await fs.writeFile(postcssConfigPath, postcssContent, "utf-8");
+      logger.success("Created postcss.config.js");
+    }
+    logger.info("Tailwind v4 uses CSS-first configuration — theme tokens are in global.css");
   }
 
   // 4. Copy nativewind-env.d.ts
-  await copyTemplate("nativewind-env.d.ts", nativewindEnvPath);
+  await copyTemplate("nativewind-env.d.ts", nativewindEnvPath, gen);
   logger.success("Created nativewind-env.d.ts");
 
   // 5. Ensure components directory exists
   await fs.ensureDir(componentsDir);
   logger.success(`Created ${path.relative(cwd, componentsDir)}/`);
 
-  // 6. Set up metro.config.js for NativeWind
+  // 6. Set up metro.config.js and babel.config.js for Expo
   if (project.type === "expo") {
     const metroConfigPath = path.resolve(cwd, "metro.config.js");
     if (await fs.pathExists(metroConfigPath)) {
@@ -134,8 +176,31 @@ export async function initCommand(): Promise<void> {
       logger.info('  const { withNativeWind } = require("nativewind/metro");');
       logger.info('  module.exports = withNativeWind(config, { input: "./global.css" });');
     } else {
-      await copyTemplate("metro.config.expo.js", metroConfigPath);
+      await copyTemplate("metro.config.expo.js", metroConfigPath, gen);
       logger.success("Created metro.config.js (NativeWind configured)");
+    }
+
+    const babelConfigPath = path.resolve(cwd, "babel.config.js");
+    if (await fs.pathExists(babelConfigPath)) {
+      // Will be patched in step 8 below if needed
+    } else {
+      await copyTemplate("babel.config.expo.js", babelConfigPath, gen);
+      logger.success("Created babel.config.js (NativeWind configured)");
+    }
+
+    // Disable reactCompiler in app.json — it breaks NativeWind className transform
+    const appJsonPath = path.resolve(cwd, "app.json");
+    if (await fs.pathExists(appJsonPath)) {
+      try {
+        const appJson = await fs.readJson(appJsonPath);
+        if (appJson?.expo?.experiments?.reactCompiler) {
+          appJson.expo.experiments.reactCompiler = false;
+          await fs.writeJson(appJsonPath, appJson, { spaces: 2 });
+          logger.success("Disabled reactCompiler in app.json (incompatible with NativeWind)");
+        }
+      } catch {
+        // Ignore if app.json can't be parsed
+      }
     }
   }
 
@@ -147,7 +212,7 @@ export async function initCommand(): Promise<void> {
       logger.info('  const { withNativeWind } = require("nativewind/metro");');
       logger.info('  module.exports = withNativeWind(config, { input: "./global.css" });');
     } else {
-      await copyTemplate("metro.config.bare.js", metroConfigPath);
+      await copyTemplate("metro.config.bare.js", metroConfigPath, gen);
       logger.success("Created metro.config.js (NativeWind configured)");
     }
 
@@ -156,12 +221,12 @@ export async function initCommand(): Promise<void> {
       logger.warn('babel.config.js already exists — add "nativewind/babel" to presets:');
       logger.info('  presets: [...existing, "nativewind/babel"]');
     } else {
-      await copyTemplate("babel.config.bare.js", babelConfigPath);
+      await copyTemplate("babel.config.bare.js", babelConfigPath, gen);
       logger.success("Created babel.config.js (NativeWind configured)");
     }
   }
 
-  // 8. Configure jsxImportSource for NativeWind v4
+  // 8. Configure jsxImportSource / babel plugin based on generation
   const tsconfigPath = path.resolve(cwd, "tsconfig.json");
   if (await fs.pathExists(tsconfigPath)) {
     try {
@@ -169,30 +234,57 @@ export async function initCommand(): Promise<void> {
       if (!tsconfig.compilerOptions) {
         tsconfig.compilerOptions = {};
       }
-      if (tsconfig.compilerOptions.jsxImportSource !== "nativewind") {
-        tsconfig.compilerOptions.jsxImportSource = "nativewind";
-        await fs.writeJson(tsconfigPath, tsconfig, { spaces: 2 });
-        logger.success('Added jsxImportSource: "nativewind" to tsconfig.json');
+      if (gen === "v5") {
+        // NativeWind v5 does NOT use jsxImportSource — remove it if present
+        // className types come from nativewind-env.d.ts → nativewind/types → react-native-css/types
+        if (tsconfig.compilerOptions.jsxImportSource) {
+          delete tsconfig.compilerOptions.jsxImportSource;
+          await fs.writeJson(tsconfigPath, tsconfig, { spaces: 2 });
+          logger.success('Removed jsxImportSource from tsconfig.json (not needed for NativeWind v5)');
+        }
+      } else {
+        // NativeWind v4 uses nativewind for JSX types
+        if (tsconfig.compilerOptions.jsxImportSource !== "nativewind") {
+          tsconfig.compilerOptions.jsxImportSource = "nativewind";
+          await fs.writeJson(tsconfigPath, tsconfig, { spaces: 2 });
+          logger.success('Added jsxImportSource: "nativewind" to tsconfig.json');
+        }
       }
     } catch {
-      logger.warn("Could not update tsconfig.json — add jsxImportSource: \"nativewind\" to compilerOptions manually");
+      logger.warn("Could not update tsconfig.json — add jsxImportSource manually");
     }
   }
 
   const babelConfigPath = path.resolve(cwd, "babel.config.js");
   if (await fs.pathExists(babelConfigPath)) {
     let babelContent = await fs.readFile(babelConfigPath, "utf-8");
-    if (!babelContent.includes("jsxImportSource")) {
-      // Replace bare "babel-preset-expo" with ["babel-preset-expo", { jsxImportSource: "nativewind" }]
-      const replaced = babelContent.replace(
-        /(['"])babel-preset-expo\1/,
-        '["babel-preset-expo", { jsxImportSource: "nativewind" }]'
-      );
-      if (replaced !== babelContent) {
-        await fs.writeFile(babelConfigPath, replaced, "utf-8");
-        logger.success('Added jsxImportSource: "nativewind" to babel.config.js');
-      } else {
-        logger.warn('Could not patch babel.config.js — add { jsxImportSource: "nativewind" } to babel-preset-expo options manually');
+    if (gen === "v5") {
+      // NativeWind v5 — no babel config needed for NativeWind
+      // withNativeWind in metro.config.js handles everything
+      // Just ensure jsxImportSource is NOT set (it breaks v5)
+      if (babelContent.includes("jsxImportSource")) {
+        const replaced = babelContent.replace(
+          /\["babel-preset-expo",\s*\{[^}]*jsxImportSource[^}]*\}\]/,
+          '"babel-preset-expo"'
+        );
+        if (replaced !== babelContent) {
+          await fs.writeFile(babelConfigPath, replaced, "utf-8");
+          logger.success('Removed jsxImportSource from babel.config.js (not needed for NativeWind v5)');
+        }
+      }
+    } else {
+      // NativeWind v4 uses jsxImportSource: "nativewind" in babel-preset-expo options
+      if (!babelContent.includes("jsxImportSource")) {
+        const replaced = babelContent.replace(
+          /(['"])babel-preset-expo\1/,
+          '["babel-preset-expo", { jsxImportSource: "nativewind" }]'
+        );
+        if (replaced !== babelContent) {
+          await fs.writeFile(babelConfigPath, replaced, "utf-8");
+          logger.success('Added jsxImportSource: "nativewind" to babel.config.js');
+        } else {
+          logger.warn('Could not patch babel.config.js — add { jsxImportSource: "nativewind" } to babel-preset-expo options manually');
+        }
       }
     }
   }
@@ -202,6 +294,7 @@ export async function initCommand(): Promise<void> {
     componentsDir: response.componentsDir,
     utilPath: response.utilPath,
     theme: response.theme,
+    tsx: useTsx,
   };
   await fs.writeJson(path.join(cwd, ".aniui.json"), config, { spaces: 2 });
   logger.success("Created .aniui.json");
@@ -219,8 +312,10 @@ export async function initCommand(): Promise<void> {
     logger.info("4. Add components:");
   } else {
     logger.info("2. Verify metro.config.js uses withNativeWind (created above)");
+    logger.info("3. Verify babel.config.js has jsxImportSource: \"nativewind\" (created above)");
+    logger.info("4. Make sure React Compiler is NOT enabled in app.json");
     logger.break();
-    logger.info("3. Add components:");
+    logger.info("5. Add components:");
   }
   logger.info(`   ${getDlxCommand(pm, "aniui add button card text")}`);
   logger.break();

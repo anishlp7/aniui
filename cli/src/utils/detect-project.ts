@@ -4,6 +4,8 @@ import fs from "fs-extra";
 export type ProjectType = "expo" | "react-native-cli" | "unknown";
 export type PackageManager = "npm" | "pnpm" | "yarn" | "bun";
 
+export type SDKGeneration = "v4" | "v5";
+
 export interface ProjectInfo {
   type: ProjectType;
   root: string;
@@ -11,6 +13,7 @@ export interface ProjectInfo {
   hasNativewind: boolean;
   hasReanimated: boolean;
   hasTailwind: boolean;
+  sdkGeneration: SDKGeneration;
 }
 
 export async function detectPackageManager(cwd: string): Promise<PackageManager> {
@@ -91,7 +94,7 @@ export async function detectProject(cwd: string): Promise<ProjectInfo> {
   const packageManager = await detectPackageManager(cwd);
 
   if (!await fs.pathExists(pkgPath)) {
-    return { type: "unknown", root: cwd, packageManager, hasNativewind: false, hasReanimated: false, hasTailwind: false };
+    return { type: "unknown", root: cwd, packageManager, hasNativewind: false, hasReanimated: false, hasTailwind: false, sdkGeneration: "v4" };
   }
 
   const pkg = await fs.readJson(pkgPath);
@@ -105,6 +108,8 @@ export async function detectProject(cwd: string): Promise<ProjectInfo> {
   if (hasExpo) type = "expo";
   else if (hasRN) type = "react-native-cli";
 
+  const sdkGeneration = detectSDKGeneration(allDeps);
+
   return {
     type,
     root: cwd,
@@ -112,5 +117,30 @@ export async function detectProject(cwd: string): Promise<ProjectInfo> {
     hasNativewind: !!allDeps["nativewind"],
     hasReanimated: !!allDeps["react-native-reanimated"],
     hasTailwind: !!allDeps["tailwindcss"],
+    sdkGeneration,
   };
+}
+
+function detectSDKGeneration(deps: Record<string, string>): SDKGeneration {
+  // Check Expo SDK version — ~55.x means v5
+  const expoVersion = deps["expo"] || "";
+  const expoMajor = parseMajor(expoVersion);
+  if (expoMajor >= 55) return "v5";
+
+  // Check NativeWind version — ^5.x means v5
+  const nativewindVersion = deps["nativewind"] || "";
+  const nwMajor = parseMajor(nativewindVersion);
+  if (nwMajor >= 5) return "v5";
+
+  // Check Tailwind CSS version — ^4.x means v5 generation
+  const twVersion = deps["tailwindcss"] || "";
+  const twMajor = parseMajor(twVersion);
+  if (twMajor >= 4) return "v5";
+
+  return "v4";
+}
+
+function parseMajor(version: string): number {
+  const match = version.match(/(\d+)/);
+  return match ? parseInt(match[1], 10) : 0;
 }

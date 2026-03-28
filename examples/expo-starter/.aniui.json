@@ -1,0 +1,6 @@
+{
+  "componentsDir": "components/ui",
+  "utilPath": "lib/utils.ts",
+  "theme": "blue",
+  "tsx": true
+}

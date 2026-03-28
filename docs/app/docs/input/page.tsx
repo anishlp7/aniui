@@ -1,5 +1,5 @@
 "use client";
-import { PreviewInput } from "@/components/preview/input";
+import { PreviewInput, PreviewInputLeadingIcon, PreviewInputTrailingIcon, PreviewInputPasswordToggle } from "@/components/preview/input";
 import { ComponentPlayground } from "@/components/component-playground";
 import { CodeBlock } from "@/components/code-block";
 import { PropsTable } from "@/components/props-table";
@@ -17,6 +17,40 @@ const variantsCode = `<Input variant="default" placeholder="Default input" />
 const sizesCode = `<Input size="sm" placeholder="Small" />
 <Input size="md" placeholder="Medium" />
 <Input size="lg" placeholder="Large" />`;
+const leadingIconCode = `import { Input } from "@/components/ui/input";
+import { Ionicons } from "@expo/vector-icons";
+
+<Input
+  leadingIcon={<Ionicons name="search" size={18} color="#71717a" />}
+  placeholder="Search..."
+/>`;
+const trailingIconCode = `import { Input } from "@/components/ui/input";
+import { Pressable, Text } from "react-native";
+
+<Input
+  trailingIcon={
+    <Pressable onPress={() => setValue("")}>
+      <Ionicons name="close-circle" size={18} color="#71717a" />
+    </Pressable>
+  }
+  placeholder="Type something..."
+  value={value}
+/>`;
+const passwordCode = `import { Input } from "@/components/ui/input";
+import { Pressable } from "react-native";
+import { Ionicons } from "@expo/vector-icons";
+
+const [visible, setVisible] = useState(false);
+
+<Input
+  secureTextEntry={!visible}
+  trailingIcon={
+    <Pressable onPress={() => setVisible(!visible)}>
+      <Ionicons name={visible ? "eye-off" : "eye"} size={18} color="#71717a" />
+    </Pressable>
+  }
+  placeholder="Password"
+/>`;
 const sourceCode = `import React from "react";
 import { TextInput } from "react-native";
 import { cva, type VariantProps } from "class-variance-authority";
@@ -82,6 +116,36 @@ export default function InputPage() {
         <h2 className="text-2xl font-semibold tracking-tight text-foreground">Usage</h2>
         <CodeBlock code={usageCode} title="app/index.tsx" />
       </div>
+      {/* Password Toggle */}
+      <div className="space-y-4">
+        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Password Toggle</h2>
+        <p className="text-sm text-muted-foreground">Show/hide password with a trailing eye icon.</p>
+        <ComponentPlayground code={passwordCode}>
+          <div className="w-full max-w-sm">
+            <PreviewInputPasswordToggle />
+          </div>
+        </ComponentPlayground>
+      </div>
+      {/* Clear Button */}
+      <div className="space-y-4">
+        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Clear Button</h2>
+        <p className="text-sm text-muted-foreground">Add a pressable clear icon to reset the input value.</p>
+        <ComponentPlayground code={trailingIconCode}>
+          <div className="w-full max-w-sm">
+            <PreviewInputTrailingIcon />
+          </div>
+        </ComponentPlayground>
+      </div>
+      {/* Leading Icon */}
+      <div className="space-y-4">
+        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Leading Icon</h2>
+        <p className="text-sm text-muted-foreground">Add an icon before the input text.</p>
+        <ComponentPlayground code={leadingIconCode}>
+          <div className="w-full max-w-sm">
+            <PreviewInputLeadingIcon />
+          </div>
+        </ComponentPlayground>
+      </div>
       {/* Variants */}
       <div className="space-y-4">
         <h2 className="text-2xl font-semibold tracking-tight text-foreground">Variants</h2>
@@ -109,6 +173,8 @@ export default function InputPage() {
         <PropsTable props={[
           { name: "variant", type: "\"default\" | \"ghost\"", default: "\"default\"" },
           { name: "size", type: "\"sm\" | \"md\" | \"lg\"", default: "\"md\"" },
+          { name: "leadingIcon", type: "React.ReactNode", default: "—" },
+          { name: "trailingIcon", type: "React.ReactNode", default: "—" },
           { name: "className", type: "string" },
         ]} />
         <p className="text-sm text-muted-foreground">
