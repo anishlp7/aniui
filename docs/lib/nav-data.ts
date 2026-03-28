@@ -6,11 +6,13 @@ export type NavSection = { title: string; items: NavItem[] };
 export const gettingStartedItems: NavItem[] = [
   { title: "Introduction", href: "/docs" },
   { title: "Installation", href: "/docs/installation" },
+  { title: "JavaScript", href: "/docs/javascript" },
   { title: "CLI", href: "/docs/cli" },
   { title: "MCP", href: "/docs/mcp" },
   { title: "Theming", href: "/docs/theming" },
   { title: "Dark Mode", href: "/docs/dark-mode" },
   { title: "Compatibility", href: "/docs/compatibility" },
+  { title: "Android", href: "/docs/android" },
   { title: "Changelog", href: "/docs/changelog" },
   { title: "Create", href: "/create" },
 ];

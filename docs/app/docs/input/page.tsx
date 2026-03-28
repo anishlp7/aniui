@@ -116,6 +116,36 @@ export default function InputPage() {
         <h2 className="text-2xl font-semibold tracking-tight text-foreground">Usage</h2>
         <CodeBlock code={usageCode} title="app/index.tsx" />
       </div>
+      {/* Password Toggle */}
+      <div className="space-y-4">
+        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Password Toggle</h2>
+        <p className="text-sm text-muted-foreground">Show/hide password with a trailing eye icon.</p>
+        <ComponentPlayground code={passwordCode}>
+          <div className="w-full max-w-sm">
+            <PreviewInputPasswordToggle />
+          </div>
+        </ComponentPlayground>
+      </div>
+      {/* Clear Button */}
+      <div className="space-y-4">
+        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Clear Button</h2>
+        <p className="text-sm text-muted-foreground">Add a pressable clear icon to reset the input value.</p>
+        <ComponentPlayground code={trailingIconCode}>
+          <div className="w-full max-w-sm">
+            <PreviewInputTrailingIcon />
+          </div>
+        </ComponentPlayground>
+      </div>
+      {/* Leading Icon */}
+      <div className="space-y-4">
+        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Leading Icon</h2>
+        <p className="text-sm text-muted-foreground">Add an icon before the input text.</p>
+        <ComponentPlayground code={leadingIconCode}>
+          <div className="w-full max-w-sm">
+            <PreviewInputLeadingIcon />
+          </div>
+        </ComponentPlayground>
+      </div>
       {/* Variants */}
       <div className="space-y-4">
         <h2 className="text-2xl font-semibold tracking-tight text-foreground">Variants</h2>
@@ -134,36 +164,6 @@ export default function InputPage() {
             <PreviewInput size="sm" placeholder="Small" />
             <PreviewInput size="md" placeholder="Medium" />
             <PreviewInput size="lg" placeholder="Large" />
-          </div>
-        </ComponentPlayground>
-      </div>
-      {/* Leading Icon */}
-      <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Leading Icon</h2>
-        <p className="text-sm text-muted-foreground">Add an icon before the input text.</p>
-        <ComponentPlayground code={leadingIconCode}>
-          <div className="w-full max-w-sm">
-            <PreviewInputLeadingIcon />
-          </div>
-        </ComponentPlayground>
-      </div>
-      {/* Trailing Icon */}
-      <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Trailing Icon</h2>
-        <p className="text-sm text-muted-foreground">Add a pressable icon after the input for clear or actions.</p>
-        <ComponentPlayground code={trailingIconCode}>
-          <div className="w-full max-w-sm">
-            <PreviewInputTrailingIcon />
-          </div>
-        </ComponentPlayground>
-      </div>
-      {/* Password Toggle */}
-      <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Password Toggle</h2>
-        <p className="text-sm text-muted-foreground">Show/hide password with a trailing eye icon.</p>
-        <ComponentPlayground code={passwordCode}>
-          <div className="w-full max-w-sm">
-            <PreviewInputPasswordToggle />
           </div>
         </ComponentPlayground>
       </div>

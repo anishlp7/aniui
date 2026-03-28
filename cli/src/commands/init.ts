@@ -83,7 +83,25 @@ export async function initCommand(): Promise<void> {
       ],
       initial: 0,
     },
+    {
+      type: "select",
+      name: "tsx",
+      message: "Would you like to use TypeScript?",
+      choices: [
+        { title: "Yes (recommended)", value: true },
+        { title: "No", value: false },
+      ],
+      initial: 0,
+    },
   ]);
+
+  if (response.tsx === false) {
+    logger.info("Components will be generated as .jsx files with types stripped automatically.");
+    // Adjust util path extension for JavaScript
+    if (response.utilPath && response.utilPath.endsWith(".ts")) {
+      response.utilPath = response.utilPath.replace(/\.ts$/, ".js");
+    }
+  }
 
   if (!response.componentsDir || !response.utilPath) {
     logger.warn("Setup cancelled.");
@@ -96,8 +114,9 @@ export async function initCommand(): Promise<void> {
   const tailwindConfigPath = path.resolve(cwd, "tailwind.config.js");
   const nativewindEnvPath = path.resolve(cwd, "nativewind-env.d.ts");
 
-  // 1. Copy lib/utils.ts
-  await copyUtilFile(utilPath);
+  // 1. Copy lib/utils.ts (or utils.js for JavaScript projects)
+  const useTsx = response.tsx !== false;
+  await copyUtilFile(utilPath, useTsx);
   logger.success(`Created ${path.relative(cwd, utilPath)}`);
 
   // 2. Copy global.css with theme applied
@@ -211,6 +230,7 @@ export async function initCommand(): Promise<void> {
     componentsDir: response.componentsDir,
     utilPath: response.utilPath,
     theme: response.theme,
+    tsx: useTsx,
   };
   await fs.writeJson(path.join(cwd, ".aniui.json"), config, { spaces: 2 });
   logger.success("Created .aniui.json");
