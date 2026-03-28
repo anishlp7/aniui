@@ -142,6 +142,18 @@ export async function addCommand(names: string[]): Promise<void> {
     if (needsGorhom && !allDeps["@gorhom/bottom-sheet"]) {
       logger.info(`  ${getInstallCommand(pm, ["@gorhom/bottom-sheet", "react-native-gesture-handler"])}`);
     }
+    if (needsGorhom) {
+      logger.break();
+      logger.warn("Wrap your root layout with BottomSheetModalProvider (required for Select):");
+      logger.info('  import { GestureHandlerRootView } from "react-native-gesture-handler";');
+      logger.info('  import { BottomSheetModalProvider } from "@gorhom/bottom-sheet";');
+      logger.info("");
+      logger.info("  <GestureHandlerRootView style={{ flex: 1 }}>");
+      logger.info("    <BottomSheetModalProvider>");
+      logger.info("      {/* your app */}");
+      logger.info("    </BottomSheetModalProvider>");
+      logger.info("  </GestureHandlerRootView>");
+    }
     if (needsDatePicker && !allDeps["@react-native-community/datetimepicker"]) {
       logger.info(`  ${getInstallCommand(pm, ["@react-native-community/datetimepicker"])}`);
     }

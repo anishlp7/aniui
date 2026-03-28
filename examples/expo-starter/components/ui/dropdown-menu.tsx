@@ -18,8 +18,8 @@ export function DropdownMenu({ children }: DropdownMenuProps) {
       </Pressable>
       {open && (
         <Modal transparent animationType="none" onRequestClose={() => setOpen(false)}>
-          <Pressable className="flex-1" onPress={() => setOpen(false)}>
-            <Animated.View entering={FadeIn.duration(150)} exiting={FadeOut.duration(100)} className="flex-1 items-center justify-center">
+          <Pressable style={{ flex: 1 }} onPress={() => setOpen(false)}>
+            <Animated.View entering={FadeIn.duration(150)} exiting={FadeOut.duration(100)} style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
               <Pressable onPress={(e) => e.stopPropagation()}>{content}</Pressable>
             </Animated.View>
           </Pressable>

@@ -1,28 +1,57 @@
-import React, { createContext, useContext, useState } from "react";
-import { View, Text, Pressable, Modal } from "react-native";
-import Animated, { FadeIn, FadeOut } from "react-native-reanimated";
+import React, { createContext, useContext, useRef, useState } from "react";
+import { View, Text, Pressable, Modal, Dimensions, StyleSheet } from "react-native";
 import { cn } from "../../lib/utils";
 
+type Layout = { x: number; y: number; w: number; h: number };
 const MenuCtx = createContext<{ close: () => void }>({ close: () => {} });
 
-export interface DropdownMenuProps { children: React.ReactNode }
+export interface DropdownMenuProps {
+  children: React.ReactNode;
+  /** Where the menu appears relative to the trigger */
+  side?: "top" | "bottom";
+  /** Horizontal alignment relative to the trigger */
+  align?: "start" | "end";
+}
 
-export function DropdownMenu({ children }: DropdownMenuProps) {
+export function DropdownMenu({ children, side = "bottom", align = "start" }: DropdownMenuProps) {
   const [open, setOpen] = useState(false);
+  const [layout, setLayout] = useState<Layout>({ x: 0, y: 0, w: 0, h: 0 });
+  const ref = useRef<View>(null);
   const trigger = React.Children.toArray(children).find((c) => React.isValidElement(c) && c.type === DropdownMenuTrigger);
   const content = React.Children.toArray(children).find((c) => React.isValidElement(c) && c.type === DropdownMenuContent);
+
+  const onOpen = () => {
+    ref.current?.measureInWindow((x, y, w, h) => {
+      setLayout({ x, y, w, h });
+      setOpen(true);
+    });
+  };
+
+  const { width: screenW, height: screenH } = Dimensions.get("window");
+  const menuWidth = 196;
+  const gap = 4;
+
+  // Vertical: respect side prop
+  const posY = side === "top"
+    ? { bottom: screenH - layout.y + gap }
+    : { top: layout.y + layout.h + gap };
+
+  // Horizontal: align to trigger
+  const leftAligned = Math.max(8, Math.min(layout.x, screenW - menuWidth));
+  const rightAligned = Math.max(8, Math.min(layout.x + layout.w - menuWidth, screenW - menuWidth));
+  const posX = align === "end" ? rightAligned : leftAligned;
+
   return (
     <MenuCtx.Provider value={{ close: () => setOpen(false) }}>
-      <Pressable onPress={() => setOpen(true)} accessible={true} accessibilityRole="button">
+      <Pressable ref={ref} onPress={onOpen} accessible={true} accessibilityRole="button">
         <View pointerEvents="none">{trigger}</View>
       </Pressable>
       {open && (
-        <Modal transparent animationType="none" onRequestClose={() => setOpen(false)}>
-          <Pressable className="flex-1" onPress={() => setOpen(false)}>
-            <Animated.View entering={FadeIn.duration(150)} exiting={FadeOut.duration(100)} className="flex-1 items-center justify-center">
-              <Pressable onPress={(e) => e.stopPropagation()}>{content}</Pressable>
-            </Animated.View>
-          </Pressable>
+        <Modal transparent animationType="fade" onRequestClose={() => setOpen(false)}>
+          <Pressable style={StyleSheet.absoluteFill} onPress={() => setOpen(false)} />
+          <View style={{ position: "absolute", ...posY, left: posX }}>
+            {content}
+          </View>
         </Modal>
       )}
     </MenuCtx.Provider>
@@ -34,8 +63,7 @@ export function DropdownMenuTrigger({ children }: { children: React.ReactNode })
 }
 
 export interface DropdownMenuContentProps extends React.ComponentPropsWithoutRef<typeof View> {
-  className?: string;
-  children?: React.ReactNode;
+  className?: string; children?: React.ReactNode;
 }
 
 export function DropdownMenuContent({ className, children, ...props }: DropdownMenuContentProps) {
@@ -43,19 +71,14 @@ export function DropdownMenuContent({ className, children, ...props }: DropdownM
 }
 
 export interface DropdownMenuItemProps extends React.ComponentPropsWithoutRef<typeof Pressable> {
-  className?: string;
-  children: React.ReactNode;
-  destructive?: boolean;
+  className?: string; children: React.ReactNode; destructive?: boolean;
 }
 
 export function DropdownMenuItem({ className, children, destructive, onPress, ...props }: DropdownMenuItemProps) {
   const { close } = useContext(MenuCtx);
   return (
-    <Pressable
-      className={cn("flex-row items-center rounded-md px-3 py-2.5 min-h-11", className)}
-      onPress={(e) => { onPress?.(e); close(); }}
-      accessible={true} accessibilityRole="menuitem" {...props}
-    >
+    <Pressable className={cn("flex-row items-center rounded-md px-3 py-2.5 min-h-11", className)}
+      onPress={(e) => { onPress?.(e); close(); }} accessible={true} accessibilityRole="menuitem" {...props}>
       {typeof children === "string" ? (
         <Text className={cn("text-sm", destructive ? "text-destructive" : "text-foreground")}>{children}</Text>
       ) : children}

@@ -27,7 +27,7 @@ export function PopoverTrigger({ className, children, ...props }: PopoverTrigger
   const { toggle } = useContext(PopoverCtx);
   return (
     <Pressable className={cn("min-h-12 min-w-12", className)} onPress={toggle} accessible={true} accessibilityRole="button" {...props}>
-      {children}
+      <View pointerEvents="none">{children}</View>
     </Pressable>
   );
 }
@@ -42,8 +42,8 @@ export function PopoverContent({ className, children, ...props }: PopoverContent
   if (!open) return null;
   return (
     <Modal transparent animationType="none" onRequestClose={close}>
-      <Pressable className="flex-1" onPress={close}>
-        <Animated.View entering={FadeIn.duration(150)} exiting={FadeOut.duration(100)} className="flex-1 items-center justify-center">
+      <Pressable style={{ flex: 1 }} onPress={close}>
+        <Animated.View entering={FadeIn.duration(150)} exiting={FadeOut.duration(100)} style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
           <Pressable onPress={(e) => e.stopPropagation()}>
             <View className={cn("w-72 rounded-lg border border-border bg-card p-4 shadow-lg", className)} {...props}>{children}</View>
           </Pressable>

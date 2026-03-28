@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { View, Pressable, Text, Modal, ScrollView } from "react-native";
-import Animated, { FadeIn, FadeOut, SlideInUp, SlideOutDown } from "react-native-reanimated";
+import Animated, { FadeIn, FadeOut, SlideInDown, SlideOutDown } from "react-native-reanimated";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 export interface SelectOption { label: string; value: string }
 
@@ -19,6 +20,7 @@ export function Select({ placeholder = "Select...", options, value, onValueChang
   const selected = value ?? internal;
   const selectedLabel = options.find((o) => o.value === selected)?.label ?? placeholder;
   const isPlaceholder = !selected;
+  const insets = useSafeAreaInsets();
 
   const pick = (val: string) => {
     setInternal(val);
@@ -57,9 +59,9 @@ export function Select({ placeholder = "Select...", options, value, onValueChang
 
         {/* Sheet */}
         <Animated.View
-          entering={SlideInUp.duration(300)}
+          entering={SlideInDown.duration(300)}
           exiting={SlideOutDown.duration(200)}
-          style={{ backgroundColor: "#ffffff", borderTopLeftRadius: 16, borderTopRightRadius: 16, paddingBottom: 34 }}
+          style={{ backgroundColor: "#ffffff", borderTopLeftRadius: 16, borderTopRightRadius: 16, paddingBottom: Math.max(insets.bottom, 16) }}
         >
           {/* Handle */}
           <View style={{ alignItems: "center", paddingTop: 12, paddingBottom: 4 }}>
