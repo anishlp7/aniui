@@ -214,7 +214,7 @@ const tsconfigBareCode = `{
 
 function PlatformSwitcher({ platform, onSwitch }: { platform: Platform; onSwitch: (p: Platform) => void }) {
   const tabs: { key: Platform; label: string }[] = [
-    { key: "expo54", label: "Expo SDK 54" },
+    { key: "expo54", label: "Expo SDK 53/54" },
     { key: "expo55", label: "Expo SDK 55" },
     { key: "bare", label: "Bare React Native" },
   ];
@@ -516,7 +516,7 @@ export default function InstallationPage() {
           <div className="rounded-lg border border-destructive/50 bg-destructive/5 p-4">
             <p className="text-sm font-medium text-foreground mb-1">Styles not appearing / components render unstyled</p>
             <ul className="text-sm text-muted-foreground space-y-1 mt-2">
-              <li>1. <strong>Expo SDK 54:</strong> Check <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">babel.config.js</code> has{" "}
+              <li>1. <strong>Expo SDK 53/54:</strong> Check <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">babel.config.js</code> has{" "}
                 <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">jsxImportSource: &quot;nativewind&quot;</code> in babel-preset-expo options</li>
               <li>1. <strong>Expo SDK 55:</strong> babel.config.js must NOT have{" "}
                 <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">jsxImportSource</code> or{" "}

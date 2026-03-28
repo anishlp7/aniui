@@ -2,7 +2,7 @@
 
 import { CodeBlock } from "@/components/code-block";
 
-const installSdk54 = `# Expo SDK 54 — NativeWind v4 + Tailwind v3
+const installSdk54 = `# Expo SDK 53/54 — NativeWind v4 + Tailwind v3
 
 # 1. Create project
 npx create-expo-app@latest my-app --template default@sdk-54
@@ -15,7 +15,7 @@ npm install class-variance-authority clsx tailwind-merge
 # 3. Create config files: babel.config.js, metro.config.js, tailwind.config.js, global.css
 # See Installation page for exact contents
 
-# 4. Run AniUI init (auto-detects SDK 54 → uses v4 templates)
+# 4. Run AniUI init (auto-detects SDK 53/54 → uses v4 templates)
 npx @aniui/cli init
 
 # 5. Import global.css at the top of app/_layout.tsx (or App.tsx)
@@ -95,7 +95,7 @@ export default function CompatibilityPage() {
       <div>
         <h1 className="text-3xl font-bold tracking-tight text-foreground">Compatibility</h1>
         <p className="mt-2 text-lg text-muted-foreground">
-          AniUI supports both Expo SDK 54 and 55. The CLI auto-detects your setup.
+          AniUI supports Expo SDK 53, 54, and 55. The CLI auto-detects your setup.
         </p>
       </div>
 
@@ -107,7 +107,7 @@ export default function CompatibilityPage() {
             <thead>
               <tr className="bg-muted/50">
                 <th className="text-left p-3 font-medium text-muted-foreground"></th>
-                <th className="text-left p-3 font-medium text-foreground">Expo SDK 54</th>
+                <th className="text-left p-3 font-medium text-foreground">Expo SDK 53/54</th>
                 <th className="text-left p-3 font-medium text-foreground">Expo SDK 55</th>
               </tr>
             </thead>
@@ -165,7 +165,7 @@ export default function CompatibilityPage() {
 
       {/* Setup for SDK 54 */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Setup for Expo SDK 54</h2>
+        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Setup for Expo SDK 53/54</h2>
         <CodeBlock code={installSdk54} />
         <p className="text-sm text-muted-foreground">
           Uses <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">templates/v4/</code> — Tailwind v3 with{" "}
@@ -190,7 +190,7 @@ export default function CompatibilityPage() {
         <h2 className="text-2xl font-semibold tracking-tight text-foreground">CSS Format Differences</h2>
         <div className="grid gap-4 md:grid-cols-2">
           <div>
-            <p className="text-sm font-medium text-foreground mb-2">SDK 54 (Tailwind v3)</p>
+            <p className="text-sm font-medium text-foreground mb-2">SDK 53/54 (Tailwind v3)</p>
             <CodeBlock code={globalCssV4} title="global.css" />
           </div>
           <div>
@@ -202,7 +202,7 @@ export default function CompatibilityPage() {
 
       {/* Migration */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Migrating from SDK 54 to 55</h2>
+        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Migrating from SDK 53/54 to 55</h2>
         <CodeBlock code={migrationSteps} title="Migration steps" />
         <div className="rounded-lg border border-border bg-muted/30 p-4">
           <p className="text-sm font-medium text-foreground mb-1">Components don&apos;t change</p>
@@ -232,7 +232,7 @@ export default function CompatibilityPage() {
               <tr>
                 <td className="p-3"><code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">babel.config.js</code></td>
                 <td className="p-3 text-muted-foreground">Enables NativeWind JSX transform</td>
-                <td className="p-3"><code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">SDK 54: jsxImportSource: &quot;nativewind&quot;</code><br/><code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">SDK 55: &quot;nativewind/babel&quot; plugin</code></td>
+                <td className="p-3"><code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">SDK 53/54: jsxImportSource: &quot;nativewind&quot;</code><br/><code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">SDK 55: &quot;nativewind/babel&quot; plugin</code></td>
               </tr>
               <tr>
                 <td className="p-3"><code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">metro.config.js</code></td>
@@ -242,7 +242,7 @@ export default function CompatibilityPage() {
               <tr>
                 <td className="p-3"><code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">tsconfig.json</code></td>
                 <td className="p-3 text-muted-foreground">TypeScript className support</td>
-                <td className="p-3"><code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">SDK 54: &quot;nativewind&quot;</code><br/><code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">SDK 55: &quot;react-native-css&quot;</code></td>
+                <td className="p-3"><code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">SDK 53/54: &quot;nativewind&quot;</code><br/><code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">SDK 55: &quot;react-native-css&quot;</code></td>
               </tr>
               <tr>
                 <td className="p-3"><code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">global.css</code></td>
@@ -252,7 +252,7 @@ export default function CompatibilityPage() {
               <tr>
                 <td className="p-3"><code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">tailwind.config.js</code></td>
                 <td className="p-3 text-muted-foreground">Theme colors + NativeWind preset</td>
-                <td className="p-3 text-muted-foreground">SDK 54 only (v5 uses CSS-first config)</td>
+                <td className="p-3 text-muted-foreground">SDK 53/54 only (v5 uses CSS-first config)</td>
               </tr>
             </tbody>
           </table>

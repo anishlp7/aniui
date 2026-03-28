@@ -30,7 +30,7 @@ const releases: Release[] = [
     date: "2026-03-26",
     title: "Expo 55 + NativeWind v5 Support",
     changes: [
-      { type: "feat", text: "Dual SDK support: Expo 54 (NativeWind v4) + Expo 55 (NativeWind v5)", link: "/docs/compatibility" },
+      { type: "feat", text: "Dual SDK support: Expo 53/54 (NativeWind v4) + Expo 55 (NativeWind v5)", link: "/docs/compatibility" },
       { type: "feat", text: "CLI auto-detects SDK version during aniui init" },
       { type: "feat", text: "Versioned templates (v4/ and v5/) for each SDK generation" },
       { type: "feat", text: "expo-55-starter example app with NativeWind v5 + Tailwind v4" },
