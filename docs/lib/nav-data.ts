@@ -56,6 +56,7 @@ export const componentItems: NavItem[] = [
   { title: "Slider", href: "/docs/slider" },
   { title: "Spinner", href: "/docs/spinner" },
   { title: "Stepper", href: "/docs/stepper" },
+  { title: "Swipeable List Item", href: "/docs/swipeable-list-item" },
   { title: "Switch", href: "/docs/switch" },
   { title: "Table", href: "/docs/table" },
   { title: "Tabs", href: "/docs/tabs" },

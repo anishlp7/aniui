@@ -6,7 +6,7 @@ import { Card, CardHeader, CardTitle, CardDescription } from "@/components/ui/ca
 
 const categories = [
   { title: "Forms", description: "Input, Checkbox, Switch, Select, Slider, and more", route: "/forms" as const, count: 17 },
-  { title: "Data Display", description: "Text, Badge, Card, Avatar, Table, Calendar, and more", route: "/data-display" as const, count: 14 },
+  { title: "Data Display", description: "Text, Badge, Card, Avatar, Table, Calendar, and more", route: "/data-display" as const, count: 15 },
   { title: "Feedback", description: "Alert, Dialog, Toast, Banner, Tooltip, and more", route: "/feedback" as const, count: 8 },
   { title: "Navigation", description: "Tabs, Accordion, Collapsible, Drawer", route: "/navigation" as const, count: 4 },
   { title: "Overlays", description: "Bottom Sheet, Action Sheet, FAB", route: "/overlays" as const, count: 3 },
