@@ -84,7 +84,7 @@ export function WelcomeScreen() {
 
 ## Components
 
-**54 components** — all listed alphabetically. Each component's docs page tells you if it needs extra dependencies.
+**55 components** — all listed alphabetically. Each component's docs page tells you if it needs extra dependencies.
 
 | Component | Description |
 |-----------|-------------|
@@ -126,6 +126,7 @@ export function WelcomeScreen() {
 | [Slider](https://aniui.dev/docs/slider) | Draggable slider for numeric values |
 | [Spinner](https://aniui.dev/docs/spinner) | Loading spinner with 3 sizes |
 | [Stepper](https://aniui.dev/docs/stepper) | Numeric increment/decrement with min/max/step |
+| [Swipeable List Item](https://aniui.dev/docs/swipeable-list-item) | Swipe to reveal action buttons (delete, archive, etc.) |
 | [Switch](https://aniui.dev/docs/switch) | Themed toggle switch |
 | [Table](https://aniui.dev/docs/table) | Data table with header, body, rows, and cells |
 | [Tabs](https://aniui.dev/docs/tabs) | Tab navigation with indicator transition |

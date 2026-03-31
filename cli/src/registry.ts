@@ -440,6 +440,14 @@ export const registry: Record<string, ComponentEntry> = {
     registryDependencies: [],
     tier: 3,
   },
+  "swipeable-list-item": {
+    name: "SwipeableListItem",
+    file: "components/ui/swipeable-list-item.tsx",
+    description: "Swipeable list item revealing action buttons on swipe",
+    dependencies: ["react-native-reanimated", "react-native-gesture-handler", "clsx", "tailwind-merge"],
+    registryDependencies: [],
+    tier: 3,
+  },
 };
 
 export function getComponentNames(): string[] {

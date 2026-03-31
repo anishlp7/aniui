@@ -134,7 +134,8 @@ aniui/
 │       ├── rating.tsx
 │       ├── stepper.tsx
 │       ├── banner.tsx
-│       └── calendar.tsx
+│       ├── calendar.tsx
+│       └── swipeable-list-item.tsx
 │
 ├── lib/                       # Shared utils — also copied to user's project
 │   └── utils.ts               # cn() helper — THE ONLY utility file
@@ -291,6 +292,7 @@ export function [Name]({ variant, size, className, ...props }: [Name]Props) {
 | 45 | select | @gorhom/bottom-sheet |
 | 46 | calendar | (standalone) |
 | 47 | date-picker | @react-native-community/datetimepicker |
+| 48 | swipeable-list-item | react-native-gesture-handler |
 
 ## Theme System
 

@@ -29,6 +29,7 @@ import { Image } from "@/components/ui/image";
 import { Carousel } from "@/components/ui/carousel";
 import { Calendar } from "@/components/ui/calendar";
 import { EmptyState } from "@/components/ui/empty-state";
+import { SwipeableListItem } from "@/components/ui/swipeable-list-item";
 
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
   return (
@@ -58,7 +59,7 @@ export default function DataDisplayScreen() {
     <SafeAreaView style={{ flex: 1, backgroundColor: "hsl(0, 0%, 100%)" }}>
       <ScrollView className="flex-1 px-4" contentContainerClassName="gap-6 py-6">
         <Text variant="h2">Data Display</Text>
-        <Text variant="muted">14 components for presenting content and data.</Text>
+        <Text variant="muted">15 components for presenting content and data.</Text>
 
         {/* Text */}
         <Section title="Text">
@@ -159,6 +160,78 @@ export default function DataDisplayScreen() {
               </View>
             </ListItem>
           </List>
+        </Section>
+
+        {/* Swipeable List Item */}
+        <Section title="Swipeable List Item">
+          <List className="rounded-lg border border-border overflow-hidden">
+            <SwipeableListItem
+              rightActions={[
+                {
+                  key: "archive",
+                  label: "Archive",
+                  color: "bg-amber-500",
+                  onPress: () => Alert.alert("Archive", "Item archived"),
+                },
+                {
+                  key: "delete",
+                  label: "Delete",
+                  color: "bg-destructive",
+                  onPress: () => Alert.alert("Delete", "Item deleted"),
+                },
+              ]}
+              leftActions={[
+                {
+                  key: "pin",
+                  label: "Pin",
+                  color: "bg-green-600",
+                  onPress: () => Alert.alert("Pin", "Item pinned"),
+                },
+              ]}
+            >
+              <ListItem>
+                <View className="flex-1">
+                  <ListItemTitle>Design Review</ListItemTitle>
+                  <ListItemDescription>Review the new onboarding flow</ListItemDescription>
+                </View>
+              </ListItem>
+            </SwipeableListItem>
+            <SwipeableListItem
+              rightActions={[
+                {
+                  key: "delete",
+                  label: "Delete",
+                  color: "bg-destructive",
+                  onPress: () => Alert.alert("Delete", "Item deleted"),
+                },
+              ]}
+            >
+              <ListItem>
+                <View className="flex-1">
+                  <ListItemTitle>Team Standup</ListItemTitle>
+                  <ListItemDescription>Daily sync at 10:00 AM</ListItemDescription>
+                </View>
+              </ListItem>
+            </SwipeableListItem>
+            <SwipeableListItem
+              rightActions={[
+                {
+                  key: "delete",
+                  label: "Delete",
+                  color: "bg-destructive",
+                  onPress: () => Alert.alert("Delete", "Item deleted"),
+                },
+              ]}
+            >
+              <ListItem className="border-b-0">
+                <View className="flex-1">
+                  <ListItemTitle>Deploy v2.1</ListItemTitle>
+                  <ListItemDescription>Push release to production</ListItemDescription>
+                </View>
+              </ListItem>
+            </SwipeableListItem>
+          </List>
+          <Text variant="muted">Swipe left for delete/archive, swipe right to pin</Text>
         </Section>
 
         {/* Table */}

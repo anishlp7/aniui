@@ -49,6 +49,26 @@ jest.mock("@gorhom/bottom-sheet", () => {
   };
 });
 
+/* ── Mock react-native-gesture-handler ──────────────────── */
+jest.mock("react-native-gesture-handler", () => {
+  const React = require("react");
+  const { View } = require("react-native");
+  return {
+    __esModule: true,
+    Gesture: {
+      Pan: () => ({
+        activeOffsetX: function () { return this; },
+        enabled: function () { return this; },
+        onStart: function () { return this; },
+        onUpdate: function () { return this; },
+        onEnd: function () { return this; },
+      }),
+    },
+    GestureDetector: ({ children }) => children,
+    GestureHandlerRootView: (props) => React.createElement(View, props),
+  };
+});
+
 /* ── Mock @react-native-community/datetimepicker ─────────── */
 jest.mock("@react-native-community/datetimepicker", () => {
   const React = require("react");
