@@ -5,10 +5,10 @@ import { Text } from "@/components/ui/text";
 import { Card, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 
 const categories = [
-  { title: "Forms", description: "Input, Checkbox, Switch, Select, Slider, and more", route: "/forms" as const, count: 17 },
-  { title: "Data Display", description: "Text, Badge, Card, Avatar, Table, Calendar, and more", route: "/data-display" as const, count: 15 },
-  { title: "Feedback", description: "Alert, Dialog, Toast, Banner, Tooltip, and more", route: "/feedback" as const, count: 8 },
-  { title: "Navigation", description: "Tabs, Accordion, Collapsible, Drawer", route: "/navigation" as const, count: 4 },
+  { title: "Forms", description: "Input, Password, Phone, Masked, Number, Combobox, and more", route: "/forms" as const, count: 24 },
+  { title: "Data Display", description: "Text, Badge, Card, Timeline, Chat, Stats, and more", route: "/data-display" as const, count: 25 },
+  { title: "Feedback", description: "Alert, Dialog, Toast, Banner, Connection Banner, and more", route: "/feedback" as const, count: 9 },
+  { title: "Navigation", description: "Tabs, Accordion, Header, Tab Bar, Drawer, and more", route: "/navigation" as const, count: 6 },
   { title: "Overlays", description: "Bottom Sheet, Action Sheet, FAB", route: "/overlays" as const, count: 3 },
   { title: "Charts", description: "Area, Bar, Line, Pie, Radar, Radial charts", route: "/charts" as const, count: 7 },
 ];
@@ -20,7 +20,7 @@ export default function HomeScreen() {
     <SafeAreaView style={{ flex: 1, backgroundColor: "hsl(0, 0%, 100%)" }}>
       <ScrollView className="flex-1 px-4" contentContainerClassName="gap-4 py-6">
         <Text variant="h2">AniUI Demo</Text>
-        <Text variant="muted">54 components across 6 categories. Tap to explore.</Text>
+        <Text variant="muted">80 components across 6 categories. Tap to explore.</Text>
 
         {categories.map((cat) => (
           <Pressable key={cat.title} onPress={() => router.push(cat.route)}>

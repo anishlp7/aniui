@@ -20,6 +20,13 @@ import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 import { Rating } from "@/components/ui/rating";
 import { Chip } from "@/components/ui/chip";
 import { SegmentedControl } from "@/components/ui/segmented-control";
+import { PasswordInput } from "@/components/ui/password-input";
+import { MaskedInput } from "@/components/ui/masked-input";
+import { PhoneInput } from "@/components/ui/phone-input";
+import { NumberInput } from "@/components/ui/number-input";
+import { Combobox } from "@/components/ui/combobox";
+import { Form, FormField, FormItem, FormMessage } from "@/components/ui/form";
+import { FilePicker } from "@/components/ui/file-picker";
 
 export default function FormsScreen() {
   // Input states
@@ -84,6 +91,21 @@ export default function FormsScreen() {
 
   // Segmented control state
   const [segment, setSegment] = useState("Daily");
+
+  // Password input state
+  const [passwordValue, setPasswordValue] = useState("");
+
+  // Masked input state
+  const [cardNumber, setCardNumber] = useState("");
+
+  // Number input state
+  const [quantity, setQuantity] = useState(1);
+
+  // Combobox state
+  const [comboValue, setComboValue] = useState("");
+
+  // File picker state
+  const [file, setFile] = useState<{ name: string; size?: number } | undefined>(undefined);
 
   const selectOptions = [
     { label: "React Native", value: "rn" },
@@ -491,6 +513,128 @@ export default function FormsScreen() {
               onValueChange={setSegment}
             />
             <Text variant="muted">Selected: {segment}</Text>
+          </CardContent>
+        </Card>
+
+        {/* Password Input */}
+        <Card>
+          <CardHeader>
+            <CardTitle className="text-lg">Password Input</CardTitle>
+          </CardHeader>
+          <CardContent className="gap-3">
+            <Label>Password</Label>
+            <PasswordInput
+              placeholder="Enter password"
+              value={passwordValue}
+              onChangeText={setPasswordValue}
+              showStrength
+            />
+          </CardContent>
+        </Card>
+
+        {/* Masked Input */}
+        <Card>
+          <CardHeader>
+            <CardTitle className="text-lg">Masked Input</CardTitle>
+          </CardHeader>
+          <CardContent className="gap-3">
+            <Label>Credit Card</Label>
+            <MaskedInput
+              preset="credit-card"
+              placeholder="0000 0000 0000 0000"
+              value={cardNumber}
+              onChangeText={(masked) => setCardNumber(masked)}
+            />
+            <Label>Phone</Label>
+            <MaskedInput
+              preset="phone"
+              placeholder="(000) 000-0000"
+            />
+          </CardContent>
+        </Card>
+
+        {/* Phone Input */}
+        <Card>
+          <CardHeader>
+            <CardTitle className="text-lg">Phone Input</CardTitle>
+          </CardHeader>
+          <CardContent className="gap-3">
+            <Label>Phone Number</Label>
+            <PhoneInput defaultCountry="US" />
+          </CardContent>
+        </Card>
+
+        {/* Number Input */}
+        <Card>
+          <CardHeader>
+            <CardTitle className="text-lg">Number Input</CardTitle>
+          </CardHeader>
+          <CardContent className="gap-3">
+            <Label>Quantity</Label>
+            <NumberInput value={quantity} onValueChange={setQuantity} min={1} max={99} />
+            <Text variant="muted">Value: {quantity}</Text>
+          </CardContent>
+        </Card>
+
+        {/* Combobox */}
+        <Card>
+          <CardHeader>
+            <CardTitle className="text-lg">Combobox</CardTitle>
+          </CardHeader>
+          <CardContent className="gap-3">
+            <Label>Framework</Label>
+            <Combobox
+              options={[
+                { label: "React Native", value: "rn" },
+                { label: "Flutter", value: "flutter" },
+                { label: "SwiftUI", value: "swiftui" },
+                { label: "Jetpack Compose", value: "compose" },
+                { label: "Kotlin Multiplatform", value: "kmp" },
+              ]}
+              value={comboValue}
+              onValueChange={setComboValue}
+              placeholder="Search frameworks..."
+            />
+          </CardContent>
+        </Card>
+
+        {/* Form Context */}
+        <Card>
+          <CardHeader>
+            <CardTitle className="text-lg">Form Validation</CardTitle>
+          </CardHeader>
+          <CardContent className="gap-3">
+            <Form>
+              <FormField name="email">
+                <FormItem>
+                  <Label>Email</Label>
+                  <Input placeholder="john@example.com" />
+                  <FormMessage />
+                </FormItem>
+              </FormField>
+              <FormField name="name">
+                <FormItem>
+                  <Label>Name</Label>
+                  <Input placeholder="John Doe" />
+                  <FormMessage />
+                </FormItem>
+              </FormField>
+            </Form>
+          </CardContent>
+        </Card>
+
+        {/* File Picker */}
+        <Card>
+          <CardHeader>
+            <CardTitle className="text-lg">File Picker</CardTitle>
+          </CardHeader>
+          <CardContent className="gap-3">
+            <FilePicker
+              file={file}
+              onPress={() => setFile({ name: "document.pdf", size: 245000 })}
+              onRemove={() => setFile(undefined)}
+              label="Tap to upload a document"
+            />
           </CardContent>
         </Card>
       </ScrollView>
