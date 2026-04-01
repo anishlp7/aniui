@@ -12,10 +12,13 @@ import {
   CollapsibleContent,
 } from "@/components/ui/collapsible";
 import { Drawer, DrawerContent } from "@/components/ui/drawer";
+import { Header, HeaderLeft, HeaderTitle, HeaderRight, HeaderBackButton } from "@/components/ui/header";
+import { TabBar, TabBarItem } from "@/components/ui/tab-bar";
 
 export default function NavigationScreen() {
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [collapsibleOpen, setCollapsibleOpen] = useState(false);
+  const [activeTab, setActiveTab] = useState(0);
 
   return (
     <SafeAreaView className="flex-1 bg-background" edges={["bottom"]}>
@@ -144,6 +147,40 @@ export default function NavigationScreen() {
                 </View>
               </DrawerContent>
             </Drawer>
+          </CardContent>
+        </Card>
+        {/* Header */}
+        <Card>
+          <CardHeader>
+            <CardTitle>Header</CardTitle>
+          </CardHeader>
+          <CardContent className="gap-3">
+            <Header variant="default">
+              <HeaderLeft>
+                <HeaderBackButton onPress={() => {}} />
+              </HeaderLeft>
+              <HeaderTitle>Settings</HeaderTitle>
+              <HeaderRight>
+                <Button variant="ghost" size="sm">Save</Button>
+              </HeaderRight>
+            </Header>
+            <Header variant="primary" className="rounded-lg mt-2">
+              <HeaderTitle className="text-primary-foreground">Dashboard</HeaderTitle>
+            </Header>
+          </CardContent>
+        </Card>
+
+        {/* Tab Bar */}
+        <Card>
+          <CardHeader>
+            <CardTitle>Tab Bar</CardTitle>
+          </CardHeader>
+          <CardContent className="gap-3">
+            <TabBar className="rounded-lg">
+              <TabBarItem active={activeTab === 0} label="Home" onPress={() => setActiveTab(0)} />
+              <TabBarItem active={activeTab === 1} label="Search" onPress={() => setActiveTab(1)} />
+              <TabBarItem active={activeTab === 2} label="Profile" badge={3} onPress={() => setActiveTab(2)} />
+            </TabBar>
           </CardContent>
         </Card>
       </ScrollView>

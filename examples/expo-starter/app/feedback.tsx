@@ -34,10 +34,12 @@ import {
   DropdownMenuItem,
   DropdownMenuSeparator,
 } from "@/components/ui/dropdown-menu";
+import { ConnectionBanner } from "@/components/ui/connection-banner";
 
 function FeedbackContent() {
   const [alertDialogOpen, setAlertDialogOpen] = useState(false);
   const [dialogOpen, setDialogOpen] = useState(false);
+  const [isConnected, setIsConnected] = useState(true);
   const [bannerVisible, setBannerVisible] = useState({
     default: true,
     info: true,
@@ -258,6 +260,22 @@ function FeedbackContent() {
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
+        </CardContent>
+      </Card>
+
+      {/* Connection Banner */}
+      <Card>
+        <CardHeader>
+          <CardTitle>Connection Banner</CardTitle>
+        </CardHeader>
+        <CardContent className="gap-3">
+          <Button
+            variant="outline"
+            onPress={() => setIsConnected(!isConnected)}
+          >
+            Toggle: {isConnected ? "Online" : "Offline"}
+          </Button>
+          <ConnectionBanner connected={isConnected} />
         </CardContent>
       </Card>
     </ScrollView>
