@@ -135,7 +135,32 @@ aniui/
 │       ├── stepper.tsx
 │       ├── banner.tsx
 │       ├── calendar.tsx
-│       └── swipeable-list-item.tsx
+│       ├── swipeable-list-item.tsx
+│       ├── form.tsx
+│       ├── password-input.tsx
+│       ├── theme-provider.tsx
+│       ├── safe-area.tsx
+│       ├── header.tsx
+│       ├── tab-bar.tsx
+│       ├── status-indicator.tsx
+│       ├── labeled-separator.tsx
+│       ├── masked-input.tsx
+│       ├── phone-input.tsx
+│       ├── number-input.tsx
+│       ├── combobox.tsx
+│       ├── progress-steps.tsx
+│       ├── timeline.tsx
+│       ├── chat-bubble.tsx
+│       ├── stat-card.tsx
+│       ├── grid.tsx
+│       ├── price.tsx
+│       ├── refresh-control.tsx
+│       ├── infinite-list.tsx
+│       ├── pagination.tsx
+│       ├── file-picker.tsx
+│       ├── connection-banner.tsx
+│       ├── typing-indicator.tsx
+│       └── image-gallery.tsx
 │
 ├── lib/                       # Shared utils — also copied to user's project
 │   └── utils.ts               # cn() helper — THE ONLY utility file
@@ -257,6 +282,29 @@ export function [Name]({ variant, size, className, ...props }: [Name]Props) {
 | 20 | fab | Pressable | Floating action button |
 | 21 | search-bar | TextInput | Search input with icon |
 | 22 | banner | View | Informational banner |
+| 23 | form | View+Context | Form, FormField, FormItem, FormMessage + validation |
+| 24 | password-input | TextInput | Show/hide toggle + strength indicator |
+| 25 | theme-provider | Context | ThemeProvider, useTheme hook (light/dark/system) |
+| 26 | safe-area | SafeAreaView | Styled safe area wrapper with variants |
+| 27 | header | View | Compound: Header, HeaderLeft, HeaderTitle, HeaderRight, HeaderBackButton |
+| 28 | tab-bar | View+Pressable | Bottom tab bar with badge support |
+| 29 | status-indicator | View | online/offline/away/busy dot with pulse |
+| 30 | labeled-separator | View+Text | Separator with centered text label |
+| 31 | masked-input | TextInput | Auto-format masks (credit card, phone, date) |
+| 32 | phone-input | TextInput | Phone with country code picker |
+| 33 | number-input | TextInput+Pressable | +/- buttons with min/max/step |
+| 34 | combobox | Modal+FlatList | Searchable select with type-to-filter |
+| 35 | progress-steps | View+Context | Multi-step wizard progress indicator |
+| 36 | timeline | View | Vertical event timeline with dot variants |
+| 37 | chat-bubble | View+Text | Sent/received message bubbles with status |
+| 38 | stat-card | View | KPI card with value, trend, and change % |
+| 39 | grid | FlatList | Column-based grid layout |
+| 40 | price | Text | Formatted currency display with Intl |
+| 41 | refresh-control | RefreshControl | Themed pull-to-refresh |
+| 42 | infinite-list | FlatList | Auto-load more on scroll |
+| 43 | pagination | View+Pressable | Numbered page navigation |
+| 44 | file-picker | Pressable | Upload UI with dashed border and preview |
+| 45 | image-gallery | FlatList+Modal | Horizontal carousel with fullscreen viewer |
 
 ### Tier 2: Needs react-native-reanimated v3
 
@@ -282,6 +330,8 @@ export function [Name]({ variant, size, className, ...props }: [Name]Props) {
 | 40 | carousel | Swipeable carousel |
 | 41 | rating | Star/icon rating |
 | 42 | stepper | Increment/decrement stepper |
+| 43 | connection-banner | Slide-in online/offline banner |
+| 44 | typing-indicator | Animated typing dots for chat |
 
 ### Tier 3: Needs external packages
 
