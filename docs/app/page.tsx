@@ -68,7 +68,7 @@ const sitelinksJsonLd = {
 
 export default function HomePage() {
   const { theme } = useTheme();
-  const [selectedPreset, setSelectedPreset] = useState("zinc");
+  const [selectedPreset, setSelectedPreset] = useState("blue");
   const [customColor, setCustomColor] = useState<ColorDef | null>(null);
   const [selectedRadius, setSelectedRadius] = useState("0.75rem");
   const [previewMode, setPreviewMode] = useState<"light" | "dark">(theme);
