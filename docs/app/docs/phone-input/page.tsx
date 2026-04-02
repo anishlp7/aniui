@@ -1,6 +1,7 @@
 "use client";
 import { CodeBlock } from "@/components/code-block";
 import { PropsTable } from "@/components/props-table";
+import { AddComponentTabs } from "@/components/package-manager-tabs";
 
 const installCode = `npx @aniui/cli add phone-input`;
 const usageCode = `import { PhoneInput } from "@/components/ui/phone-input";
@@ -137,7 +138,7 @@ export default function PhoneInputPage() {
       {/* Installation */}
       <div className="space-y-4">
         <h2 className="text-2xl font-semibold tracking-tight text-foreground">Installation</h2>
-        <CodeBlock code={installCode} />
+        <AddComponentTabs names="phone-input" />
       </div>
       {/* Usage */}
       <div className="space-y-4">

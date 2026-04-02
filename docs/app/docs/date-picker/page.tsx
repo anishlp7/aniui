@@ -4,6 +4,7 @@ import { ComponentPlayground } from "@/components/component-playground";
 import { CodeBlock } from "@/components/code-block";
 import { PropsTable } from "@/components/props-table";
 
+import { AddComponentTabs } from "@/components/package-manager-tabs";
 const installCode = `npx @aniui/cli add date-picker`;
 const usageCode = `import { DatePicker } from "@/components/ui/date-picker";
 import { useState } from "react";
@@ -128,7 +129,7 @@ export default function DatePickerPage() {
       {/* Installation */}
       <div className="space-y-4">
         <h2 className="text-2xl font-semibold tracking-tight text-foreground">Installation</h2>
-        <CodeBlock code={installCode} />
+        <AddComponentTabs names="date-picker" />
         <p className="text-sm text-muted-foreground">
           The DatePicker depends on the Calendar component, which will be installed automatically.
         </p>

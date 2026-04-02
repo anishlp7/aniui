@@ -4,6 +4,7 @@ import { PreviewImage } from "@/components/preview/image";
 import { ComponentPlayground } from "@/components/component-playground";
 import { CodeBlock } from "@/components/code-block";
 import { PropsTable } from "@/components/props-table";
+import { AddComponentTabs } from "@/components/package-manager-tabs";
 
 const installCode = `npx @aniui/cli add image`;
 const usageCode = `import { Image } from "@/components/ui/image";
@@ -86,7 +87,7 @@ export default function ImagePage() {
       </ComponentPlayground>
       <div>
         <h2 className="text-xl font-semibold mb-3">Installation</h2>
-        <CodeBlock code={installCode} />
+        <AddComponentTabs names="image" />
       </div>
       <div>
         <h2 className="text-xl font-semibold mb-3">Rounded Variants</h2>

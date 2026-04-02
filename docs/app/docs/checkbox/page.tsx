@@ -3,6 +3,7 @@ import { PreviewCheckbox } from "@/components/preview/checkbox";
 import { ComponentPlayground } from "@/components/component-playground";
 import { CodeBlock } from "@/components/code-block";
 import { PropsTable } from "@/components/props-table";
+import { AddComponentTabs } from "@/components/package-manager-tabs";
 
 const installCode = `npx @aniui/cli add checkbox`;
 const usageCode = `import { Checkbox } from "@/components/ui/checkbox";
@@ -65,7 +66,7 @@ export default function CheckboxPage() {
       {/* Installation */}
       <div className="space-y-4">
         <h2 className="text-2xl font-semibold tracking-tight text-foreground">Installation</h2>
-        <CodeBlock code={installCode} />
+        <AddComponentTabs names="checkbox" />
       </div>
       {/* Usage */}
       <div className="space-y-4">

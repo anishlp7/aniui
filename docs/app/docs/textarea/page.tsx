@@ -3,6 +3,7 @@ import { PreviewTextarea } from "@/components/preview/textarea";
 import { ComponentPlayground } from "@/components/component-playground";
 import { CodeBlock } from "@/components/code-block";
 import { PropsTable } from "@/components/props-table";
+import { AddComponentTabs } from "@/components/package-manager-tabs";
 
 const installCode = `npx @aniui/cli add textarea`;
 const usageCode = `import { Textarea } from "@/components/ui/textarea";
@@ -71,7 +72,7 @@ export default function TextareaPage() {
       {/* Installation */}
       <div className="space-y-4">
         <h2 className="text-2xl font-semibold tracking-tight text-foreground">Installation</h2>
-        <CodeBlock code={installCode} />
+        <AddComponentTabs names="textarea" />
       </div>
       {/* Usage */}
       <div className="space-y-4">

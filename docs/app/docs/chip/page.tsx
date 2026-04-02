@@ -4,6 +4,7 @@ import { PreviewChip } from "@/components/preview/chip";
 import { ComponentPlayground } from "@/components/component-playground";
 import { CodeBlock } from "@/components/code-block";
 import { PropsTable } from "@/components/props-table";
+import { AddComponentTabs } from "@/components/package-manager-tabs";
 
 const installCode = `npx @aniui/cli add chip`;
 const usageCode = `import { Chip } from "@/components/ui/chip";
@@ -111,7 +112,7 @@ export default function ChipPage() {
       </ComponentPlayground>
       <div>
         <h2 className="text-xl font-semibold mb-3">Installation</h2>
-        <CodeBlock code={installCode} />
+        <AddComponentTabs names="chip" />
       </div>
       <div>
         <h2 className="text-xl font-semibold mb-3">Variants</h2>

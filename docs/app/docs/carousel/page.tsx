@@ -4,6 +4,7 @@ import { PreviewCarousel } from "@/components/preview/carousel";
 import { ComponentPlayground } from "@/components/component-playground";
 import { CodeBlock } from "@/components/code-block";
 import { PropsTable } from "@/components/props-table";
+import { AddComponentTabs } from "@/components/package-manager-tabs";
 
 const installCode = `npx @aniui/cli add carousel`;
 const usageCode = `import { Carousel } from "@/components/ui/carousel";
@@ -84,7 +85,7 @@ export default function CarouselPage() {
       </ComponentPlayground>
       <div>
         <h2 className="text-xl font-semibold mb-3">Installation</h2>
-        <CodeBlock code={installCode} />
+        <AddComponentTabs names="carousel" />
       </div>
       <div>
         <h2 className="text-xl font-semibold mb-3">Auto-Play</h2>

@@ -4,6 +4,7 @@ import { PreviewBanner } from "@/components/preview/banner";
 import { ComponentPlayground } from "@/components/component-playground";
 import { CodeBlock } from "@/components/code-block";
 import { PropsTable, type PropDef } from "@/components/props-table";
+import { AddComponentTabs } from "@/components/package-manager-tabs";
 
 const installCode = `npx @aniui/cli add banner`;
 const usageCode = `import { Banner } from "@/components/ui/banner";
@@ -170,7 +171,7 @@ export default function BannerPage() {
       </ComponentPlayground>
       <div>
         <h2 className="text-xl font-semibold mb-3">Installation</h2>
-        <CodeBlock code={installCode} />
+        <AddComponentTabs names="banner" />
       </div>
       <div>
         <h2 className="text-xl font-semibold mb-3">Variants</h2>

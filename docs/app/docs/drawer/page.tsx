@@ -3,6 +3,7 @@ import { PreviewDrawer } from "@/components/preview/drawer";
 import { ComponentPlayground } from "@/components/component-playground";
 import { CodeBlock } from "@/components/code-block";
 import { PropsTable } from "@/components/props-table";
+import { AddComponentTabs } from "@/components/package-manager-tabs";
 
 const installCode = `npx @aniui/cli add drawer`;
 const usageCode = `import { Drawer, DrawerContent } from "@/components/ui/drawer";
@@ -100,7 +101,7 @@ export default function DrawerPage() {
       {/* Installation */}
       <div className="space-y-4">
         <h2 className="text-2xl font-semibold tracking-tight text-foreground">Installation</h2>
-        <CodeBlock code={installCode} />
+        <AddComponentTabs names="drawer" />
       </div>
       {/* Usage */}
       <div className="space-y-4">

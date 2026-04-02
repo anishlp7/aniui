@@ -1,6 +1,7 @@
 "use client";
 import { CodeBlock } from "@/components/code-block";
 import { PropsTable } from "@/components/props-table";
+import { AddComponentTabs } from "@/components/package-manager-tabs";
 
 const installCode = `npx @aniui/cli add refresh-control`;
 const usageCode = `import { RefreshControl } from "@/components/ui/refresh-control";
@@ -55,7 +56,7 @@ export default function RefreshControlPage() {
       {/* Installation */}
       <div className="space-y-4">
         <h2 className="text-2xl font-semibold tracking-tight text-foreground">Installation</h2>
-        <CodeBlock code={installCode} />
+        <AddComponentTabs names="refresh-control" />
       </div>
       {/* Usage */}
       <div className="space-y-4">

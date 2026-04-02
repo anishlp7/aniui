@@ -3,6 +3,7 @@ import { PreviewList, PreviewListItem, PreviewListItemTitle, PreviewListItemDesc
 import { ComponentPlayground } from "@/components/component-playground";
 import { CodeBlock } from "@/components/code-block";
 import { PropsTable, ComponentTable } from "@/components/props-table";
+import { AddComponentTabs } from "@/components/package-manager-tabs";
 
 const installCode = `npx @aniui/cli add list`;
 const usageCode = `import { List, ListItem, ListItemTitle, ListItemDescription } from "@/components/ui/list";
@@ -93,7 +94,7 @@ export default function ListPage() {
       {/* Installation */}
       <div className="space-y-4">
         <h2 className="text-2xl font-semibold tracking-tight text-foreground">Installation</h2>
-        <CodeBlock code={installCode} />
+        <AddComponentTabs names="list" />
       </div>
       {/* Usage */}
       <div className="space-y-4">

@@ -2,6 +2,7 @@
 import { CodeBlock } from "@/components/code-block";
 import { PropsTable } from "@/components/props-table";
 
+import { AddComponentTabs } from "@/components/package-manager-tabs";
 const installCode = `npx @aniui/cli add header`;
 const usageCode = `import { Header, HeaderLeft, HeaderTitle, HeaderRight, HeaderBackButton } from "@/components/ui/header";
 import { Button } from "@/components/ui/button";
@@ -115,7 +116,7 @@ export default function HeaderPage() {
       {/* Installation */}
       <div className="space-y-4">
         <h2 className="text-2xl font-semibold tracking-tight text-foreground">Installation</h2>
-        <CodeBlock code={installCode} />
+        <AddComponentTabs names="header" />
       </div>
       {/* Usage */}
       <div className="space-y-4">

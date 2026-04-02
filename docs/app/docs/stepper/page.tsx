@@ -4,6 +4,7 @@ import { PreviewStepper } from "@/components/preview/stepper";
 import { ComponentPlayground } from "@/components/component-playground";
 import { CodeBlock } from "@/components/code-block";
 import { PropsTable } from "@/components/props-table";
+import { AddComponentTabs } from "@/components/package-manager-tabs";
 
 const installCode = `npx @aniui/cli add stepper`;
 const usageCode = `import { Stepper } from "@/components/ui/stepper";
@@ -100,7 +101,7 @@ export default function StepperPage() {
       </ComponentPlayground>
       <div>
         <h2 className="text-xl font-semibold mb-3">Installation</h2>
-        <CodeBlock code={installCode} />
+        <AddComponentTabs names="stepper" />
       </div>
       <div>
         <h2 className="text-xl font-semibold mb-3">Sizes</h2>

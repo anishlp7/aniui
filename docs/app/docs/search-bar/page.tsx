@@ -4,6 +4,7 @@ import { PreviewSearchBar } from "@/components/preview/search-bar";
 import { ComponentPlayground } from "@/components/component-playground";
 import { CodeBlock } from "@/components/code-block";
 import { PropsTable } from "@/components/props-table";
+import { AddComponentTabs } from "@/components/package-manager-tabs";
 
 const installCode = `npx @aniui/cli add search-bar`;
 const usageCode = `import { SearchBar } from "@/components/ui/search-bar";
@@ -119,7 +120,7 @@ export default function SearchBarPage() {
       </ComponentPlayground>
       <div>
         <h2 className="text-xl font-semibold mb-3">Installation</h2>
-        <CodeBlock code={installCode} />
+        <AddComponentTabs names="search-bar" />
       </div>
       <div>
         <h2 className="text-xl font-semibold mb-3">Usage</h2>

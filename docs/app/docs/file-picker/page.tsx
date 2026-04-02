@@ -2,6 +2,7 @@
 import { CodeBlock } from "@/components/code-block";
 import { PropsTable } from "@/components/props-table";
 
+import { AddComponentTabs } from "@/components/package-manager-tabs";
 const installCode = `npx @aniui/cli add file-picker`;
 const usageCode = `import { FilePicker, type FileInfo } from "@/components/ui/file-picker";
 import * as DocumentPicker from "expo-document-picker";
@@ -110,7 +111,7 @@ export default function FilePickerPage() {
       {/* Installation */}
       <div className="space-y-4">
         <h2 className="text-2xl font-semibold tracking-tight text-foreground">Installation</h2>
-        <CodeBlock code={installCode} />
+        <AddComponentTabs names="file-picker" />
       </div>
       {/* Usage */}
       <div className="space-y-4">

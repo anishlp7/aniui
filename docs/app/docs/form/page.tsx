@@ -2,6 +2,7 @@
 import { CodeBlock } from "@/components/code-block";
 import { PropsTable } from "@/components/props-table";
 
+import { AddComponentTabs } from "@/components/package-manager-tabs";
 const installCode = `npx @aniui/cli add form`;
 const usageCode = `import { Form, FormField, FormItem, FormMessage, useFormField } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
@@ -163,7 +164,7 @@ export default function FormPage() {
       {/* Installation */}
       <div className="space-y-4">
         <h2 className="text-2xl font-semibold tracking-tight text-foreground">Installation</h2>
-        <CodeBlock code={installCode} />
+        <AddComponentTabs names="form" />
       </div>
       {/* Usage */}
       <div className="space-y-4">

@@ -4,6 +4,7 @@ import { PreviewSegmentedControl } from "@/components/preview/segmented-control"
 import { ComponentPlayground } from "@/components/component-playground";
 import { CodeBlock } from "@/components/code-block";
 import { PropsTable } from "@/components/props-table";
+import { AddComponentTabs } from "@/components/package-manager-tabs";
 
 const installCode = `npx @aniui/cli add segmented-control`;
 const usageCode = `import { SegmentedControl } from "@/components/ui/segmented-control";
@@ -93,7 +94,7 @@ export default function SegmentedControlPage() {
       </ComponentPlayground>
       <div>
         <h2 className="text-xl font-semibold mb-3">Installation</h2>
-        <CodeBlock code={installCode} />
+        <AddComponentTabs names="segmented-control" />
       </div>
       <div>
         <h2 className="text-xl font-semibold mb-3">Sizes</h2>

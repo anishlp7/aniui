@@ -2,6 +2,7 @@
 import { CodeBlock } from "@/components/code-block";
 import { PropsTable } from "@/components/props-table";
 
+import { AddComponentTabs } from "@/components/package-manager-tabs";
 const installCode = `npx @aniui/cli add tab-bar`;
 const usageCode = `import { TabBar, TabBarItem } from "@/components/ui/tab-bar";
 import { Ionicons } from "@expo/vector-icons";
@@ -118,7 +119,7 @@ export default function TabBarPage() {
       {/* Installation */}
       <div className="space-y-4">
         <h2 className="text-2xl font-semibold tracking-tight text-foreground">Installation</h2>
-        <CodeBlock code={installCode} />
+        <AddComponentTabs names="tab-bar" />
       </div>
       {/* Usage */}
       <div className="space-y-4">

@@ -4,6 +4,7 @@ import { PreviewRating } from "@/components/preview/rating";
 import { ComponentPlayground } from "@/components/component-playground";
 import { CodeBlock } from "@/components/code-block";
 import { PropsTable } from "@/components/props-table";
+import { AddComponentTabs } from "@/components/package-manager-tabs";
 
 const installCode = `npx @aniui/cli add rating`;
 const usageCode = `import { Rating } from "@/components/ui/rating";
@@ -81,7 +82,7 @@ export default function RatingPage() {
       </ComponentPlayground>
       <div>
         <h2 className="text-xl font-semibold mb-3">Installation</h2>
-        <CodeBlock code={installCode} />
+        <AddComponentTabs names="rating" />
       </div>
       <div>
         <h2 className="text-xl font-semibold mb-3">Sizes</h2>

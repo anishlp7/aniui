@@ -5,6 +5,7 @@ import { ComponentPlayground } from "@/components/component-playground";
 import { CodeBlock } from "@/components/code-block";
 import { PropsTable } from "@/components/props-table";
 
+import { AddComponentTabs } from "@/components/package-manager-tabs";
 const installCode = `npx @aniui/cli add empty-state`;
 const usageCode = `import { EmptyState } from "@/components/ui/empty-state";
 import { Ionicons } from "@expo/vector-icons";
@@ -100,7 +101,7 @@ export default function EmptyStatePage() {
       </ComponentPlayground>
       <div>
         <h2 className="text-xl font-semibold mb-3">Installation</h2>
-        <CodeBlock code={installCode} />
+        <AddComponentTabs names="empty-state" />
       </div>
       <div>
         <h2 className="text-xl font-semibold mb-3">Usage</h2>

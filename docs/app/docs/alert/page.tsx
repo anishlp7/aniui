@@ -3,6 +3,7 @@ import { PreviewAlert } from "@/components/preview/alert";
 import { ComponentPlayground } from "@/components/component-playground";
 import { CodeBlock } from "@/components/code-block";
 import { PropsTable } from "@/components/props-table";
+import { AddComponentTabs } from "@/components/package-manager-tabs";
 
 const installCode = `npx @aniui/cli add alert`;
 const usageCode = `import { Alert, AlertDescription } from "@/components/ui/alert";
@@ -100,7 +101,7 @@ export default function AlertPage() {
       {/* Installation */}
       <div className="space-y-4">
         <h2 className="text-2xl font-semibold tracking-tight text-foreground">Installation</h2>
-        <CodeBlock code={installCode} />
+        <AddComponentTabs names="alert" />
       </div>
       {/* Usage */}
       <div className="space-y-4">

@@ -4,6 +4,7 @@ import { PreviewToggle } from "@/components/preview/toggle";
 import { ComponentPlayground } from "@/components/component-playground";
 import { CodeBlock } from "@/components/code-block";
 import { PropsTable } from "@/components/props-table";
+import { AddComponentTabs } from "@/components/package-manager-tabs";
 
 function ToggleDemo() {
   const [bold, setBold] = useState(true);
@@ -130,7 +131,7 @@ export default function TogglePage() {
       {/* Installation */}
       <div className="space-y-4">
         <h2 className="text-2xl font-semibold tracking-tight text-foreground">Installation</h2>
-        <CodeBlock code={installCode} />
+        <AddComponentTabs names="toggle" />
       </div>
       {/* Usage */}
       <div className="space-y-4">

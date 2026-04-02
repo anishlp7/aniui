@@ -3,6 +3,7 @@ import { PreviewActionSheet } from "@/components/preview/action-sheet";
 import { ComponentPlayground } from "@/components/component-playground";
 import { CodeBlock } from "@/components/code-block";
 import { PropsTable } from "@/components/props-table";
+import { AddComponentTabs } from "@/components/package-manager-tabs";
 
 const installCode = `npx @aniui/cli add action-sheet`;
 const depInstallCode = `npx expo install @gorhom/bottom-sheet react-native-gesture-handler react-native-reanimated`;
@@ -116,7 +117,7 @@ export default function ActionSheetPage() {
       {/* Installation */}
       <div className="space-y-4">
         <h2 className="text-2xl font-semibold tracking-tight text-foreground">Installation</h2>
-        <CodeBlock code={installCode} />
+        <AddComponentTabs names="action-sheet" />
         <p className="text-sm text-muted-foreground">
           This component requires additional dependencies:
         </p>
