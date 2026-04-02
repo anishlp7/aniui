@@ -79,9 +79,10 @@ export function MaskedInput({
   return (
     <TextInput
       className={cn(maskedVariants({ variant, size }), className)}
-      placeholderTextColor="hsl(240 3.8% 46.1%)"
+      placeholderTextColor="hsl(var(--muted-foreground))"
       keyboardType="number-pad"
       onChangeText={handleChange}
+      accessibilityRole="text"
       {...props}
     />
   );
