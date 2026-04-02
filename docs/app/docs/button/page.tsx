@@ -3,6 +3,8 @@ import { PreviewButton } from "@/components/preview/button";
 import { ComponentPlayground } from "@/components/component-playground";
 import { CodeBlock } from "@/components/code-block";
 import { PropsTable } from "@/components/props-table";
+import { PreviewToggle } from "@/components/preview-toggle";
+import { AddComponentTabs } from "@/components/package-manager-tabs";
 
 function PlusIcon({ className }: { className?: string }) {
   return (
@@ -39,7 +41,7 @@ function SearchIcon({ className }: { className?: string }) {
     </svg>
   );
 }
-const installCode = `npx @aniui/cli add button`;
+const installCode = `npx @aniui/cli add button`;  // kept for source display
 const usageCode = `import { Button } from "@/components/ui/button";
 
 export function MyScreen() {
@@ -159,15 +161,17 @@ export default function ButtonPage() {
         </p>
       </div>
       {/* Preview */}
-      <ComponentPlayground code={usageCode}>
-        <div className="flex flex-wrap items-center gap-3">
-          <PreviewButton>Click me</PreviewButton>
-        </div>
-      </ComponentPlayground>
+      <PreviewToggle>
+        <ComponentPlayground code={usageCode}>
+          <div className="flex flex-wrap items-center gap-3">
+            <PreviewButton>Click me</PreviewButton>
+          </div>
+        </ComponentPlayground>
+      </PreviewToggle>
       {/* Installation */}
       <div className="space-y-4">
         <h2 className="text-2xl font-semibold tracking-tight text-foreground">Installation</h2>
-        <CodeBlock code={installCode} />
+        <AddComponentTabs names="button" />
       </div>
       {/* Usage */}
       <div className="space-y-4">
@@ -275,6 +279,16 @@ export default function ButtonPage() {
         <p className="text-sm text-muted-foreground">
           Also accepts all <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">Pressable</code> props from React Native.
         </p>
+      </div>
+      {/* Accessibility */}
+      <div className="space-y-4">
+        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Accessibility</h2>
+        <ul className="list-disc list-inside space-y-2 text-sm text-muted-foreground">
+          <li><code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">accessibilityRole="button"</code> set automatically</li>
+          <li>Minimum touch target of 48x48dp via <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">min-h-12 min-w-12</code></li>
+          <li>Disabled state announced to screen readers</li>
+          <li>Loading state disables interaction and shows spinner</li>
+        </ul>
       </div>
       {/* Source */}
       <div className="space-y-4">
