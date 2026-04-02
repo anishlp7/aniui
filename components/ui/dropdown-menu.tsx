@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useRef, useState } from "react";
-import { View, Text, Pressable, Modal, Dimensions, StyleSheet } from "react-native";
+import { View, Text, Pressable, Modal, Dimensions } from "react-native";
 import { cn } from "@/lib/utils";
 
 type Layout = { x: number; y: number; w: number; h: number };
@@ -48,7 +48,7 @@ export function DropdownMenu({ children, side = "bottom", align = "start" }: Dro
       </Pressable>
       {open && (
         <Modal transparent animationType="fade" onRequestClose={() => setOpen(false)}>
-          <Pressable style={StyleSheet.absoluteFill} onPress={() => setOpen(false)} />
+          <Pressable className="absolute inset-0" onPress={() => setOpen(false)} />
           <View style={{ position: "absolute", ...posY, left: posX }}>
             {content}
           </View>
