@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { Sidebar } from "@/components/sidebar";
+import { DocsPagination } from "@/components/docs-pagination";
+import { ScrollToTop } from "@/components/scroll-to-top";
 
 export const metadata: Metadata = {
   title: {
@@ -19,7 +21,9 @@ export default function DocsLayout({
       <Sidebar />
       <main className="flex-1 md:ml-64">
         <div className="mx-auto max-w-3xl px-6 py-10">
+          <ScrollToTop />
           {children}
+          <DocsPagination />
         </div>
       </main>
     </div>
