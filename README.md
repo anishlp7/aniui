@@ -30,7 +30,7 @@
 
 AniUI is a [shadcn/ui](https://ui.shadcn.com)-inspired component library for **React Native**. Instead of installing a package, you copy component source files directly into your project. You own the code. Customize everything.
 
-Built with [NativeWind](https://www.nativewind.dev), [class-variance-authority](https://cva.style), and strict TypeScript. Every component is a single file, styled with Tailwind classes, and works on both iOS and Android out of the box.
+Built with [NativeWind](https://www.nativewind.dev) (or [Uniwind](https://github.com/nicepkg/uniwind)), [rn-primitives](https://rn-primitives.vercel.app) for accessibility, [class-variance-authority](https://cva.style), and strict TypeScript. Every component is a single file, styled with Tailwind classes, and works on both iOS and Android out of the box.
 
 **Demo:** [YouTube Short](https://www.youtube.com/shorts/KxHLlLk8YkA)
 
@@ -40,8 +40,12 @@ Built with [NativeWind](https://www.nativewind.dev), [class-variance-authority](
 |---|---|
 | Expo | ✅ SDK 53, 54 & 55 |
 | Bare React Native | ✅ 0.76+ |
+| NativeWind | ✅ v4 + v5 |
+| Uniwind | ✅ `--style uniwind` |
+| rn-primitives | ✅ Headless a11y layer |
 | TypeScript | ✅ Strict |
 | JavaScript | ✅ Via CLI (`tsx: false`) |
+| npm / pnpm / yarn / bun | ✅ All supported |
 | New Architecture | ✅ |
 | Old Architecture | ✅ SDK 53/54 only |
 | iOS | ✅ 15+ |
@@ -51,11 +55,17 @@ Built with [NativeWind](https://www.nativewind.dev), [class-variance-authority](
 
 ```bash
 # Initialize AniUI in your project
-npx @aniui/cli init
+npx @aniui/cli init              # npm
+pnpm dlx @aniui/cli init         # pnpm
+yarn dlx @aniui/cli init         # yarn
+bunx @aniui/cli init             # bun
+
+# Choose your styling engine during init:
+npx @aniui/cli init --style nativewind   # default
+npx @aniui/cli init --style uniwind      # Uniwind support
 
 # Add components
-npx @aniui/cli add button
-npx @aniui/cli add card input text
+npx @aniui/cli add button card input text
 ```
 
 That's it. Components are copied to your `components/ui/` directory. Import and use them:
