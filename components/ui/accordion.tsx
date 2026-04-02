@@ -1,27 +1,25 @@
-import React, { createContext, useContext, useState } from "react";
+import React from "react";
 import { View, Pressable, Text } from "react-native";
+import * as AccordionPrimitive from "@rn-primitives/accordion";
 import Animated, { FadeIn, FadeOut } from "react-native-reanimated";
 import { cn } from "@/lib/utils";
-
-const AccordionContext = createContext<{
-  expanded: string | null;
-  toggle: (value: string) => void;
-}>({ expanded: null, toggle: () => {} });
 
 export interface AccordionProps extends React.ComponentPropsWithoutRef<typeof View> {
   className?: string;
   defaultValue?: string;
   children?: React.ReactNode;
+  type?: "single" | "multiple";
 }
 
-export function Accordion({ className, defaultValue, children, ...props }: AccordionProps) {
-  const [expanded, setExpanded] = useState<string | null>(defaultValue ?? null);
-  const toggle = (value: string) => setExpanded((prev) => (prev === value ? null : value));
-
+export function Accordion({ className, defaultValue, children, type = "single", ...props }: AccordionProps) {
   return (
-    <AccordionContext.Provider value={{ expanded, toggle }}>
+    <AccordionPrimitive.Root
+      type={type}
+      defaultValue={type === "single" ? defaultValue : defaultValue ? [defaultValue] : undefined}
+      asChild
+    >
       <View className={cn("", className)} {...props}>{children}</View>
-    </AccordionContext.Provider>
+    </AccordionPrimitive.Root>
   );
 }
 
@@ -33,26 +31,21 @@ export interface AccordionItemProps extends React.ComponentPropsWithoutRef<typeo
 }
 
 export function AccordionItem({ value, trigger, className, children, ...props }: AccordionItemProps) {
-  const { expanded, toggle } = useContext(AccordionContext);
-  const isOpen = expanded === value;
-
   return (
-    <View className={cn("border-b border-border", className)} {...props}>
-      <Pressable
-        className="flex-row items-center justify-between py-4 min-h-12"
-        onPress={() => toggle(value)}
-        accessible={true}
-        accessibilityRole="button"
-        accessibilityState={{ expanded: isOpen }}
-      >
-        <Text className="text-base font-medium text-foreground flex-1">{trigger}</Text>
-        <Text className="text-muted-foreground text-lg">{isOpen ? "−" : "+"}</Text>
-      </Pressable>
-      {isOpen && (
-        <Animated.View entering={FadeIn.duration(200)} exiting={FadeOut.duration(150)}>
-          <View className="pb-4">{children}</View>
-        </Animated.View>
-      )}
-    </View>
+    <AccordionPrimitive.Item value={value} asChild>
+      <View className={cn("border-b border-border", className)} {...props}>
+        <AccordionPrimitive.Trigger asChild>
+          <Pressable className="flex-row items-center justify-between py-4 min-h-12" accessible={true} accessibilityRole="button">
+            <Text className="text-base font-medium text-foreground flex-1">{trigger}</Text>
+            <Text className="text-muted-foreground text-lg">+</Text>
+          </Pressable>
+        </AccordionPrimitive.Trigger>
+        <AccordionPrimitive.Content>
+          <Animated.View entering={FadeIn.duration(200)} exiting={FadeOut.duration(150)}>
+            <View className="pb-4">{children}</View>
+          </Animated.View>
+        </AccordionPrimitive.Content>
+      </View>
+    </AccordionPrimitive.Item>
   );
 }
