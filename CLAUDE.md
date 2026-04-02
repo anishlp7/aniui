@@ -310,39 +310,53 @@ export function [Name]({ variant, size, className, ...props }: [Name]Props) {
 
 | # | Component | Animation |
 |---|-----------|-----------|
-| 23 | skeleton | Animated pulse via opacity |
-| 24 | accordion | Height expand/collapse |
-| 25 | tabs | Indicator slide |
-| 26 | collapsible | Height animate |
-| 27 | toast | Slide in/out + auto dismiss |
-| 28 | dialog | Fade + scale overlay |
-| 29 | alert-dialog | Fade + zoom confirmation dialog |
-| 30 | tooltip | Fade in/out + position |
-| 31 | popover | Contextual overlay content |
-| 32 | slider | Animated thumb + track |
-| 33 | toggle | Pressable toggle button |
-| 34 | toggle-group | Multi-toggle group |
-| 35 | drawer | Slide-in drawer overlay |
-| 36 | input-otp | OTP code input |
-| 37 | table | Data table with rows/cells |
-| 38 | dropdown-menu | Animated dropdown |
-| 39 | segmented-control | Animated segment indicator |
-| 40 | carousel | Swipeable carousel |
-| 41 | rating | Star/icon rating |
-| 42 | stepper | Increment/decrement stepper |
-| 43 | connection-banner | Slide-in online/offline banner |
-| 44 | typing-indicator | Animated typing dots for chat |
+| 46 | skeleton | Animated pulse via opacity |
+| 47 | toggle | Pressable toggle button |
+| 48 | toggle-group | Multi-toggle group |
+| 49 | drawer | Slide-in drawer overlay |
+| 50 | input-otp | OTP code input |
+| 51 | table | Data table with rows/cells |
+| 52 | segmented-control | Animated segment indicator |
+| 53 | carousel | Swipeable carousel |
+| 54 | rating | Star/icon rating |
+| 55 | connection-banner | Slide-in online/offline banner |
+| 56 | typing-indicator | Animated typing dots for chat |
 
-### Tier 3: Needs external packages
+### Tier 3: Needs rn-primitives or external packages
 
 | # | Component | Extra Dep |
 |---|-----------|-----------|
-| 43 | bottom-sheet | @gorhom/bottom-sheet |
-| 44 | action-sheet | @gorhom/bottom-sheet |
-| 45 | select | @gorhom/bottom-sheet |
-| 46 | calendar | (standalone) |
-| 47 | date-picker | @react-native-community/datetimepicker |
-| 48 | swipeable-list-item | react-native-gesture-handler |
+| 57 | dialog | @rn-primitives/dialog + @rn-primitives/portal |
+| 58 | alert-dialog | @rn-primitives/alert-dialog + @rn-primitives/portal |
+| 59 | popover | @rn-primitives/popover + @rn-primitives/portal |
+| 60 | tooltip | @rn-primitives/tooltip + @rn-primitives/portal |
+| 61 | dropdown-menu | @rn-primitives/dropdown-menu + @rn-primitives/portal |
+| 62 | context-menu | @rn-primitives/context-menu + @rn-primitives/portal |
+| 63 | select | @rn-primitives/select + @rn-primitives/portal |
+| 64 | accordion | @rn-primitives/accordion |
+| 65 | tabs | @rn-primitives/tabs |
+| 66 | collapsible | @rn-primitives/collapsible |
+| 67 | slider | @rn-primitives/slider |
+| 68 | checkbox | @rn-primitives/checkbox |
+| 69 | radio-group | @rn-primitives/radio-group |
+| 70 | progress | @rn-primitives/progress |
+| 71 | toast | @rn-primitives/toast |
+| 72 | bottom-sheet | @gorhom/bottom-sheet |
+| 73 | action-sheet | @gorhom/bottom-sheet |
+| 74 | date-picker | @react-native-community/datetimepicker |
+| 75 | swipeable-list-item | react-native-gesture-handler |
+
+### Tier 4: Chart components (needs react-native-svg)
+
+| # | Component | Description |
+|---|-----------|-------------|
+| 76 | area-chart | SVG area chart with fill |
+| 77 | bar-chart | SVG bar chart with grouping |
+| 78 | line-chart | SVG line chart with series |
+| 79 | pie-chart | SVG pie/donut chart |
+| 80 | radar-chart | SVG radar/spider chart |
+| 81 | radial-chart | SVG radial progress rings |
+| 82 | chart-tooltip | Tooltip overlay for chart data |
 
 ## Theme System
 
