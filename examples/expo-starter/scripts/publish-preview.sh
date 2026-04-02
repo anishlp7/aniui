@@ -4,13 +4,13 @@
 # Prerequisites:
 #   1. Run: eas login
 #   2. Run: eas init (links project to your Expo account)
-#   3. Replace YOUR_PROJECT_ID in app.json with the actual project ID
+#   3. Replace 4d52bb77-8a04-4713-b4b9-e2ed4c5ec1a0 in app.json with the actual project ID
 #
 # After running this script, get your QR code at:
-#   https://qr.expo.dev/eas-update?projectId=YOUR_PROJECT_ID&channel=preview
+#   https://qr.expo.dev/eas-update?projectId=4d52bb77-8a04-4713-b4b9-e2ed4c5ec1a0&channel=preview
 #
 # Embed in docs/README:
-#   <img src="https://qr.expo.dev/eas-update?projectId=YOUR_PROJECT_ID&channel=preview" width="200" />
+#   <img src="https://qr.expo.dev/eas-update?projectId=4d52bb77-8a04-4713-b4b9-e2ed4c5ec1a0&channel=preview" width="200" />
 
 set -e
 
@@ -21,9 +21,9 @@ echo ""
 eas whoami || { echo "Run 'eas login' first"; exit 1; }
 
 # Check if project is linked
-if grep -q "YOUR_PROJECT_ID" app.json; then
+if grep -q "4d52bb77-8a04-4713-b4b9-e2ed4c5ec1a0" app.json; then
   echo ""
-  echo "ERROR: app.json still has YOUR_PROJECT_ID placeholder."
+  echo "ERROR: app.json still has 4d52bb77-8a04-4713-b4b9-e2ed4c5ec1a0 placeholder."
   echo "Run 'eas init' to link this project, then update app.json with your project ID."
   exit 1
 fi

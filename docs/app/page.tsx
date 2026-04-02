@@ -137,17 +137,17 @@ export default function HomePage() {
         </button>
 
         {/* Preview on device */}
-        <div className="mt-6 flex items-center gap-4 rounded-lg border border-border bg-card/50 px-5 py-3">
-          <div className="flex-shrink-0 h-10 w-10 rounded-lg bg-primary/10 flex items-center justify-center">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-primary">
-              <rect width="7" height="12" x="2" y="6" rx="1" />
-              <rect width="7" height="12" x="15" y="6" rx="1" />
-            </svg>
-          </div>
-          <div className="text-left">
+        <div className="mt-6 flex flex-col sm:flex-row items-center gap-4 rounded-lg border border-border bg-card/50 px-5 py-4">
+          <img
+            src="https://qr.expo.dev/eas-update?projectId=4d52bb77-8a04-4713-b4b9-e2ed4c5ec1a0&channel=preview"
+            alt="Scan with Expo Go"
+            className="w-24 h-24 rounded-lg"
+          />
+          <div className="text-center sm:text-left">
             <p className="text-sm font-medium text-foreground">Preview on your device</p>
-            <p className="text-xs text-muted-foreground">
-              Each component page has an Expo Snack embed — try components on a real device instantly.
+            <p className="text-xs text-muted-foreground mt-1">
+              Scan with Expo Go to try all 80+ components on a real device.
+              Each component page also has an Expo Snack embed.
             </p>
           </div>
         </div>

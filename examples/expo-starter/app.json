@@ -46,10 +46,17 @@
       "reactCompiler": false
     },
     "updates": {
-      "url": "https://u.expo.dev/YOUR_PROJECT_ID"
+      "url": "https://u.expo.dev/4d52bb77-8a04-4713-b4b9-e2ed4c5ec1a0"
     },
     "runtimeVersion": {
       "policy": "appVersion"
-    }
+    },
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "4d52bb77-8a04-4713-b4b9-e2ed4c5ec1a0"
+      }
+    },
+    "owner": "anishlp7"
   }
 }

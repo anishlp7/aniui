@@ -34,6 +34,10 @@ Built with [NativeWind](https://www.nativewind.dev) (or [Uniwind](https://github
 
 **Demo:** [YouTube Short](https://www.youtube.com/shorts/KxHLlLk8YkA)
 
+**Try on device:** Scan with Expo Go
+
+<img src="https://qr.expo.dev/eas-update?projectId=4d52bb77-8a04-4713-b4b9-e2ed4c5ec1a0&channel=preview" alt="Scan with Expo Go" width="160" />
+
 ## Compatibility
 
 | | Status |
