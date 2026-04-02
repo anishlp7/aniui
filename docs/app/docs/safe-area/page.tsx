@@ -1,4 +1,7 @@
 "use client";
+import { PreviewSafeAreaDemo } from "@/components/preview/safe-area";
+import { ComponentPlayground } from "@/components/component-playground";
+import { PreviewToggle } from "@/components/preview-toggle";
 import { CodeBlock } from "@/components/code-block";
 import { PropsTable } from "@/components/props-table";
 import { AddComponentTabs } from "@/components/package-manager-tabs";
@@ -67,6 +70,12 @@ export default function SafeAreaPage() {
         <h2 className="text-2xl font-semibold tracking-tight text-foreground">Installation</h2>
         <AddComponentTabs names="safe-area" />
       </div>
+      {/* Preview */}
+      <PreviewToggle>
+        <ComponentPlayground code={usageCode}>
+          <PreviewSafeAreaDemo />
+        </ComponentPlayground>
+      </PreviewToggle>
       {/* Usage */}
       <div className="space-y-4">
         <h2 className="text-2xl font-semibold tracking-tight text-foreground">Usage</h2>

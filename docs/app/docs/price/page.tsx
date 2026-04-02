@@ -1,4 +1,7 @@
 "use client";
+import { PreviewPriceDemo } from "@/components/preview/price";
+import { ComponentPlayground } from "@/components/component-playground";
+import { PreviewToggle } from "@/components/preview-toggle";
 import { CodeBlock } from "@/components/code-block";
 import { PropsTable } from "@/components/props-table";
 import { AddComponentTabs } from "@/components/package-manager-tabs";
@@ -82,6 +85,12 @@ export default function PricePage() {
         <h2 className="text-2xl font-semibold tracking-tight text-foreground">Installation</h2>
         <AddComponentTabs names="price" />
       </div>
+      {/* Preview */}
+      <PreviewToggle>
+        <ComponentPlayground code={usageCode}>
+          <PreviewPriceDemo />
+        </ComponentPlayground>
+      </PreviewToggle>
       {/* Usage */}
       <div className="space-y-4">
         <h2 className="text-2xl font-semibold tracking-tight text-foreground">Usage</h2>

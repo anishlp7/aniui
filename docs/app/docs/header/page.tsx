@@ -1,7 +1,9 @@
 "use client";
+import { PreviewHeaderDemo } from "@/components/preview/header";
+import { ComponentPlayground } from "@/components/component-playground";
+import { PreviewToggle } from "@/components/preview-toggle";
 import { CodeBlock } from "@/components/code-block";
 import { PropsTable } from "@/components/props-table";
-
 import { AddComponentTabs } from "@/components/package-manager-tabs";
 const installCode = `npx @aniui/cli add header`;
 const usageCode = `import { Header, HeaderLeft, HeaderTitle, HeaderRight, HeaderBackButton } from "@/components/ui/header";
@@ -118,6 +120,12 @@ export default function HeaderPage() {
         <h2 className="text-2xl font-semibold tracking-tight text-foreground">Installation</h2>
         <AddComponentTabs names="header" />
       </div>
+      {/* Preview */}
+      <PreviewToggle>
+        <ComponentPlayground code={usageCode}>
+          <PreviewHeaderDemo />
+        </ComponentPlayground>
+      </PreviewToggle>
       {/* Usage */}
       <div className="space-y-4">
         <h2 className="text-2xl font-semibold tracking-tight text-foreground">Usage</h2>

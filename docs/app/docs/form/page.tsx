@@ -1,7 +1,9 @@
 "use client";
+import { PreviewFormDemo } from "@/components/preview/form";
+import { ComponentPlayground } from "@/components/component-playground";
+import { PreviewToggle } from "@/components/preview-toggle";
 import { CodeBlock } from "@/components/code-block";
 import { PropsTable } from "@/components/props-table";
-
 import { AddComponentTabs } from "@/components/package-manager-tabs";
 const installCode = `npx @aniui/cli add form`;
 const usageCode = `import { Form, FormField, FormItem, FormMessage, useFormField } from "@/components/ui/form";
@@ -166,6 +168,12 @@ export default function FormPage() {
         <h2 className="text-2xl font-semibold tracking-tight text-foreground">Installation</h2>
         <AddComponentTabs names="form" />
       </div>
+      {/* Preview */}
+      <PreviewToggle>
+        <ComponentPlayground code={usageCode}>
+          <PreviewFormDemo />
+        </ComponentPlayground>
+      </PreviewToggle>
       {/* Usage */}
       <div className="space-y-4">
         <h2 className="text-2xl font-semibold tracking-tight text-foreground">Usage</h2>
