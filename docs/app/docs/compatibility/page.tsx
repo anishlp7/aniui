@@ -95,7 +95,7 @@ export default function CompatibilityPage() {
       <div>
         <h1 className="text-3xl font-bold tracking-tight text-foreground">Compatibility</h1>
         <p className="mt-2 text-lg text-muted-foreground">
-          AniUI supports Expo SDK 53, 54, and 55. The CLI auto-detects your setup.
+          AniUI supports Expo SDK 53, 54, 55, Bare React Native 0.76+, NativeWind, and Uniwind. The CLI auto-detects your setup.
         </p>
       </div>
 
@@ -136,6 +136,21 @@ export default function CompatibilityPage() {
                 <td className="p-3 font-medium text-muted-foreground">React Native</td>
                 <td className="p-3"><code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">0.79</code></td>
                 <td className="p-3"><code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">0.83</code></td>
+              </tr>
+              <tr>
+                <td className="p-3 font-medium text-muted-foreground">Uniwind</td>
+                <td className="p-3">✅ Supported</td>
+                <td className="p-3">✅ Supported</td>
+              </tr>
+              <tr>
+                <td className="p-3 font-medium text-muted-foreground">rn-primitives</td>
+                <td className="p-3">✅ v1.3+</td>
+                <td className="p-3">✅ v1.3+</td>
+              </tr>
+              <tr>
+                <td className="p-3 font-medium text-muted-foreground">Bare React Native</td>
+                <td className="p-3">✅ 0.76+</td>
+                <td className="p-3">✅ 0.83+</td>
               </tr>
               <tr>
                 <td className="p-3 font-medium text-muted-foreground">Architecture</td>
@@ -237,7 +252,7 @@ export default function CompatibilityPage() {
               <tr>
                 <td className="p-3"><code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">metro.config.js</code></td>
                 <td className="p-3 text-muted-foreground">Processes CSS with NativeWind</td>
-                <td className="p-3"><code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">withNativeWind(config, &#123; input: &quot;./global.css&quot; &#125;)</code></td>
+                <td className="p-3"><code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">withNativeWind</code> or <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">withUniwind</code></td>
               </tr>
               <tr>
                 <td className="p-3"><code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">tsconfig.json</code></td>
@@ -274,6 +289,16 @@ export default function CompatibilityPage() {
           <li className="flex items-start gap-2">
             <span className="text-foreground font-medium shrink-0">React 19:</span>
             SDK 55 uses React 19 which changes some lifecycle behaviors. AniUI components are compatible with both React 18 and 19.
+          </li>
+          <li className="flex items-start gap-2">
+            <span className="text-foreground font-medium shrink-0">Uniwind:</span>
+            Uniwind uses 16px rem base (vs NativeWind&apos;s 14px). Components may appear ~14% larger.
+            Uses <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">withUniwind</code> in metro.config.js instead of <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">withNativeWind</code>.
+            See <a href="/docs/uniwind" className="text-primary hover:underline">Uniwind guide</a>.
+          </li>
+          <li className="flex items-start gap-2">
+            <span className="text-foreground font-medium shrink-0">rn-primitives:</span>
+            Overlay components (Dialog, Popover, Select, etc.) require <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">&lt;PortalHost /&gt;</code> at your app root.
           </li>
           <li className="flex items-start gap-2">
             <span className="text-foreground font-medium shrink-0">React Compiler:</span>
