@@ -7,9 +7,11 @@ interface ComponentPlaygroundProps {
   children: React.ReactNode;
   /** Use "inline" for overlay components (dialog, drawer, toast) that escape containment */
   variant?: "phone" | "inline";
+  /** Optional Expo Snack URL for real device preview */
+  snackUrl?: string;
 }
 
-export function ComponentPlayground({ code, children, variant = "phone" }: ComponentPlaygroundProps) {
+export function ComponentPlayground({ code, children, variant = "phone", snackUrl }: ComponentPlaygroundProps) {
   const [copied, setCopied] = useState(false);
 
   const handleCopy = () => {
@@ -43,6 +45,16 @@ export function ComponentPlayground({ code, children, variant = "phone" }: Compo
           <div className="w-full min-h-[200px] flex items-center justify-center rounded-lg bg-background p-6">
             {children}
           </div>
+        )}
+      </div>
+
+      {/* Web preview disclaimer */}
+      <div className="flex items-center justify-between px-4 py-2 border-t border-border bg-muted/30 text-xs text-muted-foreground">
+        <span>Web preview — components render natively on iOS &amp; Android</span>
+        {snackUrl && (
+          <a href={snackUrl} target="_blank" rel="noopener noreferrer" className="text-primary hover:underline font-medium">
+            Open in Expo Snack →
+          </a>
         )}
       </div>
 
