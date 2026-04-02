@@ -5,6 +5,7 @@ import { addBlockCommand } from "./commands/add-block";
 import { themeCommand } from "./commands/theme";
 import { mcpCommand } from "./commands/mcp";
 import { generateCommand } from "./commands/generate";
+import { doctorCommand } from "./commands/doctor";
 
 const pkg = require("../../package.json");
 
@@ -58,6 +59,13 @@ program
   .option("-o, --output <path>", "output file path")
   .action(async (description: string, opts: { output?: string }) => {
     await generateCommand(description, opts);
+  });
+
+program
+  .command("doctor")
+  .description("Check your project setup for issues")
+  .action(async () => {
+    await doctorCommand();
   });
 
 program.parse();
