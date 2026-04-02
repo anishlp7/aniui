@@ -65,7 +65,7 @@ export function Button({ variant, size, className, textClassName, children, icon
       {...props}
     >
       {loading ? (
-        <ActivityIndicator size="small" color={light ? "hsl(0,0%,98%)" : "hsl(240,5.9%,10%)"} />
+        <ActivityIndicator size="small" color={light ? "hsl(var(--primary-foreground))" : "hsl(var(--foreground))"} />
       ) : icon ?? null}
       {children ? (
         <Text className={cn(buttonTextVariants({ variant, size }), textClassName)}>{children}</Text>

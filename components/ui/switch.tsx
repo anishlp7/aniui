@@ -11,11 +11,11 @@ export function Switch({ className, ...props }: SwitchProps) {
     <View className={cn("", className)}>
       <RNSwitch
         trackColor={{
-          false: "hsl(240, 4.8%, 95.9%)",
-          true: "hsl(240, 5.9%, 10%)",
+          false: "hsl(var(--input))",
+          true: "hsl(var(--primary))",
         }}
-        thumbColor={Platform.OS === "android" ? "hsl(0, 0%, 98%)" : undefined}
-        ios_backgroundColor="hsl(240, 4.8%, 95.9%)"
+        thumbColor={Platform.OS === "android" ? "hsl(var(--background))" : undefined}
+        ios_backgroundColor="hsl(var(--input))"
         accessibilityRole="switch"
         {...props}
       />

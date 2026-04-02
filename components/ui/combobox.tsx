@@ -60,7 +60,7 @@ export function Combobox({
               <TextInput
                 className="min-h-10 px-3 rounded-md border border-input bg-background text-foreground text-base"
                 placeholder={searchPlaceholder}
-                placeholderTextColor="hsl(240 3.8% 46.1%)"
+                placeholderTextColor="hsl(var(--muted-foreground))"
                 value={search}
                 onChangeText={setSearch}
                 autoFocus

@@ -15,7 +15,7 @@ export function Spinner({ size = "md", color, className, ...props }: SpinnerProp
     <View className={cn("items-center justify-center", className)} {...props}>
       <ActivityIndicator
         size={sizeMap[size]}
-        color={color ?? "hsl(240, 5.9%, 10%)"}
+        color={color ?? "hsl(var(--foreground))"}
         accessibilityRole="progressbar"
       />
     </View>

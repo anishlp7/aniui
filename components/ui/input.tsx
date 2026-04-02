@@ -46,7 +46,7 @@ export function Input({
     return (
       <TextInput
         className={cn(inputVariants({ variant, size }), className)}
-        placeholderTextColor="hsl(240 3.8% 46.1%)"
+        placeholderTextColor="hsl(var(--muted-foreground))"
         {...props}
       />
     );
@@ -63,7 +63,7 @@ export function Input({
       {leadingIcon && <View className="mr-2">{leadingIcon}</View>}
       <TextInput
         className="flex-1 text-foreground p-0 text-base"
-        placeholderTextColor="hsl(240 3.8% 46.1%)"
+        placeholderTextColor="hsl(var(--muted-foreground))"
         {...props}
       />
       {trailingIcon && <View className="ml-2">{trailingIcon}</View>}

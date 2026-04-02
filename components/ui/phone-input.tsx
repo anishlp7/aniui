@@ -74,7 +74,7 @@ export function PhoneInput({
       </Pressable>
       <TextInput
         className="flex-1 text-foreground p-0 text-base"
-        placeholderTextColor="hsl(240 3.8% 46.1%)"
+        placeholderTextColor="hsl(var(--muted-foreground))"
         keyboardType="phone-pad"
         onChangeText={handleChange}
         placeholder="Phone number"

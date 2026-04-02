@@ -57,7 +57,7 @@ export function PasswordInput({
       <View className={cn(passwordVariants({ variant, size }), className)}>
         <TextInput
           className="flex-1 text-foreground p-0 text-base"
-          placeholderTextColor="hsl(240 3.8% 46.1%)"
+          placeholderTextColor="hsl(var(--muted-foreground))"
           secureTextEntry={!visible}
           onChangeText={(text) => { setValue(text); onChangeText?.(text); }}
           accessibilityLabel="Password"

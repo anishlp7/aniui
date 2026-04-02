@@ -28,7 +28,7 @@ export function Textarea({ variant, className, ...props }: TextareaProps) {
   return (
     <TextInput
       className={cn(textareaVariants({ variant }), "min-h-24 px-4 py-3 text-base", className)}
-      placeholderTextColor="hsl(240, 3.8%, 46.1%)"
+      placeholderTextColor="hsl(var(--muted-foreground))"
       multiline
       textAlignVertical="top"
       {...props}

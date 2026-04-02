@@ -11,8 +11,8 @@ export function RefreshControl({ refreshing, onRefresh, ...props }: RefreshContr
     <RNRefreshControl
       refreshing={refreshing}
       onRefresh={onRefresh}
-      tintColor="hsl(240 5.9% 10%)"
-      colors={["hsl(240 5.9% 10%)"]}
+      tintColor="hsl(var(--primary))"
+      colors={["hsl(var(--primary))"]}
       {...props}
     />
   );

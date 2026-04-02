@@ -28,8 +28,8 @@ export const BottomSheet = forwardRef<BottomSheetModal, BottomSheetProps>(
         snapPoints={snapPoints}
         enablePanDownToClose
         backdropComponent={renderBackdrop}
-        backgroundStyle={{ backgroundColor: "hsl(0 0% 100%)" }}
-        handleIndicatorStyle={{ backgroundColor: "hsl(240 3.8% 46.1%)" }}
+        backgroundStyle={{ backgroundColor: "hsl(var(--card))" }}
+        handleIndicatorStyle={{ backgroundColor: "hsl(var(--muted-foreground))" }}
         {...props}
       >
         <BottomSheetView>
