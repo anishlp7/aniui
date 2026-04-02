@@ -5,6 +5,7 @@ import { ComponentPlayground } from "@/components/component-playground";
 import { CodeBlock } from "@/components/code-block";
 import { PropsTable, type PropDef } from "@/components/props-table";
 import { AddComponentTabs } from "@/components/package-manager-tabs";
+import { PreviewToggle } from "@/components/preview-toggle";
 
 const installCode = `npx @aniui/cli add banner`;
 const usageCode = `import { Banner } from "@/components/ui/banner";
@@ -164,11 +165,13 @@ export default function BannerPage() {
           in both light and dark mode.
         </p>
       </div>
-      <ComponentPlayground code={usageCode}>
-        <PreviewBanner variant="info" onDismiss={() => {}}>
-          New version available. Update now for the latest features.
-        </PreviewBanner>
-      </ComponentPlayground>
+      <PreviewToggle>
+        <ComponentPlayground code={usageCode}>
+          <PreviewBanner variant="info" onDismiss={() => {}}>
+            New version available. Update now for the latest features.
+          </PreviewBanner>
+        </ComponentPlayground>
+      </PreviewToggle>
       <div>
         <h2 className="text-xl font-semibold mb-3">Installation</h2>
         <AddComponentTabs names="banner" />

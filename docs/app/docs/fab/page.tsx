@@ -6,6 +6,7 @@ import { CodeBlock } from "@/components/code-block";
 import { PropsTable } from "@/components/props-table";
 
 import { AddComponentTabs } from "@/components/package-manager-tabs";
+import { PreviewToggle } from "@/components/preview-toggle";
 const installCode = `npx @aniui/cli add fab`;
 const usageCode = `import { FAB } from "@/components/ui/fab";
 import { Ionicons } from "@expo/vector-icons";
@@ -109,9 +110,11 @@ export default function FABPage() {
         <h1 className="text-3xl font-bold mb-2">FAB</h1>
         <p className="text-muted-foreground text-lg">A floating action button for primary screen actions. Positions itself absolutely within its container.</p>
       </div>
-      <ComponentPlayground code={usageCode}>
-        <PreviewFAB />
-      </ComponentPlayground>
+      <PreviewToggle>
+        <ComponentPlayground code={usageCode}>
+          <PreviewFAB />
+        </ComponentPlayground>
+      </PreviewToggle>
       <div>
         <h2 className="text-xl font-semibold mb-3">Installation</h2>
         <AddComponentTabs names="fab" />

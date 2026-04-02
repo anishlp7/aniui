@@ -4,6 +4,7 @@ import { ComponentPlayground } from "@/components/component-playground";
 import { CodeBlock } from "@/components/code-block";
 import { PropsTable, ComponentTable } from "@/components/props-table";
 import { AddComponentTabs } from "@/components/package-manager-tabs";
+import { PreviewToggle } from "@/components/preview-toggle";
 
 const installCode = `npx @aniui/cli add card`;
 const usageCode = `import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from "@/components/ui/card";
@@ -89,22 +90,24 @@ export default function CardPage() {
         </p>
       </div>
       {/* Preview */}
-      <ComponentPlayground code={usageCode}>
-        <div className="w-full max-w-sm">
-          <PreviewCard>
-            <PreviewCardHeader>
-              <PreviewCardTitle>Card Title</PreviewCardTitle>
-              <PreviewCardDescription>Card description goes here.</PreviewCardDescription>
-            </PreviewCardHeader>
-            <PreviewCardContent>
-              <p className="text-sm text-muted-foreground">Card content area.</p>
-            </PreviewCardContent>
-            <PreviewCardFooter>
-              <button className="rounded-md bg-primary px-4 py-2 text-sm text-primary-foreground">Action</button>
-            </PreviewCardFooter>
-          </PreviewCard>
-        </div>
-      </ComponentPlayground>
+      <PreviewToggle>
+        <ComponentPlayground code={usageCode}>
+          <div className="w-full max-w-sm">
+            <PreviewCard>
+              <PreviewCardHeader>
+                <PreviewCardTitle>Card Title</PreviewCardTitle>
+                <PreviewCardDescription>Card description goes here.</PreviewCardDescription>
+              </PreviewCardHeader>
+              <PreviewCardContent>
+                <p className="text-sm text-muted-foreground">Card content area.</p>
+              </PreviewCardContent>
+              <PreviewCardFooter>
+                <button className="rounded-md bg-primary px-4 py-2 text-sm text-primary-foreground">Action</button>
+              </PreviewCardFooter>
+            </PreviewCard>
+          </div>
+        </ComponentPlayground>
+      </PreviewToggle>
       {/* Installation */}
       <div className="space-y-4">
         <h2 className="text-2xl font-semibold tracking-tight text-foreground">Installation</h2>

@@ -5,6 +5,7 @@ import { ComponentPlayground } from "@/components/component-playground";
 import { CodeBlock } from "@/components/code-block";
 import { PropsTable } from "@/components/props-table";
 import { AddComponentTabs } from "@/components/package-manager-tabs";
+import { PreviewToggle } from "@/components/preview-toggle";
 
 const installCode = `npx @aniui/cli add stepper`;
 const usageCode = `import { Stepper } from "@/components/ui/stepper";
@@ -94,11 +95,13 @@ export default function StepperPage() {
         <h1 className="text-3xl font-bold mb-2">Stepper</h1>
         <p className="text-muted-foreground text-lg">Numeric increment/decrement control with min, max, and step support. Ideal for quantity selectors.</p>
       </div>
-      <ComponentPlayground code={usageCode}>
-        <div style={{ maxWidth: 180 }}>
-          <InteractiveDemo />
-        </div>
-      </ComponentPlayground>
+      <PreviewToggle>
+        <ComponentPlayground code={usageCode}>
+          <div style={{ maxWidth: 180 }}>
+            <InteractiveDemo />
+          </div>
+        </ComponentPlayground>
+      </PreviewToggle>
       <div>
         <h2 className="text-xl font-semibold mb-3">Installation</h2>
         <AddComponentTabs names="stepper" />

@@ -5,6 +5,7 @@ import { CodeBlock } from "@/components/code-block";
 import React, { useState } from "react";
 import { PropsTable } from "@/components/props-table";
 import { AddComponentTabs } from "@/components/package-manager-tabs";
+import { PreviewToggle } from "@/components/preview-toggle";
 
 const installCode = `npx @aniui/cli add calendar`;
 const usageCode = `import { Calendar } from "@/components/ui/calendar";
@@ -97,9 +98,11 @@ export default function CalendarPage() {
         </p>
       </div>
       {/* Preview */}
-      <ComponentPlayground code={usageCode}>
-        <PreviewCalendar />
-      </ComponentPlayground>
+      <PreviewToggle>
+        <ComponentPlayground code={usageCode}>
+          <PreviewCalendar />
+        </ComponentPlayground>
+      </PreviewToggle>
       {/* Installation */}
       <div className="space-y-4">
         <h2 className="text-2xl font-semibold tracking-tight text-foreground">Installation</h2>

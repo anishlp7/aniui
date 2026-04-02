@@ -4,6 +4,7 @@ import { ComponentPlayground } from "@/components/component-playground";
 import { CodeBlock } from "@/components/code-block";
 import { PropsTable } from "@/components/props-table";
 import { AddComponentTabs } from "@/components/package-manager-tabs";
+import { PreviewToggle } from "@/components/preview-toggle";
 
 const installCode = `npx @aniui/cli add skeleton`;
 const usageCode = `import { Skeleton } from "@/components/ui/skeleton";
@@ -65,13 +66,15 @@ export default function SkeletonPage() {
         </p>
       </div>
       {/* Preview */}
-      <ComponentPlayground code={usageCode}>
-        <div className="space-y-3 w-full max-w-sm">
-          <PreviewSkeleton className="h-4 w-48" />
-          <PreviewSkeleton className="h-4 w-32" />
-          <PreviewSkeleton className="h-10 w-10 rounded-full" />
-        </div>
-      </ComponentPlayground>
+      <PreviewToggle>
+        <ComponentPlayground code={usageCode}>
+          <div className="space-y-3 w-full max-w-sm">
+            <PreviewSkeleton className="h-4 w-48" />
+            <PreviewSkeleton className="h-4 w-32" />
+            <PreviewSkeleton className="h-10 w-10 rounded-full" />
+          </div>
+        </ComponentPlayground>
+      </PreviewToggle>
       {/* Installation */}
       <div className="space-y-4">
         <h2 className="text-2xl font-semibold tracking-tight text-foreground">Installation</h2>

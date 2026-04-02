@@ -5,6 +5,7 @@ import { ComponentPlayground } from "@/components/component-playground";
 import { CodeBlock } from "@/components/code-block";
 import { PropsTable } from "@/components/props-table";
 import { AddComponentTabs } from "@/components/package-manager-tabs";
+import { PreviewToggle } from "@/components/preview-toggle";
 
 const installCode = `npx @aniui/cli add carousel`;
 const usageCode = `import { Carousel } from "@/components/ui/carousel";
@@ -78,11 +79,13 @@ export default function CarouselPage() {
         <h1 className="text-3xl font-bold mb-2">Carousel</h1>
         <p className="text-muted-foreground text-lg">Horizontal scrollable carousel with pagination dots and optional auto-play. Uses FlatList for performant scrolling.</p>
       </div>
-      <ComponentPlayground code={usageCode}>
-        <div className="max-w-md">
-          <PreviewCarousel items={slides} />
-        </div>
-      </ComponentPlayground>
+      <PreviewToggle>
+        <ComponentPlayground code={usageCode}>
+          <div className="max-w-md">
+            <PreviewCarousel items={slides} />
+          </div>
+        </ComponentPlayground>
+      </PreviewToggle>
       <div>
         <h2 className="text-xl font-semibold mb-3">Installation</h2>
         <AddComponentTabs names="carousel" />

@@ -5,6 +5,7 @@ import { CodeBlock } from "@/components/code-block";
 import { PropsTable } from "@/components/props-table";
 
 import { AddComponentTabs } from "@/components/package-manager-tabs";
+import { PreviewToggle } from "@/components/preview-toggle";
 const installCode = `npx @aniui/cli add slider`;
 const usageCode = `import { Slider } from "@/components/ui/slider";
 import { useState } from "react";
@@ -91,11 +92,13 @@ export default function SliderPage() {
         </p>
       </div>
       {/* Preview */}
-      <ComponentPlayground code={usageCode}>
-        <div className="flex w-full items-center gap-4">
-          <PreviewSlider />
-        </div>
-      </ComponentPlayground>
+      <PreviewToggle>
+        <ComponentPlayground code={usageCode}>
+          <div className="flex w-full items-center gap-4">
+            <PreviewSlider />
+          </div>
+        </ComponentPlayground>
+      </PreviewToggle>
       {/* Installation */}
       <div className="space-y-4">
         <h2 className="text-2xl font-semibold tracking-tight text-foreground">Installation</h2>

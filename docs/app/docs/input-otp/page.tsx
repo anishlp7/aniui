@@ -5,6 +5,7 @@ import { CodeBlock } from "@/components/code-block";
 import { PropsTable } from "@/components/props-table";
 
 import { AddComponentTabs } from "@/components/package-manager-tabs";
+import { PreviewToggle } from "@/components/preview-toggle";
 const installCode = `npx @aniui/cli add input-otp`;
 const usageCode = `import { InputOTP } from "@/components/ui/input-otp";
 import { useState } from "react";
@@ -88,13 +89,15 @@ export default function InputOtpPage() {
         </p>
       </div>
       {/* Preview */}
-      <ComponentPlayground code={defaultCode}>
-        <div className="flex flex-col items-center gap-3 w-full">
-          <p className="text-sm font-medium text-foreground">Enter verification code</p>
-          <PreviewInputOTP length={6} value="38" />
-          <p className="text-xs text-muted-foreground">We sent a code to your email</p>
-        </div>
-      </ComponentPlayground>
+      <PreviewToggle>
+        <ComponentPlayground code={defaultCode}>
+          <div className="flex flex-col items-center gap-3 w-full">
+            <p className="text-sm font-medium text-foreground">Enter verification code</p>
+            <PreviewInputOTP length={6} value="38" />
+            <p className="text-xs text-muted-foreground">We sent a code to your email</p>
+          </div>
+        </ComponentPlayground>
+      </PreviewToggle>
       {/* Installation */}
       <div className="space-y-4">
         <h2 className="text-2xl font-semibold tracking-tight text-foreground">Installation</h2>

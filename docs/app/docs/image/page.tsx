@@ -5,6 +5,7 @@ import { ComponentPlayground } from "@/components/component-playground";
 import { CodeBlock } from "@/components/code-block";
 import { PropsTable } from "@/components/props-table";
 import { AddComponentTabs } from "@/components/package-manager-tabs";
+import { PreviewToggle } from "@/components/preview-toggle";
 
 const installCode = `npx @aniui/cli add image`;
 const usageCode = `import { Image } from "@/components/ui/image";
@@ -82,9 +83,11 @@ export default function ImagePage() {
         <h1 className="text-3xl font-bold mb-2">Image</h1>
         <p className="text-muted-foreground text-lg">Image component with loading placeholder, error fallback, and rounded variants.</p>
       </div>
-      <ComponentPlayground code={usageCode}>
-        <PreviewImage src="https://picsum.photos/400/300" alt="Sample" width={200} height={150} />
-      </ComponentPlayground>
+      <PreviewToggle>
+        <ComponentPlayground code={usageCode}>
+          <PreviewImage src="https://picsum.photos/400/300" alt="Sample" width={200} height={150} />
+        </ComponentPlayground>
+      </PreviewToggle>
       <div>
         <h2 className="text-xl font-semibold mb-3">Installation</h2>
         <AddComponentTabs names="image" />

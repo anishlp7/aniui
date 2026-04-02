@@ -139,7 +139,7 @@ export default function HomePage() {
         {/* Preview on device */}
         <div className="mt-6 flex flex-col sm:flex-row items-center gap-4 rounded-lg border border-border bg-card/50 px-5 py-4">
           <img
-            src="https://qr.expo.dev/eas-update?projectId=4d52bb77-8a04-4713-b4b9-e2ed4c5ec1a0&channel=preview"
+            src="https://qr.expo.dev/eas-update?slug=exp&projectId=4d52bb77-8a04-4713-b4b9-e2ed4c5ec1a0&groupId=699b0812-e1e7-4baa-a451-1814bdbdd5e7&host=u.expo.dev"
             alt="Scan with Expo Go"
             className="w-24 h-24 rounded-lg"
           />

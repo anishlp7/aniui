@@ -4,6 +4,7 @@ import { ComponentPlayground } from "@/components/component-playground";
 import { CodeBlock } from "@/components/code-block";
 import { PropsTable } from "@/components/props-table";
 import { AddComponentTabs } from "@/components/package-manager-tabs";
+import { PreviewToggle } from "@/components/preview-toggle";
 
 const installCode = `npx @aniui/cli add separator`;
 const usageCode = `import { Separator } from "@/components/ui/separator";
@@ -50,13 +51,15 @@ export default function SeparatorPage() {
         </p>
       </div>
       {/* Preview */}
-      <ComponentPlayground code={usageCode}>
-        <div className="space-y-4 w-full max-w-sm">
-          <p className="text-sm text-foreground">Above the separator</p>
-          <PreviewSeparator />
-          <p className="text-sm text-foreground">Below the separator</p>
-        </div>
-      </ComponentPlayground>
+      <PreviewToggle>
+        <ComponentPlayground code={usageCode}>
+          <div className="space-y-4 w-full max-w-sm">
+            <p className="text-sm text-foreground">Above the separator</p>
+            <PreviewSeparator />
+            <p className="text-sm text-foreground">Below the separator</p>
+          </div>
+        </ComponentPlayground>
+      </PreviewToggle>
       {/* Installation */}
       <div className="space-y-4">
         <h2 className="text-2xl font-semibold tracking-tight text-foreground">Installation</h2>

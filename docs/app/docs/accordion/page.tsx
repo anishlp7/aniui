@@ -4,6 +4,7 @@ import { ComponentPlayground } from "@/components/component-playground";
 import { CodeBlock } from "@/components/code-block";
 import { PropsTable, ComponentTable } from "@/components/props-table";
 import { AddComponentTabs } from "@/components/package-manager-tabs";
+import { PreviewToggle } from "@/components/preview-toggle";
 
 const installCode = `npx @aniui/cli add accordion`;
 const usageCode = `import { Accordion, AccordionItem } from "@/components/ui/accordion";
@@ -86,21 +87,23 @@ export default function AccordionPage() {
         </p>
       </div>
       {/* Preview */}
-      <ComponentPlayground code={usageCode}>
-        <div className="w-full max-w-sm">
-          <PreviewAccordion defaultValue="item-1">
-            <PreviewAccordionItem value="item-1" trigger="Is it accessible?">
-              <p className="text-sm text-muted-foreground">Yes. It uses accessibilityRole and accessibilityState.</p>
-            </PreviewAccordionItem>
-            <PreviewAccordionItem value="item-2" trigger="Is it animated?">
-              <p className="text-sm text-muted-foreground">Yes. It uses react-native-reanimated for smooth animations.</p>
-            </PreviewAccordionItem>
-            <PreviewAccordionItem value="item-3" trigger="Can I customize it?">
-              <p className="text-sm text-muted-foreground">Yes. Use className to override any styles.</p>
-            </PreviewAccordionItem>
-          </PreviewAccordion>
-        </div>
-      </ComponentPlayground>
+      <PreviewToggle>
+        <ComponentPlayground code={usageCode}>
+          <div className="w-full max-w-sm">
+            <PreviewAccordion defaultValue="item-1">
+              <PreviewAccordionItem value="item-1" trigger="Is it accessible?">
+                <p className="text-sm text-muted-foreground">Yes. It uses accessibilityRole and accessibilityState.</p>
+              </PreviewAccordionItem>
+              <PreviewAccordionItem value="item-2" trigger="Is it animated?">
+                <p className="text-sm text-muted-foreground">Yes. It uses react-native-reanimated for smooth animations.</p>
+              </PreviewAccordionItem>
+              <PreviewAccordionItem value="item-3" trigger="Can I customize it?">
+                <p className="text-sm text-muted-foreground">Yes. Use className to override any styles.</p>
+              </PreviewAccordionItem>
+            </PreviewAccordion>
+          </div>
+        </ComponentPlayground>
+      </PreviewToggle>
       {/* Installation */}
       <div className="space-y-4">
         <h2 className="text-2xl font-semibold tracking-tight text-foreground">Installation</h2>

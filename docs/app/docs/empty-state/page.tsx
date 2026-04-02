@@ -6,6 +6,7 @@ import { CodeBlock } from "@/components/code-block";
 import { PropsTable } from "@/components/props-table";
 
 import { AddComponentTabs } from "@/components/package-manager-tabs";
+import { PreviewToggle } from "@/components/preview-toggle";
 const installCode = `npx @aniui/cli add empty-state`;
 const usageCode = `import { EmptyState } from "@/components/ui/empty-state";
 import { Ionicons } from "@expo/vector-icons";
@@ -90,15 +91,17 @@ export default function EmptyStatePage() {
         <h1 className="text-3xl font-bold mb-2">EmptyState</h1>
         <p className="text-muted-foreground text-lg">A placeholder for empty screens, search results, and error states. Every list needs one.</p>
       </div>
-      <ComponentPlayground code={usageCode}>
-        <PreviewEmptyState
-          icon={<SearchIcon />}
-          title="No results found"
-          description="Try adjusting your search or filters to find what you're looking for."
-          actionLabel="Clear Filters"
-          onAction={() => {}}
-        />
-      </ComponentPlayground>
+      <PreviewToggle>
+        <ComponentPlayground code={usageCode}>
+          <PreviewEmptyState
+            icon={<SearchIcon />}
+            title="No results found"
+            description="Try adjusting your search or filters to find what you're looking for."
+            actionLabel="Clear Filters"
+            onAction={() => {}}
+          />
+        </ComponentPlayground>
+      </PreviewToggle>
       <div>
         <h2 className="text-xl font-semibold mb-3">Installation</h2>
         <AddComponentTabs names="empty-state" />

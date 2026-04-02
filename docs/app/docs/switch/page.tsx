@@ -5,6 +5,7 @@ import { CodeBlock } from "@/components/code-block";
 import { PropsTable } from "@/components/props-table";
 
 import { AddComponentTabs } from "@/components/package-manager-tabs";
+import { PreviewToggle } from "@/components/preview-toggle";
 const installCode = `npx @aniui/cli add switch`;
 const usageCode = `import { Switch } from "@/components/ui/switch";
 import { useState } from "react";
@@ -49,11 +50,13 @@ export default function SwitchPage() {
         </p>
       </div>
       {/* Preview */}
-      <ComponentPlayground code={usageCode}>
-        <div className="flex items-center gap-4">
-          <PreviewSwitch />
-        </div>
-      </ComponentPlayground>
+      <PreviewToggle>
+        <ComponentPlayground code={usageCode}>
+          <div className="flex items-center gap-4">
+            <PreviewSwitch />
+          </div>
+        </ComponentPlayground>
+      </PreviewToggle>
       {/* Installation */}
       <div className="space-y-4">
         <h2 className="text-2xl font-semibold tracking-tight text-foreground">Installation</h2>
