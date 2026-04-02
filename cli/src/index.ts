@@ -16,8 +16,9 @@ const program = new Command()
 program
   .command("init")
   .description("Initialize AniUI in your React Native project")
-  .action(async () => {
-    await initCommand();
+  .option("--style <engine>", "styling engine: nativewind or uniwind")
+  .action(async (opts: { style?: string }) => {
+    await initCommand(opts);
   });
 
 program

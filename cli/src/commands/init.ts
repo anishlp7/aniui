@@ -1,7 +1,7 @@
 import path from "path";
 import fs from "fs-extra";
 import prompts from "prompts";
-import { detectProject, getInstallCommand, getDlxCommand } from "../utils/detect-project";
+import { detectProject, getInstallCommand, getDlxCommand, type StyleEngine } from "../utils/detect-project";
 import { copyTemplate, copyUtilFile, getPackageRoot } from "../utils/file-ops";
 import { logger } from "../utils/logger";
 
@@ -28,7 +28,7 @@ const THEME_PRESETS: Record<string, Record<string, string>> = {
   },
 };
 
-export async function initCommand(): Promise<void> {
+export async function initCommand(opts?: { style?: string }): Promise<void> {
   const cwd = process.cwd();
   logger.title("AniUI — Initialize");
 
@@ -46,19 +46,29 @@ export async function initCommand(): Promise<void> {
   logger.success(`Using ${pm} as package manager`);
   logger.success(`SDK generation: ${gen === "v5" ? "NativeWind v5 + Tailwind v4" : "NativeWind v4 + Tailwind v3"}`);
 
-  if (!project.hasNativewind) {
-    logger.error("NativeWind is not installed.");
-    logger.info("Install it first:");
-    if (gen === "v5") {
-      logger.info(`  ${getDlxCommand(pm, "expo install nativewind@preview react-native-css react-native-reanimated react-native-safe-area-context")}`);
-      logger.info(`  ${getDlxCommand(pm, "expo install --dev tailwindcss@4")}`);
-      logger.info(`  ${getInstallCommand(pm, ["class-variance-authority", "clsx", "tailwind-merge"])}`);
-    } else {
-      logger.info(`  ${getInstallCommand(pm, ["nativewind", "tailwindcss@3", "react-native-reanimated", "react-native-safe-area-context", "class-variance-authority", "clsx", "tailwind-merge"])}`);
-    }
-    logger.info(`  ${getDlxCommand(pm, "pod-install")} (iOS only)`);
+  // Auto-detect style engine (CLI flag overrides detection)
+  const detectedStyle: StyleEngine = (opts?.style === "uniwind" || opts?.style === "nativewind")
+    ? opts.style
+    : project.hasUniwind ? "uniwind" : "nativewind";
+  const hasStyleEngine = project.hasNativewind || project.hasUniwind;
+
+  if (!hasStyleEngine) {
+    logger.error("No styling engine found (NativeWind or Uniwind).");
+    logger.info("Install one first:");
     logger.break();
-    logger.info("See: https://www.nativewind.dev/getting-started/installation");
+    logger.info("  NativeWind:");
+    if (gen === "v5") {
+      logger.info(`    ${getDlxCommand(pm, "expo install nativewind@preview react-native-css react-native-reanimated react-native-safe-area-context")}`);
+      logger.info(`    ${getDlxCommand(pm, "expo install --dev tailwindcss@4")}`);
+    } else {
+      logger.info(`    ${getInstallCommand(pm, ["nativewind", "tailwindcss@3", "react-native-reanimated", "react-native-safe-area-context"])}`);
+    }
+    logger.break();
+    logger.info("  Uniwind:");
+    logger.info(`    ${getInstallCommand(pm, ["uniwind", "tailwindcss", "react-native-reanimated", "react-native-safe-area-context"])}`);
+    logger.break();
+    logger.info(`  Then: ${getInstallCommand(pm, ["class-variance-authority", "clsx", "tailwind-merge"])}`);
+    logger.info(`  ${getDlxCommand(pm, "pod-install")} (iOS only)`);
     process.exit(1);
   }
 
@@ -87,6 +97,16 @@ export async function initCommand(): Promise<void> {
         { title: "Rose", value: "rose" },
       ],
       initial: 0,
+    },
+    {
+      type: "select",
+      name: "style",
+      message: "Which styling engine?",
+      choices: [
+        { title: "NativeWind" + (detectedStyle === "nativewind" ? " (detected)" : ""), value: "nativewind" },
+        { title: "Uniwind" + (detectedStyle === "uniwind" ? " (detected)" : ""), value: "uniwind" },
+      ],
+      initial: detectedStyle === "uniwind" ? 1 : 0,
     },
     {
       type: "select",
@@ -168,16 +188,27 @@ export async function initCommand(): Promise<void> {
   await fs.ensureDir(componentsDir);
   logger.success(`Created ${path.relative(cwd, componentsDir)}/`);
 
+  const styleEngine: StyleEngine = response.style || "nativewind";
+  const isUniwind = styleEngine === "uniwind";
+  const wrapperName = isUniwind ? "withUniwind" : "withNativeWind";
+  const wrapperPkg = isUniwind ? "uniwind/metro" : "nativewind/metro";
+
   // 6. Set up metro.config.js and babel.config.js for Expo
   if (project.type === "expo") {
     const metroConfigPath = path.resolve(cwd, "metro.config.js");
     if (await fs.pathExists(metroConfigPath)) {
-      logger.warn("metro.config.js already exists — wrap it with withNativeWind:");
-      logger.info('  const { withNativeWind } = require("nativewind/metro");');
-      logger.info('  module.exports = withNativeWind(config, { input: "./global.css" });');
+      logger.warn(`metro.config.js already exists — wrap it with ${wrapperName}:`);
+      logger.info(`  const { ${wrapperName} } = require("${wrapperPkg}");`);
+      logger.info(`  module.exports = ${wrapperName}(config, { input: "./global.css" });`);
     } else {
-      await copyTemplate("metro.config.expo.js", metroConfigPath, gen);
-      logger.success("Created metro.config.js (NativeWind configured)");
+      if (isUniwind) {
+        const metroContent = `const { getDefaultConfig } = require("expo/metro-config");\nconst { withUniwind } = require("uniwind/metro");\n\nconst config = getDefaultConfig(__dirname);\n\nmodule.exports = withUniwind(config, { input: "./global.css" });\n`;
+        await fs.writeFile(metroConfigPath, metroContent, "utf-8");
+        logger.success("Created metro.config.js (Uniwind configured)");
+      } else {
+        await copyTemplate("metro.config.expo.js", metroConfigPath, gen);
+        logger.success("Created metro.config.js (NativeWind configured)");
+      }
     }
 
     const babelConfigPath = path.resolve(cwd, "babel.config.js");
@@ -204,16 +235,22 @@ export async function initCommand(): Promise<void> {
     }
   }
 
-  // 7. Bare RN: set up metro.config.js and babel.config.js for NativeWind
+  // 7. Bare RN: set up metro.config.js and babel.config.js
   if (project.type === "react-native-cli") {
     const metroConfigPath = path.resolve(cwd, "metro.config.js");
     if (await fs.pathExists(metroConfigPath)) {
-      logger.warn("metro.config.js already exists — wrap it with withNativeWind:");
-      logger.info('  const { withNativeWind } = require("nativewind/metro");');
-      logger.info('  module.exports = withNativeWind(config, { input: "./global.css" });');
+      logger.warn(`metro.config.js already exists — wrap it with ${wrapperName}:`);
+      logger.info(`  const { ${wrapperName} } = require("${wrapperPkg}");`);
+      logger.info(`  module.exports = ${wrapperName}(config, { input: "./global.css" });`);
     } else {
-      await copyTemplate("metro.config.bare.js", metroConfigPath, gen);
-      logger.success("Created metro.config.js (NativeWind configured)");
+      if (isUniwind) {
+        const metroContent = `const { mergeConfig, getDefaultConfig } = require("@react-native/metro-config");\nconst { withUniwind } = require("uniwind/metro");\n\nconst config = mergeConfig(getDefaultConfig(__dirname), {});\n\nmodule.exports = withUniwind(config, { input: "./global.css" });\n`;
+        await fs.writeFile(metroConfigPath, metroContent, "utf-8");
+        logger.success("Created metro.config.js (Uniwind configured)");
+      } else {
+        await copyTemplate("metro.config.bare.js", metroConfigPath, gen);
+        logger.success("Created metro.config.js (NativeWind configured)");
+      }
     }
 
     const babelConfigPath = path.resolve(cwd, "babel.config.js");
@@ -226,9 +263,13 @@ export async function initCommand(): Promise<void> {
     }
   }
 
-  // 8. Configure jsxImportSource / babel plugin based on generation
+  // 8. Configure jsxImportSource / babel plugin based on generation (NativeWind only — Uniwind handles this via metro)
+  if (isUniwind) {
+    logger.info("Uniwind handles className types via its metro plugin — no jsxImportSource needed.");
+  }
+
   const tsconfigPath = path.resolve(cwd, "tsconfig.json");
-  if (await fs.pathExists(tsconfigPath)) {
+  if (!isUniwind && await fs.pathExists(tsconfigPath)) {
     try {
       const tsconfig = await fs.readJson(tsconfigPath);
       if (!tsconfig.compilerOptions) {
@@ -256,7 +297,7 @@ export async function initCommand(): Promise<void> {
   }
 
   const babelConfigPath = path.resolve(cwd, "babel.config.js");
-  if (await fs.pathExists(babelConfigPath)) {
+  if (!isUniwind && await fs.pathExists(babelConfigPath)) {
     let babelContent = await fs.readFile(babelConfigPath, "utf-8");
     if (gen === "v5") {
       // NativeWind v5 — no babel config needed for NativeWind
@@ -294,6 +335,7 @@ export async function initCommand(): Promise<void> {
     componentsDir: response.componentsDir,
     utilPath: response.utilPath,
     theme: response.theme,
+    style: styleEngine,
     tsx: useTsx,
   };
   await fs.writeJson(path.join(cwd, ".aniui.json"), config, { spaces: 2 });
@@ -306,16 +348,16 @@ export async function initCommand(): Promise<void> {
   logger.break();
 
   if (project.type === "react-native-cli") {
-    logger.info("2. Verify metro.config.js uses withNativeWind (created above)");
-    logger.info("3. Verify babel.config.js includes nativewind/babel preset");
+    logger.info(`2. Verify metro.config.js uses ${wrapperName} (created above)`);
+    if (!isUniwind) logger.info("3. Verify babel.config.js includes nativewind/babel preset");
     logger.break();
-    logger.info("4. Add components:");
+    logger.info(`${isUniwind ? "3" : "4"}. Add components:`);
   } else {
-    logger.info("2. Verify metro.config.js uses withNativeWind (created above)");
-    logger.info("3. Verify babel.config.js has jsxImportSource: \"nativewind\" (created above)");
-    logger.info("4. Make sure React Compiler is NOT enabled in app.json");
+    logger.info(`2. Verify metro.config.js uses ${wrapperName} (created above)`);
+    if (!isUniwind) logger.info("3. Verify babel.config.js has jsxImportSource: \"nativewind\" (created above)");
+    logger.info(`${isUniwind ? "3" : "4"}. Make sure React Compiler is NOT enabled in app.json`);
     logger.break();
-    logger.info("5. Add components:");
+    logger.info(`${isUniwind ? "4" : "5"}. Add components:`);
   }
   logger.info(`   ${getDlxCommand(pm, "aniui add button card text")}`);
   logger.break();
