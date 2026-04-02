@@ -41,6 +41,31 @@ function ShuffleIcon() {
 
 /* ── Main ──────────────────────────────────────────────────── */
 
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  name: "AniUI",
+  applicationCategory: "DeveloperApplication",
+  operatingSystem: "iOS, Android",
+  description: "shadcn/ui for React Native. 80+ accessible components built with NativeWind and TypeScript.",
+  url: "https://aniui.dev",
+  author: { "@type": "Person", name: "Anish" },
+  offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
+  aggregateRating: { "@type": "AggregateRating", ratingValue: "5", ratingCount: "1" },
+};
+
+const sitelinksJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: "AniUI",
+  url: "https://aniui.dev",
+  potentialAction: {
+    "@type": "SearchAction",
+    target: { "@type": "EntryPoint", urlTemplate: "https://aniui.dev/docs/{search_term_string}" },
+    "query-input": "required name=search_term_string",
+  },
+};
+
 export default function HomePage() {
   const { theme } = useTheme();
   const [selectedPreset, setSelectedPreset] = useState("zinc");
@@ -87,6 +112,9 @@ export default function HomePage() {
   };
 
   return (
+    <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(sitelinksJsonLd) }} />
     <div className="mx-auto max-w-[1400px] px-6">
       {/* ── Hero ─── */}
       <div className="flex flex-col items-center text-center pt-20 pb-16">
@@ -253,5 +281,6 @@ export default function HomePage() {
       </div>
 
     </div>
+    </>
   );
 }

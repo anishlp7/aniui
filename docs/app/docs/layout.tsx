@@ -1,4 +1,13 @@
+import type { Metadata } from "next";
 import { Sidebar } from "@/components/sidebar";
+
+export const metadata: Metadata = {
+  title: {
+    default: "Components",
+    template: "%s | AniUI",
+  },
+  description: "Browse 80+ React Native components. Button, Card, Dialog, Select, Toast, and more. Built with NativeWind and rn-primitives.",
+};
 
 export default function DocsLayout({
   children,
