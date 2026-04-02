@@ -50,40 +50,18 @@ export async function initCommand(opts?: { style?: string }): Promise<void> {
   const detectedStyle: StyleEngine = (opts?.style === "uniwind" || opts?.style === "nativewind")
     ? opts.style
     : project.hasUniwind ? "uniwind" : "nativewind";
-  const hasStyleEngine = project.hasNativewind || project.hasUniwind;
 
-  if (!hasStyleEngine) {
-    logger.error("No styling engine found (NativeWind or Uniwind).");
-    logger.info("Install one first:");
-    logger.break();
-    logger.info("  NativeWind:");
-    if (gen === "v5") {
-      logger.info(`    ${getDlxCommand(pm, "expo install nativewind@preview react-native-css react-native-reanimated react-native-safe-area-context")}`);
-      logger.info(`    ${getDlxCommand(pm, "expo install --dev tailwindcss@4")}`);
-    } else {
-      logger.info(`    ${getInstallCommand(pm, ["nativewind", "tailwindcss@3", "react-native-reanimated", "react-native-safe-area-context"])}`);
-    }
-    logger.break();
-    logger.info("  Uniwind:");
-    logger.info(`    ${getInstallCommand(pm, ["uniwind", "tailwindcss", "react-native-reanimated", "react-native-safe-area-context"])}`);
-    logger.break();
-    logger.info(`  Then: ${getInstallCommand(pm, ["class-variance-authority", "clsx", "tailwind-merge"])}`);
-    logger.info(`  ${getDlxCommand(pm, "pod-install")} (iOS only)`);
-    process.exit(1);
-  }
-
+  // Step 1: Ask style engine + theme + paths upfront
   const response = await prompts([
     {
-      type: "text",
-      name: "componentsDir",
-      message: "Where should components be installed?",
-      initial: "components/ui",
-    },
-    {
-      type: "text",
-      name: "utilPath",
-      message: "Where should the utility file go?",
-      initial: "lib/utils.ts",
+      type: "select",
+      name: "style",
+      message: "Which styling engine?",
+      choices: [
+        { title: "NativeWind" + (project.hasNativewind ? " (installed)" : ""), value: "nativewind" },
+        { title: "Uniwind" + (project.hasUniwind ? " (installed)" : ""), value: "uniwind" },
+      ],
+      initial: detectedStyle === "uniwind" ? 1 : 0,
     },
     {
       type: "select",
@@ -99,14 +77,16 @@ export async function initCommand(opts?: { style?: string }): Promise<void> {
       initial: 0,
     },
     {
-      type: "select",
-      name: "style",
-      message: "Which styling engine?",
-      choices: [
-        { title: "NativeWind" + (detectedStyle === "nativewind" ? " (detected)" : ""), value: "nativewind" },
-        { title: "Uniwind" + (detectedStyle === "uniwind" ? " (detected)" : ""), value: "uniwind" },
-      ],
-      initial: detectedStyle === "uniwind" ? 1 : 0,
+      type: "text",
+      name: "componentsDir",
+      message: "Where should components be installed?",
+      initial: "components/ui",
+    },
+    {
+      type: "text",
+      name: "utilPath",
+      message: "Where should the utility file go?",
+      initial: "lib/utils.ts",
     },
     {
       type: "select",
@@ -120,17 +100,72 @@ export async function initCommand(opts?: { style?: string }): Promise<void> {
     },
   ]);
 
+  if (!response.style || !response.componentsDir || !response.utilPath) {
+    logger.warn("Setup cancelled.");
+    process.exit(0);
+  }
+
+  // Step 2: Auto-install missing dependencies
+  const chosenStyle: StyleEngine = response.style;
+  const isChosenUniwind = chosenStyle === "uniwind";
+  const hasStyleEngine = isChosenUniwind ? project.hasUniwind : project.hasNativewind;
+
+  if (!hasStyleEngine || !project.hasReanimated || !project.hasTailwind) {
+    const missing: string[] = [];
+
+    if (!hasStyleEngine) {
+      if (isChosenUniwind) {
+        missing.push("uniwind");
+      } else if (gen === "v5") {
+        missing.push("nativewind@preview", "react-native-css");
+      } else {
+        missing.push("nativewind");
+      }
+    }
+    if (!project.hasTailwind) {
+      missing.push(gen === "v5" ? "tailwindcss@4" : "tailwindcss@3");
+    }
+    if (!project.hasReanimated) {
+      missing.push("react-native-reanimated");
+    }
+
+    // Always ensure these are present
+    missing.push("react-native-safe-area-context", "class-variance-authority", "clsx", "tailwind-merge");
+
+    logger.break();
+    logger.info("Missing dependencies detected. Installing...");
+    logger.info(`  ${getInstallCommand(pm, missing)}`);
+    logger.break();
+
+    const { confirm } = await prompts({
+      type: "confirm",
+      name: "confirm",
+      message: `Install ${missing.length} packages with ${pm}?`,
+      initial: true,
+    });
+
+    if (confirm) {
+      const { execSync } = require("child_process");
+      try {
+        execSync(getInstallCommand(pm, missing), { cwd, stdio: "inherit" });
+        logger.success("Dependencies installed!");
+      } catch {
+        logger.error("Failed to install dependencies. Install them manually:");
+        logger.info(`  ${getInstallCommand(pm, missing)}`);
+        process.exit(1);
+      }
+    } else {
+      logger.warn("Skipping dependency install. You'll need to install them manually before using AniUI components.");
+    }
+  } else {
+    logger.success("All required dependencies already installed!");
+  }
+
   if (response.tsx === false) {
     logger.info("Components will be generated as .jsx files with types stripped automatically.");
-    // Adjust util path extension for JavaScript
     if (response.utilPath && response.utilPath.endsWith(".ts")) {
       response.utilPath = response.utilPath.replace(/\.ts$/, ".js");
     }
-  }
-
-  if (!response.componentsDir || !response.utilPath) {
-    logger.warn("Setup cancelled.");
-    process.exit(0);
   }
 
   const componentsDir = path.resolve(cwd, response.componentsDir);
@@ -188,8 +223,8 @@ export async function initCommand(opts?: { style?: string }): Promise<void> {
   await fs.ensureDir(componentsDir);
   logger.success(`Created ${path.relative(cwd, componentsDir)}/`);
 
-  const styleEngine: StyleEngine = response.style || "nativewind";
-  const isUniwind = styleEngine === "uniwind";
+  const styleEngine: StyleEngine = chosenStyle;
+  const isUniwind = isChosenUniwind;
   const wrapperName = isUniwind ? "withUniwind" : "withNativeWind";
   const wrapperPkg = isUniwind ? "uniwind/metro" : "nativewind/metro";
 
