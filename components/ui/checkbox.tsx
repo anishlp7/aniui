@@ -1,5 +1,6 @@
 import React from "react";
 import { Pressable, View, Text } from "react-native";
+import * as CheckboxPrimitive from "@rn-primitives/checkbox";
 import { cn } from "@/lib/utils";
 
 export interface CheckboxProps extends React.ComponentPropsWithoutRef<typeof Pressable> {
@@ -10,25 +11,30 @@ export interface CheckboxProps extends React.ComponentPropsWithoutRef<typeof Pre
 
 export function Checkbox({ checked = false, onCheckedChange, className, disabled, ...props }: CheckboxProps) {
   return (
-    <Pressable
-      className="min-h-12 min-w-12 items-center justify-center"
-      accessibilityRole="checkbox"
-      accessibilityState={{ checked: !!checked, disabled: !!disabled }}
-      accessible={true}
-      onPress={() => onCheckedChange?.(!checked)}
+    <CheckboxPrimitive.Root
+      checked={checked}
+      onCheckedChange={onCheckedChange}
       disabled={disabled}
-      {...props}
+      asChild
     >
-      <View
-        className={cn(
-          "h-5 w-5 items-center justify-center rounded border",
-          checked ? "border-primary bg-primary" : "border-input bg-background",
-          disabled && "opacity-50",
-          className
-        )}
+      <Pressable
+        className="min-h-12 min-w-12 items-center justify-center"
+        accessible={true}
+        {...props}
       >
-        {checked && <Text className="text-xs text-primary-foreground font-bold">✓</Text>}
-      </View>
-    </Pressable>
+        <View
+          className={cn(
+            "h-5 w-5 items-center justify-center rounded border",
+            checked ? "border-primary bg-primary" : "border-input bg-background",
+            disabled && "opacity-50",
+            className
+          )}
+        >
+          <CheckboxPrimitive.Indicator>
+            <Text className="text-xs text-primary-foreground font-bold">✓</Text>
+          </CheckboxPrimitive.Indicator>
+        </View>
+      </Pressable>
+    </CheckboxPrimitive.Root>
   );
 }
