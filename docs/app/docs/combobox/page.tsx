@@ -157,6 +157,14 @@ export default function ComboboxPage() {
           { name: "value", type: "string", default: "-" },
         ]} />
       </div>
+      {/* Accessibility */}
+      <div className="space-y-4">
+        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Accessibility</h2>
+        <ul className="list-disc list-inside space-y-2 text-sm text-muted-foreground">
+          <li>Searchable select with type-to-filter functionality.</li>
+          <li>Options list is announced to screen readers as results are filtered.</li>
+        </ul>
+      </div>
       {/* Source */}
       <div className="space-y-4">
         <h2 className="text-2xl font-semibold tracking-tight text-foreground">Source</h2>

@@ -74,6 +74,14 @@ export default function RefreshControlPage() {
           Also accepts all React Native <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">RefreshControl</code> props.
         </p>
       </div>
+      {/* Accessibility */}
+      <div className="space-y-4">
+        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Accessibility</h2>
+        <ul className="list-disc list-inside space-y-2 text-sm text-muted-foreground">
+          <li>Themed pull-to-refresh control using React Native's built-in <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">RefreshControl</code>.</li>
+          <li>Refresh state is announced by the platform's accessibility system.</li>
+        </ul>
+      </div>
       {/* Source */}
       <div className="space-y-4">
         <h2 className="text-2xl font-semibold tracking-tight text-foreground">Source</h2>

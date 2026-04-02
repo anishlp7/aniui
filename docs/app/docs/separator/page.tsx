@@ -94,6 +94,14 @@ export default function SeparatorPage() {
           Also accepts all <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">View</code> props from React Native.
         </p>
       </div>
+      {/* Accessibility */}
+      <div className="space-y-4">
+        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Accessibility</h2>
+        <ul className="list-disc list-inside space-y-2 text-sm text-muted-foreground">
+          <li>Decorative element with no interaction needed.</li>
+          <li>Screen readers will skip this element by default.</li>
+        </ul>
+      </div>
       {/* Source */}
       <div className="space-y-4">
         <h2 className="text-2xl font-semibold tracking-tight text-foreground">Source</h2>

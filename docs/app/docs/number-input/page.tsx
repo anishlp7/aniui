@@ -143,6 +143,14 @@ export default function NumberInputPage() {
           Also accepts all <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">TextInput</code> props except <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">value</code> and <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">onChangeText</code>.
         </p>
       </div>
+      {/* Accessibility */}
+      <div className="space-y-4">
+        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Accessibility</h2>
+        <ul className="list-disc list-inside space-y-2 text-sm text-muted-foreground">
+          <li>Increment/decrement buttons with <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">accessibilityValue</code> for current value.</li>
+          <li>Min/max boundaries are enforced and announced to assistive technology.</li>
+        </ul>
+      </div>
       {/* Source */}
       <div className="space-y-4">
         <h2 className="text-2xl font-semibold tracking-tight text-foreground">Source</h2>

@@ -122,6 +122,14 @@ export default function ListPage() {
           <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">ListItem</code> accepts all <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">Pressable</code> props. Title and Description accept all <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">Text</code> props.
         </p>
       </div>
+      {/* Accessibility */}
+      <div className="space-y-4">
+        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Accessibility</h2>
+        <ul className="list-disc list-inside space-y-2 text-sm text-muted-foreground">
+          <li>Semantic list with <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">accessibilityRole="list"</code> on the container and <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">"listitem"</code> on each item.</li>
+          <li>Screen readers announce the list structure and item count.</li>
+        </ul>
+      </div>
       {/* Source */}
       <div className="space-y-4">
         <h2 className="text-2xl font-semibold tracking-tight text-foreground">Source</h2>

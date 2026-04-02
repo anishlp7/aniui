@@ -115,6 +115,14 @@ export default function RatingPage() {
           { name: "className", type: "string" },
         ]} />
       </div>
+      {/* Accessibility */}
+      <div className="space-y-4">
+        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Accessibility</h2>
+        <ul className="list-disc list-inside space-y-2 text-sm text-muted-foreground">
+          <li><code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">accessibilityRole="adjustable"</code> with star labels.</li>
+          <li>Each star is individually labeled for screen readers (e.g., "1 of 5 stars").</li>
+        </ul>
+      </div>
       <div>
         <h2 className="text-xl font-semibold mb-3">Source</h2>
         <CodeBlock code={sourceCode} title="components/ui/rating.tsx" />

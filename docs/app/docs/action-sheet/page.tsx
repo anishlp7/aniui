@@ -150,6 +150,14 @@ export default function ActionSheetPage() {
           Use a ref to control the sheet imperatively. Call <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">expand()</code> to open and <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">close()</code> to dismiss.
         </p>
       </div>
+      {/* Accessibility */}
+      <div className="space-y-4">
+        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Accessibility</h2>
+        <ul className="list-disc list-inside space-y-2 text-sm text-muted-foreground">
+          <li>Powered by <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">@gorhom/bottom-sheet</code> for action options.</li>
+          <li>Each action item is focusable with <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">accessibilityRole="button"</code>.</li>
+        </ul>
+      </div>
       {/* Source */}
       <div className="space-y-4">
         <h2 className="text-2xl font-semibold tracking-tight text-foreground">Source</h2>

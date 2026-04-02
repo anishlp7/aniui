@@ -136,6 +136,15 @@ export default function CalendarPage() {
           { name: "className", type: "string" },
         ]} />
       </div>
+      {/* Accessibility */}
+      <div className="space-y-4">
+        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Accessibility</h2>
+        <ul className="list-disc list-inside space-y-2 text-sm text-muted-foreground">
+          <li>Date selection with day/month/year navigation.</li>
+          <li>Each day cell is focusable with <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">accessibilityLabel</code> for the full date.</li>
+          <li>Navigation buttons for previous/next month are labeled for screen readers.</li>
+        </ul>
+      </div>
       {/* Source */}
       <div className="space-y-4">
         <h2 className="text-2xl font-semibold tracking-tight text-foreground">Source</h2>

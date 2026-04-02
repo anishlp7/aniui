@@ -108,6 +108,14 @@ export default function BottomSheetPage() {
           Also accepts all <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">@gorhom/bottom-sheet</code> props. Use a ref to control the sheet imperatively with <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">expand()</code>, <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">close()</code>, and <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">snapToIndex()</code>.
         </p>
       </div>
+      {/* Accessibility */}
+      <div className="space-y-4">
+        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Accessibility</h2>
+        <ul className="list-disc list-inside space-y-2 text-sm text-muted-foreground">
+          <li>Powered by <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">@gorhom/bottom-sheet</code> with backdrop dismiss.</li>
+          <li>Sheet content is focusable and supports screen reader navigation.</li>
+        </ul>
+      </div>
       {/* Source */}
       <div className="space-y-4">
         <h2 className="text-2xl font-semibold tracking-tight text-foreground">Source</h2>

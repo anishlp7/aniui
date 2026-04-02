@@ -183,6 +183,14 @@ export default function DatePickerPage() {
           { name: "className", type: "string" },
         ]} />
       </div>
+      {/* Accessibility */}
+      <div className="space-y-4">
+        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Accessibility</h2>
+        <ul className="list-disc list-inside space-y-2 text-sm text-muted-foreground">
+          <li>Powered by <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">@react-native-community/datetimepicker</code> native picker.</li>
+          <li>Uses the platform's native date picker which has built-in accessibility support.</li>
+        </ul>
+      </div>
       {/* Source */}
       <div className="space-y-4">
         <h2 className="text-2xl font-semibold tracking-tight text-foreground">Source</h2>

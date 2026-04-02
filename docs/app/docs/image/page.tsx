@@ -119,6 +119,14 @@ export default function ImagePage() {
           { name: "className", type: "string" },
         ]} />
       </div>
+      {/* Accessibility */}
+      <div className="space-y-4">
+        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Accessibility</h2>
+        <ul className="list-disc list-inside space-y-2 text-sm text-muted-foreground">
+          <li><code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">accessibilityRole="image"</code> with loading placeholder.</li>
+          <li>Always provide an <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">alt</code> prop for screen reader descriptions.</li>
+        </ul>
+      </div>
       <div>
         <h2 className="text-xl font-semibold mb-3">Source</h2>
         <CodeBlock code={sourceCode} title="components/ui/image.tsx" />

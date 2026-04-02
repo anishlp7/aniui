@@ -145,6 +145,14 @@ export default function TabBarPage() {
           { name: "className", type: "string", default: "-" },
         ]} />
       </div>
+      {/* Accessibility */}
+      <div className="space-y-4">
+        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Accessibility</h2>
+        <ul className="list-disc list-inside space-y-2 text-sm text-muted-foreground">
+          <li>Bottom tab navigation with badge support.</li>
+          <li>Each tab has <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">accessibilityRole="tab"</code> with selected state.</li>
+        </ul>
+      </div>
       {/* Source */}
       <div className="space-y-4">
         <h2 className="text-2xl font-semibold tracking-tight text-foreground">Source</h2>

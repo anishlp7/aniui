@@ -153,6 +153,14 @@ export default function CollapsiblePage() {
           { name: "className", type: "string" },
         ]} />
       </div>
+      {/* Accessibility */}
+      <div className="space-y-4">
+        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Accessibility</h2>
+        <ul className="list-disc list-inside space-y-2 text-sm text-muted-foreground">
+          <li>Uses <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">@rn-primitives/collapsible</code> for keyboard navigation and <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">aria-expanded</code> semantics.</li>
+          <li>Trigger button announces expanded/collapsed state to screen readers.</li>
+        </ul>
+      </div>
       {/* Source */}
       <div className="space-y-4">
         <h2 className="text-2xl font-semibold tracking-tight text-foreground">Source</h2>
