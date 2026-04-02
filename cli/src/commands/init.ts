@@ -147,7 +147,20 @@ export async function initCommand(opts?: { style?: string }): Promise<void> {
     if (confirm) {
       const { execSync } = require("child_process");
       try {
-        execSync(getInstallCommand(pm, missing), { cwd, stdio: "inherit" });
+        if (project.type === "expo") {
+          // Use npx expo install for Expo projects — handles version pinning
+          const rnPkgs = missing.filter(p => ["react-native-reanimated", "react-native-safe-area-context", "react-native-css"].includes(p.replace(/@.*$/, "")));
+          const npmPkgs = missing.filter(p => !rnPkgs.includes(p));
+          if (rnPkgs.length > 0) {
+            logger.info(`Installing RN packages with expo install (auto-pins versions)...`);
+            execSync(`npx expo install ${rnPkgs.join(" ")}`, { cwd, stdio: "inherit" });
+          }
+          if (npmPkgs.length > 0) {
+            execSync(getInstallCommand(pm, npmPkgs), { cwd, stdio: "inherit" });
+          }
+        } else {
+          execSync(getInstallCommand(pm, missing), { cwd, stdio: "inherit" });
+        }
         logger.success("Dependencies installed!");
       } catch {
         logger.error("Failed to install dependencies. Install them manually:");
@@ -395,5 +408,8 @@ export async function initCommand(opts?: { style?: string }): Promise<void> {
     logger.info(`${isUniwind ? "4" : "5"}. Add components:`);
   }
   logger.info(`   ${getDlxCommand(pm, "aniui add button card text")}`);
+  logger.break();
+  logger.info("If something isn't working, run the diagnostic:");
+  logger.info(`   ${getDlxCommand(pm, "@aniui/cli doctor")}`);
   logger.break();
 }
