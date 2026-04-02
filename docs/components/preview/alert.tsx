@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
@@ -13,9 +13,7 @@ const alertVariants = cva("rounded-lg border p-4", {
       warning: "border-yellow-500/50 bg-yellow-500/10",
     },
   },
-  defaultVariants: {
-    variant: "default",
-  },
+  defaultVariants: { variant: "default" },
 });
 
 const alertTitleVariants = cva("text-base font-semibold mb-1", {
@@ -30,17 +28,24 @@ const alertTitleVariants = cva("text-base font-semibold mb-1", {
   defaultVariants: { variant: "default" },
 });
 
-export interface PreviewAlertProps
-  extends React.HTMLAttributes<HTMLDivElement>,
-    VariantProps<typeof alertVariants> {
+export interface PreviewAlertProps extends React.HTMLAttributes<HTMLDivElement>, VariantProps<typeof alertVariants> {
   className?: string;
   title?: string;
   titleClassName?: string;
+  dismissible?: boolean;
 }
 
-export function PreviewAlert({ variant, className, title, titleClassName, children, ...props }: PreviewAlertProps) {
+export function PreviewAlert({ variant, className, title, titleClassName, dismissible, children, ...props }: PreviewAlertProps) {
+  const [visible, setVisible] = useState(true);
+  if (!visible) return null;
+
   return (
-    <div className={cn(alertVariants({ variant }), className)} role="alert" {...props}>
+    <div className={cn(alertVariants({ variant }), "relative", className)} role="alert" {...props}>
+      {dismissible && (
+        <button onClick={() => setVisible(false)} className="absolute top-3 right-3 text-muted-foreground hover:text-foreground cursor-pointer">
+          <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><path d="M18 6L6 18M6 6l12 12" /></svg>
+        </button>
+      )}
       {title && <p className={cn(alertTitleVariants({ variant }), titleClassName)}>{title}</p>}
       {children}
     </div>

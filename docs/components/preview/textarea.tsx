@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
@@ -21,13 +21,32 @@ export interface PreviewTextareaProps
   extends Omit<React.TextareaHTMLAttributes<HTMLTextAreaElement>, "children">,
     VariantProps<typeof textareaVariants> {
   className?: string;
+  maxLength?: number;
+  showCount?: boolean;
 }
 
-export function PreviewTextarea({ variant, className, ...props }: PreviewTextareaProps) {
+export function PreviewTextarea({ variant, className, value, onChange, maxLength = 200, showCount = false, ...props }: PreviewTextareaProps) {
+  const [internal, setInternal] = useState((value as string) ?? "");
+  const controlled = value !== undefined;
+  const text = controlled ? (value as string) : internal;
+
+  const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    if (!controlled) setInternal(e.target.value);
+    onChange?.(e);
+  };
+
   return (
-    <textarea
-      className={cn(textareaVariants({ variant }), "min-h-24 px-4 py-3 text-base", className)}
-      {...props}
-    />
+    <div className="w-full">
+      <textarea
+        className={cn(textareaVariants({ variant }), "min-h-24 px-4 py-3 text-base w-full", className)}
+        value={text}
+        onChange={handleChange}
+        maxLength={maxLength}
+        {...props}
+      />
+      {showCount && (
+        <p className="text-xs text-muted-foreground mt-1 text-right">{text.length}/{maxLength}</p>
+      )}
+    </div>
   );
 }

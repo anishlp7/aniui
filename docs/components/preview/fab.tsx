@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
@@ -25,26 +25,35 @@ const fabVariants = cva(
 );
 
 function PlusIcon() {
-  return (
-    <svg className="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
-      <path d="M12 5v14M5 12h14" />
-    </svg>
-  );
+  return <svg className="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><path d="M12 5v14M5 12h14" /></svg>;
 }
 
-export interface PreviewFABProps
-  extends React.ButtonHTMLAttributes<HTMLButtonElement>,
-    VariantProps<typeof fabVariants> {
+export interface PreviewFABProps extends React.ButtonHTMLAttributes<HTMLButtonElement>, VariantProps<typeof fabVariants> {
   className?: string;
   icon?: React.ReactNode;
   label?: string;
 }
 
-export function PreviewFAB({ variant, size, className, icon, label, ...props }: PreviewFABProps) {
+export function PreviewFAB({ variant, size, className, icon, label, onClick, ...props }: PreviewFABProps) {
+  const [toast, setToast] = useState(false);
+
+  const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    setToast(true);
+    setTimeout(() => setToast(false), 1500);
+    onClick?.(e);
+  };
+
   return (
-    <button className={cn(fabVariants({ variant, size: label ? "extended" : size }), className)} {...props}>
-      {icon ?? <PlusIcon />}
-      {label && <span className="text-base font-semibold">{label}</span>}
-    </button>
+    <div className="relative inline-flex">
+      <button className={cn(fabVariants({ variant, size: label ? "extended" : size }), className)} onClick={handleClick} {...props}>
+        {icon ?? <PlusIcon />}
+        {label && <span className="text-base font-semibold">{label}</span>}
+      </button>
+      {toast && (
+        <div className="absolute -top-10 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-md bg-foreground text-background px-3 py-1.5 text-xs font-medium shadow-lg animate-in fade-in slide-in-from-bottom-2">
+          Action triggered
+        </div>
+      )}
+    </div>
   );
 }

@@ -7,11 +7,17 @@ export interface PreviewSkeletonProps extends React.HTMLAttributes<HTMLDivElemen
   className?: string;
 }
 
-export function PreviewSkeleton({ className, ...props }: PreviewSkeletonProps) {
+export function PreviewSkeleton({ className, style, ...props }: PreviewSkeletonProps) {
   return (
     <div
-      className={cn("animate-pulse rounded-md bg-muted", className)}
+      className={cn("rounded-md bg-muted", className)}
+      style={{
+        animation: "pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite",
+        ...style,
+      }}
       {...props}
-    />
+    >
+      <style>{`@keyframes pulse { 0%, 100% { opacity: 1 } 50% { opacity: 0.4 } }`}</style>
+    </div>
   );
 }
