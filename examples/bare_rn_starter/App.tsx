@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import { BottomSheetModalProvider } from "@gorhom/bottom-sheet";
+import { PortalHost } from "@rn-primitives/portal";
 import { HomeScreen } from "./screens/HomeScreen";
 import { FormsScreen } from "./screens/FormsScreen";
 import { DataDisplayScreen } from "./screens/DataDisplayScreen";
@@ -35,6 +36,7 @@ export default function App() {
           {renderScreen()}
         </BottomSheetModalProvider>
       </SafeAreaProvider>
+      <PortalHost />
     </GestureHandlerRootView>
   );
 }

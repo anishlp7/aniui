@@ -1,6 +1,7 @@
 import "../global.css";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { BottomSheetModalProvider } from "@gorhom/bottom-sheet";
+import { PortalHost } from "@rn-primitives/portal";
 import { Stack } from "expo-router";
 
 export default function RootLayout() {
@@ -15,6 +16,7 @@ export default function RootLayout() {
           }}
         />
       </BottomSheetModalProvider>
+      <PortalHost />
     </GestureHandlerRootView>
   );
 }
