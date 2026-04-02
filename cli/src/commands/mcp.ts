@@ -1,19 +1,22 @@
 import { logger } from "../utils/logger";
+import { detectPackageManager, getDlxCommand } from "../utils/detect-project";
 
 export async function mcpCommand(): Promise<void> {
+  const cwd = process.cwd();
+  const pm = await detectPackageManager(cwd);
+
   logger.title("AniUI MCP Server Configuration");
   logger.break();
-  logger.info("First, install the MCP server:");
-  logger.info("  npm install -g @aniui/mcp");
-  logger.break();
-  logger.info("Then add this to your MCP client config (Claude Desktop, Cursor, etc.):");
+  logger.info("Add this to your MCP client config (Claude Desktop, Cursor, etc.):");
   logger.break();
 
+  const dlxFull = getDlxCommand(pm, "@aniui/mcp");
+  const parts = dlxFull.split(" ");
   const config = {
     mcpServers: {
       aniui: {
-        command: "npx",
-        args: ["-y", "@aniui/mcp"],
+        command: parts[0],
+        args: [...parts.slice(1)],
       },
     },
   };

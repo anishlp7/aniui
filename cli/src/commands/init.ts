@@ -50,8 +50,8 @@ export async function initCommand(): Promise<void> {
     logger.error("NativeWind is not installed.");
     logger.info("Install it first:");
     if (gen === "v5") {
-      logger.info(`  npx expo install nativewind@preview react-native-css react-native-reanimated react-native-safe-area-context`);
-      logger.info(`  npx expo install --dev tailwindcss@4`);
+      logger.info(`  ${getDlxCommand(pm, "expo install nativewind@preview react-native-css react-native-reanimated react-native-safe-area-context")}`);
+      logger.info(`  ${getDlxCommand(pm, "expo install --dev tailwindcss@4")}`);
       logger.info(`  ${getInstallCommand(pm, ["class-variance-authority", "clsx", "tailwind-merge"])}`);
     } else {
       logger.info(`  ${getInstallCommand(pm, ["nativewind", "tailwindcss@3", "react-native-reanimated", "react-native-safe-area-context", "class-variance-authority", "clsx", "tailwind-merge"])}`);

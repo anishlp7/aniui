@@ -2,6 +2,7 @@ import path from "path";
 import fs from "fs-extra";
 import prompts from "prompts";
 import { logger } from "../utils/logger";
+import { detectPackageManager, getDlxCommand } from "../utils/detect-project";
 
 const THEMES: Record<string, { light: Record<string, string>; dark: Record<string, string> }> = {
   default: {
@@ -81,7 +82,8 @@ export async function themeCommand(): Promise<void> {
   const globalCssPath = path.join(cwd, "global.css");
 
   if (!await fs.pathExists(globalCssPath)) {
-    logger.error("global.css not found. Run `npx @aniui/cli init` first.");
+    const pm = await detectPackageManager(cwd);
+    logger.error(`global.css not found. Run \`${getDlxCommand(pm, "@aniui/cli init")}\` first.`);
     process.exit(1);
   }
 
