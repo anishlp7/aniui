@@ -98,12 +98,12 @@ export default function HomePage() {
         </h1>
 
         <p className="mt-6 max-w-xl text-lg text-muted-foreground leading-relaxed">
-          54 accessible components built with NativeWind and TypeScript.
+          80+ accessible components built with NativeWind and TypeScript.
           No npm install — you own every line of code.
         </p>
 
         <div className="flex flex-wrap items-center justify-center gap-2.5 mt-5">
-          {["Expo", "Bare RN", "TypeScript", "New Architecture"].map((label) => (
+          {["Expo", "Bare RN", "NativeWind", "Uniwind", "TypeScript", "New Architecture"].map((label) => (
             <span key={label} className="inline-flex items-center gap-1.5 rounded-full border border-border bg-secondary/40 px-3 py-1 text-xs font-medium text-muted-foreground">
               <span className="text-green-500">✓</span> {label}
             </span>
@@ -135,6 +135,22 @@ export default function HomePage() {
             {copiedInstall ? <CheckIcon /> : <CopyIcon />}
           </span>
         </button>
+
+        {/* Preview on device */}
+        <div className="mt-6 flex items-center gap-4 rounded-lg border border-border bg-card/50 px-5 py-3">
+          <div className="flex-shrink-0 h-10 w-10 rounded-lg bg-primary/10 flex items-center justify-center">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-primary">
+              <rect width="7" height="12" x="2" y="6" rx="1" />
+              <rect width="7" height="12" x="15" y="6" rx="1" />
+            </svg>
+          </div>
+          <div className="text-left">
+            <p className="text-sm font-medium text-foreground">Preview on your device</p>
+            <p className="text-xs text-muted-foreground">
+              Each component page has an Expo Snack embed — try components on a real device instantly.
+            </p>
+          </div>
+        </div>
       </div>
 
       {/* ── How it works ─── */}
