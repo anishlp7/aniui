@@ -618,6 +618,15 @@ export default function InstallationPage() {
         <h2 className="text-2xl font-semibold tracking-tight">Troubleshooting</h2>
 
         <div className="space-y-4">
+          <div className="rounded-lg border-2 border-primary/30 bg-primary/5 p-4">
+            <p className="text-sm font-semibold text-primary mb-1">Run the diagnostic first</p>
+            <p className="text-sm text-muted-foreground">
+              Before debugging manually, run{" "}
+              <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">npx @aniui/cli doctor</code>{" "}
+              — it checks every dependency, config file, and known conflict, and tells you exactly what to fix.
+            </p>
+          </div>
+
           <div className="rounded-lg border border-destructive/50 bg-destructive/5 p-4">
             <p className="text-sm font-medium text-foreground mb-1">Styles not appearing / components render unstyled</p>
             <ul className="text-sm text-muted-foreground space-y-1 mt-2">
