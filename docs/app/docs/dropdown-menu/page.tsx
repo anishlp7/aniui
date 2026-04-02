@@ -4,6 +4,8 @@ import { PreviewDropdownMenu } from "@/components/preview/dropdown-menu";
 import { ComponentPlayground } from "@/components/component-playground";
 import { CodeBlock } from "@/components/code-block";
 import { PropsTable } from "@/components/props-table";
+import { PreviewToggle } from "@/components/preview-toggle";
+import { AddComponentTabs } from "@/components/package-manager-tabs";
 
 const installCode = `npx @aniui/cli add dropdown-menu`;
 const usageCode = `import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuItem } from "@/components/ui/dropdown-menu";
@@ -140,7 +142,7 @@ export default function DropdownMenuPage() {
       </ComponentPlayground>
       <div>
         <h2 className="text-xl font-semibold mb-3">Installation</h2>
-        <CodeBlock code={installCode} />
+        <AddComponentTabs names="dropdown-menu" />
       </div>
       <div>
         <h2 className="text-xl font-semibold mb-3">Positioning</h2>
@@ -169,6 +171,18 @@ export default function DropdownMenuPage() {
           { component: "DropdownMenuItem", name: "onPress", type: "() => void" },
         ]} />
       </div>
+      {/* Accessibility */}
+      <div className="space-y-4">
+        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Accessibility</h2>
+        <ul className="list-disc list-inside space-y-2 text-sm text-muted-foreground">
+          <li>Uses <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">@rn-primitives/dropdown-menu</code> for menu semantics</li>
+          <li><code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">accessibilityRole=&quot;menuitem&quot;</code> on each item</li>
+          <li>BackHandler dismisses on Android</li>
+          <li>Collision detection for screen edge positioning</li>
+          <li>Requires <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">&lt;PortalHost /&gt;</code> at app root</li>
+        </ul>
+      </div>
+      {/* Source */}
       <div>
         <h2 className="text-xl font-semibold mb-3">Source</h2>
         <CodeBlock code={sourceCode} title="components/ui/dropdown-menu.tsx" />

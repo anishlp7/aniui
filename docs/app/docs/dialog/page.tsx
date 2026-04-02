@@ -4,6 +4,8 @@ import { PreviewDialogDemo } from "@/components/preview/dialog";
 import { ComponentPlayground } from "@/components/component-playground";
 import { CodeBlock } from "@/components/code-block";
 import { PropsTable, ComponentTable } from "@/components/props-table";
+import { PreviewToggle } from "@/components/preview-toggle";
+import { AddComponentTabs } from "@/components/package-manager-tabs";
 
 const installCode = `npx @aniui/cli add dialog`;
 const usageCode = `import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter } from "@/components/ui/dialog";
@@ -113,7 +115,7 @@ export default function DialogPage() {
       {/* Installation */}
       <div className="space-y-4">
         <h2 className="text-2xl font-semibold tracking-tight text-foreground">Installation</h2>
-        <CodeBlock code={installCode} />
+        <AddComponentTabs names="dialog" />
         <p className="text-sm text-muted-foreground">
           This component requires <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">react-native-reanimated</code> for fade and zoom animations.
         </p>
@@ -147,6 +149,16 @@ export default function DialogPage() {
         <p className="text-sm text-muted-foreground">
           Sub-components (<code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">DialogContent</code>, <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">DialogHeader</code>, etc.) accept <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">className</code> and their respective React Native base props.
         </p>
+      </div>
+      {/* Accessibility */}
+      <div className="space-y-4">
+        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Accessibility</h2>
+        <ul className="list-disc list-inside space-y-2 text-sm text-muted-foreground">
+          <li>Uses <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">@rn-primitives/dialog</code> for focus trapping</li>
+          <li><code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">accessibilityRole=&quot;dialog&quot;</code> on content</li>
+          <li>Title and Description linked via rn-primitives for screen readers</li>
+          <li>Requires <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">&lt;PortalHost /&gt;</code> at app root</li>
+        </ul>
       </div>
       {/* Source */}
       <div className="space-y-4">

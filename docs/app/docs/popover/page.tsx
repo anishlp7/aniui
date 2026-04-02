@@ -3,6 +3,8 @@ import { PreviewPopoverDemo } from "@/components/preview/popover";
 import { ComponentPlayground } from "@/components/component-playground";
 import { CodeBlock } from "@/components/code-block";
 import { PropsTable, ComponentTable } from "@/components/props-table";
+import { PreviewToggle } from "@/components/preview-toggle";
+import { AddComponentTabs } from "@/components/package-manager-tabs";
 
 const installCode = `npx @aniui/cli add popover`;
 const usageCode = `import { Text } from "react-native";
@@ -92,7 +94,7 @@ export default function PopoverPage() {
       {/* Installation */}
       <div className="space-y-4">
         <h2 className="text-2xl font-semibold tracking-tight text-foreground">Installation</h2>
-        <CodeBlock code={installCode} />
+        <AddComponentTabs names="popover" />
         <p className="text-sm text-muted-foreground">
           This component requires <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">react-native-reanimated</code> to be installed in your project.
         </p>
@@ -126,6 +128,17 @@ export default function PopoverPage() {
         <p className="text-sm text-muted-foreground">
           Sub-components (<code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">PopoverTrigger</code>, <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">PopoverContent</code>) accept <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">className</code> and their respective React Native base props.
         </p>
+      </div>
+      {/* Accessibility */}
+      <div className="space-y-4">
+        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Accessibility</h2>
+        <ul className="list-disc list-inside space-y-2 text-sm text-muted-foreground">
+          <li>Uses <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">@rn-primitives/popover</code> for proper trigger-relative positioning</li>
+          <li>Collision detection prevents overflow off screen edges</li>
+          <li>BackHandler dismisses on Android</li>
+          <li><code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">accessibilityRole=&quot;button&quot;</code> on trigger</li>
+          <li>Requires <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">&lt;PortalHost /&gt;</code> at app root</li>
+        </ul>
       </div>
       {/* Source */}
       <div className="space-y-4">
