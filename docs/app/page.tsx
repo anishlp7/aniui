@@ -275,7 +275,14 @@ export default function HomePage() {
         </div>
 
         {/* Preview */}
-        <div className="rounded-xl border border-border p-6" style={{ backgroundColor: hsl(vars["--background"]) }}>
+        <div
+          className="rounded-xl border border-border p-4 sm:p-6"
+          style={{
+            ...Object.fromEntries(Object.entries(vars).map(([k, v]) => [k, v])),
+            "--radius": selectedRadius,
+            backgroundColor: hsl(vars["--background"]),
+          } as React.CSSProperties}
+        >
           <ThemePreview vars={vars} radius={selectedRadius} />
         </div>
       </div>

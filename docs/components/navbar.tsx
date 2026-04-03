@@ -120,8 +120,8 @@ export function Navbar() {
 
       {/* Mobile sidebar */}
       {mobileOpen && (
-        <div className="fixed inset-0 top-14 z-40 bg-background md:hidden">
-          <nav className="space-y-4 p-6">
+        <div className="fixed inset-0 top-14 z-40 bg-background md:hidden overflow-y-auto">
+          <nav className="space-y-4 p-6 pb-20">
             {gettingStartedItems.map((item) => (
               <Link key={item.href} href={item.href} className="block text-sm text-muted-foreground hover:text-foreground" onClick={() => setMobileOpen(false)}>
                 {item.title}
