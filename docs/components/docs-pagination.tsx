@@ -16,7 +16,7 @@ export function DocsPagination() {
   const next = currentIndex < allPages.length - 1 ? allPages[currentIndex + 1] : null;
 
   return (
-    <div className="flex items-center justify-between border-t border-border pt-6 mt-10">
+    <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border-t border-border pt-6 mt-10">
       {prev ? (
         <Link
           href={prev.href}

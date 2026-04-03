@@ -17,10 +17,10 @@ export default function DocsLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="flex min-h-[calc(100vh-3.5rem-73px)]">
+    <div className="flex min-h-[calc(100vh-3.5rem-73px)] overflow-x-hidden">
       <Sidebar />
-      <main className="flex-1 md:ml-64">
-        <div className="mx-auto max-w-3xl px-6 py-10">
+      <main className="flex-1 md:ml-64 min-w-0">
+        <div className="mx-auto max-w-3xl px-4 sm:px-6 py-6 sm:py-10">
           <ScrollToTop />
           {children}
           <DocsPagination />

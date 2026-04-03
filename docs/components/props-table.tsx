@@ -49,7 +49,8 @@ export function PropsTable({ props }: { props: PropDef[] }) {
   const hasComponent = props.some((p) => p.component);
 
   return (
-    <div className="rounded-xl border border-border bg-card overflow-hidden">
+    <div className="rounded-xl border border-border bg-card overflow-x-auto">
+      <div className={hasComponent ? "min-w-[600px]" : "min-w-[480px]"}>
       {/* Header */}
       <div
         className={`grid gap-2 px-4 py-2.5 bg-muted/50 border-b border-border ${
@@ -119,6 +120,7 @@ export function PropsTable({ props }: { props: PropDef[] }) {
             )}
           </div>
         ))}
+      </div>
       </div>
     </div>
   );

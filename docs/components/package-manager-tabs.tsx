@@ -25,7 +25,7 @@ export function PackageManagerTabs({ commands }: PackageManagerTabsProps) {
           <button
             key={pm}
             onClick={() => setActive(pm)}
-            className={`px-4 py-2 text-sm font-medium transition-colors cursor-pointer ${
+            className={`px-2.5 sm:px-4 py-2 text-xs sm:text-sm font-medium transition-colors cursor-pointer ${
               active === pm
                 ? "text-foreground border-b-2 border-primary bg-background"
                 : "text-muted-foreground hover:text-foreground"
