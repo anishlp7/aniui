@@ -1,8 +1,21 @@
 import type { Metadata } from "next";
+import { Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
+
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-inter",
+  display: "swap",
+});
+
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ["latin"],
+  variable: "--font-jetbrains",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   title: {
@@ -55,7 +68,7 @@ export default function RootLayout({
         <link rel="icon" href="/favicon-light.ico" media="(prefers-color-scheme: light)" />
         <link rel="icon" href="/favicon-dark.ico" media="(prefers-color-scheme: dark)" />
       </head>
-      <body className="antialiased font-sans">
+      <body className={`${inter.variable} ${jetbrainsMono.variable} antialiased font-sans`}>
         <ThemeProvider>
           <Navbar />
           {children}

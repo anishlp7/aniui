@@ -81,7 +81,7 @@ export function Navbar() {
             />
           </Link>
 
-          <nav className="hidden md:flex items-center gap-6 text-sm">
+          <nav className="hidden md:flex items-center gap-6 text-sm font-medium">
             <Link href="/docs" className="text-muted-foreground hover:text-foreground transition-colors">
               Docs
             </Link>
