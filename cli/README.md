@@ -21,108 +21,99 @@
 
 AniUI is a [shadcn/ui](https://ui.shadcn.com)-inspired component library for **React Native**. Instead of installing a package, you copy component source files directly into your project. You own the code. Customize everything.
 
-Built with [NativeWind](https://www.nativewind.dev), [class-variance-authority](https://cva.style), and strict TypeScript. Every component is a single file, styled with Tailwind classes, and works on both iOS and Android out of the box.
+Built with [NativeWind](https://www.nativewind.dev) (or [Uniwind](https://github.com/nicepkg/uniwind)), [rn-primitives](https://rn-primitives.vercel.app) for accessibility, [class-variance-authority](https://cva.style), and strict TypeScript.
+
+**Demo:** [Live Preview (Expo Go)](https://expo.dev/projects/4d52bb77-8a04-4713-b4b9-e2ed4c5ec1a0) | [Docs](https://aniui.dev)
 
 ## Quick Start
 
 ```bash
-# Initialize AniUI in your project
+# npm
 npx @aniui/cli init
 
-# Add components
-npx @aniui/cli add button
-npx @aniui/cli add card input text
+# pnpm
+pnpm dlx @aniui/cli init
+
+# yarn
+yarn dlx @aniui/cli init
+
+# bun
+bunx @aniui/cli init
+
+# With Uniwind instead of NativeWind
+npx @aniui/cli init --style uniwind
 ```
 
-Components are copied to your `components/ui/` directory. Import and use them:
+The CLI auto-detects your project (Expo/Bare RN), installs missing dependencies, and configures everything.
 
-```tsx
-import { Button } from "@/components/ui/button";
-import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
-import { Text } from "@/components/ui/text";
-
-export function WelcomeScreen() {
-  return (
-    <Card>
-      <CardHeader>
-        <CardTitle>Welcome to AniUI</CardTitle>
-      </CardHeader>
-      <CardContent>
-        <Text variant="muted">Beautiful components for React Native.</Text>
-        <Button onPress={() => console.log("shipped!")}>
-          Get Started
-        </Button>
-      </CardContent>
-    </Card>
-  );
-}
+```bash
+# Add components
+npx @aniui/cli add button card input text
 ```
 
 ## CLI Commands
 
-### `npx @aniui/cli init`
+### `aniui init`
 
 Sets up AniUI in your project:
-- Auto-detects Expo SDK version (53/54 or 55) or Bare React Native
-- Creates `lib/utils.ts` (the `cn()` helper)
-- Copies `global.css` with theme variables
-- Configures `tailwind.config.js` with AniUI tokens
-- Sets up `metro.config.js`, `babel.config.js`, and `tsconfig.json`
+- Asks: NativeWind or Uniwind? Theme preset? TypeScript?
+- Auto-installs missing dependencies (nativewind, tailwindcss, reanimated, etc.)
+- Uses `npx expo install` for Expo projects (auto-pins versions)
+- Creates all config files (metro, babel, tailwind, global.css, tsconfig)
 
-### `npx @aniui/cli add <components...>`
+### `aniui add <components...>`
 
 Copies component source files into your project:
 
 ```bash
-npx @aniui/cli add button text input card badge
+npx @aniui/cli add button text input card badge dialog select tabs
 ```
 
-- Resolves dependencies automatically (e.g., `date-picker` installs `calendar`)
+- Resolves dependencies automatically
 - Lists any npm packages you need to install
-- Supports TypeScript and JavaScript (`tsx: false` in config)
+- Supports TypeScript and JavaScript (`tsx: false`)
 
-### `npx @aniui/cli theme <preset>`
+### `aniui doctor`
+
+Diagnoses your project setup:
+
+```bash
+npx @aniui/cli doctor
+```
+
+Checks all deps, config files, known conflicts, and tells you exactly what to fix.
+
+### `aniui theme`
 
 Switch theme presets: `default`, `blue`, `green`, `orange`, `rose`.
 
 ## Components
 
-**54 components** across 3 tiers:
+**80+ components** across 4 tiers:
 
-**Tier 1 — Zero extra deps:** Accordion, Alert, Avatar, Badge, Banner, Button, Card, Checkbox, Chip, Empty State, FAB, Image, Input, Label, List, Progress, Radio Group, Search Bar, Separator, Spinner, Switch, Text, Textarea
+**Tier 1 — No extra deps:** Button, Card, Input, Text, Badge, Avatar, Separator, Label, Chip, Image, Empty State, FAB, Search Bar, Banner, Stepper, Grid, Price, Status Indicator, Select, Slider, Tabs, Dialog, and more
 
-**Tier 2 — Needs Reanimated:** Accordion, Alert Dialog, Calendar, Carousel, Collapsible, Date Picker, Dialog, Drawer, Dropdown Menu, Input OTP, Popover, Rating, Segmented Control, Skeleton, Slider, Stepper, Table, Tabs, Toast, Toggle, Toggle Group, Tooltip
+**Tier 2 — Needs Reanimated:** Skeleton, Toggle, Drawer, Carousel, Rating, Segmented Control, Connection Banner, Toast, Alert Dialog, Collapsible, and more
 
-**Tier 3 — External packages:** Action Sheet, Bottom Sheet, Select (`@gorhom/bottom-sheet`)
+**Tier 3 — rn-primitives or external:** Accordion, Checkbox, Radio Group, Popover, Dropdown Menu, Tooltip, Progress, Bottom Sheet, Action Sheet, Date Picker, Swipeable List Item
+
+**Tier 4 — Charts (react-native-svg):** Area, Bar, Line, Pie, Radar, Radial
 
 ## Compatibility
 
 | | Status |
 |---|---|
-| Expo | SDK 53, 54 & 55 |
-| Bare React Native | 0.76+ |
-| TypeScript | Strict |
-| JavaScript | Via CLI (`tsx: false`) |
-| New Architecture | Supported |
-| Old Architecture | SDK 53/54 only |
-| iOS | 15+ |
-| Android | API 24+ |
-
-## Prerequisites
-
-```bash
-# Required
-npm install nativewind class-variance-authority clsx tailwind-merge
-
-# SDK 53/54
-npm install tailwindcss@3 react-native-reanimated
-
-# SDK 55
-npx expo install nativewind@preview react-native-css tailwindcss@4 react-native-reanimated
-
-# For Tier 3 components (as needed)
-npm install @gorhom/bottom-sheet react-native-gesture-handler
-```
+| Expo | ✅ SDK 53, 54 & 55 |
+| Bare React Native | ✅ 0.76+ |
+| NativeWind | ✅ v4 + v5 |
+| Uniwind | ✅ `--style uniwind` |
+| npm / pnpm / yarn / bun | ✅ All supported |
+| TypeScript | ✅ Strict |
+| JavaScript | ✅ Via CLI (`tsx: false`) |
+| New Architecture | ✅ |
+| Old Architecture | ✅ SDK 53/54 only |
+| iOS | ✅ 15+ |
+| Android | ✅ API 24+ |
 
 ## Documentation
 
@@ -132,6 +123,7 @@ Full docs with interactive previews: **[aniui.dev](https://aniui.dev)**
 
 - [Documentation](https://aniui.dev)
 - [GitHub](https://github.com/anishlp7/aniui)
+- [Live Demo](https://expo.dev/projects/4d52bb77-8a04-4713-b4b9-e2ed4c5ec1a0)
 - [Report an Issue](https://github.com/anishlp7/aniui/issues)
 
 ## License
