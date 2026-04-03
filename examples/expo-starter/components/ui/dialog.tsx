@@ -21,7 +21,7 @@ export function Dialog({ open, onOpenChange, children }: DialogProps) {
 
 export function DialogContent({ className, children, ...props }: React.ComponentPropsWithoutRef<typeof View> & { className?: string; children?: React.ReactNode }) {
   return (
-    <View className={cn("mx-6 w-80 rounded-lg bg-card p-6 shadow-xl", className)} accessible={true} {...props}>
+    <View className={cn("mx-6 w-80 rounded-lg bg-card p-6 shadow-xl", className)} accessibilityRole="alert" accessible={true} {...props}>
       {children}
     </View>
   );

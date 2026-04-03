@@ -154,10 +154,8 @@ export default function DialogPage() {
       <div className="space-y-4">
         <h2 className="text-2xl font-semibold tracking-tight text-foreground">Accessibility</h2>
         <ul className="list-disc list-inside space-y-2 text-sm text-muted-foreground">
-          <li>Uses <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">@rn-primitives/dialog</code> for focus trapping</li>
+          <li>Uses Modal with backdrop dismiss and BackHandler support</li>
           <li><code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">accessibilityRole=&quot;dialog&quot;</code> on content</li>
-          <li>Title and Description linked via rn-primitives for screen readers</li>
-          <li>Requires <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">&lt;PortalHost /&gt;</code> at app root</li>
         </ul>
       </div>
       {/* Source */}

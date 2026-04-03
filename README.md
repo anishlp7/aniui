@@ -32,11 +32,11 @@ AniUI is a [shadcn/ui](https://ui.shadcn.com)-inspired component library for **R
 
 Built with [NativeWind](https://www.nativewind.dev) (or [Uniwind](https://github.com/nicepkg/uniwind)), [rn-primitives](https://rn-primitives.vercel.app) for accessibility, [class-variance-authority](https://cva.style), and strict TypeScript. Every component is a single file, styled with Tailwind classes, and works on both iOS and Android out of the box.
 
-**Demo:** [YouTube Short](https://www.youtube.com/shorts/KxHLlLk8YkA)
+**Demo:** [YouTube Short](https://www.youtube.com/shorts/KxHLlLk8YkA) | [Live Demo (Expo Go)](https://expo.dev/projects/4d52bb77-8a04-4713-b4b9-e2ed4c5ec1a0)
 
-**Try on device:** Scan with Expo Go
+**Try on device:** Scan with [Expo Go](https://expo.dev/go)
 
-<img src="https://qr.expo.dev/eas-update?projectId=4d52bb77-8a04-4713-b4b9-e2ed4c5ec1a0&channel=preview" alt="Scan with Expo Go" width="160" />
+<img src="https://qr.expo.dev/eas-update?slug=exp&projectId=4d52bb77-8a04-4713-b4b9-e2ed4c5ec1a0&groupId=699b0812-e1e7-4baa-a451-1814bdbdd5e7&host=u.expo.dev" alt="Scan with Expo Go" width="160" />
 
 ## Compatibility
 

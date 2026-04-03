@@ -192,10 +192,9 @@ export default function SelectPage() {
       <div className="space-y-4">
         <h2 className="text-2xl font-semibold tracking-tight text-foreground">Accessibility</h2>
         <ul className="list-disc list-inside space-y-2 text-sm text-muted-foreground">
-          <li>Uses <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">@rn-primitives/select</code> for proper combobox semantics</li>
+          <li>Uses Modal with anchored dropdown positioning. Supports searchable prop for filtering options.</li>
           <li>Selected state announced to screen readers</li>
           <li><code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">accessibilityRole=&quot;button&quot;</code> on trigger</li>
-          <li>Requires <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">&lt;PortalHost /&gt;</code> at app root</li>
         </ul>
       </div>
       {/* Source */}
