@@ -58,14 +58,14 @@ export function Button({ variant, size, className, textClassName, children, icon
 
   return (
     <Pressable
-      className={cn(buttonVariants({ variant, size }), isDisabled && "opacity-50", className)}
+      className={cn(buttonVariants({ variant, size }), isDisabled && "opacity-50", "active:opacity-80", className)}
       accessibilityRole="button"
       accessible={true}
       disabled={isDisabled}
       {...props}
     >
       {loading ? (
-        <ActivityIndicator size="small" color={light ? "hsl(var(--primary-foreground))" : "hsl(var(--foreground))"} />
+        <ActivityIndicator size="small" color={light ? "#fafafa" : "#18181b"} />
       ) : icon ?? null}
       {children ? (
         <Text className={cn(buttonTextVariants({ variant, size }), textClassName)}>{children}</Text>

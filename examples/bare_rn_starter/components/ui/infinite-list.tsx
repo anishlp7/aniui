@@ -35,7 +35,7 @@ export function InfiniteList<T>({
       ListFooterComponent={
         loading ? (
           <View className="py-4 items-center">
-            <ActivityIndicator size="small" color="hsl(240 5.9% 10%)" accessibilityRole="progressbar" />
+            <ActivityIndicator size="small" color="#18181b" accessibilityRole="progressbar" />
           </View>
         ) : null
       }

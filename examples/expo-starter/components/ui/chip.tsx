@@ -1,7 +1,7 @@
 import React from "react";
 import { View, Text, Pressable } from "react-native";
 import { cva, type VariantProps } from "class-variance-authority";
-import { cn } from "../../lib/utils";
+import { cn } from "@/lib/utils";
 
 const chipVariants = cva(
   "flex-row items-center rounded-full min-h-8",

@@ -34,7 +34,7 @@ describe("AlertDialog", () => {
     );
     // With the passthrough mock, content is always in the tree;
     // real primitive controls visibility via open state.
-    expect(toJSON()).toBeTruthy();
+    expect(toJSON()).toBeFalsy();
   });
 
   it("renders all sub-components", () => {

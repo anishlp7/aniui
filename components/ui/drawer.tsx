@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { View, Pressable, Modal } from "react-native";
-import Animated, { useSharedValue, useAnimatedStyle, withTiming, runOnJS } from "react-native-reanimated";
+import Animated, { useSharedValue, useAnimatedStyle, withTiming } from "react-native-reanimated";
 import { cn } from "@/lib/utils";
 
 export interface DrawerProps {
@@ -38,15 +38,14 @@ export function Drawer({ open, onOpenChange, side = "left", children }: DrawerPr
             top: 0,
             bottom: 0,
             width: 288,
-            backgroundColor: "hsl(var(--card))",
-            borderColor: "hsl(var(--border))",
-            ...(side === "left" ? { left: 0, borderRightWidth: 1 } : { right: 0, borderLeftWidth: 1 }),
+            ...(side === "left" ? { left: 0 } : { right: 0 }),
           },
           drawerStyle,
         ]}
-        accessibilityRole="menu"
       >
-        {children}
+        <View className={cn("flex-1 bg-card", side === "left" ? "border-r border-border" : "border-l border-border")} accessibilityRole="menu">
+          {children}
+        </View>
       </Animated.View>
     </Modal>
   );

@@ -25,16 +25,15 @@ describe("Tabs", () => {
     expect(toJSON()).toBeTruthy();
   });
 
-  it("renders all tab content in the tree (primitive manages visibility)", () => {
-    const { getByText } = renderTabs();
-    // With the passthrough mock, all content is in the tree;
-    // real primitive only shows the active tab's content.
+  it("renders active tab content and hides inactive", () => {
+    const { getByText, queryByText } = renderTabs();
+    // Only the default active tab's content is rendered
     expect(getByText("Content One")).toBeTruthy();
-    expect(getByText("Content Two")).toBeTruthy();
+    expect(queryByText("Content Two")).toBeNull();
   });
 
   it("trigger is pressable", () => {
-    const { getByText } = renderTabs();
+    const { getByText, queryByText } = renderTabs();
     fireEvent.press(getByText("Two"));
     expect(getByText("Content Two")).toBeTruthy();
   });

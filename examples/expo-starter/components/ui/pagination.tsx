@@ -41,7 +41,7 @@ export function Pagination({
         accessibilityLabel="Previous page"
         className="min-h-10 min-w-10 items-center justify-center rounded-md"
       >
-        <Text className={cn("text-sm", current <= 1 ? "text-muted" : "text-foreground")}>‹</Text>
+        <Text className={cn("text-base font-bold", current <= 1 ? "text-muted" : "text-foreground")}>←</Text>
       </Pressable>
       {pages.map((page, i) =>
         page === "..." ? (
@@ -73,7 +73,7 @@ export function Pagination({
         accessibilityLabel="Next page"
         className="min-h-10 min-w-10 items-center justify-center rounded-md"
       >
-        <Text className={cn("text-sm", current >= total ? "text-muted" : "text-foreground")}>›</Text>
+        <Text className={cn("text-base font-bold", current >= total ? "text-muted" : "text-foreground")}>→</Text>
       </Pressable>
     </View>
   );

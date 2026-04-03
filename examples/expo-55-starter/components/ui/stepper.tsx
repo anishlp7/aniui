@@ -1,56 +1,74 @@
 import React from "react";
 import { View, Text, Pressable } from "react-native";
+import { cva, type VariantProps } from "class-variance-authority";
+import { cn } from "@/lib/utils";
 
-const sizes = {
-  sm: { height: 36, width: 36 },
-  md: { height: 44, width: 44 },
-  lg: { height: 56, width: 56 },
-} as const;
+const stepperVariants = cva("flex-row items-center self-start rounded-lg border border-border", {
+  variants: {
+    size: {
+      sm: "h-9",
+      md: "h-11",
+      lg: "h-14",
+    },
+  },
+  defaultVariants: { size: "md" },
+});
 
-export interface StepperProps extends React.ComponentPropsWithoutRef<typeof View> {
+const buttonVariants = cva("items-center justify-center border-border", {
+  variants: {
+    size: {
+      sm: "w-9",
+      md: "w-11",
+      lg: "w-14",
+    },
+  },
+  defaultVariants: { size: "md" },
+});
+
+export interface StepperProps
+  extends React.ComponentPropsWithoutRef<typeof View>,
+    VariantProps<typeof stepperVariants> {
   className?: string;
   value: number;
   onChange: (value: number) => void;
   min?: number;
   max?: number;
   step?: number;
-  size?: "sm" | "md" | "lg";
 }
 
-export function Stepper({ size = "md", className, value, onChange, min = 0, max = 99, step = 1, ...props }: StepperProps) {
-  const s = sizes[size];
+export function Stepper({ size, className, value, onChange, min = 0, max = 99, step = 1, ...props }: StepperProps) {
   const canDec = value - step >= min;
   const canInc = value + step <= max;
 
   return (
     <View
-      style={{ flexDirection: "row", alignItems: "center", height: s.height, borderWidth: 1, borderColor: "#e4e4e7", borderRadius: 8, alignSelf: "flex-start" }}
+      className={cn(stepperVariants({ size }), className)}
       accessibilityRole="adjustable"
       accessibilityValue={{ min, max, now: value }}
       {...props}
     >
       <Pressable
-        style={{ width: s.width, height: "100%", alignItems: "center", justifyContent: "center", borderRightWidth: 1, borderRightColor: "#e4e4e7", opacity: canDec ? 1 : 0.3 }}
+        className={cn(buttonVariants({ size }), "h-full border-r", !canDec && "opacity-30")}
         onPress={() => { if (canDec) onChange(value - step); }}
         disabled={!canDec}
         accessible={true}
         accessibilityRole="button"
         accessibilityLabel="Decrease"
       >
-        <Text style={{ fontSize: 18, color: "#09090b" }}>−</Text>
+        <Text className="text-lg text-foreground">−</Text>
       </Pressable>
-      <View style={{ width: 56, alignItems: "center", justifyContent: "center" }}>
-        <Text style={{ fontSize: 16, fontWeight: "500", color: "#09090b" }}>{value}</Text>
+      <View className="w-14 items-center justify-center">
+        <Text className="text-base font-medium text-foreground">{value}</Text>
       </View>
       <Pressable
-        style={{ width: s.width, height: "100%", alignItems: "center", justifyContent: "center", borderLeftWidth: 1, borderLeftColor: "#e4e4e7", opacity: canInc ? 1 : 0.3 }}
+        className={cn(buttonVariants({ size }), "h-full border-l", !canInc && "opacity-30")}
         onPress={() => { if (canInc) onChange(value + step); }}
         disabled={!canInc}
         accessible={true}
         accessibilityRole="button"
         accessibilityLabel="Increase"
       >
-        <Text style={{ fontSize: 18, color: "#09090b" }}>+</Text>
+        <Text className="text-lg text-foreground">+</Text>
       </Pressable>
     </View>
   );

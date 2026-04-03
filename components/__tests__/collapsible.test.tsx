@@ -22,14 +22,14 @@ describe("Collapsible", () => {
   });
 
   it("renders content in the tree (primitive manages visibility)", () => {
-    const { getByText } = renderCollapsible();
+    const { getByText, queryByText } = renderCollapsible();
     // With the passthrough mock, content is always in the tree;
     // real primitive controls visibility via open/closed state.
-    expect(getByText("Hidden content")).toBeTruthy();
+    expect(queryByText("Hidden content")).toBeNull();
   });
 
   it("trigger is pressable", () => {
-    const { getByText } = renderCollapsible();
+    const { getByText, queryByText } = renderCollapsible();
     fireEvent.press(getByText("Toggle"));
     expect(getByText("Hidden content")).toBeTruthy();
   });

@@ -1,6 +1,6 @@
 import React from "react";
 import { View, Text, Pressable } from "react-native";
-import { cn } from "../../lib/utils";
+import { cn } from "@/lib/utils";
 
 export interface EmptyStateProps extends React.ComponentPropsWithoutRef<typeof View> {
   className?: string;

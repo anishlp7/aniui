@@ -2,6 +2,7 @@ import React, { useState, useCallback } from "react";
 import { View, TextInput, Pressable, Text, ScrollView, Modal } from "react-native";
 import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
+import { ChevronDownIcon } from "@/components/ui/icons";
 
 const phoneVariants = cva("flex-row items-center rounded-md border", {
   variants: {
@@ -34,28 +35,28 @@ const countries: Country[] = [
 ];
 
 export interface PhoneInputProps
-  extends Omit<React.ComponentPropsWithoutRef<typeof TextInput>, "onChangeText">,
+  extends Omit<React.ComponentPropsWithoutRef<typeof TextInput>, "onChangeText" | "value">,
     VariantProps<typeof phoneVariants> {
   className?: string;
   defaultCountry?: string;
-  onChangeText?: (phone: string, dial: string, raw: string) => void;
+  value?: string;
+  onChangeText?: (fullPhone: string) => void;
 }
 
 export function PhoneInput({
-  variant,
-  size,
-  className,
-  defaultCountry = "US",
-  onChangeText,
-  ...props
+  variant, size, className, defaultCountry = "US",
+  value = "", onChangeText, ...props
 }: PhoneInputProps) {
   const [country, setCountry] = useState(countries.find((c) => c.code === defaultCountry) ?? countries[0]);
   const [open, setOpen] = useState(false);
 
+  // Strip the dial code prefix to get just the number for display
+  const rawNumber = value.startsWith(country.dial) ? value.slice(country.dial.length) : value.replace(/^\+\d+/, "");
+
   const handleChange = useCallback(
     (text: string) => {
-      const raw = text.replace(/\D/g, "");
-      onChangeText?.(`${country.dial}${raw}`, country.dial, raw);
+      const digits = text.replace(/\D/g, "");
+      onChangeText?.(`${country.dial}${digits}`);
     },
     [country, onChangeText]
   );
@@ -70,12 +71,13 @@ export function PhoneInput({
         className="flex-row items-center mr-2 pr-2 border-r border-border min-h-8"
       >
         <Text className="text-foreground text-base">{country.dial}</Text>
-        <Text className="text-muted-foreground ml-1 text-xs">▼</Text>
+        <ChevronDownIcon size={14} />
       </Pressable>
       <TextInput
         className="flex-1 text-foreground p-0 text-base"
-        placeholderTextColor="hsl(240 3.8% 46.1%)"
+        placeholderTextColor="#71717a"
         keyboardType="phone-pad"
+        value={rawNumber}
         onChangeText={handleChange}
         placeholder="Phone number"
         {...props}

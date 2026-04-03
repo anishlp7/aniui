@@ -18,7 +18,7 @@
         "monochromeImage": "./assets/images/android-icon-monochrome.png"
       },
       "predictiveBackGestureEnabled": false,
-      "package": "com.anish.anonyfess.expo55starter"
+      "package": "com.anish.dev.expo55starter"
     },
     "web": {
       "output": "static",

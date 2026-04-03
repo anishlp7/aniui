@@ -1,6 +1,6 @@
 import React, { useRef, useState } from "react";
 import { View, TextInput } from "react-native";
-import { cn } from "../../lib/utils";
+import { cn } from "@/lib/utils";
 
 export interface InputOTPProps extends React.ComponentPropsWithoutRef<typeof View> {
   className?: string;

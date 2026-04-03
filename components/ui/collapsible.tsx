@@ -1,8 +1,9 @@
-import React from "react";
+import React, { createContext, useContext, useState } from "react";
 import { View, Pressable } from "react-native";
-import * as CollapsiblePrimitive from "@rn-primitives/collapsible";
 import Animated, { FadeIn, FadeOut } from "react-native-reanimated";
 import { cn } from "@/lib/utils";
+
+const CollapsibleCtx = createContext<{ isOpen: boolean; toggle: () => void }>({ isOpen: false, toggle: () => {} });
 
 export interface CollapsibleProps extends React.ComponentPropsWithoutRef<typeof View> {
   className?: string;
@@ -11,11 +12,19 @@ export interface CollapsibleProps extends React.ComponentPropsWithoutRef<typeof 
   children?: React.ReactNode;
 }
 
-export function Collapsible({ open, onOpenChange, className, children, ...props }: CollapsibleProps) {
+export function Collapsible({ open: controlledOpen, onOpenChange, className, children, ...props }: CollapsibleProps) {
+  const [uncontrolled, setUncontrolled] = useState(false);
+  const isOpen = controlledOpen ?? uncontrolled;
+  const toggle = () => {
+    const next = !isOpen;
+    setUncontrolled(next);
+    onOpenChange?.(next);
+  };
+
   return (
-    <CollapsiblePrimitive.Root open={open} onOpenChange={onOpenChange} asChild>
+    <CollapsibleCtx.Provider value={{ isOpen, toggle }}>
       <View className={cn("", className)} {...props}>{children}</View>
-    </CollapsiblePrimitive.Root>
+    </CollapsibleCtx.Provider>
   );
 }
 
@@ -25,12 +34,11 @@ export interface CollapsibleTriggerProps extends React.ComponentPropsWithoutRef<
 }
 
 export function CollapsibleTrigger({ className, children, ...props }: CollapsibleTriggerProps) {
+  const { toggle } = useContext(CollapsibleCtx);
   return (
-    <CollapsiblePrimitive.Trigger asChild>
-      <Pressable className={cn("min-h-12 min-w-12", className)} accessible={true} accessibilityRole="button" {...props}>
-        {children}
-      </Pressable>
-    </CollapsiblePrimitive.Trigger>
+    <Pressable className={cn("", className)} onPress={toggle} accessible={true} accessibilityRole="button" {...props}>
+      {children}
+    </Pressable>
   );
 }
 
@@ -40,11 +48,11 @@ export interface CollapsibleContentProps extends React.ComponentPropsWithoutRef<
 }
 
 export function CollapsibleContent({ className, children, ...props }: CollapsibleContentProps) {
+  const { isOpen } = useContext(CollapsibleCtx);
+  if (!isOpen) return null;
   return (
-    <CollapsiblePrimitive.Content>
-      <Animated.View entering={FadeIn.duration(200)} exiting={FadeOut.duration(150)}>
-        <View className={cn("", className)} {...props}>{children}</View>
-      </Animated.View>
-    </CollapsiblePrimitive.Content>
+    <Animated.View entering={FadeIn.duration(200)} exiting={FadeOut.duration(150)}>
+      <View className={cn("", className)} {...props}>{children}</View>
+    </Animated.View>
   );
 }

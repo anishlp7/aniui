@@ -1,6 +1,7 @@
 import React, { useState, useMemo } from "react";
 import { View, TextInput, Pressable, Text, FlatList, Modal } from "react-native";
 import { cn } from "@/lib/utils";
+import { ChevronDownIcon } from "@/components/ui/icons";
 
 export interface ComboboxOption {
   label: string;
@@ -48,7 +49,7 @@ export function Combobox({
         <Text className={cn("text-base", selected ? "text-foreground" : "text-muted-foreground")}>
           {selected?.label ?? placeholder}
         </Text>
-        <Text className="text-muted-foreground text-xs">▼</Text>
+        <ChevronDownIcon size={16} />
       </Pressable>
       <Modal visible={open} transparent animationType="fade" onRequestClose={() => setOpen(false)}>
         <Pressable className="flex-1 bg-black/50 justify-end" onPress={() => setOpen(false)}>
@@ -60,7 +61,7 @@ export function Combobox({
               <TextInput
                 className="min-h-10 px-3 rounded-md border border-input bg-background text-foreground text-base"
                 placeholder={searchPlaceholder}
-                placeholderTextColor="hsl(var(--muted-foreground))"
+                placeholderTextColor="#71717a"
                 value={search}
                 onChangeText={setSearch}
                 autoFocus

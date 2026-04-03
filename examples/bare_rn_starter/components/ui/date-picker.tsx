@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { View, Text, Pressable, Modal } from "react-native";
-import { cn } from "../../lib/utils";
-import { Calendar } from "./calendar";
+import { cn } from "@/lib/utils";
+import { Calendar } from "@/components/ui/calendar";
+import { CalendarIcon } from "@/components/ui/icons";
 
 export interface DatePickerProps {
   className?: string;
@@ -32,7 +33,7 @@ function TriggerButton({ label, hasValue, className, onPress }: { label: string;
   return (
     <Pressable className={cn("flex-row items-center rounded-md border border-input bg-background px-4 min-h-12", className)} onPress={onPress} accessible={true} accessibilityRole="button">
       <Text className={cn("flex-1 text-base", hasValue ? "text-foreground" : "text-muted-foreground")}>{label}</Text>
-      <Text className="text-muted-foreground text-xs">{"▾"}</Text>
+      <CalendarIcon size={16} />
     </Pressable>
   );
 }

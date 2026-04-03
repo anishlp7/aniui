@@ -35,8 +35,8 @@ export const ActionSheet = forwardRef<BottomSheetModal, ActionSheetProps>(
         enableDynamicSizing
         enablePanDownToClose
         backdropComponent={renderBackdrop}
-        backgroundStyle={{ backgroundColor: "hsl(var(--card))" }}
-        handleIndicatorStyle={{ backgroundColor: "hsl(var(--muted-foreground))" }}
+        backgroundStyle={{ backgroundColor: "#ffffff" }}
+        handleIndicatorStyle={{ backgroundColor: "#71717a" }}
       >
         <BottomSheetView>
           <View className={cn("pb-8 px-4", className)}>

@@ -1,7 +1,7 @@
 import React from "react";
 import { View, Text, Pressable } from "react-native";
 import { cva, type VariantProps } from "class-variance-authority";
-import { cn } from "../../lib/utils";
+import { cn } from "@/lib/utils";
 
 const bannerVariants = cva(
   "flex-row items-center rounded-xl px-4 py-3 gap-3 border",

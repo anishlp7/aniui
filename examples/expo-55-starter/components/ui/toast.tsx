@@ -1,22 +1,18 @@
 import React, { createContext, useCallback, useContext, useState } from "react";
 import { View, Text, Pressable } from "react-native";
 import Animated, { SlideInUp, SlideOutUp } from "react-native-reanimated";
-import { cn } from "../../lib/utils";
+import { cn } from "@/lib/utils";
 
 type ToastVariant = "default" | "destructive" | "success";
 type ToastData = { id: string; title: string; description?: string; variant?: ToastVariant };
 
-const ToastContext = createContext<{
-  toast: (data: Omit<ToastData, "id">) => void;
-}>({ toast: () => {} });
+const ToastContext = createContext<{ toast: (data: Omit<ToastData, "id">) => void }>({ toast: () => {} });
 
 export function useToast() {
   return useContext(ToastContext);
 }
 
-export interface ToastProviderProps {
-  children: React.ReactNode;
-}
+export interface ToastProviderProps { children: React.ReactNode }
 
 export function ToastProvider({ children }: ToastProviderProps) {
   const [toasts, setToasts] = useState<ToastData[]>([]);
@@ -59,13 +55,9 @@ function ToastItem({ data, onDismiss }: { data: ToastData; onDismiss: () => void
         accessible={true}
         accessibilityRole="alert"
       >
-        <Text className={cn("text-sm font-semibold", isDefault ? "text-foreground" : "text-white")}>
-          {data.title}
-        </Text>
+        <Text className={cn("text-sm font-semibold", isDefault ? "text-foreground" : "text-white")}>{data.title}</Text>
         {data.description && (
-          <Text className={cn("text-xs mt-1", isDefault ? "text-muted-foreground" : "text-white/80")}>
-            {data.description}
-          </Text>
+          <Text className={cn("text-xs mt-1", isDefault ? "text-muted-foreground" : "text-white/80")}>{data.description}</Text>
         )}
       </Pressable>
     </Animated.View>

@@ -59,18 +59,23 @@ export function MaskedInput({
   mask: customMask,
   preset,
   onChangeText,
+  value: controlledValue,
   ...props
-}: MaskedInputProps) {
+}: MaskedInputProps & { value?: string }) {
   const maskPattern = customMask ?? (preset ? masks[preset] : "");
+  const [internal, setInternal] = React.useState("");
+  const displayValue = controlledValue ?? internal;
 
   const handleChange = useCallback(
     (text: string) => {
       if (!maskPattern) {
+        setInternal(text);
         onChangeText?.(text, text);
         return;
       }
       const raw = text.replace(/\D/g, "");
       const masked = applyMask(raw, maskPattern);
+      setInternal(masked);
       onChangeText?.(masked, raw);
     },
     [maskPattern, onChangeText]
@@ -79,9 +84,11 @@ export function MaskedInput({
   return (
     <TextInput
       className={cn(maskedVariants({ variant, size }), className)}
-      placeholderTextColor="hsl(240 3.8% 46.1%)"
+      placeholderTextColor="#71717a"
       keyboardType="number-pad"
+      value={displayValue}
       onChangeText={handleChange}
+      accessibilityRole="text"
       {...props}
     />
   );

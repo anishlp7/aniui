@@ -1,7 +1,7 @@
 import React from "react";
 import { Pressable, Text, ActivityIndicator } from "react-native";
 import { cva, type VariantProps } from "class-variance-authority";
-import { cn } from "../../lib/utils";
+import { cn } from "@/lib/utils";
 
 const buttonVariants = cva(
   "flex-row items-center justify-center rounded-md min-h-12 min-w-12",
@@ -58,14 +58,14 @@ export function Button({ variant, size, className, textClassName, children, icon
 
   return (
     <Pressable
-      className={cn(buttonVariants({ variant, size }), isDisabled && "opacity-50", className)}
+      className={cn(buttonVariants({ variant, size }), isDisabled && "opacity-50", "active:opacity-80", className)}
       accessibilityRole="button"
       accessible={true}
       disabled={isDisabled}
       {...props}
     >
       {loading ? (
-        <ActivityIndicator size="small" color={light ? "hsl(0,0%,98%)" : "hsl(240,5.9%,10%)"} />
+        <ActivityIndicator size="small" color={light ? "#fafafa" : "#18181b"} />
       ) : icon ?? null}
       {children ? (
         <Text className={cn(buttonTextVariants({ variant, size }), textClassName)}>{children}</Text>

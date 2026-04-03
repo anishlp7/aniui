@@ -1,7 +1,7 @@
 import React from "react";
 import { View, Text } from "react-native";
 import { cva, type VariantProps } from "class-variance-authority";
-import { cn } from "../../lib/utils";
+import { cn } from "@/lib/utils";
 
 const alertVariants = cva("rounded-lg border p-4", {
   variants: {

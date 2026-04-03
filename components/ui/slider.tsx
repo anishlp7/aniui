@@ -1,6 +1,5 @@
-import React from "react";
-import { View } from "react-native";
-import * as SliderPrimitive from "@rn-primitives/slider";
+import React, { useState } from "react";
+import { View, PanResponder } from "react-native";
 import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
@@ -31,28 +30,58 @@ export function Slider({
   value = 0, min = 0, max = 100, step = 1, disabled, size,
   onValueChange, className, ...props
 }: SliderProps) {
+  const [trackWidth, setTrackWidth] = useState(0);
+  const pct = max > min ? ((value - min) / (max - min)) * 100 : 0;
+  const thumbSize = size === "lg" ? 24 : size === "sm" ? 16 : 20;
+
+  const clampValue = (raw: number) => {
+    const stepped = Math.round(raw / step) * step;
+    return Math.max(min, Math.min(max, stepped));
+  };
+
+  const calcValue = (locationX: number) => {
+    if (trackWidth <= 0) return value;
+    const ratio = Math.max(0, Math.min(1, locationX / trackWidth));
+    return clampValue(min + ratio * (max - min));
+  };
+
+  const panResponder = PanResponder.create({
+    onStartShouldSetPanResponder: () => !disabled,
+    onMoveShouldSetPanResponder: () => !disabled,
+    onPanResponderGrant: (e) => {
+      onValueChange?.(calcValue(e.nativeEvent.locationX));
+    },
+    onPanResponderMove: (e) => {
+      onValueChange?.(calcValue(e.nativeEvent.locationX));
+    },
+  });
+
   return (
-    <SliderPrimitive.Root
-      value={value}
-      min={min}
-      max={max}
-      step={step}
-      disabled={disabled}
-      onValueChange={(val) => onValueChange?.(typeof val === "number" ? val : val[0])}
-      asChild
+    <View
+      className={cn(sliderVariants({ size }), disabled && "opacity-50", className)}
+      accessible={true}
+      accessibilityRole="adjustable"
+      accessibilityValue={{ min, max, now: value }}
+      onLayout={(e) => setTrackWidth(e.nativeEvent.layout.width)}
+      {...panResponder.panHandlers}
+      {...props}
     >
-      <View
-        className={cn(sliderVariants({ size }), disabled && "opacity-50", className)}
-        accessible={true}
-        accessibilityRole="adjustable"
-        accessibilityValue={{ min, max, now: value }}
-        {...props}
-      >
-        <SliderPrimitive.Track className="h-1.5 w-full rounded-full bg-secondary">
-          <SliderPrimitive.Range className="h-full rounded-full bg-primary" />
-        </SliderPrimitive.Track>
-        <SliderPrimitive.Thumb className="h-5 w-5 rounded-full border-2 border-primary bg-background" />
+      <View className="h-1.5 w-full rounded-full bg-secondary overflow-hidden">
+        <View className="h-full rounded-full bg-primary" style={{ width: `${pct}%` }} />
       </View>
-    </SliderPrimitive.Root>
+      <View
+        style={{
+          position: "absolute",
+          left: `${pct}%`,
+          marginLeft: -(thumbSize / 2),
+          width: thumbSize,
+          height: thumbSize,
+          borderRadius: thumbSize / 2,
+          borderWidth: 2,
+          borderColor: "#18181b",
+          backgroundColor: "#ffffff",
+        }}
+      />
+    </View>
   );
 }

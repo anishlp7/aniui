@@ -27,8 +27,14 @@ export interface SwipeableListItemProps extends React.ComponentPropsWithoutRef<t
 function ActionTray({ actions, side }: { actions: SwipeableAction[]; side: "left" | "right" }) {
   return (
     <View
-      className={`absolute ${side}-0 top-0 bottom-0 flex-row`}
-      style={{ width: actions.length * ACTION_WIDTH }}
+      style={{
+        position: "absolute",
+        top: 0,
+        bottom: 0,
+        ...(side === "left" ? { left: 0 } : { right: 0 }),
+        width: actions.length * ACTION_WIDTH,
+        flexDirection: "row",
+      }}
     >
       {actions.map((action) => (
         <Pressable

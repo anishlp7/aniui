@@ -227,7 +227,7 @@ export const registry: Record<string, ComponentEntry> = {
   select: {
     name: "Select",
     file: "components/ui/select.tsx",
-    description: "Dropdown select with options",
+    description: "Dropdown select with search support",
     dependencies: ["@rn-primitives/select", "@rn-primitives/portal", "react-native-reanimated", "clsx", "tailwind-merge"],
     registryDependencies: [],
     tier: 3,

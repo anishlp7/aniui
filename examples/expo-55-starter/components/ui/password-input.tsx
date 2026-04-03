@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { View, TextInput, Pressable, Text } from "react-native";
 import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
+import { EyeIcon, EyeOffIcon } from "@/components/ui/icons";
 
 const passwordVariants = cva(
   "flex-row items-center rounded-md border py-2 text-foreground",
@@ -57,7 +58,7 @@ export function PasswordInput({
       <View className={cn(passwordVariants({ variant, size }), className)}>
         <TextInput
           className="flex-1 text-foreground p-0 text-base"
-          placeholderTextColor="hsl(240 3.8% 46.1%)"
+          placeholderTextColor="#71717a"
           secureTextEntry={!visible}
           onChangeText={(text) => { setValue(text); onChangeText?.(text); }}
           accessibilityLabel="Password"
@@ -70,7 +71,7 @@ export function PasswordInput({
           accessibilityLabel={visible ? "Hide password" : "Show password"}
           className="ml-2 min-h-8 min-w-8 items-center justify-center"
         >
-          <Text className="text-muted-foreground text-sm">{visible ? "Hide" : "Show"}</Text>
+          {visible ? <EyeOffIcon size={18} /> : <EyeIcon size={18} />}
         </Pressable>
       </View>
       {showStrength && value.length > 0 && (

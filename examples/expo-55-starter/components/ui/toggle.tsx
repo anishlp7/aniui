@@ -1,7 +1,7 @@
 import React from "react";
 import { Pressable, Text } from "react-native";
 import { cva, type VariantProps } from "class-variance-authority";
-import { cn } from "../../lib/utils";
+import { cn } from "@/lib/utils";
 
 const toggleVariants = cva(
   "items-center justify-center rounded-md min-h-12 min-w-12",

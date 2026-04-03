@@ -35,14 +35,14 @@ export function AccordionItem({ value, trigger, className, children, ...props }:
     <AccordionPrimitive.Item value={value} asChild>
       <View className={cn("border-b border-border", className)} {...props}>
         <AccordionPrimitive.Trigger asChild>
-          <Pressable className="flex-row items-center justify-between py-4 min-h-12" accessible={true} accessibilityRole="button">
+          <Pressable className="flex-row items-center justify-between px-4 py-4 min-h-12" accessible={true} accessibilityRole="button">
             <Text className="text-base font-medium text-foreground flex-1">{trigger}</Text>
             <Text className="text-muted-foreground text-lg">+</Text>
           </Pressable>
         </AccordionPrimitive.Trigger>
         <AccordionPrimitive.Content>
           <Animated.View entering={FadeIn.duration(200)} exiting={FadeOut.duration(150)}>
-            <View className="pb-4">{children}</View>
+            <View className="px-4 pb-4">{children}</View>
           </Animated.View>
         </AccordionPrimitive.Content>
       </View>

@@ -27,6 +27,8 @@ export function ConnectionBanner({
         connected ? "bg-green-600" : "bg-destructive",
         className
       )}
+      accessibilityRole="alert"
+      accessibilityLiveRegion="polite"
     >
       <Text className="text-white text-sm font-medium">
         {connected ? onlineText : offlineText}

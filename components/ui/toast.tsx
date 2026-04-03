@@ -1,6 +1,5 @@
 import React, { createContext, useCallback, useContext, useState } from "react";
 import { View, Text, Pressable } from "react-native";
-import * as ToastPrimitive from "@rn-primitives/toast";
 import Animated, { SlideInUp, SlideOutUp } from "react-native-reanimated";
 import { cn } from "@/lib/utils";
 
@@ -29,14 +28,11 @@ export function ToastProvider({ children }: ToastProviderProps) {
   return (
     <ToastContext.Provider value={{ toast }}>
       {children}
-      <ToastPrimitive.Provider>
-        <View className="absolute top-14 left-4 right-4 gap-2 z-50" pointerEvents="box-none">
-          {toasts.map((t) => (
-            <ToastItem key={t.id} data={t} onDismiss={() => dismiss(t.id)} />
-          ))}
-        </View>
-        <ToastPrimitive.Viewport />
-      </ToastPrimitive.Provider>
+      <View className="absolute top-14 left-4 right-4 gap-2 z-50" pointerEvents="box-none">
+        {toasts.map((t) => (
+          <ToastItem key={t.id} data={t} onDismiss={() => dismiss(t.id)} />
+        ))}
+      </View>
     </ToastContext.Provider>
   );
 }

@@ -20,6 +20,9 @@ export function Checkbox({ checked = false, onCheckedChange, className, disabled
       <Pressable
         className="min-h-12 min-w-12 items-center justify-center"
         accessible={true}
+        accessibilityRole="checkbox"
+        accessibilityState={{ checked, disabled: !!disabled }}
+        onPress={() => !disabled && onCheckedChange?.(!checked)}
         {...props}
       >
         <View
