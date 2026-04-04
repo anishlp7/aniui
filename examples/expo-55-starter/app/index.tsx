@@ -99,9 +99,12 @@ const sectionOrder = ["Forms", "Display", "Feedback", "Navigation", "Overlays", 
 
 export default function HomeScreen() {
   const router = useRouter();
-  const { theme, toggle, colors } = useAppTheme();
+  const { theme, toggle } = useAppTheme();
   const [search, setSearch] = useState("");
   const isDark = theme === "dark";
+  const colors = isDark
+    ? { bg: "#09090b", fg: "#fafafa", muted: "#27272a", mutedFg: "#a1a1aa", border: "#27272a", primary: "#18181b", secondary: "#27272a" }
+    : { bg: "#ffffff", fg: "#09090b", muted: "#f4f4f5", mutedFg: "#71717a", border: "#e4e4e7", primary: "#18181b", secondary: "#f4f4f5" };
 
   const filtered = search
     ? components.filter((c) => c.name.toLowerCase().includes(search.toLowerCase()))

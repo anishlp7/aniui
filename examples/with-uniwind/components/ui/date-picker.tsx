@@ -18,12 +18,12 @@ function PickerShell({ open, onClose, children }: { open: boolean; onClose: () =
   return (
     <Modal visible={open} transparent animationType="fade" onRequestClose={onClose}>
       <Pressable className="flex-1 items-center justify-center bg-black/50" onPress={onClose}>
-        <Pressable onPress={() => {}} className="mx-6 rounded-xl bg-card p-2 shadow-xl" style={{ minHeight: 360 }}>
+        <Pressable onPress={() => {}} className="mx-6 rounded-xl bg-white dark:bg-zinc-950 p-2 shadow-xl" style={{ minHeight: 360 }}>
           <View style={{ minHeight: 310 }}>
             {children}
           </View>
           <Pressable onPress={onClose} className="mt-1 mb-2 items-center py-2" accessibilityRole="button">
-            <Text className="text-sm font-medium text-muted-foreground">Cancel</Text>
+            <Text className="text-sm font-medium text-zinc-500 dark:text-zinc-400">Cancel</Text>
           </Pressable>
         </Pressable>
       </Pressable>
@@ -33,8 +33,8 @@ function PickerShell({ open, onClose, children }: { open: boolean; onClose: () =
 
 function TriggerButton({ label, hasValue, className, onPress }: { label: string; hasValue: boolean; className?: string; onPress: () => void }) {
   return (
-    <Pressable className={cn("flex-row items-center rounded-md border border-input bg-background px-4 min-h-12", className)} onPress={onPress} accessible={true} accessibilityRole="button">
-      <Text className={cn("flex-1 text-base", hasValue ? "text-foreground" : "text-muted-foreground")}>{label}</Text>
+    <Pressable className={cn("flex-row items-center rounded-md border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 px-4 min-h-12", className)} onPress={onPress} accessible={true} accessibilityRole="button">
+      <Text className={cn("flex-1 text-base", hasValue ? "text-zinc-950 dark:text-zinc-50" : "text-zinc-500 dark:text-zinc-400")}>{label}</Text>
       <CalendarIcon size={16} />
     </Pressable>
   );

@@ -1,5 +1,6 @@
 import React from "react";
 import { View, Pressable, Text } from "react-native";
+import Svg, { Path } from "react-native-svg";
 import { cn } from "@/lib/utils";
 
 export interface FileInfo {
@@ -42,7 +43,12 @@ export function FilePicker({
           accessibilityLabel={label}
           className="min-h-24 items-center justify-center rounded-lg border-2 border-dashed border-input bg-background px-4 py-6"
         >
-          <Text className="text-2xl text-muted-foreground mb-2">↑</Text>
+          <View className="mb-2">
+            <Svg width={24} height={24} viewBox="0 0 24 24" fill="none" stroke="#71717a" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
+              <Path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+              <Path d="m17 8-5-5-5 5" /><Path d="M12 3v12" />
+            </Svg>
+          </View>
           <Text className="text-sm text-muted-foreground text-center">{label}</Text>
         </Pressable>
       ) : (

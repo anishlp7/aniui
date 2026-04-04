@@ -4,11 +4,11 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
 const textareaVariants = cva(
-  "rounded-md border text-foreground placeholder:text-muted-foreground align-top",
+  "rounded-md border text-zinc-950 dark:text-zinc-50 placeholder:text-zinc-500 dark:placeholder:text-zinc-400 align-top",
   {
     variants: {
       variant: {
-        default: "border-input bg-background",
+        default: "border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950",
         ghost: "border-transparent bg-transparent",
       },
     },

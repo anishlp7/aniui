@@ -85,9 +85,9 @@ function ToastDemo() {
   const { toast } = useToast();
   return (
     <View className="gap-6">
-      <Text className="text-sm text-muted-foreground">Non-modal notifications that appear briefly at the top of the screen. Supports default, success, and destructive variants.</Text>
+      <Text className="text-sm text-zinc-500 dark:text-zinc-400">Non-modal notifications that appear briefly at the top of the screen. Supports default, success, and destructive variants.</Text>
       <View className="gap-2">
-        <Text className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Variants</Text>
+        <Text className="text-xs font-semibold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">Variants</Text>
         <View className="gap-3">
           <Button onPress={() => toast({ title: "Hello!", description: "This is a default toast message." })}>Default Toast</Button>
           <Button variant="secondary" onPress={() => toast({ title: "Saved!", description: "Your changes have been saved.", variant: "success" })}>Success Toast</Button>
@@ -95,7 +95,7 @@ function ToastDemo() {
         </View>
       </View>
       <View className="gap-2">
-        <Text className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Title Only</Text>
+        <Text className="text-xs font-semibold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">Title Only</Text>
         <Button variant="outline" onPress={() => toast({ title: "Quick notification" })}>Title Only Toast</Button>
       </View>
     </View>
@@ -106,10 +106,10 @@ const demos: Record<string, () => React.ReactElement> = {
   button: () => {
     return (
       <View className="gap-6">
-        <Text className="text-sm text-muted-foreground">A pressable button component with multiple visual variants and sizes. Supports loading states, icons, and full accessibility.</Text>
+        <Text className="text-sm text-zinc-500 dark:text-zinc-400">A pressable button component with multiple visual variants and sizes. Supports loading states, icons, and full accessibility.</Text>
         <View className="gap-2">
-          <Text className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Variants</Text>
-          <View className="rounded-lg border border-border bg-card p-4 gap-3">
+          <Text className="text-xs font-semibold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">Variants</Text>
+          <View className="rounded-lg border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 p-4 gap-3">
             <Button>Default</Button>
             <Button variant="secondary">Secondary</Button>
             <Button variant="outline">Outline</Button>
@@ -119,16 +119,16 @@ const demos: Record<string, () => React.ReactElement> = {
           </View>
         </View>
         <View className="gap-2">
-          <Text className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Sizes</Text>
-          <View className="rounded-lg border border-border bg-card p-4 gap-3">
+          <Text className="text-xs font-semibold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">Sizes</Text>
+          <View className="rounded-lg border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 p-4 gap-3">
             <Button size="sm">Small</Button>
             <Button size="md">Medium (default)</Button>
             <Button size="lg">Large</Button>
           </View>
         </View>
         <View className="gap-2">
-          <Text className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">States</Text>
-          <View className="rounded-lg border border-border bg-card p-4 gap-3">
+          <Text className="text-xs font-semibold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">States</Text>
+          <View className="rounded-lg border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 p-4 gap-3">
             <Button loading>Loading...</Button>
             <Button disabled>Disabled</Button>
           </View>
@@ -140,10 +140,10 @@ const demos: Record<string, () => React.ReactElement> = {
     const [val, setVal] = useState("");
     return (
       <View className="gap-6">
-        <Text className="text-sm text-muted-foreground">A styled text input with variant and size options. Supports leading/trailing icons and integrates with Label for form fields.</Text>
+        <Text className="text-sm text-zinc-500 dark:text-zinc-400">A styled text input with variant and size options. Supports leading/trailing icons and integrates with Label for form fields.</Text>
         <View className="gap-2">
-          <Text className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Variants</Text>
-          <View className="rounded-lg border border-border bg-card p-4 gap-3">
+          <Text className="text-xs font-semibold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">Variants</Text>
+          <View className="rounded-lg border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 p-4 gap-3">
             <Label>Default</Label>
             <Input placeholder="you@example.com" value={val} onChangeText={setVal} />
             <Label>Ghost</Label>
@@ -151,23 +151,23 @@ const demos: Record<string, () => React.ReactElement> = {
           </View>
         </View>
         <View className="gap-2">
-          <Text className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Sizes</Text>
-          <View className="rounded-lg border border-border bg-card p-4 gap-3">
+          <Text className="text-xs font-semibold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">Sizes</Text>
+          <View className="rounded-lg border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 p-4 gap-3">
             <Input size="sm" placeholder="Small input" />
             <Input size="md" placeholder="Medium input (default)" />
             <Input size="lg" placeholder="Large input" />
           </View>
         </View>
         <View className="gap-2">
-          <Text className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">With Icons</Text>
-          <View className="rounded-lg border border-border bg-card p-4 gap-3">
-            <Input placeholder="Search..." leadingIcon={<Text className="text-muted-foreground">🔍</Text>} />
-            <Input placeholder="Amount" trailingIcon={<Text className="text-muted-foreground">USD</Text>} />
+          <Text className="text-xs font-semibold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">With Icons</Text>
+          <View className="rounded-lg border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 p-4 gap-3">
+            <Input placeholder="Search..." leadingIcon={<Text className="text-zinc-500 dark:text-zinc-400">🔍</Text>} />
+            <Input placeholder="Amount" trailingIcon={<Text className="text-zinc-500 dark:text-zinc-400">USD</Text>} />
           </View>
         </View>
         <View className="gap-2">
-          <Text className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Disabled</Text>
-          <View className="rounded-lg border border-border bg-card p-4">
+          <Text className="text-xs font-semibold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">Disabled</Text>
+          <View className="rounded-lg border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 p-4">
             <Input placeholder="Disabled input" editable={false} className="opacity-50" />
           </View>
         </View>
@@ -178,18 +178,18 @@ const demos: Record<string, () => React.ReactElement> = {
     const [val, setVal] = useState("");
     return (
       <View className="gap-6">
-        <Text className="text-sm text-muted-foreground">A multi-line text input for longer-form content like bios, comments, or messages. Supports variant and size props.</Text>
+        <Text className="text-sm text-zinc-500 dark:text-zinc-400">A multi-line text input for longer-form content like bios, comments, or messages. Supports variant and size props.</Text>
         <View className="gap-2">
-          <Text className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Default</Text>
-          <View className="rounded-lg border border-border bg-card p-4 gap-2">
+          <Text className="text-xs font-semibold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">Default</Text>
+          <View className="rounded-lg border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 p-4 gap-2">
             <Label>Bio</Label>
             <Textarea placeholder="Tell us about yourself..." value={val} onChangeText={setVal} />
-            <Text className="text-xs text-muted-foreground text-right">{val.length}/200</Text>
+            <Text className="text-xs text-zinc-500 dark:text-zinc-400 text-right">{val.length}/200</Text>
           </View>
         </View>
         <View className="gap-2">
-          <Text className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Ghost Variant</Text>
-          <View className="rounded-lg border border-border bg-card p-4">
+          <Text className="text-xs font-semibold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">Ghost Variant</Text>
+          <View className="rounded-lg border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 p-4">
             <Textarea variant="ghost" placeholder="Ghost textarea..." />
           </View>
         </View>
@@ -202,18 +202,18 @@ const demos: Record<string, () => React.ReactElement> = {
     const [c, setC] = useState(false);
     return (
       <View className="gap-6">
-        <Text className="text-sm text-muted-foreground">A toggleable checkbox for binary choices in forms. Supports checked, unchecked, and disabled states.</Text>
+        <Text className="text-sm text-zinc-500 dark:text-zinc-400">A toggleable checkbox for binary choices in forms. Supports checked, unchecked, and disabled states.</Text>
         <View className="gap-2">
-          <Text className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">States</Text>
-          <View className="rounded-lg border border-border bg-card p-4 gap-3">
+          <Text className="text-xs font-semibold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">States</Text>
+          <View className="rounded-lg border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 p-4 gap-3">
             <View className="flex-row items-center gap-2"><Checkbox checked={a} onCheckedChange={setA} /><Text>Unchecked</Text></View>
             <View className="flex-row items-center gap-2"><Checkbox checked={b} onCheckedChange={setB} /><Text>Checked</Text></View>
             <View className="flex-row items-center gap-2 opacity-50"><Checkbox checked={false} disabled /><Text>Disabled</Text></View>
           </View>
         </View>
         <View className="gap-2">
-          <Text className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Form Group</Text>
-          <View className="rounded-lg border border-border bg-card p-4 gap-3">
+          <Text className="text-xs font-semibold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">Form Group</Text>
+          <View className="rounded-lg border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 p-4 gap-3">
             <View className="flex-row items-center gap-2"><Checkbox checked={a} onCheckedChange={setA} /><Text>Accept terms and conditions</Text></View>
             <View className="flex-row items-center gap-2"><Checkbox checked={b} onCheckedChange={setB} /><Text>Send me notifications</Text></View>
             <View className="flex-row items-center gap-2"><Checkbox checked={c} onCheckedChange={setC} /><Text>Subscribe to newsletter</Text></View>
@@ -229,24 +229,24 @@ const demos: Record<string, () => React.ReactElement> = {
     const [auto, setAuto] = useState(false);
     return (
       <View className="gap-6">
-        <Text className="text-sm text-muted-foreground">A themed toggle switch for binary on/off settings. Wraps the native Switch component with consistent styling.</Text>
+        <Text className="text-sm text-zinc-500 dark:text-zinc-400">A themed toggle switch for binary on/off settings. Wraps the native Switch component with consistent styling.</Text>
         <View className="gap-2">
-          <Text className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Settings Example</Text>
-          <View className="rounded-lg border border-border bg-card divide-y divide-border">
+          <Text className="text-xs font-semibold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">Settings Example</Text>
+          <View className="rounded-lg border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 divide-y divide-zinc-200 dark:divide-zinc-800">
             <View className="flex-row items-center justify-between px-4 py-3">
-              <Text className="text-sm text-foreground">Notifications</Text>
+              <Text className="text-sm text-zinc-950 dark:text-zinc-50">Notifications</Text>
               <Switch value={notif} onValueChange={setNotif} />
             </View>
             <View className="flex-row items-center justify-between px-4 py-3">
-              <Text className="text-sm text-foreground">Dark Mode</Text>
+              <Text className="text-sm text-zinc-950 dark:text-zinc-50">Dark Mode</Text>
               <Switch value={dark} onValueChange={setDark} />
             </View>
             <View className="flex-row items-center justify-between px-4 py-3">
-              <Text className="text-sm text-foreground">Sound Effects</Text>
+              <Text className="text-sm text-zinc-950 dark:text-zinc-50">Sound Effects</Text>
               <Switch value={sound} onValueChange={setSound} />
             </View>
             <View className="flex-row items-center justify-between px-4 py-3">
-              <Text className="text-sm text-foreground">Auto-Update</Text>
+              <Text className="text-sm text-zinc-950 dark:text-zinc-50">Auto-Update</Text>
               <Switch value={auto} onValueChange={setAuto} />
             </View>
           </View>
@@ -258,10 +258,10 @@ const demos: Record<string, () => React.ReactElement> = {
     const [val, setVal] = useState("a");
     return (
       <View className="gap-6">
-        <Text className="text-sm text-muted-foreground">A group of mutually exclusive radio options. Only one item can be selected at a time.</Text>
+        <Text className="text-sm text-zinc-500 dark:text-zinc-400">A group of mutually exclusive radio options. Only one item can be selected at a time.</Text>
         <View className="gap-2">
-          <Text className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Options</Text>
-          <View className="rounded-lg border border-border bg-card p-4">
+          <Text className="text-xs font-semibold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">Options</Text>
+          <View className="rounded-lg border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 p-4">
             <RadioGroup value={val} onValueChange={setVal}>
               <RadioGroupItem value="a" label="Option A" />
               <RadioGroupItem value="b" label="Option B" />
@@ -287,13 +287,13 @@ const demos: Record<string, () => React.ReactElement> = {
     ];
     return (
       <View className="gap-6">
-        <Text className="text-sm text-muted-foreground">A dropdown picker for selecting a single value from a list. Supports an optional searchable mode for filtering options.</Text>
+        <Text className="text-sm text-zinc-500 dark:text-zinc-400">A dropdown picker for selecting a single value from a list. Supports an optional searchable mode for filtering options.</Text>
         <View className="gap-2">
-          <Text className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Basic</Text>
+          <Text className="text-xs font-semibold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">Basic</Text>
           <Select placeholder="Pick a fruit..." options={fruits} value={val} onValueChange={setVal} />
         </View>
         <View className="gap-2">
-          <Text className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Searchable</Text>
+          <Text className="text-xs font-semibold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">Searchable</Text>
           <Select placeholder="Search fruits..." options={fruits} value={val2} onValueChange={setVal2} searchable />
         </View>
       </View>
@@ -305,7 +305,7 @@ const demos: Record<string, () => React.ReactElement> = {
     const [bright, setBright] = useState(30);
     return (
       <View className="gap-6">
-        <Text className="text-sm text-muted-foreground">A draggable slider for selecting a numeric value within a range. Supports multiple sizes and a disabled state.</Text>
+        <Text className="text-sm text-zinc-500 dark:text-zinc-400">A draggable slider for selecting a numeric value within a range. Supports multiple sizes and a disabled state.</Text>
         <View className="gap-2">
           <View className="flex-row justify-between"><Text variant="small">Volume</Text><Text variant="muted">{vol}%</Text></View>
           <Slider value={vol} onValueChange={setVol} />
@@ -319,7 +319,7 @@ const demos: Record<string, () => React.ReactElement> = {
           <Slider value={val} onValueChange={setVal} size="sm" />
         </View>
         <View className="gap-2">
-          <Text variant="small" className="text-muted-foreground">Disabled</Text>
+          <Text variant="small" className="text-zinc-500 dark:text-zinc-400">Disabled</Text>
           <Slider value={60} disabled />
         </View>
       </View>
@@ -330,16 +330,16 @@ const demos: Record<string, () => React.ReactElement> = {
     const [val2, setVal2] = useState(1);
     return (
       <View className="gap-6">
-        <Text className="text-sm text-muted-foreground">A numeric stepper with increment and decrement buttons. Supports min, max, and step constraints.</Text>
+        <Text className="text-sm text-zinc-500 dark:text-zinc-400">A numeric stepper with increment and decrement buttons. Supports min, max, and step constraints.</Text>
         <View className="gap-2">
-          <Text className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Default (0-10)</Text>
-          <View className="rounded-lg border border-border bg-card p-4">
+          <Text className="text-xs font-semibold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">Default (0-10)</Text>
+          <View className="rounded-lg border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 p-4">
             <Stepper value={val} onChange={setVal} min={0} max={10} />
           </View>
         </View>
         <View className="gap-2">
-          <Text className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Small Range (1-5)</Text>
-          <View className="rounded-lg border border-border bg-card p-4">
+          <Text className="text-xs font-semibold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">Small Range (1-5)</Text>
+          <View className="rounded-lg border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 p-4">
             <Stepper value={val2} onChange={setVal2} min={1} max={5} />
           </View>
         </View>
@@ -351,10 +351,10 @@ const demos: Record<string, () => React.ReactElement> = {
     const [bold, setBold] = useState(true);
     return (
       <View className="gap-6">
-        <Text className="text-sm text-muted-foreground">A pressable toggle button that switches between pressed and unpressed states. Useful for binary options like bold/italic.</Text>
+        <Text className="text-sm text-zinc-500 dark:text-zinc-400">A pressable toggle button that switches between pressed and unpressed states. Useful for binary options like bold/italic.</Text>
         <View className="gap-2">
-          <Text className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">States</Text>
-          <View className="rounded-lg border border-border bg-card p-4 flex-row gap-3">
+          <Text className="text-xs font-semibold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">States</Text>
+          <View className="rounded-lg border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 p-4 flex-row gap-3">
             <Toggle pressed={on} onPressedChange={setOn}><Text>{on ? "On" : "Off"}</Text></Toggle>
             <Toggle pressed={bold} onPressedChange={setBold}><Text className="font-bold">B</Text></Toggle>
           </View>
@@ -367,10 +367,10 @@ const demos: Record<string, () => React.ReactElement> = {
     const [val, setVal] = useState("a");
     return (
       <View className="gap-6">
-        <Text className="text-sm text-muted-foreground">A group of toggle buttons where one item is selected at a time. Works like a segmented control with toggle styling.</Text>
+        <Text className="text-sm text-zinc-500 dark:text-zinc-400">A group of toggle buttons where one item is selected at a time. Works like a segmented control with toggle styling.</Text>
         <View className="gap-2">
-          <Text className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Selection</Text>
-          <View className="rounded-lg border border-border bg-card p-4">
+          <Text className="text-xs font-semibold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">Selection</Text>
+          <View className="rounded-lg border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 p-4">
             <ToggleGroup value={val} onValueChange={setVal}>
               <ToggleGroupItem value="a"><Text>Left</Text></ToggleGroupItem>
               <ToggleGroupItem value="b"><Text>Center</Text></ToggleGroupItem>
@@ -386,15 +386,15 @@ const demos: Record<string, () => React.ReactElement> = {
     const [val, setVal] = useState(3);
     return (
       <View className="gap-6">
-        <Text className="text-sm text-muted-foreground">An interactive star rating input for collecting user feedback. Supports small, medium, and large sizes.</Text>
+        <Text className="text-sm text-zinc-500 dark:text-zinc-400">An interactive star rating input for collecting user feedback. Supports small, medium, and large sizes.</Text>
         <View className="gap-2">
-          <Text className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Sizes</Text>
-          <View className="rounded-lg border border-border bg-card p-4 gap-4">
-            <Text variant="small" className="text-muted-foreground">Small</Text>
+          <Text className="text-xs font-semibold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">Sizes</Text>
+          <View className="rounded-lg border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 p-4 gap-4">
+            <Text variant="small" className="text-zinc-500 dark:text-zinc-400">Small</Text>
             <Rating size="sm" value={val} onChange={setVal} />
-            <Text variant="small" className="text-muted-foreground">Medium</Text>
+            <Text variant="small" className="text-zinc-500 dark:text-zinc-400">Medium</Text>
             <Rating size="md" value={val} onChange={setVal} />
-            <Text variant="small" className="text-muted-foreground">Large</Text>
+            <Text variant="small" className="text-zinc-500 dark:text-zinc-400">Large</Text>
             <Rating size="lg" value={val} onChange={setVal} />
           </View>
         </View>
@@ -408,9 +408,9 @@ const demos: Record<string, () => React.ReactElement> = {
     const toggle = (t: string) => setSelected((s) => s.includes(t) ? s.filter((x) => x !== t) : [...s, t]);
     return (
       <View className="gap-6">
-        <Text className="text-sm text-muted-foreground">A compact, pressable tag element for filtering, categorizing, or selecting options. Supports sizes, selection state, and a close button.</Text>
+        <Text className="text-sm text-zinc-500 dark:text-zinc-400">A compact, pressable tag element for filtering, categorizing, or selecting options. Supports sizes, selection state, and a close button.</Text>
         <View className="gap-2">
-          <Text className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Sizes</Text>
+          <Text className="text-xs font-semibold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">Sizes</Text>
           <View className="flex-row flex-wrap gap-2">
             <Chip size="sm">Small</Chip>
             <Chip size="md">Medium</Chip>
@@ -418,7 +418,7 @@ const demos: Record<string, () => React.ReactElement> = {
           </View>
         </View>
         <View className="gap-2">
-          <Text className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Selectable</Text>
+          <Text className="text-xs font-semibold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">Selectable</Text>
           <View className="flex-row flex-wrap gap-2">
             {tags.map((t) => (
               <Chip key={t} selected={selected.includes(t)} onPress={() => toggle(t)}>{t}</Chip>
@@ -426,7 +426,7 @@ const demos: Record<string, () => React.ReactElement> = {
           </View>
         </View>
         <View className="gap-2">
-          <Text className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">With Close</Text>
+          <Text className="text-xs font-semibold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">With Close</Text>
           <View className="flex-row flex-wrap gap-2">
             {tags.map((t) => (
               <Chip key={t} variant="secondary" onClose={() => setTags((prev) => prev.filter((x) => x !== t))}>{t}</Chip>
@@ -440,9 +440,9 @@ const demos: Record<string, () => React.ReactElement> = {
     const [val, setVal] = useState("Day");
     return (
       <View className="gap-6">
-        <Text className="text-sm text-muted-foreground">An animated segmented control for switching between a small set of options. The active indicator slides smoothly between segments.</Text>
+        <Text className="text-sm text-zinc-500 dark:text-zinc-400">An animated segmented control for switching between a small set of options. The active indicator slides smoothly between segments.</Text>
         <View className="gap-2">
-          <Text className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Example</Text>
+          <Text className="text-xs font-semibold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">Example</Text>
           <SegmentedControl options={["Day", "Week", "Month"]} value={val} onValueChange={setVal} />
         </View>
         <Text variant="muted">Selected: {val}</Text>
@@ -455,9 +455,9 @@ const demos: Record<string, () => React.ReactElement> = {
     const [v3, setV3] = useState("");
     return (
       <View className="gap-6">
-        <Text className="text-sm text-muted-foreground">A search input with a built-in search icon and clear button. Supports small, medium, and large sizes.</Text>
+        <Text className="text-sm text-zinc-500 dark:text-zinc-400">A search input with a built-in search icon and clear button. Supports small, medium, and large sizes.</Text>
         <View className="gap-2">
-          <Text className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Sizes</Text>
+          <Text className="text-xs font-semibold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">Sizes</Text>
           <View className="gap-3">
             <SearchBar value={v2} onChangeText={setV2} placeholder="Small" size="sm" />
             <SearchBar value={v1} onChangeText={setV1} placeholder="Medium (default)" />
@@ -472,14 +472,14 @@ const demos: Record<string, () => React.ReactElement> = {
     const [val6, setVal6] = useState("");
     return (
       <View className="gap-6">
-        <Text className="text-sm text-muted-foreground">A one-time password input with individual character cells. Supports configurable length and auto-focus advancement.</Text>
+        <Text className="text-sm text-zinc-500 dark:text-zinc-400">A one-time password input with individual character cells. Supports configurable length and auto-focus advancement.</Text>
         <View className="gap-2">
-          <Text className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">4-Digit Code</Text>
+          <Text className="text-xs font-semibold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">4-Digit Code</Text>
           <InputOTP value={val4} onValueChange={setVal4} length={4} />
           {val4.length === 4 && <Text variant="muted">Code: {val4}</Text>}
         </View>
         <View className="gap-2">
-          <Text className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">6-Digit Code</Text>
+          <Text className="text-xs font-semibold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">6-Digit Code</Text>
           <InputOTP value={val6} onValueChange={setVal6} length={6} />
           {val6.length === 6 && <Text variant="muted">Code: {val6}</Text>}
         </View>
@@ -491,17 +491,17 @@ const demos: Record<string, () => React.ReactElement> = {
     const [p2, setP2] = useState("");
     return (
       <View className="gap-6">
-        <Text className="text-sm text-muted-foreground">A password text input with a show/hide toggle and optional strength indicator. Masks input by default.</Text>
+        <Text className="text-sm text-zinc-500 dark:text-zinc-400">A password text input with a show/hide toggle and optional strength indicator. Masks input by default.</Text>
         <View className="gap-2">
-          <Text className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Basic</Text>
-          <View className="rounded-lg border border-border bg-card p-4 gap-2">
+          <Text className="text-xs font-semibold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">Basic</Text>
+          <View className="rounded-lg border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 p-4 gap-2">
             <Label>Password</Label>
             <PasswordInput value={p1} onChangeText={setP1} placeholder="Enter password" />
           </View>
         </View>
         <View className="gap-2">
-          <Text className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">With Strength Indicator</Text>
-          <View className="rounded-lg border border-border bg-card p-4 gap-2">
+          <Text className="text-xs font-semibold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">With Strength Indicator</Text>
+          <View className="rounded-lg border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 p-4 gap-2">
             <Label>Password</Label>
             <PasswordInput value={p2} onChangeText={setP2} placeholder="Enter password" showStrength />
           </View>
@@ -515,9 +515,9 @@ const demos: Record<string, () => React.ReactElement> = {
     const [date, setDate] = useState("");
     return (
       <View className="gap-6">
-        <Text className="text-sm text-muted-foreground">A text input that automatically formats input with a mask pattern. Includes presets for credit cards, phone numbers, and dates.</Text>
+        <Text className="text-sm text-zinc-500 dark:text-zinc-400">A text input that automatically formats input with a mask pattern. Includes presets for credit cards, phone numbers, and dates.</Text>
         <View className="gap-2">
-          <Text className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Presets</Text>
+          <Text className="text-xs font-semibold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">Presets</Text>
           <View className="gap-4">
             <View className="gap-1">
               <Label>Credit Card</Label>
@@ -541,18 +541,18 @@ const demos: Record<string, () => React.ReactElement> = {
     const [dob, setDob] = useState<Date | undefined>(undefined);
     return (
       <View className="gap-6">
-        <Text className="text-sm text-muted-foreground">A calendar-based date picker in a modal overlay. Opens a full month view for date selection with navigation between months.</Text>
+        <Text className="text-sm text-zinc-500 dark:text-zinc-400">A calendar-based date picker in a modal overlay. Opens a full month view for date selection with navigation between months.</Text>
         <View className="gap-2">
-          <Text className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Default</Text>
-          <View className="rounded-xl border border-border bg-card p-4 gap-3">
+          <Text className="text-xs font-semibold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">Default</Text>
+          <View className="rounded-xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 p-4 gap-3">
             <Label>Event date</Label>
             <DatePicker value={date} onChange={setDate} />
             <Text variant="muted">Selected: {date.toLocaleDateString()}</Text>
           </View>
         </View>
         <View className="gap-2">
-          <Text className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">With Placeholder</Text>
-          <View className="rounded-xl border border-border bg-card p-4 gap-3">
+          <Text className="text-xs font-semibold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">With Placeholder</Text>
+          <View className="rounded-xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 p-4 gap-3">
             <Label>Date of birth</Label>
             <DatePicker value={dob} onChange={setDob} placeholder="Pick your birthday" />
             {dob && <Text variant="muted">Birthday: {dob.toLocaleDateString()}</Text>}
@@ -565,10 +565,10 @@ const demos: Record<string, () => React.ReactElement> = {
     const [val, setVal] = useState(5);
     return (
       <View className="gap-6">
-        <Text className="text-sm text-muted-foreground">A numeric input with increment and decrement buttons. Supports min, max, and step constraints for controlled numeric entry.</Text>
+        <Text className="text-sm text-zinc-500 dark:text-zinc-400">A numeric input with increment and decrement buttons. Supports min, max, and step constraints for controlled numeric entry.</Text>
         <View className="gap-2">
-          <Text className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">With Min/Max (0-20)</Text>
-          <View className="rounded-lg border border-border bg-card p-4">
+          <Text className="text-xs font-semibold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">With Min/Max (0-20)</Text>
+          <View className="rounded-lg border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 p-4">
             <NumberInput value={val} onValueChange={setVal} min={0} max={20} />
           </View>
         </View>
@@ -580,10 +580,10 @@ const demos: Record<string, () => React.ReactElement> = {
     const [val, setVal] = useState("");
     return (
       <View className="gap-6">
-        <Text className="text-sm text-muted-foreground">A phone number input with a country code selector. Automatically formats the number based on the selected country.</Text>
+        <Text className="text-sm text-zinc-500 dark:text-zinc-400">A phone number input with a country code selector. Automatically formats the number based on the selected country.</Text>
         <View className="gap-2">
-          <Text className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Example</Text>
-          <View className="rounded-lg border border-border bg-card p-4 gap-3">
+          <Text className="text-xs font-semibold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">Example</Text>
+          <View className="rounded-lg border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 p-4 gap-3">
             <Label>Phone number</Label>
             <PhoneInput value={val} onChangeText={setVal} placeholder="5551234567" />
             {val ? <Text variant="muted">Full: {val}</Text> : null}
@@ -596,10 +596,10 @@ const demos: Record<string, () => React.ReactElement> = {
     const [val, setVal] = useState("");
     return (
       <View className="gap-6">
-        <Text className="text-sm text-muted-foreground">A searchable dropdown that combines a text input with a filterable options list. Type to filter, then select from matching results.</Text>
+        <Text className="text-sm text-zinc-500 dark:text-zinc-400">A searchable dropdown that combines a text input with a filterable options list. Type to filter, then select from matching results.</Text>
         <View className="gap-2">
-          <Text className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Example</Text>
-          <View className="rounded-lg border border-border bg-card p-4 gap-3">
+          <Text className="text-xs font-semibold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">Example</Text>
+          <View className="rounded-lg border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 p-4 gap-3">
             <Label>Framework</Label>
             <Combobox
               placeholder="Select framework..."
@@ -638,19 +638,19 @@ const demos: Record<string, () => React.ReactElement> = {
     };
     return (
       <View className="gap-6">
-        <Text className="text-sm text-muted-foreground">A form layout with validation and error messages. Combines Label, Input, and error text for a complete form experience.</Text>
+        <Text className="text-sm text-zinc-500 dark:text-zinc-400">A form layout with validation and error messages. Combines Label, Input, and error text for a complete form experience.</Text>
         <View className="gap-2">
-          <Text className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Contact Form</Text>
-          <View className="rounded-lg border border-border bg-card p-4 gap-4">
+          <Text className="text-xs font-semibold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">Contact Form</Text>
+          <View className="rounded-lg border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 p-4 gap-4">
             <View className="gap-1">
               <Label>Name</Label>
               <Input placeholder="John Doe" value={name} onChangeText={(t) => { setName(t); if (errors.name) setErrors((e) => ({ ...e, name: undefined })); }} />
-              {errors.name && <Text className="text-destructive text-xs">{errors.name}</Text>}
+              {errors.name && <Text className="text-red-500 dark:text-red-900 text-xs">{errors.name}</Text>}
             </View>
             <View className="gap-1">
               <Label>Email</Label>
               <Input placeholder="john@example.com" value={email} onChangeText={(t) => { setEmail(t); if (errors.email) setErrors((e) => ({ ...e, email: undefined })); }} keyboardType="email-address" autoCapitalize="none" />
-              {errors.email && <Text className="text-destructive text-xs">{errors.email}</Text>}
+              {errors.email && <Text className="text-red-500 dark:text-red-900 text-xs">{errors.email}</Text>}
             </View>
             <Button onPress={handleSubmit}>{submitted ? "Submitted!" : "Submit"}</Button>
           </View>
@@ -681,7 +681,7 @@ const demos: Record<string, () => React.ReactElement> = {
     const reset = () => { setFile(null); setStatus("idle"); setProgress(0); };
     return (
       <View className="gap-6">
-        <Text className="text-sm text-muted-foreground">A file upload area with dashed border, file preview, and upload progress. Simulates a real upload workflow with status feedback.</Text>
+        <Text className="text-sm text-zinc-500 dark:text-zinc-400">A file upload area with dashed border, file preview, and upload progress. Simulates a real upload workflow with status feedback.</Text>
         <View className="gap-4">
         <FilePicker file={file ?? undefined} onPress={selectFile} onRemove={reset} label="Select a document" />
         {file && status === "idle" && (
@@ -693,7 +693,7 @@ const demos: Record<string, () => React.ReactElement> = {
         {status === "uploading" && (
           <View className="gap-2">
             <Progress value={progress} />
-            <Text variant="small" className="text-muted-foreground text-center">Uploading... {progress}%</Text>
+            <Text variant="small" className="text-zinc-500 dark:text-zinc-400 text-center">Uploading... {progress}%</Text>
           </View>
         )}
         {status === "success" && (
@@ -703,8 +703,8 @@ const demos: Record<string, () => React.ReactElement> = {
         )}
         {status === "failed" && (
           <View className="gap-2">
-            <View className="rounded-lg border border-destructive/30 bg-destructive/10 p-3">
-              <Text className="text-destructive text-sm font-medium text-center">Upload failed. Please try again.</Text>
+            <View className="rounded-lg border border-red-500/30 dark:border-red-900/30 bg-red-500/10 dark:bg-red-900/10 p-3">
+              <Text className="text-red-500 dark:text-red-900 text-sm font-medium text-center">Upload failed. Please try again.</Text>
             </View>
             <Button variant="outline" onPress={upload}>Retry</Button>
           </View>
@@ -715,10 +715,10 @@ const demos: Record<string, () => React.ReactElement> = {
   },
   text: () => (
     <View className="gap-6">
-      <Text className="text-sm text-muted-foreground">A typography component with semantic variants for headings, body text, and utility styles. Maps to React Native Text with NativeWind classes.</Text>
+      <Text className="text-sm text-zinc-500 dark:text-zinc-400">A typography component with semantic variants for headings, body text, and utility styles. Maps to React Native Text with NativeWind classes.</Text>
       <View className="gap-2">
-        <Text className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Headings</Text>
-        <View className="rounded-lg border border-border bg-card p-4 gap-3">
+        <Text className="text-xs font-semibold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">Headings</Text>
+        <View className="rounded-lg border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 p-4 gap-3">
           <Text variant="h1">Heading 1</Text>
           <Text variant="h2">Heading 2</Text>
           <Text variant="h3">Heading 3</Text>
@@ -726,16 +726,16 @@ const demos: Record<string, () => React.ReactElement> = {
         </View>
       </View>
       <View className="gap-2">
-        <Text className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Body</Text>
-        <View className="rounded-lg border border-border bg-card p-4 gap-3">
+        <Text className="text-xs font-semibold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">Body</Text>
+        <View className="rounded-lg border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 p-4 gap-3">
           <Text variant="lead">Lead text for introductions</Text>
           <Text variant="p">Paragraph text for body content with comfortable line height for readability.</Text>
           <Text variant="large">Large emphasized text</Text>
         </View>
       </View>
       <View className="gap-2">
-        <Text className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Utility</Text>
-        <View className="rounded-lg border border-border bg-card p-4 gap-3">
+        <Text className="text-xs font-semibold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">Utility</Text>
+        <View className="rounded-lg border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 p-4 gap-3">
           <Text variant="small">Small text for captions</Text>
           <Text variant="muted">Muted text for secondary info</Text>
         </View>
@@ -744,10 +744,10 @@ const demos: Record<string, () => React.ReactElement> = {
   ),
   badge: () => (
     <View className="gap-6">
-      <Text className="text-sm text-muted-foreground">Small status labels for categorizing, counting, or highlighting items. Supports four visual variants.</Text>
+      <Text className="text-sm text-zinc-500 dark:text-zinc-400">Small status labels for categorizing, counting, or highlighting items. Supports four visual variants.</Text>
       <View className="gap-2">
-        <Text className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Variants</Text>
-        <View className="rounded-lg border border-border bg-card p-4">
+        <Text className="text-xs font-semibold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">Variants</Text>
+        <View className="rounded-lg border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 p-4">
           <View className="flex-row flex-wrap gap-2">
             <Badge>Default</Badge>
             <Badge variant="secondary">Secondary</Badge>
@@ -757,22 +757,22 @@ const demos: Record<string, () => React.ReactElement> = {
         </View>
       </View>
       <View className="gap-2">
-        <Text className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Use Cases</Text>
-        <View className="rounded-lg border border-border bg-card p-4 gap-3">
+        <Text className="text-xs font-semibold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">Use Cases</Text>
+        <View className="rounded-lg border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 p-4 gap-3">
           <View className="flex-row items-center gap-2">
-            <Text className="text-sm text-foreground flex-1">Notifications</Text>
+            <Text className="text-sm text-zinc-950 dark:text-zinc-50 flex-1">Notifications</Text>
             <Badge variant="destructive">3 new</Badge>
           </View>
           <View className="flex-row items-center gap-2">
-            <Text className="text-sm text-foreground flex-1">Status</Text>
+            <Text className="text-sm text-zinc-950 dark:text-zinc-50 flex-1">Status</Text>
             <Badge>Active</Badge>
           </View>
           <View className="flex-row items-center gap-2">
-            <Text className="text-sm text-foreground flex-1">Version</Text>
+            <Text className="text-sm text-zinc-950 dark:text-zinc-50 flex-1">Version</Text>
             <Badge variant="outline">v2.0</Badge>
           </View>
           <View className="flex-row items-center gap-2">
-            <Text className="text-sm text-foreground flex-1">Plan</Text>
+            <Text className="text-sm text-zinc-950 dark:text-zinc-50 flex-1">Plan</Text>
             <Badge variant="secondary">Pro</Badge>
           </View>
         </View>
@@ -781,9 +781,9 @@ const demos: Record<string, () => React.ReactElement> = {
   ),
   card: () => (
     <View className="gap-6">
-      <Text className="text-sm text-muted-foreground">A container component with header, content, and footer sections. Use for grouping related information with consistent styling.</Text>
+      <Text className="text-sm text-zinc-500 dark:text-zinc-400">A container component with header, content, and footer sections. Use for grouping related information with consistent styling.</Text>
       <View className="gap-2">
-        <Text className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Full Card</Text>
+        <Text className="text-xs font-semibold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">Full Card</Text>
         <Card>
           <CardHeader>
             <CardTitle>Upgrade to Pro</CardTitle>
@@ -791,9 +791,9 @@ const demos: Record<string, () => React.ReactElement> = {
           </CardHeader>
           <CardContent>
             <View className="gap-2">
-              <View className="flex-row items-center gap-2"><Text className="text-green-600">*</Text><Text className="text-sm text-foreground">Unlimited projects</Text></View>
-              <View className="flex-row items-center gap-2"><Text className="text-green-600">*</Text><Text className="text-sm text-foreground">Advanced analytics</Text></View>
-              <View className="flex-row items-center gap-2"><Text className="text-green-600">*</Text><Text className="text-sm text-foreground">Priority support</Text></View>
+              <View className="flex-row items-center gap-2"><Text className="text-green-600">*</Text><Text className="text-sm text-zinc-950 dark:text-zinc-50">Unlimited projects</Text></View>
+              <View className="flex-row items-center gap-2"><Text className="text-green-600">*</Text><Text className="text-sm text-zinc-950 dark:text-zinc-50">Advanced analytics</Text></View>
+              <View className="flex-row items-center gap-2"><Text className="text-green-600">*</Text><Text className="text-sm text-zinc-950 dark:text-zinc-50">Priority support</Text></View>
             </View>
           </CardContent>
           <CardFooter>
@@ -802,10 +802,10 @@ const demos: Record<string, () => React.ReactElement> = {
         </Card>
       </View>
       <View className="gap-2">
-        <Text className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Simple Card</Text>
+        <Text className="text-xs font-semibold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">Simple Card</Text>
         <Card>
           <CardContent>
-            <Text className="text-sm text-foreground">A minimal card with only content, no header or footer.</Text>
+            <Text className="text-sm text-zinc-950 dark:text-zinc-50">A minimal card with only content, no header or footer.</Text>
           </CardContent>
         </Card>
       </View>
@@ -813,29 +813,29 @@ const demos: Record<string, () => React.ReactElement> = {
   ),
   avatar: () => (
     <View className="gap-6">
-      <Text className="text-sm text-muted-foreground">A circular avatar component that displays an image with a fallback to initials. Supports three sizes.</Text>
+      <Text className="text-sm text-zinc-500 dark:text-zinc-400">A circular avatar component that displays an image with a fallback to initials. Supports three sizes.</Text>
       <View className="gap-2">
-        <Text className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Sizes</Text>
-        <View className="rounded-lg border border-border bg-card p-4">
+        <Text className="text-xs font-semibold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">Sizes</Text>
+        <View className="rounded-lg border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 p-4">
           <View className="flex-row items-center gap-4">
             <View className="items-center gap-1">
               <Avatar size="sm" src="https://i.pravatar.cc/150?img=1" fallback="SM" />
-              <Text className="text-xs text-muted-foreground">sm</Text>
+              <Text className="text-xs text-zinc-500 dark:text-zinc-400">sm</Text>
             </View>
             <View className="items-center gap-1">
               <Avatar size="md" src="https://i.pravatar.cc/150?img=2" fallback="MD" />
-              <Text className="text-xs text-muted-foreground">md</Text>
+              <Text className="text-xs text-zinc-500 dark:text-zinc-400">md</Text>
             </View>
             <View className="items-center gap-1">
               <Avatar size="lg" src="https://i.pravatar.cc/150?img=3" fallback="LG" />
-              <Text className="text-xs text-muted-foreground">lg</Text>
+              <Text className="text-xs text-zinc-500 dark:text-zinc-400">lg</Text>
             </View>
           </View>
         </View>
       </View>
       <View className="gap-2">
-        <Text className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Fallback Initials</Text>
-        <View className="rounded-lg border border-border bg-card p-4">
+        <Text className="text-xs font-semibold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">Fallback Initials</Text>
+        <View className="rounded-lg border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 p-4">
           <View className="flex-row items-center gap-3">
             <Avatar fallback="AN" />
             <Avatar fallback="JD" />
@@ -845,22 +845,22 @@ const demos: Record<string, () => React.ReactElement> = {
         </View>
       </View>
       <View className="gap-2">
-        <Text className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">User List</Text>
-        <View className="rounded-lg border border-border bg-card divide-y divide-border">
+        <Text className="text-xs font-semibold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">User List</Text>
+        <View className="rounded-lg border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 divide-y divide-zinc-200 dark:divide-zinc-800">
           <View className="flex-row items-center gap-3 px-4 py-3">
             <Avatar size="sm" src="https://i.pravatar.cc/150?img=5" fallback="AJ" />
-            <Text className="text-sm text-foreground">Alice Johnson</Text>
+            <Text className="text-sm text-zinc-950 dark:text-zinc-50">Alice Johnson</Text>
           </View>
           <View className="flex-row items-center gap-3 px-4 py-3">
             <Avatar size="sm" fallback="BS" />
-            <Text className="text-sm text-foreground">Bob Smith</Text>
+            <Text className="text-sm text-zinc-950 dark:text-zinc-50">Bob Smith</Text>
           </View>
         </View>
       </View>
     </View>
   ),
   separator: () => (
-    <View className="rounded-lg border border-border bg-card p-4 gap-3">
+    <View className="rounded-lg border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 p-4 gap-3">
       <Text>Above the separator</Text>
       <Separator />
       <Text>Below the separator</Text>
@@ -873,7 +873,7 @@ const demos: Record<string, () => React.ReactElement> = {
     </View>
   ),
   skeleton: () => (
-    <View className="rounded-lg border border-border bg-card p-4 gap-3">
+    <View className="rounded-lg border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 p-4 gap-3">
       <View className="flex-row items-center gap-3">
         <Skeleton className="h-12 w-12 rounded-full" />
         <View className="gap-2">
@@ -887,65 +887,65 @@ const demos: Record<string, () => React.ReactElement> = {
   ),
   spinner: () => (
     <View className="gap-6">
-      <Text className="text-sm text-muted-foreground">An activity indicator for loading states. Wraps React Native ActivityIndicator with consistent sizing.</Text>
+      <Text className="text-sm text-zinc-500 dark:text-zinc-400">An activity indicator for loading states. Wraps React Native ActivityIndicator with consistent sizing.</Text>
       <View className="gap-2">
-        <Text className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Sizes</Text>
-        <View className="rounded-lg border border-border bg-card p-4">
+        <Text className="text-xs font-semibold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">Sizes</Text>
+        <View className="rounded-lg border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 p-4">
           <View className="flex-row items-center gap-6">
             <View className="items-center gap-2">
               <Spinner size="sm" />
-              <Text className="text-xs text-muted-foreground">sm</Text>
+              <Text className="text-xs text-zinc-500 dark:text-zinc-400">sm</Text>
             </View>
             <View className="items-center gap-2">
               <Spinner size="md" />
-              <Text className="text-xs text-muted-foreground">md</Text>
+              <Text className="text-xs text-zinc-500 dark:text-zinc-400">md</Text>
             </View>
             <View className="items-center gap-2">
               <Spinner size="lg" />
-              <Text className="text-xs text-muted-foreground">lg</Text>
+              <Text className="text-xs text-zinc-500 dark:text-zinc-400">lg</Text>
             </View>
           </View>
         </View>
       </View>
       <View className="gap-2">
-        <Text className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Inline Loading</Text>
-        <View className="rounded-lg border border-border bg-card p-4 flex-row items-center gap-3">
+        <Text className="text-xs font-semibold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">Inline Loading</Text>
+        <View className="rounded-lg border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 p-4 flex-row items-center gap-3">
           <Spinner size="sm" />
-          <Text className="text-sm text-muted-foreground">Loading content...</Text>
+          <Text className="text-sm text-zinc-500 dark:text-zinc-400">Loading content...</Text>
         </View>
       </View>
     </View>
   ),
   progress: () => (
     <View className="gap-6">
-      <Text className="text-sm text-muted-foreground">A horizontal progress bar that fills to indicate completion. Accepts a value from 0 to 100.</Text>
+      <Text className="text-sm text-zinc-500 dark:text-zinc-400">A horizontal progress bar that fills to indicate completion. Accepts a value from 0 to 100.</Text>
       <View className="gap-2">
-        <Text className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Values</Text>
-        <View className="rounded-lg border border-border bg-card p-4 gap-4">
+        <Text className="text-xs font-semibold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">Values</Text>
+        <View className="rounded-lg border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 p-4 gap-4">
           <View className="gap-1">
-            <View className="flex-row justify-between"><Text className="text-xs text-muted-foreground">25%</Text></View>
+            <View className="flex-row justify-between"><Text className="text-xs text-zinc-500 dark:text-zinc-400">25%</Text></View>
             <Progress value={25} />
           </View>
           <View className="gap-1">
-            <View className="flex-row justify-between"><Text className="text-xs text-muted-foreground">50%</Text></View>
+            <View className="flex-row justify-between"><Text className="text-xs text-zinc-500 dark:text-zinc-400">50%</Text></View>
             <Progress value={50} />
           </View>
           <View className="gap-1">
-            <View className="flex-row justify-between"><Text className="text-xs text-muted-foreground">75%</Text></View>
+            <View className="flex-row justify-between"><Text className="text-xs text-zinc-500 dark:text-zinc-400">75%</Text></View>
             <Progress value={75} />
           </View>
           <View className="gap-1">
-            <View className="flex-row justify-between"><Text className="text-xs text-muted-foreground">100%</Text></View>
+            <View className="flex-row justify-between"><Text className="text-xs text-zinc-500 dark:text-zinc-400">100%</Text></View>
             <Progress value={100} />
           </View>
         </View>
       </View>
       <View className="gap-2">
-        <Text className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Storage Usage</Text>
-        <View className="rounded-lg border border-border bg-card p-4 gap-2">
+        <Text className="text-xs font-semibold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">Storage Usage</Text>
+        <View className="rounded-lg border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 p-4 gap-2">
           <View className="flex-row justify-between">
-            <Text className="text-sm text-foreground">Storage</Text>
-            <Text className="text-sm text-muted-foreground">7.2 GB / 10 GB</Text>
+            <Text className="text-sm text-zinc-950 dark:text-zinc-50">Storage</Text>
+            <Text className="text-sm text-zinc-500 dark:text-zinc-400">7.2 GB / 10 GB</Text>
           </View>
           <Progress value={72} />
         </View>
@@ -954,22 +954,22 @@ const demos: Record<string, () => React.ReactElement> = {
   ),
   "empty-state": () => (
     <View className="gap-6">
-      <Text className="text-sm text-muted-foreground">A placeholder view for empty lists, search results, or error states. Supports title, description, icon, and an optional action button.</Text>
+      <Text className="text-sm text-zinc-500 dark:text-zinc-400">A placeholder view for empty lists, search results, or error states. Supports title, description, icon, and an optional action button.</Text>
       <View className="gap-2">
-        <Text className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">No Search Results</Text>
-        <View className="rounded-xl border border-border bg-card p-6">
+        <Text className="text-xs font-semibold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">No Search Results</Text>
+        <View className="rounded-xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 p-6">
           <EmptyState title="No results found" description="Try adjusting your search terms or filters to find what you're looking for." action={{ label: "Clear search", onPress: () => {} }} />
         </View>
       </View>
       <View className="gap-2">
-        <Text className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Empty Inbox</Text>
-        <View className="rounded-xl border border-border bg-card p-6">
+        <Text className="text-xs font-semibold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">Empty Inbox</Text>
+        <View className="rounded-xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 p-6">
           <EmptyState title="Your inbox is empty" description="When you receive messages, they'll appear here." />
         </View>
       </View>
       <View className="gap-2">
-        <Text className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Error State</Text>
-        <View className="rounded-xl border border-destructive/30 bg-destructive/5 p-6">
+        <Text className="text-xs font-semibold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">Error State</Text>
+        <View className="rounded-xl border border-red-500/30 dark:border-red-900/30 bg-red-500/5 dark:bg-red-900/5 p-6">
           <EmptyState title="Something went wrong" description="We couldn't load your data. Please check your connection and try again." action={{ label: "Retry", onPress: () => {} }} />
         </View>
       </View>
@@ -977,9 +977,9 @@ const demos: Record<string, () => React.ReactElement> = {
   ),
   alert: () => (
     <View className="gap-6">
-      <Text className="text-sm text-muted-foreground">Contextual feedback messages for important information. Supports default, destructive, success, and warning variants.</Text>
+      <Text className="text-sm text-zinc-500 dark:text-zinc-400">Contextual feedback messages for important information. Supports default, destructive, success, and warning variants.</Text>
       <View className="gap-2">
-        <Text className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Variants</Text>
+        <Text className="text-xs font-semibold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">Variants</Text>
         <View className="gap-3">
           <Alert variant="default" title="Info">
             <AlertDescription>This is a general informational alert for the user.</AlertDescription>
@@ -996,7 +996,7 @@ const demos: Record<string, () => React.ReactElement> = {
         </View>
       </View>
       <View className="gap-2">
-        <Text className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Title Only</Text>
+        <Text className="text-xs font-semibold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">Title Only</Text>
         <Alert variant="default" title="A simple alert with just a title." />
       </View>
     </View>
@@ -1016,22 +1016,22 @@ const demos: Record<string, () => React.ReactElement> = {
 
   accordion: () => (
     <View className="gap-6">
-      <Text className="text-sm text-muted-foreground">A collapsible content panel for organizing information into expandable sections. Only one item can be open at a time by default.</Text>
+      <Text className="text-sm text-zinc-500 dark:text-zinc-400">A collapsible content panel for organizing information into expandable sections. Only one item can be open at a time by default.</Text>
       <View className="gap-2">
-        <Text className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">FAQ Example</Text>
-        <View className="rounded-lg border border-border bg-card overflow-hidden">
+        <Text className="text-xs font-semibold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">FAQ Example</Text>
+        <View className="rounded-lg border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 overflow-hidden">
           <Accordion defaultValue="item-1">
             <AccordionItem value="item-1" trigger="What is AniUI?">
-              <Text className="text-sm text-muted-foreground">AniUI is a shadcn/ui-style component library for React Native. Components are copied into your project as source files that you own and customize.</Text>
+              <Text className="text-sm text-zinc-500 dark:text-zinc-400">AniUI is a shadcn/ui-style component library for React Native. Components are copied into your project as source files that you own and customize.</Text>
             </AccordionItem>
             <AccordionItem value="item-2" trigger="How do I install components?">
-              <Text className="text-sm text-muted-foreground">Run npx @aniui/cli add button to add individual components, or npx @aniui/cli init to set up the project.</Text>
+              <Text className="text-sm text-zinc-500 dark:text-zinc-400">Run npx @aniui/cli add button to add individual components, or npx @aniui/cli init to set up the project.</Text>
             </AccordionItem>
             <AccordionItem value="item-3" trigger="Does it support dark mode?">
-              <Text className="text-sm text-muted-foreground">Yes! All components use CSS variables for theming and support light and dark mode out of the box.</Text>
+              <Text className="text-sm text-zinc-500 dark:text-zinc-400">Yes! All components use CSS variables for theming and support light and dark mode out of the box.</Text>
             </AccordionItem>
             <AccordionItem value="item-4" trigger="What platforms are supported?">
-              <Text className="text-sm text-muted-foreground">AniUI supports iOS 15+, Android API 24+, Expo SDK 54/55, and bare React Native CLI 0.76+.</Text>
+              <Text className="text-sm text-zinc-500 dark:text-zinc-400">AniUI supports iOS 15+, Android API 24+, Expo SDK 54/55, and bare React Native CLI 0.76+.</Text>
             </AccordionItem>
           </Accordion>
         </View>
@@ -1045,28 +1045,28 @@ const demos: Record<string, () => React.ReactElement> = {
     return (
       <View className="gap-3">
         <Collapsible open={open1} onOpenChange={setOpen1}>
-          <View className="rounded-lg border border-border bg-card overflow-hidden">
+          <View className="rounded-lg border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 overflow-hidden">
             <CollapsibleTrigger>
               <View className="flex-row items-center justify-between px-4 py-3">
-                <Text className="text-sm font-medium text-foreground">What is AniUI?</Text>
-                <Text className="text-muted-foreground">{open1 ? "−" : "+"}</Text>
+                <Text className="text-sm font-medium text-zinc-950 dark:text-zinc-50">What is AniUI?</Text>
+                <Text className="text-zinc-500 dark:text-zinc-400">{open1 ? "−" : "+"}</Text>
               </View>
             </CollapsibleTrigger>
             <CollapsibleContent>
-              <View className="px-4 pb-3"><Text className="text-xs text-muted-foreground">A shadcn/ui-style component library for React Native with 80+ components.</Text></View>
+              <View className="px-4 pb-3"><Text className="text-xs text-zinc-500 dark:text-zinc-400">A shadcn/ui-style component library for React Native with 80+ components.</Text></View>
             </CollapsibleContent>
           </View>
         </Collapsible>
         <Collapsible open={open2} onOpenChange={setOpen2}>
-          <View className="rounded-lg border border-border bg-card overflow-hidden">
+          <View className="rounded-lg border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 overflow-hidden">
             <CollapsibleTrigger>
               <View className="flex-row items-center justify-between px-4 py-3">
-                <Text className="text-sm font-medium text-foreground">How do I install it?</Text>
-                <Text className="text-muted-foreground">{open2 ? "−" : "+"}</Text>
+                <Text className="text-sm font-medium text-zinc-950 dark:text-zinc-50">How do I install it?</Text>
+                <Text className="text-zinc-500 dark:text-zinc-400">{open2 ? "−" : "+"}</Text>
               </View>
             </CollapsibleTrigger>
             <CollapsibleContent>
-              <View className="px-4 pb-3"><Text className="text-xs text-muted-foreground">Run npx @aniui/cli init and the CLI will set up everything automatically.</Text></View>
+              <View className="px-4 pb-3"><Text className="text-xs text-zinc-500 dark:text-zinc-400">Run npx @aniui/cli init and the CLI will set up everything automatically.</Text></View>
             </CollapsibleContent>
           </View>
         </Collapsible>
@@ -1074,7 +1074,7 @@ const demos: Record<string, () => React.ReactElement> = {
     );
   },
   "labeled-separator": () => (
-    <View className="rounded-lg border border-border bg-card p-4 gap-4">
+    <View className="rounded-lg border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 p-4 gap-4">
       <Text>Content above</Text>
       <LabeledSeparator label="OR" />
       <Text>Content below</Text>
@@ -1083,7 +1083,7 @@ const demos: Record<string, () => React.ReactElement> = {
   image: () => (
     <View className="gap-4">
       <AniImage src="https://picsum.photos/300/200" alt="Sample" width={300} height={200} rounded="md" />
-      <AniImage src="https://invalid-url.com/img.jpg" alt="Broken" width={300} height={200} fallback={<View className="flex-1 items-center justify-center bg-muted rounded-md"><Text className="text-xs text-muted-foreground">Image not found</Text></View>} rounded="md" />
+      <AniImage src="https://invalid-url.com/img.jpg" alt="Broken" width={300} height={200} fallback={<View className="flex-1 items-center justify-center bg-zinc-100 dark:bg-zinc-800 rounded-md"><Text className="text-xs text-zinc-500 dark:text-zinc-400">Image not found</Text></View>} rounded="md" />
     </View>
   ),
   "progress-steps": () => {
@@ -1095,18 +1095,18 @@ const demos: Record<string, () => React.ReactElement> = {
     ];
     return (
       <View className="gap-6">
-        <Text className="text-sm text-muted-foreground">A multi-step wizard indicator for onboarding flows, checkout processes, or form wizards. Shows completed, active, and pending steps.</Text>
+        <Text className="text-sm text-zinc-500 dark:text-zinc-400">A multi-step wizard indicator for onboarding flows, checkout processes, or form wizards. Shows completed, active, and pending steps.</Text>
         <View className="gap-2">
-          <Text className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Onboarding Flow</Text>
-          <View className="rounded-xl border border-border bg-card p-4 gap-4">
+          <Text className="text-xs font-semibold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">Onboarding Flow</Text>
+          <View className="rounded-xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 p-4 gap-4">
             <ProgressSteps current={step}>
               <ProgressStep label="Account" />
               <ProgressStep label="Profile" />
               <ProgressStep label="Review" />
             </ProgressSteps>
-            <View className="rounded-lg bg-secondary/30 p-4 gap-1">
-              <Text className="text-sm font-semibold text-foreground">{step < 3 ? stepContent[step].title : "All Done!"}</Text>
-              <Text className="text-xs text-muted-foreground">{step < 3 ? stepContent[step].desc : "Your account has been created successfully."}</Text>
+            <View className="rounded-lg bg-zinc-100/30 dark:bg-zinc-800/30 p-4 gap-1">
+              <Text className="text-sm font-semibold text-zinc-950 dark:text-zinc-50">{step < 3 ? stepContent[step].title : "All Done!"}</Text>
+              <Text className="text-xs text-zinc-500 dark:text-zinc-400">{step < 3 ? stepContent[step].desc : "Your account has been created successfully."}</Text>
             </View>
             <View className="flex-row gap-3">
               <Button variant="outline" className="flex-1" onPress={() => setStep(Math.max(0, step - 1))} disabled={step <= 0}>Back</Button>
@@ -1118,34 +1118,34 @@ const demos: Record<string, () => React.ReactElement> = {
     );
   },
   list: () => (
-    <View className="rounded-xl border border-border bg-card overflow-hidden">
+    <View className="rounded-xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 overflow-hidden">
       <List>
         <ListItem>
           <View className="flex-row items-center gap-3">
-            <View className="h-9 w-9 rounded-full bg-primary/10 items-center justify-center"><Text className="text-primary text-sm font-bold">N</Text></View>
+            <View className="h-9 w-9 rounded-full bg-zinc-900/10 dark:bg-zinc-50/10 items-center justify-center"><Text className="text-zinc-900 dark:text-zinc-50 text-sm font-bold">N</Text></View>
             <View className="flex-1"><ListItemTitle>Notifications</ListItemTitle><ListItemDescription>Manage your notification preferences</ListItemDescription></View>
-            <Text className="text-muted-foreground text-xs">→</Text>
+            <Text className="text-zinc-500 dark:text-zinc-400 text-xs">→</Text>
           </View>
         </ListItem>
         <ListItem>
           <View className="flex-row items-center gap-3">
-            <View className="h-9 w-9 rounded-full bg-primary/10 items-center justify-center"><Text className="text-primary text-sm font-bold">P</Text></View>
+            <View className="h-9 w-9 rounded-full bg-zinc-900/10 dark:bg-zinc-50/10 items-center justify-center"><Text className="text-zinc-900 dark:text-zinc-50 text-sm font-bold">P</Text></View>
             <View className="flex-1"><ListItemTitle>Privacy</ListItemTitle><ListItemDescription>Control your privacy settings</ListItemDescription></View>
-            <Text className="text-muted-foreground text-xs">→</Text>
+            <Text className="text-zinc-500 dark:text-zinc-400 text-xs">→</Text>
           </View>
         </ListItem>
         <ListItem>
           <View className="flex-row items-center gap-3">
-            <View className="h-9 w-9 rounded-full bg-primary/10 items-center justify-center"><Text className="text-primary text-sm font-bold">S</Text></View>
+            <View className="h-9 w-9 rounded-full bg-zinc-900/10 dark:bg-zinc-50/10 items-center justify-center"><Text className="text-zinc-900 dark:text-zinc-50 text-sm font-bold">S</Text></View>
             <View className="flex-1"><ListItemTitle>Security</ListItemTitle><ListItemDescription>Password and authentication</ListItemDescription></View>
-            <Text className="text-muted-foreground text-xs">→</Text>
+            <Text className="text-zinc-500 dark:text-zinc-400 text-xs">→</Text>
           </View>
         </ListItem>
       </List>
     </View>
   ),
   table: () => (
-    <View className="rounded-xl border border-border overflow-hidden">
+    <View className="rounded-xl border border-zinc-200 dark:border-zinc-800 overflow-hidden">
       <Table>
         <TableHeader>
           <TableRow><TableHead>Name</TableHead><TableHead>Role</TableHead><TableHead>Status</TableHead></TableRow>
@@ -1153,7 +1153,7 @@ const demos: Record<string, () => React.ReactElement> = {
         <TableBody>
           <TableRow><TableCell>Alice Johnson</TableCell><TableCell>Admin</TableCell><TableCell><View className="rounded-full bg-green-500/10 px-2 py-0.5 self-start"><Text className="text-green-600 text-xs font-medium">Active</Text></View></TableCell></TableRow>
           <TableRow><TableCell>Bob Smith</TableCell><TableCell>Editor</TableCell><TableCell><View className="rounded-full bg-green-500/10 px-2 py-0.5 self-start"><Text className="text-green-600 text-xs font-medium">Active</Text></View></TableCell></TableRow>
-          <TableRow><TableCell>Charlie Lee</TableCell><TableCell>Viewer</TableCell><TableCell><View className="rounded-full bg-muted px-2 py-0.5 self-start"><Text className="text-muted-foreground text-xs font-medium">Inactive</Text></View></TableCell></TableRow>
+          <TableRow><TableCell>Charlie Lee</TableCell><TableCell>Viewer</TableCell><TableCell><View className="rounded-full bg-zinc-100 dark:bg-zinc-800 px-2 py-0.5 self-start"><Text className="text-zinc-500 dark:text-zinc-400 text-xs font-medium">Inactive</Text></View></TableCell></TableRow>
         </TableBody>
       </Table>
     </View>
@@ -1170,12 +1170,12 @@ const demos: Record<string, () => React.ReactElement> = {
     return (
       <View className="flex-row flex-wrap gap-3">
         {items.map((item) => (
-          <View key={item.id} className="rounded-xl border border-border bg-card p-4 gap-2" style={{ width: "47%" }}>
+          <View key={item.id} className="rounded-xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 p-4 gap-2" style={{ width: "47%" }}>
             <View className={`h-10 w-10 rounded-lg ${item.color} items-center justify-center`}>
-              <Text className="text-foreground text-lg font-bold">{item.title.charAt(0)}</Text>
+              <Text className="text-zinc-950 dark:text-zinc-50 text-lg font-bold">{item.title.charAt(0)}</Text>
             </View>
-            <Text className="text-sm font-medium text-foreground">{item.title}</Text>
-            <Text className="text-xs text-muted-foreground">{item.count} items</Text>
+            <Text className="text-sm font-medium text-zinc-950 dark:text-zinc-50">{item.title}</Text>
+            <Text className="text-xs text-zinc-500 dark:text-zinc-400">{item.count} items</Text>
           </View>
         ))}
       </View>
@@ -1183,10 +1183,10 @@ const demos: Record<string, () => React.ReactElement> = {
   },
   timeline: () => (
     <View className="gap-6">
-      <Text className="text-sm text-muted-foreground">Vertical event timeline with status dots and connecting lines. Perfect for order tracking, activity feeds, and step-by-step flows.</Text>
+      <Text className="text-sm text-zinc-500 dark:text-zinc-400">Vertical event timeline with status dots and connecting lines. Perfect for order tracking, activity feeds, and step-by-step flows.</Text>
       <View className="gap-2">
-        <Text className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Order Tracking</Text>
-        <View className="rounded-xl border border-border bg-card p-4">
+        <Text className="text-xs font-semibold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">Order Tracking</Text>
+        <View className="rounded-xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 p-4">
           <Timeline>
             <TimelineItem title="Order placed" description="Order #1234 confirmed and payment processed." time="Mar 15, 9:00 AM" variant="completed" />
             <TimelineItem title="Processing" description="Your items are being packed and prepared." time="Mar 15, 10:30 AM" variant="completed" />
@@ -1197,8 +1197,8 @@ const demos: Record<string, () => React.ReactElement> = {
         </View>
       </View>
       <View className="gap-2">
-        <Text className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Activity Log</Text>
-        <View className="rounded-xl border border-border bg-card p-4">
+        <Text className="text-xs font-semibold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">Activity Log</Text>
+        <View className="rounded-xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 p-4">
           <Timeline>
             <TimelineItem title="John updated the design" description="Changed header layout and color scheme." time="2 min ago" variant="default" />
             <TimelineItem title="Sarah left a comment" description="Looks great! Can we add more padding?" time="15 min ago" variant="default" />
@@ -1225,23 +1225,23 @@ const demos: Record<string, () => React.ReactElement> = {
   ),
   price: () => (
     <View className="gap-5">
-      <View className="rounded-lg border border-border bg-card p-4 gap-1">
-        <Text variant="small" className="text-muted-foreground">Regular price</Text>
+      <View className="rounded-lg border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 p-4 gap-1">
+        <Text variant="small" className="text-zinc-500 dark:text-zinc-400">Regular price</Text>
         <Price amount={49.99} currency="USD" />
       </View>
-      <View className="rounded-lg border border-border bg-card p-4 gap-1">
-        <Text variant="small" className="text-muted-foreground">Sale price</Text>
+      <View className="rounded-lg border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 p-4 gap-1">
+        <Text variant="small" className="text-zinc-500 dark:text-zinc-400">Sale price</Text>
         <View className="flex-row items-center gap-3">
           <Price amount={99.99} currency="USD" strikethrough />
           <Price amount={29.99} currency="USD" />
         </View>
       </View>
-      <View className="rounded-lg border border-border bg-card p-4 gap-1">
-        <Text variant="small" className="text-muted-foreground">With prefix</Text>
+      <View className="rounded-lg border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 p-4 gap-1">
+        <Text variant="small" className="text-zinc-500 dark:text-zinc-400">With prefix</Text>
         <Price amount={9.99} currency="USD" prefix="From " />
       </View>
-      <View className="rounded-lg border border-border bg-card p-4 gap-1">
-        <Text variant="small" className="text-muted-foreground">Free</Text>
+      <View className="rounded-lg border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 p-4 gap-1">
+        <Text variant="small" className="text-zinc-500 dark:text-zinc-400">Free</Text>
         <Price amount={0} currency="USD" />
       </View>
     </View>
@@ -1256,7 +1256,7 @@ const demos: Record<string, () => React.ReactElement> = {
     </View>
   ),
   "typing-indicator": () => (
-    <View className="rounded-lg border border-border bg-card p-4 items-start">
+    <View className="rounded-lg border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 p-4 items-start">
       <TypingIndicator />
     </View>
   ),
@@ -1318,18 +1318,18 @@ const demos: Record<string, () => React.ReactElement> = {
     const [rightOpen, setRightOpen] = useState(false);
     return (
       <View className="gap-6">
-        <Text className="text-sm text-muted-foreground">A slide-in panel from the left or right edge. Use for navigation menus, filters, or settings.</Text>
+        <Text className="text-sm text-zinc-500 dark:text-zinc-400">A slide-in panel from the left or right edge. Use for navigation menus, filters, or settings.</Text>
         <View className="gap-2">
-          <Text className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Left Drawer</Text>
+          <Text className="text-xs font-semibold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">Left Drawer</Text>
           <Button onPress={() => setLeftOpen(true)}>Open Navigation</Button>
           <Drawer open={leftOpen} onOpenChange={setLeftOpen} side="left">
             <DrawerContent>
               <View className="gap-1 pt-14 px-4">
-                <Text className="text-lg font-bold text-foreground mb-4">Navigation</Text>
+                <Text className="text-lg font-bold text-zinc-950 dark:text-zinc-50 mb-4">Navigation</Text>
                 {["Home", "Explore", "Notifications", "Messages", "Bookmarks", "Profile", "Settings"].map((item) => (
-                  <Pressable key={item} className="flex-row items-center gap-3 py-3 px-2 rounded-lg active:bg-accent" onPress={() => setLeftOpen(false)}>
-                    <View className="h-8 w-8 rounded-full bg-primary/10 items-center justify-center"><Text className="text-primary text-xs font-bold">{item[0]}</Text></View>
-                    <Text className="text-foreground text-sm">{item}</Text>
+                  <Pressable key={item} className="flex-row items-center gap-3 py-3 px-2 rounded-lg active:bg-zinc-100 dark:active:bg-zinc-800" onPress={() => setLeftOpen(false)}>
+                    <View className="h-8 w-8 rounded-full bg-zinc-900/10 dark:bg-zinc-50/10 items-center justify-center"><Text className="text-zinc-900 dark:text-zinc-50 text-xs font-bold">{item[0]}</Text></View>
+                    <Text className="text-zinc-950 dark:text-zinc-50 text-sm">{item}</Text>
                   </Pressable>
                 ))}
               </View>
@@ -1337,16 +1337,16 @@ const demos: Record<string, () => React.ReactElement> = {
           </Drawer>
         </View>
         <View className="gap-2">
-          <Text className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Right Drawer</Text>
+          <Text className="text-xs font-semibold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">Right Drawer</Text>
           <Button variant="outline" onPress={() => setRightOpen(true)}>Open Filters</Button>
           <Drawer open={rightOpen} onOpenChange={setRightOpen} side="right">
             <DrawerContent>
               <View className="gap-4 pt-14 px-4">
-                <Text className="text-lg font-bold text-foreground">Filters</Text>
+                <Text className="text-lg font-bold text-zinc-950 dark:text-zinc-50">Filters</Text>
                 <View className="gap-3">
-                  <View className="flex-row items-center gap-2"><Checkbox checked={true} onCheckedChange={() => {}} /><Text className="text-sm text-foreground">In stock only</Text></View>
-                  <View className="flex-row items-center gap-2"><Checkbox checked={false} onCheckedChange={() => {}} /><Text className="text-sm text-foreground">Free shipping</Text></View>
-                  <View className="flex-row items-center gap-2"><Checkbox checked={false} onCheckedChange={() => {}} /><Text className="text-sm text-foreground">On sale</Text></View>
+                  <View className="flex-row items-center gap-2"><Checkbox checked={true} onCheckedChange={() => {}} /><Text className="text-sm text-zinc-950 dark:text-zinc-50">In stock only</Text></View>
+                  <View className="flex-row items-center gap-2"><Checkbox checked={false} onCheckedChange={() => {}} /><Text className="text-sm text-zinc-950 dark:text-zinc-50">Free shipping</Text></View>
+                  <View className="flex-row items-center gap-2"><Checkbox checked={false} onCheckedChange={() => {}} /><Text className="text-sm text-zinc-950 dark:text-zinc-50">On sale</Text></View>
                 </View>
                 <View className="flex-row gap-3 mt-4">
                   <Button className="flex-1" onPress={() => setRightOpen(false)}>Apply</Button>
@@ -1361,42 +1361,42 @@ const demos: Record<string, () => React.ReactElement> = {
   },
   header: () => (
     <View className="gap-6">
-      <Text className="text-sm text-muted-foreground">App header bar with back button, title, and action buttons. Supports default and transparent variants.</Text>
+      <Text className="text-sm text-zinc-500 dark:text-zinc-400">App header bar with back button, title, and action buttons. Supports default and transparent variants.</Text>
       <View className="gap-2">
-        <Text className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Default</Text>
-        <View className="rounded-xl border border-border overflow-hidden">
+        <Text className="text-xs font-semibold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">Default</Text>
+        <View className="rounded-xl border border-zinc-200 dark:border-zinc-800 overflow-hidden">
           <Header>
             <HeaderLeft><HeaderBackButton onPress={() => {}} /></HeaderLeft>
             <HeaderTitle>Settings</HeaderTitle>
             <HeaderRight>
-              <Pressable onPress={() => {}} className="px-3 py-1.5"><Text className="text-primary text-sm font-semibold">Save</Text></Pressable>
+              <Pressable onPress={() => {}} className="px-3 py-1.5"><Text className="text-zinc-900 dark:text-zinc-50 text-sm font-semibold">Save</Text></Pressable>
             </HeaderRight>
           </Header>
         </View>
       </View>
       <View className="gap-2">
-        <Text className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">With Search</Text>
-        <View className="rounded-xl border border-border overflow-hidden">
+        <Text className="text-xs font-semibold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">With Search</Text>
+        <View className="rounded-xl border border-zinc-200 dark:border-zinc-800 overflow-hidden">
           <Header>
             <HeaderLeft><HeaderBackButton onPress={() => {}} /></HeaderLeft>
             <HeaderTitle>Explore</HeaderTitle>
             <HeaderRight>
-              <Pressable onPress={() => {}} className="h-9 w-9 rounded-full bg-secondary items-center justify-center">
-                <Text className="text-foreground text-sm">🔍</Text>
+              <Pressable onPress={() => {}} className="h-9 w-9 rounded-full bg-zinc-100 dark:bg-zinc-800 items-center justify-center">
+                <Text className="text-zinc-950 dark:text-zinc-50 text-sm">🔍</Text>
               </Pressable>
             </HeaderRight>
           </Header>
         </View>
       </View>
       <View className="gap-2">
-        <Text className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Transparent</Text>
-        <View className="rounded-xl border border-border overflow-hidden bg-primary/5">
+        <Text className="text-xs font-semibold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">Transparent</Text>
+        <View className="rounded-xl border border-zinc-200 dark:border-zinc-800 overflow-hidden bg-zinc-900/5 dark:bg-zinc-50/5">
           <Header variant="transparent">
             <HeaderLeft><HeaderBackButton onPress={() => {}} /></HeaderLeft>
             <HeaderTitle>Profile</HeaderTitle>
             <HeaderRight>
-              <Pressable onPress={() => {}} className="h-9 w-9 rounded-full bg-secondary items-center justify-center">
-                <Text className="text-foreground text-sm">⚙</Text>
+              <Pressable onPress={() => {}} className="h-9 w-9 rounded-full bg-zinc-100 dark:bg-zinc-800 items-center justify-center">
+                <Text className="text-zinc-950 dark:text-zinc-50 text-sm">⚙</Text>
               </Pressable>
             </HeaderRight>
           </Header>
@@ -1418,11 +1418,11 @@ const demos: Record<string, () => React.ReactElement> = {
     };
     return (
       <View className="gap-6">
-        <Text className="text-sm text-muted-foreground">Bottom navigation bar for switching between main app sections. Supports icons, labels, and notification badges.</Text>
+        <Text className="text-sm text-zinc-500 dark:text-zinc-400">Bottom navigation bar for switching between main app sections. Supports icons, labels, and notification badges.</Text>
         <View className="gap-2">
-          <Text className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">With Badges</Text>
-          <View className="rounded-xl border border-border overflow-hidden">
-            <View className="px-4 py-6 items-center"><Text className="text-sm text-muted-foreground">{content[active]}</Text></View>
+          <Text className="text-xs font-semibold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">With Badges</Text>
+          <View className="rounded-xl border border-zinc-200 dark:border-zinc-800 overflow-hidden">
+            <View className="px-4 py-6 items-center"><Text className="text-sm text-zinc-500 dark:text-zinc-400">{content[active]}</Text></View>
             <TabBar>
               <TabBarItem label="Home" active={active === "home"} onPress={() => setActive("home")} icon={<Text>🏠</Text>} />
               <TabBarItem label="Search" active={active === "search"} onPress={() => setActive("search")} icon={<Text>🔍</Text>} />
@@ -1432,9 +1432,9 @@ const demos: Record<string, () => React.ReactElement> = {
           </View>
         </View>
         <View className="gap-2">
-          <Text className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Minimal (Labels Only)</Text>
-          <View className="rounded-xl border border-border overflow-hidden">
-            <View className="px-4 py-6 items-center"><Text className="text-sm text-muted-foreground">{content[active2]}</Text></View>
+          <Text className="text-xs font-semibold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">Minimal (Labels Only)</Text>
+          <View className="rounded-xl border border-zinc-200 dark:border-zinc-800 overflow-hidden">
+            <View className="px-4 py-6 items-center"><Text className="text-sm text-zinc-500 dark:text-zinc-400">{content[active2]}</Text></View>
             <TabBar>
               <TabBarItem label="Feed" active={active2 === "feed"} onPress={() => setActive2("feed")} />
               <TabBarItem label="Chat" active={active2 === "chat"} onPress={() => setActive2("chat")} />
@@ -1451,9 +1451,9 @@ const demos: Record<string, () => React.ReactElement> = {
     return (
       <Carousel
         data={[
-          <View className="h-44 rounded-xl bg-primary/10 items-center justify-center"><Text className="text-primary text-lg font-semibold">Slide 1</Text></View>,
-          <View className="h-44 rounded-xl bg-primary/20 items-center justify-center"><Text className="text-primary text-lg font-semibold">Slide 2</Text></View>,
-          <View className="h-44 rounded-xl bg-primary/30 items-center justify-center"><Text className="text-primary text-lg font-semibold">Slide 3</Text></View>,
+          <View className="h-44 rounded-xl bg-zinc-900/10 dark:bg-zinc-50/10 items-center justify-center"><Text className="text-zinc-900 dark:text-zinc-50 text-lg font-semibold">Slide 1</Text></View>,
+          <View className="h-44 rounded-xl bg-zinc-900/20 dark:bg-zinc-50/20 items-center justify-center"><Text className="text-zinc-900 dark:text-zinc-50 text-lg font-semibold">Slide 2</Text></View>,
+          <View className="h-44 rounded-xl bg-zinc-900/30 dark:bg-zinc-50/30 items-center justify-center"><Text className="text-zinc-900 dark:text-zinc-50 text-lg font-semibold">Slide 3</Text></View>,
         ]}
         itemWidth={itemW}
         autoPlay
@@ -1471,15 +1471,15 @@ const demos: Record<string, () => React.ReactElement> = {
     );
   },
   "infinite-list": () => (
-    <View className="rounded-xl border border-border bg-card overflow-hidden">
+    <View className="rounded-xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 overflow-hidden">
       {[1, 2, 3, 4, 5].map((i) => (
-        <View key={i} className="flex-row items-center gap-3 px-4 py-3 border-b border-border">
-          <View className="h-10 w-10 rounded-full bg-primary/10 items-center justify-center">
-            <Text className="text-primary font-bold">{i}</Text>
+        <View key={i} className="flex-row items-center gap-3 px-4 py-3 border-b border-zinc-200 dark:border-zinc-800">
+          <View className="h-10 w-10 rounded-full bg-zinc-900/10 dark:bg-zinc-50/10 items-center justify-center">
+            <Text className="text-zinc-900 dark:text-zinc-50 font-bold">{i}</Text>
           </View>
           <View className="flex-1">
-            <Text className="text-sm font-medium text-foreground">Item {i}</Text>
-            <Text className="text-xs text-muted-foreground">Auto-loaded on scroll</Text>
+            <Text className="text-sm font-medium text-zinc-950 dark:text-zinc-50">Item {i}</Text>
+            <Text className="text-xs text-zinc-500 dark:text-zinc-400">Auto-loaded on scroll</Text>
           </View>
         </View>
       ))}
@@ -1499,24 +1499,24 @@ const demos: Record<string, () => React.ReactElement> = {
     return (
       <View className="gap-4">
         {/* Action Legend */}
-        <View className="rounded-xl border border-border bg-card p-4 gap-3">
-          <Text className="text-sm font-medium text-foreground">Swipe Actions</Text>
+        <View className="rounded-xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 p-4 gap-3">
+          <Text className="text-sm font-medium text-zinc-950 dark:text-zinc-50">Swipe Actions</Text>
           <View className="gap-2">
-            <Text className="text-xs text-muted-foreground">Swipe right →</Text>
+            <Text className="text-xs text-zinc-500 dark:text-zinc-400">Swipe right →</Text>
             <View className="flex-row gap-2">
               <View className="flex-row items-center gap-1.5 rounded-md bg-amber-500/10 px-2.5 py-1"><View className="h-2.5 w-2.5 rounded-full bg-amber-500" /><Text className="text-xs text-amber-600 font-medium">Pin</Text></View>
               <View className="flex-row items-center gap-1.5 rounded-md bg-green-500/10 px-2.5 py-1"><View className="h-2.5 w-2.5 rounded-full bg-green-600" /><Text className="text-xs text-green-600 font-medium">Archive</Text></View>
             </View>
-            <Text className="text-xs text-muted-foreground mt-1">← Swipe left</Text>
+            <Text className="text-xs text-zinc-500 dark:text-zinc-400 mt-1">← Swipe left</Text>
             <View className="flex-row gap-2">
               <View className="flex-row items-center gap-1.5 rounded-md bg-blue-500/10 px-2.5 py-1"><View className="h-2.5 w-2.5 rounded-full bg-blue-500" /><Text className="text-xs text-blue-600 font-medium">Edit</Text></View>
-              <View className="flex-row items-center gap-1.5 rounded-md bg-red-500/10 px-2.5 py-1"><View className="h-2.5 w-2.5 rounded-full bg-destructive" /><Text className="text-xs text-destructive font-medium">Delete</Text></View>
+              <View className="flex-row items-center gap-1.5 rounded-md bg-red-500/10 px-2.5 py-1"><View className="h-2.5 w-2.5 rounded-full bg-red-500 dark:bg-red-900" /><Text className="text-xs text-red-500 dark:text-red-900 font-medium">Delete</Text></View>
             </View>
           </View>
         </View>
 
         {/* Swipeable List */}
-        <View className="rounded-xl border border-border overflow-hidden">
+        <View className="rounded-xl border border-zinc-200 dark:border-zinc-800 overflow-hidden">
           {items.map((item, i) => (
             <SwipeableListItem
               key={item.id}
@@ -1526,21 +1526,21 @@ const demos: Record<string, () => React.ReactElement> = {
               ]}
               rightActions={[
                 { key: "edit", label: "Edit", color: "bg-blue-500", onPress: () => {} },
-                { key: "delete", label: "Delete", color: "bg-destructive", onPress: () => setDeleted([...deleted, item.id]) },
+                { key: "delete", label: "Delete", color: "bg-red-500 dark:bg-red-900", onPress: () => setDeleted([...deleted, item.id]) },
               ]}
             >
-              <View className={`bg-card px-4 py-3.5 ${i < items.length - 1 ? "border-b border-border" : ""}`}>
+              <View className={`bg-white dark:bg-zinc-950 px-4 py-3.5 ${i < items.length - 1 ? "border-b border-zinc-200 dark:border-zinc-800" : ""}`}>
                 <View className="flex-row items-center justify-between">
-                  <Text className="text-sm font-medium text-foreground flex-1">{item.title}</Text>
-                  <Text className="text-[10px] text-muted-foreground">{item.time}</Text>
+                  <Text className="text-sm font-medium text-zinc-950 dark:text-zinc-50 flex-1">{item.title}</Text>
+                  <Text className="text-[10px] text-zinc-500 dark:text-zinc-400">{item.time}</Text>
                 </View>
-                <Text className="text-xs text-muted-foreground mt-0.5">{item.desc}</Text>
+                <Text className="text-xs text-zinc-500 dark:text-zinc-400 mt-0.5">{item.desc}</Text>
               </View>
             </SwipeableListItem>
           ))}
           {items.length === 0 && (
-            <View className="bg-card px-4 py-10 items-center gap-3">
-              <Text className="text-sm text-muted-foreground">All items cleared</Text>
+            <View className="bg-white dark:bg-zinc-950 px-4 py-10 items-center gap-3">
+              <Text className="text-sm text-zinc-500 dark:text-zinc-400">All items cleared</Text>
               <Button variant="outline" size="sm" onPress={() => { setDeleted([]); setArchived([]); }}>Reset</Button>
             </View>
           )}
@@ -1548,20 +1548,20 @@ const demos: Record<string, () => React.ReactElement> = {
 
         {/* Status */}
         {(archived.length > 0 || deleted.length > 0) && (
-          <View className="rounded-lg border border-border bg-card px-4 py-3 flex-row justify-between">
+          <View className="rounded-lg border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 px-4 py-3 flex-row justify-between">
             {archived.length > 0 && <Text className="text-xs text-green-600">{archived.length} archived</Text>}
-            {deleted.length > 0 && <Text className="text-xs text-destructive">{deleted.length} deleted</Text>}
+            {deleted.length > 0 && <Text className="text-xs text-red-500 dark:text-red-900">{deleted.length} deleted</Text>}
           </View>
         )}
       </View>
     );
   },
   "safe-area": () => (
-    <View className="rounded-xl border border-border bg-card p-4 gap-2">
-      <Text className="text-sm font-medium text-foreground">SafeArea</Text>
-      <Text className="text-xs text-muted-foreground">Wraps content with safe area insets to avoid notch, status bar, and home indicator. Already used in this app&apos;s root layout.</Text>
-      <View className="rounded-lg border-2 border-dashed border-primary/30 p-4 mt-2 items-center">
-        <Text className="text-xs text-primary">Safe content area</Text>
+    <View className="rounded-xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 p-4 gap-2">
+      <Text className="text-sm font-medium text-zinc-950 dark:text-zinc-50">SafeArea</Text>
+      <Text className="text-xs text-zinc-500 dark:text-zinc-400">Wraps content with safe area insets to avoid notch, status bar, and home indicator. Already used in this app&apos;s root layout.</Text>
+      <View className="rounded-lg border-2 border-dashed border-zinc-900/30 dark:border-zinc-50/30 p-4 mt-2 items-center">
+        <Text className="text-xs text-zinc-900 dark:text-zinc-50">Safe content area</Text>
       </View>
     </View>
   ),
@@ -1582,8 +1582,8 @@ const demos: Record<string, () => React.ReactElement> = {
       <View className="gap-4">
         <Button onPress={() => setOpen(!open)}>Toggle Popover</Button>
         {open && (
-          <View className="rounded-lg border border-border bg-card p-4 shadow-lg">
-            <Text variant="small" className="font-semibold text-foreground">Popover Content</Text>
+          <View className="rounded-lg border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 p-4 shadow-lg">
+            <Text variant="small" className="font-semibold text-zinc-950 dark:text-zinc-50">Popover Content</Text>
             <Text variant="muted" className="mt-1">This is a popover panel with extra info.</Text>
           </View>
         )}
@@ -1610,15 +1610,15 @@ const demos: Record<string, () => React.ReactElement> = {
       <View className="gap-4">
         <Pressable
           onLongPress={() => setAction("long-pressed")}
-          className="h-32 rounded-xl border-2 border-dashed border-border items-center justify-center"
+          className="h-32 rounded-xl border-2 border-dashed border-zinc-200 dark:border-zinc-800 items-center justify-center"
         >
-          <Text className="text-muted-foreground text-sm">Long press me</Text>
+          <Text className="text-zinc-500 dark:text-zinc-400 text-sm">Long press me</Text>
         </Pressable>
         {action ? (
-          <View className="rounded-xl border border-border bg-card overflow-hidden">
-            <Pressable className="px-4 py-3 active:bg-accent" onPress={() => setAction("Edit")}><Text className="text-sm text-foreground">Edit</Text></Pressable>
-            <Pressable className="px-4 py-3 active:bg-accent border-t border-border" onPress={() => setAction("Duplicate")}><Text className="text-sm text-foreground">Duplicate</Text></Pressable>
-            <Pressable className="px-4 py-3 active:bg-accent border-t border-border" onPress={() => setAction("Delete")}><Text className="text-sm text-destructive">Delete</Text></Pressable>
+          <View className="rounded-xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 overflow-hidden">
+            <Pressable className="px-4 py-3 active:bg-zinc-100 dark:active:bg-zinc-800" onPress={() => setAction("Edit")}><Text className="text-sm text-zinc-950 dark:text-zinc-50">Edit</Text></Pressable>
+            <Pressable className="px-4 py-3 active:bg-zinc-100 dark:active:bg-zinc-800 border-t border-zinc-200 dark:border-zinc-800" onPress={() => setAction("Duplicate")}><Text className="text-sm text-zinc-950 dark:text-zinc-50">Duplicate</Text></Pressable>
+            <Pressable className="px-4 py-3 active:bg-zinc-100 dark:active:bg-zinc-800 border-t border-zinc-200 dark:border-zinc-800" onPress={() => setAction("Delete")}><Text className="text-sm text-red-500 dark:text-red-900">Delete</Text></Pressable>
           </View>
         ) : null}
         {action && action !== "long-pressed" ? <Text variant="muted">Action: {action}</Text> : null}
@@ -1632,13 +1632,13 @@ const demos: Record<string, () => React.ReactElement> = {
         <Pressable
           onPressIn={() => setShow(true)}
           onPressOut={() => setShow(false)}
-          className="rounded-lg bg-primary px-4 py-2.5"
+          className="rounded-lg bg-zinc-900 dark:bg-zinc-50 px-4 py-2.5"
         >
-          <Text className="text-primary-foreground text-sm font-medium">Hold for tooltip</Text>
+          <Text className="text-zinc-50 dark:text-zinc-900 text-sm font-medium">Hold for tooltip</Text>
         </Pressable>
         {show && (
-          <View className="rounded-md bg-foreground px-3 py-1.5">
-            <Text className="text-background text-xs">This is a helpful tooltip</Text>
+          <View className="rounded-md bg-zinc-950 dark:bg-zinc-50 px-3 py-1.5">
+            <Text className="text-white dark:text-zinc-950 text-xs">This is a helpful tooltip</Text>
           </View>
         )}
       </View>
@@ -1651,8 +1651,8 @@ const demos: Record<string, () => React.ReactElement> = {
         <Button onPress={() => setOpen(true)}>Open Bottom Sheet</Button>
         <Modal visible={open} transparent animationType="slide" onRequestClose={() => setOpen(false)}>
           <Pressable className="flex-1 bg-black/40" onPress={() => setOpen(false)} />
-          <View className="bg-card rounded-t-2xl p-6 pb-10">
-            <View className="items-center mb-4"><View className="w-10 h-1 rounded-full bg-muted" /></View>
+          <View className="bg-white dark:bg-zinc-950 rounded-t-2xl p-6 pb-10">
+            <View className="items-center mb-4"><View className="w-10 h-1 rounded-full bg-zinc-100 dark:bg-zinc-800" /></View>
             <Text variant="h3" className="mb-2">Bottom Sheet</Text>
             <Text variant="muted" className="mb-4">This slides up from the bottom. Tap backdrop or button to close.</Text>
             <Button onPress={() => setOpen(false)}>Close</Button>
@@ -1671,13 +1671,13 @@ const demos: Record<string, () => React.ReactElement> = {
         {selected ? <Text variant="muted">Selected: {selected}</Text> : null}
         <Modal visible={open} transparent animationType="slide" onRequestClose={() => setOpen(false)}>
           <Pressable className="flex-1 bg-black/40" onPress={() => setOpen(false)} />
-          <View className="bg-card rounded-t-2xl pb-10">
-            <View className="items-center py-3"><View className="w-10 h-1 rounded-full bg-muted" /></View>
-            <Text className="text-sm text-muted-foreground text-center py-2">Choose an action</Text>
-            <Pressable className="py-4 items-center border-t border-border" onPress={() => pick("Share")}><Text className="text-foreground text-base">Share</Text></Pressable>
-            <Pressable className="py-4 items-center border-t border-border" onPress={() => pick("Copy Link")}><Text className="text-foreground text-base">Copy Link</Text></Pressable>
-            <Pressable className="py-4 items-center border-t border-border" onPress={() => pick("Delete")}><Text className="text-destructive text-base">Delete</Text></Pressable>
-            <Pressable className="py-4 items-center border-t border-border" onPress={() => setOpen(false)}><Text className="text-muted-foreground text-base font-semibold">Cancel</Text></Pressable>
+          <View className="bg-white dark:bg-zinc-950 rounded-t-2xl pb-10">
+            <View className="items-center py-3"><View className="w-10 h-1 rounded-full bg-zinc-100 dark:bg-zinc-800" /></View>
+            <Text className="text-sm text-zinc-500 dark:text-zinc-400 text-center py-2">Choose an action</Text>
+            <Pressable className="py-4 items-center border-t border-zinc-200 dark:border-zinc-800" onPress={() => pick("Share")}><Text className="text-zinc-950 dark:text-zinc-50 text-base">Share</Text></Pressable>
+            <Pressable className="py-4 items-center border-t border-zinc-200 dark:border-zinc-800" onPress={() => pick("Copy Link")}><Text className="text-zinc-950 dark:text-zinc-50 text-base">Copy Link</Text></Pressable>
+            <Pressable className="py-4 items-center border-t border-zinc-200 dark:border-zinc-800" onPress={() => pick("Delete")}><Text className="text-red-500 dark:text-red-900 text-base">Delete</Text></Pressable>
+            <Pressable className="py-4 items-center border-t border-zinc-200 dark:border-zinc-800" onPress={() => setOpen(false)}><Text className="text-zinc-500 dark:text-zinc-400 text-base font-semibold">Cancel</Text></Pressable>
           </View>
         </Modal>
       </View>
@@ -1694,22 +1694,22 @@ const demos: Record<string, () => React.ReactElement> = {
   },
   "area-chart": () => (
     <View className="gap-6">
-      <Text className="text-sm text-muted-foreground">SVG area chart with gradient fill. Supports curved/linear lines, grid, labels, and multi-series stacking.</Text>
+      <Text className="text-sm text-zinc-500 dark:text-zinc-400">SVG area chart with gradient fill. Supports curved/linear lines, grid, labels, and multi-series stacking.</Text>
       <View className="gap-2">
-        <Text className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Revenue Trend</Text>
-        <View className="rounded-xl border border-border bg-card p-4">
+        <Text className="text-xs font-semibold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">Revenue Trend</Text>
+        <View className="rounded-xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 p-4">
           <AreaChart data={[{ label: "Jan", value: 186 }, { label: "Feb", value: 305 }, { label: "Mar", value: 237 }, { label: "Apr", value: 173 }, { label: "May", value: 409 }, { label: "Jun", value: 214 }]} height={180} color="#3b82f6" showGrid showLabels />
         </View>
       </View>
       <View className="gap-2">
-        <Text className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Curved with High Fill</Text>
-        <View className="rounded-xl border border-border bg-card p-4">
+        <Text className="text-xs font-semibold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">Curved with High Fill</Text>
+        <View className="rounded-xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 p-4">
           <AreaChart data={[{ label: "W1", value: 40 }, { label: "W2", value: 80 }, { label: "W3", value: 55 }, { label: "W4", value: 95 }, { label: "W5", value: 70 }]} height={160} color="#8b5cf6" curved fillOpacity={0.4} showLabels />
         </View>
       </View>
       <View className="gap-2">
-        <Text className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Multi-Series</Text>
-        <View className="rounded-xl border border-border bg-card p-4">
+        <Text className="text-xs font-semibold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">Multi-Series</Text>
+        <View className="rounded-xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 p-4">
           <AreaChart data={[{ label: "Q1", value: 0 }, { label: "Q2", value: 0 }, { label: "Q3", value: 0 }, { label: "Q4", value: 0 }]} height={180} series={[{ data: [{ label: "Q1", value: 120 }, { label: "Q2", value: 200 }, { label: "Q3", value: 170 }, { label: "Q4", value: 250 }], color: "#3b82f6" }, { data: [{ label: "Q1", value: 80 }, { label: "Q2", value: 150 }, { label: "Q3", value: 130 }, { label: "Q4", value: 180 }], color: "#f59e0b" }]} showGrid showLabels />
         </View>
       </View>
@@ -1717,16 +1717,16 @@ const demos: Record<string, () => React.ReactElement> = {
   ),
   "bar-chart": () => (
     <View className="gap-6">
-      <Text className="text-sm text-muted-foreground">SVG bar chart with vertical or horizontal orientation. Supports rounded bars, grid lines, labels, and grouped data.</Text>
+      <Text className="text-sm text-zinc-500 dark:text-zinc-400">SVG bar chart with vertical or horizontal orientation. Supports rounded bars, grid lines, labels, and grouped data.</Text>
       <View className="gap-2">
-        <Text className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Monthly Sales</Text>
-        <View className="rounded-xl border border-border bg-card p-4">
+        <Text className="text-xs font-semibold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">Monthly Sales</Text>
+        <View className="rounded-xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 p-4">
           <BarChart data={[{ label: "Jan", value: 450 }, { label: "Feb", value: 320 }, { label: "Mar", value: 580 }, { label: "Apr", value: 420 }, { label: "May", value: 690 }, { label: "Jun", value: 530 }]} height={200} color="#8b5cf6" showGrid showLabels barRadius={4} />
         </View>
       </View>
       <View className="gap-2">
-        <Text className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Horizontal</Text>
-        <View className="rounded-xl border border-border bg-card p-4">
+        <Text className="text-xs font-semibold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">Horizontal</Text>
+        <View className="rounded-xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 p-4">
           <BarChart data={[{ label: "React Native", value: 85, color: "#3b82f6" }, { label: "Flutter", value: 65, color: "#06b6d4" }, { label: "SwiftUI", value: 45, color: "#f59e0b" }, { label: "Compose", value: 40, color: "#10b981" }]} height={180} horizontal showLabels barRadius={6} />
         </View>
       </View>
@@ -1734,16 +1734,16 @@ const demos: Record<string, () => React.ReactElement> = {
   ),
   "line-chart": () => (
     <View className="gap-6">
-      <Text className="text-sm text-muted-foreground">SVG line chart with dot markers. Supports curved/linear lines, multi-series, grid, and labels.</Text>
+      <Text className="text-sm text-zinc-500 dark:text-zinc-400">SVG line chart with dot markers. Supports curved/linear lines, multi-series, grid, and labels.</Text>
       <View className="gap-2">
-        <Text className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Weekly Active Users</Text>
-        <View className="rounded-xl border border-border bg-card p-4">
+        <Text className="text-xs font-semibold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">Weekly Active Users</Text>
+        <View className="rounded-xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 p-4">
           <LineChart data={[{ label: "Mon", value: 120 }, { label: "Tue", value: 245 }, { label: "Wed", value: 180 }, { label: "Thu", value: 360 }, { label: "Fri", value: 290 }, { label: "Sat", value: 410 }, { label: "Sun", value: 350 }]} height={200} color="#10b981" showDots showGrid showLabels />
         </View>
       </View>
       <View className="gap-2">
-        <Text className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Curved Multi-Series</Text>
-        <View className="rounded-xl border border-border bg-card p-4">
+        <Text className="text-xs font-semibold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">Curved Multi-Series</Text>
+        <View className="rounded-xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 p-4">
           <LineChart height={200} curved showDots showGrid showLabels series={[{ data: [{ label: "Jan", value: 150 }, { label: "Feb", value: 230 }, { label: "Mar", value: 280 }, { label: "Apr", value: 320 }], color: "#3b82f6" }, { data: [{ label: "Jan", value: 100 }, { label: "Feb", value: 180 }, { label: "Mar", value: 220 }, { label: "Apr", value: 260 }], color: "#10b981" }]} />
         </View>
       </View>
@@ -1751,16 +1751,16 @@ const demos: Record<string, () => React.ReactElement> = {
   ),
   "pie-chart": () => (
     <View className="gap-6">
-      <Text className="text-sm text-muted-foreground">SVG pie/donut chart with segments, labels, and configurable inner radius for donut style.</Text>
+      <Text className="text-sm text-zinc-500 dark:text-zinc-400">SVG pie/donut chart with segments, labels, and configurable inner radius for donut style.</Text>
       <View className="gap-2">
-        <Text className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Donut Chart</Text>
-        <View className="rounded-xl border border-border bg-card p-4">
+        <Text className="text-xs font-semibold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">Donut Chart</Text>
+        <View className="rounded-xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 p-4">
           <PieChart data={[{ label: "Organic", value: 65, color: "#3b82f6" }, { label: "Social", value: 20, color: "#8b5cf6" }, { label: "Direct", value: 15, color: "#f59e0b" }]} height={220} innerRadius={0.6} showLabels />
         </View>
       </View>
       <View className="gap-2">
-        <Text className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Full Pie</Text>
-        <View className="rounded-xl border border-border bg-card p-4">
+        <Text className="text-xs font-semibold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">Full Pie</Text>
+        <View className="rounded-xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 p-4">
           <PieChart data={[{ label: "Mobile", value: 55, color: "#3b82f6" }, { label: "Desktop", value: 30, color: "#8b5cf6" }, { label: "Tablet", value: 10, color: "#10b981" }, { label: "Other", value: 5, color: "#f59e0b" }]} height={220} innerRadius={0} showLabels />
         </View>
       </View>
@@ -1768,16 +1768,16 @@ const demos: Record<string, () => React.ReactElement> = {
   ),
   "radar-chart": () => (
     <View className="gap-6">
-      <Text className="text-sm text-muted-foreground">SVG radar/spider chart for comparing multiple variables. Supports dots, grid levels, and multi-series overlay.</Text>
+      <Text className="text-sm text-zinc-500 dark:text-zinc-400">SVG radar/spider chart for comparing multiple variables. Supports dots, grid levels, and multi-series overlay.</Text>
       <View className="gap-2">
-        <Text className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Skill Assessment</Text>
-        <View className="rounded-xl border border-border bg-card p-4">
+        <Text className="text-xs font-semibold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">Skill Assessment</Text>
+        <View className="rounded-xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 p-4">
           <RadarChart data={[{ label: "Frontend", value: 90 }, { label: "Backend", value: 70 }, { label: "Design", value: 60 }, { label: "DevOps", value: 50 }, { label: "Mobile", value: 85 }]} height={250} color="#3b82f6" showDots showLabels gridLevels={4} />
         </View>
       </View>
       <View className="gap-2">
-        <Text className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Multi-Series Comparison</Text>
-        <View className="rounded-xl border border-border bg-card p-4">
+        <Text className="text-xs font-semibold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">Multi-Series Comparison</Text>
+        <View className="rounded-xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 p-4">
           <RadarChart height={250} showDots showLabels gridLevels={4} series={[{ data: [{ label: "Sales", value: 80 }, { label: "Marketing", value: 65 }, { label: "Support", value: 90 }, { label: "Dev", value: 75 }, { label: "Design", value: 55 }], color: "#3b82f6" }, { data: [{ label: "Sales", value: 90 }, { label: "Marketing", value: 80 }, { label: "Support", value: 70 }, { label: "Dev", value: 85 }, { label: "Design", value: 75 }], color: "#ef4444" }]} />
         </View>
       </View>
@@ -1785,16 +1785,16 @@ const demos: Record<string, () => React.ReactElement> = {
   ),
   "radial-chart": () => (
     <View className="gap-6">
-      <Text className="text-sm text-muted-foreground">SVG radial progress rings for showing completion or goal tracking. Supports center text, labels, and multiple rings.</Text>
+      <Text className="text-sm text-zinc-500 dark:text-zinc-400">SVG radial progress rings for showing completion or goal tracking. Supports center text, labels, and multiple rings.</Text>
       <View className="gap-2">
-        <Text className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Goal Progress</Text>
-        <View className="rounded-xl border border-border bg-card p-4">
+        <Text className="text-xs font-semibold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">Goal Progress</Text>
+        <View className="rounded-xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 p-4">
           <RadialChart data={[{ label: "Tasks", value: 72, maxValue: 100, color: "#3b82f6" }, { label: "Bugs", value: 45, maxValue: 60, color: "#ef4444" }, { label: "Features", value: 28, maxValue: 40, color: "#10b981" }]} height={220} showLabels centerText="72%" centerSubText="Tasks done" />
         </View>
       </View>
       <View className="gap-2">
-        <Text className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Single Ring</Text>
-        <View className="rounded-xl border border-border bg-card p-4">
+        <Text className="text-xs font-semibold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">Single Ring</Text>
+        <View className="rounded-xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 p-4">
           <RadialChart data={[{ label: "Storage", value: 7.2, maxValue: 10, color: "#8b5cf6" }]} height={180} strokeWidth={12} showLabels centerText="72%" centerSubText="7.2 / 10 GB" />
         </View>
       </View>
@@ -1824,7 +1824,7 @@ export default function ComponentPage() {
           <Text variant="muted" className="mb-6">Live preview</Text>
           {ready && Demo ? <Demo /> : (
             <View className="items-center py-12">
-              <Text className="text-muted-foreground">{ready ? "Demo coming soon" : ""}</Text>
+              <Text className="text-zinc-500 dark:text-zinc-400">{ready ? "Demo coming soon" : ""}</Text>
             </View>
           )}
         </ScrollView>

@@ -1,7 +1,6 @@
 import React, { createContext, useCallback, useContext, useEffect, useState } from "react";
-import { useColorScheme as useNativeColorScheme } from "react-native";
+import { Appearance, useColorScheme as useNativeColorScheme, View } from "react-native";
 import { cn } from "@/lib/utils";
-import { View } from "react-native";
 
 type Theme = "light" | "dark" | "system";
 
@@ -24,9 +23,17 @@ export function useTheme() {
 export interface ThemeProviderProps {
   children: React.ReactNode;
   defaultTheme?: Theme;
-  storageKey?: string;
   className?: string;
 }
+
+// Try to detect and use Uniwind's setTheme if available
+let uniwindSetTheme: ((theme: string) => void) | null = null;
+try {
+  const mod = require("uniwind");
+  if (mod?.Uniwind?.setTheme) {
+    uniwindSetTheme = (theme: string) => mod.Uniwind.setTheme(theme);
+  }
+} catch {}
 
 export function ThemeProvider({
   children,
@@ -39,20 +46,41 @@ export function ThemeProvider({
   const resolvedTheme: "light" | "dark" =
     theme === "system" ? (systemScheme ?? "light") : theme;
 
+  const applyTheme = useCallback((resolved: "light" | "dark") => {
+    if (uniwindSetTheme) {
+      // Uniwind handles Appearance.setColorScheme internally
+      uniwindSetTheme(resolved);
+    } else {
+      // NativeWind v4/v5: set system appearance directly
+      try { Appearance.setColorScheme(resolved); } catch {}
+    }
+  }, []);
+
   const setTheme = useCallback((newTheme: Theme) => {
     setThemeState(newTheme);
-  }, []);
+    const resolved = newTheme === "system" ? (systemScheme ?? "light") : newTheme;
+    applyTheme(resolved);
+  }, [systemScheme, applyTheme]);
 
   const toggleTheme = useCallback(() => {
     setThemeState((prev) => {
-      if (prev === "system") return systemScheme === "dark" ? "light" : "dark";
-      return prev === "dark" ? "light" : "dark";
+      const current = prev === "system" ? (systemScheme ?? "light") : prev;
+      const next = current === "dark" ? "light" : "dark";
+      applyTheme(next);
+      return next;
     });
-  }, [systemScheme]);
+  }, [systemScheme, applyTheme]);
+
+  // Apply initial theme
+  useEffect(() => {
+    if (defaultTheme !== "system") {
+      applyTheme(defaultTheme === "dark" ? "dark" : "light");
+    }
+  }, []);
 
   return (
     <ThemeContext.Provider value={{ theme, resolvedTheme, setTheme, toggleTheme }}>
-      <View className={cn(resolvedTheme === "dark" ? "dark" : "", "flex-1 bg-background", className)}>
+      <View className={cn(resolvedTheme === "dark" ? "dark" : "", "flex-1 bg-white dark:bg-zinc-950", className)}>
         {children}
       </View>
     </ThemeContext.Provider>

@@ -17,7 +17,7 @@ export function ProgressSteps({ current, className, children, ...props }: Progre
         {React.Children.map(children, (child, index) => (
           <>
             {index > 0 && (
-              <View className={cn("flex-1 h-0.5 mx-2", index <= current ? "bg-primary" : "bg-muted")} />
+              <View className={cn("flex-1 h-0.5 mx-2", index <= current ? "bg-zinc-900 dark:bg-zinc-50" : "bg-zinc-100 dark:bg-zinc-800")} />
             )}
             {React.isValidElement(child)
               ? React.cloneElement(child as React.ReactElement<{ _index?: number }>, { _index: index })
@@ -46,14 +46,14 @@ export function ProgressStep({ label, icon, className, _index = 0, ...props }: P
       <View
         className={cn(
           "h-8 w-8 rounded-full items-center justify-center",
-          isCompleted ? "bg-primary" : isActive ? "border-2 border-primary bg-background" : "bg-muted"
+          isCompleted ? "bg-zinc-900 dark:bg-zinc-50" : isActive ? "border-2 border-zinc-900 dark:border-zinc-50 bg-white dark:bg-zinc-950" : "bg-zinc-100 dark:bg-zinc-800"
         )}
       >
         {icon ?? (
           <Text
             className={cn(
               "text-sm font-semibold",
-              isCompleted ? "text-primary-foreground" : isActive ? "text-primary" : "text-muted-foreground"
+              isCompleted ? "text-zinc-50 dark:text-zinc-900" : isActive ? "text-zinc-900 dark:text-zinc-50" : "text-zinc-500 dark:text-zinc-400"
             )}
           >
             {isCompleted ? "✓" : _index + 1}
@@ -64,7 +64,7 @@ export function ProgressStep({ label, icon, className, _index = 0, ...props }: P
         <Text
           className={cn(
             "text-xs",
-            isActive ? "text-primary font-medium" : "text-muted-foreground"
+            isActive ? "text-zinc-900 dark:text-zinc-50 font-medium" : "text-zinc-500 dark:text-zinc-400"
           )}
           numberOfLines={1}
         >

@@ -5,7 +5,7 @@ import { cn } from "@/lib/utils";
 import { SearchIcon, XIcon } from "@/components/ui/icons";
 
 const searchBarVariants = cva(
-  "flex-row items-center rounded-lg bg-muted px-3 min-h-12",
+  "flex-row items-center rounded-lg bg-zinc-100 dark:bg-zinc-800 px-3 min-h-12",
   {
     variants: {
       size: {
@@ -40,7 +40,7 @@ export function SearchBar({ size = "md", className, value, icon, onClear, showCa
           {icon ?? <SearchIcon size={iconSize}  />}
         </View>
         <TextInput
-          className="flex-1 text-base text-foreground p-0"
+          className="flex-1 text-base text-zinc-950 dark:text-zinc-50 p-0"
           placeholderTextColor="#71717a"
           placeholder="Search..."
           value={value}
@@ -48,14 +48,14 @@ export function SearchBar({ size = "md", className, value, icon, onClear, showCa
           {...props}
         />
         {value ? (
-          <Pressable onPress={() => { onClear?.(); props.onChangeText?.(""); }} className="ml-1 h-6 w-6 items-center justify-center rounded-full bg-muted-foreground/20" accessible={true} accessibilityRole="button" accessibilityLabel="Clear search">
+          <Pressable onPress={() => { onClear?.(); props.onChangeText?.(""); }} className="ml-1 h-6 w-6 items-center justify-center rounded-full bg-zinc-500/20 dark:bg-zinc-400/20" accessible={true} accessibilityRole="button" accessibilityLabel="Clear search">
             <XIcon size={12} />
           </Pressable>
         ) : null}
       </View>
       {showCancel && (
         <Pressable onPress={onCancel} accessible={true} accessibilityRole="button">
-          <Text className="text-base text-primary">Cancel</Text>
+          <Text className="text-base text-zinc-900 dark:text-zinc-50">Cancel</Text>
         </Pressable>
       )}
     </View>

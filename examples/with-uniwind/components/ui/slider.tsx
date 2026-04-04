@@ -66,8 +66,8 @@ export function Slider({
       {...panResponder.panHandlers}
       {...props}
     >
-      <View className="h-1.5 w-full rounded-full bg-secondary overflow-hidden">
-        <View className="h-full rounded-full bg-primary" style={{ width: `${pct}%` }} />
+      <View className="h-1.5 w-full rounded-full bg-zinc-100 dark:bg-zinc-800 overflow-hidden">
+        <View className="h-full rounded-full bg-zinc-900 dark:bg-zinc-50" style={{ width: `${pct}%` }} />
       </View>
       <View
         style={{

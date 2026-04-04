@@ -41,11 +41,11 @@ export function Pagination({
         accessibilityLabel="Previous page"
         className="min-h-10 min-w-10 items-center justify-center rounded-md"
       >
-        <Text className={cn("text-base font-bold", current <= 1 ? "text-muted" : "text-foreground")}>←</Text>
+        <Text className={cn("text-base font-bold", current <= 1 ? "text-zinc-100 dark:text-zinc-800" : "text-zinc-950 dark:text-zinc-50")}>←</Text>
       </Pressable>
       {pages.map((page, i) =>
         page === "..." ? (
-          <Text key={`e${i}`} className="text-muted-foreground px-1">…</Text>
+          <Text key={`e${i}`} className="text-zinc-500 dark:text-zinc-400 px-1">…</Text>
         ) : (
           <Pressable
             key={page}
@@ -56,10 +56,10 @@ export function Pagination({
             accessibilityState={{ selected: page === current }}
             className={cn(
               "min-h-10 min-w-10 items-center justify-center rounded-md",
-              page === current ? "bg-primary" : "bg-transparent"
+              page === current ? "bg-zinc-900 dark:bg-zinc-50" : "bg-transparent"
             )}
           >
-            <Text className={cn("text-sm font-medium", page === current ? "text-primary-foreground" : "text-foreground")}>
+            <Text className={cn("text-sm font-medium", page === current ? "text-zinc-50 dark:text-zinc-900" : "text-zinc-950 dark:text-zinc-50")}>
               {page}
             </Text>
           </Pressable>
@@ -73,7 +73,7 @@ export function Pagination({
         accessibilityLabel="Next page"
         className="min-h-10 min-w-10 items-center justify-center rounded-md"
       >
-        <Text className={cn("text-base font-bold", current >= total ? "text-muted" : "text-foreground")}>→</Text>
+        <Text className={cn("text-base font-bold", current >= total ? "text-zinc-100 dark:text-zinc-800" : "text-zinc-950 dark:text-zinc-50")}>→</Text>
       </Pressable>
     </View>
   );

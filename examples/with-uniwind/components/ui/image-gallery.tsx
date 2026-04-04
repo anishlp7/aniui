@@ -47,7 +47,7 @@ export function ImageGallery({ className, images, showPagination = true, ...prop
           {images.map((_, i) => (
             <View
               key={i}
-              className={cn("h-2 rounded-full", i === activeIndex ? "w-4 bg-primary" : "w-2 bg-muted")}
+              className={cn("h-2 rounded-full", i === activeIndex ? "w-4 bg-zinc-900 dark:bg-zinc-50" : "w-2 bg-zinc-100 dark:bg-zinc-800")}
             />
           ))}
         </View>

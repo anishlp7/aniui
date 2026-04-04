@@ -6,7 +6,7 @@ import { cn } from "@/lib/utils";
 const numberVariants = cva("flex-row items-center rounded-md border", {
   variants: {
     variant: {
-      default: "border-input bg-background",
+      default: "border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950",
       ghost: "border-transparent bg-transparent",
     },
     size: {
@@ -62,10 +62,10 @@ export function NumberInput({
         accessibilityLabel="Decrease"
         className="min-h-10 min-w-10 items-center justify-center"
       >
-        <Text className={cn("text-lg font-bold", value <= min ? "text-muted" : "text-foreground")}>−</Text>
+        <Text className={cn("text-lg font-bold", value <= min ? "text-zinc-100 dark:text-zinc-800" : "text-zinc-950 dark:text-zinc-50")}>−</Text>
       </Pressable>
       <TextInput
-        className="flex-1 text-center text-foreground text-base p-0"
+        className="flex-1 text-center text-zinc-950 dark:text-zinc-50 text-base p-0"
         keyboardType="number-pad"
         value={String(value)}
         onChangeText={(t) => update(Number(t) || min)}
@@ -80,7 +80,7 @@ export function NumberInput({
         accessibilityLabel="Increase"
         className="min-h-10 min-w-10 items-center justify-center"
       >
-        <Text className={cn("text-lg font-bold", value >= max ? "text-muted" : "text-foreground")}>+</Text>
+        <Text className={cn("text-lg font-bold", value >= max ? "text-zinc-100 dark:text-zinc-800" : "text-zinc-950 dark:text-zinc-50")}>+</Text>
       </Pressable>
     </View>
   );

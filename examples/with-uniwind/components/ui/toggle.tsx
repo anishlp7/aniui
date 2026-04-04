@@ -9,7 +9,7 @@ const toggleVariants = cva(
     variants: {
       variant: {
         default: "bg-transparent",
-        outline: "border border-input bg-transparent",
+        outline: "border border-zinc-200 dark:border-zinc-800 bg-transparent",
       },
       size: {
         sm: "px-2 py-1.5",
@@ -37,7 +37,7 @@ export function Toggle({
     <Pressable
       className={cn(
         toggleVariants({ variant, size }),
-        pressed && "bg-accent",
+        pressed && "bg-zinc-100 dark:bg-zinc-800",
         className
       )}
       onPress={() => onPressedChange?.(!pressed)}
@@ -47,7 +47,7 @@ export function Toggle({
       {...props}
     >
       {typeof children === "string" ? (
-        <Text className={cn("text-sm font-medium", pressed ? "text-accent-foreground" : "text-muted-foreground")}>
+        <Text className={cn("text-sm font-medium", pressed ? "text-accent-zinc-950 dark:accent-zinc-50" : "text-zinc-500 dark:text-zinc-400")}>
           {children}
         </Text>
       ) : children}

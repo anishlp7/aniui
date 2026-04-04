@@ -7,9 +7,9 @@ const statusVariants = cva("rounded-full", {
   variants: {
     status: {
       online: "bg-green-500",
-      offline: "bg-muted-foreground",
+      offline: "bg-zinc-500 dark:bg-zinc-400",
       away: "bg-amber-500",
-      busy: "bg-destructive",
+      busy: "bg-red-500 dark:bg-red-900",
     },
     size: {
       sm: "h-2 w-2",

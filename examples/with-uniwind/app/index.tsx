@@ -1,7 +1,8 @@
 import { useState } from "react";
-import { Pressable, ScrollView, View, Image, TextInput, Text } from "react-native";
+import { Pressable, ScrollView, View, Image, TextInput } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useRouter } from "expo-router";
+import { Text } from "@/components/ui/text";
 import { useAppTheme } from "./_layout";
 
 function toSlug(name: string) {
@@ -98,9 +99,12 @@ const sectionOrder = ["Forms", "Display", "Feedback", "Navigation", "Overlays", 
 
 export default function HomeScreen() {
   const router = useRouter();
-  const { theme, toggle, colors } = useAppTheme();
+  const { theme, toggle } = useAppTheme();
   const [search, setSearch] = useState("");
   const isDark = theme === "dark";
+  const colors = isDark
+    ? { bg: "#09090b", fg: "#fafafa", muted: "#27272a", mutedFg: "#a1a1aa", border: "#27272a", primary: "#fafafa", secondary: "#27272a" }
+    : { bg: "#ffffff", fg: "#09090b", muted: "#f4f4f5", mutedFg: "#71717a", border: "#e4e4e7", primary: "#18181b", secondary: "#f4f4f5" };
 
   const filtered = search
     ? components.filter((c) => c.name.toLowerCase().includes(search.toLowerCase()))
@@ -113,33 +117,63 @@ export default function HomeScreen() {
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: colors.bg }}>
       <ScrollView style={{ flex: 1 }} contentContainerStyle={{ paddingBottom: 40 }}>
+        {/* Header */}
         <View style={{ paddingHorizontal: 20, paddingTop: 24, paddingBottom: 16 }}>
           <View style={{ flexDirection: "row", alignItems: "center", justifyContent: "space-between" }}>
             <View style={{ flexDirection: "row", alignItems: "center", gap: 12 }}>
-              <Image source={isDark ? require("@/assets/images/logo-dark.png") : require("@/assets/images/logo-light.png")} style={{ width: 44, height: 44 }} resizeMode="contain" />
+              <Image
+                source={isDark ? require("@/assets/images/logo-dark.png") : require("@/assets/images/logo-light.png")}
+                style={{ width: 44, height: 44 }}
+                resizeMode="contain"
+              />
               <View>
-                <Text style={{ fontSize: 20, fontWeight: "700", color: colors.fg }}>AniUI + Uniwind</Text>
-                <Text style={{ fontSize: 12, color: colors.mutedFg }}>Uniwind example</Text>
+                <Text style={{ fontSize: 20, fontWeight: "700", color: colors.fg }}>AniUI</Text>
+                <Text style={{ fontSize: 12, color: colors.mutedFg }}>77 components</Text>
               </View>
             </View>
-            <Pressable onPress={toggle} style={{ height: 40, width: 40, alignItems: "center", justifyContent: "center", borderRadius: 20, backgroundColor: colors.secondary }}>
+            <Pressable
+              onPress={toggle}
+              style={{ height: 40, width: 40, alignItems: "center", justifyContent: "center", borderRadius: 20, backgroundColor: colors.secondary }}
+              accessibilityRole="button"
+              accessibilityLabel={isDark ? "Switch to light mode" : "Switch to dark mode"}
+            >
               <Text style={{ fontSize: 16 }}>{isDark ? "☀️" : "🌙"}</Text>
             </Pressable>
           </View>
+
+          {/* Search */}
           <View style={{ marginTop: 16, flexDirection: "row", alignItems: "center", borderRadius: 8, borderWidth: 1, borderColor: colors.border, backgroundColor: colors.bg, paddingHorizontal: 12, height: 44 }}>
             <Text style={{ color: colors.mutedFg, marginRight: 8 }}>🔍</Text>
-            <TextInput style={{ flex: 1, color: colors.fg, fontSize: 14 }} placeholder="Search components..." placeholderTextColor={colors.mutedFg} value={search} onChangeText={setSearch} />
-            {search.length > 0 && <Pressable onPress={() => setSearch("")}><Text style={{ color: colors.mutedFg }}>✕</Text></Pressable>}
+            <TextInput
+              style={{ flex: 1, color: colors.fg, fontSize: 14 }}
+              placeholder="Search components..."
+              placeholderTextColor={colors.mutedFg}
+              value={search}
+              onChangeText={setSearch}
+            />
+            {search.length > 0 && (
+              <Pressable onPress={() => setSearch("")} accessibilityRole="button" accessibilityLabel="Clear search">
+                <Text style={{ color: colors.mutedFg }}>✕</Text>
+              </Pressable>
+            )}
           </View>
         </View>
 
+        {/* Component List */}
         {grouped.map((section) => (
           <View key={section.title} style={{ marginTop: 8 }}>
             <View style={{ paddingHorizontal: 20, paddingVertical: 8 }}>
-              <Text style={{ fontSize: 11, fontWeight: "600", color: colors.mutedFg, textTransform: "uppercase", letterSpacing: 1 }}>{section.title} ({section.items.length})</Text>
+              <Text style={{ fontSize: 11, fontWeight: "600", color: colors.mutedFg, textTransform: "uppercase", letterSpacing: 1 }}>
+                {section.title} ({section.items.length})
+              </Text>
             </View>
             {section.items.map((comp) => (
-              <Pressable key={comp.name} onPress={() => router.push(`/component/${toSlug(comp.name)}` as never)} style={{ flexDirection: "row", alignItems: "center", justifyContent: "space-between", paddingHorizontal: 20, paddingVertical: 12 }}>
+              <Pressable
+                key={comp.name}
+                onPress={() => router.push(`/component/${toSlug(comp.name)}` as never)}
+                style={{ flexDirection: "row", alignItems: "center", justifyContent: "space-between", paddingHorizontal: 20, paddingVertical: 12 }}
+                accessibilityRole="button"
+              >
                 <View style={{ flexDirection: "row", alignItems: "center", gap: 12 }}>
                   <View style={{ height: 32, width: 32, alignItems: "center", justifyContent: "center", borderRadius: 8, backgroundColor: colors.primary + "15" }}>
                     <Text style={{ color: colors.primary, fontSize: 12, fontWeight: "700" }}>{comp.name.charAt(0)}</Text>
@@ -152,8 +186,15 @@ export default function HomeScreen() {
           </View>
         ))}
 
-        {filtered.length === 0 && <View style={{ alignItems: "center", paddingVertical: 48 }}><Text style={{ color: colors.mutedFg }}>No results</Text></View>}
-        <View style={{ alignItems: "center", marginTop: 32 }}><Text style={{ fontSize: 12, color: colors.mutedFg }}>Built with AniUI + Uniwind</Text></View>
+        {filtered.length === 0 && (
+          <View style={{ alignItems: "center", paddingVertical: 48 }}>
+            <Text style={{ color: colors.mutedFg }}>No components match &quot;{search}&quot;</Text>
+          </View>
+        )}
+
+        <View style={{ alignItems: "center", marginTop: 32 }}>
+          <Text style={{ fontSize: 12, color: colors.mutedFg }}>Built with AniUI</Text>
+        </View>
       </ScrollView>
     </SafeAreaView>
   );

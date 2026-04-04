@@ -106,7 +106,7 @@ export function SwipeableListItem({
       {leftActions.length > 0 && <ActionTray actions={leftActions} side="left" />}
       {rightActions.length > 0 && <ActionTray actions={rightActions} side="right" />}
       <GestureDetector gesture={pan}>
-        <Animated.View style={contentStyle} className="bg-background">
+        <Animated.View style={contentStyle} className="bg-white dark:bg-zinc-950">
           {children}
         </Animated.View>
       </GestureDetector>

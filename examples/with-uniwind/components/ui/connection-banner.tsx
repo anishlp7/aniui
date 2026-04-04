@@ -24,7 +24,7 @@ export function ConnectionBanner({
       exiting={SlideOutUp.duration(200)}
       className={cn(
         "px-4 py-2 items-center",
-        connected ? "bg-green-600" : "bg-destructive",
+        connected ? "bg-green-600" : "bg-red-500 dark:bg-red-900",
         className
       )}
       accessibilityRole="alert"

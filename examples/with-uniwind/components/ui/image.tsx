@@ -3,7 +3,7 @@ import { Image as RNImage, View, Text } from "react-native";
 import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
-const imageVariants = cva("overflow-hidden bg-muted", {
+const imageVariants = cva("overflow-hidden bg-zinc-100 dark:bg-zinc-800", {
   variants: {
     rounded: {
       none: "",
@@ -34,14 +34,14 @@ export function Image({ rounded, className, src, alt, width, height, fallback, s
   return (
     <View className={cn(imageVariants({ rounded }), className)} style={[width && height ? { width, height } : undefined, style as object]}>
       {status === "loading" && (
-        <View className="absolute inset-0 items-center justify-center bg-muted">
-          <View className="h-8 w-8 rounded-full bg-muted-foreground/10" />
+        <View className="absolute inset-0 items-center justify-center bg-zinc-100 dark:bg-zinc-800">
+          <View className="h-8 w-8 rounded-full bg-zinc-500/10 dark:bg-zinc-400/10" />
         </View>
       )}
       {status === "error" ? (
         fallback ?? (
-          <View className="flex-1 items-center justify-center bg-muted">
-            <Text className="text-xs text-muted-foreground">Failed to load</Text>
+          <View className="flex-1 items-center justify-center bg-zinc-100 dark:bg-zinc-800">
+            <Text className="text-xs text-zinc-500 dark:text-zinc-400">Failed to load</Text>
           </View>
         )
       ) : (

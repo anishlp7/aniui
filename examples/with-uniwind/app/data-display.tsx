@@ -66,7 +66,7 @@ export default function DataDisplayScreen() {
   }, []);
 
   return (
-    <SafeAreaView className="flex-1 bg-background">
+    <SafeAreaView style={{ flex: 1, backgroundColor: "hsl(0, 0%, 100%)" }}>
       <ScrollView className="flex-1 px-4" contentContainerClassName="gap-6 py-6">
         <Text variant="h2">Data Display</Text>
         <Text variant="muted">15 components for presenting content and data.</Text>

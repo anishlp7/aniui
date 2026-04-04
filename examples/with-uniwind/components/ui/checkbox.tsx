@@ -28,13 +28,13 @@ export function Checkbox({ checked = false, onCheckedChange, className, disabled
         <View
           className={cn(
             "h-5 w-5 items-center justify-center rounded border",
-            checked ? "border-primary bg-primary" : "border-input bg-background",
+            checked ? "border-zinc-900 dark:border-zinc-50 bg-zinc-900 dark:bg-zinc-50" : "border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950",
             disabled && "opacity-50",
             className
           )}
         >
           <CheckboxPrimitive.Indicator>
-            <Text className="text-xs text-primary-foreground font-bold">✓</Text>
+            <Text className="text-xs text-zinc-50 dark:text-zinc-900 font-bold">✓</Text>
           </CheckboxPrimitive.Indicator>
         </View>
       </Pressable>

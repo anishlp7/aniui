@@ -21,7 +21,7 @@ export function Dialog({ open, onOpenChange, children }: DialogProps) {
 
 export function DialogContent({ className, children, ...props }: React.ComponentPropsWithoutRef<typeof View> & { className?: string; children?: React.ReactNode }) {
   return (
-    <View className={cn("mx-6 w-80 rounded-lg bg-card p-6 shadow-xl", className)} accessibilityRole="alert" accessible={true} {...props}>
+    <View className={cn("mx-6 w-80 rounded-lg bg-white dark:bg-zinc-950 p-6 shadow-xl", className)} accessibilityRole="alert" accessible={true} {...props}>
       {children}
     </View>
   );
@@ -32,11 +32,11 @@ export function DialogHeader({ className, ...props }: React.ComponentPropsWithou
 }
 
 export function DialogTitle({ className, ...props }: React.ComponentPropsWithoutRef<typeof Text> & { className?: string }) {
-  return <Text className={cn("text-lg font-semibold text-card-foreground", className)} {...props} />;
+  return <Text className={cn("text-lg font-semibold text-zinc-950 dark:text-zinc-50", className)} {...props} />;
 }
 
 export function DialogDescription({ className, ...props }: React.ComponentPropsWithoutRef<typeof Text> & { className?: string }) {
-  return <Text className={cn("text-sm text-muted-foreground mt-1", className)} {...props} />;
+  return <Text className={cn("text-sm text-zinc-500 dark:text-zinc-400 mt-1", className)} {...props} />;
 }
 
 export function DialogFooter({ className, ...props }: React.ComponentPropsWithoutRef<typeof View> & { className?: string }) {

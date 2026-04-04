@@ -5,11 +5,11 @@ import { cn } from "@/lib/utils";
 import { EyeIcon, EyeOffIcon } from "@/components/ui/icons";
 
 const passwordVariants = cva(
-  "flex-row items-center rounded-md border py-2 text-foreground",
+  "flex-row items-center rounded-md border py-2 text-zinc-950 dark:text-zinc-50",
   {
     variants: {
       variant: {
-        default: "border-input bg-background",
+        default: "border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950",
         ghost: "border-transparent bg-transparent",
       },
       size: {
@@ -38,7 +38,7 @@ function getStrength(value: string): number {
   return score;
 }
 
-const strengthColors = ["bg-destructive", "bg-orange-500", "bg-yellow-500", "bg-green-500"];
+const strengthColors = ["bg-red-500 dark:bg-red-900", "bg-orange-500", "bg-yellow-500", "bg-green-500"];
 const strengthLabels = ["Weak", "Fair", "Good", "Strong"];
 
 export function PasswordInput({
@@ -57,7 +57,7 @@ export function PasswordInput({
     <View className="gap-2">
       <View className={cn(passwordVariants({ variant, size }), className)}>
         <TextInput
-          className="flex-1 text-foreground p-0 text-base"
+          className="flex-1 text-zinc-950 dark:text-zinc-50 p-0 text-base"
           placeholderTextColor="#71717a"
           secureTextEntry={!visible}
           onChangeText={(text) => { setValue(text); onChangeText?.(text); }}
@@ -80,11 +80,11 @@ export function PasswordInput({
             {[0, 1, 2, 3].map((i) => (
               <View
                 key={i}
-                className={cn("flex-1 h-1 rounded-full", i < strength ? strengthColors[strength - 1] : "bg-muted")}
+                className={cn("flex-1 h-1 rounded-full", i < strength ? strengthColors[strength - 1] : "bg-zinc-100 dark:bg-zinc-800")}
               />
             ))}
           </View>
-          <Text className="text-xs text-muted-foreground">{strengthLabels[strength - 1] ?? ""}</Text>
+          <Text className="text-xs text-zinc-500 dark:text-zinc-400">{strengthLabels[strength - 1] ?? ""}</Text>
         </View>
       )}
     </View>

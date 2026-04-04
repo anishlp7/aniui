@@ -34,12 +34,12 @@ export function RadioGroupItem({ value, label, className, ...props }: RadioGroup
         accessible={true}
         {...props}
       >
-        <View className="h-5 w-5 rounded-full border-2 border-input items-center justify-center">
+        <View className="h-5 w-5 rounded-full border-2 border-zinc-200 dark:border-zinc-800 items-center justify-center">
           <RadioGroupPrimitive.Indicator>
-            <View className="h-2.5 w-2.5 rounded-full bg-primary" />
+            <View className="h-2.5 w-2.5 rounded-full bg-zinc-900 dark:bg-zinc-50" />
           </RadioGroupPrimitive.Indicator>
         </View>
-        {label && <Text className="text-base text-foreground">{label}</Text>}
+        {label && <Text className="text-base text-zinc-950 dark:text-zinc-50">{label}</Text>}
       </Pressable>
     </RadioGroupPrimitive.Item>
   );

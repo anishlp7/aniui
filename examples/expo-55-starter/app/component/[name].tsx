@@ -1809,7 +1809,10 @@ function formatName(slug: string): string {
 export default function ComponentPage() {
   const { name } = useLocalSearchParams<{ name: string }>();
   const [ready, setReady] = useState(false);
-  const { colors } = useAppTheme();
+  const { theme } = useAppTheme();
+  const colors = theme === "dark"
+    ? { bg: "#09090b", fg: "#fafafa", mutedFg: "#a1a1aa" }
+    : { bg: "#ffffff", fg: "#09090b", mutedFg: "#71717a" };
   const title = formatName(name || "");
   const Demo = demos[name || ""];
 

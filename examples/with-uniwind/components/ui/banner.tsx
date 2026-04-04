@@ -8,10 +8,10 @@ const bannerVariants = cva(
   {
     variants: {
       variant: {
-        default: "bg-secondary/60 border-border",
-        info: "bg-primary/8 border-primary/15",
+        default: "bg-zinc-100/60 dark:bg-zinc-800/60 border-zinc-200 dark:border-zinc-800",
+        info: "bg-zinc-900/8 dark:bg-zinc-50/8 border-zinc-900/15 dark:border-zinc-50/15",
         warning: "bg-yellow-50 border-yellow-200 dark:bg-yellow-950/30 dark:border-yellow-900/40",
-        destructive: "bg-destructive/8 border-destructive/15",
+        destructive: "bg-red-500/8 dark:bg-red-900/8 border-red-500/15 dark:border-red-900/15",
         success: "bg-green-50 border-green-200 dark:bg-green-950/30 dark:border-green-900/40",
       },
     },
@@ -22,10 +22,10 @@ const bannerVariants = cva(
 const bannerTextVariants = cva("text-sm font-medium", {
   variants: {
     variant: {
-      default: "text-foreground",
-      info: "text-primary",
+      default: "text-zinc-950 dark:text-zinc-50",
+      info: "text-zinc-900 dark:text-zinc-50",
       warning: "text-yellow-800 dark:text-yellow-200",
-      destructive: "text-destructive",
+      destructive: "text-red-500 dark:text-red-900",
       success: "text-green-800 dark:text-green-200",
     },
   },

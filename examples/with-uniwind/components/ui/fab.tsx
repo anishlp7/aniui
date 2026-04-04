@@ -8,9 +8,9 @@ const fabVariants = cva(
   {
     variants: {
       variant: {
-        default: "bg-primary",
-        secondary: "bg-secondary",
-        destructive: "bg-destructive",
+        default: "bg-zinc-900 dark:bg-zinc-50",
+        secondary: "bg-zinc-100 dark:bg-zinc-800",
+        destructive: "bg-red-500 dark:bg-red-900",
       },
       size: {
         sm: "h-12 w-12 rounded-full",
@@ -32,9 +32,9 @@ const fabVariants = cva(
 const fabTextVariants = cva("font-semibold", {
   variants: {
     variant: {
-      default: "text-primary-foreground",
-      secondary: "text-secondary-foreground",
-      destructive: "text-destructive-foreground",
+      default: "text-zinc-50 dark:text-zinc-900",
+      secondary: "text-zinc-900 dark:text-zinc-50",
+      destructive: "text-zinc-50 dark:text-zinc-50",
     },
   },
   defaultVariants: { variant: "default" },

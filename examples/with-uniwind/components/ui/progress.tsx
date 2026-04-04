@@ -15,14 +15,14 @@ export function Progress({ value = 0, className, indicatorClassName, ...props }:
   return (
     <ProgressPrimitive.Root value={clampedValue} asChild>
       <View
-        className={cn("h-2 w-full overflow-hidden rounded-full bg-secondary", className)}
+        className={cn("h-2 w-full overflow-hidden rounded-full bg-zinc-100 dark:bg-zinc-800", className)}
         accessibilityRole="progressbar"
         accessibilityValue={{ min: 0, max: 100, now: clampedValue }}
         {...props}
       >
         <ProgressPrimitive.Indicator asChild>
           <View
-            className={cn("h-full rounded-full bg-primary", indicatorClassName)}
+            className={cn("h-full rounded-full bg-zinc-900 dark:bg-zinc-50", indicatorClassName)}
             style={{ width: `${clampedValue}%` }}
           />
         </ProgressPrimitive.Indicator>

@@ -3,7 +3,7 @@ import { View, Text, Pressable } from "react-native";
 import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
-const stepperVariants = cva("flex-row items-center self-start rounded-lg border border-border", {
+const stepperVariants = cva("flex-row items-center self-start rounded-lg border border-zinc-200 dark:border-zinc-800", {
   variants: {
     size: {
       sm: "h-9",
@@ -14,7 +14,7 @@ const stepperVariants = cva("flex-row items-center self-start rounded-lg border 
   defaultVariants: { size: "md" },
 });
 
-const buttonVariants = cva("items-center justify-center border-border", {
+const buttonVariants = cva("items-center justify-center border-zinc-200 dark:border-zinc-800", {
   variants: {
     size: {
       sm: "w-9",
@@ -55,10 +55,10 @@ export function Stepper({ size, className, value, onChange, min = 0, max = 99, s
         accessibilityRole="button"
         accessibilityLabel="Decrease"
       >
-        <Text className="text-lg text-foreground">−</Text>
+        <Text className="text-lg text-zinc-950 dark:text-zinc-50">−</Text>
       </Pressable>
       <View className="w-14 items-center justify-center">
-        <Text className="text-base font-medium text-foreground">{value}</Text>
+        <Text className="text-base font-medium text-zinc-950 dark:text-zinc-50">{value}</Text>
       </View>
       <Pressable
         className={cn(buttonVariants({ size }), "h-full border-l", !canInc && "opacity-30")}
@@ -68,7 +68,7 @@ export function Stepper({ size, className, value, onChange, min = 0, max = 99, s
         accessibilityRole="button"
         accessibilityLabel="Increase"
       >
-        <Text className="text-lg text-foreground">+</Text>
+        <Text className="text-lg text-zinc-950 dark:text-zinc-50">+</Text>
       </Pressable>
     </View>
   );

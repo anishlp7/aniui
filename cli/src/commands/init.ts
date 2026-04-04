@@ -5,26 +5,31 @@ import { detectProject, getInstallCommand, getDlxCommand, type StyleEngine } fro
 import { copyTemplate, copyUtilFile, getPackageRoot } from "../utils/file-ops";
 import { logger } from "../utils/logger";
 
-const THEME_PRESETS: Record<string, Record<string, string>> = {
+interface ThemePreset {
+  light: Record<string, string>;
+  dark: Record<string, string>;
+}
+
+const THEME_PRESETS: Record<string, ThemePreset> = {
   default: {
-    "--primary": "240 5.9% 10%",
-    "--primary-foreground": "0 0% 98%",
+    light: { "--primary": "240 5.9% 10%", "--primary-foreground": "0 0% 98%" },
+    dark:  { "--primary": "0 0% 98%", "--primary-foreground": "240 5.9% 10%" },
   },
   blue: {
-    "--primary": "221.2 83.2% 53.3%",
-    "--primary-foreground": "210 40% 98%",
+    light: { "--primary": "221.2 83.2% 53.3%", "--primary-foreground": "210 40% 98%" },
+    dark:  { "--primary": "217.2 91.2% 59.8%", "--primary-foreground": "222.2 47.4% 11.2%" },
   },
   green: {
-    "--primary": "142.1 76.2% 36.3%",
-    "--primary-foreground": "355.7 100% 97.3%",
+    light: { "--primary": "142.1 76.2% 36.3%", "--primary-foreground": "355.7 100% 97.3%" },
+    dark:  { "--primary": "142.1 70.6% 45.3%", "--primary-foreground": "144.9 80.4% 10%" },
   },
   orange: {
-    "--primary": "24.6 95% 53.1%",
-    "--primary-foreground": "60 9.1% 97.8%",
+    light: { "--primary": "24.6 95% 53.1%", "--primary-foreground": "60 9.1% 97.8%" },
+    dark:  { "--primary": "20.5 90.2% 48.2%", "--primary-foreground": "60 9.1% 97.8%" },
   },
   rose: {
-    "--primary": "346.8 77.2% 49.8%",
-    "--primary-foreground": "355.7 100% 97.3%",
+    light: { "--primary": "346.8 77.2% 49.8%", "--primary-foreground": "355.7 100% 97.3%" },
+    dark:  { "--primary": "346.8 77.2% 49.8%", "--primary-foreground": "355.7 100% 97.3%" },
   },
 };
 
@@ -199,10 +204,54 @@ export async function initCommand(opts?: { style?: string }): Promise<void> {
     ? path.join(templateDir, "global.css")
     : path.join(templateFallback, "global.css");
   let globalCss = await fs.readFile(globalCssSource, "utf-8");
+
+  // For Uniwind: remove nativewind-specific import, add @import "uniwind", use @media for dark mode
+  if (isChosenUniwind) {
+    globalCss = globalCss.replace(/@import\s+["']nativewind\/theme["'];\s*\n?/g, "");
+    // Add @import "uniwind" after @import "tailwindcss"
+    globalCss = globalCss.replace(
+      /(@import\s+["']tailwindcss["'];)/,
+      '$1\n@import "uniwind";'
+    );
+    globalCss = globalCss.replace(/\.dark\s*\{/g, "@media (prefers-color-scheme: dark) {\n:root {");
+    // Add closing brace for the media query
+    const lastBrace = globalCss.lastIndexOf("}");
+    if (lastBrace !== -1) {
+      globalCss = globalCss.slice(0, lastBrace + 1) + "\n}" + globalCss.slice(lastBrace + 1);
+    }
+  }
+
   const preset = THEME_PRESETS[response.theme] || THEME_PRESETS.default;
-  for (const [varName, value] of Object.entries(preset)) {
-    const regex = new RegExp(`(${varName.replace("--", "\\-\\-")}:\\s*)[^;]+`, "g");
-    globalCss = globalCss.replace(regex, `$1${value}`);
+  const isV5 = gen === "v5" || isChosenUniwind;
+
+  // Apply theme preset to both light and dark sections
+  const applyPreset = (css: string, vars: Record<string, string>) => {
+    for (const [varName, hslValue] of Object.entries(vars)) {
+      if (isV5) {
+        // v5/Uniwind: --color-primary: hsl(240 5.9% 10%)
+        const colorVar = varName.replace("--", "--color-");
+        const regex = new RegExp(`(${colorVar.replace(/--/g, "\\-\\-")}:\\s*)hsl\\([^)]+\\)`, "g");
+        css = css.replace(regex, `$1hsl(${hslValue})`);
+      } else {
+        // v4: --primary: 240 5.9% 10%
+        const regex = new RegExp(`(${varName.replace(/--/g, "\\-\\-")}:\\s*)[^;]+`, "g");
+        css = css.replace(regex, `$1${hslValue}`);
+      }
+    }
+    return css;
+  };
+
+  // Split CSS into light section (before dark block) and dark section
+  const darkBlockMatch = isV5
+    ? globalCss.match(/@media\s*\(prefers-color-scheme:\s*dark\)\s*\{/)
+    : globalCss.match(/\.dark\s*\{/);
+
+  if (darkBlockMatch && darkBlockMatch.index !== undefined) {
+    const lightPart = globalCss.slice(0, darkBlockMatch.index);
+    const darkPart = globalCss.slice(darkBlockMatch.index);
+    globalCss = applyPreset(lightPart, preset.light) + applyPreset(darkPart, preset.dark);
+  } else {
+    globalCss = applyPreset(globalCss, preset.light);
   }
   await fs.writeFile(globalCssPath, globalCss, "utf-8");
   logger.success(`Created global.css (${response.theme} theme)`);

@@ -6,9 +6,9 @@ import { cn } from "@/lib/utils";
 const headerVariants = cva("flex-row items-center min-h-14 px-4", {
   variants: {
     variant: {
-      default: "bg-background border-b border-border",
+      default: "bg-white dark:bg-zinc-950 border-b border-zinc-200 dark:border-zinc-800",
       transparent: "bg-transparent",
-      primary: "bg-primary",
+      primary: "bg-zinc-900 dark:bg-zinc-50",
     },
   },
   defaultVariants: { variant: "default" },
@@ -45,7 +45,7 @@ export interface HeaderTitleProps extends React.ComponentPropsWithoutRef<typeof 
 export function HeaderTitle({ className, ...props }: HeaderTitleProps) {
   return (
     <Text
-      className={cn("flex-1 text-lg font-semibold text-foreground", className)}
+      className={cn("flex-1 text-lg font-semibold text-zinc-950 dark:text-zinc-50", className)}
       numberOfLines={1}
       {...props}
     />
@@ -77,7 +77,7 @@ export function HeaderBackButton({ className, label = "←", onPress, ...props }
       className={cn("min-h-12 min-w-12 items-center justify-center", className)}
       {...props}
     >
-      <Text className="text-primary text-lg">{label}</Text>
+      <Text className="text-zinc-900 dark:text-zinc-50 text-lg">{label}</Text>
     </Pressable>
   );
 }

@@ -6,10 +6,10 @@ import { cn } from "@/lib/utils";
 const badgeVariants = cva("flex-row items-center rounded-full px-2.5 py-0.5", {
   variants: {
     variant: {
-      default: "bg-primary",
-      secondary: "bg-secondary",
-      outline: "border border-border bg-transparent",
-      destructive: "bg-destructive",
+      default: "bg-zinc-900 dark:bg-zinc-50",
+      secondary: "bg-zinc-100 dark:bg-zinc-800",
+      outline: "border border-zinc-200 dark:border-zinc-800 bg-transparent",
+      destructive: "bg-red-500 dark:bg-red-900",
     },
   },
   defaultVariants: {
@@ -20,10 +20,10 @@ const badgeVariants = cva("flex-row items-center rounded-full px-2.5 py-0.5", {
 const badgeTextVariants = cva("text-xs font-semibold", {
   variants: {
     variant: {
-      default: "text-primary-foreground",
-      secondary: "text-secondary-foreground",
-      outline: "text-foreground",
-      destructive: "text-destructive-foreground",
+      default: "text-zinc-50 dark:text-zinc-900",
+      secondary: "text-zinc-900 dark:text-zinc-50",
+      outline: "text-zinc-950 dark:text-zinc-50",
+      destructive: "text-zinc-50 dark:text-zinc-50",
     },
   },
   defaultVariants: {

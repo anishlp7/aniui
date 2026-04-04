@@ -3,7 +3,7 @@ import { Text as RNText } from "react-native";
 import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
-const textVariants = cva("text-foreground", {
+const textVariants = cva("text-zinc-950 dark:text-zinc-50", {
   variants: {
     variant: {
       h1: "text-4xl font-extrabold tracking-tight",
@@ -11,10 +11,10 @@ const textVariants = cva("text-foreground", {
       h3: "text-2xl font-semibold tracking-tight",
       h4: "text-xl font-semibold tracking-tight",
       p: "text-base leading-7",
-      lead: "text-xl text-muted-foreground",
+      lead: "text-xl text-zinc-500 dark:text-zinc-400",
       large: "text-lg font-semibold",
       small: "text-sm font-medium leading-none",
-      muted: "text-sm text-muted-foreground",
+      muted: "text-sm text-zinc-500 dark:text-zinc-400",
     },
   },
   defaultVariants: {

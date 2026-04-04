@@ -43,7 +43,7 @@ export function Drawer({ open, onOpenChange, side = "left", children }: DrawerPr
           drawerStyle,
         ]}
       >
-        <View className={cn("flex-1 bg-card", side === "left" ? "border-r border-border" : "border-l border-border")} accessibilityRole="menu">
+        <View className={cn("flex-1 bg-white dark:bg-zinc-950", side === "left" ? "border-r border-zinc-200 dark:border-zinc-800" : "border-l border-zinc-200 dark:border-zinc-800")} accessibilityRole="menu">
           {children}
         </View>
       </Animated.View>

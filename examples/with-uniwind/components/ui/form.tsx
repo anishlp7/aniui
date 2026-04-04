@@ -100,7 +100,7 @@ export function FormMessage({ className, ...props }: { className?: string }) {
   const { error } = useContext(FormFieldContext);
   if (!error) return null;
   return (
-    <Text className={cn("text-sm text-destructive", className)} accessibilityRole="alert" {...props}>
+    <Text className={cn("text-sm text-red-500 dark:text-red-900", className)} accessibilityRole="alert" {...props}>
       {error}
     </Text>
   );
