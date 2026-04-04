@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "expo-55-starter",
+    "name": "AniUI Expo 55 Starter",
     "slug": "expo-55-starter",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -8,7 +8,8 @@
     "scheme": "expo55starter",
     "userInterfaceStyle": "automatic",
     "ios": {
-      "icon": "./assets/expo.icon"
+      "icon": "./assets/expo.icon",
+      "bundleIdentifier": "com.anish.dev.expo55starter"
     },
     "android": {
       "adaptiveIcon": {

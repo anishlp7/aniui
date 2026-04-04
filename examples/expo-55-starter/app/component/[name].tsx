@@ -3,6 +3,7 @@ import { ScrollView, View, Pressable, Modal } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useLocalSearchParams, Stack } from "expo-router";
 import { Text } from "@/components/ui/text";
+import { useAppTheme } from "../_layout";
 
 // Forms
 import { Button } from "@/components/ui/button";
@@ -1808,6 +1809,7 @@ function formatName(slug: string): string {
 export default function ComponentPage() {
   const { name } = useLocalSearchParams<{ name: string }>();
   const [ready, setReady] = useState(false);
+  const { colors } = useAppTheme();
   const title = formatName(name || "");
   const Demo = demos[name || ""];
 
@@ -1817,13 +1819,13 @@ export default function ComponentPage() {
   return (
     <>
       <Stack.Screen options={{ title }} />
-      <SafeAreaView className="flex-1 bg-background" edges={["bottom"]}>
-        <ScrollView className="flex-1 px-5" contentContainerStyle={{ paddingVertical: 24 }}>
-          <Text variant="h2" className="mb-1">{title}</Text>
-          <Text variant="muted" className="mb-6">Live preview</Text>
+      <SafeAreaView style={{ flex: 1, backgroundColor: colors.bg }} edges={["bottom"]}>
+        <ScrollView style={{ flex: 1, paddingHorizontal: 20 }} contentContainerStyle={{ paddingVertical: 24 }}>
+          <Text style={{ fontSize: 22, fontWeight: "700", color: colors.fg, marginBottom: 4 }}>{title}</Text>
+          <Text style={{ fontSize: 14, color: colors.mutedFg, marginBottom: 24 }}>Live preview</Text>
           {ready && Demo ? <Demo /> : (
-            <View className="items-center py-12">
-              <Text className="text-muted-foreground">{ready ? "Demo coming soon" : ""}</Text>
+            <View style={{ alignItems: "center", paddingVertical: 48 }}>
+              <Text style={{ color: colors.mutedFg }}>{ready ? "Demo coming soon" : ""}</Text>
             </View>
           )}
         </ScrollView>

@@ -99,7 +99,7 @@ const sectionOrder = ["Forms", "Display", "Feedback", "Navigation", "Overlays", 
 
 export default function HomeScreen() {
   const router = useRouter();
-  const { theme, toggle } = useAppTheme();
+  const { theme, toggle, colors } = useAppTheme();
   const [search, setSearch] = useState("");
   const isDark = theme === "dark";
 
@@ -112,45 +112,45 @@ export default function HomeScreen() {
     .filter((s) => s.items.length > 0);
 
   return (
-    <SafeAreaView className="flex-1 bg-background">
-      <ScrollView className="flex-1" contentContainerStyle={{ paddingBottom: 40 }}>
+    <SafeAreaView style={{ flex: 1, backgroundColor: colors.bg }}>
+      <ScrollView style={{ flex: 1 }} contentContainerStyle={{ paddingBottom: 40 }}>
         {/* Header */}
-        <View className="px-5 pt-6 pb-4">
-          <View className="flex-row items-center justify-between">
-            <View className="flex-row items-center gap-3">
+        <View style={{ paddingHorizontal: 20, paddingTop: 24, paddingBottom: 16 }}>
+          <View style={{ flexDirection: "row", alignItems: "center", justifyContent: "space-between" }}>
+            <View style={{ flexDirection: "row", alignItems: "center", gap: 12 }}>
               <Image
                 source={isDark ? require("@/assets/images/logo-dark.png") : require("@/assets/images/logo-light.png")}
                 style={{ width: 44, height: 44 }}
                 resizeMode="contain"
               />
               <View>
-                <Text variant="h3" className="text-foreground">AniUI</Text>
-                <Text variant="small" className="text-muted-foreground">77 components</Text>
+                <Text style={{ fontSize: 20, fontWeight: "700", color: colors.fg }}>AniUI</Text>
+                <Text style={{ fontSize: 12, color: colors.mutedFg }}>77 components</Text>
               </View>
             </View>
             <Pressable
               onPress={toggle}
-              className="h-10 w-10 items-center justify-center rounded-full bg-secondary"
+              style={{ height: 40, width: 40, alignItems: "center", justifyContent: "center", borderRadius: 20, backgroundColor: colors.secondary }}
               accessibilityRole="button"
               accessibilityLabel={isDark ? "Switch to light mode" : "Switch to dark mode"}
             >
-              <Text className="text-base">{isDark ? "☀️" : "🌙"}</Text>
+              <Text style={{ fontSize: 16 }}>{isDark ? "☀️" : "🌙"}</Text>
             </Pressable>
           </View>
 
           {/* Search */}
-          <View className="mt-4 flex-row items-center rounded-lg border border-input bg-background px-3 h-11">
-            <Text className="text-muted-foreground mr-2">🔍</Text>
+          <View style={{ marginTop: 16, flexDirection: "row", alignItems: "center", borderRadius: 8, borderWidth: 1, borderColor: colors.border, backgroundColor: colors.bg, paddingHorizontal: 12, height: 44 }}>
+            <Text style={{ color: colors.mutedFg, marginRight: 8 }}>🔍</Text>
             <TextInput
-              className="flex-1 text-foreground text-sm"
+              style={{ flex: 1, color: colors.fg, fontSize: 14 }}
               placeholder="Search components..."
-              placeholderTextColor="hsl(var(--muted-foreground))"
+              placeholderTextColor={colors.mutedFg}
               value={search}
               onChangeText={setSearch}
             />
             {search.length > 0 && (
               <Pressable onPress={() => setSearch("")} accessibilityRole="button" accessibilityLabel="Clear search">
-                <Text className="text-muted-foreground">✕</Text>
+                <Text style={{ color: colors.mutedFg }}>✕</Text>
               </Pressable>
             )}
           </View>
@@ -158,9 +158,9 @@ export default function HomeScreen() {
 
         {/* Component List */}
         {grouped.map((section) => (
-          <View key={section.title} className="mt-2">
-            <View className="px-5 py-2">
-              <Text variant="small" className="text-muted-foreground font-semibold uppercase tracking-wider">
+          <View key={section.title} style={{ marginTop: 8 }}>
+            <View style={{ paddingHorizontal: 20, paddingVertical: 8 }}>
+              <Text style={{ fontSize: 11, fontWeight: "600", color: colors.mutedFg, textTransform: "uppercase", letterSpacing: 1 }}>
                 {section.title} ({section.items.length})
               </Text>
             </View>
@@ -168,29 +168,29 @@ export default function HomeScreen() {
               <Pressable
                 key={comp.name}
                 onPress={() => router.push(`/component/${toSlug(comp.name)}` as never)}
-                className="flex-row items-center justify-between px-5 py-3 active:bg-accent"
+                style={{ flexDirection: "row", alignItems: "center", justifyContent: "space-between", paddingHorizontal: 20, paddingVertical: 12 }}
                 accessibilityRole="button"
               >
-                <View className="flex-row items-center gap-3">
-                  <View className="h-8 w-8 items-center justify-center rounded-lg bg-primary/10">
-                    <Text className="text-primary text-xs font-bold">{comp.name.charAt(0)}</Text>
+                <View style={{ flexDirection: "row", alignItems: "center", gap: 12 }}>
+                  <View style={{ height: 32, width: 32, alignItems: "center", justifyContent: "center", borderRadius: 8, backgroundColor: colors.primary + "15" }}>
+                    <Text style={{ color: colors.primary, fontSize: 12, fontWeight: "700" }}>{comp.name.charAt(0)}</Text>
                   </View>
-                  <Text className="text-foreground text-sm font-medium">{comp.name}</Text>
+                  <Text style={{ color: colors.fg, fontSize: 14, fontWeight: "500" }}>{comp.name}</Text>
                 </View>
-                <Text className="text-muted-foreground text-xs">→</Text>
+                <Text style={{ color: colors.mutedFg, fontSize: 12 }}>→</Text>
               </Pressable>
             ))}
           </View>
         ))}
 
         {filtered.length === 0 && (
-          <View className="items-center py-12">
-            <Text className="text-muted-foreground">No components match &quot;{search}&quot;</Text>
+          <View style={{ alignItems: "center", paddingVertical: 48 }}>
+            <Text style={{ color: colors.mutedFg }}>No components match &quot;{search}&quot;</Text>
           </View>
         )}
 
-        <View className="items-center mt-8">
-          <Text variant="small" className="text-muted-foreground">Built with AniUI</Text>
+        <View style={{ alignItems: "center", marginTop: 32 }}>
+          <Text style={{ fontSize: 12, color: colors.mutedFg }}>Built with AniUI</Text>
         </View>
       </ScrollView>
     </SafeAreaView>
