@@ -32,7 +32,7 @@ export async function doctorCommand(): Promise<void> {
 
   // 3. SDK generation
   checks.push({
-    label: `SDK generation: ${gen === "v5" ? "NativeWind v5 + Tailwind v4" : "NativeWind v4 + Tailwind v3"}`,
+    label: `SDK generation: ${gen === "v5" ? "Tailwind v4" : "Tailwind v3"} (${gen})`,
     pass: true,
   });
 
@@ -102,11 +102,12 @@ export async function doctorCommand(): Promise<void> {
   const metroPath = path.join(cwd, "metro.config.js");
   if (await fs.pathExists(metroPath)) {
     const metroContent = await fs.readFile(metroPath, "utf-8");
-    const wrapperName = isUniwind ? "withUniwind" : "withNativeWind";
+    const wrapperName = isUniwind ? "withUniwindConfig" : "withNativeWind";
+    const configParam = isUniwind ? "cssEntryFile" : "input";
     checks.push({
       label: `metro.config.js has ${wrapperName}`,
       pass: metroContent.includes(wrapperName),
-      fix: `Add ${wrapperName} wrapper to metro.config.js`,
+      fix: `Add ${wrapperName}(config, { ${configParam}: "./global.css" }) to metro.config.js`,
     });
   } else {
     checks.push({ label: "metro.config.js exists", pass: false, fix: "Run: npx @aniui/cli init" });
@@ -138,9 +139,21 @@ export async function doctorCommand(): Promise<void> {
     const css = await fs.readFile(globalCssPath, "utf-8");
     checks.push({
       label: "global.css has theme tokens",
-      pass: css.includes("--primary") && css.includes("--background"),
+      pass: css.includes("--primary") || css.includes("--color-primary"),
       fix: "Run: npx @aniui/cli init",
     });
+    if (isUniwind) {
+      checks.push({
+        label: 'global.css has @import "uniwind"',
+        pass: css.includes('@import "uniwind"') || css.includes("@import 'uniwind'"),
+        fix: 'Add @import "uniwind"; after @import "tailwindcss"; in global.css',
+      });
+      checks.push({
+        label: "global.css has dark mode via @media (prefers-color-scheme: dark)",
+        pass: css.includes("prefers-color-scheme: dark"),
+        fix: "Wrap dark theme overrides in @media (prefers-color-scheme: dark) { :root { ... } }",
+      });
+    }
   } else {
     checks.push({ label: "global.css exists", pass: false, fix: "Run: npx @aniui/cli init" });
   }
@@ -162,12 +175,14 @@ export async function doctorCommand(): Promise<void> {
     });
   }
 
-  // nativewind-env.d.ts
-  checks.push({
-    label: "nativewind-env.d.ts exists",
-    pass: await fs.pathExists(path.join(cwd, "nativewind-env.d.ts")),
-    fix: "Run: npx @aniui/cli init",
-  });
+  // nativewind-env.d.ts (NativeWind only)
+  if (!isUniwind) {
+    checks.push({
+      label: "nativewind-env.d.ts exists",
+      pass: await fs.pathExists(path.join(cwd, "nativewind-env.d.ts")),
+      fix: "Run: npx @aniui/cli init",
+    });
+  }
 
   // 9. No known conflicts
   if (project.type === "expo") {

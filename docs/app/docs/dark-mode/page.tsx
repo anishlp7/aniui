@@ -6,7 +6,7 @@ export default function DarkModePage() {
       <div>
         <h1 className="text-3xl font-bold tracking-tight text-foreground">Dark Mode</h1>
         <p className="mt-2 text-lg text-muted-foreground">
-          Set up dark mode in your React Native app with NativeWind.
+          Set up dark mode in your React Native app with NativeWind or Uniwind.
         </p>
       </div>
 
@@ -76,6 +76,71 @@ export function ThemeToggle() {
   );
 }`}
         />
+
+        <h2 className="text-2xl font-semibold tracking-tight pt-4">Uniwind</h2>
+        <p className="text-muted-foreground">
+          Uniwind uses <code className="rounded bg-secondary px-1.5 py-0.5 text-sm font-mono">Uniwind.setTheme()</code> for
+          programmatic theme switching. Dark mode values are defined in <code className="rounded bg-secondary px-1.5 py-0.5 text-sm font-mono">global.css</code> using
+          a <code className="rounded bg-secondary px-1.5 py-0.5 text-sm font-mono">@media (prefers-color-scheme: dark)</code> block.
+        </p>
+
+        <h3 className="text-lg font-semibold pt-2">1. global.css setup</h3>
+        <p className="text-muted-foreground">
+          Make sure your CSS has both <code className="rounded bg-secondary px-1.5 py-0.5 text-sm font-mono">@import &quot;uniwind&quot;</code> and
+          the dark mode media query:
+        </p>
+        <CodeBlock
+          title="global.css"
+          code={`@import "tailwindcss";
+@import "uniwind";
+
+@theme {
+  --color-background: hsl(0 0% 100%);
+  --color-foreground: hsl(240 10% 3.9%);
+  --color-primary: hsl(240 5.9% 10%);
+  /* ... light values */
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-background: hsl(240 10% 3.9%);
+    --color-foreground: hsl(0 0% 98%);
+    --color-primary: hsl(0 0% 98%);
+    /* ... dark values */
+  }
+}`}
+        />
+
+        <h3 className="text-lg font-semibold pt-2">2. Toggle theme</h3>
+        <CodeBlock
+          title="components/theme-toggle.tsx"
+          code={`import { Pressable, Text } from "react-native";
+import { Uniwind, useUniwind } from "uniwind";
+
+export function ThemeToggle() {
+  const { theme } = useUniwind();
+
+  return (
+    <Pressable
+      onPress={() => {
+        const next = Uniwind.currentTheme === "light" ? "dark" : "light";
+        Uniwind.setTheme(next);
+      }}
+      className="rounded-md bg-secondary px-4 py-2"
+    >
+      <Text className="text-secondary-foreground">
+        {theme === "dark" ? "Light Mode" : "Dark Mode"}
+      </Text>
+    </Pressable>
+  );
+}`}
+        />
+        <p className="text-muted-foreground">
+          <code className="rounded bg-secondary px-1.5 py-0.5 text-sm font-mono">Uniwind.setTheme()</code> automatically
+          calls <code className="rounded bg-secondary px-1.5 py-0.5 text-sm font-mono">Appearance.setColorScheme()</code> internally, so native
+          components (Alert, Modal, etc.) also adapt. Use <code className="rounded bg-secondary px-1.5 py-0.5 text-sm font-mono">Uniwind.setTheme(&quot;system&quot;)</code> to
+          re-enable automatic system theme following.
+        </p>
 
         <h2 className="text-2xl font-semibold tracking-tight pt-4">Bare React Native</h2>
         <p className="text-muted-foreground">

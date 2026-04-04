@@ -277,9 +277,13 @@ export async function initCommand(opts?: { style?: string }): Promise<void> {
     logger.info("Tailwind v4 uses CSS-first configuration — theme tokens are in global.css");
   }
 
-  // 4. Copy nativewind-env.d.ts
-  await copyTemplate("nativewind-env.d.ts", nativewindEnvPath, gen);
-  logger.success("Created nativewind-env.d.ts");
+  // 4. Copy nativewind-env.d.ts (NativeWind only — Uniwind provides its own types)
+  if (!isChosenUniwind) {
+    await copyTemplate("nativewind-env.d.ts", nativewindEnvPath, gen);
+    logger.success("Created nativewind-env.d.ts");
+  } else {
+    logger.info("Uniwind provides className types via its metro plugin — no nativewind-env.d.ts needed.");
+  }
 
   // 5. Ensure components directory exists
   await fs.ensureDir(componentsDir);
