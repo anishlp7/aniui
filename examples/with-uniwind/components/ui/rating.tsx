@@ -33,7 +33,7 @@ export function Rating({ size, className, value, max = 5, onChange, readOnly, ..
       {Array.from({ length: max }, (_, i) => {
         const filled = i < value;
         const star = (
-          <Text className={cn(starSizes[s], filled ? "text-yellow-400" : "text-zinc-500/30 dark:text-zinc-400/30")}>★</Text>
+          <Text className={cn(starSizes[s], filled ? "text-yellow-400" : "text-muted-foreground/30")}>★</Text>
         );
         return readOnly ? (
           <View key={i}>{star}</View>

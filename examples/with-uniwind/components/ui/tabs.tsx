@@ -20,7 +20,7 @@ export function Tabs({ defaultValue, className, children, ...props }: TabsProps)
 }
 
 export function TabsList({ className, ...props }: React.ComponentPropsWithoutRef<typeof View> & { className?: string }) {
-  return <View className={cn("flex-row rounded-lg bg-zinc-100 dark:bg-zinc-800 p-1", className)} {...props} />;
+  return <View className={cn("flex-row rounded-lg bg-muted p-1", className)} {...props} />;
 }
 
 export interface TabsTriggerProps extends React.ComponentPropsWithoutRef<typeof Pressable> {
@@ -35,7 +35,7 @@ export function TabsTrigger({ value, className, children, ...props }: TabsTrigge
 
   return (
     <Pressable
-      className={cn("flex-1 items-center justify-center py-2 min-h-12 rounded-md", isActive && "bg-white dark:bg-zinc-950 shadow-sm", className)}
+      className={cn("flex-1 items-center justify-center py-2 min-h-12 rounded-md", isActive && "bg-background shadow-sm", className)}
       onPress={() => onValueChange(value)}
       accessible={true}
       accessibilityRole="tab"
@@ -43,7 +43,7 @@ export function TabsTrigger({ value, className, children, ...props }: TabsTrigge
       {...props}
     >
       {typeof children === "string" ? (
-        <Text className={cn("text-sm font-medium", isActive ? "text-zinc-950 dark:text-zinc-50" : "text-zinc-500 dark:text-zinc-400")}>{children}</Text>
+        <Text className={cn("text-sm font-medium", isActive ? "text-foreground" : "text-muted-foreground")}>{children}</Text>
       ) : children}
     </Pressable>
   );

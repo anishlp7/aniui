@@ -22,7 +22,7 @@ function Dot({ delay }: { delay: number }) {
 
   const style = useAnimatedStyle(() => ({ transform: [{ translateY: translateY.value }] }));
 
-  return <Animated.View style={style} className="h-2 w-2 rounded-full bg-zinc-500 dark:bg-zinc-400" />;
+  return <Animated.View style={style} className="h-2 w-2 rounded-full bg-muted-foreground" />;
 }
 
 export interface TypingIndicatorProps extends React.ComponentPropsWithoutRef<typeof View> {
@@ -32,7 +32,7 @@ export interface TypingIndicatorProps extends React.ComponentPropsWithoutRef<typ
 export function TypingIndicator({ className, ...props }: TypingIndicatorProps) {
   return (
     <View
-      className={cn("flex-row items-center gap-1 px-4 py-2.5 rounded-2xl bg-zinc-100 dark:bg-zinc-800 self-start rounded-bl-sm", className)}
+      className={cn("flex-row items-center gap-1 px-4 py-2.5 rounded-2xl bg-secondary self-start rounded-bl-sm", className)}
       accessibilityLabel="Typing"
       {...props}
     >

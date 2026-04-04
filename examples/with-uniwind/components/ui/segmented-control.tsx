@@ -14,7 +14,7 @@ export interface SegmentedControlProps extends React.ComponentPropsWithoutRef<ty
 export function SegmentedControl({ size = "md", className, options, value, onValueChange, ...props }: SegmentedControlProps) {
   return (
     <View
-      className="rounded-lg bg-zinc-100 dark:bg-zinc-800"
+      className="rounded-lg bg-muted"
       style={{ height: heights[size], padding: 4, flexDirection: "row", borderRadius: 8 }}
       accessibilityRole="tablist"
       {...props}

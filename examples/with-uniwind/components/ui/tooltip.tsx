@@ -41,9 +41,9 @@ export function TooltipContent({ className, children, side = "top", sideOffset =
     <TooltipPrimitive.Portal>
       <TooltipPrimitive.Content side={side} sideOffset={sideOffset} avoidCollisions>
         <Animated.View entering={FadeIn.duration(150)} exiting={FadeOut.duration(100)}>
-          <View className={cn("rounded-md bg-zinc-900 dark:bg-zinc-50 px-3 py-1.5", className)} {...props}>
+          <View className={cn("rounded-md bg-primary px-3 py-1.5", className)} {...props}>
             {typeof children === "string" ? (
-              <Text className="text-xs text-zinc-50 dark:text-zinc-900 text-center">{children}</Text>
+              <Text className="text-xs text-primary-foreground text-center">{children}</Text>
             ) : children}
           </View>
         </Animated.View>

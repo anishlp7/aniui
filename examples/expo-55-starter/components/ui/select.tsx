@@ -1,7 +1,7 @@
 import React, { useState, useRef } from "react";
 import { View, Text, Pressable, TextInput, Modal, ScrollView, Dimensions, LayoutChangeEvent } from "react-native";
 import { cn } from "@/lib/utils";
-import { ChevronDownIcon } from "@/components/ui/icons";
+import Svg, { Path } from "react-native-svg";
 
 export interface SelectOption { label: string; value: string }
 
@@ -58,7 +58,9 @@ export function Select({
         <Text className={cn("text-base flex-1", selected ? "text-foreground" : "text-muted-foreground")} numberOfLines={1}>
           {selected?.label ?? placeholder}
         </Text>
-        <ChevronDownIcon size={16} />
+        <Svg width={16} height={16} viewBox="0 0 24 24" fill="none" stroke="#71717a" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
+      <Path d="m6 9 6 6 6-6" />
+    </Svg>
       </Pressable>
 
       <Modal visible={open} transparent animationType="none" onRequestClose={close}>

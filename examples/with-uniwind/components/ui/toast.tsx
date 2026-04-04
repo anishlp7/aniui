@@ -38,8 +38,8 @@ export function ToastProvider({ children }: ToastProviderProps) {
 }
 
 const variantStyles: Record<ToastVariant, string> = {
-  default: "bg-white dark:bg-zinc-950 border-zinc-200 dark:border-zinc-800",
-  destructive: "bg-red-500 dark:bg-red-900 border-red-500 dark:border-red-900",
+  default: "bg-card border-border",
+  destructive: "bg-destructive border-destructive",
   success: "bg-green-600 border-green-600",
 };
 
@@ -55,9 +55,9 @@ function ToastItem({ data, onDismiss }: { data: ToastData; onDismiss: () => void
         accessible={true}
         accessibilityRole="alert"
       >
-        <Text className={cn("text-sm font-semibold", isDefault ? "text-zinc-950 dark:text-zinc-50" : "text-white")}>{data.title}</Text>
+        <Text className={cn("text-sm font-semibold", isDefault ? "text-foreground" : "text-white")}>{data.title}</Text>
         {data.description && (
-          <Text className={cn("text-xs mt-1", isDefault ? "text-zinc-500 dark:text-zinc-400" : "text-white/80")}>{data.description}</Text>
+          <Text className={cn("text-xs mt-1", isDefault ? "text-muted-foreground" : "text-white/80")}>{data.description}</Text>
         )}
       </Pressable>
     </Animated.View>

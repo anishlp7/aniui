@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { View, Text, Pressable } from "react-native";
 import { cn } from "@/lib/utils";
+import { Path } from "react-native-svg";
+import Svg from "react-native-svg";
 
 export interface CalendarProps {
   className?: string; selected?: Date; onSelect?: (date: Date) => void;
@@ -34,24 +36,34 @@ export function Calendar({ className, selected, onSelect, rangeStart, rangeEnd, 
   const label = new Date(year, month).toLocaleString("default", { month: "long", year: "numeric" });
 
   return (
-    <View className={cn("rounded-lg bg-white dark:bg-zinc-950 p-3", className)}>
+    <View className={cn("rounded-lg bg-background p-3", className)}>
       <View className="flex-row items-center justify-between mb-3">
         <Pressable onPress={() => mode === "days" ? setViewing(new Date(year, month - 1, 1)) : mode === "months" ? setViewing(new Date(year - 1, month, 1)) : setViewing(new Date(decadeStart - 12, month, 1))} className="h-9 w-9 items-center justify-center rounded-md" accessibilityRole="button" accessibilityLabel="Previous">
-          <Text className="text-base text-zinc-500 dark:text-zinc-400">{"\u2039"}</Text>
+          <Text className="text-base text-muted-foreground">
+          <Svg width={24} height={24} viewBox="0 0 24 24" fill="none" stroke="#71717a" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
+            <Path d="m12 19-7-7 7-7" />
+            <Path d="M19 12H5" />
+          </Svg>
+          </Text>
         </Pressable>
         <Pressable onPress={handleHeaderPress} accessibilityRole="button">
-          <Text className="text-sm font-semibold text-zinc-950 dark:text-zinc-50">{mode === "days" ? label : mode === "months" ? `${year}` : `${decadeStart} – ${decadeStart + 11}`}</Text>
+          <Text className="text-sm font-semibold text-foreground">{mode === "days" ? label : mode === "months" ? `${year}` : `${decadeStart} – ${decadeStart + 11}`}</Text>
         </Pressable>
         <Pressable onPress={() => mode === "days" ? setViewing(new Date(year, month + 1, 1)) : mode === "months" ? setViewing(new Date(year + 1, month, 1)) : setViewing(new Date(decadeStart + 12, month, 1))} className="h-9 w-9 items-center justify-center rounded-md" accessibilityRole="button" accessibilityLabel="Next">
-          <Text className="text-base text-zinc-500 dark:text-zinc-400">{"\u203A"}</Text>
+          <Text className="text-base text-muted-foreground">
+          <Svg width={24} height={24} viewBox="0 0 24 24" fill="none" stroke="#71717a" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
+            <Path d="M5 12h14" />
+            <Path d="m12 5 7 7-7 7" />
+          </Svg>
+          </Text>
         </Pressable>
       </View>
       {mode === "years" && (
         <View className="flex-row flex-wrap">
           {Array.from({ length: 12 }, (_, i) => decadeStart + i).map((y) => (
             <View key={y} className="w-1/3 items-center p-1">
-              <Pressable onPress={() => pickYear(y)} className={cn("h-9 w-full items-center justify-center rounded-md", y === year && "bg-zinc-900 dark:bg-zinc-50")} accessibilityRole="button">
-                <Text className={cn("text-sm", y === year ? "text-zinc-50 dark:text-zinc-900 font-semibold" : "text-zinc-950 dark:text-zinc-50")}>{y}</Text>
+              <Pressable onPress={() => pickYear(y)} className={cn("h-9 w-full items-center justify-center rounded-md", y === year && "bg-primary")} accessibilityRole="button">
+                <Text className={cn("text-sm", y === year ? "text-primary-foreground font-semibold" : "text-foreground")}>{y}</Text>
               </Pressable>
             </View>
           ))}
@@ -63,8 +75,8 @@ export function Calendar({ className, selected, onSelect, rangeStart, rangeEnd, 
         <View className="flex-row flex-wrap">
           {MONTHS.map((m, i) => (
             <View key={m} className="w-1/3 items-center p-1">
-              <Pressable onPress={() => pickMonth(i)} className={cn("h-9 w-full items-center justify-center rounded-md", i === month && year === viewing.getFullYear() && "bg-zinc-900 dark:bg-zinc-50")} accessibilityRole="button">
-                <Text className={cn("text-sm", i === month && year === viewing.getFullYear() ? "text-zinc-50 dark:text-zinc-900 font-semibold" : "text-zinc-950 dark:text-zinc-50")}>{m}</Text>
+              <Pressable onPress={() => pickMonth(i)} className={cn("h-9 w-full items-center justify-center rounded-md", i === month && year === viewing.getFullYear() && "bg-primary")} accessibilityRole="button">
+                <Text className={cn("text-sm", i === month && year === viewing.getFullYear() ? "text-primary-foreground font-semibold" : "text-foreground")}>{m}</Text>
               </Pressable>
             </View>
           ))}
@@ -75,7 +87,7 @@ export function Calendar({ className, selected, onSelect, rangeStart, rangeEnd, 
       {mode === "days" && (
         <>
           <View className="flex-row mb-1">
-            {DAYS.map((d) => <View key={d} className="flex-1 items-center py-1"><Text className="text-xs font-medium text-zinc-500 dark:text-zinc-400">{d}</Text></View>)}
+            {DAYS.map((d) => <View key={d} className="flex-1 items-center py-1"><Text className="text-xs font-medium text-muted-foreground">{d}</Text></View>)}
           </View>
           <View className="flex-row flex-wrap">
             {(() => {
@@ -93,8 +105,8 @@ export function Calendar({ className, selected, onSelect, rangeStart, rangeEnd, 
                 const off = (min && date < min) || (max && date > max);
                 return (
                   <View key={day} className="w-[14.28%] items-center">
-                    <Pressable onPress={() => handlePress(day)} disabled={!!off} className={cn("h-9 w-9 items-center justify-center rounded-full", sel || rs || re ? "bg-zinc-900 dark:bg-zinc-50" : inR ? "bg-zinc-100 dark:bg-zinc-800" : "", today && !sel && "border border-zinc-900 dark:border-zinc-50", off && "opacity-30")} accessibilityRole="button" accessibilityLabel={`${label} ${day}`}>
-                      <Text className={cn("text-sm", sel || rs || re ? "text-zinc-50 dark:text-zinc-900 font-semibold" : "text-zinc-950 dark:text-zinc-50")}>{day}</Text>
+                    <Pressable onPress={() => handlePress(day)} disabled={!!off} className={cn("h-9 w-9 items-center justify-center rounded-full", sel || rs || re ? "bg-primary" : inR ? "bg-accent" : "", today && !sel && "border border-primary", off && "opacity-30")} accessibilityRole="button" accessibilityLabel={`${label} ${day}`}>
+                      <Text className={cn("text-sm", sel || rs || re ? "text-primary-foreground font-semibold" : "text-foreground")}>{day}</Text>
                     </Pressable>
                   </View>
                 );

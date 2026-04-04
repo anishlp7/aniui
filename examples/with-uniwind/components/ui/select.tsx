@@ -1,7 +1,7 @@
 import React, { useState, useRef } from "react";
 import { View, Text, Pressable, TextInput, Modal, ScrollView, Dimensions, LayoutChangeEvent } from "react-native";
 import { cn } from "@/lib/utils";
-import { ChevronDownIcon } from "@/components/ui/icons";
+import Svg, { Path } from "react-native-svg";
 
 export interface SelectOption { label: string; value: string }
 
@@ -49,16 +49,18 @@ export function Select({
     <View>
       <Pressable
         ref={triggerRef}
-        className={cn("flex-row items-center justify-between h-12 px-4 border border-zinc-200 dark:border-zinc-800 rounded-lg bg-white dark:bg-zinc-950 active:bg-zinc-100/30 dark:active:bg-zinc-800/30", className)}
+        className={cn("flex-row items-center justify-between h-12 px-4 border border-input rounded-lg bg-background active:bg-accent/30", className)}
         onPress={handleOpen}
         accessible={true}
         accessibilityRole="button"
         accessibilityLabel={label ?? placeholder}
       >
-        <Text className={cn("text-base flex-1", selected ? "text-zinc-950 dark:text-zinc-50" : "text-zinc-500 dark:text-zinc-400")} numberOfLines={1}>
+        <Text className={cn("text-base flex-1", selected ? "text-foreground" : "text-muted-foreground")} numberOfLines={1}>
           {selected?.label ?? placeholder}
         </Text>
-        <ChevronDownIcon size={16} />
+        <Svg width={16} height={16} viewBox="0 0 24 24" fill="none" stroke="#71717a" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
+      <Path d="m6 9 6 6 6-6" />
+    </Svg>
       </Pressable>
 
       <Modal visible={open} transparent animationType="none" onRequestClose={close}>
@@ -75,12 +77,12 @@ export function Select({
               ? { top: belowY }
               : { bottom: screenH - pos.y + 4 }),
           }}
-          className="rounded-xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 shadow-2xl overflow-hidden"
+          className="rounded-xl border border-border bg-card shadow-2xl overflow-hidden"
         >
           {searchable && (
             <View className="px-3 pt-3 pb-2">
               <TextInput
-                className="h-11 px-4 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 text-zinc-950 dark:text-zinc-50 text-base"
+                className="h-11 px-4 rounded-lg border border-input bg-background text-foreground text-base"
                 placeholder={searchPlaceholder}
                 placeholderTextColor="#71717a"
                 value={search}
@@ -96,20 +98,20 @@ export function Select({
               return (
                 <Pressable
                   key={o.value}
-                  className={cn("flex-row items-center h-12 px-4 active:bg-zinc-100/50 dark:active:bg-zinc-800/50", isSelected && "bg-zinc-100 dark:bg-zinc-800")}
+                  className={cn("flex-row items-center h-12 px-4 active:bg-accent/50", isSelected && "bg-accent")}
                   onPress={() => pick(o.value)}
                   accessible={true}
                   accessibilityRole="button"
                   accessibilityState={{ selected: isSelected }}
                 >
-                  <Text className={cn("flex-1 text-base text-zinc-950 dark:text-zinc-50", isSelected && "font-semibold")} numberOfLines={1}>{o.label}</Text>
-                  {isSelected && <Text className="text-base text-zinc-900 dark:text-zinc-50 font-bold">✓</Text>}
+                  <Text className={cn("flex-1 text-base text-foreground", isSelected && "font-semibold")} numberOfLines={1}>{o.label}</Text>
+                  {isSelected && <Text className="text-base text-primary font-bold">✓</Text>}
                 </Pressable>
               );
             })}
             {filtered.length === 0 && (
               <View className="h-12 items-center justify-center">
-                <Text className="text-sm text-zinc-500 dark:text-zinc-400">No results</Text>
+                <Text className="text-sm text-muted-foreground">No results</Text>
               </View>
             )}
           </ScrollView>

@@ -2,7 +2,7 @@ import React, { useState, useCallback } from "react";
 import { View, TextInput, Pressable, Text, ScrollView, Modal } from "react-native";
 import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
-import { ChevronDownIcon } from "@/components/ui/icons";
+import Svg, { Path } from "react-native-svg";
 
 const phoneVariants = cva("flex-row items-center rounded-md border", {
   variants: {
@@ -71,7 +71,9 @@ export function PhoneInput({
         className="flex-row items-center mr-2 pr-2 border-r border-border min-h-8"
       >
         <Text className="text-foreground text-base">{country.dial}</Text>
-        <ChevronDownIcon size={14} />
+        <Svg width={14} height={14} viewBox="0 0 24 24" fill="none" stroke="#71717a" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
+      <Path d="m6 9 6 6 6-6" />
+    </Svg>
       </Pressable>
       <TextInput
         className="flex-1 text-foreground p-0 text-base"

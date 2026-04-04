@@ -8,11 +8,11 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        default: "bg-zinc-900 dark:bg-zinc-50",
-        secondary: "bg-zinc-100 dark:bg-zinc-800",
-        outline: "border border-zinc-200 dark:border-zinc-800 bg-transparent",
+        default: "bg-primary",
+        secondary: "bg-secondary",
+        outline: "border border-input bg-transparent",
         ghost: "bg-transparent",
-        destructive: "bg-red-500 dark:bg-red-900",
+        destructive: "bg-destructive",
         link: "bg-transparent",
       },
       size: {
@@ -29,12 +29,12 @@ const buttonVariants = cva(
 const buttonTextVariants = cva("text-center font-medium", {
   variants: {
     variant: {
-      default: "text-zinc-50 dark:text-zinc-900",
-      secondary: "text-zinc-900 dark:text-zinc-50",
-      outline: "text-zinc-950 dark:text-zinc-50",
-      ghost: "text-zinc-950 dark:text-zinc-50",
-      destructive: "text-zinc-50 dark:text-zinc-50",
-      link: "text-zinc-900 dark:text-zinc-50 underline",
+      default: "text-primary-foreground",
+      secondary: "text-secondary-foreground",
+      outline: "text-foreground",
+      ghost: "text-foreground",
+      destructive: "text-destructive-foreground",
+      link: "text-primary underline",
     },
     size: { sm: "text-sm", md: "text-base", lg: "text-lg", icon: "text-sm" },
   },

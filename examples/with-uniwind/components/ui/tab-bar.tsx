@@ -6,8 +6,8 @@ import { cn } from "@/lib/utils";
 const tabBarVariants = cva("flex-row border-t pb-6 pt-2 px-2", {
   variants: {
     variant: {
-      default: "bg-white dark:bg-zinc-950 border-zinc-200 dark:border-zinc-800",
-      card: "bg-white dark:bg-zinc-950 border-zinc-200 dark:border-zinc-800",
+      default: "bg-background border-border",
+      card: "bg-card border-border",
       transparent: "bg-transparent border-transparent",
     },
   },
@@ -50,13 +50,13 @@ export function TabBarItem({ active, icon, label, badge, className, onPress, ...
     >
       {icon && <View>{icon}</View>}
       {label && (
-        <Text className={cn("text-xs", active ? "text-zinc-900 dark:text-zinc-50 font-medium" : "text-zinc-500 dark:text-zinc-400")}>
+        <Text className={cn("text-xs", active ? "text-primary font-medium" : "text-muted-foreground")}>
           {label}
         </Text>
       )}
       {badge !== undefined && badge > 0 && (
-        <View className="absolute -top-1 right-1/4 bg-red-500 dark:bg-red-900 rounded-full min-w-5 h-5 items-center justify-center px-1">
-          <Text className="text-zinc-50 dark:text-zinc-50 text-[10px] font-bold">
+        <View className="absolute -top-1 right-1/4 bg-destructive rounded-full min-w-5 h-5 items-center justify-center px-1">
+          <Text className="text-destructive-foreground text-[10px] font-bold">
             {badge > 99 ? "99+" : badge}
           </Text>
         </View>

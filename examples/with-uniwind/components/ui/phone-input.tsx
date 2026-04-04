@@ -2,12 +2,12 @@ import React, { useState, useCallback } from "react";
 import { View, TextInput, Pressable, Text, ScrollView, Modal } from "react-native";
 import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
-import { ChevronDownIcon } from "@/components/ui/icons";
+import Svg, { Path } from "react-native-svg";
 
 const phoneVariants = cva("flex-row items-center rounded-md border", {
   variants: {
     variant: {
-      default: "border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950",
+      default: "border-input bg-background",
       ghost: "border-transparent bg-transparent",
     },
     size: {
@@ -68,13 +68,15 @@ export function PhoneInput({
         accessible={true}
         accessibilityRole="button"
         accessibilityLabel={`Country: ${country.name}`}
-        className="flex-row items-center mr-2 pr-2 border-r border-zinc-200 dark:border-zinc-800 min-h-8"
+        className="flex-row items-center mr-2 pr-2 border-r border-border min-h-8"
       >
-        <Text className="text-zinc-950 dark:text-zinc-50 text-base">{country.dial}</Text>
-        <ChevronDownIcon size={14} />
+        <Text className="text-foreground text-base">{country.dial}</Text>
+        <Svg width={14} height={14} viewBox="0 0 24 24" fill="none" stroke="#71717a" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
+      <Path d="m6 9 6 6 6-6" />
+    </Svg>
       </Pressable>
       <TextInput
-        className="flex-1 text-zinc-950 dark:text-zinc-50 p-0 text-base"
+        className="flex-1 text-foreground p-0 text-base"
         placeholderTextColor="#71717a"
         keyboardType="phone-pad"
         value={rawNumber}
@@ -84,20 +86,20 @@ export function PhoneInput({
       />
       <Modal visible={open} transparent animationType="fade" onRequestClose={() => setOpen(false)}>
         <Pressable className="flex-1 bg-black/50 justify-end" onPress={() => setOpen(false)}>
-          <View className="bg-white dark:bg-zinc-950 rounded-t-2xl max-h-80 pb-8">
+          <View className="bg-card rounded-t-2xl max-h-80 pb-8">
             <View className="items-center py-3">
-              <View className="w-10 h-1 rounded-full bg-zinc-100 dark:bg-zinc-800" />
+              <View className="w-10 h-1 rounded-full bg-muted" />
             </View>
             <ScrollView>
               {countries.map((c) => (
                 <Pressable
                   key={c.code}
-                  className={cn("flex-row items-center px-5 py-3", c.code === country.code && "bg-zinc-100 dark:bg-zinc-800")}
+                  className={cn("flex-row items-center px-5 py-3", c.code === country.code && "bg-accent")}
                   onPress={() => { setCountry(c); setOpen(false); }}
                   accessibilityRole="button"
                 >
-                  <Text className="text-zinc-950 dark:text-zinc-50 flex-1">{c.name}</Text>
-                  <Text className="text-zinc-500 dark:text-zinc-400">{c.dial}</Text>
+                  <Text className="text-foreground flex-1">{c.name}</Text>
+                  <Text className="text-muted-foreground">{c.dial}</Text>
                 </Pressable>
               ))}
             </ScrollView>

@@ -6,8 +6,8 @@ import { cn } from "@/lib/utils";
 const bubbleVariants = cva("max-w-[80%] rounded-2xl px-4 py-2.5", {
   variants: {
     variant: {
-      sent: "bg-zinc-900 dark:bg-zinc-50 self-end rounded-br-sm",
-      received: "bg-zinc-100 dark:bg-zinc-800 self-start rounded-bl-sm",
+      sent: "bg-primary self-end rounded-br-sm",
+      received: "bg-secondary self-start rounded-bl-sm",
     },
   },
   defaultVariants: { variant: "received" },
@@ -16,8 +16,8 @@ const bubbleVariants = cva("max-w-[80%] rounded-2xl px-4 py-2.5", {
 const textVariants = cva("text-base", {
   variants: {
     variant: {
-      sent: "text-zinc-50 dark:text-zinc-900",
-      received: "text-zinc-900 dark:text-zinc-50",
+      sent: "text-primary-foreground",
+      received: "text-secondary-foreground",
     },
   },
   defaultVariants: { variant: "received" },
@@ -54,12 +54,12 @@ export function ChatBubble({
       {(timestamp || status) && (
         <View className={cn("flex-row items-center gap-1 mt-1", isSent ? "self-end" : "self-start")}>
           {timestamp && (
-            <Text className={cn("text-[10px]", isSent ? "text-zinc-50/60 dark:text-zinc-900/60" : "text-zinc-500 dark:text-zinc-400")}>
+            <Text className={cn("text-[10px]", isSent ? "text-primary-foreground/60" : "text-muted-foreground")}>
               {timestamp}
             </Text>
           )}
           {status && isSent && (
-            <Text className={cn("text-[10px]", status === "read" ? "text-blue-300" : "text-zinc-50/60 dark:text-zinc-900/60")}>
+            <Text className={cn("text-[10px]", status === "read" ? "text-blue-300" : "text-primary-foreground/60")}>
               {statusIcons[status]}
             </Text>
           )}

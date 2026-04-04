@@ -80,7 +80,7 @@ export function ThemeProvider({
 
   return (
     <ThemeContext.Provider value={{ theme, resolvedTheme, setTheme, toggleTheme }}>
-      <View className={cn(resolvedTheme === "dark" ? "dark" : "", "flex-1 bg-white dark:bg-zinc-950", className)}>
+      <View className={cn(resolvedTheme === "dark" ? "dark" : "", "flex-1 bg-background", className)}>
         {children}
       </View>
     </ThemeContext.Provider>

@@ -2,13 +2,14 @@ import React from "react";
 import { View, Text, Pressable } from "react-native";
 import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
+import Svg, { Path } from "react-native-svg";
 
 const headerVariants = cva("flex-row items-center min-h-14 px-4", {
   variants: {
     variant: {
-      default: "bg-white dark:bg-zinc-950 border-b border-zinc-200 dark:border-zinc-800",
+      default: "bg-background border-b border-border",
       transparent: "bg-transparent",
-      primary: "bg-zinc-900 dark:bg-zinc-50",
+      primary: "bg-primary",
     },
   },
   defaultVariants: { variant: "default" },
@@ -45,7 +46,7 @@ export interface HeaderTitleProps extends React.ComponentPropsWithoutRef<typeof 
 export function HeaderTitle({ className, ...props }: HeaderTitleProps) {
   return (
     <Text
-      className={cn("flex-1 text-lg font-semibold text-zinc-950 dark:text-zinc-50", className)}
+      className={cn("flex-1 text-lg font-semibold text-foreground", className)}
       numberOfLines={1}
       {...props}
     />
@@ -63,11 +64,20 @@ export function HeaderRight({ className, children, ...props }: HeaderRightProps)
 
 export interface HeaderBackButtonProps extends React.ComponentPropsWithoutRef<typeof Pressable> {
   className?: string;
-  label?: string;
+  label?: React.ReactNode;
   onPress: () => void;
 }
 
-export function HeaderBackButton({ className, label = "←", onPress, ...props }: HeaderBackButtonProps) {
+function BackIcon() {
+  return (
+    <Svg width={24} height={24} viewBox="0 0 24 24" fill="none" stroke="#71717a" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
+      <Path d="m12 19-7-7 7-7" />
+      <Path d="M19 12H5" />
+    </Svg>
+  );
+}
+
+export function HeaderBackButton({ className, label = <BackIcon /> , onPress, ...props }: HeaderBackButtonProps) {
   return (
     <Pressable
       onPress={onPress}
@@ -77,7 +87,7 @@ export function HeaderBackButton({ className, label = "←", onPress, ...props }
       className={cn("min-h-12 min-w-12 items-center justify-center", className)}
       {...props}
     >
-      <Text className="text-zinc-900 dark:text-zinc-50 text-lg">{label}</Text>
+      <Text className="text-primary text-lg">{label}</Text>
     </Pressable>
   );
 }

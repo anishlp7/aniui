@@ -2,14 +2,14 @@ import React, { useState } from "react";
 import { View, TextInput, Pressable, Text } from "react-native";
 import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
-import { EyeIcon, EyeOffIcon } from "@/components/ui/icons";
+import Svg, { Circle, Line, Path } from "react-native-svg";
 
 const passwordVariants = cva(
-  "flex-row items-center rounded-md border py-2 text-zinc-950 dark:text-zinc-50",
+  "flex-row items-center rounded-md border py-2 text-foreground",
   {
     variants: {
       variant: {
-        default: "border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950",
+        default: "border-input bg-background",
         ghost: "border-transparent bg-transparent",
       },
       size: {
@@ -19,11 +19,12 @@ const passwordVariants = cva(
       },
     },
     defaultVariants: { variant: "default", size: "md" },
-  }
+  },
 );
 
 export interface PasswordInputProps
-  extends Omit<React.ComponentPropsWithoutRef<typeof TextInput>, "secureTextEntry">,
+  extends
+    Omit<React.ComponentPropsWithoutRef<typeof TextInput>, "secureTextEntry">,
     VariantProps<typeof passwordVariants> {
   className?: string;
   showStrength?: boolean;
@@ -38,7 +39,12 @@ function getStrength(value: string): number {
   return score;
 }
 
-const strengthColors = ["bg-red-500 dark:bg-red-900", "bg-orange-500", "bg-yellow-500", "bg-green-500"];
+const strengthColors = [
+  "bg-destructive",
+  "bg-orange-500",
+  "bg-yellow-500",
+  "bg-green-500",
+];
 const strengthLabels = ["Weak", "Fair", "Good", "Strong"];
 
 export function PasswordInput({
@@ -57,10 +63,13 @@ export function PasswordInput({
     <View className="gap-2">
       <View className={cn(passwordVariants({ variant, size }), className)}>
         <TextInput
-          className="flex-1 text-zinc-950 dark:text-zinc-50 p-0 text-base"
+          className="flex-1 text-foreground p-0 text-base"
           placeholderTextColor="#71717a"
           secureTextEntry={!visible}
-          onChangeText={(text) => { setValue(text); onChangeText?.(text); }}
+          onChangeText={(text) => {
+            setValue(text);
+            onChangeText?.(text);
+          }}
           accessibilityLabel="Password"
           {...props}
         />
@@ -71,7 +80,37 @@ export function PasswordInput({
           accessibilityLabel={visible ? "Hide password" : "Show password"}
           className="ml-2 min-h-8 min-w-8 items-center justify-center"
         >
-          {visible ? <EyeOffIcon size={18} /> : <EyeIcon size={18} />}
+          {visible ? (
+            <Svg
+              width={size}
+              height={size}
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="#71717a"
+              strokeWidth={2}
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <Path d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0" />
+              <Circle cx="12" cy="12" r="3" />
+            </Svg>
+          ) : (
+            <Svg
+              width={size}
+              height={size}
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="#71717a"
+              strokeWidth={2}
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <Path d="M10.733 5.076a10.744 10.744 0 0 1 11.205 6.575 1 1 0 0 1 0 .696 10.747 10.747 0 0 1-1.444 2.49" />
+              <Path d="M14.084 14.158a3 3 0 0 1-4.242-4.242" />
+              <Path d="M17.479 17.499a10.75 10.75 0 0 1-15.417-5.151 1 1 0 0 1 0-.696 10.75 10.75 0 0 1 4.446-5.143" />
+              <Line x1="2" y1="2" x2="22" y2="22" />
+            </Svg>
+          )}
         </Pressable>
       </View>
       {showStrength && value.length > 0 && (
@@ -80,11 +119,16 @@ export function PasswordInput({
             {[0, 1, 2, 3].map((i) => (
               <View
                 key={i}
-                className={cn("flex-1 h-1 rounded-full", i < strength ? strengthColors[strength - 1] : "bg-zinc-100 dark:bg-zinc-800")}
+                className={cn(
+                  "flex-1 h-1 rounded-full",
+                  i < strength ? strengthColors[strength - 1] : "bg-muted",
+                )}
               />
             ))}
           </View>
-          <Text className="text-xs text-zinc-500 dark:text-zinc-400">{strengthLabels[strength - 1] ?? ""}</Text>
+          <Text className="text-xs text-muted-foreground">
+            {strengthLabels[strength - 1] ?? ""}
+          </Text>
         </View>
       )}
     </View>

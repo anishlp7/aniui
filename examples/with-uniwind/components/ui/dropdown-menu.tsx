@@ -38,7 +38,7 @@ export function DropdownMenuContent({ className, children, side = "bottom", side
       <DropdownMenuPrimitive.Overlay className="absolute inset-0" />
       <DropdownMenuPrimitive.Content side={side} sideOffset={sideOffset} align={align} avoidCollisions>
         <Animated.View entering={FadeIn.duration(150)} exiting={FadeOut.duration(100)}>
-          <View className={cn("min-w-[180px] rounded-lg border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 p-1 shadow-lg", className)} {...props}>
+          <View className={cn("min-w-[180px] rounded-lg border border-border bg-card p-1 shadow-lg", className)} {...props}>
             {children}
           </View>
         </Animated.View>
@@ -58,7 +58,7 @@ export function DropdownMenuItem({ className, children, destructive, ...props }:
     <DropdownMenuPrimitive.Item asChild>
       <Pressable className={cn("flex-row items-center rounded-md px-3 py-2.5 min-h-11", className)} accessible={true} accessibilityRole="menuitem" {...props}>
         {typeof children === "string" ? (
-          <Text className={cn("text-sm", destructive ? "text-red-500 dark:text-red-900" : "text-zinc-950 dark:text-zinc-50")}>{children}</Text>
+          <Text className={cn("text-sm", destructive ? "text-destructive" : "text-foreground")}>{children}</Text>
         ) : children}
       </Pressable>
     </DropdownMenuPrimitive.Item>
@@ -66,5 +66,5 @@ export function DropdownMenuItem({ className, children, destructive, ...props }:
 }
 
 export function DropdownMenuSeparator({ className }: { className?: string }) {
-  return <DropdownMenuPrimitive.Separator className={cn("my-1 h-px bg-zinc-200 dark:bg-zinc-800", className)} />;
+  return <DropdownMenuPrimitive.Separator className={cn("my-1 h-px bg-border", className)} />;
 }

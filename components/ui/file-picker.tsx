@@ -67,7 +67,12 @@ export function FilePicker({
               accessibilityLabel="Remove file"
               className="min-h-8 min-w-8 items-center justify-center"
             >
-              <Text className="text-destructive text-lg">×</Text>
+              <Text className="text-destructive text-lg">
+              <Svg width={24} height={24} viewBox="0 0 24 24" fill="none" stroke="#71717a" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
+                <Path d="M18 6 6 18" />
+                <Path d="m6 6 12 12" />
+              </Svg>
+              </Text>
             </Pressable>
           )}
         </View>

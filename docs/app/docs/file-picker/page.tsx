@@ -100,7 +100,7 @@ export function FilePicker({
     </View>
   );
 }`;
-export default function FilePickerPage() {
+export default function Page() {
   return (
     <div className="space-y-10">
       {/* Header */}

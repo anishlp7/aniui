@@ -1,6 +1,8 @@
 import React from "react";
 import { View, Pressable, Text } from "react-native";
 import { cn } from "@/lib/utils";
+import { Path } from "react-native-svg";
+import { Svg } from "react-native-svg";
 
 export interface PaginationProps extends React.ComponentPropsWithoutRef<typeof View> {
   className?: string;
@@ -41,11 +43,16 @@ export function Pagination({
         accessibilityLabel="Previous page"
         className="min-h-10 min-w-10 items-center justify-center rounded-md"
       >
-        <Text className={cn("text-base font-bold", current <= 1 ? "text-zinc-100 dark:text-zinc-800" : "text-zinc-950 dark:text-zinc-50")}>←</Text>
+        <Text className={cn("text-base font-bold", current <= 1 ? "text-muted" : "text-foreground")}>
+        <Svg width={24} height={24} viewBox="0 0 24 24" fill="none" stroke="#71717a" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
+          <Path d="m12 19-7-7 7-7" />
+          <Path d="M19 12H5" />
+        </Svg>  
+        </Text>
       </Pressable>
       {pages.map((page, i) =>
         page === "..." ? (
-          <Text key={`e${i}`} className="text-zinc-500 dark:text-zinc-400 px-1">…</Text>
+          <Text key={`e${i}`} className="text-muted-foreground px-1">…</Text>
         ) : (
           <Pressable
             key={page}
@@ -56,10 +63,10 @@ export function Pagination({
             accessibilityState={{ selected: page === current }}
             className={cn(
               "min-h-10 min-w-10 items-center justify-center rounded-md",
-              page === current ? "bg-zinc-900 dark:bg-zinc-50" : "bg-transparent"
+              page === current ? "bg-primary" : "bg-transparent"
             )}
           >
-            <Text className={cn("text-sm font-medium", page === current ? "text-zinc-50 dark:text-zinc-900" : "text-zinc-950 dark:text-zinc-50")}>
+            <Text className={cn("text-sm font-medium", page === current ? "text-primary-foreground" : "text-foreground")}>
               {page}
             </Text>
           </Pressable>
@@ -73,7 +80,12 @@ export function Pagination({
         accessibilityLabel="Next page"
         className="min-h-10 min-w-10 items-center justify-center rounded-md"
       >
-        <Text className={cn("text-base font-bold", current >= total ? "text-zinc-100 dark:text-zinc-800" : "text-zinc-950 dark:text-zinc-50")}>→</Text>
+        <Text className={cn("text-base font-bold", current >= total ? "text-muted" : "text-foreground")}>
+        <Svg width={24} height={24} viewBox="0 0 24 24" fill="none" stroke="#71717a" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
+          <Path d="M5 12h14" />
+          <Path d="m12 5 7 7-7 7" />
+        </Svg>  
+        </Text>
       </Pressable>
     </View>
   );

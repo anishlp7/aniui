@@ -40,7 +40,7 @@ export function Carousel({ className, data, itemWidth, showDots = true, autoPlay
       {showDots && data.length > 1 && (
         <View className="flex-row items-center justify-center gap-1.5 mt-3" accessibilityRole="tablist">
           {data.map((_, i) => (
-            <View key={i} className={cn("h-2 rounded-full", i === active ? "w-4 bg-zinc-900 dark:bg-zinc-50" : "w-2 bg-zinc-500/30 dark:bg-zinc-400/30")} accessibilityRole="tab" accessibilityState={{ selected: i === active }} accessibilityLabel={`Page ${i + 1}`} />
+            <View key={i} className={cn("h-2 rounded-full", i === active ? "w-4 bg-primary" : "w-2 bg-muted-foreground/30")} accessibilityRole="tab" accessibilityState={{ selected: i === active }} accessibilityLabel={`Page ${i + 1}`} />
           ))}
         </View>
       )}

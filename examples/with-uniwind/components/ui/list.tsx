@@ -19,7 +19,7 @@ export interface ListItemProps extends React.ComponentPropsWithoutRef<typeof Pre
 export function ListItem({ className, ...props }: ListItemProps) {
   return (
     <Pressable
-      className={cn("flex-row items-center px-4 py-3 min-h-12 border-b border-zinc-200 dark:border-zinc-800", className)}
+      className={cn("flex-row items-center px-4 py-3 min-h-12 border-b border-border", className)}
       accessible={true}
       accessibilityRole="button"
       {...props}
@@ -32,7 +32,7 @@ export interface ListItemTitleProps extends React.ComponentPropsWithoutRef<typeo
 }
 
 export function ListItemTitle({ className, ...props }: ListItemTitleProps) {
-  return <Text className={cn("text-base font-medium text-zinc-950 dark:text-zinc-50", className)} {...props} />;
+  return <Text className={cn("text-base font-medium text-foreground", className)} {...props} />;
 }
 
 export interface ListItemDescriptionProps extends React.ComponentPropsWithoutRef<typeof Text> {
@@ -40,5 +40,5 @@ export interface ListItemDescriptionProps extends React.ComponentPropsWithoutRef
 }
 
 export function ListItemDescription({ className, ...props }: ListItemDescriptionProps) {
-  return <Text className={cn("text-sm text-zinc-500 dark:text-zinc-400", className)} {...props} />;
+  return <Text className={cn("text-sm text-muted-foreground", className)} {...props} />;
 }

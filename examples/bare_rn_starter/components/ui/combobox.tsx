@@ -1,7 +1,7 @@
 import React, { useState, useMemo } from "react";
 import { View, TextInput, Pressable, Text, FlatList, Modal } from "react-native";
 import { cn } from "@/lib/utils";
-import { ChevronDownIcon } from "@/components/ui/icons";
+import Svg, { Path } from "react-native-svg";
 
 export interface ComboboxOption {
   label: string;
@@ -49,7 +49,9 @@ export function Combobox({
         <Text className={cn("text-base", selected ? "text-foreground" : "text-muted-foreground")}>
           {selected?.label ?? placeholder}
         </Text>
-        <ChevronDownIcon size={16} />
+        <Svg width={16} height={16} viewBox="0 0 24 24" fill="none" stroke="#71717a" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
+          <Path d="m6 9 6 6 6-6" />
+        </Svg>
       </Pressable>
       <Modal visible={open} transparent animationType="fade" onRequestClose={() => setOpen(false)}>
         <Pressable className="flex-1 bg-black/50 justify-end" onPress={() => setOpen(false)}>

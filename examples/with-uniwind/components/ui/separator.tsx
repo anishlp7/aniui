@@ -11,7 +11,7 @@ export function Separator({ orientation = "horizontal", className, ...props }: S
   return (
     <View
       className={cn(
-        "bg-zinc-200 dark:bg-zinc-800",
+        "bg-border",
         orientation === "horizontal" ? "h-px w-full" : "h-full w-px",
         className
       )}

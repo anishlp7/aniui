@@ -1,7 +1,7 @@
 import React, { useState, useMemo } from "react";
 import { View, TextInput, Pressable, Text, FlatList, Modal } from "react-native";
 import { cn } from "@/lib/utils";
-import { ChevronDownIcon } from "@/components/ui/icons";
+import Svg, { Path } from "react-native-svg";
 
 export interface ComboboxOption {
   label: string;
@@ -40,26 +40,28 @@ export function Combobox({
   return (
     <View className={cn("", className)} {...props}>
       <Pressable
-        className="flex-row items-center justify-between min-h-12 px-4 rounded-md border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950"
+        className="flex-row items-center justify-between min-h-12 px-4 rounded-md border border-input bg-background"
         onPress={() => setOpen(true)}
         accessible={true}
         accessibilityRole="button"
         accessibilityLabel={selected ? `Selected: ${selected.label}` : placeholder}
       >
-        <Text className={cn("text-base", selected ? "text-zinc-950 dark:text-zinc-50" : "text-zinc-500 dark:text-zinc-400")}>
+        <Text className={cn("text-base", selected ? "text-foreground" : "text-muted-foreground")}>
           {selected?.label ?? placeholder}
         </Text>
-        <ChevronDownIcon size={16} />
+        <Svg width={16} height={16} viewBox="0 0 24 24" fill="none" stroke="#71717a" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
+          <Path d="m6 9 6 6 6-6" />
+        </Svg>
       </Pressable>
       <Modal visible={open} transparent animationType="fade" onRequestClose={() => setOpen(false)}>
         <Pressable className="flex-1 bg-black/50 justify-end" onPress={() => setOpen(false)}>
-          <Pressable className="bg-white dark:bg-zinc-950 rounded-t-2xl max-h-96 pb-8" onPress={() => {}}>
+          <Pressable className="bg-card rounded-t-2xl max-h-96 pb-8" onPress={() => {}}>
             <View className="items-center py-3">
-              <View className="w-10 h-1 rounded-full bg-zinc-100 dark:bg-zinc-800" />
+              <View className="w-10 h-1 rounded-full bg-muted" />
             </View>
             <View className="px-4 pb-3">
               <TextInput
-                className="min-h-10 px-3 rounded-md border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 text-zinc-950 dark:text-zinc-50 text-base"
+                className="min-h-10 px-3 rounded-md border border-input bg-background text-foreground text-base"
                 placeholder={searchPlaceholder}
                 placeholderTextColor="#71717a"
                 value={search}
@@ -72,16 +74,16 @@ export function Combobox({
               data={filtered}
               keyExtractor={(item) => item.value}
               ListEmptyComponent={
-                <Text className="text-zinc-500 dark:text-zinc-400 text-center py-4">{emptyText}</Text>
+                <Text className="text-muted-foreground text-center py-4">{emptyText}</Text>
               }
               renderItem={({ item }) => (
                 <Pressable
-                  className={cn("px-5 py-3", item.value === value && "bg-zinc-100 dark:bg-zinc-800")}
+                  className={cn("px-5 py-3", item.value === value && "bg-accent")}
                   onPress={() => { onValueChange?.(item.value); setOpen(false); setSearch(""); }}
                   accessibilityRole="button"
                   accessibilityState={{ selected: item.value === value }}
                 >
-                  <Text className="text-zinc-950 dark:text-zinc-50">{item.label}</Text>
+                  <Text className="text-foreground">{item.label}</Text>
                 </Pressable>
               )}
             />

@@ -33,11 +33,11 @@ export interface AccordionItemProps extends React.ComponentPropsWithoutRef<typeo
 export function AccordionItem({ value, trigger, className, children, ...props }: AccordionItemProps) {
   return (
     <AccordionPrimitive.Item value={value} asChild>
-      <View className={cn("border-b border-zinc-200 dark:border-zinc-800", className)} {...props}>
+      <View className={cn("border-b border-border", className)} {...props}>
         <AccordionPrimitive.Trigger asChild>
           <Pressable className="flex-row items-center justify-between px-4 py-4 min-h-12" accessible={true} accessibilityRole="button">
-            <Text className="text-base font-medium text-zinc-950 dark:text-zinc-50 flex-1">{trigger}</Text>
-            <Text className="text-zinc-500 dark:text-zinc-400 text-lg">+</Text>
+            <Text className="text-base font-medium text-foreground flex-1">{trigger}</Text>
+            <Text className="text-muted-foreground text-lg">+</Text>
           </Pressable>
         </AccordionPrimitive.Trigger>
         <AccordionPrimitive.Content>

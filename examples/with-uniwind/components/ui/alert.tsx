@@ -6,8 +6,8 @@ import { cn } from "@/lib/utils";
 const alertVariants = cva("rounded-lg border p-4", {
   variants: {
     variant: {
-      default: "border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950",
-      destructive: "border-red-500/50 dark:border-red-900/50 bg-red-500/10 dark:bg-red-900/10",
+      default: "border-border bg-background",
+      destructive: "border-destructive/50 bg-destructive/10",
       success: "border-green-500/50 bg-green-500/10",
       warning: "border-yellow-500/50 bg-yellow-500/10",
     },
@@ -20,8 +20,8 @@ const alertVariants = cva("rounded-lg border p-4", {
 const alertTitleVariants = cva("text-base font-semibold mb-1", {
   variants: {
     variant: {
-      default: "text-zinc-950 dark:text-zinc-50",
-      destructive: "text-red-500 dark:text-red-900",
+      default: "text-foreground",
+      destructive: "text-destructive",
       success: "text-green-600",
       warning: "text-yellow-600",
     },
@@ -52,5 +52,5 @@ export interface AlertDescriptionProps extends React.ComponentPropsWithoutRef<ty
 }
 
 export function AlertDescription({ className, ...props }: AlertDescriptionProps) {
-  return <Text className={cn("text-sm text-zinc-500 dark:text-zinc-400", className)} {...props} />;
+  return <Text className={cn("text-sm text-muted-foreground", className)} {...props} />;
 }

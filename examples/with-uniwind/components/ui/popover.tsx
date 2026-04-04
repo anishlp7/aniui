@@ -43,7 +43,7 @@ export function PopoverContent({ className, children, side = "bottom", sideOffse
       <PopoverPrimitive.Overlay className="absolute inset-0" />
       <PopoverPrimitive.Content side={side} sideOffset={sideOffset} align={align} avoidCollisions>
         <Animated.View entering={FadeIn.duration(150)} exiting={FadeOut.duration(100)}>
-          <View className={cn("w-72 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 p-4 shadow-lg", className)} {...props}>
+          <View className={cn("w-72 rounded-lg border border-border bg-card p-4 shadow-lg", className)} {...props}>
             {children}
           </View>
         </Animated.View>

@@ -38,7 +38,7 @@ export function TabsTrigger({ value, className, children, ...props }: TabsTrigge
       className={cn("flex-1 items-center justify-center py-2 min-h-12 rounded-md", isActive && "bg-background shadow-sm", className)}
       onPress={() => onValueChange(value)}
       accessible={true}
-      accessibilityRole="button"
+      accessibilityRole="tab"
       accessibilityState={{ selected: isActive }}
       {...props}
     >

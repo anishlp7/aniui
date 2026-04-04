@@ -6,8 +6,8 @@ import { cn } from "@/lib/utils";
 const safeAreaVariants = cva("flex-1", {
   variants: {
     variant: {
-      default: "bg-white dark:bg-zinc-950",
-      card: "bg-white dark:bg-zinc-950",
+      default: "bg-background",
+      card: "bg-card",
       transparent: "bg-transparent",
     },
   },

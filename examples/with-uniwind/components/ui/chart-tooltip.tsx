@@ -39,21 +39,21 @@ export function ChartTooltip({
   return (
     <View
       className={cn(
-        "rounded-lg border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 px-3 py-2 shadow-sm",
+        "rounded-lg border border-border bg-card px-3 py-2 shadow-sm",
         className
       )}
       accessibilityRole="summary"
       {...props}
     >
       {label && (
-        <Text className="text-xs text-zinc-500 dark:text-zinc-400 mb-1">{label}</Text>
+        <Text className="text-xs text-muted-foreground mb-1">{label}</Text>
       )}
       {items ? (
         items.map((item, i) => (
           <View key={i} className="flex-row items-center gap-2 py-0.5">
             {indicatorEl(item.color)}
-            <Text className="text-xs text-zinc-500 dark:text-zinc-400">{item.label}</Text>
-            <Text className="text-xs font-medium text-zinc-950 dark:text-zinc-50 ml-auto">
+            <Text className="text-xs text-muted-foreground">{item.label}</Text>
+            <Text className="text-xs font-medium text-foreground ml-auto">
               {item.value}
             </Text>
           </View>
@@ -61,7 +61,7 @@ export function ChartTooltip({
       ) : (
         <View className="flex-row items-center gap-2">
           {indicatorEl(color)}
-          <Text className="text-sm font-medium text-zinc-950 dark:text-zinc-50">{value}</Text>
+          <Text className="text-sm font-medium text-foreground">{value}</Text>
         </View>
       )}
     </View>

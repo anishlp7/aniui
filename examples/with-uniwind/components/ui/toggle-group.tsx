@@ -9,7 +9,7 @@ const itemVariants = cva(
     variants: {
       variant: {
         default: "bg-transparent",
-        outline: "border border-zinc-200 dark:border-zinc-800 bg-transparent",
+        outline: "border border-input bg-transparent",
       },
       size: {
         sm: "px-2 py-1.5",
@@ -54,7 +54,7 @@ export function ToggleGroupItem({ value, className, children, ...props }: Toggle
   const active = selected === value;
   return (
     <Pressable
-      className={cn(itemVariants({ variant: "default", size: "md" }), active && "bg-zinc-100 dark:bg-zinc-800", className)}
+      className={cn(itemVariants({ variant: "default", size: "md" }), active && "bg-accent", className)}
       onPress={() => onValueChange(value)}
       accessibilityRole="radio"
       accessibilityState={{ selected: active }}
@@ -62,7 +62,7 @@ export function ToggleGroupItem({ value, className, children, ...props }: Toggle
       {...props}
     >
       {typeof children === "string" ? (
-        <Text className={cn("text-sm font-medium", active ? "text-accent-zinc-950 dark:accent-zinc-50" : "text-zinc-500 dark:text-zinc-400")}>
+        <Text className={cn("text-sm font-medium", active ? "text-accent-foreground" : "text-muted-foreground")}>
           {children}
         </Text>
       ) : children}

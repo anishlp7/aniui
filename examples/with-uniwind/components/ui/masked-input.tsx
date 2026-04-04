@@ -4,11 +4,11 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
 const maskedVariants = cva(
-  "rounded-md border py-2 text-zinc-950 dark:text-zinc-50 placeholder:text-zinc-500 dark:placeholder:text-zinc-400",
+  "rounded-md border py-2 text-foreground placeholder:text-muted-foreground",
   {
     variants: {
       variant: {
-        default: "border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950",
+        default: "border-input bg-background",
         ghost: "border-transparent bg-transparent",
       },
       size: {
