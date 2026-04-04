@@ -44,7 +44,7 @@ export async function initCommand(opts?: { style?: string }): Promise<void> {
   const gen = project.sdkGeneration;
   logger.success(`Detected ${project.type === "expo" ? "Expo" : "React Native CLI"} project`);
   logger.success(`Using ${pm} as package manager`);
-  logger.success(`SDK generation: ${gen === "v5" ? "NativeWind v5 + Tailwind v4" : "NativeWind v4 + Tailwind v3"}`);
+  logger.success(`SDK generation: ${gen === "v5" ? "Tailwind v4" : "Tailwind v3"}`);
 
   // Auto-detect style engine (CLI flag overrides detection)
   const detectedStyle: StyleEngine = (opts?.style === "uniwind" || opts?.style === "nativewind")
@@ -238,7 +238,7 @@ export async function initCommand(opts?: { style?: string }): Promise<void> {
 
   const styleEngine: StyleEngine = chosenStyle;
   const isUniwind = isChosenUniwind;
-  const wrapperName = isUniwind ? "withUniwind" : "withNativeWind";
+  const wrapperName = isUniwind ? "withUniwindConfig" : "withNativeWind";
   const wrapperPkg = isUniwind ? "uniwind/metro" : "nativewind/metro";
 
   // 6. Set up metro.config.js and babel.config.js for Expo
@@ -247,10 +247,10 @@ export async function initCommand(opts?: { style?: string }): Promise<void> {
     if (await fs.pathExists(metroConfigPath)) {
       logger.warn(`metro.config.js already exists — wrap it with ${wrapperName}:`);
       logger.info(`  const { ${wrapperName} } = require("${wrapperPkg}");`);
-      logger.info(`  module.exports = ${wrapperName}(config, { input: "./global.css" });`);
+      logger.info(`  module.exports = ${wrapperName}(config, { ${isUniwind ? 'cssEntryFile' : 'input'}: "./global.css" });`);
     } else {
       if (isUniwind) {
-        const metroContent = `const { getDefaultConfig } = require("expo/metro-config");\nconst { withUniwind } = require("uniwind/metro");\n\nconst config = getDefaultConfig(__dirname);\n\nmodule.exports = withUniwind(config, { input: "./global.css" });\n`;
+        const metroContent = `const { getDefaultConfig } = require("expo/metro-config");\nconst { withUniwindConfig } = require("uniwind/metro");\n\nconst config = getDefaultConfig(__dirname);\n\nmodule.exports = withUniwindConfig(config, { cssEntryFile: "./global.css" });\n`;
         await fs.writeFile(metroConfigPath, metroContent, "utf-8");
         logger.success("Created metro.config.js (Uniwind configured)");
       } else {
@@ -289,10 +289,10 @@ export async function initCommand(opts?: { style?: string }): Promise<void> {
     if (await fs.pathExists(metroConfigPath)) {
       logger.warn(`metro.config.js already exists — wrap it with ${wrapperName}:`);
       logger.info(`  const { ${wrapperName} } = require("${wrapperPkg}");`);
-      logger.info(`  module.exports = ${wrapperName}(config, { input: "./global.css" });`);
+      logger.info(`  module.exports = ${wrapperName}(config, { ${isUniwind ? 'cssEntryFile' : 'input'}: "./global.css" });`);
     } else {
       if (isUniwind) {
-        const metroContent = `const { mergeConfig, getDefaultConfig } = require("@react-native/metro-config");\nconst { withUniwind } = require("uniwind/metro");\n\nconst config = mergeConfig(getDefaultConfig(__dirname), {});\n\nmodule.exports = withUniwind(config, { input: "./global.css" });\n`;
+        const metroContent = `const { mergeConfig, getDefaultConfig } = require("@react-native/metro-config");\nconst { withUniwindConfig } = require("uniwind/metro");\n\nconst config = mergeConfig(getDefaultConfig(__dirname), {});\n\nmodule.exports = withUniwindConfig(config, { cssEntryFile: "./global.css" });\n`;
         await fs.writeFile(metroConfigPath, metroContent, "utf-8");
         logger.success("Created metro.config.js (Uniwind configured)");
       } else {
@@ -317,30 +317,46 @@ export async function initCommand(opts?: { style?: string }): Promise<void> {
   }
 
   const tsconfigPath = path.resolve(cwd, "tsconfig.json");
-  if (!isUniwind && await fs.pathExists(tsconfigPath)) {
+  if (await fs.pathExists(tsconfigPath)) {
     try {
       const tsconfig = await fs.readJson(tsconfigPath);
       if (!tsconfig.compilerOptions) {
         tsconfig.compilerOptions = {};
       }
-      if (gen === "v5") {
-        // NativeWind v5 does NOT use jsxImportSource — remove it if present
-        // className types come from nativewind-env.d.ts → nativewind/types → react-native-css/types
-        if (tsconfig.compilerOptions.jsxImportSource) {
-          delete tsconfig.compilerOptions.jsxImportSource;
-          await fs.writeJson(tsconfigPath, tsconfig, { spaces: 2 });
-          logger.success('Removed jsxImportSource from tsconfig.json (not needed for NativeWind v5)');
+      let changed = false;
+
+      // Add @/ path alias if not present
+      if (!tsconfig.compilerOptions.paths?.["@/*"]) {
+        if (!tsconfig.compilerOptions.paths) {
+          tsconfig.compilerOptions.paths = {};
         }
-      } else {
-        // NativeWind v4 uses nativewind for JSX types
-        if (tsconfig.compilerOptions.jsxImportSource !== "nativewind") {
-          tsconfig.compilerOptions.jsxImportSource = "nativewind";
-          await fs.writeJson(tsconfigPath, tsconfig, { spaces: 2 });
-          logger.success('Added jsxImportSource: "nativewind" to tsconfig.json');
+        tsconfig.compilerOptions.paths["@/*"] = ["./*"];
+        changed = true;
+        logger.success('Added @/* path alias to tsconfig.json');
+      }
+
+      // NativeWind-specific jsxImportSource config
+      if (!isUniwind) {
+        if (gen === "v5") {
+          if (tsconfig.compilerOptions.jsxImportSource) {
+            delete tsconfig.compilerOptions.jsxImportSource;
+            changed = true;
+            logger.success('Removed jsxImportSource from tsconfig.json (not needed for NativeWind v5)');
+          }
+        } else {
+          if (tsconfig.compilerOptions.jsxImportSource !== "nativewind") {
+            tsconfig.compilerOptions.jsxImportSource = "nativewind";
+            changed = true;
+            logger.success('Added jsxImportSource: "nativewind" to tsconfig.json');
+          }
         }
       }
+
+      if (changed) {
+        await fs.writeJson(tsconfigPath, tsconfig, { spaces: 2 });
+      }
     } catch {
-      logger.warn("Could not update tsconfig.json — add jsxImportSource manually");
+      logger.warn("Could not update tsconfig.json — add path alias manually");
     }
   }
 
