@@ -61,7 +61,7 @@ import { RadialChart } from "@/components/ui/radial-chart";
 // Feedback
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Banner } from "@/components/ui/banner";
-import { Toast, ToastProvider, useToast } from "@/components/ui/toast";
+import { ToastProvider, useToast } from "@/components/ui/toast";
 
 // Navigation
 import { Accordion, AccordionItem } from "@/components/ui/accordion";
@@ -537,15 +537,24 @@ const demos: Record<string, () => React.ReactElement> = {
   },
   "date-picker": () => {
     const [date, setDate] = useState(new Date());
+    const [dob, setDob] = useState<Date | undefined>(undefined);
     return (
       <View className="gap-6">
-        <Text className="text-sm text-muted-foreground">A native date picker that opens the platform date selection UI. Displays the selected date in a styled button.</Text>
+        <Text className="text-sm text-muted-foreground">A calendar-based date picker in a modal overlay. Opens a full month view for date selection with navigation between months.</Text>
         <View className="gap-2">
-          <Text className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Example</Text>
-          <View className="rounded-lg border border-border bg-card p-4 gap-3">
-            <Label>Select a date</Label>
+          <Text className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Default</Text>
+          <View className="rounded-xl border border-border bg-card p-4 gap-3">
+            <Label>Event date</Label>
             <DatePicker value={date} onChange={setDate} />
             <Text variant="muted">Selected: {date.toLocaleDateString()}</Text>
+          </View>
+        </View>
+        <View className="gap-2">
+          <Text className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">With Placeholder</Text>
+          <View className="rounded-xl border border-border bg-card p-4 gap-3">
+            <Label>Date of birth</Label>
+            <DatePicker value={dob} onChange={setDob} placeholder="Pick your birthday" />
+            {dob && <Text variant="muted">Birthday: {dob.toLocaleDateString()}</Text>}
           </View>
         </View>
       </View>
@@ -943,8 +952,26 @@ const demos: Record<string, () => React.ReactElement> = {
     </View>
   ),
   "empty-state": () => (
-    <View className="rounded-lg border border-border bg-card p-6">
-      <EmptyState title="No results found" description="Try adjusting your filters or search terms" action={{ label: "Clear filters", onPress: () => {} }} />
+    <View className="gap-6">
+      <Text className="text-sm text-muted-foreground">A placeholder view for empty lists, search results, or error states. Supports title, description, icon, and an optional action button.</Text>
+      <View className="gap-2">
+        <Text className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">No Search Results</Text>
+        <View className="rounded-xl border border-border bg-card p-6">
+          <EmptyState title="No results found" description="Try adjusting your search terms or filters to find what you're looking for." action={{ label: "Clear search", onPress: () => {} }} />
+        </View>
+      </View>
+      <View className="gap-2">
+        <Text className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Empty Inbox</Text>
+        <View className="rounded-xl border border-border bg-card p-6">
+          <EmptyState title="Your inbox is empty" description="When you receive messages, they'll appear here." />
+        </View>
+      </View>
+      <View className="gap-2">
+        <Text className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Error State</Text>
+        <View className="rounded-xl border border-destructive/30 bg-destructive/5 p-6">
+          <EmptyState title="Something went wrong" description="We couldn't load your data. Please check your connection and try again." action={{ label: "Retry", onPress: () => {} }} />
+        </View>
+      </View>
     </View>
   ),
   alert: () => (
@@ -1060,16 +1087,31 @@ const demos: Record<string, () => React.ReactElement> = {
   ),
   "progress-steps": () => {
     const [step, setStep] = useState(1);
+    const stepContent = [
+      { title: "Create Account", desc: "Enter your email and choose a password to get started." },
+      { title: "Set Up Profile", desc: "Add your name, photo, and bio so others can find you." },
+      { title: "Review & Submit", desc: "Double-check your details and confirm to complete setup." },
+    ];
     return (
-      <View className="gap-4">
-        <ProgressSteps current={step}>
-          <ProgressStep label="Account" />
-          <ProgressStep label="Profile" />
-          <ProgressStep label="Review" />
-        </ProgressSteps>
-        <View className="flex-row gap-3">
-          <Button variant="outline" onPress={() => setStep(Math.max(0, step - 1))} disabled={step <= 0}>Back</Button>
-          <Button onPress={() => setStep(Math.min(3, step + 1))} disabled={step >= 3}>Next</Button>
+      <View className="gap-6">
+        <Text className="text-sm text-muted-foreground">A multi-step wizard indicator for onboarding flows, checkout processes, or form wizards. Shows completed, active, and pending steps.</Text>
+        <View className="gap-2">
+          <Text className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Onboarding Flow</Text>
+          <View className="rounded-xl border border-border bg-card p-4 gap-4">
+            <ProgressSteps current={step}>
+              <ProgressStep label="Account" />
+              <ProgressStep label="Profile" />
+              <ProgressStep label="Review" />
+            </ProgressSteps>
+            <View className="rounded-lg bg-secondary/30 p-4 gap-1">
+              <Text className="text-sm font-semibold text-foreground">{step < 3 ? stepContent[step].title : "All Done!"}</Text>
+              <Text className="text-xs text-muted-foreground">{step < 3 ? stepContent[step].desc : "Your account has been created successfully."}</Text>
+            </View>
+            <View className="flex-row gap-3">
+              <Button variant="outline" className="flex-1" onPress={() => setStep(Math.max(0, step - 1))} disabled={step <= 0}>Back</Button>
+              <Button className="flex-1" onPress={() => setStep(Math.min(3, step + 1))} disabled={step >= 3}>{step >= 2 ? "Submit" : "Next"}</Button>
+            </View>
+          </View>
         </View>
       </View>
     );
@@ -1139,12 +1181,31 @@ const demos: Record<string, () => React.ReactElement> = {
     );
   },
   timeline: () => (
-    <Timeline>
-      <TimelineItem title="Order placed" description="Your order #1234 has been confirmed." time="Mar 15, 9:00 AM" variant="completed" />
-      <TimelineItem title="Processing" description="We're preparing your order for shipment." time="Mar 15, 10:30 AM" variant="active" />
-      <TimelineItem title="Shipped" description="Package is on its way to you." time="Mar 16, 2:00 PM" variant="pending" />
-      <TimelineItem title="Delivered" description="Estimated delivery to your address." variant="pending" isLast />
-    </Timeline>
+    <View className="gap-6">
+      <Text className="text-sm text-muted-foreground">Vertical event timeline with status dots and connecting lines. Perfect for order tracking, activity feeds, and step-by-step flows.</Text>
+      <View className="gap-2">
+        <Text className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Order Tracking</Text>
+        <View className="rounded-xl border border-border bg-card p-4">
+          <Timeline>
+            <TimelineItem title="Order placed" description="Order #1234 confirmed and payment processed." time="Mar 15, 9:00 AM" variant="completed" />
+            <TimelineItem title="Processing" description="Your items are being packed and prepared." time="Mar 15, 10:30 AM" variant="completed" />
+            <TimelineItem title="Shipped" description="Package picked up by carrier. Tracking: TRK-8821." time="Mar 16, 2:00 PM" variant="active" />
+            <TimelineItem title="Out for delivery" description="Package is on the way to your address." variant="pending" />
+            <TimelineItem title="Delivered" description="Estimated arrival today by 5:00 PM." variant="pending" isLast />
+          </Timeline>
+        </View>
+      </View>
+      <View className="gap-2">
+        <Text className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Activity Log</Text>
+        <View className="rounded-xl border border-border bg-card p-4">
+          <Timeline>
+            <TimelineItem title="John updated the design" description="Changed header layout and color scheme." time="2 min ago" variant="default" />
+            <TimelineItem title="Sarah left a comment" description="Looks great! Can we add more padding?" time="15 min ago" variant="default" />
+            <TimelineItem title="Project created" description="New project 'AniUI Dashboard' initialized." time="1 hour ago" variant="muted" isLast />
+          </Timeline>
+        </View>
+      </View>
+    </View>
   ),
   "chat-bubble": () => (
     <View className="gap-2 px-2">
@@ -1252,51 +1313,134 @@ const demos: Record<string, () => React.ReactElement> = {
     );
   },
   drawer: () => {
-    const [open, setOpen] = useState(false);
+    const [leftOpen, setLeftOpen] = useState(false);
+    const [rightOpen, setRightOpen] = useState(false);
     return (
-      <View className="gap-4">
-        <Button onPress={() => setOpen(true)}>Open Drawer</Button>
-        <Drawer open={open} onOpenChange={setOpen}>
-          <DrawerContent>
-            <View className="gap-4 pt-12 px-4">
-              <Text variant="h3">Menu</Text>
-              <Button variant="ghost">Home</Button>
-              <Button variant="ghost">Settings</Button>
-              <Button variant="ghost">Profile</Button>
-              <Button variant="outline" onPress={() => setOpen(false)}>Close</Button>
-            </View>
-          </DrawerContent>
-        </Drawer>
+      <View className="gap-6">
+        <Text className="text-sm text-muted-foreground">A slide-in panel from the left or right edge. Use for navigation menus, filters, or settings.</Text>
+        <View className="gap-2">
+          <Text className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Left Drawer</Text>
+          <Button onPress={() => setLeftOpen(true)}>Open Navigation</Button>
+          <Drawer open={leftOpen} onOpenChange={setLeftOpen} side="left">
+            <DrawerContent>
+              <View className="gap-1 pt-14 px-4">
+                <Text className="text-lg font-bold text-foreground mb-4">Navigation</Text>
+                {["Home", "Explore", "Notifications", "Messages", "Bookmarks", "Profile", "Settings"].map((item) => (
+                  <Pressable key={item} className="flex-row items-center gap-3 py-3 px-2 rounded-lg active:bg-accent" onPress={() => setLeftOpen(false)}>
+                    <View className="h-8 w-8 rounded-full bg-primary/10 items-center justify-center"><Text className="text-primary text-xs font-bold">{item[0]}</Text></View>
+                    <Text className="text-foreground text-sm">{item}</Text>
+                  </Pressable>
+                ))}
+              </View>
+            </DrawerContent>
+          </Drawer>
+        </View>
+        <View className="gap-2">
+          <Text className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Right Drawer</Text>
+          <Button variant="outline" onPress={() => setRightOpen(true)}>Open Filters</Button>
+          <Drawer open={rightOpen} onOpenChange={setRightOpen} side="right">
+            <DrawerContent>
+              <View className="gap-4 pt-14 px-4">
+                <Text className="text-lg font-bold text-foreground">Filters</Text>
+                <View className="gap-3">
+                  <View className="flex-row items-center gap-2"><Checkbox checked={true} onCheckedChange={() => {}} /><Text className="text-sm text-foreground">In stock only</Text></View>
+                  <View className="flex-row items-center gap-2"><Checkbox checked={false} onCheckedChange={() => {}} /><Text className="text-sm text-foreground">Free shipping</Text></View>
+                  <View className="flex-row items-center gap-2"><Checkbox checked={false} onCheckedChange={() => {}} /><Text className="text-sm text-foreground">On sale</Text></View>
+                </View>
+                <View className="flex-row gap-3 mt-4">
+                  <Button className="flex-1" onPress={() => setRightOpen(false)}>Apply</Button>
+                  <Button variant="outline" className="flex-1" onPress={() => setRightOpen(false)}>Reset</Button>
+                </View>
+              </View>
+            </DrawerContent>
+          </Drawer>
+        </View>
       </View>
     );
   },
   header: () => (
-    <View className="gap-3">
-      <View className="rounded-xl border border-border overflow-hidden">
-        <Header>
-          <HeaderLeft><Pressable onPress={() => {}} className="p-2"><Text className="text-foreground text-base">‹</Text></Pressable></HeaderLeft>
-          <HeaderTitle>Settings</HeaderTitle>
-          <HeaderRight><Pressable onPress={() => {}} className="p-2"><Text className="text-primary text-sm font-medium">Save</Text></Pressable></HeaderRight>
-        </Header>
+    <View className="gap-6">
+      <Text className="text-sm text-muted-foreground">App header bar with back button, title, and action buttons. Supports default and transparent variants.</Text>
+      <View className="gap-2">
+        <Text className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Default</Text>
+        <View className="rounded-xl border border-border overflow-hidden">
+          <Header>
+            <HeaderLeft><HeaderBackButton onPress={() => {}} /></HeaderLeft>
+            <HeaderTitle>Settings</HeaderTitle>
+            <HeaderRight>
+              <Pressable onPress={() => {}} className="px-3 py-1.5"><Text className="text-primary text-sm font-semibold">Save</Text></Pressable>
+            </HeaderRight>
+          </Header>
+        </View>
       </View>
-      <View className="rounded-xl border border-border overflow-hidden">
-        <Header variant="transparent">
-          <HeaderLeft><Pressable onPress={() => {}} className="p-2"><Text className="text-foreground text-base">‹</Text></Pressable></HeaderLeft>
-          <HeaderTitle>Profile</HeaderTitle>
-          <HeaderRight><Pressable onPress={() => {}} className="p-2"><Text className="text-foreground">⚙</Text></Pressable></HeaderRight>
-        </Header>
+      <View className="gap-2">
+        <Text className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">With Search</Text>
+        <View className="rounded-xl border border-border overflow-hidden">
+          <Header>
+            <HeaderLeft><HeaderBackButton onPress={() => {}} /></HeaderLeft>
+            <HeaderTitle>Explore</HeaderTitle>
+            <HeaderRight>
+              <Pressable onPress={() => {}} className="h-9 w-9 rounded-full bg-secondary items-center justify-center">
+                <Text className="text-foreground text-sm">🔍</Text>
+              </Pressable>
+            </HeaderRight>
+          </Header>
+        </View>
+      </View>
+      <View className="gap-2">
+        <Text className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Transparent</Text>
+        <View className="rounded-xl border border-border overflow-hidden bg-primary/5">
+          <Header variant="transparent">
+            <HeaderLeft><HeaderBackButton onPress={() => {}} /></HeaderLeft>
+            <HeaderTitle>Profile</HeaderTitle>
+            <HeaderRight>
+              <Pressable onPress={() => {}} className="h-9 w-9 rounded-full bg-secondary items-center justify-center">
+                <Text className="text-foreground text-sm">⚙</Text>
+              </Pressable>
+            </HeaderRight>
+          </Header>
+        </View>
       </View>
     </View>
   ),
   "tab-bar": () => {
     const [active, setActive] = useState("home");
+    const [active2, setActive2] = useState("feed");
+    const content: Record<string, string> = {
+      home: "Welcome to the home feed with latest updates.",
+      search: "Search for people, topics, and content.",
+      notifications: "You have 3 new notifications.",
+      profile: "View and edit your profile settings.",
+      feed: "Discover trending posts and stories.",
+      chat: "Your recent conversations.",
+      settings: "App preferences and account settings.",
+    };
     return (
-      <View className="rounded-lg border border-border overflow-hidden">
-        <TabBar>
-          <TabBarItem label="Home" active={active === "home"} onPress={() => setActive("home")} />
-          <TabBarItem label="Search" active={active === "search"} onPress={() => setActive("search")} />
-          <TabBarItem label="Profile" active={active === "profile"} onPress={() => setActive("profile")} />
-        </TabBar>
+      <View className="gap-6">
+        <Text className="text-sm text-muted-foreground">Bottom navigation bar for switching between main app sections. Supports icons, labels, and notification badges.</Text>
+        <View className="gap-2">
+          <Text className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">With Badges</Text>
+          <View className="rounded-xl border border-border overflow-hidden">
+            <View className="px-4 py-6 items-center"><Text className="text-sm text-muted-foreground">{content[active]}</Text></View>
+            <TabBar>
+              <TabBarItem label="Home" active={active === "home"} onPress={() => setActive("home")} icon={<Text>🏠</Text>} />
+              <TabBarItem label="Search" active={active === "search"} onPress={() => setActive("search")} icon={<Text>🔍</Text>} />
+              <TabBarItem label="Alerts" active={active === "notifications"} onPress={() => setActive("notifications")} icon={<Text>🔔</Text>} badge={3} />
+              <TabBarItem label="Profile" active={active === "profile"} onPress={() => setActive("profile")} icon={<Text>👤</Text>} />
+            </TabBar>
+          </View>
+        </View>
+        <View className="gap-2">
+          <Text className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Minimal (Labels Only)</Text>
+          <View className="rounded-xl border border-border overflow-hidden">
+            <View className="px-4 py-6 items-center"><Text className="text-sm text-muted-foreground">{content[active2]}</Text></View>
+            <TabBar>
+              <TabBarItem label="Feed" active={active2 === "feed"} onPress={() => setActive2("feed")} />
+              <TabBarItem label="Chat" active={active2 === "chat"} onPress={() => setActive2("chat")} />
+              <TabBarItem label="Settings" active={active2 === "settings"} onPress={() => setActive2("settings")} />
+            </TabBar>
+          </View>
+        </View>
       </View>
     );
   },
@@ -1548,85 +1692,111 @@ const demos: Record<string, () => React.ReactElement> = {
     );
   },
   "area-chart": () => (
-    <View className="gap-4">
-      <Text variant="small" className="text-muted-foreground">Revenue Trend</Text>
-      <AreaChart
-        data={[
-          { label: "Jan", value: 186 }, { label: "Feb", value: 305 }, { label: "Mar", value: 237 },
-          { label: "Apr", value: 173 }, { label: "May", value: 409 }, { label: "Jun", value: 214 },
-        ]}
-        height={200}
-        color="#3b82f6"
-      />
+    <View className="gap-6">
+      <Text className="text-sm text-muted-foreground">SVG area chart with gradient fill. Supports curved/linear lines, grid, labels, and multi-series stacking.</Text>
+      <View className="gap-2">
+        <Text className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Revenue Trend</Text>
+        <View className="rounded-xl border border-border bg-card p-4">
+          <AreaChart data={[{ label: "Jan", value: 186 }, { label: "Feb", value: 305 }, { label: "Mar", value: 237 }, { label: "Apr", value: 173 }, { label: "May", value: 409 }, { label: "Jun", value: 214 }]} height={180} color="#3b82f6" showGrid showLabels />
+        </View>
+      </View>
+      <View className="gap-2">
+        <Text className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Curved with High Fill</Text>
+        <View className="rounded-xl border border-border bg-card p-4">
+          <AreaChart data={[{ label: "W1", value: 40 }, { label: "W2", value: 80 }, { label: "W3", value: 55 }, { label: "W4", value: 95 }, { label: "W5", value: 70 }]} height={160} color="#8b5cf6" curved fillOpacity={0.4} showLabels />
+        </View>
+      </View>
+      <View className="gap-2">
+        <Text className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Multi-Series</Text>
+        <View className="rounded-xl border border-border bg-card p-4">
+          <AreaChart data={[{ label: "Q1", value: 0 }, { label: "Q2", value: 0 }, { label: "Q3", value: 0 }, { label: "Q4", value: 0 }]} height={180} series={[{ data: [{ label: "Q1", value: 120 }, { label: "Q2", value: 200 }, { label: "Q3", value: 170 }, { label: "Q4", value: 250 }], color: "#3b82f6" }, { data: [{ label: "Q1", value: 80 }, { label: "Q2", value: 150 }, { label: "Q3", value: 130 }, { label: "Q4", value: 180 }], color: "#f59e0b" }]} showGrid showLabels />
+        </View>
+      </View>
     </View>
   ),
   "bar-chart": () => (
-    <View className="gap-4">
-      <Text variant="small" className="text-muted-foreground">Monthly Sales</Text>
-      <BarChart
-        data={[
-          { label: "Jan", value: 450 }, { label: "Feb", value: 320 }, { label: "Mar", value: 580 },
-          { label: "Apr", value: 420 }, { label: "May", value: 690 }, { label: "Jun", value: 530 },
-        ]}
-        height={200}
-        color="#8b5cf6"
-      />
+    <View className="gap-6">
+      <Text className="text-sm text-muted-foreground">SVG bar chart with vertical or horizontal orientation. Supports rounded bars, grid lines, labels, and grouped data.</Text>
+      <View className="gap-2">
+        <Text className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Monthly Sales</Text>
+        <View className="rounded-xl border border-border bg-card p-4">
+          <BarChart data={[{ label: "Jan", value: 450 }, { label: "Feb", value: 320 }, { label: "Mar", value: 580 }, { label: "Apr", value: 420 }, { label: "May", value: 690 }, { label: "Jun", value: 530 }]} height={200} color="#8b5cf6" showGrid showLabels barRadius={4} />
+        </View>
+      </View>
+      <View className="gap-2">
+        <Text className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Horizontal</Text>
+        <View className="rounded-xl border border-border bg-card p-4">
+          <BarChart data={[{ label: "React Native", value: 85, color: "#3b82f6" }, { label: "Flutter", value: 65, color: "#06b6d4" }, { label: "SwiftUI", value: 45, color: "#f59e0b" }, { label: "Compose", value: 40, color: "#10b981" }]} height={180} horizontal showLabels barRadius={6} />
+        </View>
+      </View>
     </View>
   ),
   "line-chart": () => (
-    <View className="gap-4">
-      <Text variant="small" className="text-muted-foreground">Active Users</Text>
-      <LineChart
-        data={[
-          { label: "Mon", value: 120 }, { label: "Tue", value: 245 }, { label: "Wed", value: 180 },
-          { label: "Thu", value: 360 }, { label: "Fri", value: 290 }, { label: "Sat", value: 410 }, { label: "Sun", value: 350 },
-        ]}
-        height={200}
-        color="#10b981"
-        showDots
-      />
+    <View className="gap-6">
+      <Text className="text-sm text-muted-foreground">SVG line chart with dot markers. Supports curved/linear lines, multi-series, grid, and labels.</Text>
+      <View className="gap-2">
+        <Text className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Weekly Active Users</Text>
+        <View className="rounded-xl border border-border bg-card p-4">
+          <LineChart data={[{ label: "Mon", value: 120 }, { label: "Tue", value: 245 }, { label: "Wed", value: 180 }, { label: "Thu", value: 360 }, { label: "Fri", value: 290 }, { label: "Sat", value: 410 }, { label: "Sun", value: 350 }]} height={200} color="#10b981" showDots showGrid showLabels />
+        </View>
+      </View>
+      <View className="gap-2">
+        <Text className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Curved Multi-Series</Text>
+        <View className="rounded-xl border border-border bg-card p-4">
+          <LineChart height={200} curved showDots showGrid showLabels series={[{ data: [{ label: "Jan", value: 150 }, { label: "Feb", value: 230 }, { label: "Mar", value: 280 }, { label: "Apr", value: 320 }], color: "#3b82f6" }, { data: [{ label: "Jan", value: 100 }, { label: "Feb", value: 180 }, { label: "Mar", value: 220 }, { label: "Apr", value: 260 }], color: "#10b981" }]} />
+        </View>
+      </View>
     </View>
   ),
   "pie-chart": () => (
-    <View className="gap-4">
-      <Text variant="small" className="text-muted-foreground">Traffic Sources</Text>
-      <PieChart
-        data={[
-          { label: "Organic", value: 65, color: "#3b82f6" },
-          { label: "Social", value: 20, color: "#8b5cf6" },
-          { label: "Direct", value: 15, color: "#f59e0b" },
-        ]}
-        height={220}
-        innerRadius={0.6}
-        showLabels
-      />
+    <View className="gap-6">
+      <Text className="text-sm text-muted-foreground">SVG pie/donut chart with segments, labels, and configurable inner radius for donut style.</Text>
+      <View className="gap-2">
+        <Text className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Donut Chart</Text>
+        <View className="rounded-xl border border-border bg-card p-4">
+          <PieChart data={[{ label: "Organic", value: 65, color: "#3b82f6" }, { label: "Social", value: 20, color: "#8b5cf6" }, { label: "Direct", value: 15, color: "#f59e0b" }]} height={220} innerRadius={0.6} showLabels />
+        </View>
+      </View>
+      <View className="gap-2">
+        <Text className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Full Pie</Text>
+        <View className="rounded-xl border border-border bg-card p-4">
+          <PieChart data={[{ label: "Mobile", value: 55, color: "#3b82f6" }, { label: "Desktop", value: 30, color: "#8b5cf6" }, { label: "Tablet", value: 10, color: "#10b981" }, { label: "Other", value: 5, color: "#f59e0b" }]} height={220} innerRadius={0} showLabels />
+        </View>
+      </View>
     </View>
   ),
   "radar-chart": () => (
-    <View className="gap-4">
-      <Text variant="small" className="text-muted-foreground">Skill Assessment</Text>
-      <RadarChart
-        data={[
-          { label: "Frontend", value: 90 }, { label: "Backend", value: 70 },
-          { label: "Design", value: 60 }, { label: "DevOps", value: 50 }, { label: "Mobile", value: 85 },
-        ]}
-        height={250}
-        color="#3b82f6"
-      />
+    <View className="gap-6">
+      <Text className="text-sm text-muted-foreground">SVG radar/spider chart for comparing multiple variables. Supports dots, grid levels, and multi-series overlay.</Text>
+      <View className="gap-2">
+        <Text className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Skill Assessment</Text>
+        <View className="rounded-xl border border-border bg-card p-4">
+          <RadarChart data={[{ label: "Frontend", value: 90 }, { label: "Backend", value: 70 }, { label: "Design", value: 60 }, { label: "DevOps", value: 50 }, { label: "Mobile", value: 85 }]} height={250} color="#3b82f6" showDots showLabels gridLevels={4} />
+        </View>
+      </View>
+      <View className="gap-2">
+        <Text className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Multi-Series Comparison</Text>
+        <View className="rounded-xl border border-border bg-card p-4">
+          <RadarChart height={250} showDots showLabels gridLevels={4} series={[{ data: [{ label: "Sales", value: 80 }, { label: "Marketing", value: 65 }, { label: "Support", value: 90 }, { label: "Dev", value: 75 }, { label: "Design", value: 55 }], color: "#3b82f6" }, { data: [{ label: "Sales", value: 90 }, { label: "Marketing", value: 80 }, { label: "Support", value: 70 }, { label: "Dev", value: 85 }, { label: "Design", value: 75 }], color: "#ef4444" }]} />
+        </View>
+      </View>
     </View>
   ),
   "radial-chart": () => (
-    <View className="gap-4">
-      <Text variant="small" className="text-muted-foreground">Goal Progress</Text>
-      <RadialChart
-        data={[
-          { label: "Tasks", value: 72, max: 100, color: "#3b82f6" },
-          { label: "Bugs", value: 45, max: 60, color: "#ef4444" },
-          { label: "Features", value: 28, max: 40, color: "#10b981" },
-        ]}
-        height={220}
-        showLabels
-      />
+    <View className="gap-6">
+      <Text className="text-sm text-muted-foreground">SVG radial progress rings for showing completion or goal tracking. Supports center text, labels, and multiple rings.</Text>
+      <View className="gap-2">
+        <Text className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Goal Progress</Text>
+        <View className="rounded-xl border border-border bg-card p-4">
+          <RadialChart data={[{ label: "Tasks", value: 72, maxValue: 100, color: "#3b82f6" }, { label: "Bugs", value: 45, maxValue: 60, color: "#ef4444" }, { label: "Features", value: 28, maxValue: 40, color: "#10b981" }]} height={220} showLabels centerText="72%" centerSubText="Tasks done" />
+        </View>
+      </View>
+      <View className="gap-2">
+        <Text className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Single Ring</Text>
+        <View className="rounded-xl border border-border bg-card p-4">
+          <RadialChart data={[{ label: "Storage", value: 7.2, maxValue: 10, color: "#8b5cf6" }]} height={180} strokeWidth={12} showLabels centerText="72%" centerSubText="7.2 / 10 GB" />
+        </View>
+      </View>
     </View>
   ),
 };
