@@ -86,8 +86,8 @@ export function ThemeToggle() {
 
         <h3 className="text-lg font-semibold pt-2">1. global.css setup</h3>
         <p className="text-muted-foreground">
-          Make sure your CSS has both <code className="rounded bg-secondary px-1.5 py-0.5 text-sm font-mono">@import &quot;uniwind&quot;</code> and
-          the dark mode media query:
+          Make sure your CSS has <code className="rounded bg-secondary px-1.5 py-0.5 text-sm font-mono">@import &quot;uniwind&quot;</code> and
+          uses <code className="rounded bg-secondary px-1.5 py-0.5 text-sm font-mono">@layer theme</code> with <code className="rounded bg-secondary px-1.5 py-0.5 text-sm font-mono">@variant light/dark</code>:
         </p>
         <CodeBlock
           title="global.css"
@@ -95,18 +95,24 @@ export function ThemeToggle() {
 @import "uniwind";
 
 @theme {
-  --color-background: hsl(0 0% 100%);
-  --color-foreground: hsl(240 10% 3.9%);
-  --color-primary: hsl(240 5.9% 10%);
-  /* ... light values */
+  --radius: 0.5rem;
 }
 
-@media (prefers-color-scheme: dark) {
+@layer theme {
   :root {
-    --color-background: hsl(240 10% 3.9%);
-    --color-foreground: hsl(0 0% 98%);
-    --color-primary: hsl(0 0% 98%);
-    /* ... dark values */
+    @variant light {
+      --color-background: hsl(0 0% 100%);
+      --color-foreground: hsl(240 10% 3.9%);
+      --color-primary: hsl(240 5.9% 10%);
+      /* ... light values */
+    }
+
+    @variant dark {
+      --color-background: hsl(240 10% 3.9%);
+      --color-foreground: hsl(0 0% 98%);
+      --color-primary: hsl(0 0% 98%);
+      /* ... dark values */
+    }
   }
 }`}
         />

@@ -250,7 +250,7 @@ function SDK54Steps() {
 
       <h3 className="text-lg font-semibold pt-2">Step 2. Install dependencies</h3>
       <CodeBlock code={`cd my-app
-npm install nativewind tailwindcss@3 react-native-reanimated react-native-safe-area-context
+npm install nativewind tailwindcss@3 react-native-reanimated react-native-safe-area-context react-native-svg
 npm install class-variance-authority clsx tailwind-merge`} />
 
       <h3 className="text-lg font-semibold pt-2">Step 3. Initialize AniUI</h3>
@@ -322,7 +322,7 @@ function SDK55Steps() {
       <CodeBlock code={`cd my-app
 
 # Install NativeWind v5 + CSS engine
-npx expo install nativewind@preview react-native-css react-native-reanimated react-native-safe-area-context
+npx expo install nativewind@preview react-native-css react-native-reanimated react-native-safe-area-context react-native-svg
 
 # Install dev dependencies
 npx expo install --dev tailwindcss@4 @tailwindcss/postcss postcss babel-preset-expo

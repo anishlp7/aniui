@@ -9,6 +9,7 @@ interface AniUIConfig {
   componentsDir: string;
   utilPath: string;
   theme: string;
+  style?: string;
   tsx?: boolean;
 }
 
@@ -163,7 +164,6 @@ export async function addCommand(names: string[]): Promise<void> {
     logger.break();
     logger.title("Import example:");
     const first = registry[created[0]];
-    const ext = useTsx ? ".tsx" : ".jsx";
     const importPath = config?.componentsDir
       ? `@/${config.componentsDir}/${path.basename(first.file, ".tsx")}`
       : `@/components/ui/${path.basename(first.file, ".tsx")}`;

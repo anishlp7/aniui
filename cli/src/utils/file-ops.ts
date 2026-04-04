@@ -10,7 +10,8 @@ export async function copyComponent(
   componentFile: string,
   destDir: string,
   utilPath: string,
-  tsx: boolean = true
+  tsx: boolean = true,
+  options?: { uniwind?: boolean }
 ): Promise<string> {
   const packageRoot = getPackageRoot();
   const srcPath = path.join(packageRoot, componentFile);
@@ -30,6 +31,11 @@ export async function copyComponent(
 
   // Rewrite cross-component imports: @/components/ui/foo → ./foo
   content = content.replace(/@\/components\/ui\//g, "./");
+
+  // For Uniwind: transform semantic tokens to dark: variants
+  if (options?.uniwind) {
+    content = transformForUniwind(content);
+  }
 
   // Strip TypeScript types if generating JavaScript
   if (!tsx) {
@@ -139,6 +145,52 @@ export function stripTypes(content: string): string {
   result = result.replace(/\n{3,}/g, "\n\n");
 
   return result.trim() + "\n";
+}
+
+/**
+ * Transform semantic color tokens to explicit dark: variants for Uniwind.
+ * Uniwind resolves @theme values statically — CSS variable cascade doesn't work on native.
+ * This maps e.g. "bg-background" → "bg-white dark:bg-zinc-950" so dark mode works.
+ */
+export function transformForUniwind(content: string): string {
+  const tokenMap: Record<string, [string, string]> = {
+    "background": ["white", "zinc-950"],
+    "foreground": ["zinc-950", "zinc-50"],
+    "card": ["white", "zinc-950"],
+    "card-foreground": ["zinc-950", "zinc-50"],
+    "primary": ["zinc-900", "zinc-50"],
+    "primary-foreground": ["zinc-50", "zinc-900"],
+    "secondary": ["zinc-100", "zinc-800"],
+    "secondary-foreground": ["zinc-900", "zinc-50"],
+    "muted": ["zinc-100", "zinc-800"],
+    "muted-foreground": ["zinc-500", "zinc-400"],
+    "accent": ["zinc-100", "zinc-800"],
+    "accent-foreground": ["zinc-900", "zinc-50"],
+    "destructive": ["red-500", "red-900"],
+    "destructive-foreground": ["zinc-50", "zinc-50"],
+    "border": ["zinc-200", "zinc-800"],
+    "input": ["zinc-200", "zinc-800"],
+    "ring": ["zinc-950", "zinc-300"],
+  };
+  const prefixes = ["bg", "text", "border", "ring", "divide", "outline", "shadow", "ring-offset", "from", "to", "via", "fill", "stroke", "caret", "accent", "placeholder"];
+
+  let result = content;
+  for (const [token, [light, dark]] of Object.entries(tokenMap)) {
+    for (const prefix of prefixes) {
+      const escaped = (s: string) => s.replace(/[.*+?${}()|[\]\\]/g, "\\$&");
+      const regex = new RegExp(
+        `((?:(?:hover|focus|active|disabled|focus-visible|focus-within|placeholder|group-hover|peer-focus|pressed|checked)[:])*)(${escaped(prefix)}-${escaped(token)})(\\/\\d+)?(?![-\\w])`,
+        "g"
+      );
+      result = result.replace(regex, (_match, variants, _cls, opacity) => {
+        const op = opacity || "";
+        const v = variants || "";
+        const darkV = v ? `dark:${v}` : "dark:";
+        return `${v}${prefix}-${light}${op} ${darkV}${prefix}-${dark}${op}`;
+      });
+    }
+  }
+  return result;
 }
 
 function getRelativeImportPath(fromDir: string, toFile: string): string {

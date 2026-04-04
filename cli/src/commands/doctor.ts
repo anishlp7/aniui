@@ -149,9 +149,9 @@ export async function doctorCommand(): Promise<void> {
         fix: 'Add @import "uniwind"; after @import "tailwindcss"; in global.css',
       });
       checks.push({
-        label: "global.css has dark mode via @media (prefers-color-scheme: dark)",
-        pass: css.includes("prefers-color-scheme: dark"),
-        fix: "Wrap dark theme overrides in @media (prefers-color-scheme: dark) { :root { ... } }",
+        label: "global.css has dark mode via @variant dark",
+        pass: css.includes("@variant dark"),
+        fix: "Define dark colors in @layer theme { :root { @variant dark { --color-background: ...; } } }",
       });
     }
   } else {

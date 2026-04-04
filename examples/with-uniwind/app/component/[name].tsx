@@ -206,17 +206,17 @@ const demos: Record<string, () => React.ReactElement> = {
         <View className="gap-2">
           <Text className="text-xs font-semibold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">States</Text>
           <View className="rounded-lg border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 p-4 gap-3">
-            <View className="flex-row items-center gap-2"><Checkbox checked={a} onCheckedChange={setA} /><Text>Unchecked</Text></View>
-            <View className="flex-row items-center gap-2"><Checkbox checked={b} onCheckedChange={setB} /><Text>Checked</Text></View>
-            <View className="flex-row items-center gap-2 opacity-50"><Checkbox checked={false} disabled /><Text>Disabled</Text></View>
+            <View className="flex-row items-center gap-2"><Checkbox checked={a} onCheckedChange={setA} /><Text className="text-foreground">Unchecked</Text></View>
+            <View className="flex-row items-center gap-2"><Checkbox checked={b} onCheckedChange={setB} /><Text className="text-foreground">Checked</Text></View>
+            <View className="flex-row items-center gap-2 opacity-50"><Checkbox checked={false} disabled /><Text className="text-foreground">Disabled</Text></View>
           </View>
         </View>
         <View className="gap-2">
           <Text className="text-xs font-semibold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">Form Group</Text>
           <View className="rounded-lg border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 p-4 gap-3">
-            <View className="flex-row items-center gap-2"><Checkbox checked={a} onCheckedChange={setA} /><Text>Accept terms and conditions</Text></View>
-            <View className="flex-row items-center gap-2"><Checkbox checked={b} onCheckedChange={setB} /><Text>Send me notifications</Text></View>
-            <View className="flex-row items-center gap-2"><Checkbox checked={c} onCheckedChange={setC} /><Text>Subscribe to newsletter</Text></View>
+            <View className="flex-row items-center gap-2"><Checkbox checked={a} onCheckedChange={setA} /><Text className="text-foreground">Accept terms and conditions</Text></View>
+            <View className="flex-row items-center gap-2"><Checkbox checked={b} onCheckedChange={setB} /><Text className="text-foreground">Send me notifications</Text></View>
+            <View className="flex-row items-center gap-2"><Checkbox checked={c} onCheckedChange={setC} /><Text className="text-foreground">Subscribe to newsletter</Text></View>
           </View>
         </View>
       </View>
@@ -355,7 +355,7 @@ const demos: Record<string, () => React.ReactElement> = {
         <View className="gap-2">
           <Text className="text-xs font-semibold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">States</Text>
           <View className="rounded-lg border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 p-4 flex-row gap-3">
-            <Toggle pressed={on} onPressedChange={setOn}><Text>{on ? "On" : "Off"}</Text></Toggle>
+            <Toggle pressed={on} onPressedChange={setOn}><Text className="text-foreground">{on ? "On" : "Off"}</Text></Toggle>
             <Toggle pressed={bold} onPressedChange={setBold}><Text className="font-bold">B</Text></Toggle>
           </View>
         </View>
@@ -372,9 +372,9 @@ const demos: Record<string, () => React.ReactElement> = {
           <Text className="text-xs font-semibold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">Selection</Text>
           <View className="rounded-lg border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 p-4">
             <ToggleGroup value={val} onValueChange={setVal}>
-              <ToggleGroupItem value="a"><Text>Left</Text></ToggleGroupItem>
-              <ToggleGroupItem value="b"><Text>Center</Text></ToggleGroupItem>
-              <ToggleGroupItem value="c"><Text>Right</Text></ToggleGroupItem>
+              <ToggleGroupItem value="a"><Text className="text-foreground">Left</Text></ToggleGroupItem>
+              <ToggleGroupItem value="b"><Text className="text-foreground">Center</Text></ToggleGroupItem>
+              <ToggleGroupItem value="c"><Text className="text-foreground">Right</Text></ToggleGroupItem>
             </ToggleGroup>
           </View>
         </View>
@@ -861,9 +861,9 @@ const demos: Record<string, () => React.ReactElement> = {
   ),
   separator: () => (
     <View className="rounded-lg border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 p-4 gap-3">
-      <Text>Above the separator</Text>
+      <Text className="text-foreground">Above the separator</Text>
       <Separator />
-      <Text>Below the separator</Text>
+      <Text className="text-foreground">Below the separator</Text>
     </View>
   ),
   label: () => (
@@ -1075,9 +1075,9 @@ const demos: Record<string, () => React.ReactElement> = {
   },
   "labeled-separator": () => (
     <View className="rounded-lg border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 p-4 gap-4">
-      <Text>Content above</Text>
+      <Text className="text-foreground">Content above</Text>
       <LabeledSeparator label="OR" />
-      <Text>Content below</Text>
+      <Text className="text-foreground">Content below</Text>
     </View>
   ),
   image: () => (

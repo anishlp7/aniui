@@ -135,7 +135,7 @@ export async function initCommand(opts?: { style?: string }): Promise<void> {
     }
 
     // Always ensure these are present
-    missing.push("react-native-safe-area-context", "class-variance-authority", "clsx", "tailwind-merge");
+    missing.push("react-native-safe-area-context", "react-native-svg", "class-variance-authority", "clsx", "tailwind-merge");
 
     logger.break();
     logger.info("Missing dependencies detected. Installing...");
@@ -154,7 +154,7 @@ export async function initCommand(opts?: { style?: string }): Promise<void> {
       try {
         if (project.type === "expo") {
           // Use npx expo install for Expo projects — handles version pinning
-          const rnPkgs = missing.filter(p => ["react-native-reanimated", "react-native-safe-area-context", "react-native-css"].includes(p.replace(/@.*$/, "")));
+          const rnPkgs = missing.filter(p => ["react-native-reanimated", "react-native-safe-area-context", "react-native-svg", "react-native-css"].includes(p.replace(/@.*$/, "")));
           const npmPkgs = missing.filter(p => !rnPkgs.includes(p));
           if (rnPkgs.length > 0) {
             logger.info(`Installing RN packages with expo install (auto-pins versions)...`);
@@ -205,29 +205,45 @@ export async function initCommand(opts?: { style?: string }): Promise<void> {
     : path.join(templateFallback, "global.css");
   let globalCss = await fs.readFile(globalCssSource, "utf-8");
 
-  // For Uniwind: remove nativewind-specific import, add @import "uniwind", use @media for dark mode
+  // For Uniwind: generate @layer theme { :root { @variant light/dark { } } } format
   if (isChosenUniwind) {
-    globalCss = globalCss.replace(/@import\s+["']nativewind\/theme["'];\s*\n?/g, "");
-    // Add @import "uniwind" after @import "tailwindcss"
-    globalCss = globalCss.replace(
-      /(@import\s+["']tailwindcss["'];)/,
-      '$1\n@import "uniwind";'
-    );
-    globalCss = globalCss.replace(/\.dark\s*\{/g, "@media (prefers-color-scheme: dark) {\n:root {");
-    // Add closing brace for the media query
-    const lastBrace = globalCss.lastIndexOf("}");
-    if (lastBrace !== -1) {
-      globalCss = globalCss.slice(0, lastBrace + 1) + "\n}" + globalCss.slice(lastBrace + 1);
+    // Extract light vars from @theme block and dark vars from .dark block
+    const lightVars: Record<string, string> = {};
+    const darkVars: Record<string, string> = {};
+    let radius = "0.5rem";
+
+    // Parse @theme block for light values
+    const themeMatch = globalCss.match(/@theme\s*\{([\s\S]*?)\}/);
+    if (themeMatch) {
+      for (const m of themeMatch[1].matchAll(/(--[\w-]+):\s*([^;]+);/g)) {
+        if (m[1] === "--radius") { radius = m[2].trim(); }
+        else { lightVars[m[1]] = m[2].trim(); }
+      }
     }
+
+    // Parse .dark block for dark values
+    const darkMatch = globalCss.match(/\.dark\s*\{([\s\S]*?)\}/);
+    if (darkMatch) {
+      for (const m of darkMatch[1].matchAll(/(--[\w-]+):\s*([^;]+);/g)) {
+        darkVars[m[1]] = m[2].trim();
+      }
+    }
+
+    // Build Uniwind CSS with @layer theme + @variant
+    const indent = "      ";
+    const lightLines = Object.entries(lightVars).map(([k, v]) => `${indent}${k}: ${v};`).join("\n");
+    const darkLines = Object.entries(darkVars).map(([k, v]) => `${indent}${k}: ${v};`).join("\n");
+
+    globalCss = `@import "tailwindcss";\n@import "uniwind";\n\n@theme {\n  --radius: ${radius};\n}\n\n@layer theme {\n  :root {\n    @variant light {\n${lightLines}\n    }\n\n    @variant dark {\n${darkLines}\n    }\n  }\n}\n`;
   }
 
   const preset = THEME_PRESETS[response.theme] || THEME_PRESETS.default;
-  const isV5 = gen === "v5" || isChosenUniwind;
+  const isV5 = gen === "v5";
 
   // Apply theme preset to both light and dark sections
-  const applyPreset = (css: string, vars: Record<string, string>) => {
+  const applyPreset = (css: string, vars: Record<string, string>, useColorPrefix: boolean) => {
     for (const [varName, hslValue] of Object.entries(vars)) {
-      if (isV5) {
+      if (useColorPrefix) {
         // v5/Uniwind: --color-primary: hsl(240 5.9% 10%)
         const colorVar = varName.replace("--", "--color-");
         const regex = new RegExp(`(${colorVar.replace(/--/g, "\\-\\-")}:\\s*)hsl\\([^)]+\\)`, "g");
@@ -241,17 +257,28 @@ export async function initCommand(opts?: { style?: string }): Promise<void> {
     return css;
   };
 
-  // Split CSS into light section (before dark block) and dark section
-  const darkBlockMatch = isV5
-    ? globalCss.match(/@media\s*\(prefers-color-scheme:\s*dark\)\s*\{/)
-    : globalCss.match(/\.dark\s*\{/);
-
-  if (darkBlockMatch && darkBlockMatch.index !== undefined) {
-    const lightPart = globalCss.slice(0, darkBlockMatch.index);
-    const darkPart = globalCss.slice(darkBlockMatch.index);
-    globalCss = applyPreset(lightPart, preset.light) + applyPreset(darkPart, preset.dark);
+  if (isChosenUniwind) {
+    // Uniwind: @variant light { } and @variant dark { } blocks
+    const lightMatch = globalCss.match(/@variant\s+light\s*\{/);
+    const darkMatch = globalCss.match(/@variant\s+dark\s*\{/);
+    if (lightMatch?.index !== undefined && darkMatch?.index !== undefined) {
+      const lightStart = globalCss.slice(0, darkMatch.index);
+      const darkStart = globalCss.slice(darkMatch.index);
+      globalCss = applyPreset(lightStart, preset.light, true) + applyPreset(darkStart, preset.dark, true);
+    }
   } else {
-    globalCss = applyPreset(globalCss, preset.light);
+    // NativeWind: @theme { } and .dark { } blocks
+    const darkBlockMatch = isV5
+      ? globalCss.match(/\.dark\s*\{/)
+      : globalCss.match(/\.dark\s*\{/);
+
+    if (darkBlockMatch && darkBlockMatch.index !== undefined) {
+      const lightPart = globalCss.slice(0, darkBlockMatch.index);
+      const darkPart = globalCss.slice(darkBlockMatch.index);
+      globalCss = applyPreset(lightPart, preset.light, isV5) + applyPreset(darkPart, preset.dark, isV5);
+    } else {
+      globalCss = applyPreset(globalCss, preset.light, isV5);
+    }
   }
   await fs.writeFile(globalCssPath, globalCss, "utf-8");
   logger.success(`Created global.css (${response.theme} theme)`);
