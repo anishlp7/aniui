@@ -1,5 +1,5 @@
 import React, { useRef, useState } from "react";
-import { View, TextInput } from "react-native";
+import { View, TextInput, useColorScheme } from "react-native";
 import { cn } from "@/lib/utils";
 
 export interface InputOTPProps extends React.ComponentPropsWithoutRef<typeof View> {
@@ -12,6 +12,7 @@ export interface InputOTPProps extends React.ComponentPropsWithoutRef<typeof Vie
 export function InputOTP({ length = 6, value = "", onValueChange, className, ...props }: InputOTPProps) {
   const refs = useRef<(TextInput | null)[]>([]);
   const [focused, setFocused] = useState(-1);
+  const dark = useColorScheme() === "dark";
   const digits = Array.from({ length }, (_, i) => value[i] ?? "");
 
   const handleChange = (text: string, index: number) => {
@@ -30,6 +31,11 @@ export function InputOTP({ length = 6, value = "", onValueChange, className, ...
     }
   };
 
+  const bg = dark ? "#27272a" : "#ffffff";
+  const borderDefault = dark ? "#3f3f46" : "#e4e4e7";
+  const borderFocused = dark ? "#fafafa" : "#18181b";
+  const textColor = dark ? "#fafafa" : "#09090b";
+
   return (
     <View className={cn("flex-row gap-2", className)} accessibilityRole="none" {...props}>
       {digits.map((digit, i) => (
@@ -39,14 +45,14 @@ export function InputOTP({ length = 6, value = "", onValueChange, className, ...
           style={{
             height: 48,
             width: 40,
-            borderRadius: 6,
+            borderRadius: 8,
             borderWidth: focused === i ? 2 : 1,
-            borderColor: focused === i ? "#18181b" : "#e4e4e7",
-            backgroundColor: "#ffffff",
+            borderColor: focused === i ? borderFocused : borderDefault,
+            backgroundColor: bg,
             textAlign: "center" as const,
             fontSize: 18,
             fontWeight: "600",
-            color: "#09090b",
+            color: textColor,
           }}
           value={digit}
           onChangeText={(t) => handleChange(t, i)}
