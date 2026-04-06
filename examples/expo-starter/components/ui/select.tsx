@@ -30,8 +30,8 @@ export function Select({
     : options;
 
   const handleOpen = () => {
-    triggerRef.current?.measure((_x, _y, width, height, pageX, pageY) => {
-      setPos({ x: pageX, y: pageY, w: width, h: height });
+    triggerRef.current?.measureInWindow((x, y, width, height) => {
+      setPos({ x, y, w: width, h: height });
       setOpen(true);
     });
   };
@@ -41,12 +41,12 @@ export function Select({
 
   const screenH = Dimensions.get("window").height;
   const belowY = pos.y + pos.h + 4;
-  const listH = Math.min(options.length * 48, 264);
+  const listH = Math.min(filtered.length * 48, 264);
   const totalH = listH + (searchable ? 60 : 0);
-  const fitsBelow = belowY + totalH < screenH - 20;
+  const fitsBelow = belowY + totalH < screenH;
 
   return (
-    <View>
+    <View collapsable={false}>
       <Pressable
         ref={triggerRef}
         className={cn("flex-row items-center justify-between h-12 px-4 border border-input rounded-lg bg-background active:bg-accent/30", className)}
@@ -58,9 +58,7 @@ export function Select({
         <Text className={cn("text-base flex-1", selected ? "text-foreground" : "text-muted-foreground")} numberOfLines={1}>
           {selected?.label ?? placeholder}
         </Text>
-        <Svg width={16} height={16} viewBox="0 0 24 24" fill="none" stroke="#71717a" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
-      <Path d="m6 9 6 6 6-6" />
-    </Svg>
+        <Svg width={16} height={16} viewBox="0 0 24 24" fill="none" stroke="#71717a" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round"><Path d="m6 9 6 6 6-6" /></Svg>
       </Pressable>
 
       <Modal visible={open} transparent animationType="none" onRequestClose={close}>
