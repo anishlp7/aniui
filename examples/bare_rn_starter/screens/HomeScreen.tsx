@@ -21,7 +21,7 @@ export function HomeScreen({ onNavigate }: HomeScreenProps) {
     <SafeAreaView className="flex-1 bg-background">
       <ScrollView className="flex-1 px-4" contentContainerClassName="gap-4 py-6">
         <Text variant="h2">AniUI Demo</Text>
-        <Text variant="muted">80 components across 6 categories. Tap to explore.</Text>
+        <Text variant="muted">81 components across 6 categories. Tap to explore.</Text>
 
         {categories.map((cat) => (
           <Pressable key={cat.title} onPress={() => onNavigate(cat.screen)}>

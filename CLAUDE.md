@@ -165,7 +165,7 @@ aniui/
 ├── lib/                       # Shared utils — also copied to user's project
 │   └── utils.ts               # cn() helper — THE ONLY utility file
 │
-├── templates/                 # Copied during `aniui init`
+├── templates/                 # Copied during `npx @aniui/cli init`
 │   ├── global.css
 │   ├── tailwind.config.js
 │   └── nativewind-env.d.ts
@@ -447,7 +447,7 @@ module.exports = {
 
 ## CLI Spec
 
-### `npx aniui init`
+### `npx @aniui/cli init`
 
 1. Check if running inside an Expo or bare RN project (look for `app.json` with `expo` key, or `react-native` in package.json)
 2. Check if `nativewind` is in dependencies (if not, print install command and exit)
@@ -460,10 +460,10 @@ module.exports = {
 9. Copy `nativewind-env.d.ts` to project root
 10. Print success message with next steps
 
-### `npx aniui add [names...]`
+### `npx @aniui/cli add [names...]`
 
 1. Validate component names against registry
-2. Check if `aniui init` has been run (look for `lib/utils.ts`)
+2. Check if `@aniui/cli init` has been run (look for `lib/utils.ts`)
 3. For each component:
    a. Read source file from bundled components
    b. Copy to user's components directory
@@ -477,7 +477,7 @@ module.exports = {
 ```json
 {
   "name": "@aniui/cli",
-  "version": "0.1.2",
+  "version": "0.2.13",
   "description": "Beautiful React Native components. Copy. Paste. Ship.",
   "license": "MIT",
   "bin": {
@@ -487,7 +487,8 @@ module.exports = {
     "dist",
     "components",
     "lib",
-    "templates"
+    "templates",
+    "blocks"
   ],
   "dependencies": {
     "commander": "^12.0.0",

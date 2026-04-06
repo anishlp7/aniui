@@ -125,7 +125,7 @@ export default function HomeScreen() {
               />
               <View>
                 <Text variant="h3" className="text-foreground">AniUI</Text>
-                <Text variant="small" className="text-muted-foreground">77 components</Text>
+                <Text variant="small" className="text-muted-foreground">81 components</Text>
               </View>
             </View>
             <Pressable

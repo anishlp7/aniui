@@ -89,15 +89,13 @@ Switch theme presets: `default`, `blue`, `green`, `orange`, `rose`.
 
 ## Components
 
-**80+ components** across 4 tiers:
+**81 components** in `cli/src/registry.ts` (tiers 1–3; source of truth for installs):
 
-**Tier 1 — No extra deps:** Button, Card, Input, Text, Badge, Avatar, Separator, Label, Chip, Image, Empty State, FAB, Search Bar, Banner, Stepper, Grid, Price, Status Indicator, Select, Slider, Tabs, Dialog, and more
+**Tier 1 — Light deps (cva / RN core):** Most inputs, display, layout, and form helpers — Button, Card, Text, Calendar, ChartTooltip, ImageGallery, ThemeProvider, and more.
 
-**Tier 2 — Needs Reanimated:** Skeleton, Toggle, Drawer, Carousel, Rating, Segmented Control, Connection Banner, Toast, Alert Dialog, Collapsible, and more
+**Tier 2 — Includes `react-native-reanimated`:** Skeleton, Toast, Alert Dialog, Drawer, Collapsible, Connection Banner, Typing Indicator.
 
-**Tier 3 — rn-primitives or external:** Accordion, Checkbox, Radio Group, Popover, Dropdown Menu, Tooltip, Progress, Bottom Sheet, Action Sheet, Date Picker, Swipeable List Item
-
-**Tier 4 — Charts (react-native-svg):** Area, Bar, Line, Pie, Radar, Radial
+**Tier 3 — Extra packages:** `@rn-primitives/*`, `@gorhom/bottom-sheet`, `react-native-svg` (charts), `react-native-gesture-handler` (swipeable) — e.g. Checkbox, Accordion, Bottom Sheet, Area Chart, Line Chart, Pie Chart.
 
 ## Compatibility
 

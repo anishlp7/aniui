@@ -35,117 +35,189 @@ Colors from CSS variables in global.css. Use these class prefixes:
 
 Dark mode: automatic via .dark class in global.css.
 
-## Component Catalog (47 components)
+## Component Catalog (81 components)
 
-### Tier 1 — Core (no extra deps)
+Source of truth: `cli/src/registry.ts` (tiers 1–3). After `npx @aniui/cli add <name>`, install any extra npm packages the CLI prints.
 
-**Button** — `import { Button } from "@/components/ui/button"`
-- variants: default, secondary, outline, ghost, destructive × sm, md, lg
+Compound components export multiple named pieces (for example `Card` + `CardHeader`, `ToastProvider` + `useToast`, `Table` + `TableRow`). Import what you need from the same file as in the component source.
 
-**Text** — `import { Text } from "@/components/ui/text"`
-- variants: h1, h2, h3, h4, p, lead, large, small, muted
+### Common variants (examples — see each file for full API)
 
-**Input** — `import { Input } from "@/components/ui/input"`
-- variants: default, ghost × sm, md, lg
+- **Button** — default, secondary, outline, ghost, destructive, link × sm, md, lg
+- **Text** — h1, h2, h3, h4, p, lead, large, small, muted
+- **Input** — default, ghost × sm, md, lg
+- **Textarea** — default, ghost
+- **Badge** — default, secondary, outline, destructive
+- **Alert** — default, destructive, success, warning
+- **Toast** — default, destructive, success (via `useToast`)
 
-**Textarea** — `import { Textarea } from "@/components/ui/textarea"`
-- variants: default, ghost
+### Registry tier 1 — 57 components
 
-**Card** — `import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from "@/components/ui/card"`
-
-**Badge** — `import { Badge } from "@/components/ui/badge"`
-- variants: default, secondary, outline, destructive
-
-**Separator** — `import { Separator } from "@/components/ui/separator"`
-- orientation: "horizontal", "vertical"
+**Alert** — `import { Alert } from "@/components/ui/alert"`
 
 **Avatar** — `import { Avatar } from "@/components/ui/avatar"`
-- sizes: sm, md, lg — props: source, fallback
 
-**Alert** — `import { Alert, AlertDescription } from "@/components/ui/alert"`
-- variants: default, destructive, success, warning
-
-**Label** — `import { Label } from "@/components/ui/label"`
-
-**Switch** — `import { Switch } from "@/components/ui/switch"`
-
-**Checkbox** — `import { Checkbox } from "@/components/ui/checkbox"`
-
-**Radio Group** — `import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"`
-
-**Progress** — `import { Progress } from "@/components/ui/progress"`
-
-**Spinner** — `import { Spinner } from "@/components/ui/spinner"`
-- sizes: sm, md, lg
-
-**List** — `import { List, ListItem, ListItemTitle, ListItemDescription } from "@/components/ui/list"`
-
-**Chip** — `import { Chip } from "@/components/ui/chip"`
-
-**Image** — `import { Image } from "@/components/ui/image"`
-
-**Empty State** — `import { EmptyState } from "@/components/ui/empty-state"`
-
-**FAB** — `import { FAB } from "@/components/ui/fab"`
-
-**Search Bar** — `import { SearchBar } from "@/components/ui/search-bar"`
+**Badge** — `import { Badge } from "@/components/ui/badge"`
 
 **Banner** — `import { Banner } from "@/components/ui/banner"`
 
-### Tier 2 — Animated (needs react-native-reanimated)
-
-**Skeleton** — `import { Skeleton } from "@/components/ui/skeleton"`
-
-**Accordion** — `import { Accordion, AccordionItem } from "@/components/ui/accordion"`
-
-**Tabs** — `import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs"`
-
-**Collapsible** — `import { Collapsible, CollapsibleTrigger, CollapsibleContent } from "@/components/ui/collapsible"`
-
-**Toast** — `import { ToastProvider, useToast } from "@/components/ui/toast"`
-- variants: default, destructive, success
-
-**Dialog** — `import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter } from "@/components/ui/dialog"`
-
-**Alert Dialog** — `import { AlertDialog, AlertDialogContent, AlertDialogHeader, AlertDialogTitle, AlertDialogDescription, AlertDialogFooter, AlertDialogAction, AlertDialogCancel } from "@/components/ui/alert-dialog"`
-
-**Tooltip** — `import { Tooltip } from "@/components/ui/tooltip"`
-
-**Popover** — `import { Popover, PopoverTrigger, PopoverContent } from "@/components/ui/popover"`
-
-**Slider** — `import { Slider } from "@/components/ui/slider"`
-
-**Toggle** — `import { Toggle } from "@/components/ui/toggle"`
-
-**Toggle Group** — `import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group"`
-
-**Drawer** — `import { Drawer, DrawerContent, DrawerHeader, DrawerTitle, DrawerFooter } from "@/components/ui/drawer"`
-
-**Input OTP** — `import { InputOTP } from "@/components/ui/input-otp"`
-
-**Table** — `import { Table, TableHeader, TableBody, TableRow, TableCell } from "@/components/ui/table"`
-
-**Dropdown Menu** — `import { DropdownMenu } from "@/components/ui/dropdown-menu"`
-
-**Segmented Control** — `import { SegmentedControl } from "@/components/ui/segmented-control"`
-
-**Carousel** — `import { Carousel } from "@/components/ui/carousel"`
-
-**Rating** — `import { Rating } from "@/components/ui/rating"`
-
-**Stepper** — `import { Stepper } from "@/components/ui/stepper"`
-
-### Tier 3 — Native (extra packages)
-
-**Bottom Sheet** — `import { BottomSheet } from "@/components/ui/bottom-sheet"` (needs @gorhom/bottom-sheet)
-
-**Action Sheet** — `import { ActionSheet } from "@/components/ui/action-sheet"` (needs @gorhom/bottom-sheet)
-
-**Select** — `import { Select } from "@/components/ui/select"` (needs @gorhom/bottom-sheet)
+**Button** — `import { Button } from "@/components/ui/button"`
 
 **Calendar** — `import { Calendar } from "@/components/ui/calendar"`
 
-**Date Picker** — `import { DatePicker } from "@/components/ui/date-picker"` (needs @react-native-community/datetimepicker)
+**Card** — `import { Card } from "@/components/ui/card"`
+
+**Carousel** — `import { Carousel } from "@/components/ui/carousel"`
+
+**ChartTooltip** — `import { ChartTooltip } from "@/components/ui/chart-tooltip"`
+
+**ChatBubble** — `import { ChatBubble } from "@/components/ui/chat-bubble"`
+
+**Chip** — `import { Chip } from "@/components/ui/chip"`
+
+**Combobox** — `import { Combobox } from "@/components/ui/combobox"`
+
+**DatePicker** — `import { DatePicker } from "@/components/ui/date-picker"`
+
+**Dialog** — `import { Dialog } from "@/components/ui/dialog"`
+
+**EmptyState** — `import { EmptyState } from "@/components/ui/empty-state"`
+
+**FAB** — `import { FAB } from "@/components/ui/fab"`
+
+**FilePicker** — `import { FilePicker } from "@/components/ui/file-picker"`
+
+**Form** — `import { Form } from "@/components/ui/form"`
+
+**Grid** — `import { Grid } from "@/components/ui/grid"`
+
+**Header** — `import { Header } from "@/components/ui/header"`
+
+**Image** — `import { Image } from "@/components/ui/image"`
+
+**ImageGallery** — `import { ImageGallery } from "@/components/ui/image-gallery"`
+
+**InfiniteList** — `import { InfiniteList } from "@/components/ui/infinite-list"`
+
+**Input** — `import { Input } from "@/components/ui/input"`
+
+**InputOTP** — `import { InputOTP } from "@/components/ui/input-otp"`
+
+**Label** — `import { Label } from "@/components/ui/label"`
+
+**LabeledSeparator** — `import { LabeledSeparator } from "@/components/ui/labeled-separator"`
+
+**List** — `import { List } from "@/components/ui/list"`
+
+**MaskedInput** — `import { MaskedInput } from "@/components/ui/masked-input"`
+
+**NumberInput** — `import { NumberInput } from "@/components/ui/number-input"`
+
+**Pagination** — `import { Pagination } from "@/components/ui/pagination"`
+
+**PasswordInput** — `import { PasswordInput } from "@/components/ui/password-input"`
+
+**PhoneInput** — `import { PhoneInput } from "@/components/ui/phone-input"`
+
+**Price** — `import { Price } from "@/components/ui/price"`
+
+**ProgressSteps** — `import { ProgressSteps } from "@/components/ui/progress-steps"`
+
+**Rating** — `import { Rating } from "@/components/ui/rating"`
+
+**RefreshControl** — `import { RefreshControl } from "@/components/ui/refresh-control"`
+
+**SafeArea** — `import { SafeArea } from "@/components/ui/safe-area"`
+
+**SearchBar** — `import { SearchBar } from "@/components/ui/search-bar"`
+
+**SegmentedControl** — `import { SegmentedControl } from "@/components/ui/segmented-control"`
+
+**Select** — `import { Select } from "@/components/ui/select"`
+
+**Separator** — `import { Separator } from "@/components/ui/separator"`
+
+**Slider** — `import { Slider } from "@/components/ui/slider"`
+
+**Spinner** — `import { Spinner } from "@/components/ui/spinner"`
+
+**StatCard** — `import { StatCard } from "@/components/ui/stat-card"`
+
+**StatusIndicator** — `import { StatusIndicator } from "@/components/ui/status-indicator"`
+
+**Stepper** — `import { Stepper } from "@/components/ui/stepper"`
+
+**Switch** — `import { Switch } from "@/components/ui/switch"`
+
+**TabBar** — `import { TabBar } from "@/components/ui/tab-bar"`
+
+**Table** — `import { Table } from "@/components/ui/table"`
+
+**Tabs** — `import { Tabs } from "@/components/ui/tabs"`
+
+**Text** — `import { Text } from "@/components/ui/text"`
+
+**Textarea** — `import { Textarea } from "@/components/ui/textarea"`
+
+**ThemeProvider** — `import { ThemeProvider } from "@/components/ui/theme-provider"`
+
+**Timeline** — `import { Timeline } from "@/components/ui/timeline"`
+
+**Toggle** — `import { Toggle } from "@/components/ui/toggle"`
+
+**ToggleGroup** — `import { ToggleGroup } from "@/components/ui/toggle-group"`
+
+### Registry tier 2 — 7 components (include `react-native-reanimated` in dependencies)
+
+**AlertDialog** — `import { AlertDialog } from "@/components/ui/alert-dialog"`
+
+**Collapsible** — `import { Collapsible } from "@/components/ui/collapsible"`
+
+**ConnectionBanner** — `import { ConnectionBanner } from "@/components/ui/connection-banner"`
+
+**Drawer** — `import { Drawer } from "@/components/ui/drawer"`
+
+**Skeleton** — `import { Skeleton } from "@/components/ui/skeleton"`
+
+**Toast** — `import { Toast } from "@/components/ui/toast"`
+
+**TypingIndicator** — `import { TypingIndicator } from "@/components/ui/typing-indicator"`
+
+### Registry tier 3 — 17 components (extra packages; see `dependencies` in registry)
+
+**Accordion** — `import { Accordion } from "@/components/ui/accordion"` (@rn-primitives/accordion, react-native-reanimated)
+
+**ActionSheet** — `import { ActionSheet } from "@/components/ui/action-sheet"` (@gorhom/bottom-sheet, react-native-gesture-handler)
+
+**AreaChart** — `import { AreaChart } from "@/components/ui/area-chart"` (react-native-svg)
+
+**BarChart** — `import { BarChart } from "@/components/ui/bar-chart"` (react-native-svg)
+
+**BottomSheet** — `import { BottomSheet } from "@/components/ui/bottom-sheet"` (@gorhom/bottom-sheet, react-native-gesture-handler)
+
+**Checkbox** — `import { Checkbox } from "@/components/ui/checkbox"` (@rn-primitives/checkbox)
+
+**ContextMenu** — `import { ContextMenu } from "@/components/ui/context-menu"` (@rn-primitives/context-menu, @rn-primitives/portal, react-native-reanimated)
+
+**DropdownMenu** — `import { DropdownMenu } from "@/components/ui/dropdown-menu"` (@rn-primitives/dropdown-menu, @rn-primitives/portal, react-native-reanimated)
+
+**LineChart** — `import { LineChart } from "@/components/ui/line-chart"` (react-native-svg)
+
+**PieChart** — `import { PieChart } from "@/components/ui/pie-chart"` (react-native-svg)
+
+**Popover** — `import { Popover } from "@/components/ui/popover"` (@rn-primitives/popover, @rn-primitives/portal, react-native-reanimated)
+
+**Progress** — `import { Progress } from "@/components/ui/progress"` (@rn-primitives/progress)
+
+**RadarChart** — `import { RadarChart } from "@/components/ui/radar-chart"` (react-native-svg)
+
+**RadialChart** — `import { RadialChart } from "@/components/ui/radial-chart"` (react-native-svg)
+
+**RadioGroup** — `import { RadioGroup } from "@/components/ui/radio-group"` (@rn-primitives/radio-group)
+
+**SwipeableListItem** — `import { SwipeableListItem } from "@/components/ui/swipeable-list-item"` (react-native-reanimated, react-native-gesture-handler)
+
+**Tooltip** — `import { Tooltip } from "@/components/ui/tooltip"` (@rn-primitives/tooltip, @rn-primitives/portal, react-native-reanimated)
 
 ## New Component Template
 ```tsx
