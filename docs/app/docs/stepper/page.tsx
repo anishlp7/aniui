@@ -4,6 +4,8 @@ import { PreviewStepper } from "@/components/preview/stepper";
 import { ComponentPlayground } from "@/components/component-playground";
 import { CodeBlock } from "@/components/code-block";
 import { PropsTable } from "@/components/props-table";
+import { AddComponentTabs } from "@/components/package-manager-tabs";
+import { PreviewToggle } from "@/components/preview-toggle";
 
 const installCode = `npx @aniui/cli add stepper`;
 const usageCode = `import { Stepper } from "@/components/ui/stepper";
@@ -93,14 +95,16 @@ export default function StepperPage() {
         <h1 className="text-3xl font-bold mb-2">Stepper</h1>
         <p className="text-muted-foreground text-lg">Numeric increment/decrement control with min, max, and step support. Ideal for quantity selectors.</p>
       </div>
-      <ComponentPlayground code={usageCode}>
-        <div style={{ maxWidth: 180 }}>
-          <InteractiveDemo />
-        </div>
-      </ComponentPlayground>
+      <PreviewToggle>
+        <ComponentPlayground code={usageCode}>
+          <div style={{ maxWidth: 180 }}>
+            <InteractiveDemo />
+          </div>
+        </ComponentPlayground>
+      </PreviewToggle>
       <div>
         <h2 className="text-xl font-semibold mb-3">Installation</h2>
-        <CodeBlock code={installCode} />
+        <AddComponentTabs names="stepper" />
       </div>
       <div>
         <h2 className="text-xl font-semibold mb-3">Sizes</h2>
@@ -128,6 +132,14 @@ export default function StepperPage() {
           { name: "size", type: "\"sm\" | \"md\" | \"lg\"", default: "\"md\"" },
           { name: "className", type: "string" },
         ]} />
+      </div>
+      {/* Accessibility */}
+      <div className="space-y-4">
+        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Accessibility</h2>
+        <ul className="list-disc list-inside space-y-2 text-sm text-muted-foreground">
+          <li><code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">accessibilityRole="adjustable"</code> with increment/decrement buttons.</li>
+          <li>Current value is announced to screen readers via <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">accessibilityValue</code>.</li>
+        </ul>
       </div>
       <div>
         <h2 className="text-xl font-semibold mb-3">Source</h2>

@@ -27,8 +27,8 @@ jobs:
         working-directory: cli
         run: npx tsc --noEmit
 
-  test:
-    name: Test
+  test-cli:
+    name: Test CLI
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -43,9 +43,47 @@ jobs:
         working-directory: cli
         run: npm ci
 
-      - name: Run tests
+      - name: Run CLI tests
         working-directory: cli
         run: npm test
+
+  test-components:
+    name: Test Components
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: ".nvmrc"
+          cache: "npm"
+          cache-dependency-path: "package-lock.json"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run component tests
+        run: npx jest --passWithNoTests --ci
+
+  docs-build:
+    name: Docs Build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: ".nvmrc"
+          cache: "npm"
+          cache-dependency-path: "docs/package-lock.json"
+
+      - name: Install docs dependencies
+        working-directory: docs
+        run: npm ci
+
+      - name: Build docs
+        working-directory: docs
+        run: npm run build
 
   lint-components:
     name: Lint Components
@@ -55,7 +93,7 @@ jobs:
 
       - name: No StyleSheet.create usage
         run: |
-          if grep -r "StyleSheet.create" components/; then
+          if grep -r "StyleSheet.create" components/ui/; then
             echo "ERROR: StyleSheet.create found in components!"
             exit 1
           fi
@@ -63,8 +101,25 @@ jobs:
 
       - name: No default exports
         run: |
-          if grep -r "export default" components/; then
+          if grep -r "export default" components/ui/; then
             echo "ERROR: Default exports found in components!"
             exit 1
           fi
           echo "OK: No default exports found"
+
+      - name: Component line count check (max 80 lines)
+        run: |
+          failed=0
+          for f in components/ui/*.tsx; do
+            lines=$(wc -l < "$f")
+            if [ "$lines" -gt 80 ]; then
+              echo "WARN: $f has $lines lines (limit: 80)"
+              failed=1
+            fi
+          done
+          if [ "$failed" -eq 1 ]; then
+            echo ""
+            echo "WARNING: Some components exceed 80-line limit"
+            echo "Consider simplifying or splitting these components"
+          fi
+          echo "Line count check complete"

@@ -29,8 +29,8 @@ describe("registry", () => {
     expect(fs.existsSync(filePath)).toBe(true);
   });
 
-  // Components using inline styles have no clsx/tailwind-merge deps
-  const inlineStyleComponents = new Set(["segmented-control", "stepper"]);
+  // Components that don't use clsx/tailwind-merge (thin wrappers or inline styles)
+  const inlineStyleComponents = new Set(["segmented-control", "stepper", "refresh-control"]);
 
   it.each(names.filter((n) => !inlineStyleComponents.has(n)))("%s has clsx and tailwind-merge in dependencies", (name) => {
     const entry = registry[name];

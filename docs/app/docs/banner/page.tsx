@@ -4,6 +4,8 @@ import { PreviewBanner } from "@/components/preview/banner";
 import { ComponentPlayground } from "@/components/component-playground";
 import { CodeBlock } from "@/components/code-block";
 import { PropsTable, type PropDef } from "@/components/props-table";
+import { AddComponentTabs } from "@/components/package-manager-tabs";
+import { PreviewToggle } from "@/components/preview-toggle";
 
 const installCode = `npx @aniui/cli add banner`;
 const usageCode = `import { Banner } from "@/components/ui/banner";
@@ -163,14 +165,16 @@ export default function BannerPage() {
           in both light and dark mode.
         </p>
       </div>
-      <ComponentPlayground code={usageCode}>
-        <PreviewBanner variant="info" onDismiss={() => {}}>
-          New version available. Update now for the latest features.
-        </PreviewBanner>
-      </ComponentPlayground>
+      <PreviewToggle>
+        <ComponentPlayground code={usageCode}>
+          <PreviewBanner variant="info" onDismiss={() => {}}>
+            New version available. Update now for the latest features.
+          </PreviewBanner>
+        </ComponentPlayground>
+      </PreviewToggle>
       <div>
         <h2 className="text-xl font-semibold mb-3">Installation</h2>
-        <CodeBlock code={installCode} />
+        <AddComponentTabs names="banner" />
       </div>
       <div>
         <h2 className="text-xl font-semibold mb-3">Variants</h2>
@@ -220,6 +224,14 @@ export default function BannerPage() {
       <div>
         <h2 className="text-xl font-semibold mb-3">Props</h2>
         <PropsTable props={bannerProps} />
+      </div>
+      {/* Accessibility */}
+      <div className="space-y-4">
+        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Accessibility</h2>
+        <ul className="list-disc list-inside space-y-2 text-sm text-muted-foreground">
+          <li><code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">accessibilityRole="alert"</code> for informational banners.</li>
+          <li>Dismiss button includes <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">accessibilityLabel="Dismiss"</code> for screen readers.</li>
+        </ul>
       </div>
       <div>
         <h2 className="text-xl font-semibold mb-3">Source</h2>

@@ -4,6 +4,8 @@ import { ComponentPlayground } from "@/components/component-playground";
 import { CodeBlock } from "@/components/code-block";
 import { PropsTable } from "@/components/props-table";
 
+import { AddComponentTabs } from "@/components/package-manager-tabs";
+import { PreviewToggle } from "@/components/preview-toggle";
 const installCode = `npx @aniui/cli add slider`;
 const usageCode = `import { Slider } from "@/components/ui/slider";
 import { useState } from "react";
@@ -90,15 +92,17 @@ export default function SliderPage() {
         </p>
       </div>
       {/* Preview */}
-      <ComponentPlayground code={usageCode}>
-        <div className="flex w-full items-center gap-4">
-          <PreviewSlider />
-        </div>
-      </ComponentPlayground>
+      <PreviewToggle>
+        <ComponentPlayground code={usageCode}>
+          <div className="flex w-full items-center gap-4">
+            <PreviewSlider />
+          </div>
+        </ComponentPlayground>
+      </PreviewToggle>
       {/* Installation */}
       <div className="space-y-4">
         <h2 className="text-2xl font-semibold tracking-tight text-foreground">Installation</h2>
-        <CodeBlock code={installCode} />
+        <AddComponentTabs names="slider" />
       </div>
       {/* Usage */}
       <div className="space-y-4">
@@ -139,6 +143,14 @@ export default function SliderPage() {
         <p className="text-sm text-muted-foreground">
           Also accepts all <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">View</code> props from React Native.
         </p>
+      </div>
+      {/* Accessibility */}
+      <div className="space-y-4">
+        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Accessibility</h2>
+        <ul className="list-disc list-inside space-y-2 text-sm text-muted-foreground">
+          <li>Uses PanResponder for smooth gesture-based dragging</li>
+          <li><code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">accessibilityRole="adjustable"</code> with min/max/now values exposed to assistive technology.</li>
+        </ul>
       </div>
       {/* Source */}
       <div className="space-y-4">

@@ -3,6 +3,8 @@ import { PreviewSwipeableListItem } from "@/components/preview/swipeable-list-it
 import { ComponentPlayground } from "@/components/component-playground";
 import { CodeBlock } from "@/components/code-block";
 import { PropsTable } from "@/components/props-table";
+import { AddComponentTabs } from "@/components/package-manager-tabs";
+import { PreviewToggle } from "@/components/preview-toggle";
 
 const installCode = `npx @aniui/cli add swipeable-list-item`;
 const depInstallCode = `npx expo install react-native-reanimated react-native-gesture-handler`;
@@ -213,13 +215,15 @@ export default function SwipeableListItemPage() {
         </p>
       </div>
       {/* Preview */}
-      <ComponentPlayground code={usageCode}>
-        <PreviewSwipeableListItem />
-      </ComponentPlayground>
+      <PreviewToggle>
+        <ComponentPlayground code={usageCode}>
+          <PreviewSwipeableListItem />
+        </ComponentPlayground>
+      </PreviewToggle>
       {/* Installation */}
       <div className="space-y-4">
         <h2 className="text-2xl font-semibold tracking-tight text-foreground">Installation</h2>
-        <CodeBlock code={installCode} />
+        <AddComponentTabs names="swipeable-list-item" />
         <p className="text-sm text-muted-foreground">
           This component requires additional dependencies:
         </p>
@@ -278,6 +282,14 @@ export default function SwipeableListItemPage() {
           { name: "textColor", type: "string", default: '"text-white"' },
           { name: "onPress", type: "() => void", default: "required" },
         ]} />
+      </div>
+      {/* Accessibility */}
+      <div className="space-y-4">
+        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Accessibility</h2>
+        <ul className="list-disc list-inside space-y-2 text-sm text-muted-foreground">
+          <li>Gesture-based swipe with action buttons revealed on swipe.</li>
+          <li>Action buttons have <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">accessibilityRole="button"</code> for screen reader users who cannot swipe.</li>
+        </ul>
       </div>
       {/* Source */}
       <div className="space-y-4">

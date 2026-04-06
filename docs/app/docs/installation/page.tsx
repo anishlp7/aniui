@@ -250,7 +250,7 @@ function SDK54Steps() {
 
       <h3 className="text-lg font-semibold pt-2">Step 2. Install dependencies</h3>
       <CodeBlock code={`cd my-app
-npm install nativewind tailwindcss@3 react-native-reanimated react-native-safe-area-context
+npm install nativewind tailwindcss@3 react-native-reanimated react-native-safe-area-context react-native-svg
 npm install class-variance-authority clsx tailwind-merge`} />
 
       <h3 className="text-lg font-semibold pt-2">Step 3. Initialize AniUI</h3>
@@ -322,7 +322,7 @@ function SDK55Steps() {
       <CodeBlock code={`cd my-app
 
 # Install NativeWind v5 + CSS engine
-npx expo install nativewind@preview react-native-css react-native-reanimated react-native-safe-area-context
+npx expo install nativewind@preview react-native-css react-native-reanimated react-native-safe-area-context react-native-svg
 
 # Install dev dependencies
 npx expo install --dev tailwindcss@4 @tailwindcss/postcss postcss babel-preset-expo
@@ -489,30 +489,144 @@ npm run android`} />
   );
 }
 
+function QuickStartSteps() {
+  return (
+    <div className="space-y-6">
+      <div className="rounded-lg border-2 border-primary/30 bg-primary/5 p-5">
+        <p className="text-sm font-semibold text-primary mb-2">One command setup</p>
+        <p className="text-sm text-muted-foreground">
+          The CLI auto-detects your project type (Expo/Bare RN), SDK version, and package manager.
+          It installs missing dependencies, creates config files, and sets up theming — all in one step.
+        </p>
+      </div>
+
+      <h3 className="text-lg font-semibold">Step 1. Create a React Native project (if you don&apos;t have one)</h3>
+      <CodeBlock code={`# Expo (recommended)
+npx create-expo-app@latest my-app
+cd my-app
+
+# Or Bare React Native
+npx @react-native-community/cli init MyApp
+cd MyApp`} />
+
+      <h3 className="text-lg font-semibold pt-2">Step 2. Run AniUI init</h3>
+      <p className="text-muted-foreground">
+        The CLI will ask you to choose NativeWind or Uniwind, a theme preset, and where to put components.
+        It then <strong>automatically installs</strong> all required dependencies.
+      </p>
+      <CodeBlock code={`npx @aniui/cli init
+
+# Or with a specific styling engine:
+npx @aniui/cli init --style uniwind`} />
+
+      <div className="rounded-lg border border-border bg-muted/20 p-4 space-y-2">
+        <p className="text-sm font-medium text-foreground">The CLI will:</p>
+        <ul className="text-sm text-muted-foreground space-y-1">
+          <li>1. Detect your project type, SDK version, and package manager</li>
+          <li>2. Ask: NativeWind or Uniwind? Theme preset? TypeScript?</li>
+          <li>3. Install missing packages (nativewind/uniwind, tailwindcss, reanimated, cva, clsx, etc.)</li>
+          <li>4. Create metro.config.js, babel.config.js, tailwind.config.js, global.css</li>
+          <li>5. Update tsconfig.json with correct jsxImportSource</li>
+          <li>6. Disable React Compiler if enabled (breaks NativeWind)</li>
+          <li>7. Create lib/utils.ts and components/ui/ directory</li>
+        </ul>
+      </div>
+
+      <h3 className="text-lg font-semibold pt-2">Step 3. Import global.css</h3>
+      <p className="text-muted-foreground">
+        Add this import at the very top of your app entry file:
+      </p>
+      <CodeBlock title="app/_layout.tsx (or App.tsx)" code={`import "./global.css";
+// ... rest of your app`} />
+
+      <h3 className="text-lg font-semibold pt-2">Step 4. Add components and start</h3>
+      <CodeBlock code={`npx @aniui/cli add button text input card
+
+# Start with clean cache
+npx expo start -c`} />
+
+      <p className="text-muted-foreground text-sm">
+        That&apos;s it. Components are copied to your <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">components/ui/</code> directory.
+        You own the source code — customize freely.
+      </p>
+
+      <div className="rounded-lg border border-border bg-muted/30 p-4">
+        <p className="text-sm font-medium text-foreground mb-1">Overlay components (Dialog, Popover, Select, etc.)</p>
+        <p className="text-sm text-muted-foreground">
+          Components using <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">@rn-primitives</code> need{" "}
+          <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">{"<PortalHost />"}</code> in your root layout.
+          Add it as the last child inside your root wrapper:
+        </p>
+        <div className="mt-2">
+          <CodeBlock code={`import { PortalHost } from "@rn-primitives/portal";
+
+// In your root layout:
+<GestureHandlerRootView style={{ flex: 1 }}>
+  <Stack />
+  <PortalHost />
+</GestureHandlerRootView>`} />
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export default function InstallationPage() {
   const [platform, setPlatform] = useState<Platform>("expo54");
+  const [showManual, setShowManual] = useState(false);
 
   return (
     <div className="space-y-8">
       <div>
         <h1 className="text-3xl font-bold tracking-tight text-foreground">Installation</h1>
         <p className="mt-2 text-lg text-muted-foreground">
-          Get AniUI set up in your React Native project from scratch.
+          Get AniUI set up in your React Native project in under 2 minutes.
         </p>
       </div>
 
-      <PlatformSwitcher platform={platform} onSwitch={setPlatform} />
-
+      {/* Recommended: Quick Start */}
       <div className="space-y-6 text-foreground leading-7">
-        {platform === "expo54" && <SDK54Steps />}
-        {platform === "expo55" && <SDK55Steps />}
-        {platform === "bare" && <BareRNSteps />}
+        <QuickStartSteps />
+
+        {/* Manual Setup (expandable) */}
+        <div className="border-t border-border my-8" />
+
+        <div>
+          <button
+            onClick={() => setShowManual(!showManual)}
+            className="flex items-center gap-2 text-lg font-semibold tracking-tight text-foreground hover:text-primary transition-colors cursor-pointer"
+          >
+            <span className={`transition-transform ${showManual ? "rotate-90" : ""}`}>&#9654;</span>
+            Manual Setup (platform-specific steps)
+          </button>
+          <p className="text-sm text-muted-foreground mt-1">
+            If you prefer to install dependencies yourself or need platform-specific guidance.
+          </p>
+        </div>
+
+        {showManual && (
+          <div className="space-y-6 pl-4 border-l-2 border-border">
+            <PlatformSwitcher platform={platform} onSwitch={setPlatform} />
+            {platform === "expo54" && <SDK54Steps />}
+            {platform === "expo55" && <SDK55Steps />}
+            {platform === "bare" && <BareRNSteps />}
+          </div>
+        )}
 
         {/* ==================== TROUBLESHOOTING ==================== */}
         <div className="border-t border-border my-8" />
         <h2 className="text-2xl font-semibold tracking-tight">Troubleshooting</h2>
 
         <div className="space-y-4">
+          <div className="rounded-lg border-2 border-primary/30 bg-primary/5 p-4">
+            <p className="text-sm font-semibold text-primary mb-1">Run the diagnostic first</p>
+            <p className="text-sm text-muted-foreground">
+              Before debugging manually, run{" "}
+              <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">npx @aniui/cli doctor</code>{" "}
+              — it checks every dependency, config file, and known conflict, and tells you exactly what to fix.
+            </p>
+          </div>
+
           <div className="rounded-lg border border-destructive/50 bg-destructive/5 p-4">
             <p className="text-sm font-medium text-foreground mb-1">Styles not appearing / components render unstyled</p>
             <ul className="text-sm text-muted-foreground space-y-1 mt-2">
@@ -623,10 +737,10 @@ export default function InstallationPage() {
             SDK Compatibility &rarr;
           </Link>
           <Link
-            href="/docs/button"
+            href="/docs"
             className="inline-flex items-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:bg-primary/90 transition-colors"
           >
-            Button Component &rarr;
+            Browse Components &rarr;
           </Link>
         </div>
       </div>

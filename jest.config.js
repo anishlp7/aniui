@@ -11,5 +11,6 @@ module.exports = {
   ],
   moduleNameMapper: {
     "^@/(.*)$": "<rootDir>/$1",
+    "^@rn-primitives/(.*)$": "<rootDir>/__mocks__/@rn-primitives/mock.js",
   },
 };

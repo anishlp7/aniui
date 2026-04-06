@@ -3,6 +3,8 @@ import { PreviewSeparator } from "@/components/preview/separator";
 import { ComponentPlayground } from "@/components/component-playground";
 import { CodeBlock } from "@/components/code-block";
 import { PropsTable } from "@/components/props-table";
+import { AddComponentTabs } from "@/components/package-manager-tabs";
+import { PreviewToggle } from "@/components/preview-toggle";
 
 const installCode = `npx @aniui/cli add separator`;
 const usageCode = `import { Separator } from "@/components/ui/separator";
@@ -49,17 +51,19 @@ export default function SeparatorPage() {
         </p>
       </div>
       {/* Preview */}
-      <ComponentPlayground code={usageCode}>
-        <div className="space-y-4 w-full max-w-sm">
-          <p className="text-sm text-foreground">Above the separator</p>
-          <PreviewSeparator />
-          <p className="text-sm text-foreground">Below the separator</p>
-        </div>
-      </ComponentPlayground>
+      <PreviewToggle>
+        <ComponentPlayground code={usageCode}>
+          <div className="space-y-4 w-full max-w-sm">
+            <p className="text-sm text-foreground">Above the separator</p>
+            <PreviewSeparator />
+            <p className="text-sm text-foreground">Below the separator</p>
+          </div>
+        </ComponentPlayground>
+      </PreviewToggle>
       {/* Installation */}
       <div className="space-y-4">
         <h2 className="text-2xl font-semibold tracking-tight text-foreground">Installation</h2>
-        <CodeBlock code={installCode} />
+        <AddComponentTabs names="separator" />
       </div>
       {/* Usage */}
       <div className="space-y-4">
@@ -92,6 +96,14 @@ export default function SeparatorPage() {
         <p className="text-sm text-muted-foreground">
           Also accepts all <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">View</code> props from React Native.
         </p>
+      </div>
+      {/* Accessibility */}
+      <div className="space-y-4">
+        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Accessibility</h2>
+        <ul className="list-disc list-inside space-y-2 text-sm text-muted-foreground">
+          <li>Decorative element with no interaction needed.</li>
+          <li>Screen readers will skip this element by default.</li>
+        </ul>
       </div>
       {/* Source */}
       <div className="space-y-4">

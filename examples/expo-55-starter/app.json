@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "expo-55-starter",
+    "name": "AniUI Expo 55 Starter",
     "slug": "expo-55-starter",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -8,7 +8,8 @@
     "scheme": "expo55starter",
     "userInterfaceStyle": "automatic",
     "ios": {
-      "icon": "./assets/expo.icon"
+      "icon": "./assets/expo.icon",
+      "bundleIdentifier": "com.anish.dev.expo55starter"
     },
     "android": {
       "adaptiveIcon": {
@@ -18,7 +19,7 @@
         "monochromeImage": "./assets/images/android-icon-monochrome.png"
       },
       "predictiveBackGestureEnabled": false,
-      "package": "com.anish.anonyfess.expo55starter"
+      "package": "com.anish.dev.expo55starter"
     },
     "web": {
       "output": "static",
@@ -40,6 +41,19 @@
     "experiments": {
       "typedRoutes": true,
       "reactCompiler": false
+    },
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "cf032338-2612-4ba6-9212-f2ec55f6a254"
+      }
+    },
+    "owner": "anishlp7",
+    "runtimeVersion": {
+      "policy": "appVersion"
+    },
+    "updates": {
+      "url": "https://u.expo.dev/cf032338-2612-4ba6-9212-f2ec55f6a254"
     }
   }
 }

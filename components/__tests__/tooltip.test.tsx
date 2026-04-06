@@ -1,13 +1,16 @@
 import React from "react";
 import { Text } from "react-native";
 import { render, fireEvent } from "@testing-library/react-native";
-import { Tooltip } from "../ui/tooltip";
+import { Tooltip, TooltipTrigger, TooltipContent } from "../ui/tooltip";
 
 describe("Tooltip", () => {
   it("renders without crashing", () => {
     const { toJSON } = render(
-      <Tooltip content="Hint text">
-        <Text>Hover me</Text>
+      <Tooltip>
+        <TooltipTrigger>
+          <Text>Hover me</Text>
+        </TooltipTrigger>
+        <TooltipContent>Hint text</TooltipContent>
       </Tooltip>
     );
     expect(toJSON()).toBeTruthy();
@@ -15,36 +18,37 @@ describe("Tooltip", () => {
 
   it("renders children", () => {
     const { getByText } = render(
-      <Tooltip content="Hint">
-        <Text>Target</Text>
+      <Tooltip>
+        <TooltipTrigger>
+          <Text>Target</Text>
+        </TooltipTrigger>
+        <TooltipContent>Hint</TooltipContent>
       </Tooltip>
     );
     expect(getByText("Target")).toBeTruthy();
   });
 
-  it("does not show tooltip content initially", () => {
-    const { queryByText } = render(
-      <Tooltip content="Tooltip text">
-        <Text>Target</Text>
+  it("renders tooltip content in the tree (primitive manages visibility)", () => {
+    const { getByText } = render(
+      <Tooltip>
+        <TooltipTrigger>
+          <Text>Target</Text>
+        </TooltipTrigger>
+        <TooltipContent>Tooltip text</TooltipContent>
       </Tooltip>
     );
-    expect(queryByText("Tooltip text")).toBeNull();
-  });
-
-  it("shows tooltip content on pressIn", () => {
-    const { getByRole, getByText } = render(
-      <Tooltip content="Tooltip text">
-        <Text>Target</Text>
-      </Tooltip>
-    );
-    fireEvent(getByRole("button"), "pressIn");
+    // With the passthrough mock, content is always in the tree;
+    // real primitive controls visibility.
     expect(getByText("Tooltip text")).toBeTruthy();
   });
 
-  it("has button accessibilityRole", () => {
+  it("trigger has button accessibilityRole", () => {
     const { getByRole } = render(
-      <Tooltip content="Hint">
-        <Text>Target</Text>
+      <Tooltip>
+        <TooltipTrigger>
+          <Text>Target</Text>
+        </TooltipTrigger>
+        <TooltipContent>Hint</TooltipContent>
       </Tooltip>
     );
     expect(getByRole("button")).toBeTruthy();

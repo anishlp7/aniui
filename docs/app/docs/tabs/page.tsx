@@ -3,6 +3,8 @@ import { PreviewTabs, PreviewTabsList, PreviewTabsTrigger, PreviewTabsContent } 
 import { ComponentPlayground } from "@/components/component-playground";
 import { CodeBlock } from "@/components/code-block";
 import { PropsTable, ComponentTable } from "@/components/props-table";
+import { AddComponentTabs } from "@/components/package-manager-tabs";
+import { PreviewToggle } from "@/components/preview-toggle";
 
 const installCode = `npx @aniui/cli add tabs`;
 const usageCode = `import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
@@ -88,26 +90,28 @@ export default function TabsPage() {
         </p>
       </div>
       {/* Preview */}
-      <ComponentPlayground code={usageCode}>
-        <div className="w-full max-w-sm">
-          <PreviewTabs defaultValue="account">
-            <PreviewTabsList>
-              <PreviewTabsTrigger value="account">Account</PreviewTabsTrigger>
-              <PreviewTabsTrigger value="password">Password</PreviewTabsTrigger>
-            </PreviewTabsList>
-            <PreviewTabsContent value="account">
-              <p className="text-sm text-muted-foreground p-4">Account settings content here.</p>
-            </PreviewTabsContent>
-            <PreviewTabsContent value="password">
-              <p className="text-sm text-muted-foreground p-4">Password settings content here.</p>
-            </PreviewTabsContent>
-          </PreviewTabs>
-        </div>
-      </ComponentPlayground>
+      <PreviewToggle>
+        <ComponentPlayground code={usageCode}>
+          <div className="w-full max-w-sm">
+            <PreviewTabs defaultValue="account">
+              <PreviewTabsList>
+                <PreviewTabsTrigger value="account">Account</PreviewTabsTrigger>
+                <PreviewTabsTrigger value="password">Password</PreviewTabsTrigger>
+              </PreviewTabsList>
+              <PreviewTabsContent value="account">
+                <p className="text-sm text-muted-foreground p-4">Account settings content here.</p>
+              </PreviewTabsContent>
+              <PreviewTabsContent value="password">
+                <p className="text-sm text-muted-foreground p-4">Password settings content here.</p>
+              </PreviewTabsContent>
+            </PreviewTabs>
+          </div>
+        </ComponentPlayground>
+      </PreviewToggle>
       {/* Installation */}
       <div className="space-y-4">
         <h2 className="text-2xl font-semibold tracking-tight text-foreground">Installation</h2>
-        <CodeBlock code={installCode} />
+        <AddComponentTabs names="tabs" />
         <p className="text-sm text-muted-foreground">
           This component requires <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">react-native-reanimated</code> for the tab indicator animation.
         </p>
@@ -145,6 +149,14 @@ export default function TabsPage() {
           { name: "value", type: "string", default: "required" },
           { name: "className", type: "string" },
         ]} />
+      </div>
+      {/* Accessibility */}
+      <div className="space-y-4">
+        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Accessibility</h2>
+        <ul className="list-disc list-inside space-y-2 text-sm text-muted-foreground">
+          <li>Uses React Context for state management</li>
+          <li>Tab triggers and content panels are properly associated for screen readers.</li>
+        </ul>
       </div>
       {/* Source */}
       <div className="space-y-4">

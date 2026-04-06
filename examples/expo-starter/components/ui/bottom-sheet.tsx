@@ -5,7 +5,7 @@ import {
   BottomSheetBackdrop,
   BottomSheetView,
 } from "@gorhom/bottom-sheet";
-import { cn } from "../../lib/utils";
+import { cn } from "@/lib/utils";
 
 export interface BottomSheetProps {
   className?: string;
@@ -28,8 +28,8 @@ export const BottomSheet = forwardRef<BottomSheetModal, BottomSheetProps>(
         snapPoints={snapPoints}
         enablePanDownToClose
         backdropComponent={renderBackdrop}
-        backgroundStyle={{ backgroundColor: "hsl(0 0% 100%)" }}
-        handleIndicatorStyle={{ backgroundColor: "hsl(240 3.8% 46.1%)" }}
+        backgroundStyle={{ backgroundColor: "#ffffff" }}
+        handleIndicatorStyle={{ backgroundColor: "#71717a" }}
         {...props}
       >
         <BottomSheetView>

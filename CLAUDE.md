@@ -135,12 +135,37 @@ aniui/
 │       ├── stepper.tsx
 │       ├── banner.tsx
 │       ├── calendar.tsx
-│       └── swipeable-list-item.tsx
+│       ├── swipeable-list-item.tsx
+│       ├── form.tsx
+│       ├── password-input.tsx
+│       ├── theme-provider.tsx
+│       ├── safe-area.tsx
+│       ├── header.tsx
+│       ├── tab-bar.tsx
+│       ├── status-indicator.tsx
+│       ├── labeled-separator.tsx
+│       ├── masked-input.tsx
+│       ├── phone-input.tsx
+│       ├── number-input.tsx
+│       ├── combobox.tsx
+│       ├── progress-steps.tsx
+│       ├── timeline.tsx
+│       ├── chat-bubble.tsx
+│       ├── stat-card.tsx
+│       ├── grid.tsx
+│       ├── price.tsx
+│       ├── refresh-control.tsx
+│       ├── infinite-list.tsx
+│       ├── pagination.tsx
+│       ├── file-picker.tsx
+│       ├── connection-banner.tsx
+│       ├── typing-indicator.tsx
+│       └── image-gallery.tsx
 │
 ├── lib/                       # Shared utils — also copied to user's project
 │   └── utils.ts               # cn() helper — THE ONLY utility file
 │
-├── templates/                 # Copied during `aniui init`
+├── templates/                 # Copied during `npx @aniui/cli init`
 │   ├── global.css
 │   ├── tailwind.config.js
 │   └── nativewind-env.d.ts
@@ -257,42 +282,81 @@ export function [Name]({ variant, size, className, ...props }: [Name]Props) {
 | 20 | fab | Pressable | Floating action button |
 | 21 | search-bar | TextInput | Search input with icon |
 | 22 | banner | View | Informational banner |
+| 23 | form | View+Context | Form, FormField, FormItem, FormMessage + validation |
+| 24 | password-input | TextInput | Show/hide toggle + strength indicator |
+| 25 | theme-provider | Context | ThemeProvider, useTheme hook (light/dark/system) |
+| 26 | safe-area | SafeAreaView | Styled safe area wrapper with variants |
+| 27 | header | View | Compound: Header, HeaderLeft, HeaderTitle, HeaderRight, HeaderBackButton |
+| 28 | tab-bar | View+Pressable | Bottom tab bar with badge support |
+| 29 | status-indicator | View | online/offline/away/busy dot with pulse |
+| 30 | labeled-separator | View+Text | Separator with centered text label |
+| 31 | masked-input | TextInput | Auto-format masks (credit card, phone, date) |
+| 32 | phone-input | TextInput | Phone with country code picker |
+| 33 | number-input | TextInput+Pressable | +/- buttons with min/max/step |
+| 34 | combobox | Modal+FlatList | Searchable select with type-to-filter |
+| 35 | progress-steps | View+Context | Multi-step wizard progress indicator |
+| 36 | timeline | View | Vertical event timeline with dot variants |
+| 37 | chat-bubble | View+Text | Sent/received message bubbles with status |
+| 38 | stat-card | View | KPI card with value, trend, and change % |
+| 39 | grid | FlatList | Column-based grid layout |
+| 40 | price | Text | Formatted currency display with Intl |
+| 41 | refresh-control | RefreshControl | Themed pull-to-refresh |
+| 42 | infinite-list | FlatList | Auto-load more on scroll |
+| 43 | pagination | View+Pressable | Numbered page navigation |
+| 44 | file-picker | Pressable | Upload UI with dashed border and preview |
+| 45 | image-gallery | FlatList+Modal | Horizontal carousel with fullscreen viewer |
 
 ### Tier 2: Needs react-native-reanimated v3
 
 | # | Component | Animation |
 |---|-----------|-----------|
-| 23 | skeleton | Animated pulse via opacity |
-| 24 | accordion | Height expand/collapse |
-| 25 | tabs | Indicator slide |
-| 26 | collapsible | Height animate |
-| 27 | toast | Slide in/out + auto dismiss |
-| 28 | dialog | Fade + scale overlay |
-| 29 | alert-dialog | Fade + zoom confirmation dialog |
-| 30 | tooltip | Fade in/out + position |
-| 31 | popover | Contextual overlay content |
-| 32 | slider | Animated thumb + track |
-| 33 | toggle | Pressable toggle button |
-| 34 | toggle-group | Multi-toggle group |
-| 35 | drawer | Slide-in drawer overlay |
-| 36 | input-otp | OTP code input |
-| 37 | table | Data table with rows/cells |
-| 38 | dropdown-menu | Animated dropdown |
-| 39 | segmented-control | Animated segment indicator |
-| 40 | carousel | Swipeable carousel |
-| 41 | rating | Star/icon rating |
-| 42 | stepper | Increment/decrement stepper |
+| 46 | skeleton | Animated pulse via opacity |
+| 47 | toggle | Pressable toggle button |
+| 48 | toggle-group | Multi-toggle group |
+| 49 | drawer | Slide-in drawer overlay |
+| 50 | input-otp | OTP code input |
+| 51 | table | Data table with rows/cells |
+| 52 | segmented-control | Animated segment indicator |
+| 53 | carousel | Swipeable carousel |
+| 54 | rating | Star/icon rating |
+| 55 | connection-banner | Slide-in online/offline banner |
+| 56 | typing-indicator | Animated typing dots for chat |
 
-### Tier 3: Needs external packages
+### Tier 3: Needs rn-primitives or external packages
 
 | # | Component | Extra Dep |
 |---|-----------|-----------|
-| 43 | bottom-sheet | @gorhom/bottom-sheet |
-| 44 | action-sheet | @gorhom/bottom-sheet |
-| 45 | select | @gorhom/bottom-sheet |
-| 46 | calendar | (standalone) |
-| 47 | date-picker | @react-native-community/datetimepicker |
-| 48 | swipeable-list-item | react-native-gesture-handler |
+| 57 | dialog | @rn-primitives/dialog + @rn-primitives/portal |
+| 58 | alert-dialog | @rn-primitives/alert-dialog + @rn-primitives/portal |
+| 59 | popover | @rn-primitives/popover + @rn-primitives/portal |
+| 60 | tooltip | @rn-primitives/tooltip + @rn-primitives/portal |
+| 61 | dropdown-menu | @rn-primitives/dropdown-menu + @rn-primitives/portal |
+| 62 | context-menu | @rn-primitives/context-menu + @rn-primitives/portal |
+| 63 | select | @rn-primitives/select + @rn-primitives/portal |
+| 64 | accordion | @rn-primitives/accordion |
+| 65 | tabs | @rn-primitives/tabs |
+| 66 | collapsible | @rn-primitives/collapsible |
+| 67 | slider | @rn-primitives/slider |
+| 68 | checkbox | @rn-primitives/checkbox |
+| 69 | radio-group | @rn-primitives/radio-group |
+| 70 | progress | @rn-primitives/progress |
+| 71 | toast | @rn-primitives/toast |
+| 72 | bottom-sheet | @gorhom/bottom-sheet |
+| 73 | action-sheet | @gorhom/bottom-sheet |
+| 74 | date-picker | @react-native-community/datetimepicker |
+| 75 | swipeable-list-item | react-native-gesture-handler |
+
+### Tier 4: Chart components (needs react-native-svg)
+
+| # | Component | Description |
+|---|-----------|-------------|
+| 76 | area-chart | SVG area chart with fill |
+| 77 | bar-chart | SVG bar chart with grouping |
+| 78 | line-chart | SVG line chart with series |
+| 79 | pie-chart | SVG pie/donut chart |
+| 80 | radar-chart | SVG radar/spider chart |
+| 81 | radial-chart | SVG radial progress rings |
+| 82 | chart-tooltip | Tooltip overlay for chart data |
 
 ## Theme System
 
@@ -383,7 +447,7 @@ module.exports = {
 
 ## CLI Spec
 
-### `npx aniui init`
+### `npx @aniui/cli init`
 
 1. Check if running inside an Expo or bare RN project (look for `app.json` with `expo` key, or `react-native` in package.json)
 2. Check if `nativewind` is in dependencies (if not, print install command and exit)
@@ -396,10 +460,10 @@ module.exports = {
 9. Copy `nativewind-env.d.ts` to project root
 10. Print success message with next steps
 
-### `npx aniui add [names...]`
+### `npx @aniui/cli add [names...]`
 
 1. Validate component names against registry
-2. Check if `aniui init` has been run (look for `lib/utils.ts`)
+2. Check if `@aniui/cli init` has been run (look for `lib/utils.ts`)
 3. For each component:
    a. Read source file from bundled components
    b. Copy to user's components directory
@@ -413,7 +477,7 @@ module.exports = {
 ```json
 {
   "name": "@aniui/cli",
-  "version": "0.1.2",
+  "version": "0.2.13",
   "description": "Beautiful React Native components. Copy. Paste. Ship.",
   "license": "MIT",
   "bin": {
@@ -423,7 +487,8 @@ module.exports = {
     "dist",
     "components",
     "lib",
-    "templates"
+    "templates",
+    "blocks"
   ],
   "dependencies": {
     "commander": "^12.0.0",

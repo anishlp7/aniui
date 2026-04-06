@@ -4,6 +4,8 @@ import { PreviewChip } from "@/components/preview/chip";
 import { ComponentPlayground } from "@/components/component-playground";
 import { CodeBlock } from "@/components/code-block";
 import { PropsTable } from "@/components/props-table";
+import { AddComponentTabs } from "@/components/package-manager-tabs";
+import { PreviewToggle } from "@/components/preview-toggle";
 
 const installCode = `npx @aniui/cli add chip`;
 const usageCode = `import { Chip } from "@/components/ui/chip";
@@ -102,16 +104,18 @@ export default function ChipPage() {
         <h1 className="text-3xl font-bold mb-2">Chip</h1>
         <p className="text-muted-foreground text-lg">Interactive tags for filters, categories, and multi-select. Unlike Badge (display-only), Chips are pressable and selectable.</p>
       </div>
-      <ComponentPlayground code={usageCode}>
-        <div className="flex flex-wrap gap-2">
-          <PreviewChip variant="default">React Native</PreviewChip>
-          <PreviewChip variant="secondary">TypeScript</PreviewChip>
-          <PreviewChip variant="outline">NativeWind</PreviewChip>
-        </div>
-      </ComponentPlayground>
+      <PreviewToggle>
+        <ComponentPlayground code={usageCode}>
+          <div className="flex flex-wrap gap-2">
+            <PreviewChip variant="default">React Native</PreviewChip>
+            <PreviewChip variant="secondary">TypeScript</PreviewChip>
+            <PreviewChip variant="outline">NativeWind</PreviewChip>
+          </div>
+        </ComponentPlayground>
+      </PreviewToggle>
       <div>
         <h2 className="text-xl font-semibold mb-3">Installation</h2>
-        <CodeBlock code={installCode} />
+        <AddComponentTabs names="chip" />
       </div>
       <div>
         <h2 className="text-xl font-semibold mb-3">Variants</h2>
@@ -162,6 +166,14 @@ export default function ChipPage() {
           { name: "textClassName", type: "string" },
           { name: "className", type: "string" },
         ]} />
+      </div>
+      {/* Accessibility */}
+      <div className="space-y-4">
+        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Accessibility</h2>
+        <ul className="list-disc list-inside space-y-2 text-sm text-muted-foreground">
+          <li><code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">accessibilityRole="button"</code> with selected state for screen readers.</li>
+          <li>Supports <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">accessibilityState</code> to indicate selection.</li>
+        </ul>
       </div>
       <div>
         <h2 className="text-xl font-semibold mb-3">Source</h2>

@@ -3,6 +3,8 @@ import { PreviewSelect } from "@/components/preview/select";
 import { ComponentPlayground } from "@/components/component-playground";
 import { CodeBlock } from "@/components/code-block";
 import { PropsTable } from "@/components/props-table";
+import { PreviewToggle } from "@/components/preview-toggle";
+import { AddComponentTabs } from "@/components/package-manager-tabs";
 
 const installCode = `npx @aniui/cli add select`;
 const usageCode = `import { Select } from "@/components/ui/select";
@@ -160,7 +162,7 @@ export default function SelectPage() {
       {/* Installation */}
       <div className="space-y-4">
         <h2 className="text-2xl font-semibold tracking-tight text-foreground">Installation</h2>
-        <CodeBlock code={installCode} />
+        <AddComponentTabs names="select" />
         <p className="text-sm text-muted-foreground">
           This component requires <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">react-native-reanimated</code> for animations.
         </p>
@@ -185,6 +187,15 @@ export default function SelectPage() {
           { name: "label", type: "string" },
           { name: "value", type: "string" },
         ]} />
+      </div>
+      {/* Accessibility */}
+      <div className="space-y-4">
+        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Accessibility</h2>
+        <ul className="list-disc list-inside space-y-2 text-sm text-muted-foreground">
+          <li>Uses Modal with anchored dropdown positioning. Supports searchable prop for filtering options.</li>
+          <li>Selected state announced to screen readers</li>
+          <li><code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">accessibilityRole=&quot;button&quot;</code> on trigger</li>
+        </ul>
       </div>
       {/* Source */}
       <div className="space-y-4">

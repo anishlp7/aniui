@@ -3,6 +3,8 @@ import { PreviewCollapsible, PreviewCollapsibleTrigger, PreviewCollapsibleConten
 import { ComponentPlayground } from "@/components/component-playground";
 import { CodeBlock } from "@/components/code-block";
 import { PropsTable, ComponentTable } from "@/components/props-table";
+import { AddComponentTabs } from "@/components/package-manager-tabs";
+import { PreviewToggle } from "@/components/preview-toggle";
 
 const installCode = `npx @aniui/cli add collapsible`;
 const usageCode = `import { Collapsible, CollapsibleTrigger, CollapsibleContent } from "@/components/ui/collapsible";
@@ -102,22 +104,24 @@ export default function CollapsiblePage() {
         </p>
       </div>
       {/* Preview */}
-      <ComponentPlayground code={usageCode}>
-        <div className="w-full max-w-sm">
-          <PreviewCollapsible>
-            <PreviewCollapsibleTrigger>
-              <span className="text-sm font-medium text-foreground">Toggle content</span>
-            </PreviewCollapsibleTrigger>
-            <PreviewCollapsibleContent>
-              <p className="text-sm text-muted-foreground pt-2">This content can be shown or hidden.</p>
-            </PreviewCollapsibleContent>
-          </PreviewCollapsible>
-        </div>
-      </ComponentPlayground>
+      <PreviewToggle>
+        <ComponentPlayground code={usageCode}>
+          <div className="w-full max-w-sm">
+            <PreviewCollapsible>
+              <PreviewCollapsibleTrigger>
+                <span className="text-sm font-medium text-foreground">Toggle content</span>
+              </PreviewCollapsibleTrigger>
+              <PreviewCollapsibleContent>
+                <p className="text-sm text-muted-foreground pt-2">This content can be shown or hidden.</p>
+              </PreviewCollapsibleContent>
+            </PreviewCollapsible>
+          </div>
+        </ComponentPlayground>
+      </PreviewToggle>
       {/* Installation */}
       <div className="space-y-4">
         <h2 className="text-2xl font-semibold tracking-tight text-foreground">Installation</h2>
-        <CodeBlock code={installCode} />
+        <AddComponentTabs names="collapsible" />
         <p className="text-sm text-muted-foreground">
           This component requires <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">react-native-reanimated</code> for animations.
         </p>
@@ -151,6 +155,14 @@ export default function CollapsiblePage() {
           { name: "onOpenChange", type: "(open: boolean) => void" },
           { name: "className", type: "string" },
         ]} />
+      </div>
+      {/* Accessibility */}
+      <div className="space-y-4">
+        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Accessibility</h2>
+        <ul className="list-disc list-inside space-y-2 text-sm text-muted-foreground">
+          <li>Uses React Context with Reanimated FadeIn/FadeOut animations</li>
+          <li>Trigger button announces expanded/collapsed state to screen readers.</li>
+        </ul>
       </div>
       {/* Source */}
       <div className="space-y-4">

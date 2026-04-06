@@ -3,6 +3,7 @@ import fs from "fs-extra";
 import prompts from "prompts";
 import { logger } from "../utils/logger";
 import { buildSystemPrompt } from "../prompts/system";
+import { detectPackageManager, getInstallCommand } from "../utils/detect-project";
 
 interface GenerateOptions {
   output?: string;
@@ -35,9 +36,10 @@ export async function generateCommand(
   try {
     Anthropic = (await import("@anthropic-ai/sdk")).default;
   } catch {
+    const pm = await detectPackageManager(process.cwd());
     logger.error("@anthropic-ai/sdk is not installed.");
     logger.info("Install it to use the generate command:");
-    logger.info("  npm install @anthropic-ai/sdk");
+    logger.info(`  ${getInstallCommand(pm, ["@anthropic-ai/sdk"])}`);
     process.exit(1);
   }
 

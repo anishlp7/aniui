@@ -4,6 +4,8 @@ import { PreviewCarousel } from "@/components/preview/carousel";
 import { ComponentPlayground } from "@/components/component-playground";
 import { CodeBlock } from "@/components/code-block";
 import { PropsTable } from "@/components/props-table";
+import { AddComponentTabs } from "@/components/package-manager-tabs";
+import { PreviewToggle } from "@/components/preview-toggle";
 
 const installCode = `npx @aniui/cli add carousel`;
 const usageCode = `import { Carousel } from "@/components/ui/carousel";
@@ -77,14 +79,16 @@ export default function CarouselPage() {
         <h1 className="text-3xl font-bold mb-2">Carousel</h1>
         <p className="text-muted-foreground text-lg">Horizontal scrollable carousel with pagination dots and optional auto-play. Uses FlatList for performant scrolling.</p>
       </div>
-      <ComponentPlayground code={usageCode}>
-        <div className="max-w-md">
-          <PreviewCarousel items={slides} />
-        </div>
-      </ComponentPlayground>
+      <PreviewToggle>
+        <ComponentPlayground code={usageCode}>
+          <div className="max-w-md">
+            <PreviewCarousel items={slides} />
+          </div>
+        </ComponentPlayground>
+      </PreviewToggle>
       <div>
         <h2 className="text-xl font-semibold mb-3">Installation</h2>
-        <CodeBlock code={installCode} />
+        <AddComponentTabs names="carousel" />
       </div>
       <div>
         <h2 className="text-xl font-semibold mb-3">Auto-Play</h2>
@@ -105,6 +109,14 @@ export default function CarouselPage() {
           { name: "interval", type: "number", default: "3000" },
           { name: "className", type: "string" },
         ]} />
+      </div>
+      {/* Accessibility */}
+      <div className="space-y-4">
+        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Accessibility</h2>
+        <ul className="list-disc list-inside space-y-2 text-sm text-muted-foreground">
+          <li><code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">accessibilityRole="adjustable"</code> with page indicators.</li>
+          <li>Swipe gestures are supplemented with navigation controls for motor accessibility.</li>
+        </ul>
       </div>
       <div>
         <h2 className="text-xl font-semibold mb-3">Source</h2>

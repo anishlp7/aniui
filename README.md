@@ -30,9 +30,13 @@
 
 AniUI is a [shadcn/ui](https://ui.shadcn.com)-inspired component library for **React Native**. Instead of installing a package, you copy component source files directly into your project. You own the code. Customize everything.
 
-Built with [NativeWind](https://www.nativewind.dev), [class-variance-authority](https://cva.style), and strict TypeScript. Every component is a single file, styled with Tailwind classes, and works on both iOS and Android out of the box.
+Built with [NativeWind](https://www.nativewind.dev) (or [Uniwind](https://github.com/nicepkg/uniwind)), [rn-primitives](https://rn-primitives.vercel.app) for accessibility, [class-variance-authority](https://cva.style), and strict TypeScript. Every component is a single file, styled with Tailwind classes, and works on both iOS and Android out of the box.
 
-**Demo:** [YouTube Short](https://www.youtube.com/shorts/KxHLlLk8YkA)
+**Demo:** [YouTube Short](https://www.youtube.com/shorts/KxHLlLk8YkA) | [Live Demo (Expo Go)](https://expo.dev/projects/4d52bb77-8a04-4713-b4b9-e2ed4c5ec1a0)
+
+**Try on device:** Scan with [Expo Go](https://expo.dev/go)
+
+<img src="https://qr.expo.dev/eas-update?slug=exp&projectId=cf032338-2612-4ba6-9212-f2ec55f6a254&groupId=d2e5cf52-0a1d-47e4-bdd6-d99064bfdcc8&host=u.expo.dev" alt="Scan with Expo Go" width="160" />
 
 ## Compatibility
 
@@ -40,8 +44,12 @@ Built with [NativeWind](https://www.nativewind.dev), [class-variance-authority](
 |---|---|
 | Expo | ✅ SDK 53, 54 & 55 |
 | Bare React Native | ✅ 0.76+ |
+| NativeWind | ✅ v4 + v5 |
+| Uniwind | ✅ `--style uniwind` |
+| rn-primitives | ✅ Headless a11y layer |
 | TypeScript | ✅ Strict |
 | JavaScript | ✅ Via CLI (`tsx: false`) |
+| npm / pnpm / yarn / bun | ✅ All supported |
 | New Architecture | ✅ |
 | Old Architecture | ✅ SDK 53/54 only |
 | iOS | ✅ 15+ |
@@ -51,11 +59,17 @@ Built with [NativeWind](https://www.nativewind.dev), [class-variance-authority](
 
 ```bash
 # Initialize AniUI in your project
-npx @aniui/cli init
+npx @aniui/cli init              # npm
+pnpm dlx @aniui/cli init         # pnpm
+yarn dlx @aniui/cli init         # yarn
+bunx @aniui/cli init             # bun
+
+# Choose your styling engine during init:
+npx @aniui/cli init --style nativewind   # default
+npx @aniui/cli init --style uniwind      # Uniwind support
 
 # Add components
-npx @aniui/cli add button
-npx @aniui/cli add card input text
+npx @aniui/cli add button card input text
 ```
 
 That's it. Components are copied to your `components/ui/` directory. Import and use them:
@@ -84,7 +98,7 @@ export function WelcomeScreen() {
 
 ## Components
 
-**55 components** — all listed alphabetically. Each component's docs page tells you if it needs extra dependencies.
+**81 components** — all listed alphabetically. Each component's docs page tells you if it needs extra dependencies.
 
 | Component | Description |
 |-----------|-------------|
@@ -100,8 +114,11 @@ export function WelcomeScreen() {
 | [Calendar](https://aniui.dev/docs/calendar) | Month grid with single date and range selection |
 | [Card](https://aniui.dev/docs/card) | Card with Header, Title, Content, Footer |
 | [Carousel](https://aniui.dev/docs/carousel) | Horizontal scrollable carousel with pagination dots |
+| [Chat Bubble](https://aniui.dev/docs/chat-bubble) | Sent/received message bubbles with timestamps and status |
 | [Checkbox](https://aniui.dev/docs/checkbox) | Checkbox with checked/unchecked/disabled |
 | [Chip](https://aniui.dev/docs/chip) | Interactive tag for filters and multi-select |
+| [Combobox](https://aniui.dev/docs/combobox) | Searchable select dropdown with type-to-filter |
+| [Connection Banner](https://aniui.dev/docs/connection-banner) | Animated online/offline connection status banner |
 | [Collapsible](https://aniui.dev/docs/collapsible) | Animated show/hide content |
 | [Date Picker](https://aniui.dev/docs/date-picker) | Calendar popup picker with range support |
 | [Dialog](https://aniui.dev/docs/dialog) | Modal with fade + scale overlay |
@@ -109,15 +126,31 @@ export function WelcomeScreen() {
 | [Dropdown Menu](https://aniui.dev/docs/dropdown-menu) | Context menu with fade animation |
 | [Empty State](https://aniui.dev/docs/empty-state) | Placeholder for empty lists and error states |
 | [FAB](https://aniui.dev/docs/fab) | Floating action button with positioning |
+| [File Picker](https://aniui.dev/docs/file-picker) | Upload UI with dashed border, preview, and remove |
+| [Form](https://aniui.dev/docs/form) | Form context with validation, error messages, compound components |
+| [Grid](https://aniui.dev/docs/grid) | FlatList-based grid layout with configurable columns |
+| [Header](https://aniui.dev/docs/header) | Navigation header with back button, title, and actions |
 | [Image](https://aniui.dev/docs/image) | Image with loading, error fallback, rounded variants |
+| [Image Gallery](https://aniui.dev/docs/image-gallery) | Horizontal carousel with fullscreen modal and pagination |
+| [Infinite List](https://aniui.dev/docs/infinite-list) | FlatList with automatic load-more on scroll |
 | [Input](https://aniui.dev/docs/input) | Text input with default and ghost variants |
 | [Input OTP](https://aniui.dev/docs/input-otp) | OTP verification input with individual cells |
 | [Label](https://aniui.dev/docs/label) | Form field label |
+| [Labeled Separator](https://aniui.dev/docs/labeled-separator) | Horizontal separator with centered text label |
 | [List](https://aniui.dev/docs/list) | Styled list with ListItem, Title, Description |
+| [Masked Input](https://aniui.dev/docs/masked-input) | Auto-format masks for credit cards, phones, dates |
+| [Number Input](https://aniui.dev/docs/number-input) | Numeric input with +/- buttons and min/max |
+| [Pagination](https://aniui.dev/docs/pagination) | Page navigation with numbered buttons and prev/next |
+| [Password Input](https://aniui.dev/docs/password-input) | Password with show/hide toggle and strength indicator |
+| [Phone Input](https://aniui.dev/docs/phone-input) | Phone number input with country code selector |
 | [Popover](https://aniui.dev/docs/popover) | Contextual overlay content |
+| [Price](https://aniui.dev/docs/price) | Formatted currency display with locale support |
 | [Progress](https://aniui.dev/docs/progress) | Progress bar |
+| [Progress Steps](https://aniui.dev/docs/progress-steps) | Multi-step wizard progress indicator |
 | [Radio Group](https://aniui.dev/docs/radio-group) | Radio button group with context |
 | [Rating](https://aniui.dev/docs/rating) | Star rating with interactive and read-only modes |
+| [Refresh Control](https://aniui.dev/docs/refresh-control) | Themed pull-to-refresh for ScrollView and FlatList |
+| [Safe Area](https://aniui.dev/docs/safe-area) | Styled SafeAreaView wrapper with theme variants |
 | [Search Bar](https://aniui.dev/docs/search-bar) | Search input with icon, clear, and cancel |
 | [Segmented Control](https://aniui.dev/docs/segmented-control) | iOS-style segmented control |
 | [Select](https://aniui.dev/docs/select) | Dropdown select |
@@ -125,17 +158,23 @@ export function WelcomeScreen() {
 | [Skeleton](https://aniui.dev/docs/skeleton) | Animated loading placeholder |
 | [Slider](https://aniui.dev/docs/slider) | Draggable slider for numeric values |
 | [Spinner](https://aniui.dev/docs/spinner) | Loading spinner with 3 sizes |
+| [Stat Card](https://aniui.dev/docs/stat-card) | KPI display with value, trend, and change percentage |
+| [Status Indicator](https://aniui.dev/docs/status-indicator) | Online/offline/away/busy status dot |
 | [Stepper](https://aniui.dev/docs/stepper) | Numeric increment/decrement with min/max/step |
 | [Swipeable List Item](https://aniui.dev/docs/swipeable-list-item) | Swipe to reveal action buttons (delete, archive, etc.) |
 | [Switch](https://aniui.dev/docs/switch) | Themed toggle switch |
+| [Tab Bar](https://aniui.dev/docs/tab-bar) | Bottom tab bar with badge support and active states |
 | [Table](https://aniui.dev/docs/table) | Data table with header, body, rows, and cells |
 | [Tabs](https://aniui.dev/docs/tabs) | Tab navigation with indicator transition |
 | [Text](https://aniui.dev/docs/text) | Typography with h1–h4, p, lead, large, small, muted |
 | [Textarea](https://aniui.dev/docs/textarea) | Multi-line text input |
+| [Theme Provider](https://aniui.dev/docs/theme-provider) | Theme context with light/dark/system mode and toggle |
+| [Timeline](https://aniui.dev/docs/timeline) | Vertical timeline for events and order tracking |
 | [Toast](https://aniui.dev/docs/toast) | Slide-in notification with auto-dismiss |
 | [Toggle](https://aniui.dev/docs/toggle) | Two-state toggle button with variants |
 | [Toggle Group](https://aniui.dev/docs/toggle-group) | Exclusive selection group |
 | [Tooltip](https://aniui.dev/docs/tooltip) | Fade-in tooltip on press |
+| [Typing Indicator](https://aniui.dev/docs/typing-indicator) | Animated typing dots for chat interfaces |
 
 ## Prerequisites
 
@@ -158,8 +197,8 @@ npm install @gorhom/bottom-sheet react-native-gesture-handler
 
 | Area | Status |
 |------|--------|
-| 54 components | ✅ |
-| Unit tests (54 suites) | ✅ |
+| 81 components | ✅ |
+| Component & CLI tests (Jest) | ✅ |
 | Accessibility audit | ✅ |
 | Performance benchmarks | ✅ |
 | CLI (`npx @aniui/cli add`) | ✅ |

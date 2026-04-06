@@ -4,6 +4,8 @@ import { ComponentPlayground } from "@/components/component-playground";
 import { CodeBlock } from "@/components/code-block";
 import { PropsTable } from "@/components/props-table";
 
+import { AddComponentTabs } from "@/components/package-manager-tabs";
+import { PreviewToggle } from "@/components/preview-toggle";
 const installCode = `npx @aniui/cli add input-otp`;
 const usageCode = `import { InputOTP } from "@/components/ui/input-otp";
 import { useState } from "react";
@@ -87,17 +89,19 @@ export default function InputOtpPage() {
         </p>
       </div>
       {/* Preview */}
-      <ComponentPlayground code={defaultCode}>
-        <div className="flex flex-col items-center gap-3 w-full">
-          <p className="text-sm font-medium text-foreground">Enter verification code</p>
-          <PreviewInputOTP length={6} value="38" />
-          <p className="text-xs text-muted-foreground">We sent a code to your email</p>
-        </div>
-      </ComponentPlayground>
+      <PreviewToggle>
+        <ComponentPlayground code={defaultCode}>
+          <div className="flex flex-col items-center gap-3 w-full">
+            <p className="text-sm font-medium text-foreground">Enter verification code</p>
+            <PreviewInputOTP length={6} value="38" />
+            <p className="text-xs text-muted-foreground">We sent a code to your email</p>
+          </div>
+        </ComponentPlayground>
+      </PreviewToggle>
       {/* Installation */}
       <div className="space-y-4">
         <h2 className="text-2xl font-semibold tracking-tight text-foreground">Installation</h2>
-        <CodeBlock code={installCode} />
+        <AddComponentTabs names="input-otp" />
       </div>
       {/* Usage */}
       <div className="space-y-4">
@@ -132,6 +136,14 @@ export default function InputOtpPage() {
         <p className="text-sm text-muted-foreground">
           Also accepts all <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">View</code> props from React Native.
         </p>
+      </div>
+      {/* Accessibility */}
+      <div className="space-y-4">
+        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Accessibility</h2>
+        <ul className="list-disc list-inside space-y-2 text-sm text-muted-foreground">
+          <li>OTP code input with individual digit cells.</li>
+          <li>Focus moves automatically between cells as digits are entered.</li>
+        </ul>
       </div>
       {/* Source */}
       <div className="space-y-4">

@@ -4,6 +4,8 @@ import { ComponentPlayground } from "@/components/component-playground";
 import { CodeBlock } from "@/components/code-block";
 import React, { useState } from "react";
 import { PropsTable } from "@/components/props-table";
+import { AddComponentTabs } from "@/components/package-manager-tabs";
+import { PreviewToggle } from "@/components/preview-toggle";
 
 const installCode = `npx @aniui/cli add calendar`;
 const usageCode = `import { Calendar } from "@/components/ui/calendar";
@@ -96,13 +98,15 @@ export default function CalendarPage() {
         </p>
       </div>
       {/* Preview */}
-      <ComponentPlayground code={usageCode}>
-        <PreviewCalendar />
-      </ComponentPlayground>
+      <PreviewToggle>
+        <ComponentPlayground code={usageCode}>
+          <PreviewCalendar />
+        </ComponentPlayground>
+      </PreviewToggle>
       {/* Installation */}
       <div className="space-y-4">
         <h2 className="text-2xl font-semibold tracking-tight text-foreground">Installation</h2>
-        <CodeBlock code={installCode} />
+        <AddComponentTabs names="calendar" />
       </div>
       {/* Usage */}
       <div className="space-y-4">
@@ -134,6 +138,15 @@ export default function CalendarPage() {
           { name: "max", type: "Date" },
           { name: "className", type: "string" },
         ]} />
+      </div>
+      {/* Accessibility */}
+      <div className="space-y-4">
+        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Accessibility</h2>
+        <ul className="list-disc list-inside space-y-2 text-sm text-muted-foreground">
+          <li>Date selection with day/month/year navigation.</li>
+          <li>Each day cell is focusable with <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">accessibilityLabel</code> for the full date.</li>
+          <li>Navigation buttons for previous/next month are labeled for screen readers.</li>
+        </ul>
       </div>
       {/* Source */}
       <div className="space-y-4">

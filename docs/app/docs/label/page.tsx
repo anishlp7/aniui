@@ -4,6 +4,8 @@ import { ComponentPlayground } from "@/components/component-playground";
 import { CodeBlock } from "@/components/code-block";
 import { PropsTable } from "@/components/props-table";
 
+import { AddComponentTabs } from "@/components/package-manager-tabs";
+import { PreviewToggle } from "@/components/preview-toggle";
 const installCode = `npx @aniui/cli add label`;
 const usageCode = `import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
@@ -42,26 +44,28 @@ export default function LabelPage() {
         </p>
       </div>
       {/* Preview */}
-      <ComponentPlayground code={usageCode}>
-        <div className="w-full max-w-sm space-y-5">
-          <div>
-            <PreviewLabel className="mb-2 block">Email</PreviewLabel>
-            <div className="rounded-md border border-input bg-background px-4 py-2.5">
-              <span className="text-sm text-muted-foreground">Enter your email...</span>
+      <PreviewToggle>
+        <ComponentPlayground code={usageCode}>
+          <div className="w-full max-w-sm space-y-5">
+            <div>
+              <PreviewLabel className="mb-2 block">Email</PreviewLabel>
+              <div className="rounded-md border border-input bg-background px-4 py-2.5">
+                <span className="text-sm text-muted-foreground">Enter your email...</span>
+              </div>
+            </div>
+            <div>
+              <PreviewLabel className="mb-2 block">Password</PreviewLabel>
+              <div className="rounded-md border border-input bg-background px-4 py-2.5">
+                <span className="text-sm text-muted-foreground">Enter your password...</span>
+              </div>
             </div>
           </div>
-          <div>
-            <PreviewLabel className="mb-2 block">Password</PreviewLabel>
-            <div className="rounded-md border border-input bg-background px-4 py-2.5">
-              <span className="text-sm text-muted-foreground">Enter your password...</span>
-            </div>
-          </div>
-        </div>
-      </ComponentPlayground>
+        </ComponentPlayground>
+      </PreviewToggle>
       {/* Installation */}
       <div className="space-y-4">
         <h2 className="text-2xl font-semibold tracking-tight text-foreground">Installation</h2>
-        <CodeBlock code={installCode} />
+        <AddComponentTabs names="label" />
       </div>
       {/* Usage */}
       <div className="space-y-4">
@@ -77,6 +81,14 @@ export default function LabelPage() {
         <p className="text-sm text-muted-foreground">
           Also accepts all <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">Text</code> props from React Native.
         </p>
+      </div>
+      {/* Accessibility */}
+      <div className="space-y-4">
+        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Accessibility</h2>
+        <ul className="list-disc list-inside space-y-2 text-sm text-muted-foreground">
+          <li>Associates with form fields for screen readers.</li>
+          <li>Use with <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">nativeID</code> to link labels to their corresponding inputs.</li>
+        </ul>
       </div>
       {/* Source */}
       <div className="space-y-4">

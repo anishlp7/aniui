@@ -5,6 +5,8 @@ import { ComponentPlayground } from "@/components/component-playground";
 import { CodeBlock } from "@/components/code-block";
 import { PropsTable } from "@/components/props-table";
 
+import { AddComponentTabs } from "@/components/package-manager-tabs";
+import { PreviewToggle } from "@/components/preview-toggle";
 const installCode = `npx @aniui/cli add fab`;
 const usageCode = `import { FAB } from "@/components/ui/fab";
 import { Ionicons } from "@expo/vector-icons";
@@ -108,12 +110,14 @@ export default function FABPage() {
         <h1 className="text-3xl font-bold mb-2">FAB</h1>
         <p className="text-muted-foreground text-lg">A floating action button for primary screen actions. Positions itself absolutely within its container.</p>
       </div>
-      <ComponentPlayground code={usageCode}>
-        <PreviewFAB />
-      </ComponentPlayground>
+      <PreviewToggle>
+        <ComponentPlayground code={usageCode}>
+          <PreviewFAB />
+        </ComponentPlayground>
+      </PreviewToggle>
       <div>
         <h2 className="text-xl font-semibold mb-3">Installation</h2>
-        <CodeBlock code={installCode} />
+        <AddComponentTabs names="fab" />
       </div>
       <div>
         <h2 className="text-xl font-semibold mb-3">Variants</h2>
@@ -160,6 +164,14 @@ export default function FABPage() {
           { name: "label", type: "string" },
           { name: "className", type: "string" },
         ]} />
+      </div>
+      {/* Accessibility */}
+      <div className="space-y-4">
+        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Accessibility</h2>
+        <ul className="list-disc list-inside space-y-2 text-sm text-muted-foreground">
+          <li><code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">accessibilityRole="button"</code> with minimum 48dp touch target.</li>
+          <li>Provide an <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">accessibilityLabel</code> describing the action since the FAB typically shows only an icon.</li>
+        </ul>
       </div>
       <div>
         <h2 className="text-xl font-semibold mb-3">Source</h2>

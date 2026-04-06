@@ -1,11 +1,11 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center rounded-md font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring cursor-pointer",
+  "inline-flex items-center justify-center rounded-md font-medium transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring cursor-pointer",
   {
     variants: {
       variant: {
@@ -43,14 +43,22 @@ function Spinner({ light }: { light?: boolean }) {
   );
 }
 
-export function PreviewButton({ variant, size, className, loading, disabled, children, ...props }: PreviewButtonProps) {
+export function PreviewButton({ variant, size, className, loading, disabled, children, onClick, ...props }: PreviewButtonProps) {
+  const [pressed, setPressed] = useState(false);
   const isDisabled = disabled || loading;
   const light = variant === "default" || variant === "destructive";
 
+  const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    setPressed(true);
+    setTimeout(() => setPressed(false), 150);
+    onClick?.(e);
+  };
+
   return (
     <button
-      className={cn(buttonVariants({ variant, size }), isDisabled && "opacity-50 pointer-events-none", className)}
+      className={cn(buttonVariants({ variant, size }), isDisabled && "opacity-50 pointer-events-none", pressed && "scale-95", "transition-transform duration-150", className)}
       disabled={isDisabled}
+      onClick={handleClick}
       {...props}
     >
       {loading && <Spinner light={light} />}

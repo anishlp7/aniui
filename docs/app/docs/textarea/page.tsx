@@ -3,6 +3,8 @@ import { PreviewTextarea } from "@/components/preview/textarea";
 import { ComponentPlayground } from "@/components/component-playground";
 import { CodeBlock } from "@/components/code-block";
 import { PropsTable } from "@/components/props-table";
+import { AddComponentTabs } from "@/components/package-manager-tabs";
+import { PreviewToggle } from "@/components/preview-toggle";
 
 const installCode = `npx @aniui/cli add textarea`;
 const usageCode = `import { Textarea } from "@/components/ui/textarea";
@@ -63,15 +65,17 @@ export default function TextareaPage() {
         </p>
       </div>
       {/* Preview */}
-      <ComponentPlayground code={usageCode}>
-        <div className="flex flex-col gap-4 w-full max-w-sm">
-          <PreviewTextarea placeholder="Type your message here..." />
-        </div>
-      </ComponentPlayground>
+      <PreviewToggle>
+        <ComponentPlayground code={usageCode}>
+          <div className="flex flex-col gap-4 w-full max-w-sm">
+            <PreviewTextarea placeholder="Type your message here..." />
+          </div>
+        </ComponentPlayground>
+      </PreviewToggle>
       {/* Installation */}
       <div className="space-y-4">
         <h2 className="text-2xl font-semibold tracking-tight text-foreground">Installation</h2>
-        <CodeBlock code={installCode} />
+        <AddComponentTabs names="textarea" />
       </div>
       {/* Usage */}
       <div className="space-y-4">
@@ -98,6 +102,14 @@ export default function TextareaPage() {
         <p className="text-sm text-muted-foreground">
           Also accepts all <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">TextInput</code> props from React Native.
         </p>
+      </div>
+      {/* Accessibility */}
+      <div className="space-y-4">
+        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Accessibility</h2>
+        <ul className="list-disc list-inside space-y-2 text-sm text-muted-foreground">
+          <li><code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">accessibilityRole</code> is set on the underlying multi-line <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">TextInput</code>.</li>
+          <li>Supports all standard React Native accessibility props.</li>
+        </ul>
       </div>
       {/* Source */}
       <div className="space-y-4">

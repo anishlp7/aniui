@@ -3,6 +3,8 @@ import { PreviewAccordion, PreviewAccordionItem } from "@/components/preview/acc
 import { ComponentPlayground } from "@/components/component-playground";
 import { CodeBlock } from "@/components/code-block";
 import { PropsTable, ComponentTable } from "@/components/props-table";
+import { AddComponentTabs } from "@/components/package-manager-tabs";
+import { PreviewToggle } from "@/components/preview-toggle";
 
 const installCode = `npx @aniui/cli add accordion`;
 const usageCode = `import { Accordion, AccordionItem } from "@/components/ui/accordion";
@@ -85,25 +87,27 @@ export default function AccordionPage() {
         </p>
       </div>
       {/* Preview */}
-      <ComponentPlayground code={usageCode}>
-        <div className="w-full max-w-sm">
-          <PreviewAccordion defaultValue="item-1">
-            <PreviewAccordionItem value="item-1" trigger="Is it accessible?">
-              <p className="text-sm text-muted-foreground">Yes. It uses accessibilityRole and accessibilityState.</p>
-            </PreviewAccordionItem>
-            <PreviewAccordionItem value="item-2" trigger="Is it animated?">
-              <p className="text-sm text-muted-foreground">Yes. It uses react-native-reanimated for smooth animations.</p>
-            </PreviewAccordionItem>
-            <PreviewAccordionItem value="item-3" trigger="Can I customize it?">
-              <p className="text-sm text-muted-foreground">Yes. Use className to override any styles.</p>
-            </PreviewAccordionItem>
-          </PreviewAccordion>
-        </div>
-      </ComponentPlayground>
+      <PreviewToggle>
+        <ComponentPlayground code={usageCode}>
+          <div className="w-full max-w-sm">
+            <PreviewAccordion defaultValue="item-1">
+              <PreviewAccordionItem value="item-1" trigger="Is it accessible?">
+                <p className="text-sm text-muted-foreground">Yes. It uses accessibilityRole and accessibilityState.</p>
+              </PreviewAccordionItem>
+              <PreviewAccordionItem value="item-2" trigger="Is it animated?">
+                <p className="text-sm text-muted-foreground">Yes. It uses react-native-reanimated for smooth animations.</p>
+              </PreviewAccordionItem>
+              <PreviewAccordionItem value="item-3" trigger="Can I customize it?">
+                <p className="text-sm text-muted-foreground">Yes. Use className to override any styles.</p>
+              </PreviewAccordionItem>
+            </PreviewAccordion>
+          </div>
+        </ComponentPlayground>
+      </PreviewToggle>
       {/* Installation */}
       <div className="space-y-4">
         <h2 className="text-2xl font-semibold tracking-tight text-foreground">Installation</h2>
-        <CodeBlock code={installCode} />
+        <AddComponentTabs names="accordion" />
         <p className="text-sm text-muted-foreground">
           This component requires <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">react-native-reanimated</code> for animations.
         </p>
@@ -135,6 +139,15 @@ export default function AccordionPage() {
           { name: "trigger", type: "string", default: "required" },
           { name: "className", type: "string" },
         ]} />
+      </div>
+      {/* Accessibility */}
+      <div className="space-y-4">
+        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Accessibility</h2>
+        <ul className="list-disc list-inside space-y-2 text-sm text-muted-foreground">
+          <li>Uses <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">@rn-primitives/accordion</code> for keyboard navigation and ARIA compliance.</li>
+          <li>Supports single and multiple open modes.</li>
+          <li>Each trigger has <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">accessibilityRole="button"</code> with <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">accessibilityState</code> for expanded/collapsed.</li>
+        </ul>
       </div>
       {/* Source */}
       <div className="space-y-4">

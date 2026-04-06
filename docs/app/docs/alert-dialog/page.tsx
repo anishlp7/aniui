@@ -3,6 +3,8 @@ import { PreviewAlertDialogDemo } from "@/components/preview/alert-dialog";
 import { ComponentPlayground } from "@/components/component-playground";
 import { CodeBlock } from "@/components/code-block";
 import { PropsTable, ComponentTable } from "@/components/props-table";
+import { AddComponentTabs } from "@/components/package-manager-tabs";
+import { PreviewToggle } from "@/components/preview-toggle";
 
 const installCode = `npx @aniui/cli add alert-dialog`;
 const usageCode = `import { useState } from "react";
@@ -151,13 +153,15 @@ export default function AlertDialogPage() {
         </p>
       </div>
       {/* Preview */}
-      <ComponentPlayground code={usageCode}>
-        <PreviewAlertDialogDemo />
-      </ComponentPlayground>
+      <PreviewToggle>
+        <ComponentPlayground code={usageCode}>
+          <PreviewAlertDialogDemo />
+        </ComponentPlayground>
+      </PreviewToggle>
       {/* Installation */}
       <div className="space-y-4">
         <h2 className="text-2xl font-semibold tracking-tight text-foreground">Installation</h2>
-        <CodeBlock code={installCode} />
+        <AddComponentTabs names="alert-dialog" />
         <p className="text-sm text-muted-foreground">
           This component requires <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">react-native-reanimated</code> to be installed in your project.
         </p>
@@ -196,6 +200,14 @@ export default function AlertDialogPage() {
         <p className="text-sm text-muted-foreground">
           Sub-components (<code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">AlertDialogContent</code>, <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">AlertDialogHeader</code>, etc.) accept <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">className</code> and their respective React Native base props.
         </p>
+      </div>
+      {/* Accessibility */}
+      <div className="space-y-4">
+        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Accessibility</h2>
+        <ul className="list-disc list-inside space-y-2 text-sm text-muted-foreground">
+          <li>Uses Modal with Reanimated animations</li>
+          <li><code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">accessibilityRole="alert"</code> on content for screen reader announcements.</li>
+        </ul>
       </div>
       {/* Source */}
       <div className="space-y-4">

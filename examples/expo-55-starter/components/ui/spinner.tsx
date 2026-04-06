@@ -1,6 +1,6 @@
 import React from "react";
 import { ActivityIndicator, View } from "react-native";
-import { cn } from "../../lib/utils";
+import { cn } from "@/lib/utils";
 
 const sizeMap = { sm: "small", md: "small", lg: "large" } as const;
 
@@ -15,7 +15,7 @@ export function Spinner({ size = "md", color, className, ...props }: SpinnerProp
     <View className={cn("items-center justify-center", className)} {...props}>
       <ActivityIndicator
         size={sizeMap[size]}
-        color={color ?? "hsl(240, 5.9%, 10%)"}
+        color={color ?? "#18181b"}
         accessibilityRole="progressbar"
       />
     </View>

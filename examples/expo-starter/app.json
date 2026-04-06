@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "expo-starter",
+    "name": "AniUI",
     "slug": "expo-starter",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -9,7 +9,8 @@
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.anish.dev.expostarter"
     },
     "android": {
       "adaptiveIcon": {
@@ -20,7 +21,7 @@
       },
       "edgeToEdgeEnabled": true,
       "predictiveBackGestureEnabled": false,
-      "package": "com.anish.anonyfess.expostarter"
+      "package": "com.anish.dev.expostarter"
     },
     "web": {
       "output": "static",
@@ -44,6 +45,19 @@
     "experiments": {
       "typedRoutes": true,
       "reactCompiler": false
-    }
+    },
+    "updates": {
+      "url": "https://u.expo.dev/4d52bb77-8a04-4713-b4b9-e2ed4c5ec1a0"
+    },
+    "runtimeVersion": {
+      "policy": "appVersion"
+    },
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "4d52bb77-8a04-4713-b4b9-e2ed4c5ec1a0"
+      }
+    },
+    "owner": "anishlp7"
   }
 }

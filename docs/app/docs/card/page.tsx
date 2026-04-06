@@ -3,6 +3,8 @@ import { PreviewCard, PreviewCardHeader, PreviewCardTitle, PreviewCardDescriptio
 import { ComponentPlayground } from "@/components/component-playground";
 import { CodeBlock } from "@/components/code-block";
 import { PropsTable, ComponentTable } from "@/components/props-table";
+import { AddComponentTabs } from "@/components/package-manager-tabs";
+import { PreviewToggle } from "@/components/preview-toggle";
 
 const installCode = `npx @aniui/cli add card`;
 const usageCode = `import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from "@/components/ui/card";
@@ -88,26 +90,28 @@ export default function CardPage() {
         </p>
       </div>
       {/* Preview */}
-      <ComponentPlayground code={usageCode}>
-        <div className="w-full max-w-sm">
-          <PreviewCard>
-            <PreviewCardHeader>
-              <PreviewCardTitle>Card Title</PreviewCardTitle>
-              <PreviewCardDescription>Card description goes here.</PreviewCardDescription>
-            </PreviewCardHeader>
-            <PreviewCardContent>
-              <p className="text-sm text-muted-foreground">Card content area.</p>
-            </PreviewCardContent>
-            <PreviewCardFooter>
-              <button className="rounded-md bg-primary px-4 py-2 text-sm text-primary-foreground">Action</button>
-            </PreviewCardFooter>
-          </PreviewCard>
-        </div>
-      </ComponentPlayground>
+      <PreviewToggle>
+        <ComponentPlayground code={usageCode}>
+          <div className="w-full max-w-sm">
+            <PreviewCard>
+              <PreviewCardHeader>
+                <PreviewCardTitle>Card Title</PreviewCardTitle>
+                <PreviewCardDescription>Card description goes here.</PreviewCardDescription>
+              </PreviewCardHeader>
+              <PreviewCardContent>
+                <p className="text-sm text-muted-foreground">Card content area.</p>
+              </PreviewCardContent>
+              <PreviewCardFooter>
+                <button className="rounded-md bg-primary px-4 py-2 text-sm text-primary-foreground">Action</button>
+              </PreviewCardFooter>
+            </PreviewCard>
+          </div>
+        </ComponentPlayground>
+      </PreviewToggle>
       {/* Installation */}
       <div className="space-y-4">
         <h2 className="text-2xl font-semibold tracking-tight text-foreground">Installation</h2>
-        <CodeBlock code={installCode} />
+        <AddComponentTabs names="card" />
       </div>
       {/* Usage */}
       <div className="space-y-4">
@@ -139,6 +143,14 @@ export default function CardPage() {
         <p className="text-sm text-muted-foreground">
           All sub-components accept <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">className</code> and their respective React Native base props.
         </p>
+      </div>
+      {/* Accessibility */}
+      <div className="space-y-4">
+        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Accessibility</h2>
+        <ul className="list-disc list-inside space-y-2 text-sm text-muted-foreground">
+          <li>Semantic container for grouped content.</li>
+          <li>Supports <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">className</code> for custom styling and all React Native <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">View</code> accessibility props.</li>
+        </ul>
       </div>
       {/* Source */}
       <div className="space-y-4">

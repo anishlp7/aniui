@@ -3,6 +3,8 @@ import { PreviewInput, PreviewInputLeadingIcon, PreviewInputTrailingIcon, Previe
 import { ComponentPlayground } from "@/components/component-playground";
 import { CodeBlock } from "@/components/code-block";
 import { PropsTable } from "@/components/props-table";
+import { AddComponentTabs } from "@/components/package-manager-tabs";
+import { PreviewToggle } from "@/components/preview-toggle";
 
 const installCode = `npx @aniui/cli add input`;
 const usageCode = `import { Input } from "@/components/ui/input";
@@ -101,15 +103,17 @@ export default function InputPage() {
         </p>
       </div>
       {/* Preview */}
-      <ComponentPlayground code={usageCode}>
-        <div className="flex flex-wrap items-center gap-4 w-full max-w-sm">
-          <PreviewInput placeholder="Enter your email..." />
-        </div>
-      </ComponentPlayground>
+      <PreviewToggle>
+        <ComponentPlayground code={usageCode}>
+          <div className="flex flex-wrap items-center gap-4 w-full max-w-sm">
+            <PreviewInput placeholder="Enter your email..." />
+          </div>
+        </ComponentPlayground>
+      </PreviewToggle>
       {/* Installation */}
       <div className="space-y-4">
         <h2 className="text-2xl font-semibold tracking-tight text-foreground">Installation</h2>
-        <CodeBlock code={installCode} />
+        <AddComponentTabs names="input" />
       </div>
       {/* Usage */}
       <div className="space-y-4">
@@ -180,6 +184,14 @@ export default function InputPage() {
         <p className="text-sm text-muted-foreground">
           Also accepts all <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">TextInput</code> props from React Native.
         </p>
+      </div>
+      {/* Accessibility */}
+      <div className="space-y-4">
+        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Accessibility</h2>
+        <ul className="list-disc list-inside space-y-2 text-sm text-muted-foreground">
+          <li><code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">accessibilityRole</code> is set on the underlying <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">TextInput</code>.</li>
+          <li>Placeholder text color uses the theme variable for consistent contrast.</li>
+        </ul>
       </div>
       {/* Source */}
       <div className="space-y-4">

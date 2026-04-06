@@ -4,6 +4,8 @@ import { PreviewSegmentedControl } from "@/components/preview/segmented-control"
 import { ComponentPlayground } from "@/components/component-playground";
 import { CodeBlock } from "@/components/code-block";
 import { PropsTable } from "@/components/props-table";
+import { AddComponentTabs } from "@/components/package-manager-tabs";
+import { PreviewToggle } from "@/components/preview-toggle";
 
 const installCode = `npx @aniui/cli add segmented-control`;
 const usageCode = `import { SegmentedControl } from "@/components/ui/segmented-control";
@@ -83,17 +85,19 @@ export default function SegmentedControlPage() {
         <h1 className="text-3xl font-bold mb-2">Segmented Control</h1>
         <p className="text-muted-foreground text-lg">iOS-style segmented control for switching between views or filter options.</p>
       </div>
-      <ComponentPlayground code={usageCode}>
-        <div className="w-full max-w-xs space-y-4">
-          <PreviewSegmentedControl options={["List", "Grid", "Map"]} value={view} onValueChange={setView} />
-          <div className="rounded-lg border border-border bg-muted/30 px-4 py-6 text-center">
-            <p className="text-xs text-muted-foreground">Showing <span className="font-medium text-foreground">{view}</span> view</p>
+      <PreviewToggle>
+        <ComponentPlayground code={usageCode}>
+          <div className="w-full max-w-xs space-y-4">
+            <PreviewSegmentedControl options={["List", "Grid", "Map"]} value={view} onValueChange={setView} />
+            <div className="rounded-lg border border-border bg-muted/30 px-4 py-6 text-center">
+              <p className="text-xs text-muted-foreground">Showing <span className="font-medium text-foreground">{view}</span> view</p>
+            </div>
           </div>
-        </div>
-      </ComponentPlayground>
+        </ComponentPlayground>
+      </PreviewToggle>
       <div>
         <h2 className="text-xl font-semibold mb-3">Installation</h2>
-        <CodeBlock code={installCode} />
+        <AddComponentTabs names="segmented-control" />
       </div>
       <div>
         <h2 className="text-xl font-semibold mb-3">Sizes</h2>
@@ -110,6 +114,14 @@ export default function SegmentedControlPage() {
           { name: "size", type: "\"sm\" | \"md\" | \"lg\"", default: "\"md\"" },
           { name: "className", type: "string" },
         ]} />
+      </div>
+      {/* Accessibility */}
+      <div className="space-y-4">
+        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Accessibility</h2>
+        <ul className="list-disc list-inside space-y-2 text-sm text-muted-foreground">
+          <li>Tab-like control with selected state announced to screen readers.</li>
+          <li>Each segment has <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">accessibilityState</code> for selected/unselected.</li>
+        </ul>
       </div>
       <div>
         <h2 className="text-xl font-semibold mb-3">Source</h2>

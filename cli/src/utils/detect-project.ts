@@ -6,11 +6,14 @@ export type PackageManager = "npm" | "pnpm" | "yarn" | "bun";
 
 export type SDKGeneration = "v4" | "v5";
 
+export type StyleEngine = "nativewind" | "uniwind";
+
 export interface ProjectInfo {
   type: ProjectType;
   root: string;
   packageManager: PackageManager;
   hasNativewind: boolean;
+  hasUniwind: boolean;
   hasReanimated: boolean;
   hasTailwind: boolean;
   sdkGeneration: SDKGeneration;
@@ -94,7 +97,7 @@ export async function detectProject(cwd: string): Promise<ProjectInfo> {
   const packageManager = await detectPackageManager(cwd);
 
   if (!await fs.pathExists(pkgPath)) {
-    return { type: "unknown", root: cwd, packageManager, hasNativewind: false, hasReanimated: false, hasTailwind: false, sdkGeneration: "v4" };
+    return { type: "unknown", root: cwd, packageManager, hasNativewind: false, hasUniwind: false, hasReanimated: false, hasTailwind: false, sdkGeneration: "v4" };
   }
 
   const pkg = await fs.readJson(pkgPath);
@@ -115,6 +118,7 @@ export async function detectProject(cwd: string): Promise<ProjectInfo> {
     root: cwd,
     packageManager,
     hasNativewind: !!allDeps["nativewind"],
+    hasUniwind: !!allDeps["uniwind"],
     hasReanimated: !!allDeps["react-native-reanimated"],
     hasTailwind: !!allDeps["tailwindcss"],
     sdkGeneration,

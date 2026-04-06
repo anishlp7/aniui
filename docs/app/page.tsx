@@ -41,9 +41,34 @@ function ShuffleIcon() {
 
 /* ── Main ──────────────────────────────────────────────────── */
 
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  name: "AniUI",
+  applicationCategory: "DeveloperApplication",
+  operatingSystem: "iOS, Android",
+  description: "shadcn/ui for React Native. 81 accessible components built with NativeWind and TypeScript.",
+  url: "https://aniui.dev",
+  author: { "@type": "Person", name: "Anish" },
+  offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
+  aggregateRating: { "@type": "AggregateRating", ratingValue: "5", ratingCount: "1" },
+};
+
+const sitelinksJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: "AniUI",
+  url: "https://aniui.dev",
+  potentialAction: {
+    "@type": "SearchAction",
+    target: { "@type": "EntryPoint", urlTemplate: "https://aniui.dev/docs/{search_term_string}" },
+    "query-input": "required name=search_term_string",
+  },
+};
+
 export default function HomePage() {
   const { theme } = useTheme();
-  const [selectedPreset, setSelectedPreset] = useState("zinc");
+  const [selectedPreset, setSelectedPreset] = useState("blue");
   const [customColor, setCustomColor] = useState<ColorDef | null>(null);
   const [selectedRadius, setSelectedRadius] = useState("0.75rem");
   const [previewMode, setPreviewMode] = useState<"light" | "dark">(theme);
@@ -87,6 +112,9 @@ export default function HomePage() {
   };
 
   return (
+    <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(sitelinksJsonLd) }} />
     <div className="mx-auto max-w-[1400px] px-6">
       {/* ── Hero ─── */}
       <div className="flex flex-col items-center text-center pt-20 pb-16">
@@ -98,12 +126,12 @@ export default function HomePage() {
         </h1>
 
         <p className="mt-6 max-w-xl text-lg text-muted-foreground leading-relaxed">
-          54 accessible components built with NativeWind and TypeScript.
+          81 accessible components built with NativeWind and TypeScript.
           No npm install — you own every line of code.
         </p>
 
         <div className="flex flex-wrap items-center justify-center gap-2.5 mt-5">
-          {["Expo", "Bare RN", "TypeScript", "New Architecture"].map((label) => (
+          {["Expo", "Bare RN", "NativeWind", "Uniwind", "TypeScript", "New Architecture"].map((label) => (
             <span key={label} className="inline-flex items-center gap-1.5 rounded-full border border-border bg-secondary/40 px-3 py-1 text-xs font-medium text-muted-foreground">
               <span className="text-green-500">✓</span> {label}
             </span>
@@ -135,6 +163,22 @@ export default function HomePage() {
             {copiedInstall ? <CheckIcon /> : <CopyIcon />}
           </span>
         </button>
+
+        {/* Preview on device */}
+        <div className="mt-6 flex flex-col sm:flex-row items-center gap-4 rounded-lg border border-border bg-card/50 px-5 py-4">
+          <img
+            src="https://qr.expo.dev/eas-update?slug=exp&projectId=cf032338-2612-4ba6-9212-f2ec55f6a254&groupId=d2e5cf52-0a1d-47e4-bdd6-d99064bfdcc8&host=u.expo.dev"
+            alt="Scan with Expo Go"
+            className="w-24 h-24 rounded-lg"
+          />
+          <div className="text-center sm:text-left">
+            <p className="text-sm font-medium text-foreground">Preview on your device</p>
+            <p className="text-xs text-muted-foreground mt-1">
+              Scan with Expo Go to try all 81 components on a real device.
+              Each component page also has an Expo Snack embed.
+            </p>
+          </div>
+        </div>
       </div>
 
       {/* ── How it works ─── */}
@@ -231,11 +275,19 @@ export default function HomePage() {
         </div>
 
         {/* Preview */}
-        <div className="rounded-xl border border-border p-6" style={{ backgroundColor: hsl(vars["--background"]) }}>
+        <div
+          className="rounded-xl border border-border p-4 sm:p-6"
+          style={{
+            ...Object.fromEntries(Object.entries(vars).map(([k, v]) => [k, v])),
+            "--radius": selectedRadius,
+            backgroundColor: hsl(vars["--background"]),
+          } as React.CSSProperties}
+        >
           <ThemePreview vars={vars} radius={selectedRadius} />
         </div>
       </div>
 
     </div>
+    </>
   );
 }

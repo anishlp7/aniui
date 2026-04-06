@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { View, Text, Pressable, Modal } from "react-native";
-import { cn } from "../../lib/utils";
-import { Calendar } from "./calendar";
+import { cn } from "@/lib/utils";
+import { Calendar } from "@/components/ui/calendar";
+import Svg, { Path, Rect } from "react-native-svg";
 
 export interface DatePickerProps {
   className?: string;
@@ -17,8 +18,10 @@ function PickerShell({ open, onClose, children }: { open: boolean; onClose: () =
   return (
     <Modal visible={open} transparent animationType="fade" onRequestClose={onClose}>
       <Pressable className="flex-1 items-center justify-center bg-black/50" onPress={onClose}>
-        <Pressable onPress={() => {}} className="mx-6 rounded-xl bg-card p-2 shadow-xl">
-          {children}
+        <Pressable onPress={() => {}} className="mx-6 rounded-xl bg-card p-2 shadow-xl" style={{ minHeight: 360 }}>
+          <View style={{ minHeight: 310 }}>
+            {children}
+          </View>
           <Pressable onPress={onClose} className="mt-1 mb-2 items-center py-2" accessibilityRole="button">
             <Text className="text-sm font-medium text-muted-foreground">Cancel</Text>
           </Pressable>
@@ -32,7 +35,9 @@ function TriggerButton({ label, hasValue, className, onPress }: { label: string;
   return (
     <Pressable className={cn("flex-row items-center rounded-md border border-input bg-background px-4 min-h-12", className)} onPress={onPress} accessible={true} accessibilityRole="button">
       <Text className={cn("flex-1 text-base", hasValue ? "text-foreground" : "text-muted-foreground")}>{label}</Text>
-      <Text className="text-muted-foreground text-xs">{"▾"}</Text>
+      <Svg width={16} height={16} viewBox="0 0 24 24" fill="none" stroke="#71717a" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
+      <Path d="M8 2v4"/><Path d="M16 2v4"/><Rect width="18" height="18" x="3" y="4" rx="2"/><Path d="M3 10h18"/>
+      </Svg>
     </Pressable>
   );
 }

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { View, LayoutChangeEvent } from "react-native";
 import Svg, { Path, G, Text as SvgText } from "react-native-svg";
-import { cn } from "../../lib/utils";
+import { cn } from "@/lib/utils";
 
 export interface PieChartSegment {
   value: number;

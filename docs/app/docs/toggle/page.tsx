@@ -4,6 +4,7 @@ import { PreviewToggle } from "@/components/preview/toggle";
 import { ComponentPlayground } from "@/components/component-playground";
 import { CodeBlock } from "@/components/code-block";
 import { PropsTable } from "@/components/props-table";
+import { AddComponentTabs } from "@/components/package-manager-tabs";
 
 function ToggleDemo() {
   const [bold, setBold] = useState(true);
@@ -130,7 +131,7 @@ export default function TogglePage() {
       {/* Installation */}
       <div className="space-y-4">
         <h2 className="text-2xl font-semibold tracking-tight text-foreground">Installation</h2>
-        <CodeBlock code={installCode} />
+        <AddComponentTabs names="toggle" />
       </div>
       {/* Usage */}
       <div className="space-y-4">
@@ -165,6 +166,14 @@ export default function TogglePage() {
         <p className="text-sm text-muted-foreground">
           Also accepts all <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">Pressable</code> props from React Native.
         </p>
+      </div>
+      {/* Accessibility */}
+      <div className="space-y-4">
+        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Accessibility</h2>
+        <ul className="list-disc list-inside space-y-2 text-sm text-muted-foreground">
+          <li><code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">accessibilityRole="button"</code> with pressed state announced to screen readers.</li>
+          <li>Supports <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">accessibilityState</code> for selected/unselected.</li>
+        </ul>
       </div>
       {/* Source */}
       <div className="space-y-4">

@@ -34,8 +34,8 @@ describe("component source files", () => {
     expect(lines).toBeLessThanOrEqual(120);
   });
 
-  // Components using inline styles don't need cn()
-  const noCnComponents = new Set(["segmented-control", "select", "stepper"]);
+  // Components that don't use cn() (thin wrappers or use inline styles)
+  const noCnComponents = new Set(["segmented-control", "select", "stepper", "refresh-control"]);
 
   it.each(names.filter((n) => !noCnComponents.has(n)))("%s imports cn from utils", (name) => {
     const filePath = path.join(repoRoot, registry[name].file);

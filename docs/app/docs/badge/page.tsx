@@ -3,6 +3,8 @@ import { PreviewBadge } from "@/components/preview/badge";
 import { ComponentPlayground } from "@/components/component-playground";
 import { CodeBlock } from "@/components/code-block";
 import { PropsTable } from "@/components/props-table";
+import { AddComponentTabs } from "@/components/package-manager-tabs";
+import { PreviewToggle } from "@/components/preview-toggle";
 
 const installCode = `npx @aniui/cli add badge`;
 const usageCode = `import { Badge } from "@/components/ui/badge";
@@ -72,15 +74,17 @@ export default function BadgePage() {
         </p>
       </div>
       {/* Preview */}
-      <ComponentPlayground code={usageCode}>
-        <div className="flex flex-wrap items-center gap-4">
-          <PreviewBadge>New</PreviewBadge>
-        </div>
-      </ComponentPlayground>
+      <PreviewToggle>
+        <ComponentPlayground code={usageCode}>
+          <div className="flex flex-wrap items-center gap-4">
+            <PreviewBadge>New</PreviewBadge>
+          </div>
+        </ComponentPlayground>
+      </PreviewToggle>
       {/* Installation */}
       <div className="space-y-4">
         <h2 className="text-2xl font-semibold tracking-tight text-foreground">Installation</h2>
-        <CodeBlock code={installCode} />
+        <AddComponentTabs names="badge" />
       </div>
       {/* Usage */}
       <div className="space-y-4">
@@ -111,6 +115,14 @@ export default function BadgePage() {
         <p className="text-sm text-muted-foreground">
           Also accepts all <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">View</code> props from React Native.
         </p>
+      </div>
+      {/* Accessibility */}
+      <div className="space-y-4">
+        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Accessibility</h2>
+        <ul className="list-disc list-inside space-y-2 text-sm text-muted-foreground">
+          <li>Visual indicator -- use <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">accessibilityLabel</code> for screen readers when the badge conveys meaning.</li>
+          <li>Color alone does not convey status; pair with text content.</li>
+        </ul>
       </div>
       {/* Source */}
       <div className="space-y-4">

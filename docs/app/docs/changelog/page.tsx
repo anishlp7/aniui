@@ -26,7 +26,29 @@ const typeBadge: Record<ChangeType, { label: string; className: string }> = {
 
 const releases: Release[] = [
   {
-    version: "0.3.0",
+    version: "0.2.14",
+    date: "2026-04-06",
+    title: "Uniwind Support + Universal Theming",
+    changes: [
+      { type: "feat", text: "Full Uniwind styling engine support — same components work with NativeWind and Uniwind", link: "/docs/uniwind" },
+      { type: "feat", text: "Uniwind dark mode via @layer theme + @variant light/dark in global.css", link: "/docs/dark-mode" },
+      { type: "feat", text: "CLI init generates correct Uniwind config: metro.config.js, global.css, @import \"uniwind\"" },
+      { type: "feat", text: "CLI doctor validates Uniwind-specific setup (withUniwindConfig, @variant dark, @import)" },
+      { type: "feat", text: "Theme presets (default, blue, green, orange, rose) now apply to both light and dark variants" },
+      { type: "feat", text: "withUniwind() HOC for third-party components like SafeAreaView" },
+      { type: "feat", text: "react-native-svg added as core dependency for inline SVG icons in components" },
+      { type: "feat", text: "with-uniwind example app with 77 interactive component demos and theme toggling" },
+      { type: "fix", text: "file-picker.tsx: replaced inline <svg> (crashes on RN) with react-native-svg" },
+      { type: "fix", text: "calendar.tsx, password-input.tsx, select.tsx: compacted SVG icons to meet 120-line limit" },
+      { type: "fix", text: "Bare <Text> tags in example app now have text-foreground class for proper theming" },
+      { type: "fix", text: "react-native-svg pinned to 15.15.3 across all example apps" },
+      { type: "fix", text: "package-lock.json synced to fix npm ci failures in CI" },
+      { type: "docs", text: "Dark mode guide updated with Uniwind section (@variant light/dark + Uniwind.setTheme())", link: "/docs/dark-mode" },
+      { type: "docs", text: "Installation guide updated with react-native-svg in all install commands", link: "/docs/installation" },
+    ],
+  },
+  {
+    version: "0.2.13",
     date: "2026-03-26",
     title: "Expo 55 + NativeWind v5 Support",
     changes: [
@@ -40,7 +62,7 @@ const releases: Release[] = [
     ],
   },
   {
-    version: "0.2.9",
+    version: "0.2.12",
     date: "2026-03-25",
     title: "Charts + Input Enhancement",
     changes: [
@@ -52,7 +74,7 @@ const releases: Release[] = [
     ],
   },
   {
-    version: "0.1.3",
+    version: "0.2.11",
     date: "2026-03-20",
     title: "Bare React Native Support",
     changes: [
@@ -62,7 +84,7 @@ const releases: Release[] = [
     ],
   },
   {
-    version: "0.1.2",
+    version: "0.2.10",
     date: "2026-03-19",
     title: "Full Component Library",
     changes: [
@@ -74,7 +96,7 @@ const releases: Release[] = [
     ],
   },
   {
-    version: "0.1.0",
+    version: "0.2.9",
     date: "2026-03-16",
     title: "Initial Release",
     changes: [

@@ -3,6 +3,8 @@ import { PreviewSpinner } from "@/components/preview/spinner";
 import { ComponentPlayground } from "@/components/component-playground";
 import { CodeBlock } from "@/components/code-block";
 import { PropsTable } from "@/components/props-table";
+import { AddComponentTabs } from "@/components/package-manager-tabs";
+import { PreviewToggle } from "@/components/preview-toggle";
 
 const installCode = `npx @aniui/cli add spinner`;
 const usageCode = `import { Spinner } from "@/components/ui/spinner";
@@ -45,15 +47,17 @@ export default function SpinnerPage() {
         </p>
       </div>
       {/* Preview */}
-      <ComponentPlayground code={usageCode}>
-        <div className="flex flex-wrap items-center gap-4">
-          <PreviewSpinner />
-        </div>
-      </ComponentPlayground>
+      <PreviewToggle>
+        <ComponentPlayground code={usageCode}>
+          <div className="flex flex-wrap items-center gap-4">
+            <PreviewSpinner />
+          </div>
+        </ComponentPlayground>
+      </PreviewToggle>
       {/* Installation */}
       <div className="space-y-4">
         <h2 className="text-2xl font-semibold tracking-tight text-foreground">Installation</h2>
-        <CodeBlock code={installCode} />
+        <AddComponentTabs names="spinner" />
       </div>
       {/* Usage */}
       <div className="space-y-4">
@@ -82,6 +86,14 @@ export default function SpinnerPage() {
         <p className="text-sm text-muted-foreground">
           Also accepts all <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">View</code> props from React Native.
         </p>
+      </div>
+      {/* Accessibility */}
+      <div className="space-y-4">
+        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Accessibility</h2>
+        <ul className="list-disc list-inside space-y-2 text-sm text-muted-foreground">
+          <li><code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">accessibilityRole="progressbar"</code> on the underlying <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">ActivityIndicator</code>.</li>
+          <li>Screen readers announce the loading state automatically.</li>
+        </ul>
       </div>
       {/* Source */}
       <div className="space-y-4">

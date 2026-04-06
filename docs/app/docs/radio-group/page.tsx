@@ -5,6 +5,8 @@ import { ComponentPlayground } from "@/components/component-playground";
 import { CodeBlock } from "@/components/code-block";
 import { PropsTable, ComponentTable } from "@/components/props-table";
 
+import { AddComponentTabs } from "@/components/package-manager-tabs";
+import { PreviewToggle } from "@/components/preview-toggle";
 const installCode = `npx @aniui/cli add radio-group`;
 const usageCode = `import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { useState } from "react";
@@ -92,13 +94,15 @@ export default function RadioGroupPage() {
         </p>
       </div>
       {/* Preview */}
-      <ComponentPlayground code={usageCode}>
-        <RadioGroupDemo />
-      </ComponentPlayground>
+      <PreviewToggle>
+        <ComponentPlayground code={usageCode}>
+          <RadioGroupDemo />
+        </ComponentPlayground>
+      </PreviewToggle>
       {/* Installation */}
       <div className="space-y-4">
         <h2 className="text-2xl font-semibold tracking-tight text-foreground">Installation</h2>
-        <CodeBlock code={installCode} />
+        <AddComponentTabs names="radio-group" />
       </div>
       {/* Usage */}
       <div className="space-y-4">
@@ -131,6 +135,14 @@ export default function RadioGroupPage() {
           { name: "label", type: "string" },
           { name: "className", type: "string" },
         ]} />
+      </div>
+      {/* Accessibility */}
+      <div className="space-y-4">
+        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Accessibility</h2>
+        <ul className="list-disc list-inside space-y-2 text-sm text-muted-foreground">
+          <li>Uses <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">@rn-primitives/radio-group</code> for arrow key navigation.</li>
+          <li><code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">accessibilityRole="radiogroup"</code> on container with individual radio items properly associated.</li>
+        </ul>
       </div>
       {/* Source */}
       <div className="space-y-4">

@@ -1,7 +1,8 @@
 import React from "react";
 import { View, TextInput, Pressable, Text } from "react-native";
 import { cva, type VariantProps } from "class-variance-authority";
-import { cn } from "../../lib/utils";
+import { cn } from "@/lib/utils";
+import Svg, { Circle, Path } from "react-native-svg";
 
 const searchBarVariants = cva(
   "flex-row items-center rounded-lg bg-muted px-3 min-h-12",
@@ -36,7 +37,10 @@ export function SearchBar({ size = "md", className, value, icon, onClear, showCa
     <View className="flex-row items-center gap-2">
       <View className={cn(searchBarVariants({ size }), className)}>
         <View className="mr-2">
-          {icon ?? <Text style={{ fontSize: iconSize, color: "#71717a" }}>&#x2315;</Text>}
+          {icon ??   <Svg width={iconSize} height={iconSize} viewBox="0 0 24 24" fill="none" stroke="#71717a" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
+      <Circle cx="11" cy="11" r="8" />
+      <Path d="m21 21-4.3-4.3" />
+    </Svg>}
         </View>
         <TextInput
           className="flex-1 text-base text-foreground p-0"
@@ -47,8 +51,10 @@ export function SearchBar({ size = "md", className, value, icon, onClear, showCa
           {...props}
         />
         {value ? (
-          <Pressable onPress={onClear} className="ml-1 h-5 w-5 items-center justify-center rounded-full bg-muted-foreground/20" accessible={true} accessibilityRole="button" accessibilityLabel="Clear search">
-            <Text className="text-xs text-muted-foreground">&#x2715;</Text>
+          <Pressable onPress={() => { onClear?.(); props.onChangeText?.(""); }} className="ml-1 h-6 w-6 items-center justify-center rounded-full bg-muted-foreground/20" accessible={true} accessibilityRole="button" accessibilityLabel="Clear search">
+              <Svg width={24} height={24} viewBox="0 0 24 24" fill="none" stroke="#71717a" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
+                <Path d="m6 6 12 12" />
+              </Svg>
           </Pressable>
         ) : null}
       </View>

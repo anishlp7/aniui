@@ -4,6 +4,8 @@ import { PreviewImage } from "@/components/preview/image";
 import { ComponentPlayground } from "@/components/component-playground";
 import { CodeBlock } from "@/components/code-block";
 import { PropsTable } from "@/components/props-table";
+import { AddComponentTabs } from "@/components/package-manager-tabs";
+import { PreviewToggle } from "@/components/preview-toggle";
 
 const installCode = `npx @aniui/cli add image`;
 const usageCode = `import { Image } from "@/components/ui/image";
@@ -81,12 +83,14 @@ export default function ImagePage() {
         <h1 className="text-3xl font-bold mb-2">Image</h1>
         <p className="text-muted-foreground text-lg">Image component with loading placeholder, error fallback, and rounded variants.</p>
       </div>
-      <ComponentPlayground code={usageCode}>
-        <PreviewImage src="https://picsum.photos/400/300" alt="Sample" width={200} height={150} />
-      </ComponentPlayground>
+      <PreviewToggle>
+        <ComponentPlayground code={usageCode}>
+          <PreviewImage src="https://picsum.photos/400/300" alt="Sample" width={200} height={150} />
+        </ComponentPlayground>
+      </PreviewToggle>
       <div>
         <h2 className="text-xl font-semibold mb-3">Installation</h2>
-        <CodeBlock code={installCode} />
+        <AddComponentTabs names="image" />
       </div>
       <div>
         <h2 className="text-xl font-semibold mb-3">Rounded Variants</h2>
@@ -117,6 +121,14 @@ export default function ImagePage() {
           { name: "fallback", type: "ReactNode" },
           { name: "className", type: "string" },
         ]} />
+      </div>
+      {/* Accessibility */}
+      <div className="space-y-4">
+        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Accessibility</h2>
+        <ul className="list-disc list-inside space-y-2 text-sm text-muted-foreground">
+          <li><code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">accessibilityRole="image"</code> with loading placeholder.</li>
+          <li>Always provide an <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">alt</code> prop for screen reader descriptions.</li>
+        </ul>
       </div>
       <div>
         <h2 className="text-xl font-semibold mb-3">Source</h2>

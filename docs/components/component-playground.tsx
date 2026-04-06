@@ -7,9 +7,11 @@ interface ComponentPlaygroundProps {
   children: React.ReactNode;
   /** Use "inline" for overlay components (dialog, drawer, toast) that escape containment */
   variant?: "phone" | "inline";
+  /** Optional Expo Snack URL for real device preview */
+  snackUrl?: string;
 }
 
-export function ComponentPlayground({ code, children, variant = "phone" }: ComponentPlaygroundProps) {
+export function ComponentPlayground({ code, children, variant = "phone", snackUrl }: ComponentPlaygroundProps) {
   const [copied, setCopied] = useState(false);
 
   const handleCopy = () => {
@@ -21,10 +23,10 @@ export function ComponentPlayground({ code, children, variant = "phone" }: Compo
   return (
     <div className="w-full rounded-lg border border-border overflow-hidden">
       {/* Preview area */}
-      <div className="flex items-center justify-center bg-[repeating-linear-gradient(45deg,var(--color-secondary)_0,var(--color-secondary)_1px,transparent_0,transparent_50%)] bg-[length:6px_6px] bg-secondary/20 p-8">
+      <div className="flex items-center justify-center bg-[repeating-linear-gradient(45deg,var(--color-secondary)_0,var(--color-secondary)_1px,transparent_0,transparent_50%)] bg-[length:6px_6px] bg-secondary/20 p-4 sm:p-8">
         {variant === "phone" ? (
           /* Phone frame mockup */
-          <div className="relative w-[320px] rounded-[2.5rem] border-[3px] border-foreground/10 bg-background shadow-xl overflow-hidden">
+          <div className="relative w-full max-w-[320px] rounded-[2.5rem] border-[3px] border-foreground/10 bg-background shadow-xl overflow-hidden">
             {/* Dynamic Island */}
             <div className="flex justify-center pt-2 pb-1 bg-background">
               <div className="h-[22px] w-[90px] rounded-full bg-foreground/10" />
@@ -43,6 +45,16 @@ export function ComponentPlayground({ code, children, variant = "phone" }: Compo
           <div className="w-full min-h-[200px] flex items-center justify-center rounded-lg bg-background p-6">
             {children}
           </div>
+        )}
+      </div>
+
+      {/* Web preview disclaimer */}
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-1 px-4 py-2 border-t border-border bg-muted/30 text-xs text-muted-foreground">
+        <span>Web preview — components render natively on iOS &amp; Android</span>
+        {snackUrl && (
+          <a href={snackUrl} target="_blank" rel="noopener noreferrer" className="text-primary hover:underline font-medium">
+            Open in Expo Snack →
+          </a>
         )}
       </div>
 

@@ -4,6 +4,8 @@ import { PreviewSearchBar } from "@/components/preview/search-bar";
 import { ComponentPlayground } from "@/components/component-playground";
 import { CodeBlock } from "@/components/code-block";
 import { PropsTable } from "@/components/props-table";
+import { AddComponentTabs } from "@/components/package-manager-tabs";
+import { PreviewToggle } from "@/components/preview-toggle";
 
 const installCode = `npx @aniui/cli add search-bar`;
 const usageCode = `import { SearchBar } from "@/components/ui/search-bar";
@@ -114,12 +116,14 @@ export default function SearchBarPage() {
         <h1 className="text-3xl font-bold mb-2">SearchBar</h1>
         <p className="text-muted-foreground text-lg">A search input with icon, clear button, and optional cancel action.</p>
       </div>
-      <ComponentPlayground code={usageCode}>
-        <SearchBarDemo />
-      </ComponentPlayground>
+      <PreviewToggle>
+        <ComponentPlayground code={usageCode}>
+          <SearchBarDemo />
+        </ComponentPlayground>
+      </PreviewToggle>
       <div>
         <h2 className="text-xl font-semibold mb-3">Installation</h2>
-        <CodeBlock code={installCode} />
+        <AddComponentTabs names="search-bar" />
       </div>
       <div>
         <h2 className="text-xl font-semibold mb-3">Usage</h2>
@@ -161,6 +165,14 @@ export default function SearchBarPage() {
           { name: "placeholder", type: "string", default: "\"Search...\"" },
           { name: "className", type: "string" },
         ]} />
+      </div>
+      {/* Accessibility */}
+      <div className="space-y-4">
+        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Accessibility</h2>
+        <ul className="list-disc list-inside space-y-2 text-sm text-muted-foreground">
+          <li><code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">TextInput</code> with <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">accessibilityRole</code> and search icon.</li>
+          <li>Clear button has <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">accessibilityLabel</code> for screen readers.</li>
+        </ul>
       </div>
       <div>
         <h2 className="text-xl font-semibold mb-3">Source</h2>

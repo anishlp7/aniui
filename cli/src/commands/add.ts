@@ -9,6 +9,7 @@ interface AniUIConfig {
   componentsDir: string;
   utilPath: string;
   theme: string;
+  style?: string;
   tsx?: boolean;
 }
 
@@ -37,11 +38,13 @@ export async function addCommand(names: string[]): Promise<void> {
     process.exit(1);
   }
 
+  const pm = await detectPackageManager(cwd);
+
   // Validate component names
   const invalid = names.filter((n) => !registry[n]);
   if (invalid.length > 0) {
     logger.error(`Unknown component(s): ${invalid.join(", ")}`);
-    logger.info(`Run "npx @aniui/cli add" to see available components.`);
+    logger.info(`Run "${getDlxCommand(pm, "@aniui/cli add")}" to see available components.`);
     process.exit(1);
   }
 
@@ -53,7 +56,7 @@ export async function addCommand(names: string[]): Promise<void> {
 
   // Check if init has been run
   if (!await fs.pathExists(utilPath)) {
-    logger.error("AniUI is not initialized. Run `npx @aniui/cli init` first.");
+    logger.error(`AniUI is not initialized. Run \`${getDlxCommand(pm, "@aniui/cli init")}\` first.`);
     process.exit(1);
   }
 
@@ -105,9 +108,6 @@ export async function addCommand(names: string[]): Promise<void> {
       logger.warn(`${registry[name].name} already exists — skipped`);
     }
   }
-
-  // Detect package manager for install commands
-  const pm = await detectPackageManager(cwd);
 
   // Check which npm deps are missing
   const pkgPath = path.join(cwd, "package.json");
@@ -164,7 +164,6 @@ export async function addCommand(names: string[]): Promise<void> {
     logger.break();
     logger.title("Import example:");
     const first = registry[created[0]];
-    const ext = useTsx ? ".tsx" : ".jsx";
     const importPath = config?.componentsDir
       ? `@/${config.componentsDir}/${path.basename(first.file, ".tsx")}`
       : `@/components/ui/${path.basename(first.file, ".tsx")}`;

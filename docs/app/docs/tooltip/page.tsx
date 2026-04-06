@@ -3,6 +3,8 @@ import { PreviewTooltip } from "@/components/preview/tooltip";
 import { ComponentPlayground } from "@/components/component-playground";
 import { CodeBlock } from "@/components/code-block";
 import { PropsTable } from "@/components/props-table";
+import { PreviewToggle } from "@/components/preview-toggle";
+import { AddComponentTabs } from "@/components/package-manager-tabs";
 
 const installCode = `npx @aniui/cli add tooltip`;
 const usageCode = `import { Tooltip } from "@/components/ui/tooltip";
@@ -85,7 +87,7 @@ export default function TooltipPage() {
       {/* Installation */}
       <div className="space-y-4">
         <h2 className="text-2xl font-semibold tracking-tight text-foreground">Installation</h2>
-        <CodeBlock code={installCode} />
+        <AddComponentTabs names="tooltip" />
         <p className="text-sm text-muted-foreground">
           This component requires <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">react-native-reanimated</code> to be installed in your project.
         </p>
@@ -121,6 +123,16 @@ export default function TooltipPage() {
         <p className="text-sm text-muted-foreground">
           Also accepts all <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">View</code> props from React Native.
         </p>
+      </div>
+      {/* Accessibility */}
+      <div className="space-y-4">
+        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Accessibility</h2>
+        <ul className="list-disc list-inside space-y-2 text-sm text-muted-foreground">
+          <li>Uses <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">@rn-primitives/tooltip</code> for trigger-relative positioning</li>
+          <li>Collision detection prevents overflow</li>
+          <li><code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">accessibilityRole=&quot;button&quot;</code> on trigger</li>
+          <li>Requires <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">&lt;PortalHost /&gt;</code> at app root</li>
+        </ul>
       </div>
       {/* Source */}
       <div className="space-y-4">

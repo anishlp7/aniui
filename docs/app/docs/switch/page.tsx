@@ -4,6 +4,8 @@ import { ComponentPlayground } from "@/components/component-playground";
 import { CodeBlock } from "@/components/code-block";
 import { PropsTable } from "@/components/props-table";
 
+import { AddComponentTabs } from "@/components/package-manager-tabs";
+import { PreviewToggle } from "@/components/preview-toggle";
 const installCode = `npx @aniui/cli add switch`;
 const usageCode = `import { Switch } from "@/components/ui/switch";
 import { useState } from "react";
@@ -48,15 +50,17 @@ export default function SwitchPage() {
         </p>
       </div>
       {/* Preview */}
-      <ComponentPlayground code={usageCode}>
-        <div className="flex items-center gap-4">
-          <PreviewSwitch />
-        </div>
-      </ComponentPlayground>
+      <PreviewToggle>
+        <ComponentPlayground code={usageCode}>
+          <div className="flex items-center gap-4">
+            <PreviewSwitch />
+          </div>
+        </ComponentPlayground>
+      </PreviewToggle>
       {/* Installation */}
       <div className="space-y-4">
         <h2 className="text-2xl font-semibold tracking-tight text-foreground">Installation</h2>
-        <CodeBlock code={installCode} />
+        <AddComponentTabs names="switch" />
       </div>
       {/* Usage */}
       <div className="space-y-4">
@@ -74,6 +78,14 @@ export default function SwitchPage() {
         <p className="text-sm text-muted-foreground">
           Also accepts all <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">Switch</code> props from React Native.
         </p>
+      </div>
+      {/* Accessibility */}
+      <div className="space-y-4">
+        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Accessibility</h2>
+        <ul className="list-disc list-inside space-y-2 text-sm text-muted-foreground">
+          <li><code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">accessibilityRole="switch"</code> wrapping the native React Native <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">Switch</code>.</li>
+          <li>On/off state is announced automatically by the platform.</li>
+        </ul>
       </div>
       {/* Source */}
       <div className="space-y-4">

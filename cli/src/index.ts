@@ -5,6 +5,7 @@ import { addBlockCommand } from "./commands/add-block";
 import { themeCommand } from "./commands/theme";
 import { mcpCommand } from "./commands/mcp";
 import { generateCommand } from "./commands/generate";
+import { doctorCommand } from "./commands/doctor";
 
 const pkg = require("../../package.json");
 
@@ -16,8 +17,9 @@ const program = new Command()
 program
   .command("init")
   .description("Initialize AniUI in your React Native project")
-  .action(async () => {
-    await initCommand();
+  .option("--style <engine>", "styling engine: nativewind or uniwind")
+  .action(async (opts: { style?: string }) => {
+    await initCommand(opts);
   });
 
 program
@@ -57,6 +59,13 @@ program
   .option("-o, --output <path>", "output file path")
   .action(async (description: string, opts: { output?: string }) => {
     await generateCommand(description, opts);
+  });
+
+program
+  .command("doctor")
+  .description("Check your project setup for issues")
+  .action(async () => {
+    await doctorCommand();
   });
 
 program.parse();

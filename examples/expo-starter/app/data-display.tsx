@@ -30,6 +30,16 @@ import { Carousel } from "@/components/ui/carousel";
 import { Calendar } from "@/components/ui/calendar";
 import { EmptyState } from "@/components/ui/empty-state";
 import { SwipeableListItem } from "@/components/ui/swipeable-list-item";
+import { StatusIndicator } from "@/components/ui/status-indicator";
+import { LabeledSeparator } from "@/components/ui/labeled-separator";
+import { ProgressSteps, ProgressStep } from "@/components/ui/progress-steps";
+import { Timeline, TimelineItem } from "@/components/ui/timeline";
+import { ChatBubble } from "@/components/ui/chat-bubble";
+import { TypingIndicator } from "@/components/ui/typing-indicator";
+import { StatCard } from "@/components/ui/stat-card";
+import { Price } from "@/components/ui/price";
+import { Pagination } from "@/components/ui/pagination";
+import { ImageGallery } from "@/components/ui/image-gallery";
 
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
   return (
@@ -409,6 +419,88 @@ export default function DataDisplayScreen() {
               />
             </CardContent>
           </Card>
+        </Section>
+
+        {/* Status Indicator */}
+        <Section title="Status Indicator">
+          <View className="flex-row items-center gap-4">
+            <View className="flex-row items-center gap-2">
+              <StatusIndicator status="online" pulse />
+              <Text variant="small">Online</Text>
+            </View>
+            <View className="flex-row items-center gap-2">
+              <StatusIndicator status="away" />
+              <Text variant="small">Away</Text>
+            </View>
+            <View className="flex-row items-center gap-2">
+              <StatusIndicator status="busy" />
+              <Text variant="small">Busy</Text>
+            </View>
+            <View className="flex-row items-center gap-2">
+              <StatusIndicator status="offline" />
+              <Text variant="small">Offline</Text>
+            </View>
+          </View>
+        </Section>
+
+        {/* Labeled Separator */}
+        <Section title="Labeled Separator">
+          <LabeledSeparator label="OR" />
+          <LabeledSeparator label="Continue with" />
+        </Section>
+
+        {/* Progress Steps */}
+        <Section title="Progress Steps">
+          <ProgressSteps current={1}>
+            <ProgressStep label="Account" />
+            <ProgressStep label="Profile" />
+            <ProgressStep label="Review" />
+          </ProgressSteps>
+        </Section>
+
+        {/* Timeline */}
+        <Section title="Timeline">
+          <Timeline>
+            <TimelineItem variant="success" title="Order placed" description="Your order has been confirmed" time="2h ago" />
+            <TimelineItem variant="success" title="Processing" description="Payment verified" time="1h ago" />
+            <TimelineItem title="Shipped" description="Package on the way" time="30m ago" />
+            <TimelineItem variant="muted" title="Delivered" description="Pending delivery" isLast />
+          </Timeline>
+        </Section>
+
+        {/* Chat Bubble */}
+        <Section title="Chat Bubble">
+          <View className="gap-2">
+            <ChatBubble variant="received" timestamp="10:30 AM">
+              Hey, how are you?
+            </ChatBubble>
+            <ChatBubble variant="sent" timestamp="10:31 AM" status="read">
+              I'm great! Working on AniUI.
+            </ChatBubble>
+            <TypingIndicator />
+          </View>
+        </Section>
+
+        {/* Stat Card */}
+        <Section title="Stat Card">
+          <View className="flex-row gap-3">
+            <StatCard className="flex-1" label="Revenue" value="$12.4k" change={12.5} trend="up" />
+            <StatCard className="flex-1" label="Users" value="1,234" change={-3.2} trend="down" />
+          </View>
+        </Section>
+
+        {/* Price */}
+        <Section title="Price">
+          <View className="flex-row items-center gap-3">
+            <Price amount={99.99} />
+            <Price amount={149.99} strikethrough />
+            <Price amount={29.99} currency="EUR" prefix="From" />
+          </View>
+        </Section>
+
+        {/* Pagination */}
+        <Section title="Pagination">
+          <Pagination total={10} current={3} onPageChange={() => {}} />
         </Section>
 
         <Text variant="muted" className="text-center mt-4 mb-8">

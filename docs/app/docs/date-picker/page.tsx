@@ -4,6 +4,8 @@ import { ComponentPlayground } from "@/components/component-playground";
 import { CodeBlock } from "@/components/code-block";
 import { PropsTable } from "@/components/props-table";
 
+import { AddComponentTabs } from "@/components/package-manager-tabs";
+import { PreviewToggle } from "@/components/preview-toggle";
 const installCode = `npx @aniui/cli add date-picker`;
 const usageCode = `import { DatePicker } from "@/components/ui/date-picker";
 import { useState } from "react";
@@ -122,13 +124,15 @@ export default function DatePickerPage() {
         </p>
       </div>
       {/* Preview */}
-      <ComponentPlayground code={usageCode}>
-        <PreviewDatePickerDemo />
-      </ComponentPlayground>
+      <PreviewToggle>
+        <ComponentPlayground code={usageCode}>
+          <PreviewDatePickerDemo />
+        </ComponentPlayground>
+      </PreviewToggle>
       {/* Installation */}
       <div className="space-y-4">
         <h2 className="text-2xl font-semibold tracking-tight text-foreground">Installation</h2>
-        <CodeBlock code={installCode} />
+        <AddComponentTabs names="date-picker" />
         <p className="text-sm text-muted-foreground">
           The DatePicker depends on the Calendar component, which will be installed automatically.
         </p>
@@ -181,6 +185,14 @@ export default function DatePickerPage() {
           { name: "max", type: "Date" },
           { name: "className", type: "string" },
         ]} />
+      </div>
+      {/* Accessibility */}
+      <div className="space-y-4">
+        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Accessibility</h2>
+        <ul className="list-disc list-inside space-y-2 text-sm text-muted-foreground">
+          <li>Powered by <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">@react-native-community/datetimepicker</code> native picker.</li>
+          <li>Uses the platform's native date picker which has built-in accessibility support.</li>
+        </ul>
       </div>
       {/* Source */}
       <div className="space-y-4">

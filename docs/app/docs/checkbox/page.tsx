@@ -3,6 +3,8 @@ import { PreviewCheckbox } from "@/components/preview/checkbox";
 import { ComponentPlayground } from "@/components/component-playground";
 import { CodeBlock } from "@/components/code-block";
 import { PropsTable } from "@/components/props-table";
+import { AddComponentTabs } from "@/components/package-manager-tabs";
+import { PreviewToggle } from "@/components/preview-toggle";
 
 const installCode = `npx @aniui/cli add checkbox`;
 const usageCode = `import { Checkbox } from "@/components/ui/checkbox";
@@ -57,15 +59,17 @@ export default function CheckboxPage() {
         </p>
       </div>
       {/* Preview */}
-      <ComponentPlayground code={usageCode}>
-        <div className="flex flex-wrap items-center gap-4">
-          <PreviewCheckbox />
-        </div>
-      </ComponentPlayground>
+      <PreviewToggle>
+        <ComponentPlayground code={usageCode}>
+          <div className="flex flex-wrap items-center gap-4">
+            <PreviewCheckbox />
+          </div>
+        </ComponentPlayground>
+      </PreviewToggle>
       {/* Installation */}
       <div className="space-y-4">
         <h2 className="text-2xl font-semibold tracking-tight text-foreground">Installation</h2>
-        <CodeBlock code={installCode} />
+        <AddComponentTabs names="checkbox" />
       </div>
       {/* Usage */}
       <div className="space-y-4">
@@ -104,6 +108,14 @@ export default function CheckboxPage() {
         <p className="text-sm text-muted-foreground">
           Also accepts all <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">Pressable</code> props from React Native.
         </p>
+      </div>
+      {/* Accessibility */}
+      <div className="space-y-4">
+        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Accessibility</h2>
+        <ul className="list-disc list-inside space-y-2 text-sm text-muted-foreground">
+          <li>Uses <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">@rn-primitives/checkbox</code> for checked/indeterminate state management.</li>
+          <li>Checked state is announced to screen readers automatically.</li>
+        </ul>
       </div>
       {/* Source */}
       <div className="space-y-4">

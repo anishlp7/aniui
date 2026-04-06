@@ -3,6 +3,8 @@ import { PreviewText } from "@/components/preview/text";
 import { ComponentPlayground } from "@/components/component-playground";
 import { CodeBlock } from "@/components/code-block";
 import { PropsTable } from "@/components/props-table";
+import { AddComponentTabs } from "@/components/package-manager-tabs";
+import { PreviewToggle } from "@/components/preview-toggle";
 
 const installCode = `npx @aniui/cli add text`;
 const usageCode = `import { Text } from "@/components/ui/text";
@@ -69,16 +71,18 @@ export default function TextPage() {
         </p>
       </div>
       {/* Preview */}
-      <ComponentPlayground code={usageCode}>
-        <div className="space-y-2">
-          <PreviewText variant="h1">Heading One</PreviewText>
-          <PreviewText variant="p">This is a paragraph of text.</PreviewText>
-        </div>
-      </ComponentPlayground>
+      <PreviewToggle>
+        <ComponentPlayground code={usageCode}>
+          <div className="space-y-2">
+            <PreviewText variant="h1">Heading One</PreviewText>
+            <PreviewText variant="p">This is a paragraph of text.</PreviewText>
+          </div>
+        </ComponentPlayground>
+      </PreviewToggle>
       {/* Installation */}
       <div className="space-y-4">
         <h2 className="text-2xl font-semibold tracking-tight text-foreground">Installation</h2>
-        <CodeBlock code={installCode} />
+        <AddComponentTabs names="text" />
       </div>
       {/* Usage */}
       <div className="space-y-4">
@@ -112,6 +116,14 @@ export default function TextPage() {
         <p className="text-sm text-muted-foreground">
           Also accepts all <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">Text</code> props from React Native.
         </p>
+      </div>
+      {/* Accessibility */}
+      <div className="space-y-4">
+        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Accessibility</h2>
+        <ul className="list-disc list-inside space-y-2 text-sm text-muted-foreground">
+          <li>Semantic text component with heading variants for proper screen reader hierarchy.</li>
+          <li>All variants use the React Native <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">Text</code> component with full accessibility prop support.</li>
+        </ul>
       </div>
       {/* Source */}
       <div className="space-y-4">
