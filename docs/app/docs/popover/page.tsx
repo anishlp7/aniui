@@ -29,52 +29,67 @@ export function MyScreen() {
     </Popover>
   );
 }`;
-const sourceCode = `import React, { createContext, useContext, useState } from "react";
-import { View, Pressable, Modal } from "react-native";
+const sourceCode = `import React from "react";
+import { View, Pressable } from "react-native";
+import * as PopoverPrimitive from "@rn-primitives/popover";
 import Animated, { FadeIn, FadeOut } from "react-native-reanimated";
 import { cn } from "@/lib/utils";
 
-const PopoverCtx = createContext<{ open: boolean; toggle: () => void; close: () => void }>({ open: false, toggle: () => {}, close: () => {} });
 export interface PopoverProps {
   open?: boolean;
   onOpenChange?: (open: boolean) => void;
   children: React.ReactNode;
 }
-export function Popover({ open: controlled, onOpenChange, children }: PopoverProps) {
-  const [internal, setInternal] = useState(false);
-  const isOpen = controlled ?? internal;
-  const setOpen = (v: boolean) => { setInternal(v); onOpenChange?.(v); };
-  return <PopoverCtx.Provider value={{ open: isOpen, toggle: () => setOpen(!isOpen), close: () => setOpen(false) }}>{children}</PopoverCtx.Provider>;
+
+export function Popover({ open, onOpenChange, children }: PopoverProps) {
+  return <PopoverPrimitive.Root open={open} onOpenChange={onOpenChange}>{children}</PopoverPrimitive.Root>;
 }
+
 export interface PopoverTriggerProps extends React.ComponentPropsWithoutRef<typeof Pressable> {
   className?: string;
   children?: React.ReactNode;
 }
+
 export function PopoverTrigger({ className, children, ...props }: PopoverTriggerProps) {
-  const { toggle } = useContext(PopoverCtx);
   return (
-    <Pressable className={cn("min-h-12 min-w-12", className)} onPress={toggle} accessible={true} accessibilityRole="button" {...props}>
-      {children}
-    </Pressable>
+    <PopoverPrimitive.Trigger asChild>
+      <Pressable className={cn("min-h-12 min-w-12", className)} accessible={true} accessibilityRole="button" {...props}>
+        {children}
+      </Pressable>
+    </PopoverPrimitive.Trigger>
   );
 }
+
 export interface PopoverContentProps extends React.ComponentPropsWithoutRef<typeof View> {
   className?: string;
   children?: React.ReactNode;
+  side?: "top" | "bottom" | "left" | "right";
+  sideOffset?: number;
+  align?: "start" | "center" | "end";
 }
-export function PopoverContent({ className, children, ...props }: PopoverContentProps) {
-  const { open, close } = useContext(PopoverCtx);
-  if (!open) return null;
+
+export function PopoverContent({ className, children, side = "bottom", sideOffset = 8, align = "center", ...props }: PopoverContentProps) {
   return (
-    <Modal transparent animationType="none" onRequestClose={close}>
-      <Pressable className="flex-1" onPress={close}>
-        <Animated.View entering={FadeIn.duration(150)} exiting={FadeOut.duration(100)} className="flex-1 items-center justify-center">
-          <Pressable onPress={(e) => e.stopPropagation()}>
-            <View className={cn("w-72 rounded-lg border border-border bg-card p-4 shadow-lg", className)} {...props}>{children}</View>
-          </Pressable>
+    <PopoverPrimitive.Portal>
+      <PopoverPrimitive.Overlay className="absolute inset-0" />
+      <PopoverPrimitive.Content side={side} sideOffset={sideOffset} align={align} avoidCollisions>
+        <Animated.View entering={FadeIn.duration(150)} exiting={FadeOut.duration(100)}>
+          <View className={cn("w-72 rounded-lg border border-border bg-card p-4 shadow-lg", className)} {...props}>
+            {children}
+          </View>
         </Animated.View>
+      </PopoverPrimitive.Content>
+    </PopoverPrimitive.Portal>
+  );
+}
+
+export function PopoverClose({ children, className, ...props }: React.ComponentPropsWithoutRef<typeof Pressable> & { className?: string; children?: React.ReactNode }) {
+  return (
+    <PopoverPrimitive.Close asChild>
+      <Pressable className={cn("", className)} accessible={true} accessibilityRole="button" {...props}>
+        {children}
       </Pressable>
-    </Modal>
+    </PopoverPrimitive.Close>
   );
 }`;
 export default function PopoverPage() {
@@ -96,7 +111,7 @@ export default function PopoverPage() {
         <h2 className="text-2xl font-semibold tracking-tight text-foreground">Installation</h2>
         <AddComponentTabs names="popover" />
         <p className="text-sm text-muted-foreground">
-          This component requires <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">react-native-reanimated</code> to be installed in your project.
+          This component requires <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">@rn-primitives/popover</code>, <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">@rn-primitives/portal</code>, and <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">react-native-reanimated</code>.
         </p>
       </div>
       {/* Usage */}
@@ -113,7 +128,8 @@ export default function PopoverPage() {
         <ComponentTable components={[
           { name: "Popover", description: "Root component that manages open/closed state. Supports both controlled and uncontrolled usage." },
           { name: "PopoverTrigger", description: "The pressable element that toggles the popover." },
-          { name: "PopoverContent", description: "The floating panel that displays the popover content." },
+          { name: "PopoverContent", description: "The floating panel that displays the popover content. Supports side, sideOffset, and align props." },
+          { name: "PopoverClose", description: "Pressable element that closes the popover." },
         ]} />
       </div>
       {/* Props */}
@@ -125,8 +141,15 @@ export default function PopoverPage() {
           { name: "onOpenChange", type: "(open: boolean) => void" },
           { name: "children", type: "React.ReactNode", default: "required" },
         ]} />
+        <h3 className="text-lg font-medium text-foreground mt-6">PopoverContent</h3>
+        <PropsTable props={[
+          { name: "side", type: "\"top\" | \"bottom\" | \"left\" | \"right\"", default: "\"bottom\"" },
+          { name: "sideOffset", type: "number", default: "8" },
+          { name: "align", type: "\"start\" | \"center\" | \"end\"", default: "\"center\"" },
+          { name: "className", type: "string" },
+        ]} />
         <p className="text-sm text-muted-foreground">
-          Sub-components (<code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">PopoverTrigger</code>, <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">PopoverContent</code>) accept <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">className</code> and their respective React Native base props.
+          All sub-components also accept <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">className</code> and their respective React Native base props.
         </p>
       </div>
       {/* Accessibility */}

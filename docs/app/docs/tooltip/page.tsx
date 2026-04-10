@@ -7,61 +7,78 @@ import { PreviewToggle } from "@/components/preview-toggle";
 import { AddComponentTabs } from "@/components/package-manager-tabs";
 
 const installCode = `npx @aniui/cli add tooltip`;
-const usageCode = `import { Tooltip } from "@/components/ui/tooltip";
+const usageCode = `import { Tooltip, TooltipTrigger, TooltipContent } from "@/components/ui/tooltip";
 import { Text } from "react-native";
 
 export function MyScreen() {
   return (
-    <Tooltip content="This is a tooltip">
-      <Text>Press and hold me</Text>
+    <Tooltip>
+      <TooltipTrigger>
+        <Text>Press and hold me</Text>
+      </TooltipTrigger>
+      <TooltipContent>This is a tooltip</TooltipContent>
     </Tooltip>
   );
 }`;
-const sidesCode = `<Tooltip content="Tooltip above" side="top">
-  <Text>Top tooltip</Text>
+const sidesCode = `<Tooltip>
+  <TooltipTrigger><Text>Top tooltip</Text></TooltipTrigger>
+  <TooltipContent side="top">Tooltip above</TooltipContent>
 </Tooltip>
-<Tooltip content="Tooltip below" side="bottom">
-  <Text>Bottom tooltip</Text>
+<Tooltip>
+  <TooltipTrigger><Text>Bottom tooltip</Text></TooltipTrigger>
+  <TooltipContent side="bottom">Tooltip below</TooltipContent>
 </Tooltip>`;
-const sourceCode = `import React, { useState } from "react";
+const sourceCode = `import React from "react";
 import { View, Text, Pressable } from "react-native";
+import * as TooltipPrimitive from "@rn-primitives/tooltip";
 import Animated, { FadeIn, FadeOut } from "react-native-reanimated";
 import { cn } from "@/lib/utils";
 
-export interface TooltipProps extends React.ComponentPropsWithoutRef<typeof View> {
-  className?: string;
-  content: string;
-  side?: "top" | "bottom";
+export interface TooltipProps {
   children: React.ReactNode;
+  open?: boolean;
+  onOpenChange?: (open: boolean) => void;
 }
-export function Tooltip({ content, side = "top", className, children, ...props }: TooltipProps) {
-  const [visible, setVisible] = useState(false);
+
+export function Tooltip({ children, open, onOpenChange }: TooltipProps) {
+  return <TooltipPrimitive.Root open={open} onOpenChange={onOpenChange}>{children}</TooltipPrimitive.Root>;
+}
+
+export interface TooltipTriggerProps extends React.ComponentPropsWithoutRef<typeof Pressable> {
+  className?: string;
+  children?: React.ReactNode;
+}
+
+export function TooltipTrigger({ className, children, ...props }: TooltipTriggerProps) {
   return (
-    <View className={cn("relative", className)} {...props}>
-      <Pressable
-        onPressIn={() => setVisible(true)}
-        onPressOut={() => setVisible(false)}
-        onLongPress={() => setVisible(true)}
-        accessible={true}
-        accessibilityRole="button"
-        accessibilityHint={content}
-      >
+    <TooltipPrimitive.Trigger asChild>
+      <Pressable className={cn("min-h-12 min-w-12", className)} accessible={true} accessibilityRole="button" {...props}>
         {children}
       </Pressable>
-      {visible && (
-        <Animated.View
-          entering={FadeIn.duration(150)}
-          exiting={FadeOut.duration(100)}
-          className={cn(
-            "absolute left-1/2 z-50 -translate-x-1/2 rounded-md bg-primary px-3 py-1.5",
-            side === "top" ? "bottom-full mb-2" : "top-full mt-2"
-          )}
-          pointerEvents="none"
-        >
-          <Text className="text-xs text-primary-foreground text-center">{content}</Text>
+    </TooltipPrimitive.Trigger>
+  );
+}
+
+export interface TooltipContentProps extends React.ComponentPropsWithoutRef<typeof View> {
+  className?: string;
+  children?: React.ReactNode;
+  side?: "top" | "bottom" | "left" | "right";
+  sideOffset?: number;
+}
+
+export function TooltipContent({ className, children, side = "top", sideOffset = 8, ...props }: TooltipContentProps) {
+  return (
+    <TooltipPrimitive.Portal>
+      <TooltipPrimitive.Content side={side} sideOffset={sideOffset} avoidCollisions>
+        <Animated.View entering={FadeIn.duration(150)} exiting={FadeOut.duration(100)}>
+          <View className={cn("rounded-md bg-primary px-3 py-1.5", className)} {...props}>
+            {typeof children === "string" ? (
+              <Text className="text-xs text-primary-foreground text-center">{children}</Text>
+            ) : children}
+          </View>
         </Animated.View>
-      )}
-    </View>
+      </TooltipPrimitive.Content>
+    </TooltipPrimitive.Portal>
   );
 }`;
 export default function TooltipPage() {
@@ -89,7 +106,7 @@ export default function TooltipPage() {
         <h2 className="text-2xl font-semibold tracking-tight text-foreground">Installation</h2>
         <AddComponentTabs names="tooltip" />
         <p className="text-sm text-muted-foreground">
-          This component requires <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">react-native-reanimated</code> to be installed in your project.
+          This component requires <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">@rn-primitives/tooltip</code>, <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">@rn-primitives/portal</code>, and <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">react-native-reanimated</code>.
         </p>
       </div>
       {/* Usage */}
@@ -114,15 +131,24 @@ export default function TooltipPage() {
       {/* Props */}
       <div className="space-y-4">
         <h2 className="text-2xl font-semibold tracking-tight text-foreground">Props</h2>
+        <h3 className="text-lg font-medium text-foreground">Tooltip</h3>
         <PropsTable props={[
-          { name: "content", type: "string", default: "required" },
-          { name: "side", type: "\"top\" | \"bottom\"", default: "\"top\"" },
-          { name: "className", type: "string" },
+          { name: "open", type: "boolean" },
+          { name: "onOpenChange", type: "(open: boolean) => void" },
           { name: "children", type: "React.ReactNode", default: "required" },
         ]} />
-        <p className="text-sm text-muted-foreground">
-          Also accepts all <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">View</code> props from React Native.
-        </p>
+        <h3 className="text-lg font-medium text-foreground mt-6">TooltipTrigger</h3>
+        <PropsTable props={[
+          { name: "className", type: "string" },
+          { name: "children", type: "React.ReactNode" },
+        ]} />
+        <h3 className="text-lg font-medium text-foreground mt-6">TooltipContent</h3>
+        <PropsTable props={[
+          { name: "children", type: "React.ReactNode | string", default: "required" },
+          { name: "side", type: "\"top\" | \"bottom\" | \"left\" | \"right\"", default: "\"top\"" },
+          { name: "sideOffset", type: "number", default: "8" },
+          { name: "className", type: "string" },
+        ]} />
       </div>
       {/* Accessibility */}
       <div className="space-y-4">
