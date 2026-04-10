@@ -25,9 +25,21 @@ export async function copyComponent(
 
   let content = await fs.readFile(srcPath, "utf-8");
 
-  // Adjust the import path for cn() utility
-  const relativeUtil = getRelativeImportPath(destDir, utilPath);
-  content = content.replace(/@\/lib\/utils/g, relativeUtil);
+  // Adjust the import path for cn() utility — keep @/ alias if tsconfig supports it
+  const tsconfigPath = path.join(path.dirname(destDir), "..", "tsconfig.json");
+  let hasPathAlias = false;
+  try {
+    const tsconfig = await fs.readJson(tsconfigPath);
+    const paths = tsconfig?.compilerOptions?.paths;
+    hasPathAlias = !!(paths?.["@/*"] || paths?.["@/*"]);
+  } catch {
+    // No tsconfig or can't read — fall back to relative
+  }
+
+  if (!hasPathAlias) {
+    const relativeUtil = getRelativeImportPath(destDir, utilPath);
+    content = content.replace(/@\/lib\/utils/g, relativeUtil);
+  }
 
   // Rewrite cross-component imports: @/components/ui/foo → ./foo
   content = content.replace(/@\/components\/ui\//g, "./");

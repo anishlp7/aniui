@@ -485,23 +485,40 @@ export async function initCommand(opts?: { style?: string }): Promise<void> {
   await fs.writeJson(path.join(cwd, ".aniui.json"), config, { spaces: 2 });
   logger.success("Created .aniui.json");
 
+  // 10. Auto-inject global.css import into layout file
+  const { findLayoutFile, injectImport } = await import("../utils/inject-layout");
+  const layoutFile = findLayoutFile(cwd);
+  let globalCssInjected = false;
+  if (layoutFile) {
+    globalCssInjected = injectImport(layoutFile, 'import "./global.css";');
+    if (globalCssInjected) {
+      logger.success(`Added global.css import to ${path.relative(cwd, layoutFile)}`);
+    }
+  }
+
   logger.break();
   logger.title("Done! Next steps:");
-  logger.info("1. Import global.css in your app entry:");
-  logger.info('   import "./global.css";');
-  logger.break();
+  if (!globalCssInjected) {
+    logger.info("1. Import global.css in your app entry:");
+    logger.info('   import "./global.css";');
+    logger.break();
+  }
 
+  let step = globalCssInjected ? 1 : 2;
   if (project.type === "react-native-cli") {
-    logger.info(`2. Verify metro.config.js uses ${wrapperName} (created above)`);
-    if (!isUniwind) logger.info("3. Verify babel.config.js includes nativewind/babel preset");
+    logger.info(`${step}. Verify metro.config.js uses ${wrapperName} (created above)`);
+    step++;
+    if (!isUniwind) { logger.info(`${step}. Verify babel.config.js includes nativewind/babel preset`); step++; }
     logger.break();
-    logger.info(`${isUniwind ? "3" : "4"}. Add components:`);
+    logger.info(`${step}. Add components:`);
   } else {
-    logger.info(`2. Verify metro.config.js uses ${wrapperName} (created above)`);
-    if (!isUniwind) logger.info("3. Verify babel.config.js has jsxImportSource: \"nativewind\" (created above)");
-    logger.info(`${isUniwind ? "3" : "4"}. Make sure React Compiler is NOT enabled in app.json`);
+    logger.info(`${step}. Verify metro.config.js uses ${wrapperName} (created above)`);
+    step++;
+    if (!isUniwind) { logger.info(`${step}. Verify babel.config.js has jsxImportSource: "nativewind" (created above)`); step++; }
+    logger.info(`${step}. Make sure React Compiler is NOT enabled in app.json`);
+    step++;
     logger.break();
-    logger.info(`${isUniwind ? "4" : "5"}. Add components:`);
+    logger.info(`${step}. Add components:`);
   }
   logger.info(`   ${getDlxCommand(pm, "aniui add button card text")}`);
   logger.break();

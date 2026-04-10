@@ -1,10 +1,11 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useTheme } from "./theme-provider";
 import { gettingStartedItems, componentItems, chartItems, blockItems } from "@/lib/nav-data";
+import { CommandSearch } from "./command-search";
 
 function SunIcon() {
   return (
@@ -60,6 +61,18 @@ function GitHubIcon() {
 export function Navbar() {
   const { theme, toggleTheme } = useTheme();
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [searchOpen, setSearchOpen] = useState(false);
+
+  useEffect(() => {
+    const handler = (e: KeyboardEvent) => {
+      if ((e.metaKey || e.ctrlKey) && e.key === "k") {
+        e.preventDefault();
+        setSearchOpen((prev) => !prev);
+      }
+    };
+    document.addEventListener("keydown", handler);
+    return () => document.removeEventListener("keydown", handler);
+  }, []);
 
   return (
     <>
@@ -100,6 +113,19 @@ export function Navbar() {
           </nav>
 
           <div className="ml-auto flex items-center gap-2">
+            <button
+              onClick={() => setSearchOpen(true)}
+              className="inline-flex items-center gap-2 rounded-md border border-border bg-muted/50 px-3 py-1.5 text-sm text-muted-foreground hover:text-foreground hover:bg-accent transition-colors sm:w-64"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <circle cx="11" cy="11" r="8" />
+                <path d="m21 21-4.3-4.3" />
+              </svg>
+              <span className="hidden sm:inline flex-1 text-left">Search</span>
+              <kbd className="hidden sm:inline-flex items-center gap-0.5 rounded border border-border bg-background px-1.5 py-0.5 text-[10px] font-medium text-muted-foreground ml-auto">
+                <span className="text-xs">&#8984;</span>K
+              </kbd>
+            </button>
             <a
               href="https://github.com/anishlp7/aniui"
               target="_blank"
@@ -154,6 +180,8 @@ export function Navbar() {
           </nav>
         </div>
       )}
+
+      <CommandSearch open={searchOpen} onOpenChange={setSearchOpen} />
     </>
   );
 }
