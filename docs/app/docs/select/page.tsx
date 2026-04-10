@@ -27,9 +27,10 @@ export function MyScreen() {
     />
   );
 }`;
-const sourceCode = `import React, { useState } from "react";
-import { View, Pressable, Text, Modal, ScrollView } from "react-native";
-import Animated, { FadeIn, FadeOut, SlideInUp, SlideOutDown } from "react-native-reanimated";
+const sourceCode = `import React, { useState, useRef } from "react";
+import { View, Text, Pressable, TextInput, Modal, ScrollView, Dimensions } from "react-native";
+import { cn } from "@/lib/utils";
+import Svg, { Path } from "react-native-svg";
 
 export interface SelectOption { label: string; value: string }
 
@@ -40,100 +41,108 @@ export interface SelectProps {
   value?: string;
   onValueChange?: (value: string) => void;
   label?: string;
+  searchable?: boolean;
+  searchPlaceholder?: string;
 }
 
-export function Select({ placeholder = "Select...", options, value, onValueChange, label }: SelectProps) {
+export function Select({
+  className, placeholder = "Select...", options, value,
+  onValueChange, label, searchable = false, searchPlaceholder = "Search...",
+}: SelectProps) {
   const [open, setOpen] = useState(false);
-  const [internal, setInternal] = useState(value ?? "");
-  const selected = value ?? internal;
-  const selectedLabel = options.find((o) => o.value === selected)?.label ?? placeholder;
-  const isPlaceholder = !selected;
+  const [search, setSearch] = useState("");
+  const triggerRef = useRef<View>(null);
+  const [pos, setPos] = useState({ x: 0, y: 0, w: 0, h: 0 });
+  const selected = options.find((o) => o.value === value);
+  const filtered = searchable && search
+    ? options.filter((o) => o.label.toLowerCase().includes(search.toLowerCase()))
+    : options;
 
-  const pick = (val: string) => {
-    setInternal(val);
-    onValueChange?.(val);
-    setOpen(false);
+  const handleOpen = () => {
+    triggerRef.current?.measureInWindow((x, y, width, height) => {
+      setPos({ x, y, w: width, h: height });
+      setOpen(true);
+    });
   };
 
+  const close = () => { setOpen(false); setSearch(""); };
+  const pick = (val: string) => { onValueChange?.(val); close(); };
+
+  const screenH = Dimensions.get("window").height;
+  const belowY = pos.y + pos.h + 4;
+  const listH = Math.min(filtered.length * 48, 264);
+  const totalH = listH + (searchable ? 60 : 0);
+  const fitsBelow = belowY + totalH < screenH;
+
   return (
-    <>
+    <View collapsable={false}>
       <Pressable
-        style={{
-          flexDirection: "row",
-          alignItems: "center",
-          justifyContent: "space-between",
-          height: 48,
-          paddingHorizontal: 16,
-          borderWidth: 1,
-          borderColor: "#e4e4e7",
-          borderRadius: 8,
-          backgroundColor: "#ffffff",
-        }}
-        onPress={() => setOpen(true)}
+        ref={triggerRef}
+        className={cn("flex-row items-center justify-between h-12 px-4 border border-input rounded-lg bg-background active:bg-accent/30", className)}
+        onPress={handleOpen}
         accessible={true}
         accessibilityRole="button"
         accessibilityLabel={label ?? placeholder}
       >
-        <Text style={{ fontSize: 16, color: isPlaceholder ? "#a1a1aa" : "#09090b" }}>{selectedLabel}</Text>
-        <Text style={{ fontSize: 12, color: "#a1a1aa" }}>▾</Text>
+        <Text className={cn("text-base flex-1", selected ? "text-foreground" : "text-muted-foreground")} numberOfLines={1}>
+          {selected?.label ?? placeholder}
+        </Text>
+        <Svg width={16} height={16} viewBox="0 0 24 24" fill="none" stroke="#71717a" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round"><Path d="m6 9 6 6 6-6" /></Svg>
       </Pressable>
 
-      <Modal visible={open} transparent animationType="none" onRequestClose={() => setOpen(false)}>
-        {/* Backdrop */}
-        <Pressable style={{ flex: 1 }} onPress={() => setOpen(false)}>
-          <Animated.View entering={FadeIn.duration(200)} exiting={FadeOut.duration(150)} style={{ flex: 1, backgroundColor: "rgba(0,0,0,0.5)" }} />
-        </Pressable>
+      <Modal visible={open} transparent animationType="none" onRequestClose={close}>
+        <Pressable style={{ position: "absolute", top: 0, left: 0, right: 0, bottom: 0 }} onPress={close} />
 
-        {/* Sheet */}
-        <Animated.View
-          entering={SlideInUp.duration(300)}
-          exiting={SlideOutDown.duration(200)}
-          style={{ backgroundColor: "#ffffff", borderTopLeftRadius: 16, borderTopRightRadius: 16, paddingBottom: 34 }}
+        <View
+          style={{
+            position: "absolute",
+            left: pos.x,
+            width: pos.w,
+            ...(fitsBelow
+              ? { top: belowY }
+              : { bottom: screenH - pos.y + 4 }),
+          }}
+          className="rounded-xl border border-border bg-card shadow-2xl overflow-hidden"
         >
-          {/* Handle */}
-          <View style={{ alignItems: "center", paddingTop: 12, paddingBottom: 4 }}>
-            <View style={{ width: 40, height: 4, borderRadius: 2, backgroundColor: "#d4d4d8" }} />
-          </View>
+          {searchable && (
+            <View className="px-3 pt-3 pb-2">
+              <TextInput
+                className="h-11 px-4 rounded-lg border border-input bg-background text-foreground text-base"
+                placeholder={searchPlaceholder}
+                placeholderTextColor="#71717a"
+                value={search}
+                onChangeText={setSearch}
+                autoFocus
+              />
+            </View>
+          )}
 
-          {/* Title + Done */}
-          <View style={{ flexDirection: "row", alignItems: "center", justifyContent: "space-between", paddingHorizontal: 20, paddingVertical: 12 }}>
-            <Text style={{ fontSize: 16, fontWeight: "600", color: "#09090b" }}>{label ?? placeholder}</Text>
-            <Pressable onPress={() => setOpen(false)} accessible={true} accessibilityRole="button" accessibilityLabel="Done">
-              <Text style={{ fontSize: 16, fontWeight: "600", color: "#3b82f6" }}>Done</Text>
-            </Pressable>
-          </View>
-
-          {/* Divider */}
-          <View style={{ height: 1, backgroundColor: "#f4f4f5" }} />
-
-          {/* Options */}
-          <ScrollView bounces={false} style={{ maxHeight: 320 }}>
-            {options.map((o) => {
-              const isSelected = o.value === selected;
+          <ScrollView style={{ height: listH }} bounces={false} keyboardShouldPersistTaps="handled">
+            {filtered.map((o) => {
+              const isSelected = o.value === value;
               return (
                 <Pressable
                   key={o.value}
-                  style={{
-                    flexDirection: "row",
-                    alignItems: "center",
-                    paddingHorizontal: 20,
-                    paddingVertical: 14,
-                    backgroundColor: isSelected ? "#f4f4f5" : "transparent",
-                  }}
+                  className={cn("flex-row items-center h-12 px-4 active:bg-accent/50", isSelected && "bg-accent")}
                   onPress={() => pick(o.value)}
                   accessible={true}
                   accessibilityRole="button"
                   accessibilityState={{ selected: isSelected }}
                 >
-                  <Text style={{ flex: 1, fontSize: 16, color: "#09090b", fontWeight: isSelected ? "600" : "400" }}>{o.label}</Text>
-                  {isSelected && <Text style={{ fontSize: 16, color: "#3b82f6", fontWeight: "700" }}>✓</Text>}
+                  <Text className={cn("flex-1 text-base text-foreground", isSelected && "font-semibold")} numberOfLines={1}>{o.label}</Text>
+                  {isSelected && <Text className="text-base text-primary font-bold">✓</Text>}
                 </Pressable>
               );
             })}
+            {filtered.length === 0 && (
+              <View className="h-12 items-center justify-center">
+                <Text className="text-sm text-muted-foreground">No results</Text>
+              </View>
+            )}
           </ScrollView>
-        </Animated.View>
+        </View>
       </Modal>
-    </>
+    </View>
   );
 }`;
 export default function SelectPage() {
@@ -143,7 +152,7 @@ export default function SelectPage() {
       <div>
         <h1 className="text-3xl font-bold tracking-tight text-foreground">Select</h1>
         <p className="mt-2 text-lg text-muted-foreground">
-          Modal-based dropdown select with animated slide-up picker.
+          Dropdown select with optional search filtering.
         </p>
       </div>
       {/* Preview */}
@@ -163,9 +172,6 @@ export default function SelectPage() {
       <div className="space-y-4">
         <h2 className="text-2xl font-semibold tracking-tight text-foreground">Installation</h2>
         <AddComponentTabs names="select" />
-        <p className="text-sm text-muted-foreground">
-          This component requires <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">react-native-reanimated</code> for animations.
-        </p>
       </div>
       {/* Usage */}
       <div className="space-y-4">
@@ -181,6 +187,9 @@ export default function SelectPage() {
           { name: "onValueChange", type: "(value: string) => void" },
           { name: "placeholder", type: "string", default: "\"Select...\"" },
           { name: "label", type: "string" },
+          { name: "searchable", type: "boolean", default: "false" },
+          { name: "searchPlaceholder", type: "string", default: "\"Search...\"" },
+          { name: "className", type: "string" },
         ]} />
         <h3 className="text-lg font-medium text-foreground mt-6">SelectOption</h3>
         <PropsTable props={[

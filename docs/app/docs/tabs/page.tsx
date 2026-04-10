@@ -27,15 +27,16 @@ export function MyScreen() {
 }`;
 const sourceCode = `import React, { createContext, useContext, useState } from "react";
 import { View, Pressable, Text } from "react-native";
-import Animated, { useAnimatedStyle, useSharedValue, withTiming } from "react-native-reanimated";
 import { cn } from "@/lib/utils";
 
 const TabsCtx = createContext<{ value: string; onValueChange: (v: string) => void }>({ value: "", onValueChange: () => {} });
+
 export interface TabsProps extends React.ComponentPropsWithoutRef<typeof View> {
   className?: string;
   defaultValue: string;
   children?: React.ReactNode;
 }
+
 export function Tabs({ defaultValue, className, children, ...props }: TabsProps) {
   const [value, setValue] = useState(defaultValue);
   return (
@@ -44,37 +45,38 @@ export function Tabs({ defaultValue, className, children, ...props }: TabsProps)
     </TabsCtx.Provider>
   );
 }
-export interface TabsListProps extends React.ComponentPropsWithoutRef<typeof View> {
-  className?: string;
-  children?: React.ReactNode;
-}
-export function TabsList({ className, ...props }: TabsListProps) {
+
+export function TabsList({ className, ...props }: React.ComponentPropsWithoutRef<typeof View> & { className?: string }) {
   return <View className={cn("flex-row rounded-lg bg-muted p-1", className)} {...props} />;
 }
+
 export interface TabsTriggerProps extends React.ComponentPropsWithoutRef<typeof Pressable> {
   className?: string;
   value: string;
   children: React.ReactNode;
 }
+
 export function TabsTrigger({ value, className, children, ...props }: TabsTriggerProps) {
   const { value: selected, onValueChange } = useContext(TabsCtx);
   const isActive = selected === value;
-  const opacity = useSharedValue(isActive ? 1 : 0);
-  React.useEffect(() => { opacity.value = withTiming(isActive ? 1 : 0, { duration: 150 }); }, [isActive, opacity]);
-  const bgStyle = useAnimatedStyle(() => ({ position: "absolute" as const, inset: 0, borderRadius: 6, backgroundColor: "hsl(0, 0%, 100%)", opacity: opacity.value }));
+
   return (
-    <Pressable className={cn("flex-1 items-center justify-center py-2 min-h-12 relative", className)} onPress={() => onValueChange(value)} accessible={true} accessibilityRole="tab" accessibilityState={{ selected: isActive }} {...props}>
-      <Animated.View style={bgStyle} />
-      {typeof children === "string" ? <Text className={cn("text-sm font-medium", isActive ? "text-foreground" : "text-muted-foreground")}>{children}</Text> : children}
+    <Pressable
+      className={cn("flex-1 items-center justify-center py-2 min-h-12 rounded-md", isActive && "bg-background shadow-sm", className)}
+      onPress={() => onValueChange(value)}
+      accessible={true}
+      accessibilityRole="tab"
+      accessibilityState={{ selected: isActive }}
+      {...props}
+    >
+      {typeof children === "string" ? (
+        <Text className={cn("text-sm font-medium", isActive ? "text-foreground" : "text-muted-foreground")}>{children}</Text>
+      ) : children}
     </Pressable>
   );
 }
-export interface TabsContentProps extends React.ComponentPropsWithoutRef<typeof View> {
-  className?: string;
-  value: string;
-  children?: React.ReactNode;
-}
-export function TabsContent({ value, className, ...props }: TabsContentProps) {
+
+export function TabsContent({ value, className, ...props }: React.ComponentPropsWithoutRef<typeof View> & { className?: string; value: string }) {
   const { value: selected } = useContext(TabsCtx);
   if (selected !== value) return null;
   return <View className={cn("mt-2", className)} {...props} />;
@@ -86,7 +88,7 @@ export default function TabsPage() {
       <div>
         <h1 className="text-3xl font-bold tracking-tight text-foreground">Tabs</h1>
         <p className="mt-2 text-lg text-muted-foreground">
-          Tab navigation with animated indicator for switching between content panels.
+          Tab navigation for switching between content panels.
         </p>
       </div>
       {/* Preview */}
@@ -112,9 +114,6 @@ export default function TabsPage() {
       <div className="space-y-4">
         <h2 className="text-2xl font-semibold tracking-tight text-foreground">Installation</h2>
         <AddComponentTabs names="tabs" />
-        <p className="text-sm text-muted-foreground">
-          This component requires <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">react-native-reanimated</code> for the tab indicator animation.
-        </p>
       </div>
       {/* Usage */}
       <div className="space-y-4">
@@ -127,7 +126,7 @@ export default function TabsPage() {
         <ComponentTable components={[
           { name: "Tabs", description: "Root container managing tab state" },
           { name: "TabsList", description: "Container for tab triggers" },
-          { name: "TabsTrigger", description: "Pressable tab button with animated background" },
+          { name: "TabsTrigger", description: "Pressable tab button with active state" },
           { name: "TabsContent", description: "Content panel shown when tab is active" },
         ]} />
       </div>

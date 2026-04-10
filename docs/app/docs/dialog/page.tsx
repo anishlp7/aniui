@@ -35,7 +35,6 @@ export function MyScreen() {
 }`;
 const sourceCode = `import React from "react";
 import { View, Pressable, Text, Modal } from "react-native";
-import Animated, { FadeIn, FadeOut, ZoomIn, ZoomOut } from "react-native-reanimated";
 import { cn } from "@/lib/utils";
 
 export interface DialogProps {
@@ -43,60 +42,48 @@ export interface DialogProps {
   onOpenChange: (open: boolean) => void;
   children: React.ReactNode;
 }
+
 export function Dialog({ open, onOpenChange, children }: DialogProps) {
   return (
-    <Modal visible={open} transparent animationType="none" onRequestClose={() => onOpenChange(false)}>
-      <Animated.View
-        entering={FadeIn.duration(150)}
-        exiting={FadeOut.duration(100)}
-        className="flex-1 items-center justify-center bg-black/50"
-      >
+    <Modal visible={open} transparent animationType="fade" onRequestClose={() => onOpenChange(false)}>
+      <View className="flex-1 items-center justify-center bg-black/50">
         <Pressable className="absolute inset-0" onPress={() => onOpenChange(false)} />
-        <Animated.View entering={ZoomIn.duration(200)} exiting={ZoomOut.duration(150)}>
-          {children}
-        </Animated.View>
-      </Animated.View>
+        {children}
+      </View>
     </Modal>
   );
 }
-export interface DialogContentProps extends React.ComponentPropsWithoutRef<typeof View> {
-  className?: string;
-  children?: React.ReactNode;
-}
-export function DialogContent({ className, ...props }: DialogContentProps) {
+
+export function DialogContent({ className, children, ...props }: React.ComponentPropsWithoutRef<typeof View> & { className?: string; children?: React.ReactNode }) {
   return (
-    <View
-      className={cn("mx-6 w-80 rounded-lg bg-card p-6 shadow-xl", className)}
-      accessibilityRole="alert"
-      {...props}
-    />
+    <View className={cn("mx-6 w-80 rounded-lg bg-card p-6 shadow-xl", className)} accessibilityRole="alert" accessible={true} {...props}>
+      {children}
+    </View>
   );
 }
-export interface DialogHeaderProps extends React.ComponentPropsWithoutRef<typeof View> {
-  className?: string;
-  children?: React.ReactNode;
-}
-export function DialogHeader({ className, ...props }: DialogHeaderProps) {
+
+export function DialogHeader({ className, ...props }: React.ComponentPropsWithoutRef<typeof View> & { className?: string }) {
   return <View className={cn("pb-4", className)} {...props} />;
 }
-export interface DialogTitleProps extends React.ComponentPropsWithoutRef<typeof Text> {
-  className?: string;
-}
-export function DialogTitle({ className, ...props }: DialogTitleProps) {
+
+export function DialogTitle({ className, ...props }: React.ComponentPropsWithoutRef<typeof Text> & { className?: string }) {
   return <Text className={cn("text-lg font-semibold text-card-foreground", className)} {...props} />;
 }
-export interface DialogDescriptionProps extends React.ComponentPropsWithoutRef<typeof Text> {
-  className?: string;
-}
-export function DialogDescription({ className, ...props }: DialogDescriptionProps) {
+
+export function DialogDescription({ className, ...props }: React.ComponentPropsWithoutRef<typeof Text> & { className?: string }) {
   return <Text className={cn("text-sm text-muted-foreground mt-1", className)} {...props} />;
 }
-export interface DialogFooterProps extends React.ComponentPropsWithoutRef<typeof View> {
-  className?: string;
-  children?: React.ReactNode;
-}
-export function DialogFooter({ className, ...props }: DialogFooterProps) {
+
+export function DialogFooter({ className, ...props }: React.ComponentPropsWithoutRef<typeof View> & { className?: string }) {
   return <View className={cn("flex-row justify-end gap-3 pt-4", className)} {...props} />;
+}
+
+export function DialogTrigger({ children }: { children: React.ReactNode }) {
+  return <>{children}</>;
+}
+
+export function DialogClose({ children }: { children: React.ReactNode }) {
+  return <>{children}</>;
 }`;
 export default function DialogPage() {
   return (
@@ -105,7 +92,7 @@ export default function DialogPage() {
       <div>
         <h1 className="text-3xl font-bold tracking-tight text-foreground">Dialog</h1>
         <p className="mt-2 text-lg text-muted-foreground">
-          Modal dialog overlay with fade and scale animations.
+          Modal dialog overlay with fade animation.
         </p>
       </div>
       {/* Preview */}
@@ -116,9 +103,6 @@ export default function DialogPage() {
       <div className="space-y-4">
         <h2 className="text-2xl font-semibold tracking-tight text-foreground">Installation</h2>
         <AddComponentTabs names="dialog" />
-        <p className="text-sm text-muted-foreground">
-          This component requires <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">react-native-reanimated</code> for fade and zoom animations.
-        </p>
       </div>
       {/* Usage */}
       <div className="space-y-4">
@@ -129,12 +113,14 @@ export default function DialogPage() {
       <div className="space-y-4">
         <h2 className="text-2xl font-semibold tracking-tight text-foreground">Compound Components</h2>
         <ComponentTable components={[
-          { name: "Dialog", description: "Root modal with backdrop and animations" },
+          { name: "Dialog", description: "Root modal with backdrop and fade animation" },
           { name: "DialogContent", description: "Card-style content container" },
           { name: "DialogHeader", description: "Header section" },
           { name: "DialogTitle", description: "Title text" },
           { name: "DialogDescription", description: "Description text in muted color" },
           { name: "DialogFooter", description: "Footer with row layout for action buttons" },
+          { name: "DialogTrigger", description: "Passthrough wrapper for trigger element" },
+          { name: "DialogClose", description: "Passthrough wrapper for close element" },
         ]} />
       </div>
       {/* Props */}
