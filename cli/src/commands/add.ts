@@ -3,6 +3,7 @@ import fs from "fs-extra";
 import { registry, resolveRegistryDeps, getComponentNames } from "../registry";
 import { copyComponent } from "../utils/file-ops";
 import { detectPackageManager, getInstallCommand, getDlxCommand } from "../utils/detect-project";
+import { findLayoutFile, injectImport, injectJsxBeforeClose } from "../utils/inject-layout";
 import { logger } from "../utils/logger";
 
 interface AniUIConfig {
@@ -156,6 +157,46 @@ export async function addCommand(names: string[]): Promise<void> {
     }
     if (needsDatePicker && !allDeps["@react-native-community/datetimepicker"]) {
       logger.info(`  ${getInstallCommand(pm, ["@react-native-community/datetimepicker"])}`);
+    }
+
+    // Auto-inject PortalHost for portal-based components
+    const needsPortal = tier3Components.some((n) =>
+      registry[n].dependencies.includes("@rn-primitives/portal")
+    );
+    if (needsPortal) {
+      const layoutFile = findLayoutFile(cwd);
+      let injected = false;
+
+      if (layoutFile) {
+        const importOk = injectImport(layoutFile, 'import { PortalHost } from "@rn-primitives/portal";');
+        const jsxOk = injectJsxBeforeClose(layoutFile, "<PortalHost />");
+
+        if (importOk || jsxOk) {
+          logger.break();
+          logger.success(`Added <PortalHost /> to ${path.relative(cwd, layoutFile)}`);
+          injected = true;
+        } else {
+          // Both returned false — PortalHost already exists
+          logger.break();
+          logger.success(`<PortalHost /> already set up in ${path.relative(cwd, layoutFile)}`);
+          injected = true;
+        }
+      }
+
+      if (!injected) {
+        logger.break();
+        logger.warn("Portal components require <PortalHost /> in your root layout:");
+        logger.info('  import { PortalHost } from "@rn-primitives/portal";');
+        logger.info("");
+        logger.info("  export default function RootLayout() {");
+        logger.info("    return (");
+        logger.info("      <>");
+        logger.info("        {/* your app */}");
+        logger.info("        <PortalHost />");
+        logger.info("      </>");
+        logger.info("    );");
+        logger.info("  }");
+      }
     }
   }
 
