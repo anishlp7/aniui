@@ -33,7 +33,7 @@ const THEME_PRESETS: Record<string, ThemePreset> = {
   },
 };
 
-export async function initCommand(opts?: { style?: string }): Promise<void> {
+export async function initCommand(opts?: { style?: string; yes?: boolean }): Promise<void> {
   const cwd = process.cwd();
   logger.title("AniUI — Initialize");
 
@@ -56,58 +56,82 @@ export async function initCommand(opts?: { style?: string }): Promise<void> {
     ? opts.style
     : project.hasUniwind ? "uniwind" : "nativewind";
 
-  // Step 1: Ask style engine + theme + paths upfront
-  const response = await prompts([
-    {
-      type: "select",
-      name: "style",
-      message: "Which styling engine?",
-      choices: [
-        { title: "NativeWind" + (project.hasNativewind ? " (installed)" : ""), value: "nativewind" },
-        { title: "Uniwind" + (project.hasUniwind ? " (installed)" : ""), value: "uniwind" },
-      ],
-      initial: detectedStyle === "uniwind" ? 1 : 0,
-    },
-    {
-      type: "select",
-      name: "theme",
-      message: "Choose a theme preset:",
-      choices: [
-        { title: "Default (neutral)", value: "default" },
-        { title: "Blue", value: "blue" },
-        { title: "Green", value: "green" },
-        { title: "Orange", value: "orange" },
-        { title: "Rose", value: "rose" },
-      ],
-      initial: 0,
-    },
-    {
-      type: "text",
-      name: "componentsDir",
-      message: "Where should components be installed?",
-      initial: "components/ui",
-    },
-    {
-      type: "text",
-      name: "utilPath",
-      message: "Where should the utility file go?",
-      initial: "lib/utils.ts",
-    },
-    {
-      type: "select",
-      name: "tsx",
-      message: "Would you like to use TypeScript?",
-      choices: [
-        { title: "Yes (recommended)", value: true },
-        { title: "No", value: false },
-      ],
-      initial: 0,
-    },
-  ]);
+  // Step 1: Ask style engine + theme + paths upfront (skip with --yes)
+  let response: {
+    style: StyleEngine;
+    theme: string;
+    componentsDir: string;
+    utilPath: string;
+    tsx: boolean;
+  };
 
-  if (!response.style || !response.componentsDir || !response.utilPath) {
-    logger.warn("Setup cancelled.");
-    process.exit(0);
+  if (opts?.yes) {
+    response = {
+      style: detectedStyle,
+      theme: "default",
+      componentsDir: "components/ui",
+      utilPath: "lib/utils.ts",
+      tsx: true,
+    };
+    logger.info("Using defaults (--yes):");
+    logger.info(`  Style: ${response.style}`);
+    logger.info(`  Theme: ${response.theme}`);
+    logger.info(`  Components: ${response.componentsDir}`);
+    logger.info(`  Utils: ${response.utilPath}`);
+    logger.info(`  TypeScript: yes`);
+  } else {
+    response = await prompts([
+      {
+        type: "select",
+        name: "style",
+        message: "Which styling engine?",
+        choices: [
+          { title: "NativeWind" + (project.hasNativewind ? " (installed)" : ""), value: "nativewind" },
+          { title: "Uniwind" + (project.hasUniwind ? " (installed)" : ""), value: "uniwind" },
+        ],
+        initial: detectedStyle === "uniwind" ? 1 : 0,
+      },
+      {
+        type: "select",
+        name: "theme",
+        message: "Choose a theme preset:",
+        choices: [
+          { title: "Default (neutral)", value: "default" },
+          { title: "Blue", value: "blue" },
+          { title: "Green", value: "green" },
+          { title: "Orange", value: "orange" },
+          { title: "Rose", value: "rose" },
+        ],
+        initial: 0,
+      },
+      {
+        type: "text",
+        name: "componentsDir",
+        message: "Where should components be installed?",
+        initial: "components/ui",
+      },
+      {
+        type: "text",
+        name: "utilPath",
+        message: "Where should the utility file go?",
+        initial: "lib/utils.ts",
+      },
+      {
+        type: "select",
+        name: "tsx",
+        message: "Would you like to use TypeScript?",
+        choices: [
+          { title: "Yes (recommended)", value: true },
+          { title: "No", value: false },
+        ],
+        initial: 0,
+      },
+    ]);
+
+    if (!response.style || !response.componentsDir || !response.utilPath) {
+      logger.warn("Setup cancelled.");
+      process.exit(0);
+    }
   }
 
   // Step 2: Auto-install missing dependencies
@@ -142,12 +166,16 @@ export async function initCommand(opts?: { style?: string }): Promise<void> {
     logger.info(`  ${getInstallCommand(pm, missing)}`);
     logger.break();
 
-    const { confirm } = await prompts({
-      type: "confirm",
-      name: "confirm",
-      message: `Install ${missing.length} packages with ${pm}?`,
-      initial: true,
-    });
+    let confirm = true;
+    if (!opts?.yes) {
+      const result = await prompts({
+        type: "confirm",
+        name: "confirm",
+        message: `Install ${missing.length} packages with ${pm}?`,
+        initial: true,
+      });
+      confirm = result.confirm;
+    }
 
     if (confirm) {
       const { execSync } = require("child_process");

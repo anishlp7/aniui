@@ -18,7 +18,8 @@ program
   .command("init")
   .description("Initialize AniUI in your React Native project")
   .option("--style <engine>", "styling engine: nativewind or uniwind")
-  .action(async (opts: { style?: string }) => {
+  .option("-y, --yes", "skip all prompts and use defaults")
+  .action(async (opts: { style?: string; yes?: boolean }) => {
     await initCommand(opts);
   });
 
