@@ -25,6 +25,20 @@ const typeBadge: Record<ChangeType, { label: string; className: string }> = {
 
 const releases: Release[] = [
   {
+    version: "0.2.17",
+    date: "2026-04-13",
+    title: "Syntax Highlighting + Bug Fixes",
+    changes: [
+      { type: "feat", text: "Docs: syntax highlighting for all code blocks via shiki (server-side, zero client JS)" },
+      { type: "feat", text: "Docs: MDX infrastructure — pages can now be authored in MDX with auto-highlighted fenced code blocks" },
+      { type: "feat", text: "Docs: all 78 doc pages converted to server components for faster loads" },
+      { type: "fix", text: "Switch: hardcoded light-only colors replaced with dark mode support via useColorScheme()", link: "/docs/switch" },
+      { type: "fix", text: "Switch: added trackColorOff, trackColorOn, thumbColorAndroid props for custom theming", link: "/docs/switch" },
+      { type: "fix", text: "og:url meta tag now reflects the current page URL instead of always pointing to the homepage" },
+      { type: "docs", text: "llms.txt updated from 48 to 82 components to match full registry" },
+    ],
+  },
+  {
     version: "0.2.14",
     date: "2026-04-06",
     title: "Uniwind Support + Universal Theming",
