@@ -6,10 +6,10 @@ const componentPages = [
   "accordion", "action-sheet", "alert", "alert-dialog", "avatar", "badge",
   "banner", "bottom-sheet", "button", "calendar", "card", "carousel",
   "chat-bubble", "checkbox", "chip", "collapsible", "combobox",
-  "connection-banner", "context-menu", "date-picker", "dialog", "drawer",
-  "dropdown-menu", "empty-state", "fab", "file-picker", "form", "grid",
-  "header", "image", "image-gallery", "infinite-list", "input", "input-otp",
-  "label", "labeled-separator", "list", "masked-input", "number-input",
+  "connection-banner", "context-menu", "date-picker", "dialog", "direction-provider", "drawer",
+  "dropdown-menu", "empty-state", "fab", "field", "file-picker", "form", "grid",
+  "header", "hover-card", "image", "image-gallery", "infinite-list", "input", "input-group", "input-otp",
+  "kbd", "label", "labeled-separator", "list", "masked-input", "number-input",
   "pagination", "password-input", "phone-input", "popover", "price",
   "progress", "progress-steps", "radio-group", "rating", "refresh-control",
   "safe-area", "search-bar", "segmented-control", "select", "separator",
@@ -20,7 +20,7 @@ const componentPages = [
 ];
 
 const guidePages = [
-  "installation", "components", "theming", "dark-mode", "compatibility",
+  "installation", "components", "theming", "dark-mode", "rtl", "compatibility",
   "cli", "mcp", "javascript", "android", "changelog", "uniwind",
 ];
 

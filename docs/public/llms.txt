@@ -17,7 +17,7 @@ AniUI is a copy-paste component library for React Native. Components are source 
 npx @aniui/cli init
 npx @aniui/cli add button text input card
 
-## Components (82 total, alphabetical)
+## Components (87 total, alphabetical)
 
 - Accordion: `import { Accordion, AccordionItem } from "@/components/ui/accordion"` — needs @rn-primitives/accordion, react-native-reanimated
 - ActionSheet: `import { ActionSheet } from "@/components/ui/action-sheet"` — needs @gorhom/bottom-sheet, react-native-gesture-handler
@@ -38,24 +38,29 @@ npx @aniui/cli add button text input card
 - Checkbox: `import { Checkbox } from "@/components/ui/checkbox"` — needs @rn-primitives/checkbox
 - Chip: `import { Chip } from "@/components/ui/chip"` — variant: default|secondary|outline|destructive, selected state, onClose
 - Collapsible: `import { Collapsible, CollapsibleTrigger, CollapsibleContent } from "@/components/ui/collapsible"` — needs react-native-reanimated
-- Combobox: `import { Combobox } from "@/components/ui/combobox"` — Searchable select dropdown with type-to-filter
+- Combobox: `import { Combobox } from "@/components/ui/combobox"` — Searchable select with multi-select, groups, clear, custom rendering, invalid/disabled states
 - ConnectionBanner: `import { ConnectionBanner } from "@/components/ui/connection-banner"` — Animated online/offline status banner, needs react-native-reanimated
 - ContextMenu: `import { ContextMenu, ContextMenuTrigger, ContextMenuContent, ContextMenuItem, ContextMenuSeparator } from "@/components/ui/context-menu"` — needs @rn-primitives/context-menu, react-native-reanimated
 - DatePicker: `import { DatePicker, DateRangePicker } from "@/components/ui/date-picker"` — Calendar popup picker with range support
 - Dialog: `import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter } from "@/components/ui/dialog"`
+- DirectionProvider: `import { DirectionProvider, useDirection } from "@/components/ui/direction-provider"` — RTL/LTR direction context with I18nManager integration
 - Drawer: `import { Drawer, DrawerContent } from "@/components/ui/drawer"` — needs react-native-reanimated
 - DropdownMenu: `import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator } from "@/components/ui/dropdown-menu"` — needs @rn-primitives/dropdown-menu, react-native-reanimated
 - EmptyState: `import { EmptyState } from "@/components/ui/empty-state"` — Empty list/error placeholder with icon, title, description, action
-- FAB: `import { FAB } from "@/components/ui/fab"` — variant: default|secondary|destructive, position: bottom-right|bottom-left|bottom-center|none
+- FAB: `import { FAB } from "@/components/ui/fab"`
+- Field: `import { Field, FieldLabel, FieldDescription, FieldError } from "@/components/ui/field"` — Layout-focused form field with label, description, and error — variant: default|secondary|destructive, position: bottom-right|bottom-left|bottom-center|none
 - FilePicker: `import { FilePicker } from "@/components/ui/file-picker"` — File upload UI with dashed border, preview, and remove
 - Form: `import { Form, FormField, FormItem, FormMessage, useFormField } from "@/components/ui/form"` — Form context with validation and error handling
 - Grid: `import { Grid } from "@/components/ui/grid"` — FlatList-based grid layout with configurable columns and gap
-- Header: `import { Header, HeaderLeft, HeaderTitle, HeaderRight, HeaderBackButton } from "@/components/ui/header"` — Navigation header with back button, title, and actions
+- Header: `import { Header, HeaderLeft, HeaderTitle, HeaderRight, HeaderBackButton } from "@/components/ui/header"`
+- HoverCard: `import { HoverCard, HoverCardTrigger, HoverCardContent } from "@/components/ui/hover-card"` — Preview card triggered by hover or long-press, needs @rn-primitives/hover-card, react-native-reanimated — Navigation header with back button, title, and actions
 - Image: `import { Image } from "@/components/ui/image"` — Loading placeholder, error fallback, rounded variants
 - ImageGallery: `import { ImageGallery } from "@/components/ui/image-gallery"` — Horizontal image carousel with fullscreen modal and pagination
 - InfiniteList: `import { InfiniteList } from "@/components/ui/infinite-list"` — FlatList with auto-loading more items on scroll
-- Input: `import { Input } from "@/components/ui/input"` — variant: default|ghost, size: sm|md|lg
+- Input: `import { Input } from "@/components/ui/input"`
+- InputGroup: `import { InputGroup, InputGroupAddon, InputGroupInput, InputGroupButton, InputGroupText } from "@/components/ui/input-group"` — Compose inputs with prefix/suffix addons, buttons, and text — variant: default|ghost, size: sm|md|lg
 - InputOTP: `import { InputOTP } from "@/components/ui/input-otp"` — OTP verification input with individual cells
+- Kbd: `import { Kbd, KbdGroup } from "@/components/ui/kbd"` — Keyboard key display with grouping and separator, size: sm|md|lg
 - Label: `import { Label } from "@/components/ui/label"` — Form field label
 - LabeledSeparator: `import { LabeledSeparator } from "@/components/ui/labeled-separator"` — Horizontal separator with centered text label
 - LineChart: `import { LineChart } from "@/components/ui/line-chart"` — Multi-series line chart with data points, needs react-native-svg

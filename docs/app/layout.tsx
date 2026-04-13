@@ -22,7 +22,7 @@ export const metadata: Metadata = {
     default: "AniUI — Beautiful React Native Components",
     template: "%s | AniUI",
   },
-  description: "shadcn/ui for React Native. 81 accessible components built with NativeWind, rn-primitives, and TypeScript. Copy. Paste. Ship.",
+  description: "shadcn/ui for React Native. 87 accessible components built with NativeWind, rn-primitives, and TypeScript. Copy. Paste. Ship.",
   keywords: ["react native", "components", "nativewind", "tailwind", "mobile", "ios", "android", "shadcn", "ui library", "expo", "uniwind", "rn-primitives", "accessible"],
   authors: [{ name: "Anish", url: "https://aniui.dev" }],
   creator: "Anish",
@@ -36,12 +36,12 @@ export const metadata: Metadata = {
     url: "./",
     siteName: "AniUI",
     title: "AniUI — Beautiful React Native Components",
-    description: "shadcn/ui for React Native. 81 accessible components. Copy. Paste. Ship.",
+    description: "shadcn/ui for React Native. 87 accessible components. Copy. Paste. Ship.",
   },
   twitter: {
     card: "summary_large_image",
     title: "AniUI — Beautiful React Native Components",
-    description: "shadcn/ui for React Native. 81 accessible components. Copy. Paste. Ship.",
+    description: "shadcn/ui for React Native. 87 accessible components. Copy. Paste. Ship.",
     creator: "@anishlp7",
   },
   robots: {
