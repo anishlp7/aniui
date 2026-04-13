@@ -243,7 +243,7 @@ const demos: Record<string, () => React.ReactElement> = {
             </View>
             <View className="flex-row items-center justify-between px-4 py-3">
               <Text className="text-sm text-foreground">Sound Effects</Text>
-              <Switch value={sound} onValueChange={setSound} />
+              <Switch value={sound} trackColorOff="red" trackColorOn="green" thumbColorAndroid="#18181b" onValueChange={setSound} />
             </View>
             <View className="flex-row items-center justify-between px-4 py-3">
               <Text className="text-sm text-foreground">Auto-Update</Text>
