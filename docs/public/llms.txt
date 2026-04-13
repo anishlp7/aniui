@@ -17,55 +17,89 @@ AniUI is a copy-paste component library for React Native. Components are source 
 npx @aniui/cli init
 npx @aniui/cli add button text input card
 
-## Components (48 total, alphabetical)
+## Components (82 total, alphabetical)
 
-- Accordion: `import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@/components/ui/accordion"` — needs react-native-reanimated
-- ActionSheet: `import { ActionSheet } from "@/components/ui/action-sheet"` — needs @gorhom/bottom-sheet
+- Accordion: `import { Accordion, AccordionItem } from "@/components/ui/accordion"` — needs @rn-primitives/accordion, react-native-reanimated
+- ActionSheet: `import { ActionSheet } from "@/components/ui/action-sheet"` — needs @gorhom/bottom-sheet, react-native-gesture-handler
 - Alert: `import { Alert } from "@/components/ui/alert"` — variant: default|destructive|success|warning
 - AlertDialog: `import { AlertDialog, AlertDialogContent, AlertDialogHeader, AlertDialogTitle, AlertDialogDescription, AlertDialogFooter, AlertDialogAction, AlertDialogCancel } from "@/components/ui/alert-dialog"` — needs react-native-reanimated
+- AreaChart: `import { AreaChart } from "@/components/ui/area-chart"` — SVG area chart with gradient fill, needs react-native-svg
 - Avatar: `import { Avatar } from "@/components/ui/avatar"` — size: sm|md|lg, with fallback initials
 - Badge: `import { Badge } from "@/components/ui/badge"` — variant: default|secondary|outline|destructive
 - Banner: `import { Banner } from "@/components/ui/banner"` — variant: default|info|warning|destructive|success, dismiss, action
-- BottomSheet: `import { BottomSheet } from "@/components/ui/bottom-sheet"` — needs @gorhom/bottom-sheet
+- BarChart: `import { BarChart } from "@/components/ui/bar-chart"` — Vertical and horizontal bar chart, needs react-native-svg
+- BottomSheet: `import { BottomSheet } from "@/components/ui/bottom-sheet"` — needs @gorhom/bottom-sheet, react-native-gesture-handler
 - Button: `import { Button } from "@/components/ui/button"` — variant: default|secondary|outline|ghost|destructive, size: sm|md|lg
 - Calendar: `import { Calendar } from "@/components/ui/calendar"` — Month grid with single date and range selection
 - Card: `import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from "@/components/ui/card"`
 - Carousel: `import { Carousel } from "@/components/ui/carousel"` — FlatList-based horizontal carousel with pagination dots and autoPlay
-- Checkbox: `import { Checkbox } from "@/components/ui/checkbox"` — checked|unchecked|disabled
+- ChartTooltip: `import { ChartTooltip } from "@/components/ui/chart-tooltip"` — Tooltip overlay for chart data points
+- ChatBubble: `import { ChatBubble } from "@/components/ui/chat-bubble"` — Sent/received message bubble with status indicators
+- Checkbox: `import { Checkbox } from "@/components/ui/checkbox"` — needs @rn-primitives/checkbox
 - Chip: `import { Chip } from "@/components/ui/chip"` — variant: default|secondary|outline|destructive, selected state, onClose
 - Collapsible: `import { Collapsible, CollapsibleTrigger, CollapsibleContent } from "@/components/ui/collapsible"` — needs react-native-reanimated
+- Combobox: `import { Combobox } from "@/components/ui/combobox"` — Searchable select dropdown with type-to-filter
+- ConnectionBanner: `import { ConnectionBanner } from "@/components/ui/connection-banner"` — Animated online/offline status banner, needs react-native-reanimated
+- ContextMenu: `import { ContextMenu, ContextMenuTrigger, ContextMenuContent, ContextMenuItem, ContextMenuSeparator } from "@/components/ui/context-menu"` — needs @rn-primitives/context-menu, react-native-reanimated
 - DatePicker: `import { DatePicker, DateRangePicker } from "@/components/ui/date-picker"` — Calendar popup picker with range support
-- Dialog: `import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter } from "@/components/ui/dialog"` — needs react-native-reanimated
+- Dialog: `import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter } from "@/components/ui/dialog"`
 - Drawer: `import { Drawer, DrawerContent } from "@/components/ui/drawer"` — needs react-native-reanimated
-- DropdownMenu: `import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator } from "@/components/ui/dropdown-menu"` — needs react-native-reanimated
+- DropdownMenu: `import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator } from "@/components/ui/dropdown-menu"` — needs @rn-primitives/dropdown-menu, react-native-reanimated
 - EmptyState: `import { EmptyState } from "@/components/ui/empty-state"` — Empty list/error placeholder with icon, title, description, action
 - FAB: `import { FAB } from "@/components/ui/fab"` — variant: default|secondary|destructive, position: bottom-right|bottom-left|bottom-center|none
+- FilePicker: `import { FilePicker } from "@/components/ui/file-picker"` — File upload UI with dashed border, preview, and remove
+- Form: `import { Form, FormField, FormItem, FormMessage, useFormField } from "@/components/ui/form"` — Form context with validation and error handling
+- Grid: `import { Grid } from "@/components/ui/grid"` — FlatList-based grid layout with configurable columns and gap
+- Header: `import { Header, HeaderLeft, HeaderTitle, HeaderRight, HeaderBackButton } from "@/components/ui/header"` — Navigation header with back button, title, and actions
 - Image: `import { Image } from "@/components/ui/image"` — Loading placeholder, error fallback, rounded variants
+- ImageGallery: `import { ImageGallery } from "@/components/ui/image-gallery"` — Horizontal image carousel with fullscreen modal and pagination
+- InfiniteList: `import { InfiniteList } from "@/components/ui/infinite-list"` — FlatList with auto-loading more items on scroll
 - Input: `import { Input } from "@/components/ui/input"` — variant: default|ghost, size: sm|md|lg
-- InputOTP: `import { InputOTP } from "@/components/ui/input-otp"` — OTP verification input
+- InputOTP: `import { InputOTP } from "@/components/ui/input-otp"` — OTP verification input with individual cells
 - Label: `import { Label } from "@/components/ui/label"` — Form field label
+- LabeledSeparator: `import { LabeledSeparator } from "@/components/ui/labeled-separator"` — Horizontal separator with centered text label
+- LineChart: `import { LineChart } from "@/components/ui/line-chart"` — Multi-series line chart with data points, needs react-native-svg
 - List: `import { List, ListItem } from "@/components/ui/list"` — Styled list items
-- Popover: `import { Popover, PopoverTrigger, PopoverContent } from "@/components/ui/popover"` — needs react-native-reanimated
-- Progress: `import { Progress } from "@/components/ui/progress"` — Percentage bar
-- RadioGroup: `import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"`
+- MaskedInput: `import { MaskedInput } from "@/components/ui/masked-input"` — Auto-format masks for credit cards, phones, dates
+- NumberInput: `import { NumberInput } from "@/components/ui/number-input"` — Numeric input with +/- buttons and min/max/step
+- Pagination: `import { Pagination } from "@/components/ui/pagination"` — Page navigation with numbered buttons and prev/next
+- PasswordInput: `import { PasswordInput } from "@/components/ui/password-input"` — Password input with show/hide toggle and strength indicator
+- PhoneInput: `import { PhoneInput } from "@/components/ui/phone-input"` — Phone number input with country code selector
+- PieChart: `import { PieChart } from "@/components/ui/pie-chart"` — Pie and donut chart, needs react-native-svg
+- Popover: `import { Popover, PopoverTrigger, PopoverContent } from "@/components/ui/popover"` — needs @rn-primitives/popover, react-native-reanimated
+- Price: `import { Price } from "@/components/ui/price"` — Formatted currency display with locale and strikethrough support
+- Progress: `import { Progress } from "@/components/ui/progress"` — needs @rn-primitives/progress
+- ProgressSteps: `import { ProgressSteps, ProgressStep } from "@/components/ui/progress-steps"` — Multi-step progress indicator for wizards
+- RadarChart: `import { RadarChart } from "@/components/ui/radar-chart"` — Radar/spider chart with polygon grid, needs react-native-svg
+- RadialChart: `import { RadialChart } from "@/components/ui/radial-chart"` — Circular radial progress chart, needs react-native-svg
+- RadioGroup: `import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"` — needs @rn-primitives/radio-group
 - Rating: `import { Rating } from "@/components/ui/rating"` — Star rating, size: sm|md|lg, readOnly mode
+- RefreshControl: `import { RefreshControl } from "@/components/ui/refresh-control"` — Themed pull-to-refresh for ScrollView and FlatList
+- SafeArea: `import { SafeArea } from "@/components/ui/safe-area"` — Styled SafeAreaView wrapper with theme variants
 - SearchBar: `import { SearchBar } from "@/components/ui/search-bar"` — Search input with icon, clear, cancel
-- SegmentedControl: `import { SegmentedControl } from "@/components/ui/segmented-control"` — size: sm|md|lg
-- Select: `import { Select } from "@/components/ui/select"` — needs @gorhom/bottom-sheet
+- SegmentedControl: `import { SegmentedControl } from "@/components/ui/segmented-control"` — iOS-style segmented control, size: sm|md|lg
+- Select: `import { Select } from "@/components/ui/select"` — Dropdown select with search support
 - Separator: `import { Separator } from "@/components/ui/separator"` — orientation: horizontal|vertical
-- Skeleton: `import { Skeleton } from "@/components/ui/skeleton"` — needs react-native-reanimated
+- Skeleton: `import { Skeleton } from "@/components/ui/skeleton"` — Animated loading placeholder, needs react-native-reanimated
 - Slider: `import { Slider } from "@/components/ui/slider"` — Draggable numeric slider
 - Spinner: `import { Spinner } from "@/components/ui/spinner"` — size: sm|md|lg
+- StatCard: `import { StatCard } from "@/components/ui/stat-card"` — KPI card with value, trend indicator, and change percentage
+- StatusIndicator: `import { StatusIndicator } from "@/components/ui/status-indicator"` — Colored dot for online/offline/away/busy status
 - Stepper: `import { Stepper } from "@/components/ui/stepper"` — Numeric +/- control, size: sm|md|lg, min/max/step
+- SwipeableListItem: `import { SwipeableListItem } from "@/components/ui/swipeable-list-item"` — Swipeable list item with action buttons, needs react-native-reanimated, react-native-gesture-handler
 - Switch: `import { Switch } from "@/components/ui/switch"` — Themed toggle switch
+- TabBar: `import { TabBar, TabBarItem } from "@/components/ui/tab-bar"` — Bottom tab bar with badge support and active states
 - Table: `import { Table, TableHeader, TableBody, TableRow, TableHead, TableCell } from "@/components/ui/table"`
-- Tabs: `import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs"` — needs react-native-reanimated
+- Tabs: `import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs"`
 - Text: `import { Text } from "@/components/ui/text"` — variant: h1|h2|h3|h4|p|lead|large|small|muted
 - Textarea: `import { Textarea } from "@/components/ui/textarea"` — Multi-line text input
-- Toast: `import { ToastProvider, useToast } from "@/components/ui/toast"` — needs react-native-reanimated
+- ThemeProvider: `import { ThemeProvider, useTheme } from "@/components/ui/theme-provider"` — Light/dark/system mode with toggle
+- Timeline: `import { Timeline, TimelineItem } from "@/components/ui/timeline"` — Vertical timeline for events and activity feeds
+- Toast: `import { ToastProvider, useToast } from "@/components/ui/toast"` — Notification toast with auto-dismiss, needs react-native-reanimated
 - Toggle: `import { Toggle } from "@/components/ui/toggle"` — Two-state toggle button
 - ToggleGroup: `import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group"` — Exclusive selection group
-- Tooltip: `import { Tooltip } from "@/components/ui/tooltip"` — needs react-native-reanimated
+- Tooltip: `import { Tooltip } from "@/components/ui/tooltip"` — needs @rn-primitives/tooltip, react-native-reanimated
+- TypingIndicator: `import { TypingIndicator } from "@/components/ui/typing-indicator"` — Animated typing dots for chat, needs react-native-reanimated
 
 ## Theme Tokens
 Available as Tailwind classes via CSS variables:

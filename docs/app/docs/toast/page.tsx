@@ -1,45 +1,10 @@
-"use client";
-import { PreviewToastProvider, usePreviewToast } from "@/components/preview/toast";
-import { ComponentPlayground } from "@/components/component-playground";
-import { CodeBlock } from "@/components/code-block";
+import { ComponentPlayground } from "@/components/highlighted-playground";
+import { CodeBlock } from "@/components/code-block-server";
 import { PropsTable } from "@/components/props-table";
 import { AddComponentTabs } from "@/components/package-manager-tabs";
 import { PreviewToggle } from "@/components/preview-toggle";
+import { ToastDemo } from "./_demos";
 
-function ToastButtons() {
-  const { toast } = usePreviewToast();
-  return (
-    <div className="flex flex-wrap gap-2">
-      <button
-        onClick={() => toast({ title: "Success!", description: "Your action was completed." })}
-        className="inline-flex items-center justify-center rounded-md bg-primary text-primary-foreground px-4 py-2 text-sm font-medium hover:bg-primary/90 transition-colors cursor-pointer"
-      >
-        Default
-      </button>
-      <button
-        onClick={() => toast({ title: "Error", description: "Something went wrong.", variant: "destructive" })}
-        className="inline-flex items-center justify-center rounded-md bg-destructive text-destructive-foreground px-4 py-2 text-sm font-medium hover:bg-destructive/90 transition-colors cursor-pointer"
-      >
-        Destructive
-      </button>
-      <button
-        onClick={() => toast({ title: "Saved!", description: "Changes saved successfully.", variant: "success" })}
-        className="inline-flex items-center justify-center rounded-md border border-input bg-background text-foreground px-4 py-2 text-sm font-medium hover:bg-accent transition-colors cursor-pointer"
-      >
-        Success
-      </button>
-    </div>
-  );
-}
-
-function ToastDemo() {
-  return (
-    <PreviewToastProvider>
-      <ToastButtons />
-    </PreviewToastProvider>
-  );
-}
-const installCode = `npx @aniui/cli add toast`;
 const usageCode = `import { ToastProvider, useToast } from "@/components/ui/toast";
 // Wrap your app with ToastProvider
 export function App() {

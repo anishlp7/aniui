@@ -1,12 +1,10 @@
-"use client";
-import { useState } from "react";
-import { PreviewRadioGroup, PreviewRadioGroupItem } from "@/components/preview/radio-group";
-import { ComponentPlayground } from "@/components/component-playground";
-import { CodeBlock } from "@/components/code-block";
+import { ComponentPlayground } from "@/components/highlighted-playground";
+import { CodeBlock } from "@/components/code-block-server";
 import { PropsTable, ComponentTable } from "@/components/props-table";
-
 import { AddComponentTabs } from "@/components/package-manager-tabs";
 import { PreviewToggle } from "@/components/preview-toggle";
+import { RadioGroupDemo } from "./_demos";
+
 const installCode = `npx @aniui/cli add radio-group`;
 const usageCode = `import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { useState } from "react";
@@ -67,18 +65,6 @@ export function RadioGroupItem({ value, label, className, ...props }: RadioGroup
     </RadioGroupPrimitive.Item>
   );
 }`;
-function RadioGroupDemo() {
-  const [value, setValue] = useState("option-1");
-  return (
-    <div className="w-full max-w-sm">
-      <PreviewRadioGroup value={value} onValueChange={setValue}>
-        <PreviewRadioGroupItem value="option-1" label="Option 1" />
-        <PreviewRadioGroupItem value="option-2" label="Option 2" />
-        <PreviewRadioGroupItem value="option-3" label="Option 3" />
-      </PreviewRadioGroup>
-    </div>
-  );
-}
 export default function RadioGroupPage() {
   return (
     <div className="space-y-10">

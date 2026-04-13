@@ -1,8 +1,6 @@
-"use client";
-import React from "react";
 import { PreviewCarousel } from "@/components/preview/carousel";
-import { ComponentPlayground } from "@/components/component-playground";
-import { CodeBlock } from "@/components/code-block";
+import { ComponentPlayground } from "@/components/highlighted-playground";
+import { CodeBlock } from "@/components/code-block-server";
 import { PropsTable } from "@/components/props-table";
 import { AddComponentTabs } from "@/components/package-manager-tabs";
 import { PreviewToggle } from "@/components/preview-toggle";
@@ -67,11 +65,13 @@ export function Carousel({ className, data, itemWidth, showDots = true, autoPlay
     </View>
   );
 }`;
+
 const slides = [
   <div key="1" className="h-48 bg-primary rounded-lg flex items-center justify-center"><span className="text-primary-foreground text-lg font-medium">Slide 1</span></div>,
   <div key="2" className="h-48 bg-secondary rounded-lg flex items-center justify-center"><span className="text-secondary-foreground text-lg font-medium">Slide 2</span></div>,
   <div key="3" className="h-48 bg-accent rounded-lg flex items-center justify-center"><span className="text-accent-foreground text-lg font-medium">Slide 3</span></div>,
 ];
+
 export default function CarouselPage() {
   return (
     <div className="space-y-12">

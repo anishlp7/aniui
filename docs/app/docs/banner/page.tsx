@@ -1,11 +1,11 @@
-"use client";
 import React from "react";
 import { PreviewBanner } from "@/components/preview/banner";
-import { ComponentPlayground } from "@/components/component-playground";
-import { CodeBlock } from "@/components/code-block";
+import { ComponentPlayground } from "@/components/highlighted-playground";
+import { CodeBlock } from "@/components/code-block-server";
 import { PropsTable, type PropDef } from "@/components/props-table";
 import { AddComponentTabs } from "@/components/package-manager-tabs";
 import { PreviewToggle } from "@/components/preview-toggle";
+import { BannerDemo, BannerActionDemo } from "./_demos";
 
 const installCode = `npx @aniui/cli add banner`;
 const usageCode = `import { Banner } from "@/components/ui/banner";
@@ -167,9 +167,7 @@ export default function BannerPage() {
       </div>
       <PreviewToggle>
         <ComponentPlayground code={usageCode}>
-          <PreviewBanner variant="info" onDismiss={() => {}}>
-            New version available. Update now for the latest features.
-          </PreviewBanner>
+          <BannerDemo />
         </ComponentPlayground>
       </PreviewToggle>
       <div>
@@ -211,14 +209,7 @@ export default function BannerPage() {
           prop with a label and onPress handler to show an inline action button.
         </p>
         <ComponentPlayground code={actionCode}>
-          <PreviewBanner
-            variant="info"
-            actionLabel="Update"
-            onAction={() => {}}
-            onDismiss={() => {}}
-          >
-            A new version is available.
-          </PreviewBanner>
+          <BannerActionDemo />
         </ComponentPlayground>
       </div>
       <div>

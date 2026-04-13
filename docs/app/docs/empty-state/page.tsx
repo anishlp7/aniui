@@ -1,12 +1,12 @@
-"use client";
 import React from "react";
 import { PreviewEmptyState } from "@/components/preview/empty-state";
-import { ComponentPlayground } from "@/components/component-playground";
-import { CodeBlock } from "@/components/code-block";
+import { ComponentPlayground } from "@/components/highlighted-playground";
+import { CodeBlock } from "@/components/code-block-server";
 import { PropsTable } from "@/components/props-table";
 
 import { AddComponentTabs } from "@/components/package-manager-tabs";
 import { PreviewToggle } from "@/components/preview-toggle";
+import { EmptyStateMainDemo, EmptyStateNoResultsDemo, EmptyStateErrorDemo } from "./_demos";
 const installCode = `npx @aniui/cli add empty-state`;
 const usageCode = `import { EmptyState } from "@/components/ui/empty-state";
 import { Ionicons } from "@expo/vector-icons";
@@ -63,24 +63,10 @@ export function EmptyState({ className, icon, title, description, action, ...pro
     </View>
   );
 }`;
-function SearchIcon() {
-  return (
-    <svg className="h-12 w-12 text-muted-foreground" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-      <circle cx="11" cy="11" r="8" /><path d="M21 21l-4.35-4.35" />
-    </svg>
-  );
-}
 function InboxIcon() {
   return (
     <svg className="h-12 w-12 text-muted-foreground" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
       <rect x="2" y="4" width="20" height="16" rx="2" /><path d="M2 10h7l2 2h2l2-2h7" />
-    </svg>
-  );
-}
-function AlertIcon() {
-  return (
-    <svg className="h-12 w-12 text-destructive" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-      <circle cx="12" cy="12" r="10" /><path d="M12 8v4M12 16h.01" />
     </svg>
   );
 }
@@ -93,13 +79,7 @@ export default function EmptyStatePage() {
       </div>
       <PreviewToggle>
         <ComponentPlayground code={usageCode}>
-          <PreviewEmptyState
-            icon={<SearchIcon />}
-            title="No results found"
-            description="Try adjusting your search or filters to find what you're looking for."
-            actionLabel="Clear Filters"
-            onAction={() => {}}
-          />
+          <EmptyStateMainDemo />
         </ComponentPlayground>
       </PreviewToggle>
       <div>
@@ -114,13 +94,7 @@ export default function EmptyStatePage() {
         <h2 className="text-xl font-semibold mb-3">No Search Results</h2>
         <p className="text-sm text-muted-foreground mb-4">Show when a search or filter returns empty.</p>
         <ComponentPlayground code={noResultsCode}>
-          <PreviewEmptyState
-            icon={<SearchIcon />}
-            title="No results found"
-            description="Try adjusting your search or filters."
-            actionLabel="Clear Filters"
-            onAction={() => {}}
-          />
+          <EmptyStateNoResultsDemo />
         </ComponentPlayground>
       </div>
       <div>
@@ -138,13 +112,7 @@ export default function EmptyStatePage() {
         <h2 className="text-xl font-semibold mb-3">Error State</h2>
         <p className="text-sm text-muted-foreground mb-4">Show when data fails to load, with a retry action.</p>
         <ComponentPlayground code={errorCode}>
-          <PreviewEmptyState
-            icon={<AlertIcon />}
-            title="Something went wrong"
-            description="We couldn't load your data. Please try again."
-            actionLabel="Retry"
-            onAction={() => {}}
-          />
+          <EmptyStateErrorDemo />
         </ComponentPlayground>
       </div>
       <div>

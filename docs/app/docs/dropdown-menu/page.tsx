@@ -1,8 +1,7 @@
-"use client";
 import React from "react";
 import { PreviewDropdownMenu } from "@/components/preview/dropdown-menu";
-import { ComponentPlayground } from "@/components/component-playground";
-import { CodeBlock } from "@/components/code-block";
+import { ComponentPlayground } from "@/components/highlighted-playground";
+import { CodeBlock } from "@/components/code-block-server";
 import { PropsTable } from "@/components/props-table";
 import { PreviewToggle } from "@/components/preview-toggle";
 import { AddComponentTabs } from "@/components/package-manager-tabs";

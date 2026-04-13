@@ -1,11 +1,10 @@
-"use client";
 import { PreviewInputOTP } from "@/components/preview/input-otp";
-import { ComponentPlayground } from "@/components/component-playground";
-import { CodeBlock } from "@/components/code-block";
+import { ComponentPlayground } from "@/components/highlighted-playground";
+import { CodeBlock } from "@/components/code-block-server";
 import { PropsTable } from "@/components/props-table";
-
 import { AddComponentTabs } from "@/components/package-manager-tabs";
 import { PreviewToggle } from "@/components/preview-toggle";
+
 const installCode = `npx @aniui/cli add input-otp`;
 const usageCode = `import { InputOTP } from "@/components/ui/input-otp";
 import { useState } from "react";

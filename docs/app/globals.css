@@ -33,6 +33,15 @@
 
 :root {
   --radius: 0.625rem;
+  --sh-class: #2d5e9d;
+  --sh-identifier: #354150;
+  --sh-sign: #8996a3;
+  --sh-property: #0550ae;
+  --sh-entity: #249a97;
+  --sh-jsxliterals: #6266d1;
+  --sh-string: #00a99a;
+  --sh-keyword: #f47067;
+  --sh-comment: #a19595;
   --background: 0 0% 100%;
   --foreground: 240 10% 3.9%;
   --card: 0 0% 100%;
@@ -57,6 +66,15 @@
 }
 
 .dark {
+  --sh-class: #4c97f8;
+  --sh-identifier: #d1d5db;
+  --sh-sign: #8996a3;
+  --sh-property: #79c0ff;
+  --sh-entity: #67cdcc;
+  --sh-jsxliterals: #a78bfa;
+  --sh-string: #7ee787;
+  --sh-keyword: #ff7b72;
+  --sh-comment: #8b949e;
   --background: 240 10% 3.9%;
   --foreground: 0 0% 98%;
   --card: 240 10% 3.9%;
@@ -129,9 +147,51 @@ html {
   display: block;
 }
 
-/* Code block styling for react-live */
-.prism-code {
-  font-family: var(--font-mono), monospace !important;
-  font-size: 0.875rem !important;
-  line-height: 1.7 !important;
+/* Shiki syntax highlighting — dual theme (light/dark) */
+.shiki-wrapper code span {
+  color: var(--shiki-light);
+}
+.dark .shiki-wrapper code span {
+  color: var(--shiki-dark);
+}
+.shiki-wrapper pre {
+  background: transparent !important;
+  margin: 0;
+}
+.shiki-wrapper code {
+  display: block;
+}
+
+/* rehype-pretty-code — fenced code blocks in MDX */
+[data-rehype-pretty-code-figure] pre {
+  background: transparent !important;
+  margin: 0;
+}
+[data-rehype-pretty-code-figure] code {
+  display: block;
+  font-family: var(--font-mono), monospace;
+}
+[data-rehype-pretty-code-figure] code span {
+  color: var(--shiki-light);
+}
+.dark [data-rehype-pretty-code-figure] code span {
+  color: var(--shiki-dark);
+}
+[data-rehype-pretty-code-figure] [data-highlighted-line] {
+  background-color: hsl(var(--accent) / 0.1);
+  border-left: 2px solid hsl(var(--primary));
+}
+[data-rehype-pretty-code-title] {
+  border: 1px solid hsl(var(--border));
+  border-bottom: 0;
+  background: hsl(var(--secondary) / 0.5);
+  padding: 0.5rem 1rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: hsl(var(--muted-foreground));
+  border-radius: 0.5rem 0.5rem 0 0;
+}
+[data-rehype-pretty-code-title] + div > pre {
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
 }

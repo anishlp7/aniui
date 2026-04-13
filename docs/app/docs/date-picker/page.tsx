@@ -1,12 +1,10 @@
-"use client";
-import { PreviewDatePickerDemo, PreviewDateRangeDemo } from "@/components/preview/date-picker";
-import { ComponentPlayground } from "@/components/component-playground";
-import { CodeBlock } from "@/components/code-block";
+import { ComponentPlayground } from "@/components/highlighted-playground";
+import { CodeBlock } from "@/components/code-block-server";
 import { PropsTable } from "@/components/props-table";
-
 import { AddComponentTabs } from "@/components/package-manager-tabs";
 import { PreviewToggle } from "@/components/preview-toggle";
-const installCode = `npx @aniui/cli add date-picker`;
+import { DatePickerDemo, DateRangeDemo } from "./_demos";
+
 const usageCode = `import { DatePicker } from "@/components/ui/date-picker";
 import { useState } from "react";
 
@@ -126,7 +124,7 @@ export default function DatePickerPage() {
       {/* Preview */}
       <PreviewToggle>
         <ComponentPlayground code={usageCode}>
-          <PreviewDatePickerDemo />
+          <DatePickerDemo />
         </ComponentPlayground>
       </PreviewToggle>
       {/* Installation */}
@@ -149,7 +147,7 @@ export default function DatePickerPage() {
           Use <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">DateRangePicker</code> to select a start and end date.
         </p>
         <ComponentPlayground code={rangeCode}>
-          <PreviewDateRangeDemo />
+          <DateRangeDemo />
         </ComponentPlayground>
       </div>
       {/* Date Constraints */}
@@ -160,7 +158,7 @@ export default function DatePickerPage() {
         </p>
         <CodeBlock code={constrainedCode} title="app/index.tsx" />
       </div>
-      {/* Props — DatePicker */}
+      {/* Props -- DatePicker */}
       <div className="space-y-4">
         <h2 className="text-2xl font-semibold tracking-tight text-foreground">DatePicker Props</h2>
         <PropsTable props={[
@@ -173,7 +171,7 @@ export default function DatePickerPage() {
           { name: "className", type: "string" },
         ]} />
       </div>
-      {/* Props — DateRangePicker */}
+      {/* Props -- DateRangePicker */}
       <div className="space-y-4">
         <h2 className="text-2xl font-semibold tracking-tight text-foreground">DateRangePicker Props</h2>
         <PropsTable props={[

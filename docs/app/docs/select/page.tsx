@@ -1,12 +1,9 @@
-"use client";
-import { PreviewSelect } from "@/components/preview/select";
-import { ComponentPlayground } from "@/components/component-playground";
-import { CodeBlock } from "@/components/code-block";
+import { ComponentPlayground } from "@/components/highlighted-playground";
+import { CodeBlock } from "@/components/code-block-server";
 import { PropsTable } from "@/components/props-table";
-import { PreviewToggle } from "@/components/preview-toggle";
 import { AddComponentTabs } from "@/components/package-manager-tabs";
+import { SelectDemo } from "./_demos";
 
-const installCode = `npx @aniui/cli add select`;
 const usageCode = `import { Select } from "@/components/ui/select";
 import { useState } from "react";
 
@@ -130,7 +127,7 @@ export function Select({
                   accessibilityState={{ selected: isSelected }}
                 >
                   <Text className={cn("flex-1 text-base text-foreground", isSelected && "font-semibold")} numberOfLines={1}>{o.label}</Text>
-                  {isSelected && <Text className="text-base text-primary font-bold">✓</Text>}
+                  {isSelected && <Text className="text-base text-primary font-bold">&#x2713;</Text>}
                 </Pressable>
               );
             })}
@@ -157,16 +154,7 @@ export default function SelectPage() {
       </div>
       {/* Preview */}
       <ComponentPlayground code={usageCode}>
-        <PreviewSelect
-          label="Fruit"
-          options={[
-            { label: "Apple", value: "apple" },
-            { label: "Banana", value: "banana" },
-            { label: "Cherry", value: "cherry" },
-            { label: "Grape", value: "grape" },
-          ]}
-          placeholder="Pick a fruit..."
-        />
+        <SelectDemo />
       </ComponentPlayground>
       {/* Installation */}
       <div className="space-y-4">

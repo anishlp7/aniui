@@ -1,10 +1,10 @@
-"use client";
 import { PreviewFormDemo } from "@/components/preview/form";
-import { ComponentPlayground } from "@/components/component-playground";
+import { ComponentPlayground } from "@/components/highlighted-playground";
 import { PreviewToggle } from "@/components/preview-toggle";
-import { CodeBlock } from "@/components/code-block";
+import { CodeBlock } from "@/components/code-block-server";
 import { PropsTable } from "@/components/props-table";
 import { AddComponentTabs } from "@/components/package-manager-tabs";
+
 const installCode = `npx @aniui/cli add form`;
 const usageCode = `import { Form, FormField, FormItem, FormMessage, useFormField } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";

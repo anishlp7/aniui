@@ -1,11 +1,10 @@
-"use client";
-import React, { useState } from "react";
 import { PreviewChip } from "@/components/preview/chip";
-import { ComponentPlayground } from "@/components/component-playground";
-import { CodeBlock } from "@/components/code-block";
+import { ComponentPlayground } from "@/components/highlighted-playground";
+import { CodeBlock } from "@/components/code-block-server";
 import { PropsTable } from "@/components/props-table";
 import { AddComponentTabs } from "@/components/package-manager-tabs";
 import { PreviewToggle } from "@/components/preview-toggle";
+import { SelectableDemo, ClosableDemo } from "./_demos";
 
 const installCode = `npx @aniui/cli add chip`;
 const usageCode = `import { Chip } from "@/components/ui/chip";
@@ -85,18 +84,6 @@ export function Chip({ variant, size, className, textClassName, children, select
     </Pressable>
   );
 }`;
-function SelectableDemo() {
-  const [selected, setSelected] = useState<string[]>(["react-native"]);
-  const toggle = (id: string) => setSelected((s) => s.includes(id) ? s.filter((x) => x !== id) : [...s, id]);
-  return (
-    <div className="flex flex-wrap gap-2">
-      <PreviewChip selected={selected.includes("react-native")} onClick={() => toggle("react-native")}>React Native</PreviewChip>
-      <PreviewChip selected={selected.includes("expo")} onClick={() => toggle("expo")}>Expo</PreviewChip>
-      <PreviewChip selected={selected.includes("nativewind")} onClick={() => toggle("nativewind")}>NativeWind</PreviewChip>
-      <PreviewChip selected={selected.includes("typescript")} onClick={() => toggle("typescript")}>TypeScript</PreviewChip>
-    </div>
-  );
-}
 export default function ChipPage() {
   return (
     <div className="space-y-12">
@@ -149,10 +136,7 @@ export default function ChipPage() {
         <h2 className="text-xl font-semibold mb-3">Closable</h2>
         <p className="text-sm text-muted-foreground mb-4">Add an <code>onClose</code> handler to show a remove button.</p>
         <ComponentPlayground code={closableCode}>
-          <div className="flex flex-wrap gap-2">
-            <PreviewChip onClose={() => {}}>Removable</PreviewChip>
-            <PreviewChip variant="secondary" onClose={() => {}}>Tag</PreviewChip>
-          </div>
+          <ClosableDemo />
         </ComponentPlayground>
       </div>
       <div>

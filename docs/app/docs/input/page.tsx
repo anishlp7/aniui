@@ -1,7 +1,6 @@
-"use client";
 import { PreviewInput, PreviewInputLeadingIcon, PreviewInputTrailingIcon, PreviewInputPasswordToggle } from "@/components/preview/input";
-import { ComponentPlayground } from "@/components/component-playground";
-import { CodeBlock } from "@/components/code-block";
+import { ComponentPlayground } from "@/components/highlighted-playground";
+import { CodeBlock } from "@/components/code-block-server";
 import { PropsTable } from "@/components/props-table";
 import { AddComponentTabs } from "@/components/package-manager-tabs";
 import { PreviewToggle } from "@/components/preview-toggle";
@@ -177,8 +176,8 @@ export default function InputPage() {
         <PropsTable props={[
           { name: "variant", type: "\"default\" | \"ghost\"", default: "\"default\"" },
           { name: "size", type: "\"sm\" | \"md\" | \"lg\"", default: "\"md\"" },
-          { name: "leadingIcon", type: "React.ReactNode", default: "—" },
-          { name: "trailingIcon", type: "React.ReactNode", default: "—" },
+          { name: "leadingIcon", type: "React.ReactNode", default: "\u2014" },
+          { name: "trailingIcon", type: "React.ReactNode", default: "\u2014" },
           { name: "className", type: "string" },
         ]} />
         <p className="text-sm text-muted-foreground">

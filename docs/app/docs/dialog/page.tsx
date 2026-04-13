@@ -1,13 +1,9 @@
-"use client";
-import React from "react";
-import { PreviewDialogDemo } from "@/components/preview/dialog";
-import { ComponentPlayground } from "@/components/component-playground";
-import { CodeBlock } from "@/components/code-block";
+import { ComponentPlayground } from "@/components/highlighted-playground";
+import { CodeBlock } from "@/components/code-block-server";
 import { PropsTable, ComponentTable } from "@/components/props-table";
-import { PreviewToggle } from "@/components/preview-toggle";
 import { AddComponentTabs } from "@/components/package-manager-tabs";
+import { DialogDemo } from "./_demos";
 
-const installCode = `npx @aniui/cli add dialog`;
 const usageCode = `import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter } from "@/components/ui/dialog";
 import { useState } from "react";
 
@@ -97,7 +93,7 @@ export default function DialogPage() {
       </div>
       {/* Preview */}
       <ComponentPlayground code={usageCode}>
-        <PreviewDialogDemo />
+        <DialogDemo />
       </ComponentPlayground>
       {/* Installation */}
       <div className="space-y-4">

@@ -1,12 +1,10 @@
-"use client";
-import { PreviewDrawer } from "@/components/preview/drawer";
-import { ComponentPlayground } from "@/components/component-playground";
-import { CodeBlock } from "@/components/code-block";
+import { ComponentPlayground } from "@/components/highlighted-playground";
+import { CodeBlock } from "@/components/code-block-server";
 import { PropsTable } from "@/components/props-table";
 import { AddComponentTabs } from "@/components/package-manager-tabs";
 import { PreviewToggle } from "@/components/preview-toggle";
+import { DrawerDefaultDemo, DrawerLeftDemo, DrawerRightDemo } from "./_demos";
 
-const installCode = `npx @aniui/cli add drawer`;
 const usageCode = `import { Drawer, DrawerContent } from "@/components/ui/drawer";
 
 export function MyScreen() {
@@ -96,9 +94,7 @@ export default function DrawerPage() {
       {/* Preview */}
       <PreviewToggle>
         <ComponentPlayground code={usageCode}>
-          <div className="flex flex-wrap items-center gap-4">
-            <PreviewDrawer />
-          </div>
+          <DrawerDefaultDemo />
         </ComponentPlayground>
       </PreviewToggle>
       {/* Installation */}
@@ -115,18 +111,14 @@ export default function DrawerPage() {
       <div className="space-y-4">
         <h2 className="text-2xl font-semibold tracking-tight text-foreground">Left Drawer (Default)</h2>
         <ComponentPlayground code={leftDrawerCode}>
-          <div className="flex flex-wrap items-center gap-3">
-            <PreviewDrawer side="left" />
-          </div>
+          <DrawerLeftDemo />
         </ComponentPlayground>
       </div>
       {/* Right Drawer */}
       <div className="space-y-4">
         <h2 className="text-2xl font-semibold tracking-tight text-foreground">Right Drawer</h2>
         <ComponentPlayground code={rightDrawerCode}>
-          <div className="flex flex-wrap items-center gap-3">
-            <PreviewDrawer side="right" />
-          </div>
+          <DrawerRightDemo />
         </ComponentPlayground>
       </div>
       {/* Props - Drawer */}
