@@ -58,6 +58,12 @@ export const registry: Record<string, ComponentEntry> = {
   rating: { name: "Rating", file: "components/ui/rating.tsx", description: "Star rating with interactive and read-only modes", dependencies: ["class-variance-authority", "clsx", "tailwind-merge"], registryDependencies: [], tier: 1 },
   stepper: { name: "Stepper", file: "components/ui/stepper.tsx", description: "Numeric increment/decrement control with min/max/step", dependencies: ["class-variance-authority", "clsx", "tailwind-merge"], registryDependencies: [], tier: 1 },
   banner: { name: "Banner", file: "components/ui/banner.tsx", description: "Full-width notification banner with variants and dismiss", dependencies: ["class-variance-authority", "clsx", "tailwind-merge"], registryDependencies: [], tier: 1 },
+  combobox: { name: "Combobox", file: "components/ui/combobox.tsx", description: "Searchable select with multi-select, groups, clear, and custom rendering", dependencies: ["react-native-svg", "clsx", "tailwind-merge"], registryDependencies: [], tier: 1 },
+  field: { name: "Field", file: "components/ui/field.tsx", description: "Layout-focused form field with label, description, and error", dependencies: ["clsx", "tailwind-merge"], registryDependencies: [], tier: 1 },
+  "input-group": { name: "InputGroup", file: "components/ui/input-group.tsx", description: "Compose inputs with prefix/suffix addons, buttons, and text", dependencies: ["clsx", "tailwind-merge"], registryDependencies: [], tier: 1 },
+  kbd: { name: "Kbd", file: "components/ui/kbd.tsx", description: "Keyboard key display with grouping and separator", dependencies: ["class-variance-authority", "clsx", "tailwind-merge"], registryDependencies: [], tier: 1 },
+  "hover-card": { name: "HoverCard", file: "components/ui/hover-card.tsx", description: "Preview content card triggered by hover or long-press", dependencies: ["@rn-primitives/hover-card", "@rn-primitives/portal", "react-native-reanimated", "clsx", "tailwind-merge"], registryDependencies: [], tier: 3 },
+  "direction-provider": { name: "DirectionProvider", file: "components/ui/direction-provider.tsx", description: "RTL/LTR direction context with I18nManager integration", dependencies: ["clsx", "tailwind-merge"], registryDependencies: [], tier: 1 },
 };
 
 export function getComponentNames(): string[] {
