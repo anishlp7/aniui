@@ -1,11 +1,10 @@
-"use client";
-import React, { useState } from "react";
 import { PreviewRating } from "@/components/preview/rating";
-import { ComponentPlayground } from "@/components/component-playground";
-import { CodeBlock } from "@/components/code-block";
+import { ComponentPlayground } from "@/components/highlighted-playground";
+import { CodeBlock } from "@/components/code-block-server";
 import { PropsTable } from "@/components/props-table";
 import { AddComponentTabs } from "@/components/package-manager-tabs";
 import { PreviewToggle } from "@/components/preview-toggle";
+import { InteractiveDemo } from "./_demos";
 
 const installCode = `npx @aniui/cli add rating`;
 const usageCode = `import { Rating } from "@/components/ui/rating";
@@ -62,15 +61,6 @@ export function Rating({ size, className, value, max = 5, onChange, readOnly, ..
     </View>
   );
 }`;
-function InteractiveDemo() {
-  const [value, setValue] = useState(3);
-  return (
-    <div className="flex items-center gap-4">
-      <PreviewRating value={value} onChange={setValue} />
-      <span className="text-sm text-muted-foreground">{value} / 5</span>
-    </div>
-  );
-}
 export default function RatingPage() {
   return (
     <div className="space-y-12">

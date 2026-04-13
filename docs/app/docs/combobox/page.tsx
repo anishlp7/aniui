@@ -1,12 +1,10 @@
-"use client";
-import { PreviewComboboxDemo } from "@/components/preview/combobox";
-import { ComponentPlayground } from "@/components/component-playground";
-import { PreviewToggle } from "@/components/preview-toggle";
-import { CodeBlock } from "@/components/code-block";
+import { ComponentPlayground } from "@/components/highlighted-playground";
+import { CodeBlock } from "@/components/code-block-server";
 import { PropsTable } from "@/components/props-table";
 import { AddComponentTabs } from "@/components/package-manager-tabs";
+import { PreviewToggle } from "@/components/preview-toggle";
+import { ComboboxDemo } from "./_demos";
 
-const installCode = `npx @aniui/cli add combobox`;
 const usageCode = `import { Combobox } from "@/components/ui/combobox";
 
 const frameworks = [
@@ -140,7 +138,7 @@ export default function ComboboxPage() {
       {/* Preview */}
       <PreviewToggle>
         <ComponentPlayground code={usageCode}>
-          <PreviewComboboxDemo />
+          <ComboboxDemo />
         </ComponentPlayground>
       </PreviewToggle>
       {/* Usage */}

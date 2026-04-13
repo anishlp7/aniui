@@ -1,11 +1,10 @@
-"use client";
 import { PreviewSlider } from "@/components/preview/slider";
-import { ComponentPlayground } from "@/components/component-playground";
-import { CodeBlock } from "@/components/code-block";
+import { ComponentPlayground } from "@/components/highlighted-playground";
+import { CodeBlock } from "@/components/code-block-server";
 import { PropsTable } from "@/components/props-table";
-
 import { AddComponentTabs } from "@/components/package-manager-tabs";
 import { PreviewToggle } from "@/components/preview-toggle";
+
 const installCode = `npx @aniui/cli add slider`;
 const usageCode = `import { Slider } from "@/components/ui/slider";
 import { useState } from "react";

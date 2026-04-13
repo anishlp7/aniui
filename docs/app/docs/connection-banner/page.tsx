@@ -1,8 +1,7 @@
-"use client";
 import { PreviewConnectionBannerDemo } from "@/components/preview/connection-banner";
-import { ComponentPlayground } from "@/components/component-playground";
+import { ComponentPlayground } from "@/components/highlighted-playground";
 import { PreviewToggle } from "@/components/preview-toggle";
-import { CodeBlock } from "@/components/code-block";
+import { CodeBlock } from "@/components/code-block-server";
 import { PropsTable } from "@/components/props-table";
 import { AddComponentTabs } from "@/components/package-manager-tabs";
 const installCode = `npx @aniui/cli add connection-banner`;

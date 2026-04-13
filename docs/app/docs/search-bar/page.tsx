@@ -1,11 +1,10 @@
-"use client";
-import React, { useState } from "react";
 import { PreviewSearchBar } from "@/components/preview/search-bar";
-import { ComponentPlayground } from "@/components/component-playground";
-import { CodeBlock } from "@/components/code-block";
+import { ComponentPlayground } from "@/components/highlighted-playground";
+import { CodeBlock } from "@/components/code-block-server";
 import { PropsTable } from "@/components/props-table";
 import { AddComponentTabs } from "@/components/package-manager-tabs";
 import { PreviewToggle } from "@/components/preview-toggle";
+import { SearchBarDemo, CancelDemo } from "./_demos";
 
 const installCode = `npx @aniui/cli add search-bar`;
 const usageCode = `import { SearchBar } from "@/components/ui/search-bar";
@@ -101,14 +100,6 @@ export function SearchBar({ size = "md", className, value, icon, onClear, showCa
     </View>
   );
 }`;
-function SearchBarDemo() {
-  const [query, setQuery] = useState("");
-  return <PreviewSearchBar value={query} onChange={(e) => setQuery(e.target.value)} onClear={() => setQuery("")} />;
-}
-function CancelDemo() {
-  const [query, setQuery] = useState("react native");
-  return <PreviewSearchBar value={query} onChange={(e) => setQuery(e.target.value)} onClear={() => setQuery("")} showCancel onCancel={() => setQuery("")} />;
-}
 export default function SearchBarPage() {
   return (
     <div className="space-y-12">

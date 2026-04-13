@@ -1,12 +1,10 @@
-"use client";
-import { PreviewAlertDialogDemo } from "@/components/preview/alert-dialog";
-import { ComponentPlayground } from "@/components/component-playground";
-import { CodeBlock } from "@/components/code-block";
+import { ComponentPlayground } from "@/components/highlighted-playground";
+import { CodeBlock } from "@/components/code-block-server";
 import { PropsTable, ComponentTable } from "@/components/props-table";
 import { AddComponentTabs } from "@/components/package-manager-tabs";
 import { PreviewToggle } from "@/components/preview-toggle";
+import { AlertDialogDemo } from "./_demos";
 
-const installCode = `npx @aniui/cli add alert-dialog`;
 const usageCode = `import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import {
@@ -155,7 +153,7 @@ export default function AlertDialogPage() {
       {/* Preview */}
       <PreviewToggle>
         <ComponentPlayground code={usageCode}>
-          <PreviewAlertDialogDemo />
+          <AlertDialogDemo />
         </ComponentPlayground>
       </PreviewToggle>
       {/* Installation */}

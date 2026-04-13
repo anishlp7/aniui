@@ -1,7 +1,6 @@
-"use client";
 import { PreviewSwitch } from "@/components/preview/switch";
-import { ComponentPlayground } from "@/components/component-playground";
-import { CodeBlock } from "@/components/code-block";
+import { ComponentPlayground } from "@/components/highlighted-playground";
+import { CodeBlock } from "@/components/code-block-server";
 import { PropsTable } from "@/components/props-table";
 
 import { AddComponentTabs } from "@/components/package-manager-tabs";

@@ -1,12 +1,10 @@
-"use client";
-import { PreviewTabs, PreviewTabsList, PreviewTabsTrigger, PreviewTabsContent } from "@/components/preview/tabs";
-import { ComponentPlayground } from "@/components/component-playground";
-import { CodeBlock } from "@/components/code-block";
+import { ComponentPlayground } from "@/components/highlighted-playground";
+import { CodeBlock } from "@/components/code-block-server";
 import { PropsTable, ComponentTable } from "@/components/props-table";
 import { AddComponentTabs } from "@/components/package-manager-tabs";
 import { PreviewToggle } from "@/components/preview-toggle";
+import { TabsDemo } from "./_demos";
 
-const installCode = `npx @aniui/cli add tabs`;
 const usageCode = `import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 
 export function MyScreen() {
@@ -94,20 +92,7 @@ export default function TabsPage() {
       {/* Preview */}
       <PreviewToggle>
         <ComponentPlayground code={usageCode}>
-          <div className="w-full max-w-sm">
-            <PreviewTabs defaultValue="account">
-              <PreviewTabsList>
-                <PreviewTabsTrigger value="account">Account</PreviewTabsTrigger>
-                <PreviewTabsTrigger value="password">Password</PreviewTabsTrigger>
-              </PreviewTabsList>
-              <PreviewTabsContent value="account">
-                <p className="text-sm text-muted-foreground p-4">Account settings content here.</p>
-              </PreviewTabsContent>
-              <PreviewTabsContent value="password">
-                <p className="text-sm text-muted-foreground p-4">Password settings content here.</p>
-              </PreviewTabsContent>
-            </PreviewTabs>
-          </div>
+          <TabsDemo />
         </ComponentPlayground>
       </PreviewToggle>
       {/* Installation */}

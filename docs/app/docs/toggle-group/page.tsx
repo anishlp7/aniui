@@ -1,23 +1,9 @@
-"use client";
-import React, { useState } from "react";
 import { PreviewToggleGroup, PreviewToggleGroupItem } from "@/components/preview/toggle-group";
-import { ComponentPlayground } from "@/components/component-playground";
-import { CodeBlock } from "@/components/code-block";
+import { ComponentPlayground } from "@/components/highlighted-playground";
+import { CodeBlock } from "@/components/code-block-server";
 import { PropsTable } from "@/components/props-table";
 import { AddComponentTabs } from "@/components/package-manager-tabs";
-
-function ToggleGroupDemo() {
-  const [value, setValue] = useState("center");
-  return (
-    <div className="flex flex-wrap items-center gap-4">
-      <PreviewToggleGroup value={value} onValueChange={setValue}>
-        <PreviewToggleGroupItem value="left">Left</PreviewToggleGroupItem>
-        <PreviewToggleGroupItem value="center">Center</PreviewToggleGroupItem>
-        <PreviewToggleGroupItem value="right">Right</PreviewToggleGroupItem>
-      </PreviewToggleGroup>
-    </div>
-  );
-}
+import { ToggleGroupDemo } from "./_demos";
 
 const installCode = `npx @aniui/cli add toggle-group`;
 const usageCode = `import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";

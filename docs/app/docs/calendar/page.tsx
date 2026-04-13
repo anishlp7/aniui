@@ -1,11 +1,10 @@
-"use client";
 import { PreviewCalendar } from "@/components/preview/calendar";
-import { ComponentPlayground } from "@/components/component-playground";
-import { CodeBlock } from "@/components/code-block";
-import React, { useState } from "react";
+import { ComponentPlayground } from "@/components/highlighted-playground";
+import { CodeBlock } from "@/components/code-block-server";
 import { PropsTable } from "@/components/props-table";
 import { AddComponentTabs } from "@/components/package-manager-tabs";
 import { PreviewToggle } from "@/components/preview-toggle";
+import { RangeDemo } from "./_demos";
 
 const installCode = `npx @aniui/cli add calendar`;
 const usageCode = `import { Calendar } from "@/components/ui/calendar";
@@ -71,22 +70,6 @@ export function Calendar({ className, selected, onSelect, rangeStart, rangeEnd, 
   const label = new Date(year, month).toLocaleString("default", { month: "long", year: "numeric" });
   // ... renders year grid, month grid, and day grid based on mode
 }`;
-function RangeDemo() {
-  const [start, setStart] = useState<Date | undefined>();
-  const [end, setEnd] = useState<Date | undefined>();
-  return (
-    <div className="w-full">
-      <PreviewCalendar
-        rangeStart={start}
-        rangeEnd={end}
-        onRangeChange={(s, e) => { setStart(s); setEnd(e); }}
-      />
-      <p className="text-xs text-muted-foreground text-center mt-2">
-        {start ? `${start.toLocaleDateString()}${end ? ` - ${end.toLocaleDateString()}` : " — select end date"}` : "Click to select start date"}
-      </p>
-    </div>
-  );
-}
 export default function CalendarPage() {
   return (
     <div className="space-y-10">

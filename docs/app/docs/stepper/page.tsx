@@ -1,11 +1,9 @@
-"use client";
-import React, { useState } from "react";
-import { PreviewStepper } from "@/components/preview/stepper";
-import { ComponentPlayground } from "@/components/component-playground";
-import { CodeBlock } from "@/components/code-block";
+import { ComponentPlayground } from "@/components/highlighted-playground";
+import { CodeBlock } from "@/components/code-block-server";
 import { PropsTable } from "@/components/props-table";
 import { AddComponentTabs } from "@/components/package-manager-tabs";
 import { PreviewToggle } from "@/components/preview-toggle";
+import { InteractiveDemo, SizesDemo, StepDemo } from "./_demos";
 
 const installCode = `npx @aniui/cli add stepper`;
 const usageCode = `import { Stepper } from "@/components/ui/stepper";
@@ -48,7 +46,7 @@ export function Stepper({ size = "md", className, value, onChange, min = 0, max 
         onPress={() => { if (canDec) onChange(value - step); }}
         disabled={!canDec} accessible={true} accessibilityRole="button" accessibilityLabel="Decrease"
       >
-        <Text style={{ fontSize: 18, color: "#09090b" }}>−</Text>
+        <Text style={{ fontSize: 18, color: "#09090b" }}>\u2212</Text>
       </Pressable>
       <View style={{ width: 56, alignItems: "center", justifyContent: "center" }}>
         <Text style={{ fontSize: 16, fontWeight: "500", color: "#09090b" }}>{value}</Text>
@@ -63,31 +61,6 @@ export function Stepper({ size = "md", className, value, onChange, min = 0, max 
     </View>
   );
 }`;
-function InteractiveDemo() {
-  const [count, setCount] = useState(1);
-  return <PreviewStepper value={count} onChange={setCount} min={0} max={10} />;
-}
-function SizesDemo() {
-  const [s1, setS1] = useState(1);
-  const [s2, setS2] = useState(1);
-  const [s3, setS3] = useState(1);
-  return (
-    <div className="space-y-3" style={{ maxWidth: 180 }}>
-      <PreviewStepper size="sm" value={s1} onChange={setS1} />
-      <PreviewStepper size="md" value={s2} onChange={setS2} />
-      <PreviewStepper size="lg" value={s3} onChange={setS3} />
-    </div>
-  );
-}
-function StepDemo() {
-  const [val, setVal] = useState(0);
-  return (
-    <div className="flex items-center gap-4">
-      <PreviewStepper value={val} onChange={setVal} min={0} max={100} step={5} />
-      <span className="text-sm text-muted-foreground">Step: 5</span>
-    </div>
-  );
-}
 export default function StepperPage() {
   return (
     <div className="space-y-12">

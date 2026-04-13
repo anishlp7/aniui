@@ -1,11 +1,9 @@
-"use client";
-import React, { useState } from "react";
-import { PreviewSegmentedControl } from "@/components/preview/segmented-control";
-import { ComponentPlayground } from "@/components/component-playground";
-import { CodeBlock } from "@/components/code-block";
+import { ComponentPlayground } from "@/components/highlighted-playground";
+import { CodeBlock } from "@/components/code-block-server";
 import { PropsTable } from "@/components/props-table";
 import { AddComponentTabs } from "@/components/package-manager-tabs";
 import { PreviewToggle } from "@/components/preview-toggle";
+import { SegmentedControlDemo, SizesDemo } from "./_demos";
 
 const installCode = `npx @aniui/cli add segmented-control`;
 const usageCode = `import { SegmentedControl } from "@/components/ui/segmented-control";
@@ -56,29 +54,7 @@ export function SegmentedControl({ size = "md", className, options, value, onVal
     </View>
   );
 }`;
-function SizesDemo() {
-  const [sm, setSm] = useState("Day");
-  const [md, setMd] = useState("Week");
-  const [lg, setLg] = useState("Month");
-  return (
-    <div className="w-full max-w-xs space-y-4">
-      <div className="space-y-1.5">
-        <p className="text-xs font-medium text-muted-foreground">Small</p>
-        <PreviewSegmentedControl size="sm" options={["Day", "Week", "Month"]} value={sm} onValueChange={setSm} />
-      </div>
-      <div className="space-y-1.5">
-        <p className="text-xs font-medium text-muted-foreground">Medium (default)</p>
-        <PreviewSegmentedControl size="md" options={["Day", "Week", "Month"]} value={md} onValueChange={setMd} />
-      </div>
-      <div className="space-y-1.5">
-        <p className="text-xs font-medium text-muted-foreground">Large</p>
-        <PreviewSegmentedControl size="lg" options={["Day", "Week", "Month"]} value={lg} onValueChange={setLg} />
-      </div>
-    </div>
-  );
-}
 export default function SegmentedControlPage() {
-  const [view, setView] = useState("List");
   return (
     <div className="space-y-12">
       <div>
@@ -87,12 +63,7 @@ export default function SegmentedControlPage() {
       </div>
       <PreviewToggle>
         <ComponentPlayground code={usageCode}>
-          <div className="w-full max-w-xs space-y-4">
-            <PreviewSegmentedControl options={["List", "Grid", "Map"]} value={view} onValueChange={setView} />
-            <div className="rounded-lg border border-border bg-muted/30 px-4 py-6 text-center">
-              <p className="text-xs text-muted-foreground">Showing <span className="font-medium text-foreground">{view}</span> view</p>
-            </div>
-          </div>
+          <SegmentedControlDemo />
         </ComponentPlayground>
       </PreviewToggle>
       <div>

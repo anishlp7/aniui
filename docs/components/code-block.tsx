@@ -1,6 +1,7 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
+import { highlight } from "sugar-high";
 
 interface CodeBlockProps {
   code: string;
@@ -10,6 +11,7 @@ interface CodeBlockProps {
 
 export function CodeBlock({ code, title }: CodeBlockProps) {
   const [copied, setCopied] = useState(false);
+  const html = useMemo(() => highlight(code), [code]);
 
   const handleCopy = () => {
     navigator.clipboard.writeText(code);
@@ -31,7 +33,7 @@ export function CodeBlock({ code, title }: CodeBlockProps) {
         {copied ? "Copied!" : "Copy"}
       </button>
       <pre className="overflow-x-auto bg-secondary/30 p-4 text-sm leading-relaxed">
-        <code className="text-foreground font-mono">{code}</code>
+        <code className="font-mono" dangerouslySetInnerHTML={{ __html: html }} />
       </pre>
     </div>
   );
