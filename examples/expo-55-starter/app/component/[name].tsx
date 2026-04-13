@@ -594,27 +594,93 @@ const demos: Record<string, () => React.ReactElement> = {
   },
   combobox: () => {
     const [val, setVal] = useState("");
+    const [multiVal, setMultiVal] = useState<string[]>([]);
+    const [groupVal, setGroupVal] = useState("");
+    const [clearVal, setClearVal] = useState("rn");
+    const [invalidVal, setInvalidVal] = useState("");
+    const [popupVal, setPopupVal] = useState("");
+    const frameworks = [
+      { label: "React Native", value: "rn" },
+      { label: "Flutter", value: "flutter" },
+      { label: "Swift UI", value: "swiftui" },
+      { label: "Jetpack Compose", value: "compose" },
+      { label: "Kotlin Multiplatform", value: "kmp" },
+    ];
+    const tags = [
+      { label: "React Native", value: "rn" },
+      { label: "TypeScript", value: "ts" },
+      { label: "NativeWind", value: "nw" },
+      { label: "Expo", value: "expo" },
+      { label: "Reanimated", value: "reanimated" },
+    ];
     return (
       <View className="gap-6">
-        <Text className="text-sm text-muted-foreground">A searchable dropdown that combines a text input with a filterable options list. Type to filter, then select from matching results.</Text>
+        <Text className="text-sm text-muted-foreground">A searchable select with multi-select, groups, clear button, custom rendering, and more. Type to filter, then select from matching results.</Text>
         <View className="gap-2">
-          <Text className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Example</Text>
+          <Text className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Basic</Text>
           <View className="rounded-lg border border-border bg-card p-4 gap-3">
             <Label>Framework</Label>
-            <Combobox
-              placeholder="Select framework..."
-              searchPlaceholder="Search..."
-              options={[
-                { label: "React Native", value: "rn" },
-                { label: "Flutter", value: "flutter" },
-                { label: "Swift UI", value: "swiftui" },
-                { label: "Jetpack Compose", value: "compose" },
-                { label: "Kotlin Multiplatform", value: "kmp" },
-              ]}
-              value={val}
-              onValueChange={setVal}
-            />
+            <Combobox placeholder="Select framework..." searchPlaceholder="Search..." options={frameworks} value={val} onValueChange={setVal} />
             {val ? <Text variant="muted">Selected: {val}</Text> : null}
+          </View>
+        </View>
+        <View className="gap-2">
+          <Text className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Multiple Selection</Text>
+          <View className="rounded-lg border border-border bg-card p-4 gap-3">
+            <Label>Tags</Label>
+            <Combobox multiple placeholder="Select tags..." searchPlaceholder="Search tags..." options={tags} selectedValues={multiVal} onSelectedValuesChange={setMultiVal} />
+            {multiVal.length > 0 ? <Text variant="muted">Selected: {multiVal.join(", ")}</Text> : null}
+          </View>
+        </View>
+        <View className="gap-2">
+          <Text className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Groups</Text>
+          <View className="rounded-lg border border-border bg-card p-4 gap-3">
+            <Label>Technology</Label>
+            <Combobox placeholder="Select..." searchPlaceholder="Search..." options={[]} groups={[{ label: "Frameworks", options: [{ label: "React Native", value: "rn" }, { label: "Flutter", value: "flutter" }, { label: "Swift UI", value: "swiftui" }] }, { label: "Languages", options: [{ label: "TypeScript", value: "ts" }, { label: "Dart", value: "dart" }, { label: "Swift", value: "swift" }] }]} value={groupVal} onValueChange={setGroupVal} />
+            {groupVal ? <Text variant="muted">Selected: {groupVal}</Text> : null}
+          </View>
+        </View>
+        <View className="gap-2">
+          <Text className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Clear Button</Text>
+          <View className="rounded-lg border border-border bg-card p-4 gap-3">
+            <Label>Framework (clearable)</Label>
+            <Combobox placeholder="Select framework..." options={frameworks} value={clearVal} onValueChange={setClearVal} clearable />
+          </View>
+        </View>
+        <View className="gap-2">
+          <Text className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Custom Items</Text>
+          <View className="rounded-lg border border-border bg-card p-4 gap-3">
+            <Label>Choose with custom rendering</Label>
+            <Combobox placeholder="Select..." options={frameworks} value={val} onValueChange={setVal} renderItem={(option, selected) => (<View className="flex-row items-center px-5 py-3 gap-3"><View className={selected ? "h-4 w-4 rounded-full bg-primary" : "h-4 w-4 rounded-full border border-input"} /><Text className="text-foreground">{option.label}</Text></View>)} />
+          </View>
+        </View>
+        <View className="gap-2">
+          <Text className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Invalid</Text>
+          <View className="rounded-lg border border-border bg-card p-4 gap-3">
+            <Label>Required field</Label>
+            <Combobox placeholder="Select framework..." options={frameworks} value={invalidVal} onValueChange={setInvalidVal} invalid />
+            <Text className="text-sm text-destructive">Please select a framework</Text>
+          </View>
+        </View>
+        <View className="gap-2">
+          <Text className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Disabled</Text>
+          <View className="rounded-lg border border-border bg-card p-4 gap-3">
+            <Combobox placeholder="Cannot interact..." options={frameworks} disabled />
+          </View>
+        </View>
+        <View className="gap-2">
+          <Text className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Auto Highlight</Text>
+          <View className="rounded-lg border border-border bg-card p-4 gap-3">
+            <Label>Auto-highlights first match</Label>
+            <Combobox placeholder="Start typing..." options={frameworks} value={val} onValueChange={setVal} autoHighlight />
+          </View>
+        </View>
+        <View className="gap-2">
+          <Text className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Popup Mode</Text>
+          <View className="rounded-lg border border-border bg-card p-4 gap-3">
+            <Label>Button-style trigger</Label>
+            <Combobox placeholder="Choose..." options={frameworks} value={popupVal} onValueChange={setPopupVal} mode="popup" />
+            {popupVal ? <Text variant="muted">Selected: {popupVal}</Text> : null}
           </View>
         </View>
       </View>
