@@ -48,7 +48,7 @@ export function Stepper({ size, className, value, onChange, min = 0, max = 99, s
       {...props}
     >
       <Pressable
-        className={cn(buttonVariants({ size }), "h-full border-r", !canDec && "opacity-30")}
+        className={cn(buttonVariants({ size }), "h-full border-e", !canDec && "opacity-30")}
         onPress={() => { if (canDec) onChange(value - step); }}
         disabled={!canDec}
         accessible={true}
@@ -61,7 +61,7 @@ export function Stepper({ size, className, value, onChange, min = 0, max = 99, s
         <Text className="text-base font-medium text-foreground">{value}</Text>
       </View>
       <Pressable
-        className={cn(buttonVariants({ size }), "h-full border-l", !canInc && "opacity-30")}
+        className={cn(buttonVariants({ size }), "h-full border-s", !canInc && "opacity-30")}
         onPress={() => { if (canInc) onChange(value + step); }}
         disabled={!canInc}
         accessible={true}

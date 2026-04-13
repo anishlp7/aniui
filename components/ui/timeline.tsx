@@ -71,7 +71,7 @@ export function TimelineItem({
       </View>
 
       {/* Content */}
-      <View className={cn("flex-1 ml-3 pb-6", isLast && "pb-0")}>
+      <View className={cn("flex-1 ms-3 pb-6", isLast && "pb-0")}>
         <View className="flex-row items-start justify-between gap-2">
           <Text className={cn("text-sm font-medium flex-1", variant === "pending" ? "text-muted-foreground" : "text-foreground")}>{title}</Text>
           {time && <Text className="text-[11px] text-muted-foreground">{time}</Text>}

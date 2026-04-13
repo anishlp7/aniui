@@ -81,7 +81,7 @@ export function Banner({
       {onDismiss && (
         <Pressable
           onPress={onDismiss}
-          className="ml-1 min-h-8 min-w-8 items-center justify-center rounded-lg"
+          className="ms-1 min-h-8 min-w-8 items-center justify-center rounded-lg"
           accessible={true}
           accessibilityRole="button"
           accessibilityLabel="Dismiss"

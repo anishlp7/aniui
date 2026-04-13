@@ -52,7 +52,7 @@ export function Chip({ variant, size, className, textClassName, children, select
     <Pressable className={cn(chipVariants({ variant: v, size }), className)} accessible={true} accessibilityRole="button" accessibilityState={{ selected }} {...props}>
       <Text className={cn(chipTextVariants({ variant: v, size }), textClassName)}>{children}</Text>
       {onClose && (
-        <Pressable onPress={onClose} accessibilityRole="button" accessibilityLabel={`Remove ${children}`} className="ml-0.5">
+        <Pressable onPress={onClose} accessibilityRole="button" accessibilityLabel={`Remove ${children}`} className="ms-0.5">
           <Text className={cn("text-xs", v === "outline" ? "text-muted-foreground" : chipTextVariants({ variant: v, size: "sm" }))}>✕</Text>
         </Pressable>
       )}

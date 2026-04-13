@@ -60,13 +60,13 @@ export function Input({
         className
       )}
     >
-      {leadingIcon && <View className="mr-2">{leadingIcon}</View>}
+      {leadingIcon && <View className="me-2">{leadingIcon}</View>}
       <TextInput
         className="flex-1 text-foreground p-0 text-base"
         placeholderTextColor="#71717a"
         {...props}
       />
-      {trailingIcon && <View className="ml-2">{trailingIcon}</View>}
+      {trailingIcon && <View className="ms-2">{trailingIcon}</View>}
     </View>
   );
 }

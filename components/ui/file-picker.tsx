@@ -53,7 +53,7 @@ export function FilePicker({
         </Pressable>
       ) : (
         <View className="flex-row items-center rounded-lg border border-border bg-card px-4 py-3">
-          <View className="flex-1 mr-3">
+          <View className="flex-1 me-3">
             <Text className="text-sm font-medium text-foreground" numberOfLines={1}>{file.name}</Text>
             {file.size !== undefined && (
               <Text className="text-xs text-muted-foreground mt-0.5">{formatSize(file.size)}</Text>
