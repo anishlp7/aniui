@@ -33,7 +33,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://aniui.dev",
+    url: "./",
     siteName: "AniUI",
     title: "AniUI — Beautiful React Native Components",
     description: "shadcn/ui for React Native. 81 accessible components. Copy. Paste. Ship.",
