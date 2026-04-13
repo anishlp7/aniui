@@ -19,6 +19,7 @@
     "react-live": "^4.1.8",
     "react-native-web": "^0.21.2",
     "recharts": "^2.15.0",
+    "shiki": "^4.0.2",
     "tailwind-merge": "^3.5.0"
   },
   "devDependencies": {

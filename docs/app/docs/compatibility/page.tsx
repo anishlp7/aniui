@@ -1,6 +1,5 @@
-"use client";
 
-import { CodeBlock } from "@/components/code-block";
+import { CodeBlock } from "@/components/code-block-server";
 
 const installSdk54 = `# Expo SDK 53/54 — NativeWind v4 + Tailwind v3
 

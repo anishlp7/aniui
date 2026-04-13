@@ -1,5 +1,4 @@
-"use client";
-import { CodeBlock } from "@/components/code-block";
+import { CodeBlock } from "@/components/code-block-server";
 import { PackageManagerTabs } from "@/components/package-manager-tabs";
 
 const initCode = `npx @aniui/cli init --style uniwind`;

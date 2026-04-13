@@ -129,9 +129,17 @@ html {
   display: block;
 }
 
-/* Code block styling for react-live */
-.prism-code {
-  font-family: var(--font-mono), monospace !important;
-  font-size: 0.875rem !important;
-  line-height: 1.7 !important;
+/* Shiki syntax highlighting — dual theme (light/dark) */
+.shiki-wrapper code span {
+  color: var(--shiki-light);
+}
+.dark .shiki-wrapper code span {
+  color: var(--shiki-dark);
+}
+.shiki-wrapper pre {
+  background: transparent !important;
+  margin: 0;
+}
+.shiki-wrapper code {
+  display: block;
 }

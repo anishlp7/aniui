@@ -4,6 +4,8 @@ import React, { useState } from "react";
 
 interface ComponentPlaygroundProps {
   code: string;
+  /** Pre-rendered highlighted HTML from server-side shiki */
+  highlightedCode?: string;
   children: React.ReactNode;
   /** Use "inline" for overlay components (dialog, drawer, toast) that escape containment */
   variant?: "phone" | "inline";
@@ -11,7 +13,7 @@ interface ComponentPlaygroundProps {
   snackUrl?: string;
 }
 
-export function ComponentPlayground({ code, children, variant = "phone", snackUrl }: ComponentPlaygroundProps) {
+export function ComponentPlaygroundClient({ code, highlightedCode, children, variant = "phone", snackUrl }: ComponentPlaygroundProps) {
   const [copied, setCopied] = useState(false);
 
   const handleCopy = () => {
@@ -66,10 +68,20 @@ export function ComponentPlayground({ code, children, variant = "phone", snackUr
         >
           {copied ? "Copied!" : "Copy"}
         </button>
-        <pre className="overflow-x-auto bg-secondary/50 p-4 text-sm leading-relaxed">
-          <code className="text-foreground font-mono">{code}</code>
-        </pre>
+        {highlightedCode ? (
+          <div
+            className="shiki-wrapper overflow-x-auto bg-secondary/50 p-4 text-sm leading-relaxed [&_pre]:!bg-transparent [&_code]:font-mono"
+            dangerouslySetInnerHTML={{ __html: highlightedCode }}
+          />
+        ) : (
+          <pre className="overflow-x-auto bg-secondary/50 p-4 text-sm leading-relaxed">
+            <code className="text-foreground font-mono">{code}</code>
+          </pre>
+        )}
       </div>
     </div>
   );
 }
+
+/** Alias for backward compatibility with "use client" pages */
+export const ComponentPlayground = ComponentPlaygroundClient;
