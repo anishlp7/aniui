@@ -252,9 +252,9 @@ export const registry: Record<string, ComponentEntry> = {
     name: "Slider",
     file: "components/ui/slider.tsx",
     description: "Draggable slider for numeric values",
-    dependencies: ["class-variance-authority", "clsx", "tailwind-merge"],
+    dependencies: ["react-native-gesture-handler", "react-native-reanimated", "class-variance-authority", "clsx", "tailwind-merge"],
     registryDependencies: [],
-    tier: 1,
+    tier: 2,
   },
   toggle: {
     name: "Toggle",
