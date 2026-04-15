@@ -30,6 +30,11 @@ import { PhoneInput } from "@/components/ui/phone-input";
 import { Combobox } from "@/components/ui/combobox";
 import { FilePicker } from "@/components/ui/file-picker";
 import { Label } from "@/components/ui/label";
+import { Field, FieldLabel, FieldDescription, FieldError } from "@/components/ui/field";
+import { InputGroup, InputGroupAddon, InputGroupInput, InputGroupButton, InputGroupText } from "@/components/ui/input-group";
+import { Kbd, KbdGroup } from "@/components/ui/kbd";
+import { HoverCard, HoverCardTrigger, HoverCardContent } from "@/components/ui/hover-card";
+import { DirectionProvider, useDirection } from "@/components/ui/direction-provider";
 
 // Display
 import { Badge } from "@/components/ui/badge";
@@ -779,6 +784,258 @@ const demos: Record<string, () => React.ReactElement> = {
       </View>
     );
   },
+  field: () => {
+    return (
+      <View className="gap-6">
+        <Text className="text-sm text-zinc-500 dark:text-zinc-400">Combine labels, controls, and help text to compose accessible form fields. Supports vertical and horizontal orientations.</Text>
+        <View className="gap-2">
+          <Text className="text-xs font-semibold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">Vertical (default)</Text>
+          <View className="rounded-lg border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 p-4 gap-4">
+            <Field>
+              <FieldLabel>Email</FieldLabel>
+              <Input placeholder="you@example.com" />
+              <FieldDescription>We will never share your email.</FieldDescription>
+            </Field>
+            <Field>
+              <FieldLabel>Password</FieldLabel>
+              <Input placeholder="••••••••" secureTextEntry />
+              <FieldDescription>Must be at least 8 characters.</FieldDescription>
+            </Field>
+          </View>
+        </View>
+        <View className="gap-2">
+          <Text className="text-xs font-semibold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">Horizontal</Text>
+          <View className="rounded-lg border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 p-4 gap-4">
+            <Field orientation="horizontal">
+              <FieldLabel>Name</FieldLabel>
+              <Input placeholder="John Doe" className="flex-1" />
+            </Field>
+            <Field orientation="horizontal">
+              <FieldLabel>Bio</FieldLabel>
+              <Textarea placeholder="Tell us about yourself..." className="flex-1" />
+            </Field>
+          </View>
+        </View>
+        <View className="gap-2">
+          <Text className="text-xs font-semibold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">Error State</Text>
+          <View className="rounded-lg border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 p-4 gap-4">
+            <Field>
+              <FieldLabel>Username</FieldLabel>
+              <Input placeholder="username" defaultValue="ab" />
+              <FieldError errors={["Username must be at least 3 characters", "Username can only contain letters and numbers"]} />
+            </Field>
+          </View>
+        </View>
+      </View>
+    );
+  },
+  "input-group": () => {
+    const [search, setSearch] = useState("");
+    return (
+      <View className="gap-6">
+        <Text className="text-sm text-zinc-500 dark:text-zinc-400">Add addons, buttons, and helper content to inputs. Prefixes, suffixes, and action buttons compose flexibly.</Text>
+        <View className="gap-2">
+          <Text className="text-xs font-semibold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">Prefix Addon</Text>
+          <View className="rounded-lg border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 p-4 gap-3">
+            <Label>Price</Label>
+            <InputGroup>
+              <InputGroupAddon>
+                <InputGroupText>$</InputGroupText>
+              </InputGroupAddon>
+              <InputGroupInput placeholder="0.00" keyboardType="numeric" />
+            </InputGroup>
+          </View>
+        </View>
+        <View className="gap-2">
+          <Text className="text-xs font-semibold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">Suffix Addon</Text>
+          <View className="rounded-lg border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 p-4 gap-3">
+            <Label>Domain</Label>
+            <InputGroup>
+              <InputGroupInput placeholder="mysite" />
+              <InputGroupAddon align="end">
+                <InputGroupText>.com</InputGroupText>
+              </InputGroupAddon>
+            </InputGroup>
+          </View>
+        </View>
+        <View className="gap-2">
+          <Text className="text-xs font-semibold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">With Button</Text>
+          <View className="rounded-lg border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 p-4 gap-3">
+            <Label>Search</Label>
+            <InputGroup>
+              <InputGroupInput placeholder="Search..." value={search} onChangeText={setSearch} />
+              <InputGroupButton onPress={() => {}}>
+                <Text className="text-sm text-zinc-900 dark:text-zinc-100">Go</Text>
+              </InputGroupButton>
+            </InputGroup>
+          </View>
+        </View>
+        <View className="gap-2">
+          <Text className="text-xs font-semibold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">Both Sides</Text>
+          <View className="rounded-lg border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 p-4 gap-3">
+            <Label>Transfer</Label>
+            <InputGroup>
+              <InputGroupAddon>
+                <InputGroupText>USD</InputGroupText>
+              </InputGroupAddon>
+              <InputGroupInput placeholder="0.00" keyboardType="numeric" />
+              <InputGroupButton onPress={() => {}}>
+                <Text className="text-sm text-zinc-900 dark:text-zinc-100">Send</Text>
+              </InputGroupButton>
+            </InputGroup>
+          </View>
+        </View>
+      </View>
+    );
+  },
+  kbd: () => (
+    <View className="gap-6">
+      <Text className="text-sm text-zinc-500 dark:text-zinc-400">Display keyboard input keys. Useful for showing shortcuts in help screens, tooltips, and iPad external keyboard hints.</Text>
+      <View className="gap-2">
+        <Text className="text-xs font-semibold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">Single Keys</Text>
+        <View className="rounded-lg border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 p-4">
+          <View className="flex-row flex-wrap gap-2">
+            <Kbd>Ctrl</Kbd>
+            <Kbd>Shift</Kbd>
+            <Kbd>Alt</Kbd>
+            <Kbd>Enter</Kbd>
+            <Kbd>Esc</Kbd>
+            <Kbd>Tab</Kbd>
+          </View>
+        </View>
+      </View>
+      <View className="gap-2">
+        <Text className="text-xs font-semibold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">Key Groups</Text>
+        <View className="rounded-lg border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 p-4 gap-3">
+          <View className="flex-row items-center gap-3">
+            <Text className="text-sm text-zinc-900 dark:text-zinc-100 flex-1">Copy</Text>
+            <KbdGroup><Kbd>Cmd</Kbd><Kbd>C</Kbd></KbdGroup>
+          </View>
+          <View className="flex-row items-center gap-3">
+            <Text className="text-sm text-zinc-900 dark:text-zinc-100 flex-1">Paste</Text>
+            <KbdGroup><Kbd>Cmd</Kbd><Kbd>V</Kbd></KbdGroup>
+          </View>
+          <View className="flex-row items-center gap-3">
+            <Text className="text-sm text-zinc-900 dark:text-zinc-100 flex-1">Find</Text>
+            <KbdGroup><Kbd>Cmd</Kbd><Kbd>Shift</Kbd><Kbd>F</Kbd></KbdGroup>
+          </View>
+        </View>
+      </View>
+      <View className="gap-2">
+        <Text className="text-xs font-semibold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">Sizes</Text>
+        <View className="rounded-lg border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 p-4 gap-3">
+          <View className="flex-row items-center gap-3">
+            <Text className="text-sm text-zinc-500 dark:text-zinc-400 w-8">sm</Text>
+            <Kbd size="sm">Esc</Kbd>
+          </View>
+          <View className="flex-row items-center gap-3">
+            <Text className="text-sm text-zinc-500 dark:text-zinc-400 w-8">md</Text>
+            <Kbd size="md">Esc</Kbd>
+          </View>
+          <View className="flex-row items-center gap-3">
+            <Text className="text-sm text-zinc-500 dark:text-zinc-400 w-8">lg</Text>
+            <Kbd size="lg">Esc</Kbd>
+          </View>
+        </View>
+      </View>
+    </View>
+  ),
+  "hover-card": () => {
+    const [open, setOpen] = useState(false);
+    return (
+      <View className="gap-6">
+        <Text className="text-sm text-zinc-500 dark:text-zinc-400">Preview content behind a trigger. On mobile, triggered by long-press instead of hover. Uses @rn-primitives for positioning.</Text>
+        <View className="gap-2">
+          <Text className="text-xs font-semibold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">Example</Text>
+          <View className="rounded-lg border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 p-4 items-start">
+            <HoverCard open={open} onOpenChange={setOpen}>
+              <HoverCardTrigger>
+                <Text className="text-sm font-medium text-zinc-900 dark:text-white underline underline-offset-4">@aniui</Text>
+              </HoverCardTrigger>
+              <HoverCardContent>
+                <View className="gap-2">
+                  <View className="flex-row items-center gap-3">
+                    <View className="h-10 w-10 rounded-full bg-zinc-900 dark:bg-white items-center justify-center">
+                      <Text className="text-sm font-bold text-white dark:text-zinc-900">A</Text>
+                    </View>
+                    <View>
+                      <Text className="text-sm font-semibold text-zinc-900 dark:text-zinc-100">AniUI</Text>
+                      <Text className="text-xs text-zinc-500 dark:text-zinc-400">@aniui</Text>
+                    </View>
+                  </View>
+                  <Text className="text-xs text-zinc-500 dark:text-zinc-400">Beautiful React Native components. Copy. Paste. Ship.</Text>
+                </View>
+              </HoverCardContent>
+            </HoverCard>
+          </View>
+        </View>
+        <View className="gap-2">
+          <Text className="text-xs font-semibold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">Note</Text>
+          <View className="rounded-lg border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 p-4">
+            <Text className="text-sm text-zinc-500 dark:text-zinc-400">On mobile, long-press the trigger to open. Requires PortalHost at app root.</Text>
+          </View>
+        </View>
+      </View>
+    );
+  },
+  "direction-provider": () => {
+    const [dir, setDir] = useState<"ltr" | "rtl">("ltr");
+    return (
+      <View className="gap-6">
+        <Text className="text-sm text-zinc-500 dark:text-zinc-400">RTL/LTR direction context for right-to-left language support. Wraps I18nManager and provides a useDirection hook.</Text>
+        <View className="gap-2">
+          <Text className="text-xs font-semibold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">Direction Toggle</Text>
+          <View className="rounded-lg border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 p-4 gap-4">
+            <View className="flex-row gap-2">
+              <Pressable onPress={() => setDir("ltr")} className={`flex-1 items-center py-3 rounded-md border ${dir === "ltr" ? "bg-zinc-900 dark:bg-white border-zinc-900 dark:border-white" : "border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950"}`}>
+                <Text className={`text-sm font-medium ${dir === "ltr" ? "text-white dark:text-zinc-900" : "text-zinc-900 dark:text-zinc-100"}`}>LTR</Text>
+              </Pressable>
+              <Pressable onPress={() => setDir("rtl")} className={`flex-1 items-center py-3 rounded-md border ${dir === "rtl" ? "bg-zinc-900 dark:bg-white border-zinc-900 dark:border-white" : "border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950"}`}>
+                <Text className={`text-sm font-medium ${dir === "rtl" ? "text-white dark:text-zinc-900" : "text-zinc-900 dark:text-zinc-100"}`}>RTL</Text>
+              </Pressable>
+            </View>
+          </View>
+        </View>
+        <View className="gap-2">
+          <Text className="text-xs font-semibold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">Preview ({dir.toUpperCase()})</Text>
+          <View className="rounded-lg border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 p-4 gap-3" style={{ direction: dir }}>
+            <Text className="text-sm font-medium text-zinc-900 dark:text-zinc-100">{dir === "rtl" ? "مرحبا بالعالم" : "Hello World"}</Text>
+            <Text className="text-xs text-zinc-500 dark:text-zinc-400">{dir === "rtl" ? "هذا مثال على تخطيط من اليمين إلى اليسار" : "This is a left-to-right layout example"}</Text>
+            <View className="flex-row gap-2">
+              <View className="flex-1 min-h-10 rounded-md border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 px-3 justify-center">
+                <Text className="text-xs text-zinc-500 dark:text-zinc-400">{dir === "rtl" ? "بحث..." : "Search..."}</Text>
+              </View>
+              <View className="min-h-10 px-4 rounded-md bg-zinc-900 dark:bg-white justify-center">
+                <Text className="text-xs font-medium text-white dark:text-zinc-900">{dir === "rtl" ? "إرسال" : "Go"}</Text>
+              </View>
+            </View>
+            <View className="gap-1.5">
+              <Text className="text-xs font-medium text-zinc-900 dark:text-zinc-100">{dir === "rtl" ? "البريد الإلكتروني" : "Email"}</Text>
+              <View className="flex-row items-center rounded-md border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950">
+                <View className="px-3 self-stretch justify-center border-e border-zinc-200 dark:border-zinc-800">
+                  <Text className="text-xs text-zinc-500 dark:text-zinc-400">@</Text>
+                </View>
+                <View className="flex-1 px-3 min-h-10 justify-center">
+                  <Text className="text-xs text-zinc-500 dark:text-zinc-400">{dir === "rtl" ? "أدخل بريدك" : "you@example.com"}</Text>
+                </View>
+              </View>
+            </View>
+          </View>
+        </View>
+        <View className="gap-2">
+          <Text className="text-xs font-semibold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">Supported Languages</Text>
+          <View className="rounded-lg border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 p-4 gap-2">
+            <View className="flex-row items-center gap-2"><View className="h-2 w-2 rounded-full bg-zinc-900 dark:bg-white" /><Text className="text-sm text-zinc-900 dark:text-zinc-100">Arabic (العربية)</Text><Text className="text-xs text-zinc-500 dark:text-zinc-400">RTL</Text></View>
+            <View className="flex-row items-center gap-2"><View className="h-2 w-2 rounded-full bg-zinc-900 dark:bg-white" /><Text className="text-sm text-zinc-900 dark:text-zinc-100">Hebrew (עברית)</Text><Text className="text-xs text-zinc-500 dark:text-zinc-400">RTL</Text></View>
+            <View className="flex-row items-center gap-2"><View className="h-2 w-2 rounded-full bg-zinc-900 dark:bg-white" /><Text className="text-sm text-zinc-900 dark:text-zinc-100">Persian (فارسی)</Text><Text className="text-xs text-zinc-500 dark:text-zinc-400">RTL</Text></View>
+            <View className="flex-row items-center gap-2"><View className="h-2 w-2 rounded-full bg-zinc-900 dark:bg-white" /><Text className="text-sm text-zinc-900 dark:text-zinc-100">Urdu (اردو)</Text><Text className="text-xs text-zinc-500 dark:text-zinc-400">RTL</Text></View>
+            <View className="flex-row items-center gap-2"><View className="h-2 w-2 rounded-full bg-zinc-200 dark:bg-zinc-800" /><Text className="text-sm text-zinc-900 dark:text-zinc-100">English</Text><Text className="text-xs text-zinc-500 dark:text-zinc-400">LTR</Text></View>
+            <View className="flex-row items-center gap-2"><View className="h-2 w-2 rounded-full bg-zinc-200 dark:bg-zinc-800" /><Text className="text-sm text-zinc-900 dark:text-zinc-100">French</Text><Text className="text-xs text-zinc-500 dark:text-zinc-400">LTR</Text></View>
+          </View>
+        </View>
+      </View>
+    );
+  },
   text: () => (
     <View className="gap-6">
       <Text className="text-sm text-zinc-500 dark:text-zinc-400">A typography component with semantic variants for headings, body text, and utility styles. Maps to React Native Text with NativeWind classes.</Text>
@@ -1119,7 +1376,7 @@ const demos: Record<string, () => React.ReactElement> = {
               </View>
             </CollapsibleTrigger>
             <CollapsibleContent>
-              <View className="px-4 pb-3"><Text className="text-xs text-zinc-500 dark:text-zinc-400">A shadcn/ui-style component library for React Native with 81 components.</Text></View>
+              <View className="px-4 pb-3"><Text className="text-xs text-zinc-500 dark:text-zinc-400">A shadcn/ui-style component library for React Native with 87 components.</Text></View>
             </CollapsibleContent>
           </View>
         </Collapsible>
