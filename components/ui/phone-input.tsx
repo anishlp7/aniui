@@ -68,7 +68,7 @@ export function PhoneInput({
         accessible={true}
         accessibilityRole="button"
         accessibilityLabel={`Country: ${country.name}`}
-        className="flex-row items-center mr-2 pr-2 border-r border-border min-h-8"
+        className="flex-row items-center me-2 pe-2 border-e border-border min-h-8"
       >
         <Text className="text-foreground text-base">{country.dial}</Text>
         <Svg width={14} height={14} viewBox="0 0 24 24" fill="none" stroke="#71717a" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">

@@ -56,7 +56,7 @@ export function ImageGallery({ className, images, showPagination = true, ...prop
         <View className="flex-1 bg-black items-center justify-center">
           <Pressable
             onPress={() => setFullscreen(false)}
-            className="absolute top-14 right-4 z-10 min-h-12 min-w-12 items-center justify-center"
+            className="absolute top-14 end-4 z-10 min-h-12 min-w-12 items-center justify-center"
             accessibilityRole="button"
             accessibilityLabel="Close"
           >

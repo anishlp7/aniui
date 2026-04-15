@@ -98,7 +98,7 @@ export function WelcomeScreen() {
 
 ## Components
 
-**81 components** — all listed alphabetically. Each component's docs page tells you if it needs extra dependencies.
+**87 components** — all listed alphabetically. Each component's docs page tells you if it needs extra dependencies.
 
 | Component | Description |
 |-----------|-------------|
@@ -117,24 +117,29 @@ export function WelcomeScreen() {
 | [Chat Bubble](https://aniui.dev/docs/chat-bubble) | Sent/received message bubbles with timestamps and status |
 | [Checkbox](https://aniui.dev/docs/checkbox) | Checkbox with checked/unchecked/disabled |
 | [Chip](https://aniui.dev/docs/chip) | Interactive tag for filters and multi-select |
-| [Combobox](https://aniui.dev/docs/combobox) | Searchable select dropdown with type-to-filter |
+| [Combobox](https://aniui.dev/docs/combobox) | Searchable select with multi-select, groups, clear, and custom rendering |
 | [Connection Banner](https://aniui.dev/docs/connection-banner) | Animated online/offline connection status banner |
 | [Collapsible](https://aniui.dev/docs/collapsible) | Animated show/hide content |
 | [Date Picker](https://aniui.dev/docs/date-picker) | Calendar popup picker with range support |
 | [Dialog](https://aniui.dev/docs/dialog) | Modal with fade + scale overlay |
+| [Direction Provider](https://aniui.dev/docs/direction-provider) | RTL/LTR direction context with I18nManager |
 | [Drawer](https://aniui.dev/docs/drawer) | Slide-in side navigation panel |
 | [Dropdown Menu](https://aniui.dev/docs/dropdown-menu) | Context menu with fade animation |
 | [Empty State](https://aniui.dev/docs/empty-state) | Placeholder for empty lists and error states |
 | [FAB](https://aniui.dev/docs/fab) | Floating action button with positioning |
+| [Field](https://aniui.dev/docs/field) | Form field with label, description, and error |
 | [File Picker](https://aniui.dev/docs/file-picker) | Upload UI with dashed border, preview, and remove |
 | [Form](https://aniui.dev/docs/form) | Form context with validation, error messages, compound components |
 | [Grid](https://aniui.dev/docs/grid) | FlatList-based grid layout with configurable columns |
 | [Header](https://aniui.dev/docs/header) | Navigation header with back button, title, and actions |
+| [Hover Card](https://aniui.dev/docs/hover-card) | Preview content card triggered by long-press |
 | [Image](https://aniui.dev/docs/image) | Image with loading, error fallback, rounded variants |
 | [Image Gallery](https://aniui.dev/docs/image-gallery) | Horizontal carousel with fullscreen modal and pagination |
 | [Infinite List](https://aniui.dev/docs/infinite-list) | FlatList with automatic load-more on scroll |
 | [Input](https://aniui.dev/docs/input) | Text input with default and ghost variants |
+| [Input Group](https://aniui.dev/docs/input-group) | Compose inputs with addons, buttons, and text |
 | [Input OTP](https://aniui.dev/docs/input-otp) | OTP verification input with individual cells |
+| [Kbd](https://aniui.dev/docs/kbd) | Keyboard key display with grouping |
 | [Label](https://aniui.dev/docs/label) | Form field label |
 | [Labeled Separator](https://aniui.dev/docs/labeled-separator) | Horizontal separator with centered text label |
 | [List](https://aniui.dev/docs/list) | Styled list with ListItem, Title, Description |
@@ -197,7 +202,7 @@ npm install @gorhom/bottom-sheet react-native-gesture-handler
 
 | Area | Status |
 |------|--------|
-| 81 components | ✅ |
+| 87 components | ✅ |
 | Component & CLI tests (Jest) | ✅ |
 | Accessibility audit | ✅ |
 | Performance benchmarks | ✅ |

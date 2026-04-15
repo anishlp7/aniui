@@ -53,7 +53,7 @@ export function ChartTooltip({
           <View key={i} className="flex-row items-center gap-2 py-0.5">
             {indicatorEl(item.color)}
             <Text className="text-xs text-muted-foreground">{item.label}</Text>
-            <Text className="text-xs font-medium text-foreground ml-auto">
+            <Text className="text-xs font-medium text-foreground ms-auto">
               {item.value}
             </Text>
           </View>

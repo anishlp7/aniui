@@ -28,7 +28,7 @@ export function ToastProvider({ children }: ToastProviderProps) {
   return (
     <ToastContext.Provider value={{ toast }}>
       {children}
-      <View className="absolute top-14 left-4 right-4 gap-2 z-50" pointerEvents="box-none">
+      <View className="absolute top-14 start-4 end-4 gap-2 z-50" pointerEvents="box-none">
         {toasts.map((t) => (
           <ToastItem key={t.id} data={t} onDismiss={() => dismiss(t.id)} />
         ))}

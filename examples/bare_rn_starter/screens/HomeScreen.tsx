@@ -31,6 +31,8 @@ const components = [
   { name: "Phone Input", section: "Forms" },
   { name: "Number Input", section: "Forms" },
   { name: "Combobox", section: "Forms" },
+  { name: "Field", section: "Forms" },
+  { name: "Input Group", section: "Forms" },
   { name: "Form", section: "Forms" },
   { name: "File Picker", section: "Forms" },
   { name: "Text", section: "Display" },
@@ -54,6 +56,7 @@ const components = [
   { name: "Stat Card", section: "Display" },
   { name: "Price", section: "Display" },
   { name: "Status Indicator", section: "Display" },
+  { name: "Kbd", section: "Display" },
   { name: "Banner", section: "Display" },
   { name: "Typing Indicator", section: "Display" },
   { name: "Alert", section: "Feedback" },
@@ -77,6 +80,7 @@ const components = [
   { name: "Dropdown Menu", section: "Overlays" },
   { name: "Context Menu", section: "Overlays" },
   { name: "Tooltip", section: "Overlays" },
+  { name: "Hover Card", section: "Overlays" },
   { name: "Bottom Sheet", section: "Overlays" },
   { name: "Action Sheet", section: "Overlays" },
   { name: "FAB", section: "Overlays" },
@@ -86,9 +90,11 @@ const components = [
   { name: "Pie Chart", section: "Charts" },
   { name: "Radar Chart", section: "Charts" },
   { name: "Radial Chart", section: "Charts" },
+  // Providers
+  { name: "Direction Provider", section: "Providers" },
 ];
 
-const sectionOrder = ["Forms", "Display", "Feedback", "Navigation", "Overlays", "Charts"];
+const sectionOrder = ["Forms", "Display", "Feedback", "Navigation", "Overlays", "Charts", "Providers"];
 
 export interface HomeScreenProps {
   onNavigate: (slug: string) => void;
@@ -114,7 +120,7 @@ export function HomeScreen({ onNavigate }: HomeScreenProps) {
           <View className="flex-row items-center justify-between">
             <View>
               <Text variant="h3" className="text-foreground">AniUI</Text>
-              <Text variant="small" className="text-muted-foreground">77 components</Text>
+              <Text variant="small" className="text-muted-foreground">87 components</Text>
             </View>
             <Pressable
               onPress={toggle}

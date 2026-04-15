@@ -36,7 +36,7 @@ export interface HeaderLeftProps extends React.ComponentPropsWithoutRef<typeof V
 }
 
 export function HeaderLeft({ className, children, ...props }: HeaderLeftProps) {
-  return <View className={cn("flex-row items-center mr-3", className)} {...props}>{children}</View>;
+  return <View className={cn("flex-row items-center me-3", className)} {...props}>{children}</View>;
 }
 
 export interface HeaderTitleProps extends React.ComponentPropsWithoutRef<typeof Text> {
@@ -59,7 +59,7 @@ export interface HeaderRightProps extends React.ComponentPropsWithoutRef<typeof 
 }
 
 export function HeaderRight({ className, children, ...props }: HeaderRightProps) {
-  return <View className={cn("flex-row items-center ml-3 gap-2", className)} {...props}>{children}</View>;
+  return <View className={cn("flex-row items-center ms-3 gap-2", className)} {...props}>{children}</View>;
 }
 
 export interface HeaderBackButtonProps extends React.ComponentPropsWithoutRef<typeof Pressable> {
