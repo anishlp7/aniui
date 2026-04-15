@@ -17,10 +17,11 @@ AniUI is a copy-paste component library for React Native. Components are source 
 npx @aniui/cli init
 npx @aniui/cli add button text input card
 
-## Components (87 total, alphabetical)
+## Components (90 total, alphabetical)
 
 - Accordion: `import { Accordion, AccordionItem } from "@/components/ui/accordion"` — needs @rn-primitives/accordion, react-native-reanimated
 - ActionSheet: `import { ActionSheet } from "@/components/ui/action-sheet"` — needs @gorhom/bottom-sheet, react-native-gesture-handler
+- Animate: `import { springs, entering, exiting, duration, easing, usePressAnimation } from "@/components/ui/animate"` — Animation presets, spring configs, and hooks for Reanimated 4
 - Alert: `import { Alert } from "@/components/ui/alert"` — variant: default|destructive|success|warning
 - AlertDialog: `import { AlertDialog, AlertDialogContent, AlertDialogHeader, AlertDialogTitle, AlertDialogDescription, AlertDialogFooter, AlertDialogAction, AlertDialogCancel } from "@/components/ui/alert-dialog"` — needs react-native-reanimated
 - AreaChart: `import { AreaChart } from "@/components/ui/area-chart"` — SVG area chart with gradient fill, needs react-native-svg
@@ -38,9 +39,11 @@ npx @aniui/cli add button text input card
 - Checkbox: `import { Checkbox } from "@/components/ui/checkbox"` — needs @rn-primitives/checkbox
 - Chip: `import { Chip } from "@/components/ui/chip"` — variant: default|secondary|outline|destructive, selected state, onClose
 - Collapsible: `import { Collapsible, CollapsibleTrigger, CollapsibleContent } from "@/components/ui/collapsible"` — needs react-native-reanimated
+- CommandMenu: `import { CommandMenu } from "@/components/ui/command-menu"` — Spotlight-style searchable command palette with groups and keyboard shortcuts
 - Combobox: `import { Combobox } from "@/components/ui/combobox"` — Searchable select with multi-select, groups, clear, custom rendering, invalid/disabled states
 - ConnectionBanner: `import { ConnectionBanner } from "@/components/ui/connection-banner"` — Animated online/offline status banner, needs react-native-reanimated
 - ContextMenu: `import { ContextMenu, ContextMenuTrigger, ContextMenuContent, ContextMenuItem, ContextMenuSeparator } from "@/components/ui/context-menu"` — needs @rn-primitives/context-menu, react-native-reanimated
+- DataTable: `import { DataTable } from "@/components/ui/data-table"` — Sortable, filterable data table with pagination and custom cell rendering
 - DatePicker: `import { DatePicker, DateRangePicker } from "@/components/ui/date-picker"` — Calendar popup picker with range support
 - Dialog: `import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter } from "@/components/ui/dialog"`
 - DirectionProvider: `import { DirectionProvider, useDirection } from "@/components/ui/direction-provider"` — RTL/LTR direction context with I18nManager integration

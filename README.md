@@ -98,12 +98,13 @@ export function WelcomeScreen() {
 
 ## Components
 
-**87 components** — all listed alphabetically. Each component's docs page tells you if it needs extra dependencies.
+**90 components** — all listed alphabetically. Each component's docs page tells you if it needs extra dependencies.
 
 | Component | Description |
 |-----------|-------------|
 | [Accordion](https://aniui.dev/docs/accordion) | Expand/collapse content sections |
 | [Action Sheet](https://aniui.dev/docs/action-sheet) | Action sheet with options |
+| [Animate](https://aniui.dev/docs/animate) | Animation presets, spring configs, and hooks |
 | [Alert](https://aniui.dev/docs/alert) | Alert with default, destructive, success, warning |
 | [Alert Dialog](https://aniui.dev/docs/alert-dialog) | Confirmation dialog with Action/Cancel |
 | [Avatar](https://aniui.dev/docs/avatar) | Image with fallback initials, 3 sizes |
@@ -117,9 +118,11 @@ export function WelcomeScreen() {
 | [Chat Bubble](https://aniui.dev/docs/chat-bubble) | Sent/received message bubbles with timestamps and status |
 | [Checkbox](https://aniui.dev/docs/checkbox) | Checkbox with checked/unchecked/disabled |
 | [Chip](https://aniui.dev/docs/chip) | Interactive tag for filters and multi-select |
+| [Command Menu](https://aniui.dev/docs/command-menu) | Spotlight-style searchable command palette |
 | [Combobox](https://aniui.dev/docs/combobox) | Searchable select with multi-select, groups, clear, and custom rendering |
 | [Connection Banner](https://aniui.dev/docs/connection-banner) | Animated online/offline connection status banner |
 | [Collapsible](https://aniui.dev/docs/collapsible) | Animated show/hide content |
+| [Data Table](https://aniui.dev/docs/data-table) | Sortable, filterable data table with pagination |
 | [Date Picker](https://aniui.dev/docs/date-picker) | Calendar popup picker with range support |
 | [Dialog](https://aniui.dev/docs/dialog) | Modal with fade + scale overlay |
 | [Direction Provider](https://aniui.dev/docs/direction-provider) | RTL/LTR direction context with I18nManager |
@@ -202,7 +205,7 @@ npm install @gorhom/bottom-sheet react-native-gesture-handler
 
 | Area | Status |
 |------|--------|
-| 87 components | ✅ |
+| 90 components | ✅ |
 | Component & CLI tests (Jest) | ✅ |
 | Accessibility audit | ✅ |
 | Performance benchmarks | ✅ |
