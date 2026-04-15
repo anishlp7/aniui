@@ -6,6 +6,9 @@ import { themeCommand } from "./commands/theme";
 import { mcpCommand } from "./commands/mcp";
 import { generateCommand } from "./commands/generate";
 import { doctorCommand } from "./commands/doctor";
+import { statusCommand } from "./commands/status";
+import { diffCommand } from "./commands/diff";
+import { updateCommand } from "./commands/update";
 
 const pkg = require("../../package.json");
 
@@ -67,6 +70,29 @@ program
   .description("Check your project setup for issues")
   .action(async () => {
     await doctorCommand();
+  });
+
+program
+  .command("status")
+  .description("Show installed components and available updates")
+  .action(async () => {
+    await statusCommand();
+  });
+
+program
+  .command("diff")
+  .description("Show differences between local and upstream component")
+  .argument("<name>", "component name to diff")
+  .action(async (name: string) => {
+    await diffCommand(name);
+  });
+
+program
+  .command("update")
+  .description("Update installed components to latest version")
+  .argument("[names...]", "component names to update (all if omitted)")
+  .action(async (names: string[]) => {
+    await updateCommand(names);
   });
 
 program.parse();
