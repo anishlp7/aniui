@@ -1,8 +1,7 @@
 import React from "react";
 import { View, Pressable } from "react-native";
 import * as HoverCardPrimitive from "@rn-primitives/hover-card";
-import Animated from "react-native-reanimated";
-import { entering, exiting } from "@/components/ui/animate";
+import Animated, { FadeIn, FadeOut } from "react-native-reanimated";
 import { cn } from "@/lib/utils";
 
 export interface HoverCardProps {
@@ -71,7 +70,7 @@ export function HoverCardContent({
         align={align}
         avoidCollisions
       >
-        <Animated.View entering={entering.fadeIn} exiting={exiting.fadeOut}>
+        <Animated.View entering={FadeIn.duration(150)} exiting={FadeOut.duration(100)}>
           <View
             className={cn("w-64 rounded-lg border border-border bg-card p-4 shadow-lg", className)}
             {...props}

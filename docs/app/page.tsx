@@ -47,7 +47,7 @@ const jsonLd = {
   name: "AniUI",
   applicationCategory: "DeveloperApplication",
   operatingSystem: "iOS, Android",
-  description: "shadcn/ui for React Native. 90 accessible components built with NativeWind and TypeScript.",
+  description: "shadcn/ui for React Native. 87 accessible components built with NativeWind and TypeScript.",
   url: "https://aniui.dev",
   author: { "@type": "Person", name: "Anish" },
   offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
@@ -126,7 +126,7 @@ export default function HomePage() {
         </h1>
 
         <p className="mt-6 max-w-xl text-lg text-muted-foreground leading-relaxed">
-          90 accessible components built with NativeWind and TypeScript.
+          87 accessible components built with NativeWind and TypeScript.
           No npm install — you own every line of code.
         </p>
 
@@ -174,7 +174,7 @@ export default function HomePage() {
           <div className="text-center sm:text-left">
             <p className="text-sm font-medium text-foreground">Preview on your device</p>
             <p className="text-xs text-muted-foreground mt-1">
-              Scan with Expo Go to try all 90 components on a real device.
+              Scan with Expo Go to try all 87 components on a real device.
               Each component page also has an Expo Snack embed.
             </p>
           </div>

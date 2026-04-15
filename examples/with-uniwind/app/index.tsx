@@ -35,6 +35,8 @@ const components = [
   { name: "Combobox", section: "Forms" },
   { name: "Command Menu", section: "Forms" },
   { name: "Data Table", section: "Display" },
+  { name: "Field", section: "Forms" },
+  { name: "Input Group", section: "Forms" },
   { name: "Form", section: "Forms" },
   { name: "File Picker", section: "Forms" },
   // Display
@@ -59,6 +61,7 @@ const components = [
   { name: "Stat Card", section: "Display" },
   { name: "Price", section: "Display" },
   { name: "Status Indicator", section: "Display" },
+  { name: "Kbd", section: "Display" },
   { name: "Banner", section: "Display" },
   { name: "Typing Indicator", section: "Display" },
   // Feedback
@@ -85,6 +88,7 @@ const components = [
   { name: "Dropdown Menu", section: "Overlays" },
   { name: "Context Menu", section: "Overlays" },
   { name: "Tooltip", section: "Overlays" },
+  { name: "Hover Card", section: "Overlays" },
   { name: "Bottom Sheet", section: "Overlays" },
   { name: "Action Sheet", section: "Overlays" },
   { name: "FAB", section: "Overlays" },
@@ -95,9 +99,11 @@ const components = [
   { name: "Pie Chart", section: "Charts" },
   { name: "Radar Chart", section: "Charts" },
   { name: "Radial Chart", section: "Charts" },
+  // Providers
+  { name: "Direction Provider", section: "Providers" },
 ];
 
-const sectionOrder = ["Forms", "Display", "Feedback", "Navigation", "Overlays", "Charts"];
+const sectionOrder = ["Forms", "Display", "Feedback", "Navigation", "Overlays", "Charts", "Providers"];
 
 export default function HomeScreen() {
   const router = useRouter();
@@ -130,7 +136,7 @@ export default function HomeScreen() {
               />
               <View>
                 <Text style={{ fontSize: 20, fontWeight: "700", color: colors.fg }}>AniUI</Text>
-                <Text style={{ fontSize: 12, color: colors.mutedFg }}>81 components</Text>
+                <Text style={{ fontSize: 12, color: colors.mutedFg }}>87 components</Text>
               </View>
             </View>
             <Pressable

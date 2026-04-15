@@ -32,6 +32,11 @@ import { CommandMenu } from "@/components/ui/command-menu";
 import { DataTable } from "@/components/ui/data-table";
 import { FilePicker } from "@/components/ui/file-picker";
 import { Label } from "@/components/ui/label";
+import { Field, FieldLabel, FieldDescription, FieldError } from "@/components/ui/field";
+import { InputGroup, InputGroupAddon, InputGroupInput, InputGroupButton, InputGroupText } from "@/components/ui/input-group";
+import { Kbd, KbdGroup } from "@/components/ui/kbd";
+import { HoverCard, HoverCardTrigger, HoverCardContent } from "@/components/ui/hover-card";
+import { DirectionProvider, useDirection } from "@/components/ui/direction-provider";
 
 // Display
 import { Badge } from "@/components/ui/badge";
@@ -688,43 +693,6 @@ const demos: Record<string, () => React.ReactElement> = {
       </View>
     );
   },
-  "data-table": () => {
-    type User = { name: string; email: string; role: string; status: string };
-    const data: User[] = [
-      { name: "Alice Johnson", email: "alice@example.com", role: "Admin", status: "Active" },
-      { name: "Bob Smith", email: "bob@example.com", role: "Editor", status: "Active" },
-      { name: "Charlie Brown", email: "charlie@example.com", role: "Viewer", status: "Inactive" },
-      { name: "Diana Prince", email: "diana@example.com", role: "Admin", status: "Active" },
-      { name: "Eve Wilson", email: "eve@example.com", role: "Editor", status: "Inactive" },
-      { name: "Frank Miller", email: "frank@example.com", role: "Viewer", status: "Active" },
-    ];
-    return (
-      <View className="gap-6">
-        <Text className="text-sm text-muted-foreground">A sortable, filterable data table with pagination.</Text>
-        <View className="gap-2">
-          <Text className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">With Search & Pagination</Text>
-          <DataTable columns={[{ key: "name", header: "Name", sortable: true }, { key: "email", header: "Email", sortable: true }, { key: "role", header: "Role", sortable: true }, { key: "status", header: "Status", sortable: true }]} data={data} searchable searchKeys={["name", "email"]} pageSize={4} striped />
-        </View>
-      </View>
-    );
-  },
-  "command-menu": () => {
-    const [open, setOpen] = useState(false);
-    const [selected, setSelected] = useState("");
-    return (
-      <View className="gap-6">
-        <Text className="text-sm text-muted-foreground">Spotlight-style command palette with search, groups, and shortcuts.</Text>
-        <View className="gap-2">
-          <Text className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Example</Text>
-          <View className="rounded-lg border border-border bg-card p-4 gap-3">
-            <Pressable onPress={() => setOpen(true)} className="flex-row items-center min-h-12 px-4 rounded-md border border-input bg-background"><Text className="text-muted-foreground text-sm flex-1">Type a command...</Text></Pressable>
-            {selected ? <Text variant="muted">Last: {selected}</Text> : null}
-            <CommandMenu open={open} onOpenChange={setOpen} onSelect={setSelected} items={[{ label: "New File", value: "new-file", group: "Actions", shortcut: "Cmd+N" }, { label: "Save", value: "save", group: "Actions", shortcut: "Cmd+S" }, { label: "Home", value: "home", group: "Navigation" }, { label: "Settings", value: "settings", group: "Navigation" }, { label: "Sign Out", value: "signout", group: "Account" }]} />
-          </View>
-        </View>
-      </View>
-    );
-  },
   form: () => {
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
@@ -814,6 +782,258 @@ const demos: Record<string, () => React.ReactElement> = {
             <Button variant="outline" onPress={upload}>Retry</Button>
           </View>
         )}
+        </View>
+      </View>
+    );
+  },
+  field: () => {
+    return (
+      <View className="gap-6">
+        <Text className="text-sm text-muted-foreground">Combine labels, controls, and help text to compose accessible form fields. Supports vertical and horizontal orientations.</Text>
+        <View className="gap-2">
+          <Text className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Vertical (default)</Text>
+          <View className="rounded-lg border border-border bg-card p-4 gap-4">
+            <Field>
+              <FieldLabel>Email</FieldLabel>
+              <Input placeholder="you@example.com" />
+              <FieldDescription>We will never share your email.</FieldDescription>
+            </Field>
+            <Field>
+              <FieldLabel>Password</FieldLabel>
+              <Input placeholder="••••••••" secureTextEntry />
+              <FieldDescription>Must be at least 8 characters.</FieldDescription>
+            </Field>
+          </View>
+        </View>
+        <View className="gap-2">
+          <Text className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Horizontal</Text>
+          <View className="rounded-lg border border-border bg-card p-4 gap-4">
+            <Field orientation="horizontal">
+              <FieldLabel>Name</FieldLabel>
+              <Input placeholder="John Doe" className="flex-1" />
+            </Field>
+            <Field orientation="horizontal">
+              <FieldLabel>Bio</FieldLabel>
+              <Textarea placeholder="Tell us about yourself..." className="flex-1" />
+            </Field>
+          </View>
+        </View>
+        <View className="gap-2">
+          <Text className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Error State</Text>
+          <View className="rounded-lg border border-border bg-card p-4 gap-4">
+            <Field>
+              <FieldLabel>Username</FieldLabel>
+              <Input placeholder="username" defaultValue="ab" />
+              <FieldError errors={["Username must be at least 3 characters", "Username can only contain letters and numbers"]} />
+            </Field>
+          </View>
+        </View>
+      </View>
+    );
+  },
+  "input-group": () => {
+    const [search, setSearch] = useState("");
+    return (
+      <View className="gap-6">
+        <Text className="text-sm text-muted-foreground">Add addons, buttons, and helper content to inputs. Prefixes, suffixes, and action buttons compose flexibly.</Text>
+        <View className="gap-2">
+          <Text className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Prefix Addon</Text>
+          <View className="rounded-lg border border-border bg-card p-4 gap-3">
+            <Label>Price</Label>
+            <InputGroup>
+              <InputGroupAddon>
+                <InputGroupText>$</InputGroupText>
+              </InputGroupAddon>
+              <InputGroupInput placeholder="0.00" keyboardType="numeric" />
+            </InputGroup>
+          </View>
+        </View>
+        <View className="gap-2">
+          <Text className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Suffix Addon</Text>
+          <View className="rounded-lg border border-border bg-card p-4 gap-3">
+            <Label>Domain</Label>
+            <InputGroup>
+              <InputGroupInput placeholder="mysite" />
+              <InputGroupAddon align="end">
+                <InputGroupText>.com</InputGroupText>
+              </InputGroupAddon>
+            </InputGroup>
+          </View>
+        </View>
+        <View className="gap-2">
+          <Text className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">With Button</Text>
+          <View className="rounded-lg border border-border bg-card p-4 gap-3">
+            <Label>Search</Label>
+            <InputGroup>
+              <InputGroupInput placeholder="Search..." value={search} onChangeText={setSearch} />
+              <InputGroupButton onPress={() => {}}>
+                <Text className="text-sm text-foreground">Go</Text>
+              </InputGroupButton>
+            </InputGroup>
+          </View>
+        </View>
+        <View className="gap-2">
+          <Text className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Both Sides</Text>
+          <View className="rounded-lg border border-border bg-card p-4 gap-3">
+            <Label>Transfer</Label>
+            <InputGroup>
+              <InputGroupAddon>
+                <InputGroupText>USD</InputGroupText>
+              </InputGroupAddon>
+              <InputGroupInput placeholder="0.00" keyboardType="numeric" />
+              <InputGroupButton onPress={() => {}}>
+                <Text className="text-sm text-foreground">Send</Text>
+              </InputGroupButton>
+            </InputGroup>
+          </View>
+        </View>
+      </View>
+    );
+  },
+  kbd: () => (
+    <View className="gap-6">
+      <Text className="text-sm text-muted-foreground">Display keyboard input keys. Useful for showing shortcuts in help screens, tooltips, and iPad external keyboard hints.</Text>
+      <View className="gap-2">
+        <Text className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Single Keys</Text>
+        <View className="rounded-lg border border-border bg-card p-4">
+          <View className="flex-row flex-wrap gap-2">
+            <Kbd>Ctrl</Kbd>
+            <Kbd>Shift</Kbd>
+            <Kbd>Alt</Kbd>
+            <Kbd>Enter</Kbd>
+            <Kbd>Esc</Kbd>
+            <Kbd>Tab</Kbd>
+          </View>
+        </View>
+      </View>
+      <View className="gap-2">
+        <Text className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Key Groups</Text>
+        <View className="rounded-lg border border-border bg-card p-4 gap-3">
+          <View className="flex-row items-center gap-3">
+            <Text className="text-sm text-foreground flex-1">Copy</Text>
+            <KbdGroup><Kbd>Cmd</Kbd><Kbd>C</Kbd></KbdGroup>
+          </View>
+          <View className="flex-row items-center gap-3">
+            <Text className="text-sm text-foreground flex-1">Paste</Text>
+            <KbdGroup><Kbd>Cmd</Kbd><Kbd>V</Kbd></KbdGroup>
+          </View>
+          <View className="flex-row items-center gap-3">
+            <Text className="text-sm text-foreground flex-1">Find</Text>
+            <KbdGroup><Kbd>Cmd</Kbd><Kbd>Shift</Kbd><Kbd>F</Kbd></KbdGroup>
+          </View>
+        </View>
+      </View>
+      <View className="gap-2">
+        <Text className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Sizes</Text>
+        <View className="rounded-lg border border-border bg-card p-4 gap-3">
+          <View className="flex-row items-center gap-3">
+            <Text className="text-sm text-muted-foreground w-8">sm</Text>
+            <Kbd size="sm">Esc</Kbd>
+          </View>
+          <View className="flex-row items-center gap-3">
+            <Text className="text-sm text-muted-foreground w-8">md</Text>
+            <Kbd size="md">Esc</Kbd>
+          </View>
+          <View className="flex-row items-center gap-3">
+            <Text className="text-sm text-muted-foreground w-8">lg</Text>
+            <Kbd size="lg">Esc</Kbd>
+          </View>
+        </View>
+      </View>
+    </View>
+  ),
+  "hover-card": () => {
+    const [open, setOpen] = useState(false);
+    return (
+      <View className="gap-6">
+        <Text className="text-sm text-muted-foreground">Preview content behind a trigger. On mobile, triggered by long-press instead of hover. Uses @rn-primitives for positioning.</Text>
+        <View className="gap-2">
+          <Text className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Example</Text>
+          <View className="rounded-lg border border-border bg-card p-4 items-start">
+            <HoverCard open={open} onOpenChange={setOpen}>
+              <HoverCardTrigger>
+                <Text className="text-sm font-medium text-primary underline underline-offset-4">@aniui</Text>
+              </HoverCardTrigger>
+              <HoverCardContent>
+                <View className="gap-2">
+                  <View className="flex-row items-center gap-3">
+                    <View className="h-10 w-10 rounded-full bg-primary items-center justify-center">
+                      <Text className="text-sm font-bold text-primary-foreground">A</Text>
+                    </View>
+                    <View>
+                      <Text className="text-sm font-semibold text-foreground">AniUI</Text>
+                      <Text className="text-xs text-muted-foreground">@aniui</Text>
+                    </View>
+                  </View>
+                  <Text className="text-xs text-muted-foreground">Beautiful React Native components. Copy. Paste. Ship.</Text>
+                </View>
+              </HoverCardContent>
+            </HoverCard>
+          </View>
+        </View>
+        <View className="gap-2">
+          <Text className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Note</Text>
+          <View className="rounded-lg border border-border bg-card p-4">
+            <Text className="text-sm text-muted-foreground">On mobile, long-press the trigger to open. Requires PortalHost at app root.</Text>
+          </View>
+        </View>
+      </View>
+    );
+  },
+  "direction-provider": () => {
+    const [dir, setDir] = useState<"ltr" | "rtl">("ltr");
+    return (
+      <View className="gap-6">
+        <Text className="text-sm text-muted-foreground">RTL/LTR direction context for right-to-left language support. Wraps I18nManager and provides a useDirection hook.</Text>
+        <View className="gap-2">
+          <Text className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Direction Toggle</Text>
+          <View className="rounded-lg border border-border bg-card p-4 gap-4">
+            <View className="flex-row gap-2">
+              <Pressable onPress={() => setDir("ltr")} className={`flex-1 items-center py-3 rounded-md border ${dir === "ltr" ? "bg-primary border-primary" : "border-input bg-background"}`}>
+                <Text className={`text-sm font-medium ${dir === "ltr" ? "text-primary-foreground" : "text-foreground"}`}>LTR</Text>
+              </Pressable>
+              <Pressable onPress={() => setDir("rtl")} className={`flex-1 items-center py-3 rounded-md border ${dir === "rtl" ? "bg-primary border-primary" : "border-input bg-background"}`}>
+                <Text className={`text-sm font-medium ${dir === "rtl" ? "text-primary-foreground" : "text-foreground"}`}>RTL</Text>
+              </Pressable>
+            </View>
+          </View>
+        </View>
+        <View className="gap-2">
+          <Text className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Preview ({dir.toUpperCase()})</Text>
+          <View className="rounded-lg border border-border bg-card p-4 gap-3" style={{ direction: dir }}>
+            <Text className="text-sm font-medium text-foreground">{dir === "rtl" ? "مرحبا بالعالم" : "Hello World"}</Text>
+            <Text className="text-xs text-muted-foreground">{dir === "rtl" ? "هذا مثال على تخطيط من اليمين إلى اليسار" : "This is a left-to-right layout example"}</Text>
+            <View className="flex-row gap-2">
+              <View className="flex-1 min-h-10 rounded-md border border-input bg-background px-3 justify-center">
+                <Text className="text-xs text-muted-foreground">{dir === "rtl" ? "بحث..." : "Search..."}</Text>
+              </View>
+              <View className="min-h-10 px-4 rounded-md bg-primary justify-center">
+                <Text className="text-xs font-medium text-primary-foreground">{dir === "rtl" ? "إرسال" : "Go"}</Text>
+              </View>
+            </View>
+            <View className="gap-1.5">
+              <Text className="text-xs font-medium text-foreground">{dir === "rtl" ? "البريد الإلكتروني" : "Email"}</Text>
+              <View className="flex-row items-center rounded-md border border-input bg-background">
+                <View className="px-3 self-stretch justify-center border-e border-input">
+                  <Text className="text-xs text-muted-foreground">@</Text>
+                </View>
+                <View className="flex-1 px-3 min-h-10 justify-center">
+                  <Text className="text-xs text-muted-foreground">{dir === "rtl" ? "أدخل بريدك" : "you@example.com"}</Text>
+                </View>
+              </View>
+            </View>
+          </View>
+        </View>
+        <View className="gap-2">
+          <Text className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Supported Languages</Text>
+          <View className="rounded-lg border border-border bg-card p-4 gap-2">
+            <View className="flex-row items-center gap-2"><View className="h-2 w-2 rounded-full bg-primary" /><Text className="text-sm text-foreground">Arabic (العربية)</Text><Text className="text-xs text-muted-foreground">RTL</Text></View>
+            <View className="flex-row items-center gap-2"><View className="h-2 w-2 rounded-full bg-primary" /><Text className="text-sm text-foreground">Hebrew (עברית)</Text><Text className="text-xs text-muted-foreground">RTL</Text></View>
+            <View className="flex-row items-center gap-2"><View className="h-2 w-2 rounded-full bg-primary" /><Text className="text-sm text-foreground">Persian (فارسی)</Text><Text className="text-xs text-muted-foreground">RTL</Text></View>
+            <View className="flex-row items-center gap-2"><View className="h-2 w-2 rounded-full bg-primary" /><Text className="text-sm text-foreground">Urdu (اردو)</Text><Text className="text-xs text-muted-foreground">RTL</Text></View>
+            <View className="flex-row items-center gap-2"><View className="h-2 w-2 rounded-full bg-muted" /><Text className="text-sm text-foreground">English</Text><Text className="text-xs text-muted-foreground">LTR</Text></View>
+            <View className="flex-row items-center gap-2"><View className="h-2 w-2 rounded-full bg-muted" /><Text className="text-sm text-foreground">French</Text><Text className="text-xs text-muted-foreground">LTR</Text></View>
+          </View>
         </View>
       </View>
     );
@@ -1158,7 +1378,7 @@ const demos: Record<string, () => React.ReactElement> = {
               </View>
             </CollapsibleTrigger>
             <CollapsibleContent>
-              <View className="px-4 pb-3"><Text className="text-xs text-muted-foreground">A shadcn/ui-style component library for React Native with 81 components.</Text></View>
+              <View className="px-4 pb-3"><Text className="text-xs text-muted-foreground">A shadcn/ui-style component library for React Native with 87 components.</Text></View>
             </CollapsibleContent>
           </View>
         </Collapsible>

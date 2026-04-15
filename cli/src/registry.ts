@@ -667,8 +667,8 @@ export const registry: Record<string, ComponentEntry> = {
   "input-group": {
     name: "InputGroup",
     file: "components/ui/input-group.tsx",
-    description: "Compose inputs with prefix/suffix addons, buttons, and text",
-    dependencies: ["clsx", "tailwind-merge"],
+    description: "Compose inputs with addons, buttons, text, and focus-aware container",
+    dependencies: ["class-variance-authority", "clsx", "tailwind-merge"],
     registryDependencies: [],
     tier: 1,
   },

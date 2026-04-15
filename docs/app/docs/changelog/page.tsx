@@ -25,6 +25,25 @@ const typeBadge: Record<ChangeType, { label: string; className: string }> = {
 
 const releases: Release[] = [
   {
+    version: "0.2.18",
+    date: "2026-04-15",
+    title: "New Components, RTL Support & Input Group Rewrite",
+    changes: [
+      { type: "feat", text: "Field component: layout-focused form field with label, description, and error slots", link: "/docs/field" },
+      { type: "feat", text: "Input Group component: rewritten with focus-aware container, CVA button variants, and textarea support", link: "/docs/input-group" },
+      { type: "feat", text: "Kbd component: keyboard key display with size variants and KbdGroup separator", link: "/docs/kbd" },
+      { type: "feat", text: "Hover Card component: preview content triggered by long-press, built on @rn-primitives/hover-card", link: "/docs/hover-card" },
+      { type: "feat", text: "Direction Provider component: RTL/LTR context with I18nManager integration and useDirection hook", link: "/docs/direction-provider" },
+      { type: "feat", text: "Combobox: multi-select with chips, groups, clear button, custom rendering, invalid/disabled/auto-highlight/popup mode", link: "/docs/combobox" },
+      { type: "feat", text: "RTL guide with interactive language selector, logical properties table, and component support matrix", link: "/docs/rtl" },
+      { type: "fix", text: "RTL: migrated 16 components from physical (ml-/mr-/border-l/right-) to logical (ms-/me-/border-s/end-) properties" },
+      { type: "fix", text: "Added @rn-primitives/hover-card to all example package.json files" },
+      { type: "docs", text: "New doc pages for Field, Input Group, Kbd, Hover Card, Direction Provider, and RTL guide" },
+      { type: "docs", text: "Component count updated to 87 across all docs, README, llms.txt, and examples" },
+      { type: "docs", text: "Full demos for all 5 new components added to all 4 example apps" },
+    ],
+  },
+  {
     version: "0.2.17",
     date: "2026-04-13",
     title: "Syntax Highlighting + Bug Fixes",

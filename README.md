@@ -98,7 +98,7 @@ export function WelcomeScreen() {
 
 ## Components
 
-**90 components** — all listed alphabetically. Each component's docs page tells you if it needs extra dependencies.
+**87 components** — all listed alphabetically. Each component's docs page tells you if it needs extra dependencies.
 
 | Component | Description |
 |-----------|-------------|
@@ -118,7 +118,6 @@ export function WelcomeScreen() {
 | [Chat Bubble](https://aniui.dev/docs/chat-bubble) | Sent/received message bubbles with timestamps and status |
 | [Checkbox](https://aniui.dev/docs/checkbox) | Checkbox with checked/unchecked/disabled |
 | [Chip](https://aniui.dev/docs/chip) | Interactive tag for filters and multi-select |
-| [Command Menu](https://aniui.dev/docs/command-menu) | Spotlight-style searchable command palette |
 | [Combobox](https://aniui.dev/docs/combobox) | Searchable select with multi-select, groups, clear, and custom rendering |
 | [Connection Banner](https://aniui.dev/docs/connection-banner) | Animated online/offline connection status banner |
 | [Collapsible](https://aniui.dev/docs/collapsible) | Animated show/hide content |
@@ -205,7 +204,7 @@ npm install @gorhom/bottom-sheet react-native-gesture-handler
 
 | Area | Status |
 |------|--------|
-| 90 components | ✅ |
+| 87 components | ✅ |
 | Component & CLI tests (Jest) | ✅ |
 | Accessibility audit | ✅ |
 | Performance benchmarks | ✅ |
