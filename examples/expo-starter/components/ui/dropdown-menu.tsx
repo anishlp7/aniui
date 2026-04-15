@@ -1,7 +1,8 @@
 import React from "react";
 import { View, Text, Pressable } from "react-native";
 import * as DropdownMenuPrimitive from "@rn-primitives/dropdown-menu";
-import Animated, { FadeIn, FadeOut } from "react-native-reanimated";
+import Animated from "react-native-reanimated";
+import { entering, exiting } from "@/components/ui/animate";
 import { cn } from "@/lib/utils";
 
 export interface DropdownMenuProps {
@@ -37,7 +38,7 @@ export function DropdownMenuContent({ className, children, side = "bottom", side
     <DropdownMenuPrimitive.Portal>
       <DropdownMenuPrimitive.Overlay className="absolute inset-0" />
       <DropdownMenuPrimitive.Content side={side} sideOffset={sideOffset} align={align} avoidCollisions>
-        <Animated.View entering={FadeIn.duration(150)} exiting={FadeOut.duration(100)}>
+        <Animated.View entering={entering.fadeIn} exiting={exiting.fadeOut}>
           <View className={cn("min-w-[180px] rounded-lg border border-border bg-card p-1 shadow-lg", className)} {...props}>
             {children}
           </View>

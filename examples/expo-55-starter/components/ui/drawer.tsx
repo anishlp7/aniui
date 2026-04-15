@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { View, Pressable, Modal } from "react-native";
-import Animated, { useSharedValue, useAnimatedStyle, withTiming } from "react-native-reanimated";
+import Animated, { useSharedValue, useAnimatedStyle, withSpring, withTiming } from "react-native-reanimated";
+import { springs, duration } from "@/components/ui/animate";
 import { cn } from "@/lib/utils";
 
 export interface DrawerProps {
@@ -15,8 +16,8 @@ export function Drawer({ open, onOpenChange, side = "left", children }: DrawerPr
   const opacity = useSharedValue(0);
 
   useEffect(() => {
-    translate.value = withTiming(open ? 0 : (side === "left" ? -300 : 300), { duration: 250 });
-    opacity.value = withTiming(open ? 0.5 : 0, { duration: 250 });
+    translate.value = open ? withSpring(0, springs.snappy) : withTiming(side === "left" ? -300 : 300, { duration: duration.normal });
+    opacity.value = withTiming(open ? 0.5 : 0, { duration: duration.normal });
   }, [open, side, translate, opacity]);
 
   const overlayStyle = useAnimatedStyle(() => ({ opacity: opacity.value }));

@@ -1,7 +1,8 @@
 import React from "react";
 import { View, Pressable } from "react-native";
 import * as PopoverPrimitive from "@rn-primitives/popover";
-import Animated, { FadeIn, FadeOut } from "react-native-reanimated";
+import Animated from "react-native-reanimated";
+import { entering, exiting } from "@/components/ui/animate";
 import { cn } from "@/lib/utils";
 
 export interface PopoverProps {
@@ -42,7 +43,7 @@ export function PopoverContent({ className, children, side = "bottom", sideOffse
     <PopoverPrimitive.Portal>
       <PopoverPrimitive.Overlay className="absolute inset-0" />
       <PopoverPrimitive.Content side={side} sideOffset={sideOffset} align={align} avoidCollisions>
-        <Animated.View entering={FadeIn.duration(150)} exiting={FadeOut.duration(100)}>
+        <Animated.View entering={entering.fadeIn} exiting={exiting.fadeOut}>
           <View className={cn("w-72 rounded-lg border border-border bg-card p-4 shadow-lg", className)} {...props}>
             {children}
           </View>

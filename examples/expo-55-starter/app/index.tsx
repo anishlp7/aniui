@@ -33,6 +33,8 @@ const components = [
   { name: "Phone Input", section: "Forms" },
   { name: "Number Input", section: "Forms" },
   { name: "Combobox", section: "Forms" },
+  { name: "Command Menu", section: "Forms" },
+  { name: "Data Table", section: "Display" },
   { name: "Form", section: "Forms" },
   { name: "File Picker", section: "Forms" },
   // Display

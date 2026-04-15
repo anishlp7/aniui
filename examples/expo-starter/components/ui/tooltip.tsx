@@ -1,7 +1,8 @@
 import React from "react";
 import { View, Text, Pressable } from "react-native";
 import * as TooltipPrimitive from "@rn-primitives/tooltip";
-import Animated, { FadeIn, FadeOut } from "react-native-reanimated";
+import Animated from "react-native-reanimated";
+import { entering, exiting } from "@/components/ui/animate";
 import { cn } from "@/lib/utils";
 
 export interface TooltipProps {
@@ -40,7 +41,7 @@ export function TooltipContent({ className, children, side = "top", sideOffset =
   return (
     <TooltipPrimitive.Portal>
       <TooltipPrimitive.Content side={side} sideOffset={sideOffset} avoidCollisions>
-        <Animated.View entering={FadeIn.duration(150)} exiting={FadeOut.duration(100)}>
+        <Animated.View entering={entering.fadeIn} exiting={exiting.fadeOut}>
           <View className={cn("rounded-md bg-primary px-3 py-1.5", className)} {...props}>
             {typeof children === "string" ? (
               <Text className="text-xs text-primary-foreground text-center">{children}</Text>

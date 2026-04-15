@@ -1,7 +1,8 @@
 import React from "react";
 import { View, Pressable, Text } from "react-native";
 import * as AccordionPrimitive from "@rn-primitives/accordion";
-import Animated, { FadeIn, FadeOut } from "react-native-reanimated";
+import Animated from "react-native-reanimated";
+import { entering, exiting } from "@/components/ui/animate";
 import { cn } from "@/lib/utils";
 
 export interface AccordionProps extends React.ComponentPropsWithoutRef<typeof View> {
@@ -41,7 +42,7 @@ export function AccordionItem({ value, trigger, className, children, ...props }:
           </Pressable>
         </AccordionPrimitive.Trigger>
         <AccordionPrimitive.Content>
-          <Animated.View entering={FadeIn.duration(200)} exiting={FadeOut.duration(150)}>
+          <Animated.View entering={entering.fadeInDown} exiting={exiting.fadeOutUp}>
             <View className="px-4 pb-4">{children}</View>
           </Animated.View>
         </AccordionPrimitive.Content>

@@ -1,6 +1,7 @@
 import React from "react";
 import { View, Pressable, Text, Modal } from "react-native";
-import Animated, { FadeIn, FadeOut, ZoomIn, ZoomOut } from "react-native-reanimated";
+import Animated from "react-native-reanimated";
+import { entering, exiting } from "@/components/ui/animate";
 import { cn } from "@/lib/utils";
 
 export interface AlertDialogProps {
@@ -12,8 +13,8 @@ export interface AlertDialogProps {
 export function AlertDialog({ open, onOpenChange, children }: AlertDialogProps) {
   return (
     <Modal visible={open} transparent animationType="none" onRequestClose={() => onOpenChange(false)}>
-      <Animated.View entering={FadeIn.duration(150)} exiting={FadeOut.duration(100)} className="flex-1 items-center justify-center bg-black/50">
-        <Animated.View entering={ZoomIn.duration(200)} exiting={ZoomOut.duration(150)}>
+      <Animated.View entering={entering.fadeIn} exiting={exiting.fadeOut} className="flex-1 items-center justify-center bg-black/50">
+        <Animated.View entering={entering.zoomIn} exiting={exiting.zoomOut}>
           {children}
         </Animated.View>
       </Animated.View>

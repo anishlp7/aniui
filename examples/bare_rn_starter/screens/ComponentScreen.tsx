@@ -27,6 +27,8 @@ import { NumberInput } from "../components/ui/number-input";
 import { DatePicker } from "../components/ui/date-picker";
 import { PhoneInput } from "../components/ui/phone-input";
 import { Combobox } from "../components/ui/combobox";
+import { CommandMenu } from "../components/ui/command-menu";
+import { DataTable } from "../components/ui/data-table";
 import { FilePicker } from "../components/ui/file-picker";
 import { Label } from "../components/ui/label";
 
@@ -680,6 +682,43 @@ const demos: Record<string, () => React.ReactElement> = {
             <Label>Button-style trigger</Label>
             <Combobox placeholder="Choose..." options={frameworks} value={popupVal} onValueChange={setPopupVal} mode="popup" />
             {popupVal ? <Text variant="muted">Selected: {popupVal}</Text> : null}
+          </View>
+        </View>
+      </View>
+    );
+  },
+  "data-table": () => {
+    type User = { name: string; email: string; role: string; status: string };
+    const data: User[] = [
+      { name: "Alice Johnson", email: "alice@example.com", role: "Admin", status: "Active" },
+      { name: "Bob Smith", email: "bob@example.com", role: "Editor", status: "Active" },
+      { name: "Charlie Brown", email: "charlie@example.com", role: "Viewer", status: "Inactive" },
+      { name: "Diana Prince", email: "diana@example.com", role: "Admin", status: "Active" },
+      { name: "Eve Wilson", email: "eve@example.com", role: "Editor", status: "Inactive" },
+      { name: "Frank Miller", email: "frank@example.com", role: "Viewer", status: "Active" },
+    ];
+    return (
+      <View className="gap-6">
+        <Text className="text-sm text-muted-foreground">A sortable, filterable data table with pagination.</Text>
+        <View className="gap-2">
+          <Text className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">With Search & Pagination</Text>
+          <DataTable columns={[{ key: "name", header: "Name", sortable: true }, { key: "email", header: "Email", sortable: true }, { key: "role", header: "Role", sortable: true }, { key: "status", header: "Status", sortable: true }]} data={data} searchable searchKeys={["name", "email"]} pageSize={4} striped />
+        </View>
+      </View>
+    );
+  },
+  "command-menu": () => {
+    const [open, setOpen] = useState(false);
+    const [selected, setSelected] = useState("");
+    return (
+      <View className="gap-6">
+        <Text className="text-sm text-muted-foreground">Spotlight-style command palette with search, groups, and shortcuts.</Text>
+        <View className="gap-2">
+          <Text className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Example</Text>
+          <View className="rounded-lg border border-border bg-card p-4 gap-3">
+            <Pressable onPress={() => setOpen(true)} className="flex-row items-center min-h-12 px-4 rounded-md border border-input bg-background"><Text className="text-muted-foreground text-sm flex-1">Type a command...</Text></Pressable>
+            {selected ? <Text variant="muted">Last: {selected}</Text> : null}
+            <CommandMenu open={open} onOpenChange={setOpen} onSelect={setSelected} items={[{ label: "New File", value: "new-file", group: "Actions", shortcut: "Cmd+N" }, { label: "Save", value: "save", group: "Actions", shortcut: "Cmd+S" }, { label: "Home", value: "home", group: "Navigation" }, { label: "Settings", value: "settings", group: "Navigation" }, { label: "Sign Out", value: "signout", group: "Account" }]} />
           </View>
         </View>
       </View>
