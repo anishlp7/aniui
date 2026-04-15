@@ -696,6 +696,30 @@ export const registry: Record<string, ComponentEntry> = {
     registryDependencies: [],
     tier: 1,
   },
+  animate: {
+    name: "Animate",
+    file: "components/ui/animate.tsx",
+    description: "Animation presets, spring configs, easing, and hooks for Reanimated 4",
+    dependencies: ["react-native-reanimated"],
+    registryDependencies: [],
+    tier: 2,
+  },
+  "data-table": {
+    name: "DataTable",
+    file: "components/ui/data-table.tsx",
+    description: "Sortable, filterable data table with pagination and custom cell rendering",
+    dependencies: ["react-native-svg", "clsx", "tailwind-merge"],
+    registryDependencies: [],
+    tier: 1,
+  },
+  "command-menu": {
+    name: "CommandMenu",
+    file: "components/ui/command-menu.tsx",
+    description: "Spotlight-style searchable command palette with groups and keyboard shortcuts",
+    dependencies: ["react-native-svg", "clsx", "tailwind-merge"],
+    registryDependencies: [],
+    tier: 1,
+  },
 };
 
 export function getComponentNames(): string[] {

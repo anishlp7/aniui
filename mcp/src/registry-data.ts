@@ -64,6 +64,9 @@ export const registry: Record<string, ComponentEntry> = {
   kbd: { name: "Kbd", file: "components/ui/kbd.tsx", description: "Keyboard key display with grouping and separator", dependencies: ["class-variance-authority", "clsx", "tailwind-merge"], registryDependencies: [], tier: 1 },
   "hover-card": { name: "HoverCard", file: "components/ui/hover-card.tsx", description: "Preview content card triggered by hover or long-press", dependencies: ["@rn-primitives/hover-card", "@rn-primitives/portal", "react-native-reanimated", "clsx", "tailwind-merge"], registryDependencies: [], tier: 3 },
   "direction-provider": { name: "DirectionProvider", file: "components/ui/direction-provider.tsx", description: "RTL/LTR direction context with I18nManager integration", dependencies: ["clsx", "tailwind-merge"], registryDependencies: [], tier: 1 },
+  animate: { name: "Animate", file: "components/ui/animate.tsx", description: "Animation presets, spring configs, easing, and hooks for Reanimated 4", dependencies: ["react-native-reanimated"], registryDependencies: [], tier: 2 },
+  "data-table": { name: "DataTable", file: "components/ui/data-table.tsx", description: "Sortable, filterable data table with pagination and custom cell rendering", dependencies: ["react-native-svg", "clsx", "tailwind-merge"], registryDependencies: [], tier: 1 },
+  "command-menu": { name: "CommandMenu", file: "components/ui/command-menu.tsx", description: "Spotlight-style searchable command palette with groups and keyboard shortcuts", dependencies: ["react-native-svg", "clsx", "tailwind-merge"], registryDependencies: [], tier: 1 },
 };
 
 export function getComponentNames(): string[] {
