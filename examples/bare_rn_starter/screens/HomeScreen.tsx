@@ -122,7 +122,7 @@ export function HomeScreen({ onNavigate }: HomeScreenProps) {
           <View className="flex-row items-center justify-between">
             <View>
               <Text variant="h3" className="text-foreground">AniUI</Text>
-              <Text variant="small" className="text-muted-foreground">87 components</Text>
+              <Text variant="small" className="text-muted-foreground">89 components</Text>
             </View>
             <Pressable
               onPress={toggle}

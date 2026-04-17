@@ -1377,7 +1377,7 @@ const demos: Record<string, () => React.ReactElement> = {
               </View>
             </CollapsibleTrigger>
             <CollapsibleContent>
-              <View className="px-4 pb-3"><Text className="text-xs text-muted-foreground">A shadcn/ui-style component library for React Native with 87 components.</Text></View>
+              <View className="px-4 pb-3"><Text className="text-xs text-muted-foreground">A shadcn/ui-style component library for React Native with 89 components.</Text></View>
             </CollapsibleContent>
           </View>
         </Collapsible>

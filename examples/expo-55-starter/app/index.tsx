@@ -136,7 +136,7 @@ export default function HomeScreen() {
               />
               <View>
                 <Text style={{ fontSize: 20, fontWeight: "700", color: colors.fg }}>AniUI</Text>
-                <Text style={{ fontSize: 12, color: colors.mutedFg }}>87 components</Text>
+                <Text style={{ fontSize: 12, color: colors.mutedFg }}>89 components</Text>
               </View>
             </View>
             <Pressable
