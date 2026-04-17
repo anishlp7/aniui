@@ -785,6 +785,63 @@ const demos: Record<string, () => React.ReactElement> = {
       </View>
     );
   },
+  "data-table": () => {
+    type User = { name: string; email: string; role: string; status: string };
+    const data: User[] = [
+      { name: "Alice Johnson", email: "alice@example.com", role: "Admin", status: "Active" },
+      { name: "Bob Smith", email: "bob@example.com", role: "Editor", status: "Active" },
+      { name: "Charlie Brown", email: "charlie@example.com", role: "Viewer", status: "Inactive" },
+      { name: "Diana Prince", email: "diana@example.com", role: "Admin", status: "Active" },
+      { name: "Eve Wilson", email: "eve@example.com", role: "Editor", status: "Inactive" },
+      { name: "Frank Miller", email: "frank@example.com", role: "Viewer", status: "Active" },
+    ];
+    return (
+      <View className="gap-6">
+        <Text className="text-sm text-muted-foreground">A sortable, filterable data table with pagination. Tap column headers to sort.</Text>
+        <View className="gap-2">
+          <Text className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Basic</Text>
+          <DataTable columns={[{ key: "name", header: "Name" }, { key: "email", header: "Email" }, { key: "role", header: "Role" }]} data={data.slice(0, 3)} />
+        </View>
+        <View className="gap-2">
+          <Text className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Sorting</Text>
+          <DataTable columns={[{ key: "name", header: "Name", sortable: true }, { key: "role", header: "Role", sortable: true }, { key: "status", header: "Status", sortable: true }]} data={data.slice(0, 4)} />
+        </View>
+        <View className="gap-2">
+          <Text className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Search</Text>
+          <DataTable columns={[{ key: "name", header: "Name", sortable: true }, { key: "email", header: "Email", sortable: true }]} data={data} searchable searchKeys={["name", "email"]} searchPlaceholder="Search..." />
+        </View>
+        <View className="gap-2">
+          <Text className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Pagination</Text>
+          <DataTable columns={[{ key: "name", header: "Name" }, { key: "role", header: "Role" }, { key: "status", header: "Status" }]} data={data} pageSize={3} />
+        </View>
+        <View className="gap-2">
+          <Text className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Custom Cells</Text>
+          <DataTable columns={[{ key: "name", header: "Name" }, { key: "status", header: "Status", render: (val) => (<View className={`rounded-full px-2 py-0.5 self-start ${val === "Active" ? "bg-green-100 dark:bg-green-900" : "bg-red-100 dark:bg-red-900"}`}><Text className={`text-xs ${val === "Active" ? "text-green-700 dark:text-green-300" : "text-red-700 dark:text-red-300"}`}>{String(val)}</Text></View>) }]} data={data.slice(0, 4)} />
+        </View>
+        <View className="gap-2">
+          <Text className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Striped</Text>
+          <DataTable columns={[{ key: "name", header: "Name" }, { key: "email", header: "Email" }, { key: "role", header: "Role" }]} data={data} striped />
+        </View>
+      </View>
+    );
+  },
+  "command-menu": () => {
+    const [open, setOpen] = useState(false);
+    const [selected, setSelected] = useState("");
+    return (
+      <View className="gap-6">
+        <Text className="text-sm text-muted-foreground">Spotlight-style command palette with search, groups, and shortcuts.</Text>
+        <View className="gap-2">
+          <Text className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Example</Text>
+          <View className="rounded-lg border border-border bg-card p-4 gap-3">
+            <Pressable onPress={() => setOpen(true)} className="flex-row items-center min-h-12 px-4 rounded-md border border-input bg-background"><Text className="text-muted-foreground text-sm flex-1">Type a command...</Text></Pressable>
+            {selected ? <Text variant="muted">Last: {selected}</Text> : null}
+            <CommandMenu open={open} onOpenChange={setOpen} onSelect={setSelected} items={[{ label: "New File", value: "new-file", group: "Actions", shortcut: "Cmd+N" }, { label: "Save", value: "save", group: "Actions", shortcut: "Cmd+S" }, { label: "Home", value: "home", group: "Navigation" }, { label: "Settings", value: "settings", group: "Navigation" }, { label: "Sign Out", value: "signout", group: "Account" }]} />
+          </View>
+        </View>
+      </View>
+    );
+  },
   field: () => {
     return (
       <View className="gap-6">
