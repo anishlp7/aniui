@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 
-const GLOBAL_QR_URL = "https://qr.expo.dev/eas-update?slug=exp&projectId=cf032338-2612-4ba6-9212-f2ec55f6a254&groupId=d2e5cf52-0a1d-47e4-bdd6-d99064bfdcc8&host=u.expo.dev";
+const GLOBAL_QR_URL = "https://qr.expo.dev/eas-update?slug=exp&projectId=cf032338-2612-4ba6-9212-f2ec55f6a254&groupId=0551337c-18a3-4381-9c18-b1bddbd808c3&host=u.expo.dev";
 
 interface PreviewToggleProps {
   /** Web preview content (component playground) */
