@@ -1,4 +1,4 @@
-import { PreviewDataTableDemo } from "@/components/preview/data-table";
+import { PreviewDataTableDemo, PreviewDataTableSort, PreviewDataTableSearch, PreviewDataTablePagination, PreviewDataTableCustomCell, PreviewDataTableStriped } from "@/components/preview/data-table";
 import { ComponentPlayground } from "@/components/highlighted-playground";
 import { CodeBlock } from "@/components/code-block-server";
 import { PropsTable } from "@/components/props-table";
@@ -293,7 +293,9 @@ export default function DataTablePage() {
         <p className="text-sm text-muted-foreground">
           Mark columns as <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">sortable: true</code> to enable click-to-sort. Supports both uncontrolled (internal state) and controlled modes via <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">sortBy</code>, <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">sortOrder</code>, and <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">onSort</code>.
         </p>
-        <CodeBlock code={sortingCode} title="Sorting" />
+        <ComponentPlayground code={sortingCode}>
+          <PreviewDataTableSort />
+        </ComponentPlayground>
       </div>
       {/* Search */}
       <div className="space-y-4">
@@ -301,7 +303,9 @@ export default function DataTablePage() {
         <p className="text-sm text-muted-foreground">
           Enable search with <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">searchable</code>. Limit which columns are searchable with <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">searchKeys</code>.
         </p>
-        <CodeBlock code={searchCode} title="Searchable table" />
+        <ComponentPlayground code={searchCode}>
+          <PreviewDataTableSearch />
+        </ComponentPlayground>
       </div>
       {/* Pagination */}
       <div className="space-y-4">
@@ -309,7 +313,9 @@ export default function DataTablePage() {
         <p className="text-sm text-muted-foreground">
           Set <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">pageSize</code> to enable pagination with Prev/Next controls. The current range and total count are displayed automatically.
         </p>
-        <CodeBlock code={paginationCode} title="Paginated table" />
+        <ComponentPlayground code={paginationCode}>
+          <PreviewDataTablePagination />
+        </ComponentPlayground>
       </div>
       {/* Custom Cell */}
       <div className="space-y-4">
@@ -317,7 +323,9 @@ export default function DataTablePage() {
         <p className="text-sm text-muted-foreground">
           Use the <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">render</code> prop on a column to provide custom cell content. The render function receives the cell value and full row.
         </p>
-        <CodeBlock code={customCellCode} title="Custom cell render" />
+        <ComponentPlayground code={customCellCode}>
+          <PreviewDataTableCustomCell />
+        </ComponentPlayground>
       </div>
       {/* Striped */}
       <div className="space-y-4">
@@ -325,7 +333,9 @@ export default function DataTablePage() {
         <p className="text-sm text-muted-foreground">
           Add alternating row backgrounds with the <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">striped</code> prop.
         </p>
-        <CodeBlock code={stripedCode} title="Striped rows" />
+        <ComponentPlayground code={stripedCode}>
+          <PreviewDataTableStriped />
+        </ComponentPlayground>
       </div>
       {/* Props */}
       <div className="space-y-4">
