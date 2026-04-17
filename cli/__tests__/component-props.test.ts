@@ -8,7 +8,10 @@ const repoRoot = path.resolve(__dirname, "..", "..");
 describe("component props interfaces", () => {
   const names = getComponentNames();
 
-  it.each(names)("%s exports a Props type or interface", (name) => {
+  // Utility modules export constants/hooks, not component Props interfaces
+  const utilityModules = new Set(["animate"]);
+
+  it.each(names.filter((n) => !utilityModules.has(n)))("%s exports a Props type or interface", (name) => {
     const filePath = path.join(repoRoot, registry[name].file);
     const content = fs.readFileSync(filePath, "utf-8");
     // Accept both `export interface FooProps` and `export type FooProps`
@@ -16,7 +19,7 @@ describe("component props interfaces", () => {
   });
 
   // These components don't have a direct className prop
-  const noClassNameComponents = new Set(["toast", "refresh-control"]);
+  const noClassNameComponents = new Set(["toast", "refresh-control", "animate"]);
 
   it.each(names.filter((n) => !noClassNameComponents.has(n)))(
     "%s has className in props",
@@ -28,7 +31,7 @@ describe("component props interfaces", () => {
   );
 
   // These components destructure specific props without ...rest spread
-  const noSpreadComponents = new Set(["select", "date-picker", "connection-banner", "theme-provider"]);
+  const noSpreadComponents = new Set(["select", "date-picker", "connection-banner", "theme-provider", "animate"]);
 
   it.each(names.filter((n) => !noSpreadComponents.has(n)))(
     "%s spreads remaining props",
@@ -41,6 +44,7 @@ describe("component props interfaces", () => {
 
   // Interactive components should have accessibilityRole or use rn-primitives (which handles it)
   const interactiveComponents = names.filter((name) => {
+    if (utilityModules.has(name)) return false;
     const filePath = path.join(repoRoot, registry[name].file);
     const content = fs.readFileSync(filePath, "utf-8");
     return content.includes("Pressable") || content.includes("Switch");

@@ -10,8 +10,10 @@ describe("component exports", () => {
 
   // Some components export a Provider instead of the base name (e.g., Toast → ToastProvider)
   const providerComponents = new Set(["toast"]);
+  // Utility modules that export constants/hooks, not a component matching the registry name
+  const utilityModules = new Set(["animate"]);
 
-  it.each(names.filter((n) => !providerComponents.has(n)))(
+  it.each(names.filter((n) => !providerComponents.has(n) && !utilityModules.has(n)))(
     "%s exports a function matching registry name",
     (name) => {
       const filePath = path.join(repoRoot, registry[name].file);
