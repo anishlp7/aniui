@@ -25,6 +25,25 @@ const typeBadge: Record<ChangeType, { label: string; className: string }> = {
 
 const releases: Release[] = [
   {
+    version: "0.2.19",
+    date: "2026-04-17",
+    title: "Animate Presets, Data Table, Command Menu & CLI Smart Updates",
+    changes: [
+      { type: "feat", text: "Animate: spring presets, layout animations, easing curves, usePressAnimation hook for Reanimated 4", link: "/docs/animate" },
+      { type: "feat", text: "Data Table: sortable columns, search filtering, pagination, custom cell rendering, striped rows", link: "/docs/data-table" },
+      { type: "feat", text: "Command Menu: Spotlight-style searchable palette with groups, keyboard shortcuts, disabled items", link: "/docs/command-menu" },
+      { type: "feat", text: "CLI: aniui status, aniui diff, aniui update commands with component manifest tracking" },
+      { type: "feat", text: "CLI: add command now writes version + hash to .aniui.json for smart update detection" },
+      { type: "fix", text: "Data Table: replaced FlatList inside ScrollView with plain View rows, fixed column alignment with minWidth" },
+      { type: "fix", text: "Tests: added 9 test suites (32 tests) for all new components; excluded animate from component pattern tests" },
+      { type: "fix", text: "MCP registry synced from 57 to 89 entries to match CLI registry" },
+      { type: "docs", text: "New doc pages with interactive previews for Animate, Data Table, and Command Menu" },
+      { type: "docs", text: "Data Table docs: live previews for sorting, search, pagination, custom cell, and striped sections" },
+      { type: "docs", text: "Component count updated to 89 across docs, README, llms.txt, .cursorrules, and all examples" },
+      { type: "docs", text: "Full demos (6 sections each) for Data Table and Command Menu in all 4 example apps" },
+    ],
+  },
+  {
     version: "0.2.18",
     date: "2026-04-15",
     title: "New Components, RTL Support & Input Group Rewrite",
@@ -39,7 +58,7 @@ const releases: Release[] = [
       { type: "fix", text: "RTL: migrated 16 components from physical (ml-/mr-/border-l/right-) to logical (ms-/me-/border-s/end-) properties" },
       { type: "fix", text: "Added @rn-primitives/hover-card to all example package.json files" },
       { type: "docs", text: "New doc pages for Field, Input Group, Kbd, Hover Card, Direction Provider, and RTL guide" },
-      { type: "docs", text: "Component count updated to 87 across all docs, README, llms.txt, and examples" },
+      { type: "docs", text: "Component count updated to 89 across all docs, README, llms.txt, and examples" },
       { type: "docs", text: "Full demos for all 5 new components added to all 4 example apps" },
     ],
   },
