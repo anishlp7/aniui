@@ -59,9 +59,11 @@ jest.mock("react-native-gesture-handler", () => {
       Pan: () => ({
         activeOffsetX: function () { return this; },
         enabled: function () { return this; },
+        onBegin: function () { return this; },
         onStart: function () { return this; },
         onUpdate: function () { return this; },
         onEnd: function () { return this; },
+        minDistance: function () { return this; },
       }),
     },
     GestureDetector: ({ children }) => children,
