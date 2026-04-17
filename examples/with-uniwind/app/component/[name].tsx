@@ -28,6 +28,8 @@ import { NumberInput } from "@/components/ui/number-input";
 import { DatePicker } from "@/components/ui/date-picker";
 import { PhoneInput } from "@/components/ui/phone-input";
 import { Combobox } from "@/components/ui/combobox";
+import { CommandMenu } from "@/components/ui/command-menu";
+import { DataTable } from "@/components/ui/data-table";
 import { FilePicker } from "@/components/ui/file-picker";
 import { Label } from "@/components/ui/label";
 import { Field, FieldLabel, FieldDescription, FieldError } from "@/components/ui/field";
@@ -784,6 +786,63 @@ const demos: Record<string, () => React.ReactElement> = {
       </View>
     );
   },
+  "data-table": () => {
+    type User = { name: string; email: string; role: string; status: string };
+    const data: User[] = [
+      { name: "Alice Johnson", email: "alice@example.com", role: "Admin", status: "Active" },
+      { name: "Bob Smith", email: "bob@example.com", role: "Editor", status: "Active" },
+      { name: "Charlie Brown", email: "charlie@example.com", role: "Viewer", status: "Inactive" },
+      { name: "Diana Prince", email: "diana@example.com", role: "Admin", status: "Active" },
+      { name: "Eve Wilson", email: "eve@example.com", role: "Editor", status: "Inactive" },
+      { name: "Frank Miller", email: "frank@example.com", role: "Viewer", status: "Active" },
+    ];
+    return (
+      <View className="gap-6">
+        <Text className="text-sm text-zinc-500 dark:text-zinc-400">A sortable, filterable data table with pagination. Tap column headers to sort.</Text>
+        <View className="gap-2">
+          <Text className="text-xs font-semibold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">Basic</Text>
+          <DataTable columns={[{ key: "name", header: "Name" }, { key: "email", header: "Email" }, { key: "role", header: "Role" }]} data={data.slice(0, 3)} />
+        </View>
+        <View className="gap-2">
+          <Text className="text-xs font-semibold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">Sorting</Text>
+          <DataTable columns={[{ key: "name", header: "Name", sortable: true }, { key: "role", header: "Role", sortable: true }, { key: "status", header: "Status", sortable: true }]} data={data.slice(0, 4)} />
+        </View>
+        <View className="gap-2">
+          <Text className="text-xs font-semibold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">Search</Text>
+          <DataTable columns={[{ key: "name", header: "Name", sortable: true }, { key: "email", header: "Email", sortable: true }]} data={data} searchable searchKeys={["name", "email"]} searchPlaceholder="Search..." />
+        </View>
+        <View className="gap-2">
+          <Text className="text-xs font-semibold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">Pagination</Text>
+          <DataTable columns={[{ key: "name", header: "Name" }, { key: "role", header: "Role" }, { key: "status", header: "Status" }]} data={data} pageSize={3} />
+        </View>
+        <View className="gap-2">
+          <Text className="text-xs font-semibold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">Custom Cells</Text>
+          <DataTable columns={[{ key: "name", header: "Name" }, { key: "status", header: "Status", render: (val) => (<View className={`rounded-full px-2 py-0.5 self-start ${val === "Active" ? "bg-green-100 dark:bg-green-900" : "bg-red-100 dark:bg-red-900"}`}><Text className={`text-xs ${val === "Active" ? "text-green-700 dark:text-green-300" : "text-red-700 dark:text-red-300"}`}>{String(val)}</Text></View>) }]} data={data.slice(0, 4)} />
+        </View>
+        <View className="gap-2">
+          <Text className="text-xs font-semibold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">Striped</Text>
+          <DataTable columns={[{ key: "name", header: "Name" }, { key: "email", header: "Email" }, { key: "role", header: "Role" }]} data={data} striped />
+        </View>
+      </View>
+    );
+  },
+  "command-menu": () => {
+    const [open, setOpen] = useState(false);
+    const [selected, setSelected] = useState("");
+    return (
+      <View className="gap-6">
+        <Text className="text-sm text-zinc-500 dark:text-zinc-400">Spotlight-style command palette with search, groups, and shortcuts.</Text>
+        <View className="gap-2">
+          <Text className="text-xs font-semibold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">Example</Text>
+          <View className="rounded-lg border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 p-4 gap-3">
+            <Pressable onPress={() => setOpen(true)} className="flex-row items-center min-h-12 px-4 rounded-md border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950"><Text className="text-zinc-400 text-sm flex-1">Type a command...</Text></Pressable>
+            {selected ? <Text variant="muted">Last: {selected}</Text> : null}
+            <CommandMenu open={open} onOpenChange={setOpen} onSelect={setSelected} items={[{ label: "New File", value: "new-file", group: "Actions", shortcut: "Cmd+N" }, { label: "Save", value: "save", group: "Actions", shortcut: "Cmd+S" }, { label: "Home", value: "home", group: "Navigation" }, { label: "Settings", value: "settings", group: "Navigation" }, { label: "Sign Out", value: "signout", group: "Account" }]} />
+          </View>
+        </View>
+      </View>
+    );
+  },
   field: () => {
     return (
       <View className="gap-6">
@@ -1376,7 +1435,7 @@ const demos: Record<string, () => React.ReactElement> = {
               </View>
             </CollapsibleTrigger>
             <CollapsibleContent>
-              <View className="px-4 pb-3"><Text className="text-xs text-zinc-500 dark:text-zinc-400">A shadcn/ui-style component library for React Native with 87 components.</Text></View>
+              <View className="px-4 pb-3"><Text className="text-xs text-zinc-500 dark:text-zinc-400">A shadcn/ui-style component library for React Native with 89 components.</Text></View>
             </CollapsibleContent>
           </View>
         </Collapsible>

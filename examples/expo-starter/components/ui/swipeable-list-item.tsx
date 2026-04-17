@@ -3,6 +3,7 @@ import { View, Text, Pressable } from "react-native";
 import { Gesture, GestureDetector } from "react-native-gesture-handler";
 import Animated, { useSharedValue, useAnimatedStyle, withSpring, runOnJS } from "react-native-reanimated";
 import { cn } from "@/lib/utils";
+import { springs } from "@/components/ui/animate";
 
 const ACTION_WIDTH = 80;
 
@@ -86,14 +87,14 @@ export function SwipeableListItem({
       const x = translateX.value;
       if (x > 0 && leftWidth > 0) {
         const open = x > leftWidth * 0.5 || e.velocityX > 500;
-        translateX.value = withSpring(open ? leftWidth : 0);
+        translateX.value = withSpring(open ? leftWidth : 0, springs.snappy);
         if (open) runOnJS(notifyOpen)("left");
       } else if (x < 0 && rightWidth > 0) {
         const open = Math.abs(x) > rightWidth * 0.5 || e.velocityX < -500;
-        translateX.value = withSpring(open ? -rightWidth : 0);
+        translateX.value = withSpring(open ? -rightWidth : 0, springs.snappy);
         if (open) runOnJS(notifyOpen)("right");
       } else {
-        translateX.value = withSpring(0);
+        translateX.value = withSpring(0, springs.snappy);
       }
     });
 

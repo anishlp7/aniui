@@ -27,6 +27,8 @@ import { NumberInput } from "@/components/ui/number-input";
 import { DatePicker } from "@/components/ui/date-picker";
 import { PhoneInput } from "@/components/ui/phone-input";
 import { Combobox } from "@/components/ui/combobox";
+import { CommandMenu } from "@/components/ui/command-menu";
+import { DataTable } from "@/components/ui/data-table";
 import { FilePicker } from "@/components/ui/file-picker";
 import { Label } from "@/components/ui/label";
 import { Field, FieldLabel, FieldDescription, FieldError } from "@/components/ui/field";
@@ -854,6 +856,140 @@ const demos: Record<string, () => React.ReactElement> = {
       </View>
     );
   },
+  "data-table": () => {
+    type User = { name: string; email: string; role: string; status: string };
+    const data: User[] = [
+      { name: "Alice Johnson", email: "alice@example.com", role: "Admin", status: "Active" },
+      { name: "Bob Smith", email: "bob@example.com", role: "Editor", status: "Active" },
+      { name: "Charlie Brown", email: "charlie@example.com", role: "Viewer", status: "Inactive" },
+      { name: "Diana Prince", email: "diana@example.com", role: "Admin", status: "Active" },
+      { name: "Eve Wilson", email: "eve@example.com", role: "Editor", status: "Inactive" },
+      { name: "Frank Miller", email: "frank@example.com", role: "Viewer", status: "Active" },
+      { name: "Grace Lee", email: "grace@example.com", role: "Admin", status: "Active" },
+      { name: "Henry Davis", email: "henry@example.com", role: "Editor", status: "Active" },
+    ];
+    return (
+      <View className="gap-6">
+        <Text className="text-sm text-muted-foreground">A sortable, filterable data table with pagination. Tap column headers to sort, use the search bar to filter rows.</Text>
+        {/* Basic */}
+        <View className="gap-2">
+          <Text className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Basic</Text>
+          <DataTable
+            columns={[
+              { key: "name", header: "Name" },
+              { key: "email", header: "Email" },
+              { key: "role", header: "Role" },
+            ]}
+            data={data.slice(0, 4)}
+          />
+        </View>
+        {/* Sorting */}
+        <View className="gap-2">
+          <Text className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Sorting</Text>
+          <DataTable
+            columns={[
+              { key: "name", header: "Name", sortable: true },
+              { key: "role", header: "Role", sortable: true },
+              { key: "status", header: "Status", sortable: true },
+            ]}
+            data={data.slice(0, 5)}
+          />
+        </View>
+        {/* Search */}
+        <View className="gap-2">
+          <Text className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Search</Text>
+          <DataTable
+            columns={[
+              { key: "name", header: "Name", sortable: true },
+              { key: "email", header: "Email", sortable: true },
+            ]}
+            data={data}
+            searchable
+            searchKeys={["name", "email"]}
+            searchPlaceholder="Search by name or email..."
+          />
+        </View>
+        {/* Pagination */}
+        <View className="gap-2">
+          <Text className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Pagination</Text>
+          <DataTable
+            columns={[
+              { key: "name", header: "Name", sortable: true },
+              { key: "role", header: "Role" },
+              { key: "status", header: "Status" },
+            ]}
+            data={data}
+            pageSize={3}
+          />
+        </View>
+        {/* Custom Cells */}
+        <View className="gap-2">
+          <Text className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Custom Cells</Text>
+          <DataTable
+            columns={[
+              { key: "name", header: "Name", sortable: true },
+              { key: "status", header: "Status", render: (val) => (
+                <View className={`rounded-full px-2 py-0.5 self-start ${val === "Active" ? "bg-green-100 dark:bg-green-900" : "bg-red-100 dark:bg-red-900"}`}>
+                  <Text className={`text-xs ${val === "Active" ? "text-green-700 dark:text-green-300" : "text-red-700 dark:text-red-300"}`}>{String(val)}</Text>
+                </View>
+              )},
+            ]}
+            data={data.slice(0, 5)}
+          />
+        </View>
+        {/* Striped */}
+        <View className="gap-2">
+          <Text className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Striped</Text>
+          <DataTable
+            columns={[
+              { key: "name", header: "Name" },
+              { key: "email", header: "Email" },
+              { key: "role", header: "Role" },
+            ]}
+            data={data.slice(0, 6)}
+            striped
+          />
+        </View>
+      </View>
+    );
+  },
+  "command-menu": () => {
+    const [open, setOpen] = useState(false);
+    const [selected, setSelected] = useState("");
+    return (
+      <View className="gap-6">
+        <Text className="text-sm text-muted-foreground">A Spotlight-style command palette. Opens as a full-screen modal with search, grouped items, and keyboard shortcut display.</Text>
+        <View className="gap-2">
+          <Text className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Example</Text>
+          <View className="rounded-lg border border-border bg-card p-4 gap-3">
+            <Pressable onPress={() => setOpen(true)} className="flex-row items-center min-h-12 px-4 rounded-md border border-input bg-background">
+              <Text className="text-muted-foreground text-sm flex-1">Type a command...</Text>
+              <View className="flex-row gap-0.5">
+                <View className="items-center justify-center rounded border border-border bg-muted px-1.5 min-h-5"><Text className="text-[10px] font-mono text-muted-foreground">Cmd</Text></View>
+                <View className="items-center justify-center rounded border border-border bg-muted px-1.5 min-h-5"><Text className="text-[10px] font-mono text-muted-foreground">K</Text></View>
+              </View>
+            </Pressable>
+            {selected ? <Text variant="muted">Last command: {selected}</Text> : null}
+            <CommandMenu
+              open={open}
+              onOpenChange={setOpen}
+              onSelect={setSelected}
+              items={[
+                { label: "New File", value: "new-file", group: "Actions", shortcut: "Cmd+N" },
+                { label: "Save", value: "save", group: "Actions", shortcut: "Cmd+S" },
+                { label: "Export PDF", value: "export", group: "Actions", shortcut: "Cmd+E" },
+                { label: "Home", value: "home", group: "Navigation" },
+                { label: "Settings", value: "settings", group: "Navigation" },
+                { label: "Profile", value: "profile", group: "Navigation" },
+                { label: "Sign Out", value: "signout", group: "Account" },
+                { label: "Delete Account", value: "delete", group: "Account", disabled: true },
+              ]}
+            />
+          </View>
+        </View>
+      </View>
+    );
+  },
   field: () => {
     return (
       <View className="gap-6">
@@ -1446,7 +1582,7 @@ const demos: Record<string, () => React.ReactElement> = {
               </View>
             </CollapsibleTrigger>
             <CollapsibleContent>
-              <View className="px-4 pb-3"><Text className="text-xs text-muted-foreground">A shadcn/ui-style component library for React Native with 87 components.</Text></View>
+              <View className="px-4 pb-3"><Text className="text-xs text-muted-foreground">A shadcn/ui-style component library for React Native with 89 components.</Text></View>
             </CollapsibleContent>
           </View>
         </Collapsible>

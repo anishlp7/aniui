@@ -28,7 +28,7 @@ describe("component source files", () => {
   });
 
   // Complex components with many features (multi-select, groups, etc.) justifiably exceed 120 lines
-  const largeComponents = new Set(["combobox", "input-group"]);
+  const largeComponents = new Set(["combobox", "input-group", "command-menu", "data-table"]);
 
   it.each(names)("%s is under 120 lines", (name) => {
     const filePath = path.join(repoRoot, registry[name].file);
@@ -39,7 +39,7 @@ describe("component source files", () => {
   });
 
   // Components that don't use cn() (thin wrappers or use inline styles)
-  const noCnComponents = new Set(["segmented-control", "select", "stepper", "refresh-control"]);
+  const noCnComponents = new Set(["segmented-control", "select", "stepper", "refresh-control", "animate"]);
 
   it.each(names.filter((n) => !noCnComponents.has(n)))("%s imports cn from utils", (name) => {
     const filePath = path.join(repoRoot, registry[name].file);

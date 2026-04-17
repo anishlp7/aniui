@@ -4,7 +4,16 @@ import { registry, resolveRegistryDeps, getComponentNames } from "../registry";
 import { copyComponent } from "../utils/file-ops";
 import { detectPackageManager, getInstallCommand, getDlxCommand } from "../utils/detect-project";
 import { findLayoutFile, injectImport, injectJsxBeforeClose } from "../utils/inject-layout";
+import { hashFile } from "../utils/hash";
 import { logger } from "../utils/logger";
+
+const pkg = require("../../package.json");
+
+interface InstalledEntry {
+  version: string;
+  hash: string;
+  addedAt: string;
+}
 
 interface AniUIConfig {
   componentsDir: string;
@@ -12,6 +21,7 @@ interface AniUIConfig {
   theme: string;
   style?: string;
   tsx?: boolean;
+  installed?: Record<string, InstalledEntry>;
 }
 
 async function loadConfig(cwd: string): Promise<AniUIConfig | null> {
@@ -92,6 +102,32 @@ export async function addCommand(names: string[]): Promise<void> {
     }
   }
 
+  // Write manifest entries for created components
+  if (created.length > 0) {
+    const configPath = path.join(cwd, ".aniui.json");
+    const fullConfig = await fs.pathExists(configPath)
+      ? await fs.readJson(configPath)
+      : {};
+    if (!fullConfig.installed) {
+      fullConfig.installed = {};
+    }
+
+    for (const name of created) {
+      const entry = registry[name];
+      const baseFile = path.basename(entry.file);
+      const destFileName = useTsx ? baseFile : baseFile.replace(/\.tsx$/, ".jsx");
+      const destFile = path.join(componentsDir, destFileName);
+      const fileHash = await hashFile(destFile);
+      fullConfig.installed[name] = {
+        version: pkg.version,
+        hash: fileHash,
+        addedAt: new Date().toISOString(),
+      };
+    }
+
+    await fs.writeJson(configPath, fullConfig, { spaces: 2 });
+  }
+
   logger.break();
 
   if (created.length > 0) {
@@ -112,8 +148,8 @@ export async function addCommand(names: string[]): Promise<void> {
 
   // Check which npm deps are missing
   const pkgPath = path.join(cwd, "package.json");
-  const pkg = await fs.pathExists(pkgPath) ? await fs.readJson(pkgPath) : { dependencies: {}, devDependencies: {} };
-  const allDeps = { ...pkg.dependencies, ...pkg.devDependencies };
+  const userPkg = await fs.pathExists(pkgPath) ? await fs.readJson(pkgPath) : { dependencies: {}, devDependencies: {} };
+  const allDeps = { ...userPkg.dependencies, ...userPkg.devDependencies };
   const missingDeps = Array.from(npmDeps).filter((dep) => !allDeps[dep]);
 
   if (missingDeps.length > 0) {

@@ -1,6 +1,7 @@
 import React from "react";
 import { Text } from "react-native";
-import Animated, { SlideInUp, SlideOutUp } from "react-native-reanimated";
+import Animated from "react-native-reanimated";
+import { entering, exiting } from "@/components/ui/animate";
 import { cn } from "@/lib/utils";
 
 export interface ConnectionBannerProps {
@@ -20,8 +21,8 @@ export function ConnectionBanner({
 
   return (
     <Animated.View
-      entering={SlideInUp.duration(300)}
-      exiting={SlideOutUp.duration(200)}
+      entering={entering.slideInDown}
+      exiting={exiting.slideOutUp}
       className={cn(
         "px-4 py-2 items-center",
         connected ? "bg-green-600" : "bg-destructive",

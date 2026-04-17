@@ -3,10 +3,10 @@ import type { MetadataRoute } from "next";
 const BASE_URL = "https://aniui.dev";
 
 const componentPages = [
-  "accordion", "action-sheet", "alert", "alert-dialog", "avatar", "badge",
+  "accordion", "action-sheet", "alert", "alert-dialog", "animate", "avatar", "badge",
   "banner", "bottom-sheet", "button", "calendar", "card", "carousel",
-  "chat-bubble", "checkbox", "chip", "collapsible", "combobox",
-  "connection-banner", "context-menu", "date-picker", "dialog", "direction-provider", "drawer",
+  "chat-bubble", "checkbox", "chip", "collapsible", "combobox", "command-menu",
+  "connection-banner", "context-menu", "data-table", "date-picker", "dialog", "direction-provider", "drawer",
   "dropdown-menu", "empty-state", "fab", "field", "file-picker", "form", "grid",
   "header", "hover-card", "image", "image-gallery", "infinite-list", "input", "input-group", "input-otp",
   "kbd", "label", "labeled-separator", "list", "masked-input", "number-input",

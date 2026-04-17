@@ -1,6 +1,7 @@
 import React, { createContext, useContext, useState } from "react";
 import { View, Pressable } from "react-native";
-import Animated, { FadeIn, FadeOut } from "react-native-reanimated";
+import Animated from "react-native-reanimated";
+import { entering, exiting } from "@/components/ui/animate";
 import { cn } from "@/lib/utils";
 
 const CollapsibleCtx = createContext<{ isOpen: boolean; toggle: () => void }>({ isOpen: false, toggle: () => {} });
@@ -51,7 +52,7 @@ export function CollapsibleContent({ className, children, ...props }: Collapsibl
   const { isOpen } = useContext(CollapsibleCtx);
   if (!isOpen) return null;
   return (
-    <Animated.View entering={FadeIn.duration(200)} exiting={FadeOut.duration(150)}>
+    <Animated.View entering={entering.fadeInDown} exiting={exiting.fadeOutUp}>
       <View className={cn("", className)} {...props}>{children}</View>
     </Animated.View>
   );

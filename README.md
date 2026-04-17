@@ -36,7 +36,7 @@ Built with [NativeWind](https://www.nativewind.dev) (or [Uniwind](https://github
 
 **Try on device:** Scan with [Expo Go](https://expo.dev/go)
 
-<img src="https://qr.expo.dev/eas-update?slug=exp&projectId=cf032338-2612-4ba6-9212-f2ec55f6a254&groupId=d2e5cf52-0a1d-47e4-bdd6-d99064bfdcc8&host=u.expo.dev" alt="Scan with Expo Go" width="160" />
+<img src="https://qr.expo.dev/eas-update?slug=exp&projectId=cf032338-2612-4ba6-9212-f2ec55f6a254&groupId=0551337c-18a3-4381-9c18-b1bddbd808c3&host=u.expo.dev" alt="Scan with Expo Go" width="160" />
 
 ## Compatibility
 
@@ -98,12 +98,13 @@ export function WelcomeScreen() {
 
 ## Components
 
-**87 components** — all listed alphabetically. Each component's docs page tells you if it needs extra dependencies.
+**89 components** — all listed alphabetically. Each component's docs page tells you if it needs extra dependencies.
 
 | Component | Description |
 |-----------|-------------|
 | [Accordion](https://aniui.dev/docs/accordion) | Expand/collapse content sections |
 | [Action Sheet](https://aniui.dev/docs/action-sheet) | Action sheet with options |
+| [Animate](https://aniui.dev/docs/animate) | Animation presets, spring configs, and hooks |
 | [Alert](https://aniui.dev/docs/alert) | Alert with default, destructive, success, warning |
 | [Alert Dialog](https://aniui.dev/docs/alert-dialog) | Confirmation dialog with Action/Cancel |
 | [Avatar](https://aniui.dev/docs/avatar) | Image with fallback initials, 3 sizes |
@@ -120,6 +121,7 @@ export function WelcomeScreen() {
 | [Combobox](https://aniui.dev/docs/combobox) | Searchable select with multi-select, groups, clear, and custom rendering |
 | [Connection Banner](https://aniui.dev/docs/connection-banner) | Animated online/offline connection status banner |
 | [Collapsible](https://aniui.dev/docs/collapsible) | Animated show/hide content |
+| [Data Table](https://aniui.dev/docs/data-table) | Sortable, filterable data table with pagination |
 | [Date Picker](https://aniui.dev/docs/date-picker) | Calendar popup picker with range support |
 | [Dialog](https://aniui.dev/docs/dialog) | Modal with fade + scale overlay |
 | [Direction Provider](https://aniui.dev/docs/direction-provider) | RTL/LTR direction context with I18nManager |
@@ -202,7 +204,7 @@ npm install @gorhom/bottom-sheet react-native-gesture-handler
 
 | Area | Status |
 |------|--------|
-| 87 components | ✅ |
+| 89 components | ✅ |
 | Component & CLI tests (Jest) | ✅ |
 | Accessibility audit | ✅ |
 | Performance benchmarks | ✅ |

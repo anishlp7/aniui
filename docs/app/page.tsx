@@ -47,7 +47,7 @@ const jsonLd = {
   name: "AniUI",
   applicationCategory: "DeveloperApplication",
   operatingSystem: "iOS, Android",
-  description: "shadcn/ui for React Native. 87 accessible components built with NativeWind and TypeScript.",
+  description: "shadcn/ui for React Native. 89 accessible components built with NativeWind and TypeScript.",
   url: "https://aniui.dev",
   author: { "@type": "Person", name: "Anish" },
   offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
@@ -126,7 +126,7 @@ export default function HomePage() {
         </h1>
 
         <p className="mt-6 max-w-xl text-lg text-muted-foreground leading-relaxed">
-          87 accessible components built with NativeWind and TypeScript.
+          89 accessible components built with NativeWind and TypeScript.
           No npm install — you own every line of code.
         </p>
 
@@ -167,14 +167,14 @@ export default function HomePage() {
         {/* Preview on device */}
         <div className="mt-6 flex flex-col sm:flex-row items-center gap-4 rounded-lg border border-border bg-card/50 px-5 py-4">
           <img
-            src="https://qr.expo.dev/eas-update?slug=exp&projectId=cf032338-2612-4ba6-9212-f2ec55f6a254&groupId=d2e5cf52-0a1d-47e4-bdd6-d99064bfdcc8&host=u.expo.dev"
+            src="https://qr.expo.dev/eas-update?slug=exp&projectId=cf032338-2612-4ba6-9212-f2ec55f6a254&groupId=0551337c-18a3-4381-9c18-b1bddbd808c3&host=u.expo.dev"
             alt="Scan with Expo Go"
             className="w-24 h-24 rounded-lg"
           />
           <div className="text-center sm:text-left">
             <p className="text-sm font-medium text-foreground">Preview on your device</p>
             <p className="text-xs text-muted-foreground mt-1">
-              Scan with Expo Go to try all 87 components on a real device.
+              Scan with Expo Go to try all 89 components on a real device.
               Each component page also has an Expo Snack embed.
             </p>
           </div>

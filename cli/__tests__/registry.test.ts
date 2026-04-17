@@ -30,7 +30,7 @@ describe("registry", () => {
   });
 
   // Components that don't use clsx/tailwind-merge (thin wrappers or inline styles)
-  const inlineStyleComponents = new Set(["segmented-control", "stepper", "refresh-control"]);
+  const inlineStyleComponents = new Set(["segmented-control", "stepper", "refresh-control", "animate"]);
 
   it.each(names.filter((n) => !inlineStyleComponents.has(n)))("%s has clsx and tailwind-merge in dependencies", (name) => {
     const entry = registry[name];

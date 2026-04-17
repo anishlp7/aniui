@@ -33,6 +33,8 @@ const components = [
   { name: "Phone Input", section: "Forms" },
   { name: "Number Input", section: "Forms" },
   { name: "Combobox", section: "Forms" },
+  { name: "Command Menu", section: "Forms" },
+  { name: "Data Table", section: "Display" },
   { name: "Field", section: "Forms" },
   { name: "Input Group", section: "Forms" },
   { name: "Form", section: "Forms" },
@@ -134,7 +136,7 @@ export default function HomeScreen() {
               />
               <View>
                 <Text style={{ fontSize: 20, fontWeight: "700", color: colors.fg }}>AniUI</Text>
-                <Text style={{ fontSize: 12, color: colors.mutedFg }}>87 components</Text>
+                <Text style={{ fontSize: 12, color: colors.mutedFg }}>89 components</Text>
               </View>
             </View>
             <Pressable

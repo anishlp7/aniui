@@ -35,7 +35,7 @@ Colors from CSS variables in global.css. Use these class prefixes:
 
 Dark mode: automatic via .dark class in global.css.
 
-## Component Catalog (81 components)
+## Component Catalog (89 components)
 
 Source of truth: `cli/src/registry.ts` (tiers 1–3). After `npx @aniui/cli add <name>`, install any extra npm packages the CLI prints.
 
@@ -51,7 +51,7 @@ Compound components export multiple named pieces (for example `Card` + `CardHead
 - **Alert** — default, destructive, success, warning
 - **Toast** — default, destructive, success (via `useToast`)
 
-### Registry tier 1 — 57 components
+### Registry tier 1 — 62 components
 
 **Alert** — `import { Alert } from "@/components/ui/alert"`
 
@@ -167,7 +167,7 @@ Compound components export multiple named pieces (for example `Card` + `CardHead
 
 **ToggleGroup** — `import { ToggleGroup } from "@/components/ui/toggle-group"`
 
-### Registry tier 2 — 7 components (include `react-native-reanimated` in dependencies)
+### Registry tier 2 — 9 components (include `react-native-reanimated` in dependencies)
 
 **AlertDialog** — `import { AlertDialog } from "@/components/ui/alert-dialog"`
 
@@ -183,7 +183,7 @@ Compound components export multiple named pieces (for example `Card` + `CardHead
 
 **TypingIndicator** — `import { TypingIndicator } from "@/components/ui/typing-indicator"`
 
-### Registry tier 3 — 17 components (extra packages; see `dependencies` in registry)
+### Registry tier 3 — 18 components (extra packages; see `dependencies` in registry)
 
 **Accordion** — `import { Accordion } from "@/components/ui/accordion"` (@rn-primitives/accordion, react-native-reanimated)
 
