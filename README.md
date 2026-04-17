@@ -98,7 +98,7 @@ export function WelcomeScreen() {
 
 ## Components
 
-**87 components** — all listed alphabetically. Each component's docs page tells you if it needs extra dependencies.
+**89 components** — all listed alphabetically. Each component's docs page tells you if it needs extra dependencies.
 
 | Component | Description |
 |-----------|-------------|
@@ -204,7 +204,7 @@ npm install @gorhom/bottom-sheet react-native-gesture-handler
 
 | Area | Status |
 |------|--------|
-| 87 components | ✅ |
+| 89 components | ✅ |
 | Component & CLI tests (Jest) | ✅ |
 | Accessibility audit | ✅ |
 | Performance benchmarks | ✅ |
