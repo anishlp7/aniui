@@ -1,5 +1,5 @@
 import React, { useState, useMemo, useCallback } from "react";
-import { View, Text, TextInput, Pressable, FlatList, ScrollView } from "react-native";
+import { View, Text, TextInput, Pressable, ScrollView } from "react-native";
 import { cn } from "@/lib/utils";
 import Svg, { Path } from "react-native-svg";
 
@@ -90,25 +90,11 @@ export function DataTable<T extends Record<string, unknown>>({
   const totalPages = pageSize ? Math.max(1, Math.ceil(sorted.length / pageSize)) : 1;
   const paged = pageSize ? sorted.slice(page * pageSize, (page + 1) * pageSize) : sorted;
 
-  const renderRow = useCallback(({ item, index }: { item: T; index: number }) => (
-    <View className={cn("flex-row border-b border-border", striped && index % 2 === 1 && "bg-muted/30")}>
-      {columns.map((col) => (
-        <View key={col.key} className="flex-1 px-4 py-3" style={col.width ? { width: col.width, flex: 0 } : undefined}>
-          {col.render ? (
-            col.render(item[col.key], item)
-          ) : (
-            <Text className="text-sm text-foreground" numberOfLines={1}>
-              {String(item[col.key] ?? "")}
-            </Text>
-          )}
-        </View>
-      ))}
-    </View>
-  ), [columns, striped]);
+  const colStyle = (col: DataTableColumn<T>) =>
+    col.width ? { width: col.width, flexGrow: 0, flexShrink: 0 } : { flex: 1, minWidth: 100 };
 
   return (
     <View className={cn("rounded-md border border-border overflow-hidden", className)} {...props}>
-      {/* Search */}
       {searchable && (
         <View className="px-4 py-3 border-b border-border bg-card">
           <TextInput
@@ -121,15 +107,15 @@ export function DataTable<T extends Record<string, unknown>>({
           />
         </View>
       )}
-      {/* Header */}
-      <ScrollView horizontal>
-        <View className="min-w-full">
+      <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+        <View style={{ minWidth: "100%" }}>
+          {/* Header */}
           <View className="flex-row bg-muted/50">
             {columns.map((col) => (
               <Pressable
                 key={col.key}
-                className="flex-1 flex-row items-center px-4 py-3 gap-1"
-                style={col.width ? { width: col.width, flex: 0 } : undefined}
+                className="flex-row items-center px-4 py-3 gap-1"
+                style={colStyle(col)}
                 onPress={() => col.sortable && handleSort(col.key)}
                 disabled={!col.sortable}
                 accessible={true}
@@ -141,19 +127,29 @@ export function DataTable<T extends Record<string, unknown>>({
             ))}
           </View>
           {/* Body */}
-          <FlatList
-            data={paged}
-            keyExtractor={(_, i) => String(i)}
-            renderItem={renderRow}
-            ListEmptyComponent={
-              <View className="py-8 items-center">
-                <Text className="text-sm text-muted-foreground">{emptyText}</Text>
+          {paged.length === 0 ? (
+            <View className="py-8 items-center">
+              <Text className="text-sm text-muted-foreground">{emptyText}</Text>
+            </View>
+          ) : (
+            paged.map((item, index) => (
+              <View key={index} className={cn("flex-row border-t border-border", striped && index % 2 === 1 && "bg-muted/30")}>
+                {columns.map((col) => (
+                  <View key={col.key} className="px-4 py-3" style={colStyle(col)}>
+                    {col.render ? (
+                      col.render(item[col.key], item)
+                    ) : (
+                      <Text className="text-sm text-foreground" numberOfLines={1}>
+                        {String(item[col.key] ?? "")}
+                      </Text>
+                    )}
+                  </View>
+                ))}
               </View>
-            }
-          />
+            ))
+          )}
         </View>
       </ScrollView>
-      {/* Pagination */}
       {pageSize && totalPages > 1 && (
         <View className="flex-row items-center justify-between px-4 py-3 border-t border-border bg-card">
           <Text className="text-xs text-muted-foreground">
