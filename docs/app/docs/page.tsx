@@ -13,7 +13,7 @@ export default function DocsPage() {
 
       <div className="space-y-4 text-foreground leading-7">
         <p>
-          <strong>AniUI</strong> is a collection of 81 re-usable components for React Native,
+          <strong>AniUI</strong> is a collection of 89 re-usable components for React Native,
           built with <Link href="/docs/uniwind" className="text-primary hover:underline">NativeWind or Uniwind</Link> (Tailwind CSS for React Native),{" "}
           <a href="https://rn-primitives.vercel.app" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">rn-primitives</a> for accessibility,
           and strict TypeScript.
