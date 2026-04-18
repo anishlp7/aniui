@@ -72,7 +72,7 @@ import { ToastProvider, useToast } from "../components/ui/toast";
 
 // Navigation
 import { Accordion, AccordionItem } from "../components/ui/accordion";
-import { TabsDemo } from "../components/tabs-demo";
+import { Tabs, TabsList, TabsTrigger, TabsContent } from "../components/ui/tabs";
 import { Collapsible, CollapsibleTrigger, CollapsibleContent } from "../components/ui/collapsible";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter } from "../components/ui/dialog";
 import { AlertDialog, AlertDialogContent, AlertDialogHeader, AlertDialogTitle, AlertDialogDescription, AlertDialogFooter, AlertDialogAction, AlertDialogCancel } from "../components/ui/alert-dialog";
@@ -1419,7 +1419,20 @@ const demos: Record<string, () => React.ReactElement> = {
       </View>
     </View>
   ),
-  "tabs": () => <TabsDemo />,
+  tabs: () => {
+    return (
+      <View className="gap-6">
+        <Text className="text-sm text-muted-foreground">Tab navigation with filled/line variants, sizes, vertical, icons, disabled, and RTL.</Text>
+        <View className="gap-2"><Text className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Default (Filled)</Text><View className="rounded-lg border border-border bg-card p-4"><Tabs defaultValue="account"><TabsList><TabsTrigger value="account">Account</TabsTrigger><TabsTrigger value="password">Password</TabsTrigger></TabsList><TabsContent value="account"><Text variant="muted" className="py-3">Account settings.</Text></TabsContent><TabsContent value="password"><Text variant="muted" className="py-3">Password settings.</Text></TabsContent></Tabs></View></View>
+        <View className="gap-2"><Text className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Line Variant</Text><View className="rounded-lg border border-border bg-card p-4"><Tabs defaultValue="overview" variant="line"><TabsList><TabsTrigger value="overview">Overview</TabsTrigger><TabsTrigger value="analytics">Analytics</TabsTrigger><TabsTrigger value="reports">Reports</TabsTrigger></TabsList><TabsContent value="overview"><Text variant="muted" className="py-3">Overview content.</Text></TabsContent><TabsContent value="analytics"><Text variant="muted" className="py-3">Analytics data.</Text></TabsContent><TabsContent value="reports"><Text variant="muted" className="py-3">Reports.</Text></TabsContent></Tabs></View></View>
+        <View className="gap-2"><Text className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Vertical</Text><View className="rounded-lg border border-border bg-card p-4"><Tabs defaultValue="general" orientation="vertical" variant="line"><TabsList><TabsTrigger value="general">General</TabsTrigger><TabsTrigger value="security">Security</TabsTrigger><TabsTrigger value="notifs">Notifs</TabsTrigger></TabsList><TabsContent value="general"><Text variant="muted">General settings.</Text></TabsContent><TabsContent value="security"><Text variant="muted">Security.</Text></TabsContent><TabsContent value="notifs"><Text variant="muted">Notifications.</Text></TabsContent></Tabs></View></View>
+        <View className="gap-2"><Text className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Disabled</Text><View className="rounded-lg border border-border bg-card p-4"><Tabs defaultValue="active"><TabsList><TabsTrigger value="active">Active</TabsTrigger><TabsTrigger value="disabled" disabled>Disabled</TabsTrigger><TabsTrigger value="other">Other</TabsTrigger></TabsList><TabsContent value="active"><Text variant="muted" className="py-3">Active tab.</Text></TabsContent><TabsContent value="other"><Text variant="muted" className="py-3">Other tab.</Text></TabsContent></Tabs></View></View>
+        <View className="gap-2"><Text className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Icons</Text><View className="rounded-lg border border-border bg-card p-4"><Tabs defaultValue="profile"><TabsList><TabsTrigger value="profile" icon={<Text className="text-xs">👤</Text>}>Profile</TabsTrigger><TabsTrigger value="settings" icon={<Text className="text-xs">⚙️</Text>}>Settings</TabsTrigger></TabsList><TabsContent value="profile"><Text variant="muted" className="py-3">Profile.</Text></TabsContent><TabsContent value="settings"><Text variant="muted" className="py-3">Settings.</Text></TabsContent></Tabs></View></View>
+        <View className="gap-2"><Text className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Sizes</Text><View className="rounded-lg border border-border bg-card p-4 gap-4"><Tabs defaultValue="a" size="sm"><TabsList><TabsTrigger value="a">Small</TabsTrigger><TabsTrigger value="b">Tabs</TabsTrigger></TabsList></Tabs><Tabs defaultValue="a" size="md"><TabsList><TabsTrigger value="a">Medium</TabsTrigger><TabsTrigger value="b">Tabs</TabsTrigger></TabsList></Tabs><Tabs defaultValue="a" size="lg"><TabsList><TabsTrigger value="a">Large</TabsTrigger><TabsTrigger value="b">Tabs</TabsTrigger></TabsList></Tabs></View></View>
+        <View className="gap-2"><Text className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">RTL</Text><View className="rounded-lg border border-border bg-card p-4" style={{ direction: "rtl" }}><Tabs defaultValue="home" variant="line"><TabsList><TabsTrigger value="home">الرئيسية</TabsTrigger><TabsTrigger value="settings">الإعدادات</TabsTrigger></TabsList><TabsContent value="home"><Text variant="muted" className="py-3">محتوى الرئيسية</Text></TabsContent><TabsContent value="settings"><Text variant="muted" className="py-3">الإعدادات</Text></TabsContent></Tabs></View></View>
+      </View>
+    );
+  },
   collapsible: () => {
     const [open1, setOpen1] = useState(false);
     const [open2, setOpen2] = useState(true);
