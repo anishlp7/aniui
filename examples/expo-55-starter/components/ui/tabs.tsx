@@ -35,7 +35,7 @@ export function TabsTrigger({ value, className, children, ...props }: TabsTrigge
 
   return (
     <Pressable
-      className={cn("flex-1 items-center justify-center py-2 min-h-12 rounded-md", isActive && "bg-background shadow-sm", className)}
+      className={cn("will-change-variable flex-1 items-center justify-center py-2 min-h-12 rounded-md", isActive && "bg-background shadow-sm", className)}
       onPress={() => onValueChange(value)}
       accessible={true}
       accessibilityRole="tab"
@@ -43,7 +43,7 @@ export function TabsTrigger({ value, className, children, ...props }: TabsTrigge
       {...props}
     >
       {typeof children === "string" ? (
-        <Text className={cn("text-sm font-medium", isActive ? "text-foreground" : "text-muted-foreground")}>{children}</Text>
+        <Text className={cn("will-change-variable text-sm font-medium", isActive ? "text-foreground" : "text-muted-foreground")}>{children}</Text>
       ) : children}
     </Pressable>
   );
