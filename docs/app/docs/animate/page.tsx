@@ -1,3 +1,4 @@
+import { Heading } from "@/components/heading";
 import { PreviewAnimateDemo } from "@/components/preview/animate";
 import { ComponentPlayground } from "@/components/highlighted-playground";
 import { CodeBlock } from "@/components/code-block-server";
@@ -232,7 +233,7 @@ export default function AnimatePage() {
       </div>
       {/* Installation */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Installation</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Installation</Heading>
         <AddComponentTabs names="animate" />
       </div>
       {/* Preview */}
@@ -243,12 +244,12 @@ export default function AnimatePage() {
       </PreviewToggle>
       {/* Usage */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Usage</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Usage</Heading>
         <CodeBlock code={usageCode} title="app/index.tsx" />
       </div>
       {/* Spring Presets */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Spring Presets</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Spring Presets</Heading>
         <p className="text-sm text-muted-foreground">
           Pre-tuned spring physics configs for <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">withSpring</code>. Each preset provides a different feel -- from playful bounces to snappy interactions.
         </p>
@@ -263,7 +264,7 @@ export default function AnimatePage() {
       </div>
       {/* Entering Animations */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Entering Animations</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Entering Animations</Heading>
         <p className="text-sm text-muted-foreground">
           Layout animation presets for <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">Animated.View entering</code>. Apply directly to any Reanimated view.
         </p>
@@ -271,7 +272,7 @@ export default function AnimatePage() {
       </div>
       {/* Exiting Animations */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Exiting Animations</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Exiting Animations</Heading>
         <p className="text-sm text-muted-foreground">
           Layout animation presets for <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">Animated.View exiting</code>. Pair with entering presets for smooth transitions.
         </p>
@@ -279,7 +280,7 @@ export default function AnimatePage() {
       </div>
       {/* Duration & Easing */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Duration &amp; Easing</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Duration &amp; Easing</Heading>
         <p className="text-sm text-muted-foreground">
           Standardized duration constants and easing curves for <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">withTiming</code>. Use these for consistent timing across your app.
         </p>
@@ -287,17 +288,17 @@ export default function AnimatePage() {
       </div>
       {/* usePressAnimation Hook */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">usePressAnimation Hook</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">usePressAnimation Hook</Heading>
         <p className="text-sm text-muted-foreground">
           A spring-based scale animation hook for press feedback. Returns an animated style and press handlers to attach to any <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">Pressable</code>.
         </p>
         <CodeBlock code={hookCode} title="usePressAnimation" />
-        <h3 className="text-lg font-medium text-foreground mt-6">Custom Scale</h3>
+        <Heading as="h3" className="text-lg font-medium text-foreground mt-6">Custom Scale</Heading>
         <p className="text-sm text-muted-foreground">
           Pass a custom scale value (default is <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">0.96</code>) for more or less dramatic press effects.
         </p>
         <CodeBlock code={hookCustomScaleCode} title="Custom scale" />
-        <h3 className="text-lg font-medium text-foreground mt-6">Return Values</h3>
+        <Heading as="h3" className="text-lg font-medium text-foreground mt-6">Return Values</Heading>
         <PropsTable props={[
           { name: "animatedStyle", type: "AnimatedStyleProp", default: "-" },
           { name: "onPressIn", type: "() => void", default: "-" },
@@ -306,7 +307,7 @@ export default function AnimatePage() {
       </div>
       {/* Stagger Helper */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Stagger Helper</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Stagger Helper</Heading>
         <p className="text-sm text-muted-foreground">
           Use <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">stagger(index, interval)</code> to create staggered entrance animations for list items. The default interval is 50ms.
         </p>
@@ -314,7 +315,7 @@ export default function AnimatePage() {
       </div>
       {/* Usage in Components */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Usage in Components</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Usage in Components</Heading>
         <p className="text-sm text-muted-foreground">
           Combine presets, hooks, and springs for rich interactive components.
         </p>
@@ -322,7 +323,7 @@ export default function AnimatePage() {
       </div>
       {/* Accessibility */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Accessibility</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Accessibility</Heading>
         <ul className="list-disc list-inside space-y-2 text-sm text-muted-foreground">
           <li>Animations respect the system <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">Reduce Motion</code> preference when used with Reanimated layout animations.</li>
           <li>Press animations provide visual feedback for interactive elements.</li>
@@ -331,7 +332,7 @@ export default function AnimatePage() {
       </div>
       {/* Source */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Source</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Source</Heading>
         <CodeBlock code={sourceCode} title="components/ui/animate.tsx" />
       </div>
     </div>

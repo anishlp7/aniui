@@ -1,3 +1,4 @@
+import { Heading } from "@/components/heading";
 import { PreviewButton } from "@/components/preview/button";
 import { ComponentPlayground } from "@/components/highlighted-playground";
 import { CodeBlock } from "@/components/code-block-server";
@@ -169,17 +170,17 @@ export default function ButtonPage() {
       </PreviewToggle>
       {/* Installation */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Installation</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Installation</Heading>
         <AddComponentTabs names="button" />
       </div>
       {/* Usage */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Usage</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Usage</Heading>
         <CodeBlock code={usageCode} title="app/index.tsx" />
       </div>
       {/* Variants */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Variants</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Variants</Heading>
         <p className="text-sm text-muted-foreground">
           Six visual styles for different contexts and emphasis levels.
         </p>
@@ -196,7 +197,7 @@ export default function ButtonPage() {
       </div>
       {/* Sizes */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Sizes</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Sizes</Heading>
         <ComponentPlayground code={sizesCode}>
           <div className="flex flex-wrap items-center gap-3">
             <PreviewButton size="sm">Small</PreviewButton>
@@ -207,7 +208,7 @@ export default function ButtonPage() {
       </div>
       {/* With Icons */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">With Icons</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">With Icons</Heading>
         <p className="text-sm text-muted-foreground">
           Pass any React Native element as <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">icon</code> (leading) or <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">iconAfter</code> (trailing). Use <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">size="icon"</code> for icon-only buttons.
         </p>
@@ -225,7 +226,7 @@ export default function ButtonPage() {
       </div>
       {/* Loading */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Loading</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Loading</Heading>
         <p className="text-sm text-muted-foreground">
           Set <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">loading</code> to show a spinner and disable interaction. The spinner color adapts to the variant.
         </p>
@@ -239,7 +240,7 @@ export default function ButtonPage() {
       </div>
       {/* Disabled */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Disabled</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Disabled</Heading>
         <ComponentPlayground code={disabledCode}>
           <div className="flex flex-wrap items-center gap-3">
             <PreviewButton disabled>Disabled</PreviewButton>
@@ -250,7 +251,7 @@ export default function ButtonPage() {
       </div>
       {/* Full Width */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Full Width</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Full Width</Heading>
         <p className="text-sm text-muted-foreground">
           Add <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">className="w-full"</code> for block-level buttons.
         </p>
@@ -263,7 +264,7 @@ export default function ButtonPage() {
       </div>
       {/* Props */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Props</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Props</Heading>
         <PropsTable props={[
           { name: "variant", type: "\"default\" | \"secondary\" | \"outline\" | \"ghost\" | \"destructive\" | \"link\"", default: "\"default\"" },
           { name: "size", type: "\"sm\" | \"md\" | \"lg\" | \"icon\"", default: "\"md\"" },
@@ -281,7 +282,7 @@ export default function ButtonPage() {
       </div>
       {/* Accessibility */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Accessibility</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Accessibility</Heading>
         <ul className="list-disc list-inside space-y-2 text-sm text-muted-foreground">
           <li><code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">accessibilityRole="button"</code> set automatically</li>
           <li>Minimum touch target of 48x48dp via <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">min-h-12 min-w-12</code></li>
@@ -291,7 +292,7 @@ export default function ButtonPage() {
       </div>
       {/* Source */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Source</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Source</Heading>
         <CodeBlock code={sourceCode} title="components/ui/button.tsx" />
       </div>
     </div>

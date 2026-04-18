@@ -1,3 +1,4 @@
+import { Heading } from "@/components/heading";
 import Link from "next/link";
 
 export default function DocsPage() {
@@ -21,14 +22,14 @@ export default function DocsPage() {
           they are source files you copy into your project and own completely.
         </p>
 
-        <h2 className="text-2xl font-semibold tracking-tight pt-4">Architecture</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight pt-4">Architecture</Heading>
         <div className="rounded-lg border border-border bg-muted/20 p-4 font-mono text-sm space-y-2">
           <p className="text-muted-foreground">┌─ <strong className="text-foreground">AniUI Design Layer</strong> (NativeWind or Uniwind styling)</p>
           <p className="text-muted-foreground">├─ <strong className="text-foreground">rn-primitives</strong> (headless behaviour + accessibility)</p>
           <p className="text-muted-foreground">└─ <strong className="text-foreground">React Native Core</strong> (View, Text, Pressable)</p>
         </div>
 
-        <h2 className="text-2xl font-semibold tracking-tight pt-4">Why AniUI?</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight pt-4">Why AniUI?</Heading>
         <ul className="list-disc pl-6 space-y-2 text-muted-foreground">
           <li><strong className="text-foreground">You own the code.</strong> Components are source files, not black-box packages.</li>
           <li><strong className="text-foreground">NativeWind + Uniwind.</strong> Tailwind CSS classes — choose your styling engine. No StyleSheet.create() anywhere.</li>
@@ -39,7 +40,7 @@ export default function DocsPage() {
           <li><strong className="text-foreground">One command setup.</strong> <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">npx @aniui/cli init</code> auto-installs everything. <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">npx @aniui/cli doctor</code> diagnoses issues.</li>
         </ul>
 
-        <h2 className="text-2xl font-semibold tracking-tight pt-4">Tech Stack</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight pt-4">Tech Stack</Heading>
         <div className="overflow-x-auto rounded-lg border border-border">
           <table className="w-full text-sm">
             <tbody className="divide-y divide-border">
@@ -55,7 +56,7 @@ export default function DocsPage() {
           </table>
         </div>
 
-        <h2 className="text-2xl font-semibold tracking-tight pt-4">Component Tiers</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight pt-4">Component Tiers</Heading>
         <ul className="list-disc pl-6 space-y-2 text-muted-foreground">
           <li><strong className="text-foreground">Tier 1</strong> — Pure RN core + NativeWind (Button, Input, Text, Card, Badge, etc.)</li>
           <li><strong className="text-foreground">Tier 2</strong> — Needs react-native-reanimated (Skeleton, Toggle, Drawer, Carousel, etc.)</li>

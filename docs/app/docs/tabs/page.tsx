@@ -1,3 +1,4 @@
+import { Heading } from "@/components/heading";
 import { ComponentPlayground } from "@/components/highlighted-playground";
 import { CodeBlock } from "@/components/code-block-server";
 import { PropsTable, ComponentTable } from "@/components/props-table";
@@ -97,17 +98,17 @@ export default function TabsPage() {
       </PreviewToggle>
       {/* Installation */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Installation</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Installation</Heading>
         <AddComponentTabs names="tabs" />
       </div>
       {/* Usage */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Usage</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Usage</Heading>
         <CodeBlock code={usageCode} title="app/index.tsx" />
       </div>
       {/* Compound Components */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Compound Components</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Compound Components</Heading>
         <ComponentTable components={[
           { name: "Tabs", description: "Root container managing tab state" },
           { name: "TabsList", description: "Container for tab triggers" },
@@ -117,18 +118,18 @@ export default function TabsPage() {
       </div>
       {/* Props */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Props</h2>
-        <h3 className="text-lg font-medium text-foreground">Tabs</h3>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Props</Heading>
+        <Heading as="h3" className="text-lg font-medium text-foreground">Tabs</Heading>
         <PropsTable props={[
           { name: "defaultValue", type: "string", default: "required" },
           { name: "className", type: "string" },
         ]} />
-        <h3 className="text-lg font-medium text-foreground mt-6">TabsTrigger</h3>
+        <Heading as="h3" className="text-lg font-medium text-foreground mt-6">TabsTrigger</Heading>
         <PropsTable props={[
           { name: "value", type: "string", default: "required" },
           { name: "className", type: "string" },
         ]} />
-        <h3 className="text-lg font-medium text-foreground mt-6">TabsContent</h3>
+        <Heading as="h3" className="text-lg font-medium text-foreground mt-6">TabsContent</Heading>
         <PropsTable props={[
           { name: "value", type: "string", default: "required" },
           { name: "className", type: "string" },
@@ -136,7 +137,7 @@ export default function TabsPage() {
       </div>
       {/* Accessibility */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Accessibility</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Accessibility</Heading>
         <ul className="list-disc list-inside space-y-2 text-sm text-muted-foreground">
           <li>Uses React Context for state management</li>
           <li>Tab triggers and content panels are properly associated for screen readers.</li>
@@ -144,7 +145,7 @@ export default function TabsPage() {
       </div>
       {/* Source */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Source</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Source</Heading>
         <CodeBlock code={sourceCode} title="components/ui/tabs.tsx" />
       </div>
     </div>

@@ -1,3 +1,4 @@
+import { Heading } from "@/components/heading";
 import { PreviewNumberInputDemo } from "@/components/preview/number-input";
 import { ComponentPlayground } from "@/components/highlighted-playground";
 import { PreviewToggle } from "@/components/preview-toggle";
@@ -120,7 +121,7 @@ export default function NumberInputPage() {
       </div>
       {/* Installation */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Installation</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Installation</Heading>
         <AddComponentTabs names="number-input" />
       </div>
       {/* Preview */}
@@ -131,12 +132,12 @@ export default function NumberInputPage() {
       </PreviewToggle>
       {/* Usage */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Usage</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Usage</Heading>
         <CodeBlock code={usageCode} title="app/index.tsx" />
       </div>
       {/* Props */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Props</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Props</Heading>
         <PropsTable props={[
           { name: "variant", type: '"default" | "ghost"', default: '"default"' },
           { name: "size", type: '"sm" | "md" | "lg"', default: '"md"' },
@@ -153,7 +154,7 @@ export default function NumberInputPage() {
       </div>
       {/* Accessibility */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Accessibility</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Accessibility</Heading>
         <ul className="list-disc list-inside space-y-2 text-sm text-muted-foreground">
           <li>Increment/decrement buttons with <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">accessibilityValue</code> for current value.</li>
           <li>Min/max boundaries are enforced and announced to assistive technology.</li>
@@ -161,7 +162,7 @@ export default function NumberInputPage() {
       </div>
       {/* Source */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Source</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Source</Heading>
         <CodeBlock code={sourceCode} title="components/ui/number-input.tsx" />
       </div>
     </div>

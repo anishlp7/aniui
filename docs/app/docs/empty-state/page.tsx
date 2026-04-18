@@ -1,3 +1,4 @@
+import { Heading } from "@/components/heading";
 import React from "react";
 import { PreviewEmptyState } from "@/components/preview/empty-state";
 import { ComponentPlayground } from "@/components/highlighted-playground";
@@ -83,22 +84,22 @@ export default function EmptyStatePage() {
         </ComponentPlayground>
       </PreviewToggle>
       <div>
-        <h2 className="text-xl font-semibold mb-3">Installation</h2>
+        <Heading as="h2" className="text-xl font-semibold mb-3">Installation</Heading>
         <AddComponentTabs names="empty-state" />
       </div>
       <div>
-        <h2 className="text-xl font-semibold mb-3">Usage</h2>
+        <Heading as="h2" className="text-xl font-semibold mb-3">Usage</Heading>
         <CodeBlock code={usageCode} title="screen.tsx" />
       </div>
       <div>
-        <h2 className="text-xl font-semibold mb-3">No Search Results</h2>
+        <Heading as="h2" className="text-xl font-semibold mb-3">No Search Results</Heading>
         <p className="text-sm text-muted-foreground mb-4">Show when a search or filter returns empty.</p>
         <ComponentPlayground code={noResultsCode}>
           <EmptyStateNoResultsDemo />
         </ComponentPlayground>
       </div>
       <div>
-        <h2 className="text-xl font-semibold mb-3">Empty List</h2>
+        <Heading as="h2" className="text-xl font-semibold mb-3">Empty List</Heading>
         <p className="text-sm text-muted-foreground mb-4">Show when a list has no items yet.</p>
         <ComponentPlayground code={emptyListCode}>
           <PreviewEmptyState
@@ -109,14 +110,14 @@ export default function EmptyStatePage() {
         </ComponentPlayground>
       </div>
       <div>
-        <h2 className="text-xl font-semibold mb-3">Error State</h2>
+        <Heading as="h2" className="text-xl font-semibold mb-3">Error State</Heading>
         <p className="text-sm text-muted-foreground mb-4">Show when data fails to load, with a retry action.</p>
         <ComponentPlayground code={errorCode}>
           <EmptyStateErrorDemo />
         </ComponentPlayground>
       </div>
       <div>
-        <h2 className="text-xl font-semibold mb-3">Props</h2>
+        <Heading as="h2" className="text-xl font-semibold mb-3">Props</Heading>
         <PropsTable props={[
           { name: "title", type: "string", default: "required" },
           { name: "description", type: "string" },
@@ -127,14 +128,14 @@ export default function EmptyStatePage() {
       </div>
       {/* Accessibility */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Accessibility</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Accessibility</Heading>
         <ul className="list-disc list-inside space-y-2 text-sm text-muted-foreground">
           <li>Informational display with no required interaction.</li>
           <li>Action button (when present) has <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">accessibilityRole="button"</code>.</li>
         </ul>
       </div>
       <div>
-        <h2 className="text-xl font-semibold mb-3">Source</h2>
+        <Heading as="h2" className="text-xl font-semibold mb-3">Source</Heading>
         <CodeBlock code={sourceCode} title="components/ui/empty-state.tsx" />
       </div>
     </div>

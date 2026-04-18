@@ -1,3 +1,4 @@
+import { Heading } from "@/components/heading";
 import { PreviewDirectionProviderDemo } from "@/components/preview/direction-provider";
 import { ComponentPlayground } from "@/components/highlighted-playground";
 import { CodeBlock } from "@/components/code-block-server";
@@ -106,7 +107,7 @@ export default function RTLPage() {
       </PreviewToggle>
       {/* Overview */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Overview</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Overview</Heading>
         <p className="text-sm text-muted-foreground">
           AniUI components support RTL layouts through two mechanisms:
         </p>
@@ -117,7 +118,7 @@ export default function RTLPage() {
       </div>
       {/* Setup */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Setup</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Setup</Heading>
         <p className="text-sm text-muted-foreground">
           Install the DirectionProvider component and wrap your root layout:
         </p>
@@ -126,7 +127,7 @@ export default function RTLPage() {
       </div>
       {/* Reading direction */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Reading Direction</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Reading Direction</Heading>
         <p className="text-sm text-muted-foreground">
           Use the <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">useDirection()</code> hook to access the current direction from any child component.
         </p>
@@ -134,7 +135,7 @@ export default function RTLPage() {
       </div>
       {/* Logical Properties */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Logical Properties</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Logical Properties</Heading>
         <p className="text-sm text-muted-foreground">
           AniUI components use logical CSS properties that automatically adapt to RTL layouts. When writing custom styles, prefer logical properties:
         </p>
@@ -159,7 +160,7 @@ export default function RTLPage() {
       </div>
       {/* Icon Flipping */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Flipping Icons</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Flipping Icons</Heading>
         <p className="text-sm text-muted-foreground">
           Directional icons like back arrows need to be flipped in RTL mode. Use <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">scaleX: -1</code> to mirror them:
         </p>
@@ -167,20 +168,20 @@ export default function RTLPage() {
       </div>
       {/* Component Examples */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Component Examples</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Component Examples</Heading>
         <p className="text-sm text-muted-foreground">
           Components that use logical properties adapt automatically. No code changes needed.
         </p>
-        <h3 className="text-lg font-medium text-foreground mt-6">InputGroup</h3>
+        <Heading as="h3" className="text-lg font-medium text-foreground mt-6">InputGroup</Heading>
         <CodeBlock code={inputGroupRtlCode} title="InputGroup adapts automatically" />
-        <h3 className="text-lg font-medium text-foreground mt-6">Combobox Multi-select</h3>
+        <Heading as="h3" className="text-lg font-medium text-foreground mt-6">Combobox Multi-select</Heading>
         <CodeBlock code={comboboxRtlCode} title="Combobox chips flip automatically" />
-        <h3 className="text-lg font-medium text-foreground mt-6">Field</h3>
+        <Heading as="h3" className="text-lg font-medium text-foreground mt-6">Field</Heading>
         <CodeBlock code={fieldRtlCode} title="Field with Arabic text" />
       </div>
       {/* Dynamic Direction Toggle */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Dynamic Direction Toggle</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Dynamic Direction Toggle</Heading>
         <p className="text-sm text-muted-foreground">
           Build a settings screen that lets users switch direction:
         </p>
@@ -188,7 +189,7 @@ export default function RTLPage() {
       </div>
       {/* Important Note */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Important</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Important</Heading>
         <p className="text-sm text-muted-foreground">
           Calling <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">setDirection</code> updates the React context value immediately for re-renders, but the full layout direction flip via <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">I18nManager.forceRTL()</code> requires an app restart. This is a React Native platform limitation.
         </p>
@@ -198,7 +199,7 @@ export default function RTLPage() {
       </div>
       {/* RTL Support Table */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Component Support</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Component Support</Heading>
         <p className="text-sm text-muted-foreground">
           All AniUI components use logical Tailwind properties and support RTL layouts out of the box.
         </p>
@@ -234,7 +235,7 @@ export default function RTLPage() {
       </div>
       {/* Accessibility */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Accessibility</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Accessibility</Heading>
         <ul className="list-disc list-inside space-y-2 text-sm text-muted-foreground">
           <li>Screen readers automatically respect <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">I18nManager</code> direction settings.</li>
           <li>Logical properties ensure touch targets and content flow correctly for RTL users.</li>

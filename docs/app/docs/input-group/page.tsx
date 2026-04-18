@@ -1,3 +1,4 @@
+import { Heading } from "@/components/heading";
 import { PreviewInputGroupDemo, PreviewInputGroupSuffix, PreviewInputGroupButton } from "@/components/preview/input-group";
 import { ComponentPlayground } from "@/components/highlighted-playground";
 import { CodeBlock } from "@/components/code-block-server";
@@ -159,17 +160,17 @@ export default function InputGroupPage() {
       </PreviewToggle>
       {/* Installation */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Installation</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Installation</Heading>
         <AddComponentTabs names="input-group" />
       </div>
       {/* Usage */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Usage</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Usage</Heading>
         <CodeBlock code={usageCode} title="app/index.tsx" />
       </div>
       {/* Suffix Addon */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Suffix Addon</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Suffix Addon</Heading>
         <PreviewToggle>
           <ComponentPlayground code={suffixCode}>
             <PreviewInputGroupSuffix />
@@ -178,7 +179,7 @@ export default function InputGroupPage() {
       </div>
       {/* Button Addon */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Button Addon</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Button Addon</Heading>
         <PreviewToggle>
           <ComponentPlayground code={buttonCode}>
             <PreviewInputGroupButton />
@@ -187,7 +188,7 @@ export default function InputGroupPage() {
       </div>
       {/* Compound Components */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Components</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Components</Heading>
         <p className="text-sm text-muted-foreground">
           InputGroup is a compound component made up of several parts:
         </p>
@@ -201,8 +202,8 @@ export default function InputGroupPage() {
       </div>
       {/* Props */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Props</h2>
-        <h3 className="text-lg font-medium text-foreground">InputGroup</h3>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Props</Heading>
+        <Heading as="h3" className="text-lg font-medium text-foreground">InputGroup</Heading>
         <PropsTable props={[
           { name: "className", type: "string", default: "-" },
           { name: "children", type: "React.ReactNode", default: "-" },
@@ -210,7 +211,7 @@ export default function InputGroupPage() {
         <p className="text-sm text-muted-foreground">
           Also accepts all <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">View</code> props from React Native.
         </p>
-        <h3 className="text-lg font-medium text-foreground mt-6">InputGroupAddon</h3>
+        <Heading as="h3" className="text-lg font-medium text-foreground mt-6">InputGroupAddon</Heading>
         <PropsTable props={[
           { name: "align", type: '"start" | "end"', default: '"start"' },
           { name: "className", type: "string", default: "-" },
@@ -219,14 +220,14 @@ export default function InputGroupPage() {
         <p className="text-sm text-muted-foreground">
           Also accepts all <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">View</code> props from React Native.
         </p>
-        <h3 className="text-lg font-medium text-foreground mt-6">InputGroupInput</h3>
+        <Heading as="h3" className="text-lg font-medium text-foreground mt-6">InputGroupInput</Heading>
         <PropsTable props={[
           { name: "className", type: "string", default: "-" },
         ]} />
         <p className="text-sm text-muted-foreground">
           Also accepts all <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">TextInput</code> props from React Native.
         </p>
-        <h3 className="text-lg font-medium text-foreground mt-6">InputGroupButton</h3>
+        <Heading as="h3" className="text-lg font-medium text-foreground mt-6">InputGroupButton</Heading>
         <PropsTable props={[
           { name: "className", type: "string", default: "-" },
           { name: "children", type: "React.ReactNode", default: "-" },
@@ -234,7 +235,7 @@ export default function InputGroupPage() {
         <p className="text-sm text-muted-foreground">
           Also accepts all <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">Pressable</code> props from React Native.
         </p>
-        <h3 className="text-lg font-medium text-foreground mt-6">InputGroupText</h3>
+        <Heading as="h3" className="text-lg font-medium text-foreground mt-6">InputGroupText</Heading>
         <PropsTable props={[
           { name: "className", type: "string", default: "-" },
         ]} />
@@ -244,7 +245,7 @@ export default function InputGroupPage() {
       </div>
       {/* Accessibility */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Accessibility</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Accessibility</Heading>
         <ul className="list-disc list-inside space-y-2 text-sm text-muted-foreground">
           <li><code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">InputGroupButton</code> uses <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">accessibilityRole=&quot;button&quot;</code> and <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">accessible=&#123;true&#125;</code>.</li>
           <li>Minimum touch target of 48dp on interactive elements.</li>
@@ -253,7 +254,7 @@ export default function InputGroupPage() {
       </div>
       {/* Source */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Source</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Source</Heading>
         <CodeBlock code={sourceCode} title="components/ui/input-group.tsx" />
       </div>
     </div>

@@ -1,3 +1,4 @@
+import { Heading } from "@/components/heading";
 import { ComponentPlayground } from "@/components/highlighted-playground";
 import { CodeBlock } from "@/components/code-block-server";
 import { PropsTable } from "@/components/props-table";
@@ -158,17 +159,17 @@ export default function SelectPage() {
       </ComponentPlayground>
       {/* Installation */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Installation</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Installation</Heading>
         <AddComponentTabs names="select" />
       </div>
       {/* Usage */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Usage</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Usage</Heading>
         <CodeBlock code={usageCode} title="app/index.tsx" />
       </div>
       {/* Props */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Props</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Props</Heading>
         <PropsTable props={[
           { name: "options", type: "SelectOption[]", default: "required" },
           { name: "value", type: "string" },
@@ -179,7 +180,7 @@ export default function SelectPage() {
           { name: "searchPlaceholder", type: "string", default: "\"Search...\"" },
           { name: "className", type: "string" },
         ]} />
-        <h3 className="text-lg font-medium text-foreground mt-6">SelectOption</h3>
+        <Heading as="h3" className="text-lg font-medium text-foreground mt-6">SelectOption</Heading>
         <PropsTable props={[
           { name: "label", type: "string" },
           { name: "value", type: "string" },
@@ -187,7 +188,7 @@ export default function SelectPage() {
       </div>
       {/* Accessibility */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Accessibility</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Accessibility</Heading>
         <ul className="list-disc list-inside space-y-2 text-sm text-muted-foreground">
           <li>Uses Modal with anchored dropdown positioning. Supports searchable prop for filtering options.</li>
           <li>Selected state announced to screen readers</li>
@@ -196,7 +197,7 @@ export default function SelectPage() {
       </div>
       {/* Source */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Source</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Source</Heading>
         <CodeBlock code={sourceCode} title="components/ui/select.tsx" />
       </div>
     </div>

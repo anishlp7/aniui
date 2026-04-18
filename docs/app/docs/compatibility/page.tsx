@@ -1,3 +1,4 @@
+import { Heading } from "@/components/heading";
 
 import { CodeBlock } from "@/components/code-block-server";
 
@@ -100,7 +101,7 @@ export default function CompatibilityPage() {
 
       {/* Version Matrix */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Version Matrix</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Version Matrix</Heading>
         <div className="overflow-x-auto rounded-lg border border-border">
           <table className="w-full text-sm">
             <thead>
@@ -163,7 +164,7 @@ export default function CompatibilityPage() {
 
       {/* How it Works */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">How it Works</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">How it Works</Heading>
         <p className="text-sm text-muted-foreground leading-relaxed">
           AniUI components are source files that use <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">className</code>,{" "}
           <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">cn()</code>, and{" "}
@@ -179,7 +180,7 @@ export default function CompatibilityPage() {
 
       {/* Setup for SDK 54 */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Setup for Expo SDK 53/54</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Setup for Expo SDK 53/54</Heading>
         <CodeBlock code={installSdk54} />
         <p className="text-sm text-muted-foreground">
           Uses <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">templates/v4/</code> — Tailwind v3 with{" "}
@@ -190,7 +191,7 @@ export default function CompatibilityPage() {
 
       {/* Setup for SDK 55 */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Setup for Expo SDK 55</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Setup for Expo SDK 55</Heading>
         <CodeBlock code={installSdk55} />
         <p className="text-sm text-muted-foreground">
           Uses <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">templates/v5/</code> — Tailwind v4 with{" "}
@@ -201,7 +202,7 @@ export default function CompatibilityPage() {
 
       {/* CSS Differences */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">CSS Format Differences</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">CSS Format Differences</Heading>
         <div className="grid gap-4 md:grid-cols-2">
           <div>
             <p className="text-sm font-medium text-foreground mb-2">SDK 53/54 (Tailwind v3)</p>
@@ -216,7 +217,7 @@ export default function CompatibilityPage() {
 
       {/* Migration */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Migrating from SDK 53/54 to 55</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Migrating from SDK 53/54 to 55</Heading>
         <CodeBlock code={migrationSteps} title="Migration steps" />
         <div className="rounded-lg border border-border bg-muted/30 p-4">
           <p className="text-sm font-medium text-foreground mb-1">Components don&apos;t change</p>
@@ -229,7 +230,7 @@ export default function CompatibilityPage() {
 
       {/* Required Config Files */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Required Config Files</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Required Config Files</Heading>
         <p className="text-sm text-muted-foreground leading-relaxed">
           The CLI creates all of these automatically. If styling isn&apos;t working, verify each file exists and is correct.
         </p>
@@ -275,7 +276,7 @@ export default function CompatibilityPage() {
 
       {/* Known Differences */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Known Differences</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Known Differences</Heading>
         <ul className="space-y-2 text-sm text-muted-foreground">
           <li className="flex items-start gap-2">
             <span className="text-foreground font-medium shrink-0">Architecture:</span>

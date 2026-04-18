@@ -1,3 +1,4 @@
+import { Heading } from "@/components/heading";
 import { PreviewDataTableDemo, PreviewDataTableSort, PreviewDataTableSearch, PreviewDataTablePagination, PreviewDataTableCustomCell, PreviewDataTableStriped } from "@/components/preview/data-table";
 import { ComponentPlayground } from "@/components/highlighted-playground";
 import { CodeBlock } from "@/components/code-block-server";
@@ -273,7 +274,7 @@ export default function DataTablePage() {
       </div>
       {/* Installation */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Installation</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Installation</Heading>
         <AddComponentTabs names="data-table" />
       </div>
       {/* Preview */}
@@ -284,12 +285,12 @@ export default function DataTablePage() {
       </PreviewToggle>
       {/* Usage */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Usage</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Usage</Heading>
         <CodeBlock code={usageCode} title="app/index.tsx" />
       </div>
       {/* Sorting */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Sorting</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Sorting</Heading>
         <p className="text-sm text-muted-foreground">
           Mark columns as <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">sortable: true</code> to enable click-to-sort. Supports both uncontrolled (internal state) and controlled modes via <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">sortBy</code>, <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">sortOrder</code>, and <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">onSort</code>.
         </p>
@@ -299,7 +300,7 @@ export default function DataTablePage() {
       </div>
       {/* Search */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Search</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Search</Heading>
         <p className="text-sm text-muted-foreground">
           Enable search with <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">searchable</code>. Limit which columns are searchable with <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">searchKeys</code>.
         </p>
@@ -309,7 +310,7 @@ export default function DataTablePage() {
       </div>
       {/* Pagination */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Pagination</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Pagination</Heading>
         <p className="text-sm text-muted-foreground">
           Set <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">pageSize</code> to enable pagination with Prev/Next controls. The current range and total count are displayed automatically.
         </p>
@@ -319,7 +320,7 @@ export default function DataTablePage() {
       </div>
       {/* Custom Cell */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Custom Cell Rendering</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Custom Cell Rendering</Heading>
         <p className="text-sm text-muted-foreground">
           Use the <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">render</code> prop on a column to provide custom cell content. The render function receives the cell value and full row.
         </p>
@@ -329,7 +330,7 @@ export default function DataTablePage() {
       </div>
       {/* Striped */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Striped Rows</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Striped Rows</Heading>
         <p className="text-sm text-muted-foreground">
           Add alternating row backgrounds with the <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">striped</code> prop.
         </p>
@@ -339,8 +340,8 @@ export default function DataTablePage() {
       </div>
       {/* Props */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Props</h2>
-        <h3 className="text-lg font-medium text-foreground">DataTableProps</h3>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Props</Heading>
+        <Heading as="h3" className="text-lg font-medium text-foreground">DataTableProps</Heading>
         <PropsTable props={[
           { name: "columns", type: "DataTableColumn<T>[]", default: "-" },
           { name: "data", type: "T[]", default: "-" },
@@ -355,7 +356,7 @@ export default function DataTablePage() {
           { name: "striped", type: "boolean", default: "false" },
           { name: "className", type: "string", default: "-" },
         ]} />
-        <h3 className="text-lg font-medium text-foreground mt-6">DataTableColumn&lt;T&gt;</h3>
+        <Heading as="h3" className="text-lg font-medium text-foreground mt-6">DataTableColumn&lt;T&gt;</Heading>
         <PropsTable props={[
           { name: "key", type: "keyof T & string", default: "-" },
           { name: "header", type: "string", default: "-" },
@@ -369,7 +370,7 @@ export default function DataTablePage() {
       </div>
       {/* Accessibility */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Accessibility</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Accessibility</Heading>
         <ul className="list-disc list-inside space-y-2 text-sm text-muted-foreground">
           <li>Sortable column headers have <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">accessibilityRole=&quot;button&quot;</code>; non-sortable headers use <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">accessibilityRole=&quot;text&quot;</code>.</li>
           <li>Search input has <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">accessibilityLabel=&quot;Search table&quot;</code>.</li>
@@ -379,7 +380,7 @@ export default function DataTablePage() {
       </div>
       {/* Source */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Source</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Source</Heading>
         <CodeBlock code={sourceCode} title="components/ui/data-table.tsx" />
       </div>
     </div>

@@ -1,3 +1,4 @@
+import { Heading } from "@/components/heading";
 import { CodeBlock } from "@/components/code-block";
 
 export default function CLIPage() {
@@ -11,7 +12,7 @@ export default function CLIPage() {
       </div>
 
       <div className="space-y-6 text-foreground leading-7">
-        <h2 className="text-2xl font-semibold tracking-tight">init</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight">init</Heading>
         <p className="text-muted-foreground">
           Initialize AniUI in your React Native project. Sets up the utility helper,
           global CSS theme, and Tailwind config.
@@ -29,7 +30,7 @@ export default function CLIPage() {
           <li>Copy <code className="rounded bg-secondary px-1.5 py-0.5 text-sm font-mono">lib/utils.ts</code>, <code className="rounded bg-secondary px-1.5 py-0.5 text-sm font-mono">global.css</code>, <code className="rounded bg-secondary px-1.5 py-0.5 text-sm font-mono">tailwind.config.js</code>, and <code className="rounded bg-secondary px-1.5 py-0.5 text-sm font-mono">nativewind-env.d.ts</code></li>
         </ul>
 
-        <h2 className="text-2xl font-semibold tracking-tight pt-4">add</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight pt-4">add</Heading>
         <p className="text-muted-foreground">
           Add components to your project. Components are copied as source files — you own the code.
         </p>
@@ -51,7 +52,7 @@ npx @aniui/cli add select
           Tier 2 components), the CLI will print the install command for you.
         </p>
 
-        <h2 className="text-2xl font-semibold tracking-tight pt-4">theme</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight pt-4">theme</Heading>
         <p className="text-muted-foreground">
           Switch between theme presets. Updates the CSS variables in your <code className="rounded bg-secondary px-1.5 py-0.5 text-sm font-mono">global.css</code>.
         </p>
@@ -60,7 +61,7 @@ npx @aniui/cli add select
           Available presets: <strong>Default</strong> (neutral), <strong>Blue</strong>, <strong>Green</strong>, <strong>Orange</strong>, <strong>Rose</strong>.
         </p>
 
-        <h2 className="text-2xl font-semibold tracking-tight pt-4">generate</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight pt-4">generate</Heading>
         <p className="text-muted-foreground">
           Generate a complete screen using AI. Requires the <code className="rounded bg-secondary px-1.5 py-0.5 text-sm font-mono">ANTHROPIC_API_KEY</code> environment variable.
         </p>
@@ -76,7 +77,7 @@ npx @aniui/cli generate "settings page" -o app/settings.tsx`}
           existing components with proper imports and NativeWind styling.
         </p>
 
-        <h2 className="text-2xl font-semibold tracking-tight pt-4">mcp</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight pt-4">mcp</Heading>
         <p className="text-muted-foreground">
           Print the MCP server configuration for AI tools like Claude Desktop or Cursor.
         </p>

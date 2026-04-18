@@ -1,3 +1,4 @@
+import { Heading } from "@/components/heading";
 import { ComponentPlayground } from "@/components/highlighted-playground";
 import { CodeBlock } from "@/components/code-block-server";
 import { PropsTable, ComponentTable } from "@/components/props-table";
@@ -48,7 +49,7 @@ export default function ContextMenuPage() {
       </PreviewToggle>
 
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Installation</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Installation</Heading>
         <AddComponentTabs names="context-menu" />
         <p className="text-sm text-muted-foreground">
           Requires <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">@rn-primitives/context-menu</code> and{" "}
@@ -58,12 +59,12 @@ export default function ContextMenuPage() {
       </div>
 
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Usage</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Usage</Heading>
         <CodeBlock code={usageCode} title="app/index.tsx" />
       </div>
 
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Components</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Components</Heading>
         <ComponentTable components={[
           { name: "ContextMenu", description: "Root wrapper — manages open/close state" },
           { name: "ContextMenuTrigger", description: "Long-press target that opens the menu" },
@@ -74,14 +75,14 @@ export default function ContextMenuPage() {
       </div>
 
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Props</h2>
-        <h3 className="text-lg font-medium text-foreground">ContextMenu</h3>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Props</Heading>
+        <Heading as="h3" className="text-lg font-medium text-foreground">ContextMenu</Heading>
         <PropsTable props={[
           { name: "open", type: "boolean", description: "Controlled open state" },
           { name: "onOpenChange", type: "(open: boolean) => void", description: "Called when state changes" },
           { name: "children", type: "React.ReactNode" },
         ]} />
-        <h3 className="text-lg font-medium text-foreground mt-6">ContextMenuItem</h3>
+        <Heading as="h3" className="text-lg font-medium text-foreground mt-6">ContextMenuItem</Heading>
         <PropsTable props={[
           { name: "destructive", type: "boolean", default: "false", description: "Renders in destructive color" },
           { name: "className", type: "string" },
@@ -90,7 +91,7 @@ export default function ContextMenuPage() {
       </div>
 
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Accessibility</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Accessibility</Heading>
         <ul className="list-disc list-inside space-y-2 text-sm text-muted-foreground">
           <li>Uses <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">@rn-primitives/context-menu</code> for proper menu semantics</li>
           <li><code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">accessibilityRole="menuitem"</code> on each item</li>
@@ -101,7 +102,7 @@ export default function ContextMenuPage() {
       </div>
 
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Source</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Source</Heading>
         <CodeBlock code={sourceCode} title="components/ui/context-menu.tsx" />
       </div>
     </div>

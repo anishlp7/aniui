@@ -1,3 +1,4 @@
+import { Heading } from "@/components/heading";
 import { CodeBlock } from "@/components/code-block";
 import { PropsTable } from "@/components/props-table";
 
@@ -11,14 +12,14 @@ export default function ThemingPage() {
         </p>
       </div>
       <div className="space-y-6 text-foreground leading-7">
-        <h2 className="text-2xl font-semibold tracking-tight">How It Works</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight">How It Works</Heading>
         <p className="text-muted-foreground">
           AniUI uses CSS custom properties (variables) defined in <code className="rounded bg-secondary px-1.5 py-0.5 text-sm font-mono">global.css</code>.
           These map to Tailwind utility classes through your <code className="rounded bg-secondary px-1.5 py-0.5 text-sm font-mono">tailwind.config.js</code>.
           Colors use HSL format without the <code className="rounded bg-secondary px-1.5 py-0.5 text-sm font-mono">hsl()</code> wrapper so Tailwind can
           apply opacity modifiers.
         </p>
-        <h2 className="text-2xl font-semibold tracking-tight pt-4">Convention</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight pt-4">Convention</Heading>
         <p className="text-muted-foreground">
           Each color has a <strong>background</strong> and <strong>foreground</strong> pair.
           Use the background color for surfaces and the foreground for text on that surface:
@@ -31,7 +32,7 @@ export default function ThemingPage() {
   <Text className="text-card-foreground">Card content</Text>
 </View>`}
         />
-        <h2 className="text-2xl font-semibold tracking-tight pt-4">Available Tokens</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight pt-4">Available Tokens</Heading>
         <PropsTable props={[
           { name: "--background", type: "bg-background / text-foreground", default: "Page background" },
           { name: "--primary", type: "bg-primary / text-primary-foreground", default: "Buttons, links" },
@@ -43,7 +44,7 @@ export default function ThemingPage() {
           { name: "--border", type: "border-border", default: "Borders, dividers" },
           { name: "--input", type: "bg-input", default: "Input backgrounds" },
         ]} />
-        <h2 className="text-2xl font-semibold tracking-tight pt-4">Theme Presets</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight pt-4">Theme Presets</Heading>
         <p className="text-muted-foreground">
           Switch presets with the CLI. Each preset changes the primary color while keeping
           the neutral palette consistent:
@@ -56,7 +57,7 @@ export default function ThemingPage() {
           <li><strong className="text-foreground">Orange</strong> — Primary: <span className="inline-block w-3 h-3 rounded-full bg-orange-500 align-middle" /> #F97316</li>
           <li><strong className="text-foreground">Rose</strong> — Primary: <span className="inline-block w-3 h-3 rounded-full bg-rose-500 align-middle" /> #F43F5E</li>
         </ul>
-        <h2 className="text-2xl font-semibold tracking-tight pt-4">Custom Colors</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight pt-4">Custom Colors</Heading>
         <p className="text-muted-foreground">
           To create your own theme, edit the CSS variables in <code className="rounded bg-secondary px-1.5 py-0.5 text-sm font-mono">global.css</code>.
           Values use HSL format (hue saturation% lightness%) without the <code className="rounded bg-secondary px-1.5 py-0.5 text-sm font-mono">hsl()</code> wrapper:
@@ -77,7 +78,7 @@ export default function ThemingPage() {
           since <code className="rounded bg-secondary px-1.5 py-0.5 text-sm font-mono">tailwind.config.js</code> references <code className="rounded bg-secondary px-1.5 py-0.5 text-sm font-mono">hsl(var(--primary))</code>.
         </p>
 
-        <h2 className="text-2xl font-semibold tracking-tight pt-4">How Tokens Flow</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight pt-4">How Tokens Flow</Heading>
         <p className="text-muted-foreground">
           Understanding the full pipeline helps when debugging or extending themes:
         </p>
@@ -104,7 +105,7 @@ export default function ThemingPage() {
           require a rebuild to take effect.
         </p>
 
-        <h2 className="text-2xl font-semibold tracking-tight pt-4">Adding Custom Tokens</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight pt-4">Adding Custom Tokens</Heading>
         <p className="text-muted-foreground">
           Need more semantic colors like <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">success</code> or{" "}
           <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">info</code>? Add them in three steps:
@@ -145,7 +146,7 @@ info: {
 </View>`}
         />
 
-        <h2 className="text-2xl font-semibold tracking-tight pt-4">Global Component Overrides</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight pt-4">Global Component Overrides</Heading>
         <p className="text-muted-foreground">
           Since AniUI components are source files you own, you have two approaches for global styling changes:
         </p>

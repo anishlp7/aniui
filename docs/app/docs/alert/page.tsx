@@ -1,3 +1,4 @@
+import { Heading } from "@/components/heading";
 import { PreviewAlert } from "@/components/preview/alert";
 import { ComponentPlayground } from "@/components/highlighted-playground";
 import { CodeBlock } from "@/components/code-block-server";
@@ -102,17 +103,17 @@ export default function AlertPage() {
       </PreviewToggle>
       {/* Installation */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Installation</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Installation</Heading>
         <AddComponentTabs names="alert" />
       </div>
       {/* Usage */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Usage</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Usage</Heading>
         <CodeBlock code={usageCode} title="app/index.tsx" />
       </div>
       {/* Variants */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Variants</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Variants</Heading>
         <ComponentPlayground code={variantsCode}>
           <div className="space-y-3 w-full max-w-sm">
             <PreviewAlert variant="default" title="Default">This is a default alert.</PreviewAlert>
@@ -124,7 +125,7 @@ export default function AlertPage() {
       </div>
       {/* Props */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Props</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Props</Heading>
         <p className="text-sm text-muted-foreground">
           This component exports <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">Alert</code> and <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">AlertDescription</code>.
         </p>
@@ -141,7 +142,7 @@ export default function AlertPage() {
       </div>
       {/* Accessibility */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Accessibility</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Accessibility</Heading>
         <ul className="list-disc list-inside space-y-2 text-sm text-muted-foreground">
           <li><code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">accessibilityRole="alert"</code> for screen reader announcements.</li>
           <li>Alert content is announced immediately when it appears.</li>
@@ -149,7 +150,7 @@ export default function AlertPage() {
       </div>
       {/* Source */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Source</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Source</Heading>
         <CodeBlock code={sourceCode} title="components/ui/alert.tsx" />
       </div>
     </div>

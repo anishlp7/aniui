@@ -1,3 +1,4 @@
+import { Heading } from "@/components/heading";
 import { ComponentPlayground } from "@/components/highlighted-playground";
 import { CodeBlock } from "@/components/code-block-server";
 import { PropsTable } from "@/components/props-table";
@@ -117,7 +118,7 @@ export default function ToastPage() {
       </PreviewToggle>
       {/* Installation */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Installation</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Installation</Heading>
         <AddComponentTabs names="toast" />
         <p className="text-sm text-muted-foreground">
           This component requires <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">react-native-reanimated</code> for slide and fade animations.
@@ -125,18 +126,18 @@ export default function ToastPage() {
       </div>
       {/* Usage */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Usage</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Usage</Heading>
         <CodeBlock code={usageCode} title="app/index.tsx" />
       </div>
       {/* Variants */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Variants</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Variants</Heading>
         <CodeBlock code={variantsCode} title="app/index.tsx" />
       </div>
       {/* Props */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Props</h2>
-        <h3 className="text-lg font-medium text-foreground">useToast</h3>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Props</Heading>
+        <Heading as="h3" className="text-lg font-medium text-foreground">useToast</Heading>
         <p className="text-sm text-muted-foreground">
           Returns an object with a <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">toast</code> function.
         </p>
@@ -145,14 +146,14 @@ export default function ToastPage() {
           { name: "description", type: "string" },
           { name: "variant", type: "\"default\" | \"destructive\" | \"success\"", default: "\"default\"" },
         ]} />
-        <h3 className="text-lg font-medium text-foreground mt-6">ToastProvider</h3>
+        <Heading as="h3" className="text-lg font-medium text-foreground mt-6">ToastProvider</Heading>
         <PropsTable props={[
           { name: "children", type: "React.ReactNode", default: "required" },
         ]} />
       </div>
       {/* Accessibility */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Accessibility</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Accessibility</Heading>
         <ul className="list-disc list-inside space-y-2 text-sm text-muted-foreground">
           <li>Uses React Context provider with auto-dismiss timer</li>
           <li><code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">accessibilityRole="alert"</code> on each toast for screen reader announcements.</li>
@@ -160,7 +161,7 @@ export default function ToastPage() {
       </div>
       {/* Source */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Source</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Source</Heading>
         <CodeBlock code={sourceCode} title="components/ui/toast.tsx" />
       </div>
     </div>

@@ -1,4 +1,5 @@
 
+import { Heading } from "@/components/heading";
 import Link from "next/link";
 
 type ChangeType = "feat" | "fix" | "breaking" | "docs";
@@ -188,9 +189,9 @@ export default function ChangelogPage() {
               </span>
               <span className="text-sm text-muted-foreground">{release.date}</span>
             </div>
-            <h2 className="text-xl font-semibold tracking-tight text-foreground mb-4">
+            <Heading as="h2" className="text-xl font-semibold tracking-tight text-foreground mb-4">
               {release.title}
-            </h2>
+            </Heading>
             <ul className="space-y-2.5">
               {release.changes.map((change, i) => (
                 <li key={i} className="flex items-start gap-2.5">

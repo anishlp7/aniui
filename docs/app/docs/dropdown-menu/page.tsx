@@ -1,3 +1,4 @@
+import { Heading } from "@/components/heading";
 import React from "react";
 import { PreviewDropdownMenu } from "@/components/preview/dropdown-menu";
 import { ComponentPlayground } from "@/components/highlighted-playground";
@@ -120,11 +121,11 @@ export default function DropdownMenuPage() {
         <PreviewDropdownMenu />
       </ComponentPlayground>
       <div>
-        <h2 className="text-xl font-semibold mb-3">Installation</h2>
+        <Heading as="h2" className="text-xl font-semibold mb-3">Installation</Heading>
         <AddComponentTabs names="dropdown-menu" />
       </div>
       <div>
-        <h2 className="text-xl font-semibold mb-3">Positioning</h2>
+        <Heading as="h2" className="text-xl font-semibold mb-3">Positioning</Heading>
         <p className="text-sm text-muted-foreground mb-4">
           Pass <code>side</code> and <code>align</code> to <code>DropdownMenuContent</code> to control positioning. Collision detection automatically flips the menu if there isn&apos;t enough space.
         </p>
@@ -133,14 +134,14 @@ export default function DropdownMenuPage() {
         </ComponentPlayground>
       </div>
       <div>
-        <h2 className="text-xl font-semibold mb-3">With Separator &amp; Destructive</h2>
+        <Heading as="h2" className="text-xl font-semibold mb-3">With Separator &amp; Destructive</Heading>
         <p className="text-sm text-muted-foreground mb-4">Use <code>DropdownMenuSeparator</code> to divide groups and the <code>destructive</code> prop for danger actions.</p>
         <ComponentPlayground code={separatorCode}>
           <PreviewDropdownMenu />
         </ComponentPlayground>
       </div>
       <div>
-        <h2 className="text-xl font-semibold mb-3">Props</h2>
+        <Heading as="h2" className="text-xl font-semibold mb-3">Props</Heading>
         <PropsTable props={[
           { component: "DropdownMenu", name: "children", type: "ReactNode" },
           { component: "DropdownMenu", name: "open", type: "boolean" },
@@ -155,7 +156,7 @@ export default function DropdownMenuPage() {
       </div>
       {/* Accessibility */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Accessibility</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Accessibility</Heading>
         <ul className="list-disc list-inside space-y-2 text-sm text-muted-foreground">
           <li>Uses <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">@rn-primitives/dropdown-menu</code> for menu semantics</li>
           <li><code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">accessibilityRole=&quot;menuitem&quot;</code> on each item</li>
@@ -166,7 +167,7 @@ export default function DropdownMenuPage() {
       </div>
       {/* Source */}
       <div>
-        <h2 className="text-xl font-semibold mb-3">Source</h2>
+        <Heading as="h2" className="text-xl font-semibold mb-3">Source</Heading>
         <CodeBlock code={sourceCode} title="components/ui/dropdown-menu.tsx" />
       </div>
     </div>

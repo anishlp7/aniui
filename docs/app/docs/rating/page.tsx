@@ -1,3 +1,4 @@
+import { Heading } from "@/components/heading";
 import { PreviewRating } from "@/components/preview/rating";
 import { ComponentPlayground } from "@/components/highlighted-playground";
 import { CodeBlock } from "@/components/code-block-server";
@@ -74,11 +75,11 @@ export default function RatingPage() {
         </ComponentPlayground>
       </PreviewToggle>
       <div>
-        <h2 className="text-xl font-semibold mb-3">Installation</h2>
+        <Heading as="h2" className="text-xl font-semibold mb-3">Installation</Heading>
         <AddComponentTabs names="rating" />
       </div>
       <div>
-        <h2 className="text-xl font-semibold mb-3">Sizes</h2>
+        <Heading as="h2" className="text-xl font-semibold mb-3">Sizes</Heading>
         <ComponentPlayground code={sizesCode}>
           <div className="space-y-3">
             <PreviewRating size="sm" value={3} readOnly />
@@ -88,7 +89,7 @@ export default function RatingPage() {
         </ComponentPlayground>
       </div>
       <div>
-        <h2 className="text-xl font-semibold mb-3">Read-Only</h2>
+        <Heading as="h2" className="text-xl font-semibold mb-3">Read-Only</Heading>
         <p className="text-sm text-muted-foreground mb-4">Use <code>readOnly</code> to display a non-interactive rating. Use <code>max</code> to customize the number of stars.</p>
         <ComponentPlayground code={readOnlyCode}>
           <div className="space-y-3">
@@ -98,7 +99,7 @@ export default function RatingPage() {
         </ComponentPlayground>
       </div>
       <div>
-        <h2 className="text-xl font-semibold mb-3">Props</h2>
+        <Heading as="h2" className="text-xl font-semibold mb-3">Props</Heading>
         <PropsTable props={[
           { name: "value", type: "number" },
           { name: "max", type: "number", default: "5" },
@@ -110,14 +111,14 @@ export default function RatingPage() {
       </div>
       {/* Accessibility */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Accessibility</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Accessibility</Heading>
         <ul className="list-disc list-inside space-y-2 text-sm text-muted-foreground">
           <li><code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">accessibilityRole="adjustable"</code> with star labels.</li>
           <li>Each star is individually labeled for screen readers (e.g., "1 of 5 stars").</li>
         </ul>
       </div>
       <div>
-        <h2 className="text-xl font-semibold mb-3">Source</h2>
+        <Heading as="h2" className="text-xl font-semibold mb-3">Source</Heading>
         <CodeBlock code={sourceCode} title="components/ui/rating.tsx" />
       </div>
     </div>

@@ -1,3 +1,4 @@
+import { Heading } from "@/components/heading";
 import { PreviewSwipeableListItem } from "@/components/preview/swipeable-list-item";
 import { ComponentPlayground } from "@/components/highlighted-playground";
 import { CodeBlock } from "@/components/code-block-server";
@@ -221,7 +222,7 @@ export default function SwipeableListItemPage() {
       </PreviewToggle>
       {/* Installation */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Installation</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Installation</Heading>
         <AddComponentTabs names="swipeable-list-item" />
         <p className="text-sm text-muted-foreground">
           This component requires additional dependencies:
@@ -233,12 +234,12 @@ export default function SwipeableListItemPage() {
       </div>
       {/* Usage */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Usage</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Usage</Heading>
         <CodeBlock code={usageCode} title="app/inbox.tsx" />
       </div>
       {/* Right actions only */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Right Actions Only</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Right Actions Only</Heading>
         <p className="text-sm text-muted-foreground">
           Swipe left to reveal a single delete action — the most common pattern.
         </p>
@@ -246,7 +247,7 @@ export default function SwipeableListItemPage() {
       </div>
       {/* With icons */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">With Icons</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">With Icons</Heading>
         <p className="text-sm text-muted-foreground">
           Add an <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">icon</code> to each action for a richer look. Icons render above the label.
         </p>
@@ -254,7 +255,7 @@ export default function SwipeableListItemPage() {
       </div>
       {/* In FlatList */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Inside FlatList</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Inside FlatList</Heading>
         <p className="text-sm text-muted-foreground">
           Works seamlessly inside <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">FlatList</code> and <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">ScrollView</code>. The gesture uses <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">activeOffsetX</code> to avoid stealing vertical scrolls.
         </p>
@@ -262,8 +263,8 @@ export default function SwipeableListItemPage() {
       </div>
       {/* Props */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Props</h2>
-        <h3 className="text-lg font-medium text-foreground">SwipeableListItemProps</h3>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Props</Heading>
+        <Heading as="h3" className="text-lg font-medium text-foreground">SwipeableListItemProps</Heading>
         <PropsTable props={[
           { name: "children", type: "React.ReactNode", default: "required" },
           { name: "leftActions", type: "SwipeableAction[]", default: "[]" },
@@ -272,7 +273,7 @@ export default function SwipeableListItemPage() {
           { name: "enabled", type: "boolean", default: "true" },
           { name: "className", type: "string" },
         ]} />
-        <h3 className="text-lg font-medium text-foreground mt-6">SwipeableAction</h3>
+        <Heading as="h3" className="text-lg font-medium text-foreground mt-6">SwipeableAction</Heading>
         <PropsTable props={[
           { name: "key", type: "string", default: "required" },
           { name: "label", type: "string", default: "required" },
@@ -284,7 +285,7 @@ export default function SwipeableListItemPage() {
       </div>
       {/* Accessibility */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Accessibility</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Accessibility</Heading>
         <ul className="list-disc list-inside space-y-2 text-sm text-muted-foreground">
           <li>Gesture-based swipe with action buttons revealed on swipe.</li>
           <li>Action buttons have <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">accessibilityRole="button"</code> for screen reader users who cannot swipe.</li>
@@ -292,7 +293,7 @@ export default function SwipeableListItemPage() {
       </div>
       {/* Source */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Source</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Source</Heading>
         <CodeBlock code={sourceCode} title="components/ui/swipeable-list-item.tsx" />
       </div>
     </div>

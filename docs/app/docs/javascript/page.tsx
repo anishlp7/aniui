@@ -1,3 +1,4 @@
+import { Heading } from "@/components/heading";
 import { CodeBlock } from "@/components/code-block";
 
 export default function JavaScriptPage() {
@@ -20,7 +21,7 @@ export default function JavaScriptPage() {
           </p>
         </div>
 
-        <h2 className="text-2xl font-semibold tracking-tight pt-4">Using JavaScript</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight pt-4">Using JavaScript</Heading>
         <p className="text-muted-foreground">
           For teams that prefer JavaScript, AniUI supports it via the CLI. During{" "}
           <code className="rounded bg-secondary px-1.5 py-0.5 text-sm font-mono">npx @aniui/cli init</code>,
@@ -38,7 +39,7 @@ export default function JavaScriptPage() {
 ℹ Components will be generated as .jsx files with types stripped automatically.`}
         />
 
-        <h2 className="text-2xl font-semibold tracking-tight pt-4">How It Works</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight pt-4">How It Works</Heading>
         <p className="text-muted-foreground">
           AniUI maintains one source of truth — TypeScript (<code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">.tsx</code>) files.
           When <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">tsx: false</code> is set
@@ -49,7 +50,7 @@ export default function JavaScriptPage() {
           The component logic and styling remain identical.
         </p>
 
-        <h2 className="text-2xl font-semibold tracking-tight pt-4">Configuration</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight pt-4">Configuration</Heading>
         <p className="text-muted-foreground">
           The init command creates a <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">.aniui.json</code> file
           in your project root:
@@ -67,7 +68,7 @@ export default function JavaScriptPage() {
           You can also manually edit this file to switch between TypeScript and JavaScript at any time.
         </p>
 
-        <h2 className="text-2xl font-semibold tracking-tight pt-4">Path Aliases</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight pt-4">Path Aliases</Heading>
         <p className="text-muted-foreground">
           For path alias support in JavaScript projects, add a{" "}
           <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">jsconfig.json</code> to your project root:
@@ -83,7 +84,7 @@ export default function JavaScriptPage() {
 }`}
         />
 
-        <h2 className="text-2xl font-semibold tracking-tight pt-4">Switching to TypeScript</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight pt-4">Switching to TypeScript</Heading>
         <p className="text-muted-foreground">
           To switch from JavaScript to TypeScript later:
         </p>

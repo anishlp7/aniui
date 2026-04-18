@@ -1,3 +1,4 @@
+import { Heading } from "@/components/heading";
 import { PreviewTimelineDemo } from "@/components/preview/timeline";
 import { ComponentPlayground } from "@/components/highlighted-playground";
 import { PreviewToggle } from "@/components/preview-toggle";
@@ -114,7 +115,7 @@ export default function TimelinePage() {
       </div>
       {/* Installation */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Installation</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Installation</Heading>
         <AddComponentTabs names="timeline" />
       </div>
       {/* Preview */}
@@ -125,18 +126,18 @@ export default function TimelinePage() {
       </PreviewToggle>
       {/* Usage */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Usage</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Usage</Heading>
         <CodeBlock code={usageCode} title="app/index.tsx" />
       </div>
       {/* Props */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Props</h2>
-        <h3 className="text-lg font-medium text-foreground">Timeline</h3>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Props</Heading>
+        <Heading as="h3" className="text-lg font-medium text-foreground">Timeline</Heading>
         <PropsTable props={[
           { name: "className", type: "string", default: "-" },
           { name: "children", type: "React.ReactNode", default: "-" },
         ]} />
-        <h3 className="text-lg font-medium text-foreground mt-6">TimelineItem</h3>
+        <Heading as="h3" className="text-lg font-medium text-foreground mt-6">TimelineItem</Heading>
         <PropsTable props={[
           { name: "title", type: "string", default: "-" },
           { name: "description", type: "string", default: "-" },
@@ -149,7 +150,7 @@ export default function TimelinePage() {
       </div>
       {/* Accessibility */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Accessibility</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Accessibility</Heading>
         <ul className="list-disc list-inside space-y-2 text-sm text-muted-foreground">
           <li>Vertical event timeline with <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">accessibilityRole="list"</code>.</li>
           <li>Each timeline item is announced as a list item with its content.</li>
@@ -157,7 +158,7 @@ export default function TimelinePage() {
       </div>
       {/* Source */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Source</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Source</Heading>
         <CodeBlock code={sourceCode} title="components/ui/timeline.tsx" />
       </div>
     </div>

@@ -1,3 +1,4 @@
+import { Heading } from "@/components/heading";
 import { ComponentPlayground } from "@/components/highlighted-playground";
 import { CodeBlock } from "@/components/code-block-server";
 import { PropsTable } from "@/components/props-table";
@@ -214,7 +215,7 @@ export default function ComboboxPage() {
       </div>
       {/* Installation */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Installation</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Installation</Heading>
         <AddComponentTabs names="combobox" />
       </div>
       {/* Preview */}
@@ -225,12 +226,12 @@ export default function ComboboxPage() {
       </PreviewToggle>
       {/* Usage */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Usage</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Usage</Heading>
         <CodeBlock code={usageCode} title="app/index.tsx" />
       </div>
       {/* Multiple */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Multiple Selection</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Multiple Selection</Heading>
         <p className="text-sm text-muted-foreground">
           Enable multi-select mode with the <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">multiple</code> prop. Selected items display as removable chips.
         </p>
@@ -238,7 +239,7 @@ export default function ComboboxPage() {
       </div>
       {/* Groups */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Groups</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Groups</Heading>
         <p className="text-sm text-muted-foreground">
           Organize options under group headers using the <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">groups</code> prop. Groups render as sticky section headers.
         </p>
@@ -246,7 +247,7 @@ export default function ComboboxPage() {
       </div>
       {/* Clear Button */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Clear Button</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Clear Button</Heading>
         <p className="text-sm text-muted-foreground">
           Add a clear button to reset the selection with <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">clearable</code>.
         </p>
@@ -254,7 +255,7 @@ export default function ComboboxPage() {
       </div>
       {/* Custom Items */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Custom Items</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Custom Items</Heading>
         <p className="text-sm text-muted-foreground">
           Use the <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">renderItem</code> prop for custom option rendering.
         </p>
@@ -262,7 +263,7 @@ export default function ComboboxPage() {
       </div>
       {/* Invalid */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Invalid</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Invalid</Heading>
         <p className="text-sm text-muted-foreground">
           Show error styling with the <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">invalid</code> prop.
         </p>
@@ -270,7 +271,7 @@ export default function ComboboxPage() {
       </div>
       {/* Disabled */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Disabled</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Disabled</Heading>
         <p className="text-sm text-muted-foreground">
           Prevent interaction with the <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">disabled</code> prop.
         </p>
@@ -278,7 +279,7 @@ export default function ComboboxPage() {
       </div>
       {/* Popup Mode */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Popup Mode</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Popup Mode</Heading>
         <p className="text-sm text-muted-foreground">
           Use <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">mode=&quot;popup&quot;</code> for a button-like trigger style.
         </p>
@@ -286,8 +287,8 @@ export default function ComboboxPage() {
       </div>
       {/* Props */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Props</h2>
-        <h3 className="text-lg font-medium text-foreground">ComboboxProps</h3>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Props</Heading>
+        <Heading as="h3" className="text-lg font-medium text-foreground">ComboboxProps</Heading>
         <PropsTable props={[
           { name: "options", type: "ComboboxOption[]", default: "-" },
           { name: "value", type: "string", default: "-" },
@@ -308,13 +309,13 @@ export default function ComboboxPage() {
           { name: "className", type: "string", default: "-" },
           { name: "triggerClassName", type: "string", default: "-" },
         ]} />
-        <h3 className="text-lg font-medium text-foreground mt-6">ComboboxOption</h3>
+        <Heading as="h3" className="text-lg font-medium text-foreground mt-6">ComboboxOption</Heading>
         <PropsTable props={[
           { name: "label", type: "string", default: "-" },
           { name: "value", type: "string", default: "-" },
           { name: "disabled", type: "boolean", default: "-" },
         ]} />
-        <h3 className="text-lg font-medium text-foreground mt-6">ComboboxGroup</h3>
+        <Heading as="h3" className="text-lg font-medium text-foreground mt-6">ComboboxGroup</Heading>
         <PropsTable props={[
           { name: "label", type: "string", default: "-" },
           { name: "options", type: "ComboboxOption[]", default: "-" },
@@ -325,7 +326,7 @@ export default function ComboboxPage() {
       </div>
       {/* Accessibility */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Accessibility</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Accessibility</Heading>
         <ul className="list-disc list-inside space-y-2 text-sm text-muted-foreground">
           <li>Searchable select with type-to-filter functionality.</li>
           <li><code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">accessibilityRole=&quot;button&quot;</code> on trigger and options.</li>
@@ -337,7 +338,7 @@ export default function ComboboxPage() {
       </div>
       {/* Source */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Source</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Source</Heading>
         <CodeBlock code={sourceCode} title="components/ui/combobox.tsx" />
       </div>
     </div>

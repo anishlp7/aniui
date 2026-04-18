@@ -1,3 +1,4 @@
+import { Heading } from "@/components/heading";
 import { PreviewImageGalleryDemo } from "@/components/preview/image-gallery";
 import { ComponentPlayground } from "@/components/highlighted-playground";
 import { PreviewToggle } from "@/components/preview-toggle";
@@ -108,7 +109,7 @@ export default function ImageGalleryPage() {
       </div>
       {/* Installation */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Installation</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Installation</Heading>
         <AddComponentTabs names="image-gallery" />
       </div>
       {/* Preview */}
@@ -119,12 +120,12 @@ export default function ImageGalleryPage() {
       </PreviewToggle>
       {/* Usage */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Usage</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Usage</Heading>
         <CodeBlock code={usageCode} title="app/index.tsx" />
       </div>
       {/* GalleryImage Type */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">GalleryImage Type</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">GalleryImage Type</Heading>
         <PropsTable props={[
           { name: "uri", type: "string", default: "-" },
           { name: "alt", type: "string", default: "-" },
@@ -132,7 +133,7 @@ export default function ImageGalleryPage() {
       </div>
       {/* Props */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Props</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Props</Heading>
         <PropsTable props={[
           { name: "images", type: "GalleryImage[]", default: "-" },
           { name: "showPagination", type: "boolean", default: "true" },
@@ -144,7 +145,7 @@ export default function ImageGalleryPage() {
       </div>
       {/* Accessibility */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Accessibility</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Accessibility</Heading>
         <ul className="list-disc list-inside space-y-2 text-sm text-muted-foreground">
           <li>Horizontal gallery with fullscreen modal viewer.</li>
           <li>Each image has <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">accessibilityRole="image"</code> and close button is labeled for screen readers.</li>
@@ -152,7 +153,7 @@ export default function ImageGalleryPage() {
       </div>
       {/* Source */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Source</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Source</Heading>
         <CodeBlock code={sourceCode} title="components/ui/image-gallery.tsx" />
       </div>
     </div>

@@ -1,3 +1,4 @@
+import { Heading } from "@/components/heading";
 import { CodeBlock } from "@/components/code-block-server";
 import Link from "next/link";
 import { ManualSetupToggle } from "./_demos";
@@ -216,29 +217,29 @@ function SDK54Steps() {
         <p className="text-sm text-muted-foreground mt-1">Supports both Old and New Architecture.</p>
       </div>
 
-      <h3 className="text-lg font-semibold">Step 1. Create a new project</h3>
+      <Heading as="h3" className="text-lg font-semibold">Step 1. Create a new project</Heading>
       <CodeBlock code="npx create-expo-app@latest my-app --template default@sdk-54" />
 
-      <h3 className="text-lg font-semibold pt-2">Step 2. Install dependencies</h3>
+      <Heading as="h3" className="text-lg font-semibold pt-2">Step 2. Install dependencies</Heading>
       <CodeBlock code={`cd my-app
 npm install nativewind tailwindcss@3 react-native-reanimated react-native-safe-area-context react-native-svg
 npm install class-variance-authority clsx tailwind-merge`} />
 
-      <h3 className="text-lg font-semibold pt-2">Step 3. Initialize AniUI</h3>
+      <Heading as="h3" className="text-lg font-semibold pt-2">Step 3. Initialize AniUI</Heading>
       <p className="text-muted-foreground">
         This auto-creates all required config files: babel.config.js, metro.config.js, tailwind.config.js,
         global.css, nativewind-env.d.ts, and updates your tsconfig.json.
       </p>
       <CodeBlock code="npx @aniui/cli init" />
 
-      <h3 className="text-lg font-semibold pt-2">Step 4. Import global.css</h3>
+      <Heading as="h3" className="text-lg font-semibold pt-2">Step 4. Import global.css</Heading>
       <p className="text-muted-foreground">
         Add this import at the very top of your app entry file:
       </p>
       <CodeBlock title="app/_layout.tsx (or App.tsx)" code={`import "./global.css";
 // ... rest of your app`} />
 
-      <h3 className="text-lg font-semibold pt-2">Step 5. Add components and start</h3>
+      <Heading as="h3" className="text-lg font-semibold pt-2">Step 5. Add components and start</Heading>
       <CodeBlock code={`npx @aniui/cli add button text input card
 
 # Start with clean cache
@@ -282,10 +283,10 @@ function SDK55Steps() {
         <p className="text-sm text-muted-foreground mt-1">New Architecture only. No tailwind.config.js — theme config lives in global.css.</p>
       </div>
 
-      <h3 className="text-lg font-semibold">Step 1. Create a new project</h3>
+      <Heading as="h3" className="text-lg font-semibold">Step 1. Create a new project</Heading>
       <CodeBlock code="npx create-expo-app@latest my-app --template default@sdk-55" />
 
-      <h3 className="text-lg font-semibold pt-2">Step 2. Install dependencies</h3>
+      <Heading as="h3" className="text-lg font-semibold pt-2">Step 2. Install dependencies</Heading>
       <p className="text-muted-foreground">
         NativeWind v5 requires <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">react-native-css</code> as the CSS engine
         (replaces the old react-native-css-interop).
@@ -304,7 +305,7 @@ npm install class-variance-authority clsx tailwind-merge
 # Pin lightningcss to compatible version (avoids "failed to deserialize" error)
 npm pkg set overrides.lightningcss=1.30.1 && npm install`} />
 
-      <h3 className="text-lg font-semibold pt-2">Step 3. Initialize AniUI</h3>
+      <Heading as="h3" className="text-lg font-semibold pt-2">Step 3. Initialize AniUI</Heading>
       <p className="text-muted-foreground">
         This auto-creates all required config files: babel.config.js, metro.config.js, postcss.config.js,
         global.css (with <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">@theme</code> block),
@@ -312,14 +313,14 @@ npm pkg set overrides.lightningcss=1.30.1 && npm install`} />
       </p>
       <CodeBlock code="npx @aniui/cli init" />
 
-      <h3 className="text-lg font-semibold pt-2">Step 4. Import global.css</h3>
+      <Heading as="h3" className="text-lg font-semibold pt-2">Step 4. Import global.css</Heading>
       <p className="text-muted-foreground">
         Add this import at the very top of your app entry file:
       </p>
       <CodeBlock title="app/_layout.tsx (or App.tsx)" code={`import "./global.css";
 // ... rest of your app`} />
 
-      <h3 className="text-lg font-semibold pt-2">Step 5. Add components and start</h3>
+      <Heading as="h3" className="text-lg font-semibold pt-2">Step 5. Add components and start</Heading>
       <CodeBlock code={`npx @aniui/cli add button text input card
 
 # Start with clean cache
@@ -362,11 +363,11 @@ function BareRNSteps() {
         <p className="text-sm text-muted-foreground mt-1">React Native 0.76+ without Expo. Supports both Old and New Architecture.</p>
       </div>
 
-      <h3 className="text-lg font-semibold">Step 1. Create a new project</h3>
+      <Heading as="h3" className="text-lg font-semibold">Step 1. Create a new project</Heading>
       <CodeBlock code={`npx @react-native-community/cli init MyApp
 cd MyApp`} />
 
-      <h3 className="text-lg font-semibold pt-2">Step 2. Install dependencies</h3>
+      <Heading as="h3" className="text-lg font-semibold pt-2">Step 2. Install dependencies</Heading>
       <p className="text-muted-foreground">
         NativeWind requires these core packages. Install them with your preferred package manager.
       </p>
@@ -383,14 +384,14 @@ npm install --save-dev babel-plugin-module-resolver
 # iOS only — install native pods
 cd ios && pod install && cd ..`} />
 
-      <h3 className="text-lg font-semibold pt-2">Step 3. Initialize AniUI</h3>
+      <Heading as="h3" className="text-lg font-semibold pt-2">Step 3. Initialize AniUI</Heading>
       <p className="text-muted-foreground">
         The CLI auto-detects bare React Native projects. It creates babel.config.js, metro.config.js,
         tailwind.config.js, global.css, nativewind-env.d.ts, and lib/utils.ts.
       </p>
       <CodeBlock code="npx @aniui/cli init" />
 
-      <h3 className="text-lg font-semibold pt-2">Step 4. Import global.css</h3>
+      <Heading as="h3" className="text-lg font-semibold pt-2">Step 4. Import global.css</Heading>
       <p className="text-muted-foreground">
         Add this import at the very top of your app entry file (usually App.tsx or index.js):
       </p>
@@ -412,7 +413,7 @@ export default function App() {
   );
 }`} />
 
-      <h3 className="text-lg font-semibold pt-2">Step 5. Add components and start</h3>
+      <Heading as="h3" className="text-lg font-semibold pt-2">Step 5. Add components and start</Heading>
       <CodeBlock code={`npx @aniui/cli add button text input card
 
 # Start Metro bundler
@@ -471,7 +472,7 @@ function QuickStartSteps() {
         </p>
       </div>
 
-      <h3 className="text-lg font-semibold">Step 1. Create a React Native project (if you don&apos;t have one)</h3>
+      <Heading as="h3" className="text-lg font-semibold">Step 1. Create a React Native project (if you don&apos;t have one)</Heading>
       <CodeBlock code={`# Expo (recommended)
 npx create-expo-app@latest my-app
 cd my-app
@@ -480,7 +481,7 @@ cd my-app
 npx @react-native-community/cli init MyApp
 cd MyApp`} />
 
-      <h3 className="text-lg font-semibold pt-2">Step 2. Run AniUI init</h3>
+      <Heading as="h3" className="text-lg font-semibold pt-2">Step 2. Run AniUI init</Heading>
       <p className="text-muted-foreground">
         The CLI will ask you to choose NativeWind or Uniwind, a theme preset, and where to put components.
         It then <strong>automatically installs</strong> all required dependencies.
@@ -503,14 +504,14 @@ npx @aniui/cli init --style uniwind`} />
         </ul>
       </div>
 
-      <h3 className="text-lg font-semibold pt-2">Step 3. Import global.css</h3>
+      <Heading as="h3" className="text-lg font-semibold pt-2">Step 3. Import global.css</Heading>
       <p className="text-muted-foreground">
         Add this import at the very top of your app entry file:
       </p>
       <CodeBlock title="app/_layout.tsx (or App.tsx)" code={`import "./global.css";
 // ... rest of your app`} />
 
-      <h3 className="text-lg font-semibold pt-2">Step 4. Add components and start</h3>
+      <Heading as="h3" className="text-lg font-semibold pt-2">Step 4. Add components and start</Heading>
       <CodeBlock code={`npx @aniui/cli add button text input card
 
 # Start with clean cache
@@ -567,7 +568,7 @@ export default function InstallationPage() {
 
         {/* ==================== TROUBLESHOOTING ==================== */}
         <div className="border-t border-border my-8" />
-        <h2 className="text-2xl font-semibold tracking-tight">Troubleshooting</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight">Troubleshooting</Heading>
 
         <div className="space-y-4">
           <div className="rounded-lg border-2 border-primary/30 bg-primary/5 p-4">
