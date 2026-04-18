@@ -155,8 +155,8 @@ export const registry: Record<string, ComponentEntry> = {
   tabs: {
     name: "Tabs",
     file: "components/ui/tabs.tsx",
-    description: "Tab navigation",
-    dependencies: ["clsx", "tailwind-merge"],
+    description: "Tab navigation with filled/line variants, sizes, vertical, disabled, and icon support",
+    dependencies: ["class-variance-authority", "clsx", "tailwind-merge"],
     registryDependencies: [],
     tier: 1,
   },
