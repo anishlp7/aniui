@@ -6,8 +6,9 @@ import { detectPackageManager, getInstallCommand, getDlxCommand } from "../utils
 import { findLayoutFile, injectImport, injectJsxBeforeClose } from "../utils/inject-layout";
 import { hashFile } from "../utils/hash";
 import { logger } from "../utils/logger";
+import { getCliPackage } from "../utils/pkg";
 
-const pkg = require("../../package.json");
+const pkg = getCliPackage();
 
 interface InstalledEntry {
   version: string;

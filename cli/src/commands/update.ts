@@ -5,8 +5,9 @@ import { registry } from "../registry";
 import { copyComponent } from "../utils/file-ops";
 import { hashFile } from "../utils/hash";
 import { logger } from "../utils/logger";
+import { getCliPackage } from "../utils/pkg";
 
-const pkg = require("../../package.json");
+const pkg = getCliPackage();
 
 interface InstalledEntry {
   version: string;
