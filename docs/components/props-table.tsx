@@ -105,7 +105,7 @@ export function PropsTable({ props }: { props: PropDef[] }) {
               </code>
             </div>
             <div>
-              <code className="text-xs font-mono text-muted-foreground">
+              <code className="text-xs font-mono text-muted-foreground break-words">
                 {prop.default ?? "—"}
               </code>
             </div>
