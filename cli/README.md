@@ -116,7 +116,7 @@ Switch theme presets: `default`, `blue`, `green`, `orange`, `rose`.
 
 **Try on device:** Scan with [Expo Go](https://expo.dev/go)
 
-<img src="https://qr.expo.dev/eas-update?slug=exp&projectId=cf032338-2612-4ba6-9212-f2ec55f6a254&groupId=0551337c-18a3-4381-9c18-b1bddbd808c3&host=u.expo.dev" alt="Scan with Expo Go" width="160" />
+<img src="https://qr.expo.dev/eas-update?slug=exp&projectId=cf032338-2612-4ba6-9212-f2ec55f6a254&groupId=6d14508c-5b49-4f06-80d4-73aaa334481f&host=u.expo.dev" alt="Scan with Expo Go" width="160" />
 
 ## Documentation
 
