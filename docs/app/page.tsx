@@ -39,6 +39,14 @@ function ShuffleIcon() {
   );
 }
 
+function StarIcon() {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" strokeWidth="1">
+      <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+    </svg>
+  );
+}
+
 /* ── Main ──────────────────────────────────────────────────── */
 
 const jsonLd = {
@@ -115,72 +123,74 @@ export default function HomePage() {
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(sitelinksJsonLd) }} />
-    <div className="mx-auto max-w-[1400px] px-6">
-      {/* ── Hero ─── */}
-      <div className="flex flex-col items-center text-center pt-20 pb-16">
-        <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-foreground max-w-3xl leading-[1.1]">
-          Beautiful React Native components.{" "}
-          <span className="bg-gradient-to-r from-foreground/70 to-foreground/30 bg-clip-text text-transparent">
-            Copy. Paste. Ship.
-          </span>
-        </h1>
 
-        <p className="mt-6 max-w-xl text-lg text-muted-foreground leading-relaxed">
-          89 accessible components built with NativeWind and TypeScript.
-          No npm install — you own every line of code.
-        </p>
+    {/* ── Hero with subtle dot pattern ─── */}
+    <div className="relative overflow-hidden">
+      <div className="absolute inset-0 -z-10 opacity-[0.03] dark:opacity-[0.06]" style={{ backgroundImage: "radial-gradient(circle, currentColor 1px, transparent 1px)", backgroundSize: "24px 24px" }} />
+      <div className="absolute inset-0 -z-10 bg-gradient-to-b from-transparent via-transparent to-background" />
 
-        <div className="flex flex-wrap items-center justify-center gap-2.5 mt-5">
-          {["Expo", "Bare RN", "NativeWind", "Uniwind", "TypeScript", "New Architecture"].map((label) => (
-            <span key={label} className="inline-flex items-center gap-1.5 rounded-full border border-border bg-secondary/40 px-3 py-1 text-xs font-medium text-muted-foreground">
-              <span className="text-green-500">✓</span> {label}
-            </span>
-          ))}
-        </div>
-
-        <div className="flex flex-col sm:flex-row items-center gap-3 mt-8">
-          <Link
-            href="/docs"
-            className="h-11 px-7 rounded-md bg-primary text-primary-foreground text-sm font-medium flex items-center hover:opacity-90 transition-opacity"
-          >
-            Get Started
-          </Link>
-          <Link
-            href="/docs/button"
-            className="h-11 px-7 rounded-md border border-border bg-background text-foreground text-sm font-medium flex items-center hover:bg-accent transition-colors"
-          >
-            Browse Components
-          </Link>
-        </div>
-
-        {/* Install command */}
-        <button
-          onClick={handleCopyInstall}
-          className="mt-6 inline-flex items-center gap-3 rounded-lg border border-border bg-secondary/30 px-5 py-2.5 font-mono text-sm text-muted-foreground hover:bg-secondary/60 transition-colors cursor-pointer"
-        >
-          <span><span className="text-foreground/40 select-none">$</span> npx @aniui/cli init</span>
-          <span className="text-muted-foreground/60">
-            {copiedInstall ? <CheckIcon /> : <CopyIcon />}
-          </span>
-        </button>
-
-        {/* Preview on device */}
-        <div className="mt-6 flex flex-col sm:flex-row items-center gap-4 rounded-lg border border-border bg-card/50 px-5 py-4">
-          <img
-            src="https://qr.expo.dev/eas-update?slug=exp&projectId=cf032338-2612-4ba6-9212-f2ec55f6a254&groupId=0551337c-18a3-4381-9c18-b1bddbd808c3&host=u.expo.dev"
-            alt="Scan with Expo Go"
-            className="w-24 h-24 rounded-lg"
-          />
-          <div className="text-center sm:text-left">
-            <p className="text-sm font-medium text-foreground">Preview on your device</p>
-            <p className="text-xs text-muted-foreground mt-1">
-              Scan with Expo Go to try all 89 components on a real device.
-              Each component page also has an Expo Snack embed.
-            </p>
+      <div className="mx-auto max-w-[1400px] px-6">
+        <div className="flex flex-col items-center text-center pt-24 sm:pt-32 pb-20">
+          {/* Component count badge */}
+          <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-border bg-card/60 backdrop-blur-sm px-4 py-1.5">
+            <span className="h-2 w-2 rounded-full bg-green-500 animate-pulse" />
+            <span className="text-xs font-medium text-muted-foreground">89+ components and counting</span>
           </div>
+
+          <h1 className="text-5xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-foreground max-w-4xl leading-[1.05]">
+            Build React Native apps{" "}
+            <span className="bg-gradient-to-r from-foreground via-foreground/60 to-foreground/30 bg-clip-text text-transparent">
+              that ship.
+            </span>
+          </h1>
+
+          <p className="mt-6 max-w-lg text-lg text-muted-foreground leading-relaxed">
+            Copy-paste production-ready components with silky-smooth animations.
+            You own every line of code.
+          </p>
+
+          <div className="flex flex-wrap items-center justify-center gap-2.5 mt-5">
+            {["Expo", "Bare RN", "NativeWind", "Uniwind", "TypeScript", "New Architecture"].map((label) => (
+              <span key={label} className="inline-flex items-center gap-1.5 rounded-full border border-border bg-secondary/40 px-3 py-1 text-xs font-medium text-muted-foreground">
+                <span className="text-green-500">✓</span> {label}
+              </span>
+            ))}
+          </div>
+
+          {/* CTAs */}
+          <div className="flex flex-col sm:flex-row items-center gap-3 mt-8">
+            <Link
+              href="/docs"
+              className="h-12 px-8 rounded-lg bg-primary text-primary-foreground text-sm font-semibold flex items-center hover:opacity-90 transition-opacity"
+            >
+              View Components &rarr;
+            </Link>
+            <a
+              href="https://github.com/anishlp7/aniui"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="h-12 px-6 rounded-lg border border-border bg-background text-foreground text-sm font-medium flex items-center gap-2 hover:bg-accent transition-colors"
+            >
+              <StarIcon />
+              Star on GitHub
+            </a>
+          </div>
+
+          {/* Install command */}
+          <button
+            onClick={handleCopyInstall}
+            className="mt-8 inline-flex items-center gap-3 rounded-lg border border-border bg-secondary/30 backdrop-blur-sm px-5 py-2.5 font-mono text-sm text-muted-foreground hover:bg-secondary/60 transition-colors cursor-pointer"
+          >
+            <span><span className="text-foreground/40 select-none">$</span> npx @aniui/cli init</span>
+            <span className="text-muted-foreground/60">
+              {copiedInstall ? <CheckIcon /> : <CopyIcon />}
+            </span>
+          </button>
         </div>
       </div>
+    </div>
 
+    <div className="mx-auto max-w-[1400px] px-6">
       {/* ── How it works ─── */}
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 pb-16">
         {[
@@ -188,7 +198,7 @@ export default function HomePage() {
           { step: "2", title: "Add components", desc: "Pick what you need with npx @aniui/cli add button card dialog — source files are copied directly into your project." },
           { step: "3", title: "Make it yours", desc: "Every component is a single file you own. Customize variants, tweak styles, or extend freely — no lock-in." },
         ].map((item) => (
-          <div key={item.step} className="rounded-lg border border-border bg-card p-6">
+          <div key={item.step} className="rounded-xl border border-border bg-card p-6">
             <div className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-primary text-primary-foreground text-sm font-bold mb-3">
               {item.step}
             </div>
@@ -196,6 +206,21 @@ export default function HomePage() {
             <p className="text-sm text-muted-foreground leading-relaxed">{item.desc}</p>
           </div>
         ))}
+      </div>
+
+      {/* ── Preview on device ─── */}
+      <div className="flex flex-col sm:flex-row items-center justify-center gap-6 rounded-xl border border-border bg-card/50 px-8 py-6 mb-16">
+        <img
+          src="https://qr.expo.dev/eas-update?slug=exp&projectId=cf032338-2612-4ba6-9212-f2ec55f6a254&groupId=6d14508c-5b49-4f06-80d4-73aaa334481f&host=u.expo.dev"
+          alt="Scan with Expo Go"
+          className="w-28 h-28 rounded-xl"
+        />
+        <div className="text-center sm:text-left">
+          <p className="text-base font-semibold text-foreground">Preview on your device</p>
+          <p className="text-sm text-muted-foreground mt-1 max-w-sm">
+            Scan with Expo Go to try all 89 components live on a real device.
+          </p>
+        </div>
       </div>
 
       {/* ── Live Theme Preview ─── */}
