@@ -1,3 +1,4 @@
+import { Heading } from "@/components/heading";
 import { PreviewThemeProviderDemo } from "@/components/preview/theme-provider";
 import { ComponentPlayground } from "@/components/highlighted-playground";
 import { PreviewToggle } from "@/components/preview-toggle";
@@ -98,7 +99,7 @@ export default function ThemeProviderPage() {
       </div>
       {/* Installation */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Installation</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Installation</Heading>
         <AddComponentTabs names="theme-provider" />
       </div>
       {/* Preview */}
@@ -109,12 +110,12 @@ export default function ThemeProviderPage() {
       </PreviewToggle>
       {/* Usage */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Usage</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Usage</Heading>
         <CodeBlock code={usageCode} title="app/_layout.tsx" />
       </div>
       {/* useTheme Hook */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">useTheme Hook</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">useTheme Hook</Heading>
         <p className="text-sm text-muted-foreground">
           Access the current theme, resolved theme, and theme controls from any child component.
         </p>
@@ -128,7 +129,7 @@ export default function ThemeProviderPage() {
       </div>
       {/* Props */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Props</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Props</Heading>
         <PropsTable props={[
           { name: "children", type: "React.ReactNode", default: "-" },
           { name: "defaultTheme", type: '"light" | "dark" | "system"', default: '"system"' },
@@ -137,7 +138,7 @@ export default function ThemeProviderPage() {
       </div>
       {/* Accessibility */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Accessibility</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Accessibility</Heading>
         <ul className="list-disc list-inside space-y-2 text-sm text-muted-foreground">
           <li><code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">ThemeProvider</code> context for light/dark/system mode.</li>
           <li>Respects the user's system-level accessibility preferences for color scheme.</li>
@@ -145,7 +146,7 @@ export default function ThemeProviderPage() {
       </div>
       {/* Source */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Source</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Source</Heading>
         <CodeBlock code={sourceCode} title="components/ui/theme-provider.tsx" />
       </div>
     </div>

@@ -1,3 +1,4 @@
+import { Heading } from "@/components/heading";
 import { PreviewInput, PreviewInputLeadingIcon, PreviewInputTrailingIcon, PreviewInputPasswordToggle } from "@/components/preview/input";
 import { ComponentPlayground } from "@/components/highlighted-playground";
 import { CodeBlock } from "@/components/code-block-server";
@@ -111,17 +112,17 @@ export default function InputPage() {
       </PreviewToggle>
       {/* Installation */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Installation</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Installation</Heading>
         <AddComponentTabs names="input" />
       </div>
       {/* Usage */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Usage</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Usage</Heading>
         <CodeBlock code={usageCode} title="app/index.tsx" />
       </div>
       {/* Password Toggle */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Password Toggle</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Password Toggle</Heading>
         <p className="text-sm text-muted-foreground">Show/hide password with a trailing eye icon.</p>
         <ComponentPlayground code={passwordCode}>
           <div className="w-full max-w-sm">
@@ -131,7 +132,7 @@ export default function InputPage() {
       </div>
       {/* Clear Button */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Clear Button</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Clear Button</Heading>
         <p className="text-sm text-muted-foreground">Add a pressable clear icon to reset the input value.</p>
         <ComponentPlayground code={trailingIconCode}>
           <div className="w-full max-w-sm">
@@ -141,7 +142,7 @@ export default function InputPage() {
       </div>
       {/* Leading Icon */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Leading Icon</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Leading Icon</Heading>
         <p className="text-sm text-muted-foreground">Add an icon before the input text.</p>
         <ComponentPlayground code={leadingIconCode}>
           <div className="w-full max-w-sm">
@@ -151,7 +152,7 @@ export default function InputPage() {
       </div>
       {/* Variants */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Variants</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Variants</Heading>
         <ComponentPlayground code={variantsCode}>
           <div className="space-y-3 w-full max-w-sm">
             <PreviewInput variant="default" placeholder="Default input" />
@@ -161,7 +162,7 @@ export default function InputPage() {
       </div>
       {/* Sizes */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Sizes</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Sizes</Heading>
         <ComponentPlayground code={sizesCode}>
           <div className="space-y-3 w-full max-w-sm">
             <PreviewInput size="sm" placeholder="Small" />
@@ -172,7 +173,7 @@ export default function InputPage() {
       </div>
       {/* Props */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Props</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Props</Heading>
         <PropsTable props={[
           { name: "variant", type: "\"default\" | \"ghost\"", default: "\"default\"" },
           { name: "size", type: "\"sm\" | \"md\" | \"lg\"", default: "\"md\"" },
@@ -186,7 +187,7 @@ export default function InputPage() {
       </div>
       {/* Accessibility */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Accessibility</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Accessibility</Heading>
         <ul className="list-disc list-inside space-y-2 text-sm text-muted-foreground">
           <li><code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">accessibilityRole</code> is set on the underlying <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">TextInput</code>.</li>
           <li>Placeholder text color uses the theme variable for consistent contrast.</li>
@@ -194,7 +195,7 @@ export default function InputPage() {
       </div>
       {/* Source */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Source</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Source</Heading>
         <CodeBlock code={sourceCode} title="components/ui/input.tsx" />
       </div>
     </div>

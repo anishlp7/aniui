@@ -1,3 +1,4 @@
+import { Heading } from "@/components/heading";
 import { PreviewAvatar } from "@/components/preview/avatar";
 import { ComponentPlayground } from "@/components/highlighted-playground";
 import { CodeBlock } from "@/components/code-block-server";
@@ -94,17 +95,17 @@ export default function AvatarPage() {
       </PreviewToggle>
       {/* Installation */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Installation</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Installation</Heading>
         <AddComponentTabs names="avatar" />
       </div>
       {/* Usage */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Usage</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Usage</Heading>
         <CodeBlock code={usageCode} title="app/index.tsx" />
       </div>
       {/* Sizes */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Sizes</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Sizes</Heading>
         <ComponentPlayground code={sizesCode}>
           <div className="flex flex-wrap items-center gap-3">
             <PreviewAvatar size="sm" fallback="SM" />
@@ -115,7 +116,7 @@ export default function AvatarPage() {
       </div>
       {/* Fallback */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Fallback</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Fallback</Heading>
         <p className="text-sm text-muted-foreground">When no image source is provided or the image fails to load, the fallback initials are displayed.</p>
         <ComponentPlayground code={fallbackCode}>
           <div className="flex flex-wrap items-center gap-3">
@@ -126,7 +127,7 @@ export default function AvatarPage() {
       </div>
       {/* Props */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Props</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Props</Heading>
         <PropsTable props={[
           { name: "size", type: "\"sm\" | \"md\" | \"lg\"", default: "\"md\"" },
           { name: "src", type: "string" },
@@ -139,7 +140,7 @@ export default function AvatarPage() {
       </div>
       {/* Accessibility */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Accessibility</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Accessibility</Heading>
         <ul className="list-disc list-inside space-y-2 text-sm text-muted-foreground">
           <li><code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">accessibilityRole="image"</code> is set on the avatar.</li>
           <li>Fallback initials are displayed when the image fails to load.</li>
@@ -147,7 +148,7 @@ export default function AvatarPage() {
       </div>
       {/* Source */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Source</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Source</Heading>
         <CodeBlock code={sourceCode} title="components/ui/avatar.tsx" />
       </div>
     </div>

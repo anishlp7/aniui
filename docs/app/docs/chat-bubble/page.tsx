@@ -1,3 +1,4 @@
+import { Heading } from "@/components/heading";
 import { PreviewChatBubbleDemo } from "@/components/preview/chat-bubble";
 import { ComponentPlayground } from "@/components/highlighted-playground";
 import { PreviewToggle } from "@/components/preview-toggle";
@@ -105,7 +106,7 @@ export default function ChatBubblePage() {
       </div>
       {/* Installation */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Installation</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Installation</Heading>
         <AddComponentTabs names="chat-bubble" />
       </div>
       {/* Preview */}
@@ -116,12 +117,12 @@ export default function ChatBubblePage() {
       </PreviewToggle>
       {/* Usage */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Usage</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Usage</Heading>
         <CodeBlock code={usageCode} title="app/index.tsx" />
       </div>
       {/* Props */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Props</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Props</Heading>
         <PropsTable props={[
           { name: "variant", type: '"sent" | "received"', default: '"received"' },
           { name: "children", type: "React.ReactNode", default: "-" },
@@ -135,7 +136,7 @@ export default function ChatBubblePage() {
       </div>
       {/* Accessibility */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Accessibility</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Accessibility</Heading>
         <ul className="list-disc list-inside space-y-2 text-sm text-muted-foreground">
           <li>Message bubble with sent/received styling for visual distinction.</li>
           <li>Message content is readable by screen readers with sender context.</li>
@@ -143,7 +144,7 @@ export default function ChatBubblePage() {
       </div>
       {/* Source */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Source</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Source</Heading>
         <CodeBlock code={sourceCode} title="components/ui/chat-bubble.tsx" />
       </div>
     </div>

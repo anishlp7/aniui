@@ -1,3 +1,4 @@
+import { Heading } from "@/components/heading";
 import { PreviewAccordion, PreviewAccordionItem } from "@/components/preview/accordion";
 import { ComponentPlayground } from "@/components/highlighted-playground";
 import { CodeBlock } from "@/components/code-block-server";
@@ -104,7 +105,7 @@ export default function AccordionPage() {
       </PreviewToggle>
       {/* Installation */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Installation</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Installation</Heading>
         <AddComponentTabs names="accordion" />
         <p className="text-sm text-muted-foreground">
           This component requires <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">react-native-reanimated</code> for animations.
@@ -112,12 +113,12 @@ export default function AccordionPage() {
       </div>
       {/* Usage */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Usage</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Usage</Heading>
         <CodeBlock code={usageCode} title="app/index.tsx" />
       </div>
       {/* Compound Components */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Compound Components</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Compound Components</Heading>
         <ComponentTable components={[
           { name: "Accordion", description: "Root container that manages expanded state" },
           { name: "AccordionItem", description: "Individual collapsible section with trigger text" },
@@ -125,14 +126,14 @@ export default function AccordionPage() {
       </div>
       {/* Props */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Props</h2>
-        <h3 className="text-lg font-medium text-foreground">Accordion</h3>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Props</Heading>
+        <Heading as="h3" className="text-lg font-medium text-foreground">Accordion</Heading>
         <PropsTable props={[
           { name: "defaultValue", type: "string" },
           { name: "type", type: "\"single\" | \"multiple\"", default: "\"single\"" },
           { name: "className", type: "string" },
         ]} />
-        <h3 className="text-lg font-medium text-foreground mt-6">AccordionItem</h3>
+        <Heading as="h3" className="text-lg font-medium text-foreground mt-6">AccordionItem</Heading>
         <PropsTable props={[
           { name: "value", type: "string", default: "required" },
           { name: "trigger", type: "string", default: "required" },
@@ -141,7 +142,7 @@ export default function AccordionPage() {
       </div>
       {/* Accessibility */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Accessibility</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Accessibility</Heading>
         <ul className="list-disc list-inside space-y-2 text-sm text-muted-foreground">
           <li>Uses <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">@rn-primitives/accordion</code> for keyboard navigation and ARIA compliance.</li>
           <li>Supports single and multiple open modes.</li>
@@ -150,7 +151,7 @@ export default function AccordionPage() {
       </div>
       {/* Source */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Source</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Source</Heading>
         <CodeBlock code={sourceCode} title="components/ui/accordion.tsx" />
       </div>
     </div>

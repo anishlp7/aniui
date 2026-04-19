@@ -1,3 +1,4 @@
+import { Heading } from "@/components/heading";
 import { PreviewSearchBar } from "@/components/preview/search-bar";
 import { ComponentPlayground } from "@/components/highlighted-playground";
 import { CodeBlock } from "@/components/code-block-server";
@@ -113,15 +114,15 @@ export default function SearchBarPage() {
         </ComponentPlayground>
       </PreviewToggle>
       <div>
-        <h2 className="text-xl font-semibold mb-3">Installation</h2>
+        <Heading as="h2" className="text-xl font-semibold mb-3">Installation</Heading>
         <AddComponentTabs names="search-bar" />
       </div>
       <div>
-        <h2 className="text-xl font-semibold mb-3">Usage</h2>
+        <Heading as="h2" className="text-xl font-semibold mb-3">Usage</Heading>
         <CodeBlock code={usageCode} title="search-screen.tsx" />
       </div>
       <div>
-        <h2 className="text-xl font-semibold mb-3">Sizes</h2>
+        <Heading as="h2" className="text-xl font-semibold mb-3">Sizes</Heading>
         <p className="text-sm text-muted-foreground mb-4">Three sizes to fit different layouts.</p>
         <ComponentPlayground code={sizesCode}>
           <div className="space-y-3 w-full">
@@ -132,19 +133,19 @@ export default function SearchBarPage() {
         </ComponentPlayground>
       </div>
       <div>
-        <h2 className="text-xl font-semibold mb-3">With Cancel Button</h2>
+        <Heading as="h2" className="text-xl font-semibold mb-3">With Cancel Button</Heading>
         <p className="text-sm text-muted-foreground mb-4">Show a cancel button when the search bar is focused (iOS pattern).</p>
         <ComponentPlayground code={cancelCode}>
           <CancelDemo />
         </ComponentPlayground>
       </div>
       <div>
-        <h2 className="text-xl font-semibold mb-3">Custom Icon</h2>
+        <Heading as="h2" className="text-xl font-semibold mb-3">Custom Icon</Heading>
         <p className="text-sm text-muted-foreground mb-4">Pass any React element via the <code>icon</code> prop. The icon size adjusts automatically based on the <code>size</code> variant (sm: 14, md: 16, lg: 20).</p>
         <CodeBlock code={iconCode} title="custom-icon.tsx" />
       </div>
       <div>
-        <h2 className="text-xl font-semibold mb-3">Props</h2>
+        <Heading as="h2" className="text-xl font-semibold mb-3">Props</Heading>
         <PropsTable props={[
           { name: "size", type: "\"sm\" | \"md\" | \"lg\"", default: "\"md\"" },
           { name: "value", type: "string" },
@@ -159,14 +160,14 @@ export default function SearchBarPage() {
       </div>
       {/* Accessibility */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Accessibility</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Accessibility</Heading>
         <ul className="list-disc list-inside space-y-2 text-sm text-muted-foreground">
           <li><code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">TextInput</code> with <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">accessibilityRole</code> and search icon.</li>
           <li>Clear button has <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">accessibilityLabel</code> for screen readers.</li>
         </ul>
       </div>
       <div>
-        <h2 className="text-xl font-semibold mb-3">Source</h2>
+        <Heading as="h2" className="text-xl font-semibold mb-3">Source</Heading>
         <CodeBlock code={sourceCode} title="components/ui/search-bar.tsx" />
       </div>
     </div>

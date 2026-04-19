@@ -1,3 +1,4 @@
+import { Heading } from "@/components/heading";
 import { PreviewActionSheet } from "@/components/preview/action-sheet";
 import { ComponentPlayground } from "@/components/highlighted-playground";
 import { CodeBlock } from "@/components/code-block-server";
@@ -118,7 +119,7 @@ export default function ActionSheetPage() {
       </PreviewToggle>
       {/* Installation */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Installation</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Installation</Heading>
         <AddComponentTabs names="action-sheet" />
         <p className="text-sm text-muted-foreground">
           This component requires additional dependencies:
@@ -130,19 +131,19 @@ export default function ActionSheetPage() {
       </div>
       {/* Usage */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Usage</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Usage</Heading>
         <CodeBlock code={usageCode} title="app/index.tsx" />
       </div>
       {/* Props */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Props</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Props</Heading>
         <PropsTable props={[
           { name: "title", type: "string" },
           { name: "actions", type: "ActionSheetAction[]", default: "required" },
           { name: "onCancel", type: "() => void" },
           { name: "className", type: "string" },
         ]} />
-        <h3 className="text-lg font-medium text-foreground mt-6">ActionSheetAction</h3>
+        <Heading as="h3" className="text-lg font-medium text-foreground mt-6">ActionSheetAction</Heading>
         <PropsTable props={[
           { name: "label", type: "string", default: "required" },
           { name: "onPress", type: "() => void", default: "required" },
@@ -154,7 +155,7 @@ export default function ActionSheetPage() {
       </div>
       {/* Accessibility */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Accessibility</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Accessibility</Heading>
         <ul className="list-disc list-inside space-y-2 text-sm text-muted-foreground">
           <li>Powered by <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">@gorhom/bottom-sheet</code> for action options.</li>
           <li>Each action item is focusable with <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">accessibilityRole="button"</code>.</li>
@@ -162,7 +163,7 @@ export default function ActionSheetPage() {
       </div>
       {/* Source */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Source</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Source</Heading>
         <CodeBlock code={sourceCode} title="components/ui/action-sheet.tsx" />
       </div>
     </div>

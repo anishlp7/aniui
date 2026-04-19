@@ -1,3 +1,4 @@
+import { Heading } from "@/components/heading";
 import { PreviewSafeAreaDemo } from "@/components/preview/safe-area";
 import { ComponentPlayground } from "@/components/highlighted-playground";
 import { PreviewToggle } from "@/components/preview-toggle";
@@ -66,7 +67,7 @@ export default function SafeAreaPage() {
       </div>
       {/* Installation */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Installation</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Installation</Heading>
         <AddComponentTabs names="safe-area" />
       </div>
       {/* Preview */}
@@ -77,17 +78,17 @@ export default function SafeAreaPage() {
       </PreviewToggle>
       {/* Usage */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Usage</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Usage</Heading>
         <CodeBlock code={usageCode} title="app/index.tsx" />
       </div>
       {/* Edges */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Examples</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Examples</Heading>
         <CodeBlock code={edgesCode} title="Edges and variants" />
       </div>
       {/* Props */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Props</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Props</Heading>
         <PropsTable props={[
           { name: "variant", type: '"default" | "card" | "transparent"', default: '"default"' },
           { name: "className", type: "string", default: "-" },
@@ -99,7 +100,7 @@ export default function SafeAreaPage() {
       </div>
       {/* Accessibility */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Accessibility</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Accessibility</Heading>
         <ul className="list-disc list-inside space-y-2 text-sm text-muted-foreground">
           <li><code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">SafeAreaView</code> wrapper that respects device safe areas.</li>
           <li>No additional accessibility concerns -- content within inherits standard behavior.</li>
@@ -107,7 +108,7 @@ export default function SafeAreaPage() {
       </div>
       {/* Source */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Source</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Source</Heading>
         <CodeBlock code={sourceCode} title="components/ui/safe-area.tsx" />
       </div>
     </div>

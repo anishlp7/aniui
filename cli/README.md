@@ -89,7 +89,7 @@ Switch theme presets: `default`, `blue`, `green`, `orange`, `rose`.
 
 ## Components
 
-**81 components** in `cli/src/registry.ts` (tiers 1–3; source of truth for installs):
+**89 components** in `cli/src/registry.ts` (tiers 1–3; source of truth for installs):
 
 **Tier 1 — Light deps (cva / RN core):** Most inputs, display, layout, and form helpers — Button, Card, Text, Calendar, ChartTooltip, ImageGallery, ThemeProvider, and more.
 

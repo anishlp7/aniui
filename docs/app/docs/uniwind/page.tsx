@@ -1,3 +1,4 @@
+import { Heading } from "@/components/heading";
 import { CodeBlock } from "@/components/code-block-server";
 import { PackageManagerTabs } from "@/components/package-manager-tabs";
 
@@ -35,7 +36,7 @@ export default function UniwindPage() {
       </div>
 
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Quick Start</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Quick Start</Heading>
         <p className="text-sm text-muted-foreground">
           Initialize AniUI with the <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">--style uniwind</code> flag:
         </p>
@@ -52,7 +53,7 @@ export default function UniwindPage() {
       </div>
 
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Key Differences</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Key Differences</Heading>
         <div className="overflow-x-auto">
           <table className="w-full text-sm">
             <thead>
@@ -99,7 +100,7 @@ export default function UniwindPage() {
       </div>
 
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">rem Unit Difference</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">rem Unit Difference</Heading>
         <div className="rounded-lg border border-border bg-card p-4">
           <p className="text-sm text-muted-foreground">
             NativeWind uses <strong className="text-foreground">14px</strong> as its rem base (matching React Native&apos;s default font size),
@@ -110,12 +111,12 @@ export default function UniwindPage() {
       </div>
 
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Metro Config</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Metro Config</Heading>
         <CodeBlock code={metroCode} title="metro.config.js" />
       </div>
 
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Tailwind Config</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Tailwind Config</Heading>
         <CodeBlock code={tailwindCode} title="tailwind.config.js" />
         <p className="text-sm text-muted-foreground">
           Theme tokens are identical — only the preset changes from <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">nativewind/preset</code> to{" "}
@@ -124,7 +125,7 @@ export default function UniwindPage() {
       </div>
 
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Example App</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Example App</Heading>
         <p className="text-sm text-muted-foreground">
           A full working Uniwind example is available at{" "}
           <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">examples/with-uniwind/</code> in the repository.

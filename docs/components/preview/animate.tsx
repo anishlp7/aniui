@@ -106,13 +106,13 @@ export function PreviewAnimateDemo() {
       {/* Entering Animations */}
       <div className="space-y-4">
         <p className="text-sm font-medium text-foreground">Entering Animations</p>
-        <div className="grid grid-cols-2 sm:grid-cols-5 gap-2">
+        <div className="flex flex-wrap gap-2">
           {enteringPresets.map((name) => (
             <button
               key={name}
               onClick={() => handleEnteringClick(name)}
               className={cn(
-                "px-2 py-1.5 rounded-md text-xs font-medium transition-colors cursor-pointer text-center",
+                "px-2 py-1.5 rounded-md text-xs font-medium transition-colors cursor-pointer text-center whitespace-nowrap",
                 activeEntering === name
                   ? "bg-primary text-primary-foreground"
                   : "bg-secondary text-secondary-foreground hover:bg-secondary/80"

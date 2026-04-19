@@ -1,3 +1,4 @@
+import { Heading } from "@/components/heading";
 import { PreviewMaskedInputDemo } from "@/components/preview/masked-input";
 import { ComponentPlayground } from "@/components/highlighted-playground";
 import { PreviewToggle } from "@/components/preview-toggle";
@@ -138,7 +139,7 @@ export default function MaskedInputPage() {
       </div>
       {/* Installation */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Installation</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Installation</Heading>
         <AddComponentTabs names="masked-input" />
       </div>
       {/* Preview */}
@@ -149,12 +150,12 @@ export default function MaskedInputPage() {
       </PreviewToggle>
       {/* Usage */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Usage</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Usage</Heading>
         <CodeBlock code={usageCode} title="app/index.tsx" />
       </div>
       {/* Props */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Props</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Props</Heading>
         <PropsTable props={[
           { name: "variant", type: '"default" | "ghost"', default: '"default"' },
           { name: "size", type: '"sm" | "md" | "lg"', default: '"md"' },
@@ -169,7 +170,7 @@ export default function MaskedInputPage() {
       </div>
       {/* Accessibility */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Accessibility</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Accessibility</Heading>
         <ul className="list-disc list-inside space-y-2 text-sm text-muted-foreground">
           <li><code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">accessibilityRole="text"</code> with auto-formatting for credit card, phone, and date masks.</li>
           <li>Formatted value is announced to screen readers as the user types.</li>
@@ -177,7 +178,7 @@ export default function MaskedInputPage() {
       </div>
       {/* Source */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Source</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Source</Heading>
         <CodeBlock code={sourceCode} title="components/ui/masked-input.tsx" />
       </div>
     </div>

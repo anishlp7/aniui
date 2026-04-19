@@ -1,3 +1,4 @@
+import { Heading } from "@/components/heading";
 import { PreviewCalendar } from "@/components/preview/calendar";
 import { ComponentPlayground } from "@/components/highlighted-playground";
 import { CodeBlock } from "@/components/code-block-server";
@@ -88,29 +89,29 @@ export default function CalendarPage() {
       </PreviewToggle>
       {/* Installation */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Installation</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Installation</Heading>
         <AddComponentTabs names="calendar" />
       </div>
       {/* Usage */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Usage</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Usage</Heading>
         <CodeBlock code={usageCode} title="app/index.tsx" />
       </div>
       {/* Year / Month Picker */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Year &amp; Month Picker</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Year &amp; Month Picker</Heading>
         <p className="text-sm text-muted-foreground">Tap the month/year header to open the year grid. Select a year, then a month to quickly navigate to any date.</p>
       </div>
       {/* Range Selection */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Range Selection</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Range Selection</Heading>
         <ComponentPlayground code={rangeCode}>
           <RangeDemo />
         </ComponentPlayground>
       </div>
       {/* Props */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Props</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Props</Heading>
         <PropsTable props={[
           { name: "selected", type: "Date" },
           { name: "onSelect", type: "(date: Date) => void" },
@@ -124,7 +125,7 @@ export default function CalendarPage() {
       </div>
       {/* Accessibility */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Accessibility</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Accessibility</Heading>
         <ul className="list-disc list-inside space-y-2 text-sm text-muted-foreground">
           <li>Date selection with day/month/year navigation.</li>
           <li>Each day cell is focusable with <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">accessibilityLabel</code> for the full date.</li>
@@ -133,7 +134,7 @@ export default function CalendarPage() {
       </div>
       {/* Source */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Source</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Source</Heading>
         <CodeBlock code={sourceCode} title="components/ui/calendar.tsx" />
       </div>
     </div>

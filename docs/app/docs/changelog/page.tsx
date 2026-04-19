@@ -1,4 +1,5 @@
 
+import { Heading } from "@/components/heading";
 import Link from "next/link";
 
 type ChangeType = "feat" | "fix" | "breaking" | "docs";
@@ -24,6 +25,26 @@ const typeBadge: Record<ChangeType, { label: string; className: string }> = {
 };
 
 const releases: Release[] = [
+  {
+    version: "0.2.20",
+    date: "2026-04-19",
+    title: "Tabs Rewrite, SEO Metadata, Anchor Links & Bug Fixes",
+    changes: [
+      { type: "feat", text: "Tabs: rewritten with filled/line variants, sm/md/lg sizes, vertical orientation, disabled, icons, and RTL support", link: "/docs/tabs" },
+      { type: "feat", text: "SEO: added layout.tsx with title and description metadata to all 82 missing doc pages" },
+      { type: "feat", text: "Anchor links: all 673 headings across 93 doc pages now have auto-generated IDs and clickable # links" },
+      { type: "feat", text: "Heading component: reusable component with slugify, scroll-mt-20 offset, and hover # indicator" },
+      { type: "feat", text: "Hash navigation: URLs like /docs/chip#closable now smooth-scroll to the section" },
+      { type: "feat", text: "Shared constants.ts: single source of truth for component count and site metadata" },
+      { type: "fix", text: "Tabs: added will-change-variable to prevent NativeWind v5 state reset warning", link: "/docs/tabs" },
+      { type: "fix", text: "RefreshControl: theme-aware tintColor via useColorScheme, overridable via props", link: "/docs/refresh-control" },
+      { type: "fix", text: "Stale counts fixed: MCP page (48), docs intro (81), preview-toggle (81), CLI README (81) all updated to 89" },
+      { type: "fix", text: "Card layout.tsx: title corrected from lowercase to capitalized" },
+      { type: "docs", text: "Tabs docs: 7 interactive preview sections (filled, line, vertical, disabled, icons, sizes, RTL)" },
+      { type: "docs", text: "Tabs examples: full 7-section demos in all 4 example apps using actual Tabs component" },
+      { type: "docs", text: "Docs root layout description updated to 89 components" },
+    ],
+  },
   {
     version: "0.2.19",
     date: "2026-04-17",
@@ -188,9 +209,9 @@ export default function ChangelogPage() {
               </span>
               <span className="text-sm text-muted-foreground">{release.date}</span>
             </div>
-            <h2 className="text-xl font-semibold tracking-tight text-foreground mb-4">
+            <Heading as="h2" className="text-xl font-semibold tracking-tight text-foreground mb-4">
               {release.title}
-            </h2>
+            </Heading>
             <ul className="space-y-2.5">
               {release.changes.map((change, i) => (
                 <li key={i} className="flex items-start gap-2.5">

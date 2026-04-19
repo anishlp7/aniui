@@ -1,3 +1,4 @@
+import { Heading } from "@/components/heading";
 import { PreviewChip } from "@/components/preview/chip";
 import { ComponentPlayground } from "@/components/highlighted-playground";
 import { CodeBlock } from "@/components/code-block-server";
@@ -101,11 +102,11 @@ export default function ChipPage() {
         </ComponentPlayground>
       </PreviewToggle>
       <div>
-        <h2 className="text-xl font-semibold mb-3">Installation</h2>
+        <Heading as="h2" className="text-xl font-semibold mb-3">Installation</Heading>
         <AddComponentTabs names="chip" />
       </div>
       <div>
-        <h2 className="text-xl font-semibold mb-3">Variants</h2>
+        <Heading as="h2" className="text-xl font-semibold mb-3">Variants</Heading>
         <ComponentPlayground code={variantsCode}>
           <div className="flex flex-wrap gap-2">
             <PreviewChip variant="default">Default</PreviewChip>
@@ -116,7 +117,7 @@ export default function ChipPage() {
         </ComponentPlayground>
       </div>
       <div>
-        <h2 className="text-xl font-semibold mb-3">Sizes</h2>
+        <Heading as="h2" className="text-xl font-semibold mb-3">Sizes</Heading>
         <ComponentPlayground code={sizesCode}>
           <div className="flex flex-wrap items-center gap-2">
             <PreviewChip size="sm">Small</PreviewChip>
@@ -126,21 +127,21 @@ export default function ChipPage() {
         </ComponentPlayground>
       </div>
       <div>
-        <h2 className="text-xl font-semibold mb-3">Selectable</h2>
+        <Heading as="h2" className="text-xl font-semibold mb-3">Selectable</Heading>
         <p className="text-sm text-muted-foreground mb-4">Use the <code>selected</code> prop for filter chips. Selected chips switch to the default (filled) variant automatically.</p>
         <ComponentPlayground code={selectableCode}>
           <SelectableDemo />
         </ComponentPlayground>
       </div>
       <div>
-        <h2 className="text-xl font-semibold mb-3">Closable</h2>
+        <Heading as="h2" className="text-xl font-semibold mb-3">Closable</Heading>
         <p className="text-sm text-muted-foreground mb-4">Add an <code>onClose</code> handler to show a remove button.</p>
         <ComponentPlayground code={closableCode}>
           <ClosableDemo />
         </ComponentPlayground>
       </div>
       <div>
-        <h2 className="text-xl font-semibold mb-3">Props</h2>
+        <Heading as="h2" className="text-xl font-semibold mb-3">Props</Heading>
         <PropsTable props={[
           { name: "variant", type: "\"default\" | \"secondary\" | \"outline\" | \"destructive\"", default: "\"outline\"" },
           { name: "size", type: "\"sm\" | \"md\" | \"lg\"", default: "\"md\"" },
@@ -153,14 +154,14 @@ export default function ChipPage() {
       </div>
       {/* Accessibility */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Accessibility</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Accessibility</Heading>
         <ul className="list-disc list-inside space-y-2 text-sm text-muted-foreground">
           <li><code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">accessibilityRole="button"</code> with selected state for screen readers.</li>
           <li>Supports <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">accessibilityState</code> to indicate selection.</li>
         </ul>
       </div>
       <div>
-        <h2 className="text-xl font-semibold mb-3">Source</h2>
+        <Heading as="h2" className="text-xl font-semibold mb-3">Source</Heading>
         <CodeBlock code={sourceCode} title="components/ui/chip.tsx" />
       </div>
     </div>

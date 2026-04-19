@@ -1,3 +1,4 @@
+import { Heading } from "@/components/heading";
 import { PreviewDirectionProviderDemo } from "@/components/preview/direction-provider";
 import { ComponentPlayground } from "@/components/highlighted-playground";
 import { PreviewToggle } from "@/components/preview-toggle";
@@ -90,7 +91,7 @@ export default function DirectionProviderPage() {
       </div>
       {/* Installation */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Installation</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Installation</Heading>
         <AddComponentTabs names="direction-provider" />
       </div>
       {/* Preview */}
@@ -101,12 +102,12 @@ export default function DirectionProviderPage() {
       </PreviewToggle>
       {/* Usage */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Usage</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Usage</Heading>
         <CodeBlock code={usageCode} title="app/_layout.tsx" />
       </div>
       {/* useDirection Hook */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">useDirection Hook</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">useDirection Hook</Heading>
         <p className="text-sm text-muted-foreground">
           Access the current direction, RTL state, and direction controls from any child component.
         </p>
@@ -119,7 +120,7 @@ export default function DirectionProviderPage() {
       </div>
       {/* Props */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Props</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Props</Heading>
         <PropsTable props={[
           { name: "children", type: "React.ReactNode", default: "required" },
           { name: "defaultDirection", type: '"ltr" | "rtl"', default: "system default" },
@@ -131,14 +132,14 @@ export default function DirectionProviderPage() {
       </div>
       {/* Important */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Important</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Important</Heading>
         <p className="text-sm text-muted-foreground">
           Calling <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">setDirection</code> updates the React context immediately, but the full layout flip via <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">I18nManager</code> requires an app restart. This is a React Native limitation.
         </p>
       </div>
       {/* Accessibility */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Accessibility</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Accessibility</Heading>
         <ul className="list-disc list-inside space-y-2 text-sm text-muted-foreground">
           <li>Respects <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">I18nManager</code> for system-level RTL detection.</li>
           <li>Supports right-to-left languages such as Arabic, Hebrew, and Persian.</li>
@@ -147,7 +148,7 @@ export default function DirectionProviderPage() {
       </div>
       {/* Source */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Source</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Source</Heading>
         <CodeBlock code={sourceCode} title="components/ui/direction-provider.tsx" />
       </div>
     </div>

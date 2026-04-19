@@ -1,3 +1,4 @@
+import { Heading } from "@/components/heading";
 import { ComponentPlayground } from "@/components/highlighted-playground";
 import { CodeBlock } from "@/components/code-block-server";
 import { PropsTable, ComponentTable } from "@/components/props-table";
@@ -158,7 +159,7 @@ export default function AlertDialogPage() {
       </PreviewToggle>
       {/* Installation */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Installation</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Installation</Heading>
         <AddComponentTabs names="alert-dialog" />
         <p className="text-sm text-muted-foreground">
           This component requires <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">react-native-reanimated</code> to be installed in your project.
@@ -166,12 +167,12 @@ export default function AlertDialogPage() {
       </div>
       {/* Usage */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Usage</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Usage</Heading>
         <CodeBlock code={usageCode} title="app/index.tsx" />
       </div>
       {/* Compound Components */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Components</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Components</Heading>
         <p className="text-sm text-muted-foreground">
           AlertDialog is a compound component made up of several parts:
         </p>
@@ -188,8 +189,8 @@ export default function AlertDialogPage() {
       </div>
       {/* Props */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Props</h2>
-        <h3 className="text-lg font-medium text-foreground">AlertDialog</h3>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Props</Heading>
+        <Heading as="h3" className="text-lg font-medium text-foreground">AlertDialog</Heading>
         <PropsTable props={[
           { name: "open", type: "boolean", default: "required" },
           { name: "onOpenChange", type: "(open: boolean) => void", default: "required" },
@@ -201,7 +202,7 @@ export default function AlertDialogPage() {
       </div>
       {/* Accessibility */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Accessibility</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Accessibility</Heading>
         <ul className="list-disc list-inside space-y-2 text-sm text-muted-foreground">
           <li>Uses Modal with Reanimated animations</li>
           <li><code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">accessibilityRole="alert"</code> on content for screen reader announcements.</li>
@@ -209,7 +210,7 @@ export default function AlertDialogPage() {
       </div>
       {/* Source */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Source</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Source</Heading>
         <CodeBlock code={sourceCode} title="components/ui/alert-dialog.tsx" />
       </div>
     </div>

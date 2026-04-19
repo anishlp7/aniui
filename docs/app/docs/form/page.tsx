@@ -1,3 +1,4 @@
+import { Heading } from "@/components/heading";
 import { PreviewFormDemo } from "@/components/preview/form";
 import { ComponentPlayground } from "@/components/highlighted-playground";
 import { PreviewToggle } from "@/components/preview-toggle";
@@ -165,7 +166,7 @@ export default function FormPage() {
       </div>
       {/* Installation */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Installation</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Installation</Heading>
         <AddComponentTabs names="form" />
       </div>
       {/* Preview */}
@@ -176,12 +177,12 @@ export default function FormPage() {
       </PreviewToggle>
       {/* Usage */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Usage</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Usage</Heading>
         <CodeBlock code={usageCode} title="app/index.tsx" />
       </div>
       {/* useFormField Hook */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">useFormField Hook</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">useFormField Hook</Heading>
         <p className="text-sm text-muted-foreground">
           Access form context and field state from within a <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">FormField</code>. Returns the field name, error, all errors, and validation helpers.
         </p>
@@ -189,7 +190,7 @@ export default function FormPage() {
       </div>
       {/* FieldRules Type */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">FieldRules Type</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">FieldRules Type</Heading>
         <PropsTable props={[
           { name: "required", type: "string | boolean", default: "-" },
           { name: "pattern", type: "{ value: RegExp; message: string }", default: "-" },
@@ -198,23 +199,23 @@ export default function FormPage() {
       </div>
       {/* Props */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Props</h2>
-        <h3 className="text-lg font-medium text-foreground">Form</h3>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Props</Heading>
+        <Heading as="h3" className="text-lg font-medium text-foreground">Form</Heading>
         <PropsTable props={[
           { name: "className", type: "string", default: "-" },
           { name: "children", type: "React.ReactNode", default: "-" },
         ]} />
-        <h3 className="text-lg font-medium text-foreground mt-6">FormField</h3>
+        <Heading as="h3" className="text-lg font-medium text-foreground mt-6">FormField</Heading>
         <PropsTable props={[
           { name: "name", type: "string", default: "-" },
           { name: "children", type: "React.ReactNode", default: "-" },
         ]} />
-        <h3 className="text-lg font-medium text-foreground mt-6">FormItem</h3>
+        <Heading as="h3" className="text-lg font-medium text-foreground mt-6">FormItem</Heading>
         <PropsTable props={[
           { name: "className", type: "string", default: "-" },
           { name: "children", type: "React.ReactNode", default: "-" },
         ]} />
-        <h3 className="text-lg font-medium text-foreground mt-6">FormMessage</h3>
+        <Heading as="h3" className="text-lg font-medium text-foreground mt-6">FormMessage</Heading>
         <PropsTable props={[
           { name: "className", type: "string", default: "-" },
         ]} />
@@ -224,7 +225,7 @@ export default function FormPage() {
       </div>
       {/* Accessibility */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Accessibility</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Accessibility</Heading>
         <ul className="list-disc list-inside space-y-2 text-sm text-muted-foreground">
           <li>Form validation with <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">FormField</code>, <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">FormItem</code>, and <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">FormMessage</code> for error announcements.</li>
           <li>Error messages are associated with their fields for screen readers.</li>
@@ -232,7 +233,7 @@ export default function FormPage() {
       </div>
       {/* Source */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Source</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Source</Heading>
         <CodeBlock code={sourceCode} title="components/ui/form.tsx" />
       </div>
     </div>

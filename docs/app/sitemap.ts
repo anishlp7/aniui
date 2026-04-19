@@ -24,28 +24,26 @@ const guidePages = [
   "cli", "mcp", "javascript", "android", "changelog", "uniwind",
 ];
 
+const chartPages = [
+  "area-chart", "bar-chart", "line-chart", "pie-chart",
+  "radar-chart", "radial-chart", "tooltip",
+];
+
+const blockPages = [
+  "login", "signup", "forgot-password", "home", "bottom-tabs",
+  "drawer-nav", "profile", "settings", "onboarding", "chat",
+  "product-list", "product-detail", "notifications", "pricing", "search",
+];
+
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();
 
   return [
-    {
-      url: BASE_URL,
-      lastModified: now,
-      changeFrequency: "weekly",
-      priority: 1,
-    },
-    {
-      url: `${BASE_URL}/docs`,
-      lastModified: now,
-      changeFrequency: "weekly",
-      priority: 0.9,
-    },
-    {
-      url: `${BASE_URL}/create`,
-      lastModified: now,
-      changeFrequency: "monthly",
-      priority: 0.7,
-    },
+    { url: BASE_URL, lastModified: now, changeFrequency: "weekly", priority: 1 },
+    { url: `${BASE_URL}/docs`, lastModified: now, changeFrequency: "weekly", priority: 0.9 },
+    { url: `${BASE_URL}/create`, lastModified: now, changeFrequency: "monthly", priority: 0.7 },
+    { url: `${BASE_URL}/charts`, lastModified: now, changeFrequency: "monthly", priority: 0.7 },
+    { url: `${BASE_URL}/blocks`, lastModified: now, changeFrequency: "monthly", priority: 0.7 },
     ...guidePages.map((slug) => ({
       url: `${BASE_URL}/docs/${slug}`,
       lastModified: now,
@@ -57,6 +55,18 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: now,
       changeFrequency: "monthly" as const,
       priority: 0.7,
+    })),
+    ...chartPages.map((slug) => ({
+      url: `${BASE_URL}/charts/${slug}`,
+      lastModified: now,
+      changeFrequency: "monthly" as const,
+      priority: 0.6,
+    })),
+    ...blockPages.map((slug) => ({
+      url: `${BASE_URL}/blocks/${slug}`,
+      lastModified: now,
+      changeFrequency: "monthly" as const,
+      priority: 0.6,
     })),
   ];
 }

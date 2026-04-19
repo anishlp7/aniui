@@ -1,3 +1,4 @@
+import { Heading } from "@/components/heading";
 import { PreviewTable } from "@/components/preview/table";
 import { ComponentPlayground } from "@/components/highlighted-playground";
 import { CodeBlock } from "@/components/code-block-server";
@@ -115,26 +116,26 @@ export default function TablePage() {
       </PreviewToggle>
       {/* Installation */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Installation</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Installation</Heading>
         <AddComponentTabs names="table" />
       </div>
       {/* Usage */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Usage</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Usage</Heading>
         <CodeBlock code={usageCode} title="app/index.tsx" />
       </div>
       {/* Examples */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Examples</h2>
-        <h3 className="text-lg font-medium text-foreground">Default</h3>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Examples</Heading>
+        <Heading as="h3" className="text-lg font-medium text-foreground">Default</Heading>
         <ComponentPlayground code={previewCode} variant="inline">
           <PreviewTable />
         </ComponentPlayground>
       </div>
       {/* Props */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Props</h2>
-        <h3 className="text-lg font-medium text-foreground">Table</h3>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Props</Heading>
+        <Heading as="h3" className="text-lg font-medium text-foreground">Table</Heading>
         <PropsTable props={[
           { name: "className", type: "string" },
           { name: "children", type: "ReactNode" },
@@ -142,7 +143,7 @@ export default function TablePage() {
         <p className="text-sm text-muted-foreground">
           Also accepts all <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">ScrollView</code> props from React Native.
         </p>
-        <h3 className="text-lg font-medium text-foreground">TableHeader / TableBody / TableRow</h3>
+        <Heading as="h3" className="text-lg font-medium text-foreground">TableHeader / TableBody / TableRow</Heading>
         <PropsTable props={[
           { name: "className", type: "string" },
           { name: "children", type: "ReactNode" },
@@ -150,7 +151,7 @@ export default function TablePage() {
         <p className="text-sm text-muted-foreground">
           Also accepts all <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">View</code> props from React Native.
         </p>
-        <h3 className="text-lg font-medium text-foreground">TableHead / TableCell</h3>
+        <Heading as="h3" className="text-lg font-medium text-foreground">TableHead / TableCell</Heading>
         <PropsTable props={[
           { name: "className", type: "string" },
           { name: "children", type: "ReactNode" },
@@ -161,7 +162,7 @@ export default function TablePage() {
       </div>
       {/* Accessibility */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Accessibility</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Accessibility</Heading>
         <ul className="list-disc list-inside space-y-2 text-sm text-muted-foreground">
           <li>Data table with semantic row/cell structure.</li>
           <li>Header cells are distinguished from body cells for screen readers.</li>
@@ -169,7 +170,7 @@ export default function TablePage() {
       </div>
       {/* Source */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Source</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Source</Heading>
         <CodeBlock code={sourceCode} title="components/ui/table.tsx" />
       </div>
     </div>

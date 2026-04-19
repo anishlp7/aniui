@@ -1,3 +1,4 @@
+import { Heading } from "@/components/heading";
 import React from "react";
 import { PreviewFAB } from "@/components/preview/fab";
 import { ComponentPlayground } from "@/components/highlighted-playground";
@@ -115,11 +116,11 @@ export default function FABPage() {
         </ComponentPlayground>
       </PreviewToggle>
       <div>
-        <h2 className="text-xl font-semibold mb-3">Installation</h2>
+        <Heading as="h2" className="text-xl font-semibold mb-3">Installation</Heading>
         <AddComponentTabs names="fab" />
       </div>
       <div>
-        <h2 className="text-xl font-semibold mb-3">Variants</h2>
+        <Heading as="h2" className="text-xl font-semibold mb-3">Variants</Heading>
         <ComponentPlayground code={variantsCode}>
           <div className="flex items-center gap-4">
             <PreviewFAB variant="default" />
@@ -129,7 +130,7 @@ export default function FABPage() {
         </ComponentPlayground>
       </div>
       <div>
-        <h2 className="text-xl font-semibold mb-3">Sizes</h2>
+        <Heading as="h2" className="text-xl font-semibold mb-3">Sizes</Heading>
         <ComponentPlayground code={sizesCode}>
           <div className="flex items-center gap-4">
             <PreviewFAB size="sm" icon={<PlusIcon className="h-5 w-5" />} />
@@ -139,7 +140,7 @@ export default function FABPage() {
         </ComponentPlayground>
       </div>
       <div>
-        <h2 className="text-xl font-semibold mb-3">Extended FAB</h2>
+        <Heading as="h2" className="text-xl font-semibold mb-3">Extended FAB</Heading>
         <p className="text-sm text-muted-foreground mb-4">Add a label for more descriptive actions. The FAB automatically switches to the extended size.</p>
         <ComponentPlayground code={extendedCode}>
           <div className="flex flex-col items-start gap-3">
@@ -149,12 +150,12 @@ export default function FABPage() {
         </ComponentPlayground>
       </div>
       <div>
-        <h2 className="text-xl font-semibold mb-3">Positioning</h2>
+        <Heading as="h2" className="text-xl font-semibold mb-3">Positioning</Heading>
         <p className="text-sm text-muted-foreground mb-4">The FAB positions itself absolutely. Wrap your screen in a <code>relative</code> container.</p>
         <CodeBlock code={positionCode} title="screen.tsx" />
       </div>
       <div>
-        <h2 className="text-xl font-semibold mb-3">Props</h2>
+        <Heading as="h2" className="text-xl font-semibold mb-3">Props</Heading>
         <PropsTable props={[
           { name: "variant", type: "\"default\" | \"secondary\" | \"destructive\"", default: "\"default\"" },
           { name: "size", type: "\"sm\" | \"md\" | \"lg\"", default: "\"md\"" },
@@ -166,14 +167,14 @@ export default function FABPage() {
       </div>
       {/* Accessibility */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Accessibility</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Accessibility</Heading>
         <ul className="list-disc list-inside space-y-2 text-sm text-muted-foreground">
           <li><code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">accessibilityRole="button"</code> with minimum 48dp touch target.</li>
           <li>Provide an <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">accessibilityLabel</code> describing the action since the FAB typically shows only an icon.</li>
         </ul>
       </div>
       <div>
-        <h2 className="text-xl font-semibold mb-3">Source</h2>
+        <Heading as="h2" className="text-xl font-semibold mb-3">Source</Heading>
         <CodeBlock code={sourceCode} title="components/ui/fab.tsx" />
       </div>
     </div>

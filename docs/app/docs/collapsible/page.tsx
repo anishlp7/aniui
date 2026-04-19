@@ -1,3 +1,4 @@
+import { Heading } from "@/components/heading";
 import { PreviewCollapsible, PreviewCollapsibleTrigger, PreviewCollapsibleContent } from "@/components/preview/collapsible";
 import { ComponentPlayground } from "@/components/highlighted-playground";
 import { CodeBlock } from "@/components/code-block-server";
@@ -119,7 +120,7 @@ export default function CollapsiblePage() {
       </PreviewToggle>
       {/* Installation */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Installation</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Installation</Heading>
         <AddComponentTabs names="collapsible" />
         <p className="text-sm text-muted-foreground">
           This component requires <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">react-native-reanimated</code> for animations.
@@ -127,18 +128,18 @@ export default function CollapsiblePage() {
       </div>
       {/* Usage */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Usage</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Usage</Heading>
         <CodeBlock code={usageCode} title="app/index.tsx" />
       </div>
       {/* Controlled */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Controlled</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Controlled</Heading>
         <p className="text-sm text-muted-foreground">Use the <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">open</code> and <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">onOpenChange</code> props for controlled behavior.</p>
         <CodeBlock code={controlledCode} title="app/index.tsx" />
       </div>
       {/* Compound Components */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Compound Components</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Compound Components</Heading>
         <ComponentTable components={[
           { name: "Collapsible", description: "Root container managing open/closed state" },
           { name: "CollapsibleTrigger", description: "Pressable element that toggles the content" },
@@ -147,8 +148,8 @@ export default function CollapsiblePage() {
       </div>
       {/* Props */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Props</h2>
-        <h3 className="text-lg font-medium text-foreground">Collapsible</h3>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Props</Heading>
+        <Heading as="h3" className="text-lg font-medium text-foreground">Collapsible</Heading>
         <PropsTable props={[
           { name: "open", type: "boolean", default: "false (uncontrolled)" },
           { name: "onOpenChange", type: "(open: boolean) => void" },
@@ -157,7 +158,7 @@ export default function CollapsiblePage() {
       </div>
       {/* Accessibility */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Accessibility</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Accessibility</Heading>
         <ul className="list-disc list-inside space-y-2 text-sm text-muted-foreground">
           <li>Uses React Context with Reanimated FadeIn/FadeOut animations</li>
           <li>Trigger button announces expanded/collapsed state to screen readers.</li>
@@ -165,7 +166,7 @@ export default function CollapsiblePage() {
       </div>
       {/* Source */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Source</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Source</Heading>
         <CodeBlock code={sourceCode} title="components/ui/collapsible.tsx" />
       </div>
     </div>

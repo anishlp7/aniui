@@ -1,3 +1,4 @@
+import { Heading } from "@/components/heading";
 import { PreviewSpinner } from "@/components/preview/spinner";
 import { ComponentPlayground } from "@/components/highlighted-playground";
 import { CodeBlock } from "@/components/code-block-server";
@@ -55,17 +56,17 @@ export default function SpinnerPage() {
       </PreviewToggle>
       {/* Installation */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Installation</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Installation</Heading>
         <AddComponentTabs names="spinner" />
       </div>
       {/* Usage */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Usage</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Usage</Heading>
         <CodeBlock code={usageCode} title="app/index.tsx" />
       </div>
       {/* Sizes */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Sizes</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Sizes</Heading>
         <ComponentPlayground code={sizesCode}>
           <div className="flex flex-wrap items-center gap-6">
             <PreviewSpinner size="sm" />
@@ -76,7 +77,7 @@ export default function SpinnerPage() {
       </div>
       {/* Props */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Props</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Props</Heading>
         <PropsTable props={[
           { name: "size", type: "\"sm\" | \"md\" | \"lg\"", default: "\"md\"" },
           { name: "color", type: "string", default: "\"hsl(240, 5.9%, 10%)\"" },
@@ -88,7 +89,7 @@ export default function SpinnerPage() {
       </div>
       {/* Accessibility */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Accessibility</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Accessibility</Heading>
         <ul className="list-disc list-inside space-y-2 text-sm text-muted-foreground">
           <li><code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">accessibilityRole="progressbar"</code> on the underlying <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">ActivityIndicator</code>.</li>
           <li>Screen readers announce the loading state automatically.</li>
@@ -96,7 +97,7 @@ export default function SpinnerPage() {
       </div>
       {/* Source */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Source</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Source</Heading>
         <CodeBlock code={sourceCode} title="components/ui/spinner.tsx" />
       </div>
     </div>

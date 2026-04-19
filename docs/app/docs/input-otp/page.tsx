@@ -1,3 +1,4 @@
+import { Heading } from "@/components/heading";
 import { PreviewInputOTP } from "@/components/preview/input-otp";
 import { ComponentPlayground } from "@/components/highlighted-playground";
 import { CodeBlock } from "@/components/code-block-server";
@@ -99,24 +100,24 @@ export default function InputOtpPage() {
       </PreviewToggle>
       {/* Installation */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Installation</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Installation</Heading>
         <AddComponentTabs names="input-otp" />
       </div>
       {/* Usage */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Usage</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Usage</Heading>
         <CodeBlock code={usageCode} title="app/index.tsx" />
       </div>
       {/* Examples */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Examples</h2>
-        <h3 className="text-lg font-medium text-foreground">6-digit verification code</h3>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Examples</Heading>
+        <Heading as="h3" className="text-lg font-medium text-foreground">6-digit verification code</Heading>
         <ComponentPlayground code={defaultCode}>
           <div className="flex flex-col items-center gap-2 w-full">
             <PreviewInputOTP length={6} value="492817" />
           </div>
         </ComponentPlayground>
-        <h3 className="text-lg font-medium text-foreground mt-4">4-digit PIN</h3>
+        <Heading as="h3" className="text-lg font-medium text-foreground mt-4">4-digit PIN</Heading>
         <ComponentPlayground code={fourDigitCode}>
           <div className="flex flex-col items-center gap-2 w-full">
             <PreviewInputOTP length={4} value="1738" />
@@ -125,7 +126,7 @@ export default function InputOtpPage() {
       </div>
       {/* Props */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Props</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Props</Heading>
         <PropsTable props={[
           { name: "length", type: "number", default: "6" },
           { name: "value", type: "string", default: "\"\"" },
@@ -138,7 +139,7 @@ export default function InputOtpPage() {
       </div>
       {/* Accessibility */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Accessibility</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Accessibility</Heading>
         <ul className="list-disc list-inside space-y-2 text-sm text-muted-foreground">
           <li>OTP code input with individual digit cells.</li>
           <li>Focus moves automatically between cells as digits are entered.</li>
@@ -146,7 +147,7 @@ export default function InputOtpPage() {
       </div>
       {/* Source */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Source</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Source</Heading>
         <CodeBlock code={sourceCode} title="components/ui/input-otp.tsx" />
       </div>
     </div>

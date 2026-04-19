@@ -1,3 +1,4 @@
+import { Heading } from "@/components/heading";
 import React from "react";
 import { PreviewBanner } from "@/components/preview/banner";
 import { ComponentPlayground } from "@/components/highlighted-playground";
@@ -171,11 +172,11 @@ export default function BannerPage() {
         </ComponentPlayground>
       </PreviewToggle>
       <div>
-        <h2 className="text-xl font-semibold mb-3">Installation</h2>
+        <Heading as="h2" className="text-xl font-semibold mb-3">Installation</Heading>
         <AddComponentTabs names="banner" />
       </div>
       <div>
-        <h2 className="text-xl font-semibold mb-3">Variants</h2>
+        <Heading as="h2" className="text-xl font-semibold mb-3">Variants</Heading>
         <p className="text-sm text-muted-foreground mb-4">
           Each variant uses a unique tinted background with matching border and
           text color. Warning uses amber tones, success uses green, destructive
@@ -200,7 +201,7 @@ export default function BannerPage() {
         </ComponentPlayground>
       </div>
       <div>
-        <h2 className="text-xl font-semibold mb-3">With Action</h2>
+        <Heading as="h2" className="text-xl font-semibold mb-3">With Action</Heading>
         <p className="text-sm text-muted-foreground mb-4">
           Add an{" "}
           <code className="bg-muted px-1.5 py-0.5 rounded font-mono text-xs">
@@ -213,19 +214,19 @@ export default function BannerPage() {
         </ComponentPlayground>
       </div>
       <div>
-        <h2 className="text-xl font-semibold mb-3">Props</h2>
+        <Heading as="h2" className="text-xl font-semibold mb-3">Props</Heading>
         <PropsTable props={bannerProps} />
       </div>
       {/* Accessibility */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Accessibility</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Accessibility</Heading>
         <ul className="list-disc list-inside space-y-2 text-sm text-muted-foreground">
           <li><code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">accessibilityRole="alert"</code> for informational banners.</li>
           <li>Dismiss button includes <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">accessibilityLabel="Dismiss"</code> for screen readers.</li>
         </ul>
       </div>
       <div>
-        <h2 className="text-xl font-semibold mb-3">Source</h2>
+        <Heading as="h2" className="text-xl font-semibold mb-3">Source</Heading>
         <CodeBlock code={sourceCode} title="components/ui/banner.tsx" />
       </div>
     </div>

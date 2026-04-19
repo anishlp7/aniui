@@ -1,3 +1,4 @@
+import { Heading } from "@/components/heading";
 import React from "react";
 import { PreviewImage } from "@/components/preview/image";
 import { ComponentPlayground } from "@/components/highlighted-playground";
@@ -88,11 +89,11 @@ export default function ImagePage() {
         </ComponentPlayground>
       </PreviewToggle>
       <div>
-        <h2 className="text-xl font-semibold mb-3">Installation</h2>
+        <Heading as="h2" className="text-xl font-semibold mb-3">Installation</Heading>
         <AddComponentTabs names="image" />
       </div>
       <div>
-        <h2 className="text-xl font-semibold mb-3">Rounded Variants</h2>
+        <Heading as="h2" className="text-xl font-semibold mb-3">Rounded Variants</Heading>
         <ComponentPlayground code={roundedCode}>
           <div className="flex flex-wrap items-center gap-4">
             <PreviewImage src="https://picsum.photos/200/200" rounded="none" width={80} height={80} />
@@ -103,14 +104,14 @@ export default function ImagePage() {
         </ComponentPlayground>
       </div>
       <div>
-        <h2 className="text-xl font-semibold mb-3">Error Fallback</h2>
+        <Heading as="h2" className="text-xl font-semibold mb-3">Error Fallback</Heading>
         <p className="text-sm text-muted-foreground mb-4">When the image fails to load, a fallback message is shown. You can provide a custom <code>fallback</code> prop.</p>
         <ComponentPlayground code={fallbackCode}>
           <PreviewImage src="https://invalid-url.example.com/broken.png" alt="Broken" width={200} height={150} />
         </ComponentPlayground>
       </div>
       <div>
-        <h2 className="text-xl font-semibold mb-3">Props</h2>
+        <Heading as="h2" className="text-xl font-semibold mb-3">Props</Heading>
         <PropsTable props={[
           { name: "src", type: "string" },
           { name: "alt", type: "string" },
@@ -123,14 +124,14 @@ export default function ImagePage() {
       </div>
       {/* Accessibility */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Accessibility</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Accessibility</Heading>
         <ul className="list-disc list-inside space-y-2 text-sm text-muted-foreground">
           <li><code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">accessibilityRole="image"</code> with loading placeholder.</li>
           <li>Always provide an <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">alt</code> prop for screen reader descriptions.</li>
         </ul>
       </div>
       <div>
-        <h2 className="text-xl font-semibold mb-3">Source</h2>
+        <Heading as="h2" className="text-xl font-semibold mb-3">Source</Heading>
         <CodeBlock code={sourceCode} title="components/ui/image.tsx" />
       </div>
     </div>

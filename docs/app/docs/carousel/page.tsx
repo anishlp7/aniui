@@ -1,3 +1,4 @@
+import { Heading } from "@/components/heading";
 import { PreviewCarousel } from "@/components/preview/carousel";
 import { ComponentPlayground } from "@/components/highlighted-playground";
 import { CodeBlock } from "@/components/code-block-server";
@@ -87,11 +88,11 @@ export default function CarouselPage() {
         </ComponentPlayground>
       </PreviewToggle>
       <div>
-        <h2 className="text-xl font-semibold mb-3">Installation</h2>
+        <Heading as="h2" className="text-xl font-semibold mb-3">Installation</Heading>
         <AddComponentTabs names="carousel" />
       </div>
       <div>
-        <h2 className="text-xl font-semibold mb-3">Auto-Play</h2>
+        <Heading as="h2" className="text-xl font-semibold mb-3">Auto-Play</Heading>
         <p className="text-sm text-muted-foreground mb-4">Set <code>autoPlay</code> to automatically cycle through slides. Configure the <code>interval</code> in milliseconds.</p>
         <ComponentPlayground code={autoPlayCode}>
           <div className="max-w-md">
@@ -100,7 +101,7 @@ export default function CarouselPage() {
         </ComponentPlayground>
       </div>
       <div>
-        <h2 className="text-xl font-semibold mb-3">Props</h2>
+        <Heading as="h2" className="text-xl font-semibold mb-3">Props</Heading>
         <PropsTable props={[
           { name: "data", type: "ReactNode[]" },
           { name: "itemWidth", type: "number", default: "screen width" },
@@ -112,14 +113,14 @@ export default function CarouselPage() {
       </div>
       {/* Accessibility */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Accessibility</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Accessibility</Heading>
         <ul className="list-disc list-inside space-y-2 text-sm text-muted-foreground">
           <li><code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">accessibilityRole="adjustable"</code> with page indicators.</li>
           <li>Swipe gestures are supplemented with navigation controls for motor accessibility.</li>
         </ul>
       </div>
       <div>
-        <h2 className="text-xl font-semibold mb-3">Source</h2>
+        <Heading as="h2" className="text-xl font-semibold mb-3">Source</Heading>
         <CodeBlock code={sourceCode} title="components/ui/carousel.tsx" />
       </div>
     </div>

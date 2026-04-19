@@ -1,3 +1,4 @@
+import { Heading } from "@/components/heading";
 import { PreviewSlider } from "@/components/preview/slider";
 import { ComponentPlayground } from "@/components/highlighted-playground";
 import { CodeBlock } from "@/components/code-block-server";
@@ -128,17 +129,17 @@ export default function SliderPage() {
       </PreviewToggle>
       {/* Installation */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Installation</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Installation</Heading>
         <AddComponentTabs names="slider" />
       </div>
       {/* Usage */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Usage</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Usage</Heading>
         <CodeBlock code={usageCode} title="app/index.tsx" />
       </div>
       {/* Default */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Default</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Default</Heading>
         <ComponentPlayground code={usageCode}>
           <div className="flex w-full items-center gap-4">
             <PreviewSlider />
@@ -147,7 +148,7 @@ export default function SliderPage() {
       </div>
       {/* Disabled */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Disabled</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Disabled</Heading>
         <ComponentPlayground code={disabledCode}>
           <div className="flex w-full items-center gap-4">
             <PreviewSlider disabled />
@@ -156,7 +157,7 @@ export default function SliderPage() {
       </div>
       {/* Props */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Props</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Props</Heading>
         <PropsTable props={[
           { name: "value", type: "number", default: "0" },
           { name: "min", type: "number", default: "0" },
@@ -173,7 +174,7 @@ export default function SliderPage() {
       </div>
       {/* Accessibility */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Accessibility</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Accessibility</Heading>
         <ul className="list-disc list-inside space-y-2 text-sm text-muted-foreground">
           <li>Uses PanResponder for smooth gesture-based dragging</li>
           <li><code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">accessibilityRole="adjustable"</code> with min/max/now values exposed to assistive technology.</li>
@@ -181,7 +182,7 @@ export default function SliderPage() {
       </div>
       {/* Source */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Source</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Source</Heading>
         <CodeBlock code={sourceCode} title="components/ui/slider.tsx" />
       </div>
     </div>

@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "select",
-  description: "AniUI select component for React Native. Accessible, customizable, built with NativeWind and TypeScript.",
+  description: "AniUI Select — dropdown picker with search support and smart positioning for React Native.",
   alternates: { canonical: "/docs/select" },
 };
 

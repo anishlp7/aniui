@@ -1,3 +1,4 @@
+import { Heading } from "@/components/heading";
 import { PreviewFieldDemo, PreviewFieldHorizontal, PreviewFieldError } from "@/components/preview/field";
 import { ComponentPlayground } from "@/components/highlighted-playground";
 import { CodeBlock } from "@/components/code-block-server";
@@ -137,17 +138,17 @@ export default function FieldPage() {
       </PreviewToggle>
       {/* Installation */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Installation</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Installation</Heading>
         <AddComponentTabs names="field" />
       </div>
       {/* Usage */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Usage</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Usage</Heading>
         <CodeBlock code={usageCode} title="app/index.tsx" />
       </div>
       {/* Horizontal Layout */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Horizontal Layout</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Horizontal Layout</Heading>
         <PreviewToggle>
           <ComponentPlayground code={horizontalCode}>
             <PreviewFieldHorizontal />
@@ -156,7 +157,7 @@ export default function FieldPage() {
       </div>
       {/* Error State */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Error State</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Error State</Heading>
         <PreviewToggle>
           <ComponentPlayground code={errorCode}>
             <PreviewFieldError />
@@ -165,7 +166,7 @@ export default function FieldPage() {
       </div>
       {/* Compound Components */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Components</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Components</Heading>
         <p className="text-sm text-muted-foreground">
           Field is a compound component made up of several parts:
         </p>
@@ -178,8 +179,8 @@ export default function FieldPage() {
       </div>
       {/* Props */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Props</h2>
-        <h3 className="text-lg font-medium text-foreground">Field</h3>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Props</Heading>
+        <Heading as="h3" className="text-lg font-medium text-foreground">Field</Heading>
         <PropsTable props={[
           { name: "orientation", type: '"vertical" | "horizontal"', default: '"vertical"' },
           { name: "className", type: "string", default: "-" },
@@ -188,21 +189,21 @@ export default function FieldPage() {
         <p className="text-sm text-muted-foreground">
           Also accepts all <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">View</code> props from React Native.
         </p>
-        <h3 className="text-lg font-medium text-foreground mt-6">FieldLabel</h3>
+        <Heading as="h3" className="text-lg font-medium text-foreground mt-6">FieldLabel</Heading>
         <PropsTable props={[
           { name: "className", type: "string", default: "-" },
         ]} />
         <p className="text-sm text-muted-foreground">
           Also accepts all <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">Text</code> props from React Native.
         </p>
-        <h3 className="text-lg font-medium text-foreground mt-6">FieldDescription</h3>
+        <Heading as="h3" className="text-lg font-medium text-foreground mt-6">FieldDescription</Heading>
         <PropsTable props={[
           { name: "className", type: "string", default: "-" },
         ]} />
         <p className="text-sm text-muted-foreground">
           Also accepts all <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">Text</code> props from React Native.
         </p>
-        <h3 className="text-lg font-medium text-foreground mt-6">FieldError</h3>
+        <Heading as="h3" className="text-lg font-medium text-foreground mt-6">FieldError</Heading>
         <PropsTable props={[
           { name: "errors", type: "string[]", default: "-" },
           { name: "className", type: "string", default: "-" },
@@ -214,7 +215,7 @@ export default function FieldPage() {
       </div>
       {/* Accessibility */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Accessibility</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Accessibility</Heading>
         <ul className="list-disc list-inside space-y-2 text-sm text-muted-foreground">
           <li><code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">FieldLabel</code> uses <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">accessibilityRole=&quot;text&quot;</code> for screen readers.</li>
           <li><code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">FieldError</code> uses <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">accessibilityRole=&quot;alert&quot;</code> to announce errors.</li>
@@ -223,7 +224,7 @@ export default function FieldPage() {
       </div>
       {/* Source */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Source</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Source</Heading>
         <CodeBlock code={sourceCode} title="components/ui/field.tsx" />
       </div>
     </div>

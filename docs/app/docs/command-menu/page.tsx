@@ -1,3 +1,4 @@
+import { Heading } from "@/components/heading";
 import { PreviewCommandMenuDemo } from "@/components/preview/command-menu";
 import { ComponentPlayground } from "@/components/highlighted-playground";
 import { CodeBlock } from "@/components/code-block-server";
@@ -281,7 +282,7 @@ export default function CommandMenuPage() {
       </div>
       {/* Installation */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Installation</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Installation</Heading>
         <AddComponentTabs names="command-menu" />
       </div>
       {/* Preview */}
@@ -292,12 +293,12 @@ export default function CommandMenuPage() {
       </PreviewToggle>
       {/* Usage */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Usage</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Usage</Heading>
         <CodeBlock code={usageCode} title="app/index.tsx" />
       </div>
       {/* Groups */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Groups</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Groups</Heading>
         <p className="text-sm text-muted-foreground">
           Organize items under section headers using the <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">group</code> property on each item. Items with the same group are rendered together with a header.
         </p>
@@ -305,7 +306,7 @@ export default function CommandMenuPage() {
       </div>
       {/* Keyboard Shortcuts */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Keyboard Shortcuts</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Keyboard Shortcuts</Heading>
         <p className="text-sm text-muted-foreground">
           Add <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">shortcut</code> to items to display keyboard shortcut badges. Shortcuts are split on <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">+</code> and rendered as individual key caps.
         </p>
@@ -313,7 +314,7 @@ export default function CommandMenuPage() {
       </div>
       {/* Custom Icons */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Custom Icons</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Custom Icons</Heading>
         <p className="text-sm text-muted-foreground">
           Pass any <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">React.ReactNode</code> as the <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">icon</code> property. Icons render in a fixed-width container to the left of the label.
         </p>
@@ -321,7 +322,7 @@ export default function CommandMenuPage() {
       </div>
       {/* Disabled Items */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Disabled Items</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Disabled Items</Heading>
         <p className="text-sm text-muted-foreground">
           Set <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">disabled: true</code> on items to prevent selection. Disabled items appear at reduced opacity.
         </p>
@@ -329,7 +330,7 @@ export default function CommandMenuPage() {
       </div>
       {/* Custom Placeholder */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Custom Placeholder</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Custom Placeholder</Heading>
         <p className="text-sm text-muted-foreground">
           Customize the search <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">placeholder</code> and <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">emptyText</code> for when no results match.
         </p>
@@ -337,8 +338,8 @@ export default function CommandMenuPage() {
       </div>
       {/* Props */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Props</h2>
-        <h3 className="text-lg font-medium text-foreground">CommandMenuProps</h3>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Props</Heading>
+        <Heading as="h3" className="text-lg font-medium text-foreground">CommandMenuProps</Heading>
         <PropsTable props={[
           { name: "open", type: "boolean", default: "-" },
           { name: "onOpenChange", type: "(open: boolean) => void", default: "-" },
@@ -348,7 +349,7 @@ export default function CommandMenuPage() {
           { name: "onSelect", type: "(value: string) => void", default: "-" },
           { name: "className", type: "string", default: "-" },
         ]} />
-        <h3 className="text-lg font-medium text-foreground mt-6">CommandItem</h3>
+        <Heading as="h3" className="text-lg font-medium text-foreground mt-6">CommandItem</Heading>
         <PropsTable props={[
           { name: "label", type: "string", default: "-" },
           { name: "value", type: "string", default: "-" },
@@ -364,7 +365,7 @@ export default function CommandMenuPage() {
       </div>
       {/* Sub-components */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Sub-components</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Sub-components</Heading>
         <p className="text-sm text-muted-foreground">
           For advanced composition, the module also exports convenience sub-components:
         </p>
@@ -376,7 +377,7 @@ export default function CommandMenuPage() {
       </div>
       {/* Accessibility */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Accessibility</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Accessibility</Heading>
         <ul className="list-disc list-inside space-y-2 text-sm text-muted-foreground">
           <li>Search input has <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">accessibilityLabel=&quot;Command search&quot;</code>.</li>
           <li>Each item has <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">accessibilityRole=&quot;button&quot;</code>.</li>
@@ -387,7 +388,7 @@ export default function CommandMenuPage() {
       </div>
       {/* Source */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Source</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Source</Heading>
         <CodeBlock code={sourceCode} title="components/ui/command-menu.tsx" />
       </div>
     </div>

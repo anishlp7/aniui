@@ -1,3 +1,4 @@
+import { Heading } from "@/components/heading";
 import { PreviewKbdDemo, PreviewKbdGroupDemo, PreviewKbdSizes } from "@/components/preview/kbd";
 import { ComponentPlayground } from "@/components/highlighted-playground";
 import { CodeBlock } from "@/components/code-block-server";
@@ -123,17 +124,17 @@ export default function KbdPage() {
       </PreviewToggle>
       {/* Installation */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Installation</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Installation</Heading>
         <AddComponentTabs names="kbd" />
       </div>
       {/* Usage */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Usage</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Usage</Heading>
         <CodeBlock code={usageCode} title="app/index.tsx" />
       </div>
       {/* KbdGroup */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">KbdGroup</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">KbdGroup</Heading>
         <PreviewToggle>
           <ComponentPlayground code={groupCode}>
             <PreviewKbdGroupDemo />
@@ -142,7 +143,7 @@ export default function KbdPage() {
       </div>
       {/* Sizes */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Sizes</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Sizes</Heading>
         <PreviewToggle>
           <ComponentPlayground code={sizesCode}>
             <div className="flex flex-row items-center gap-3">
@@ -153,7 +154,7 @@ export default function KbdPage() {
       </div>
       {/* Compound Components */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Components</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Components</Heading>
         <p className="text-sm text-muted-foreground">
           Kbd provides two components:
         </p>
@@ -164,8 +165,8 @@ export default function KbdPage() {
       </div>
       {/* Props */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Props</h2>
-        <h3 className="text-lg font-medium text-foreground">Kbd</h3>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Props</Heading>
+        <Heading as="h3" className="text-lg font-medium text-foreground">Kbd</Heading>
         <PropsTable props={[
           { name: "size", type: '"sm" | "md" | "lg"', default: '"md"' },
           { name: "className", type: "string", default: "-" },
@@ -175,7 +176,7 @@ export default function KbdPage() {
         <p className="text-sm text-muted-foreground">
           Also accepts all <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">View</code> props from React Native.
         </p>
-        <h3 className="text-lg font-medium text-foreground mt-6">KbdGroup</h3>
+        <Heading as="h3" className="text-lg font-medium text-foreground mt-6">KbdGroup</Heading>
         <PropsTable props={[
           { name: "separator", type: "string", default: '"+"' },
           { name: "className", type: "string", default: "-" },
@@ -187,7 +188,7 @@ export default function KbdPage() {
       </div>
       {/* Accessibility */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Accessibility</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Accessibility</Heading>
         <ul className="list-disc list-inside space-y-2 text-sm text-muted-foreground">
           <li>Uses monospaced font for consistent key display.</li>
           <li>Pair with descriptive text so screen readers convey the shortcut meaning, not just the key names.</li>
@@ -196,7 +197,7 @@ export default function KbdPage() {
       </div>
       {/* Source */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Source</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Source</Heading>
         <CodeBlock code={sourceCode} title="components/ui/kbd.tsx" />
       </div>
     </div>

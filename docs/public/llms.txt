@@ -122,6 +122,47 @@ Available as Tailwind classes via CSS variables:
 
 Dark mode is automatic via .dark class.
 
+## Charts (7, need react-native-svg)
+
+- AreaChart: `import { AreaChart } from "@/components/ui/area-chart"` — SVG area chart with gradient fill
+- BarChart: `import { BarChart } from "@/components/ui/bar-chart"` — Vertical and horizontal bar chart
+- LineChart: `import { LineChart } from "@/components/ui/line-chart"` — Multi-series line chart
+- PieChart: `import { PieChart } from "@/components/ui/pie-chart"` — Pie and donut chart
+- RadarChart: `import { RadarChart } from "@/components/ui/radar-chart"` — Radar/spider chart
+- RadialChart: `import { RadialChart } from "@/components/ui/radial-chart"` — Circular radial progress
+- ChartTooltip: `import { ChartTooltip } from "@/components/ui/chart-tooltip"` — Tooltip overlay for data points
+
+## Blocks (15 pre-built screens)
+
+Copy-paste full screen templates. Install via `npx @aniui/cli add-block <name>`.
+
+- Login — Email/password sign-in with form validation
+- Sign Up — Registration with name, email, password fields
+- Forgot Password — Email-based password reset flow
+- Home Screen — Dashboard layout with header, search, and sections
+- Bottom Tabs — Tab bar navigation with 4-5 tabs
+- Drawer Navigation — Side drawer with menu items
+- Profile — User profile with avatar, stats, and settings
+- Settings — Categorized settings list with toggles
+- Onboarding — Multi-step intro carousel
+- Chat — Message list with input bar
+- Product List — Grid/list of product cards with filters
+- Product Detail — Full product page with images, description, actions
+- Notifications — Grouped notification list with read/unread states
+- Pricing — Pricing tier comparison cards
+- Search — Search results with filters and categories
+
+## Why AniUI
+
+- shadcn/ui approach: copy source files, own the code, no npm dependency lock-in
+- 89 components + 7 charts + 15 blocks
+- Works with Expo SDK 53-55, bare React Native 0.76+, New Architecture
+- NativeWind v4 + v5, Uniwind support
+- Full RTL support for Arabic, Hebrew, Persian, Urdu
+- TypeScript strict, full accessibility (accessibilityRole on every interactive element)
+- CLI with init, add, add-block, theme, status, diff, update commands
+- MCP server for AI-assisted development
+
 ## Links
 - Docs: https://aniui.dev
 - GitHub: https://github.com/anishlp7/aniui

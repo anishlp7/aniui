@@ -1,3 +1,4 @@
+import { Heading } from "@/components/heading";
 import { ComponentPlayground } from "@/components/highlighted-playground";
 import { CodeBlock } from "@/components/code-block-server";
 import { PropsTable } from "@/components/props-table";
@@ -99,32 +100,32 @@ export default function DrawerPage() {
       </PreviewToggle>
       {/* Installation */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Installation</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Installation</Heading>
         <AddComponentTabs names="drawer" />
       </div>
       {/* Usage */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Usage</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Usage</Heading>
         <CodeBlock code={usageCode} title="app/index.tsx" />
       </div>
       {/* Left Drawer */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Left Drawer (Default)</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Left Drawer (Default)</Heading>
         <ComponentPlayground code={leftDrawerCode}>
           <DrawerLeftDemo />
         </ComponentPlayground>
       </div>
       {/* Right Drawer */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Right Drawer</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Right Drawer</Heading>
         <ComponentPlayground code={rightDrawerCode}>
           <DrawerRightDemo />
         </ComponentPlayground>
       </div>
       {/* Props - Drawer */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Props</h2>
-        <h3 className="text-lg font-medium text-foreground">Drawer</h3>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Props</Heading>
+        <Heading as="h3" className="text-lg font-medium text-foreground">Drawer</Heading>
         <PropsTable props={[
           { name: "open", type: "boolean", default: "required" },
           { name: "onOpenChange", type: "(open: boolean) => void", default: "required" },
@@ -132,7 +133,7 @@ export default function DrawerPage() {
           { name: "children", type: "ReactNode", default: "required" },
         ]} />
         {/* Props - DrawerContent */}
-        <h3 className="text-lg font-medium text-foreground mt-6">DrawerContent</h3>
+        <Heading as="h3" className="text-lg font-medium text-foreground mt-6">DrawerContent</Heading>
         <PropsTable props={[
           { name: "className", type: "string" },
           { name: "children", type: "ReactNode" },
@@ -143,7 +144,7 @@ export default function DrawerPage() {
       </div>
       {/* Accessibility */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Accessibility</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Accessibility</Heading>
         <ul className="list-disc list-inside space-y-2 text-sm text-muted-foreground">
           <li>Side drawer with <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">accessibilityRole="menu"</code>.</li>
           <li>Backdrop dismiss and close button are accessible to screen readers.</li>
@@ -151,7 +152,7 @@ export default function DrawerPage() {
       </div>
       {/* Source */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Source</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Source</Heading>
         <CodeBlock code={sourceCode} title="components/ui/drawer.tsx" />
       </div>
     </div>

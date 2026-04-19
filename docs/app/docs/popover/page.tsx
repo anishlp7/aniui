@@ -1,3 +1,4 @@
+import { Heading } from "@/components/heading";
 import { PreviewPopoverDemo } from "@/components/preview/popover";
 import { ComponentPlayground } from "@/components/highlighted-playground";
 import { CodeBlock } from "@/components/code-block-server";
@@ -107,7 +108,7 @@ export default function PopoverPage() {
       </ComponentPlayground>
       {/* Installation */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Installation</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Installation</Heading>
         <AddComponentTabs names="popover" />
         <p className="text-sm text-muted-foreground">
           This component requires <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">@rn-primitives/popover</code>, <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">@rn-primitives/portal</code>, and <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">react-native-reanimated</code>.
@@ -115,12 +116,12 @@ export default function PopoverPage() {
       </div>
       {/* Usage */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Usage</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Usage</Heading>
         <CodeBlock code={usageCode} title="app/index.tsx" />
       </div>
       {/* Compound Components */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Components</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Components</Heading>
         <p className="text-sm text-muted-foreground">
           Popover is a compound component made up of several parts:
         </p>
@@ -133,14 +134,14 @@ export default function PopoverPage() {
       </div>
       {/* Props */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Props</h2>
-        <h3 className="text-lg font-medium text-foreground">Popover</h3>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Props</Heading>
+        <Heading as="h3" className="text-lg font-medium text-foreground">Popover</Heading>
         <PropsTable props={[
           { name: "open", type: "boolean" },
           { name: "onOpenChange", type: "(open: boolean) => void" },
           { name: "children", type: "React.ReactNode", default: "required" },
         ]} />
-        <h3 className="text-lg font-medium text-foreground mt-6">PopoverContent</h3>
+        <Heading as="h3" className="text-lg font-medium text-foreground mt-6">PopoverContent</Heading>
         <PropsTable props={[
           { name: "side", type: "\"top\" | \"bottom\" | \"left\" | \"right\"", default: "\"bottom\"" },
           { name: "sideOffset", type: "number", default: "8" },
@@ -153,7 +154,7 @@ export default function PopoverPage() {
       </div>
       {/* Accessibility */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Accessibility</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Accessibility</Heading>
         <ul className="list-disc list-inside space-y-2 text-sm text-muted-foreground">
           <li>Uses <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">@rn-primitives/popover</code> for proper trigger-relative positioning</li>
           <li>Collision detection prevents overflow off screen edges</li>
@@ -164,7 +165,7 @@ export default function PopoverPage() {
       </div>
       {/* Source */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">Source</h2>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Source</Heading>
         <CodeBlock code={sourceCode} title="components/ui/popover.tsx" />
       </div>
     </div>

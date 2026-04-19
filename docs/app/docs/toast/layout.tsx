@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "toast",
-  description: "AniUI toast component for React Native. Accessible, customizable, built with NativeWind and TypeScript.",
+  description: "AniUI Toast — notification popup with auto-dismiss. Default, success, destructive variants.",
   alternates: { canonical: "/docs/toast" },
 };
 
