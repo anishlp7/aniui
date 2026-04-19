@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Phone Input",
-  description: "AniUI Phone Input component for React Native. Accessible, customizable, built with NativeWind and TypeScript.",
+  description: "AniUI Phone Input — phone number field with country code selector and dial code formatting.",
   alternates: { canonical: "/docs/phone-input" },
 };
 

@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Data Table",
-  description: "AniUI Data Table component for React Native. Accessible, customizable, built with NativeWind and TypeScript.",
+  description: "AniUI Data Table — sortable, filterable table with pagination, custom cells, and striped rows.",
   alternates: { canonical: "/docs/data-table" },
 };
 

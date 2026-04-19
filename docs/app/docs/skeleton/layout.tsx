@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Skeleton",
-  description: "AniUI Skeleton component for React Native. Accessible, customizable, built with NativeWind and TypeScript.",
+  description: "AniUI Skeleton — animated loading placeholder with pulse opacity. Built with Reanimated.",
   alternates: { canonical: "/docs/skeleton" },
 };
 

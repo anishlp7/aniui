@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Date Picker",
-  description: "AniUI Date Picker component for React Native. Accessible, customizable, built with NativeWind and TypeScript.",
+  description: "AniUI Date Picker — calendar popup with single date and range selection for React Native.",
   alternates: { canonical: "/docs/date-picker" },
 };
 

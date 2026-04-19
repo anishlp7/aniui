@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Status Indicator",
-  description: "AniUI Status Indicator component for React Native. Accessible, customizable, built with NativeWind and TypeScript.",
+  description: "AniUI Status Indicator — colored dot for online, offline, away, busy with pulse animation.",
   alternates: { canonical: "/docs/status-indicator" },
 };
 

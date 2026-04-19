@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Checkbox",
-  description: "AniUI Checkbox component for React Native. Accessible, customizable, built with NativeWind and TypeScript.",
+  description: "AniUI Checkbox — accessible check input with checked, unchecked, and disabled states.",
   alternates: { canonical: "/docs/checkbox" },
 };
 

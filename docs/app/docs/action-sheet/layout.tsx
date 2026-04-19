@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Action Sheet",
-  description: "AniUI Action Sheet component for React Native. Accessible, customizable, built with NativeWind and TypeScript.",
+  description: "AniUI Action Sheet — iOS-style option sheet with destructive actions. Built with @gorhom/bottom-sheet.",
   alternates: { canonical: "/docs/action-sheet" },
 };
 

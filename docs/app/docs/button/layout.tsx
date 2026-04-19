@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Button",
-  description: "AniUI Button component for React Native. Accessible, customizable, built with NativeWind and TypeScript.",
+  description: "AniUI Button — pressable with 5 variants, 3 sizes, loading state, and icon support for React Native.",
   alternates: { canonical: "/docs/button" },
 };
 

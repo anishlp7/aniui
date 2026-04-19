@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Textarea",
-  description: "AniUI Textarea component for React Native. Accessible, customizable, built with NativeWind and TypeScript.",
+  description: "AniUI Textarea — multi-line text input with variant and size options for React Native.",
   alternates: { canonical: "/docs/textarea" },
 };
 

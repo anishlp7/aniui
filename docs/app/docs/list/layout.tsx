@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "List",
-  description: "AniUI List component for React Native. Accessible, customizable, built with NativeWind and TypeScript.",
+  description: "AniUI List — styled list with ListItem, Title, and Description sub-components for React Native.",
   alternates: { canonical: "/docs/list" },
 };
 

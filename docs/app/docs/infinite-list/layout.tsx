@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Infinite List",
-  description: "AniUI Infinite List component for React Native. Accessible, customizable, built with NativeWind and TypeScript.",
+  description: "AniUI Infinite List — FlatList wrapper with automatic load-more on scroll and loading spinner.",
   alternates: { canonical: "/docs/infinite-list" },
 };
 

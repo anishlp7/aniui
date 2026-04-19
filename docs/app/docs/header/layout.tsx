@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Header",
-  description: "AniUI Header component for React Native. Accessible, customizable, built with NativeWind and TypeScript.",
+  description: "AniUI Header — navigation bar with back button, title, and right action area for React Native.",
   alternates: { canonical: "/docs/header" },
 };
 

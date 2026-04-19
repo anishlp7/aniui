@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Typing Indicator",
-  description: "AniUI Typing Indicator component for React Native. Accessible, customizable, built with NativeWind and TypeScript.",
+  description: "AniUI Typing Indicator — animated bouncing dots for chat typing status.",
   alternates: { canonical: "/docs/typing-indicator" },
 };
 

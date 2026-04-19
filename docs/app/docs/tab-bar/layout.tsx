@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Tab Bar",
-  description: "AniUI Tab Bar component for React Native. Accessible, customizable, built with NativeWind and TypeScript.",
+  description: "AniUI Tab Bar — bottom navigation with badge support and active state indicators.",
   alternates: { canonical: "/docs/tab-bar" },
 };
 

@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Switch",
-  description: "AniUI Switch component for React Native. Accessible, customizable, built with NativeWind and TypeScript.",
+  description: "AniUI Switch — toggle control with theme-aware track colors for iOS and Android.",
   alternates: { canonical: "/docs/switch" },
 };
 

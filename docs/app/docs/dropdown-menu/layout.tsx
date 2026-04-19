@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Dropdown Menu",
-  description: "AniUI Dropdown Menu component for React Native. Accessible, customizable, built with NativeWind and TypeScript.",
+  description: "AniUI Dropdown Menu — popup menu with items, separators, and destructive actions.",
   alternates: { canonical: "/docs/dropdown-menu" },
 };
 

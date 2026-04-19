@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Bottom Sheet",
-  description: "AniUI Bottom Sheet component for React Native. Accessible, customizable, built with NativeWind and TypeScript.",
+  description: "AniUI Bottom Sheet — swipeable overlay panel with snap points. Built with @gorhom/bottom-sheet.",
   alternates: { canonical: "/docs/bottom-sheet" },
 };
 

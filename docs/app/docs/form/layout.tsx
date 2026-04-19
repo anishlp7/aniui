@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Form",
-  description: "AniUI Form component for React Native. Accessible, customizable, built with NativeWind and TypeScript.",
+  description: "AniUI Form — validation context with required, pattern, and custom validators. Error messages.",
   alternates: { canonical: "/docs/form" },
 };
 

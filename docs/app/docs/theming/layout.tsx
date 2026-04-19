@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Theming",
-  description: "Customize AniUI with CSS variables. Light and dark mode, color presets, and full theme editor.",
+  description: "AniUI Theming — AniUI with CSS variables. Light and dark mode, color presets, and full theme editor.",
   alternates: { canonical: "/docs/theming" },
 };
 

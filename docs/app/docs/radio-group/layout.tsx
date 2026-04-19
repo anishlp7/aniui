@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Radio Group",
-  description: "AniUI Radio Group component for React Native. Accessible, customizable, built with NativeWind and TypeScript.",
+  description: "AniUI Radio Group — single-selection radio buttons with accessible states. rn-primitives based.",
   alternates: { canonical: "/docs/radio-group" },
 };
 

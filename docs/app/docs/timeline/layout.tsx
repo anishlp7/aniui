@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Timeline",
-  description: "AniUI Timeline component for React Native. Accessible, customizable, built with NativeWind and TypeScript.",
+  description: "AniUI Timeline — vertical event tracker for order status, activity feeds, and history.",
   alternates: { canonical: "/docs/timeline" },
 };
 

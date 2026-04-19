@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Rating",
-  description: "AniUI Rating component for React Native. Accessible, customizable, built with NativeWind and TypeScript.",
+  description: "AniUI Rating — star rating with interactive and read-only modes. 3 sizes (sm, md, lg).",
   alternates: { canonical: "/docs/rating" },
 };
 

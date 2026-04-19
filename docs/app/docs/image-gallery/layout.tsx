@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Image Gallery",
-  description: "AniUI Image Gallery component for React Native. Accessible, customizable, built with NativeWind and TypeScript.",
+  description: "AniUI Image Gallery — horizontal carousel with fullscreen modal viewer and pagination.",
   alternates: { canonical: "/docs/image-gallery" },
 };
 

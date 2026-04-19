@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Accordion",
-  description: "AniUI Accordion component for React Native. Accessible, customizable, built with NativeWind and TypeScript.",
+  description: "AniUI Accordion — expandable content sections with animated expand/collapse. Built with rn-primitives.",
   alternates: { canonical: "/docs/accordion" },
 };
 

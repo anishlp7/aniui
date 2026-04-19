@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Slider",
-  description: "AniUI Slider component for React Native. Accessible, customizable, built with NativeWind and TypeScript.",
+  description: "AniUI Slider — draggable range input with Gesture Handler and Reanimated for 120Hz performance.",
   alternates: { canonical: "/docs/slider" },
 };
 

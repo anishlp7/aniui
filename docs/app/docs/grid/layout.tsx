@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Grid",
-  description: "AniUI Grid component for React Native. Accessible, customizable, built with NativeWind and TypeScript.",
+  description: "AniUI Grid — FlatList-based grid layout with configurable columns and gap spacing.",
   alternates: { canonical: "/docs/grid" },
 };
 

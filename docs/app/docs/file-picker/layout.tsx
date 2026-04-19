@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "File Picker",
-  description: "AniUI File Picker component for React Native. Accessible, customizable, built with NativeWind and TypeScript.",
+  description: "AniUI File Picker — upload area with dashed border, file preview, and progress indicator.",
   alternates: { canonical: "/docs/file-picker" },
 };
 

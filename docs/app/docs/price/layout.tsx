@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Price",
-  description: "AniUI Price component for React Native. Accessible, customizable, built with NativeWind and TypeScript.",
+  description: "AniUI Price — formatted currency display with locale support and strikethrough for discounts.",
   alternates: { canonical: "/docs/price" },
 };
 

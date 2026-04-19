@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Dark Mode",
-  description: "Built-in dark mode support for all AniUI components. CSS variables automatically switch between light and dark themes.",
+  description: "AniUI Dark Mode — dark mode support for all AniUI components. CSS variables automatically switch between light and dark themes.",
   alternates: { canonical: "/docs/dark-mode" },
 };
 

@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Alert",
-  description: "AniUI Alert component for React Native. Accessible, customizable, built with NativeWind and TypeScript.",
+  description: "AniUI Alert — notification banners with default, destructive, success, and warning variants.",
   alternates: { canonical: "/docs/alert" },
 };
 

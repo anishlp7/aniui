@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Field",
-  description: "AniUI Field component for React Native. Accessible, customizable, built with NativeWind and TypeScript.",
+  description: "AniUI Field — form field layout combining label, input, description, and error. Vertical or horizontal.",
   alternates: { canonical: "/docs/field" },
 };
 

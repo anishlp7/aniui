@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Carousel",
-  description: "AniUI Carousel component for React Native. Accessible, customizable, built with NativeWind and TypeScript.",
+  description: "AniUI Carousel — horizontal scrollable list with pagination dots and autoPlay for React Native.",
   alternates: { canonical: "/docs/carousel" },
 };
 

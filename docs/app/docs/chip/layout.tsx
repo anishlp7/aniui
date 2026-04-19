@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Chip",
-  description: "AniUI Chip component for React Native. Accessible, customizable, built with NativeWind and TypeScript.",
+  description: "AniUI Chip — interactive tag for filters and multi-select. Selectable, closable, 4 variants, 3 sizes.",
   alternates: { canonical: "/docs/chip" },
 };
 

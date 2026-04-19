@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Theme Provider",
-  description: "AniUI Theme Provider component for React Native. Accessible, customizable, built with NativeWind and TypeScript.",
+  description: "AniUI Theme Provider — light, dark, and system mode context with toggle for React Native.",
   alternates: { canonical: "/docs/theme-provider" },
 };
 

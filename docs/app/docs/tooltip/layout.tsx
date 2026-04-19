@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Tooltip",
-  description: "AniUI Tooltip component for React Native. Accessible, customizable, built with NativeWind and TypeScript.",
+  description: "AniUI Tooltip — accessible hint overlay with fade animation. Top, bottom, left, right sides.",
   alternates: { canonical: "/docs/tooltip" },
 };
 

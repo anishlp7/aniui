@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Collapsible",
-  description: "AniUI Collapsible component for React Native. Accessible, customizable, built with NativeWind and TypeScript.",
+  description: "AniUI Collapsible — animated show/hide content panel with fade transition for React Native.",
   alternates: { canonical: "/docs/collapsible" },
 };
 

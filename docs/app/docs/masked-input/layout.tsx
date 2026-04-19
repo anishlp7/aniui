@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Masked Input",
-  description: "AniUI Masked Input component for React Native. Accessible, customizable, built with NativeWind and TypeScript.",
+  description: "AniUI Masked Input — auto-format input with credit card, phone, and date mask presets.",
   alternates: { canonical: "/docs/masked-input" },
 };
 

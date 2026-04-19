@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Pagination",
-  description: "AniUI Pagination component for React Native. Accessible, customizable, built with NativeWind and TypeScript.",
+  description: "AniUI Pagination — page navigation with numbered buttons and prev/next controls.",
   alternates: { canonical: "/docs/pagination" },
 };
 

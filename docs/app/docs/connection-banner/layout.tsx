@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Connection Banner",
-  description: "AniUI Connection Banner component for React Native. Accessible, customizable, built with NativeWind and TypeScript.",
+  description: "AniUI Connection Banner — animated online/offline status indicator for React Native.",
   alternates: { canonical: "/docs/connection-banner" },
 };
 

@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Calendar",
-  description: "AniUI Calendar component for React Native. Accessible, customizable, built with NativeWind and TypeScript.",
+  description: "AniUI Calendar — month grid with single date and range selection. Day, month, and year views.",
   alternates: { canonical: "/docs/calendar" },
 };
 

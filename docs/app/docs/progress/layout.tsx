@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Progress",
-  description: "AniUI Progress component for React Native. Accessible, customizable, built with NativeWind and TypeScript.",
+  description: "AniUI Progress — percentage bar with accessible fill indicator. Built with rn-primitives.",
   alternates: { canonical: "/docs/progress" },
 };
 

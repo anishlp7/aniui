@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Avatar",
-  description: "AniUI Avatar component for React Native. Accessible, customizable, built with NativeWind and TypeScript.",
+  description: "AniUI Avatar — user image with fallback initials. Three sizes (sm, md, lg) for React Native.",
   alternates: { canonical: "/docs/avatar" },
 };
 

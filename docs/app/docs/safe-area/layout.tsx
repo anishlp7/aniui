@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Safe Area",
-  description: "AniUI Safe Area component for React Native. Accessible, customizable, built with NativeWind and TypeScript.",
+  description: "AniUI Safe Area — SafeAreaView wrapper with theme variants. Handles notch and status bar.",
   alternates: { canonical: "/docs/safe-area" },
 };
 

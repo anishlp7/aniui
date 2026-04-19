@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Search Bar",
-  description: "AniUI Search Bar component for React Native. Accessible, customizable, built with NativeWind and TypeScript.",
+  description: "AniUI Search Bar — search input with icon, clear button, and cancel action. 3 sizes.",
   alternates: { canonical: "/docs/search-bar" },
 };
 

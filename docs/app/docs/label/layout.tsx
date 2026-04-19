@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Label",
-  description: "AniUI Label component for React Native. Accessible, customizable, built with NativeWind and TypeScript.",
+  description: "AniUI Label — styled text label for form fields in React Native.",
   alternates: { canonical: "/docs/label" },
 };
 

@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Context Menu",
-  description: "AniUI Context Menu component for React Native. Accessible, customizable, built with NativeWind and TypeScript.",
+  description: "AniUI Context Menu — long-press menu with items, separators, and destructive actions.",
   alternates: { canonical: "/docs/context-menu" },
 };
 

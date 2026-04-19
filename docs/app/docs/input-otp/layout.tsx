@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Input OTP",
-  description: "AniUI Input OTP component for React Native. Accessible, customizable, built with NativeWind and TypeScript.",
+  description: "AniUI Input OTP — one-time password input with individual cells and auto-focus navigation.",
   alternates: { canonical: "/docs/input-otp" },
 };
 

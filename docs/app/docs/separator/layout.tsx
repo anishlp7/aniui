@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Separator",
-  description: "AniUI Separator component for React Native. Accessible, customizable, built with NativeWind and TypeScript.",
+  description: "AniUI Separator — visual divider with horizontal and vertical orientations.",
   alternates: { canonical: "/docs/separator" },
 };
 

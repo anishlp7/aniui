@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Spinner",
-  description: "AniUI Spinner component for React Native. Accessible, customizable, built with NativeWind and TypeScript.",
+  description: "AniUI Spinner — loading indicator with 3 sizes (sm, md, lg) for React Native.",
   alternates: { canonical: "/docs/spinner" },
 };
 

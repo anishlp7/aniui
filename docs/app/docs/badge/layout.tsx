@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Badge",
-  description: "AniUI Badge component for React Native. Accessible, customizable, built with NativeWind and TypeScript.",
+  description: "AniUI Badge — small status indicator with default, secondary, outline, and destructive variants.",
   alternates: { canonical: "/docs/badge" },
 };
 

@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Alert Dialog",
-  description: "AniUI Alert Dialog component for React Native. Accessible, customizable, built with NativeWind and TypeScript.",
+  description: "AniUI Alert Dialog — confirmation modal with action and cancel buttons. Animated with Reanimated.",
   alternates: { canonical: "/docs/alert-dialog" },
 };
 

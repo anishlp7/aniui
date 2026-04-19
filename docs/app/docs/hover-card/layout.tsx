@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Hover Card",
-  description: "AniUI Hover Card component for React Native. Accessible, customizable, built with NativeWind and TypeScript.",
+  description: "AniUI Hover Card — preview content card triggered by long-press. Positioned with rn-primitives.",
   alternates: { canonical: "/docs/hover-card" },
 };
 

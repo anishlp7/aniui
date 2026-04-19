@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Table",
-  description: "AniUI Table component for React Native. Accessible, customizable, built with NativeWind and TypeScript.",
+  description: "AniUI Table — data layout with Header, Body, Row, Head, and Cell sub-components.",
   alternates: { canonical: "/docs/table" },
 };
 

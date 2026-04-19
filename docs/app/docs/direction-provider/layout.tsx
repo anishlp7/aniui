@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Direction Provider",
-  description: "AniUI Direction Provider component for React Native. Accessible, customizable, built with NativeWind and TypeScript.",
+  description: "AniUI Direction Provider — RTL/LTR context with I18nManager and useDirection hook.",
   alternates: { canonical: "/docs/direction-provider" },
 };
 

@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Stepper",
-  description: "AniUI Stepper component for React Native. Accessible, customizable, built with NativeWind and TypeScript.",
+  description: "AniUI Stepper — numeric increment/decrement control with min, max, and step validation.",
   alternates: { canonical: "/docs/stepper" },
 };
 

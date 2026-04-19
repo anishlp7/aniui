@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Banner",
-  description: "AniUI Banner component for React Native. Accessible, customizable, built with NativeWind and TypeScript.",
+  description: "AniUI Banner — full-width notification with info, warning, destructive, success variants and dismiss.",
   alternates: { canonical: "/docs/banner" },
 };
 

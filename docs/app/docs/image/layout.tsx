@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Image",
-  description: "AniUI Image component for React Native. Accessible, customizable, built with NativeWind and TypeScript.",
+  description: "AniUI Image — optimized image with loading placeholder, error fallback, and rounded variants.",
   alternates: { canonical: "/docs/image" },
 };
 

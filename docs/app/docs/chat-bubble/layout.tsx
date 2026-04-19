@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Chat Bubble",
-  description: "AniUI Chat Bubble component for React Native. Accessible, customizable, built with NativeWind and TypeScript.",
+  description: "AniUI Chat Bubble — sent/received message bubbles with timestamps and delivery status.",
   alternates: { canonical: "/docs/chat-bubble" },
 };
 

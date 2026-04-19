@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Toggle",
-  description: "AniUI Toggle component for React Native. Accessible, customizable, built with NativeWind and TypeScript.",
+  description: "AniUI Toggle — two-state pressable button with visual feedback for React Native.",
   alternates: { canonical: "/docs/toggle" },
 };
 

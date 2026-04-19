@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Command Menu",
-  description: "AniUI Command Menu component for React Native. Accessible, customizable, built with NativeWind and TypeScript.",
+  description: "AniUI Command Menu — Spotlight-style searchable palette with groups and keyboard shortcuts.",
   alternates: { canonical: "/docs/command-menu" },
 };
 
