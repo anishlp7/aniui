@@ -26,6 +26,22 @@ const typeBadge: Record<ChangeType, { label: string; className: string }> = {
 
 const releases: Release[] = [
   {
+    version: "0.2.21",
+    date: "2026-04-19",
+    title: "CLI Bug Fix, SEO Overhaul & Premium Homepage",
+    changes: [
+      { type: "fix", text: "CLI: fixed Cannot find module package.json crash when running via npx (compiled path resolution bug)" },
+      { type: "fix", text: "CLI: extracted shared getCliPackage() utility to resolve package.json from both source and dist paths" },
+      { type: "fix", text: "SEO: OpenGraph URL fixed from relative './' to absolute 'https://aniui.dev'" },
+      { type: "feat", text: "SEO: OG image and Twitter image configured for rich social sharing previews" },
+      { type: "feat", text: "Sitemap: added 22 missing pages (15 blocks + 7 charts) for full search engine coverage" },
+      { type: "docs", text: "82 unique SEO descriptions for component pages — 'AniUI Button — pressable with 5 variants...' format" },
+      { type: "docs", text: "llms.txt: added Charts (7), Blocks (15), and Why AniUI sections for LLM discoverability" },
+      { type: "feat", text: "Homepage: premium hero with dot pattern background, larger typography, GitHub star button, and 89+ badge" },
+      { type: "fix", text: "Props table: added break-words to Default column to prevent overflow on narrow screens" },
+    ],
+  },
+  {
     version: "0.2.20",
     date: "2026-04-19",
     title: "Tabs Rewrite, SEO Metadata, Anchor Links & Bug Fixes",

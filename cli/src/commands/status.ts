@@ -4,8 +4,9 @@ import chalk from "chalk";
 import { registry, getComponentNames } from "../registry";
 import { hashFile } from "../utils/hash";
 import { logger } from "../utils/logger";
+import { getCliPackage } from "../utils/pkg";
 
-const pkg = require("../../package.json");
+const pkg = getCliPackage();
 
 interface InstalledEntry {
   version: string;

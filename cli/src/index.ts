@@ -9,8 +9,9 @@ import { doctorCommand } from "./commands/doctor";
 import { statusCommand } from "./commands/status";
 import { diffCommand } from "./commands/diff";
 import { updateCommand } from "./commands/update";
+import { getCliPackage } from "./utils/pkg";
 
-const pkg = require("../../package.json");
+const pkg = getCliPackage();
 
 const program = new Command()
   .name("aniui")
