@@ -584,6 +584,20 @@ export type ComponentEntry = {
 28-29. Build dialog, toast (Tier 2)
 30. Launch on GitHub, Hacker News, r/reactnative, Twitter
 
+## CLI Pre-Publish Checklist
+
+**NEVER publish @aniui/cli to npm without completing ALL of these steps:**
+
+1. **Build:** `cd cli && npm run build` — must succeed with zero errors
+2. **Version check:** `node dist/bin/index.js --version` — must print the correct version
+3. **Test add:** Run `aniui add tabs button card` in a clean test directory with a `.aniui.json` — verify files are copied and manifest is written
+4. **Test status:** Run `aniui status` — verify installed/not-installed table renders correctly
+5. **Test diff:** Run `aniui diff <name>` on an installed component — verify diff output
+6. **Test init:** Run `aniui init` in a fresh Expo project — verify config files are generated
+7. **Compiled path check:** Verify `require("../../package.json")` is NOT used anywhere — all files must use `getCliPackage()` from `utils/pkg.ts`
+
+**Why:** The CLI compiles `src/` → `dist/src/`, which shifts `__dirname` one level deeper. Static `require("../../package.json")` resolves to `dist/package.json` (doesn't exist) instead of `cli/package.json`. This broke v0.2.20 for all npx users. Always test from the compiled `dist/` path, not the source.
+
 ## Git Conventions
 
 ```

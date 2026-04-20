@@ -122,5 +122,5 @@ export interface TabsContentProps extends React.ComponentPropsWithoutRef<typeof 
 export function TabsContent({ value, className, ...props }: TabsContentProps) {
   const { value: selected, orientation } = useContext(TabsCtx);
   if (selected !== value) return null;
-  return <View className={cn(orientation === "horizontal" ? "mt-2" : "ms-4 flex-1", className)} accessibilityRole="tabpanel" {...props} />;
+  return <View className={cn(orientation === "horizontal" ? "mt-2" : "ms-4 flex-1", className)} role="tabpanel" {...props} />;
 }
