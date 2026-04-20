@@ -26,6 +26,16 @@ const typeBadge: Record<ChangeType, { label: string; className: string }> = {
 
 const releases: Release[] = [
   {
+    version: "0.2.22",
+    date: "2026-04-20",
+    title: "CLI Docs Sync, A11y Fixes & ESLint",
+    changes: [
+      { type: "docs", text: "CLI docs page synced with actual --help output (5 missing commands added: add-block, doctor, status, diff, update)", link: "/docs/cli" },
+      { type: "fix", text: "Tabs: switched TabsContent from accessibilityRole='tabpanel' (not in RN's AccessibilityRole union) to role='tabpanel' (RN 0.83+ Role union)", link: "/docs/tabs" },
+      { type: "fix", text: "ThemeProvider: added missing useEffect dependencies (defaultTheme, applyTheme) to satisfy react-hooks/exhaustive-deps", link: "/docs/theme-provider" },
+    ],
+  },
+  {
     version: "0.2.21",
     date: "2026-04-19",
     title: "CLI Bug Fix, SEO Overhaul & Premium Homepage",
