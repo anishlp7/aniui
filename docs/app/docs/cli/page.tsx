@@ -52,6 +52,25 @@ npx @aniui/cli add select
           Tier 2 components), the CLI will print the install command for you.
         </p>
 
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight pt-4">add-block</Heading>
+        <p className="text-muted-foreground">
+          Add pre-built screen templates (blocks) to your project. Blocks are full screens composed of AniUI components — login, settings, profile, chat, onboarding, and more.
+        </p>
+        <CodeBlock code="npx @aniui/cli add-block [block...]" />
+        <p className="text-muted-foreground">Examples:</p>
+        <CodeBlock
+          code={`# Add a single block
+npx @aniui/cli add-block login
+
+# Add multiple blocks
+npx @aniui/cli add-block signup forgot-password
+
+# All blocks auto-resolve their component dependencies`}
+        />
+        <p className="text-muted-foreground">
+          Available blocks: login, signup, forgot-password, home, bottom-tabs, drawer-nav, profile, settings, onboarding, chat, product-list, product-detail, notifications, pricing, search.
+        </p>
+
         <Heading as="h2" className="text-2xl font-semibold tracking-tight pt-4">theme</Heading>
         <p className="text-muted-foreground">
           Switch between theme presets. Updates the CSS variables in your <code className="rounded bg-secondary px-1.5 py-0.5 text-sm font-mono">global.css</code>.
@@ -86,6 +105,53 @@ npx @aniui/cli generate "settings page" -o app/settings.tsx`}
           This outputs a JSON config block you can paste into your AI tool&apos;s MCP settings.
           The MCP server exposes component registry data, source code, usage patterns, and theme tokens.
         </p>
+
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight pt-4">doctor</Heading>
+        <p className="text-muted-foreground">
+          Check your project setup for common issues. Verifies AniUI config, NativeWind installation, theme tokens, Tailwind config, and more.
+        </p>
+        <CodeBlock code="npx @aniui/cli doctor" />
+        <p className="text-muted-foreground">
+          Useful for debugging when components don&apos;t render correctly or styles aren&apos;t applied. The doctor reports what&apos;s missing and suggests fixes.
+        </p>
+
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight pt-4">status</Heading>
+        <p className="text-muted-foreground">
+          Show installed components and available updates. Reports a table with component name, installed version, latest version, local modification state, and update status.
+        </p>
+        <CodeBlock code="npx @aniui/cli status" />
+        <p className="text-muted-foreground">
+          Status indicators: <strong>current</strong> (up to date), <strong>update available</strong>, <strong>modified</strong> (local changes detected), <strong>not installed</strong>. Local modifications are detected via SHA-256 hash comparison against the version you installed.
+        </p>
+
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight pt-4">diff</Heading>
+        <p className="text-muted-foreground">
+          Show differences between your local component file and the current upstream version. Useful before running <code className="rounded bg-secondary px-1.5 py-0.5 text-sm font-mono">update</code> to preview what will change.
+        </p>
+        <CodeBlock code="npx @aniui/cli diff button" />
+        <p className="text-muted-foreground">
+          Outputs a colored unified diff (green for additions, red for removals). Only shows lines that differ.
+        </p>
+
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight pt-4">update</Heading>
+        <p className="text-muted-foreground">
+          Update installed components to the latest version. Supports smart merging when you&apos;ve modified components locally.
+        </p>
+        <CodeBlock
+          code={`# Update all installed components
+npx @aniui/cli update
+
+# Update specific components
+npx @aniui/cli update button card`}
+        />
+        <p className="text-muted-foreground">
+          Three strategies when local changes are detected:
+        </p>
+        <ul className="list-disc pl-6 space-y-1 text-muted-foreground">
+          <li><strong>overwrite</strong> — replace your local version with upstream (loses your changes)</li>
+          <li><strong>skip</strong> — keep your local version (no update applied)</li>
+          <li><strong>backup</strong> — save local as <code className="rounded bg-secondary px-1.5 py-0.5 text-sm font-mono">.backup</code>, apply upstream</li>
+        </ul>
       </div>
     </div>
   );
