@@ -76,7 +76,7 @@ export function ThemeProvider({
     if (defaultTheme !== "system") {
       applyTheme(defaultTheme === "dark" ? "dark" : "light");
     }
-  }, []);
+  }, [defaultTheme, applyTheme]);
 
   return (
     <ThemeContext.Provider value={{ theme, resolvedTheme, setTheme, toggleTheme }}>
