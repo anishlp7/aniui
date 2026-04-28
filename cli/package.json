@@ -46,16 +46,16 @@
     "prompts": "^2.4.2"
   },
   "optionalDependencies": {
-    "@anthropic-ai/sdk": "^0.52.0"
+    "@anthropic-ai/sdk": "^0.82.0"
   },
   "engines": {
     "node": ">=20.0.0"
   },
   "devDependencies": {
     "@types/fs-extra": "^11.0.0",
-    "@types/node": "^20.0.0",
+    "@types/node": "^25.5.0",
     "@types/prompts": "^2.4.0",
-    "typescript": "^5.5.0",
+    "typescript": "^6.0.2",
     "vitest": "^4.1.0"
   }
 }
