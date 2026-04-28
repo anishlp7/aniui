@@ -184,8 +184,8 @@ export async function doctorCommand(): Promise<void> {
     });
   }
 
-  // 9. No known conflicts
-  if (project.type === "expo") {
+  // 9. No known conflicts (NativeWind only — Uniwind has no known RC conflict)
+  if (project.type === "expo" && !isUniwind) {
     const appJsonPath = path.join(cwd, "app.json");
     if (await fs.pathExists(appJsonPath)) {
       const appJson = await fs.readJson(appJsonPath);
