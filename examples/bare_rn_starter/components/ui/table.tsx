@@ -3,7 +3,7 @@ import { View, Text, ScrollView } from "react-native";
 import { cn } from "@/lib/utils";
 
 export type TableViewProps = React.ComponentPropsWithoutRef<typeof View> & { className?: string; children?: React.ReactNode };
-export type TableTextProps = React.ComponentPropsWithoutRef<typeof Text> & { className?: string };
+export interface TableCellProps extends TableViewProps { textClassName?: string }
 
 export function Table({ className, children, ...props }: React.ComponentPropsWithoutRef<typeof ScrollView> & { className?: string; children?: React.ReactNode }) {
   return (
@@ -25,14 +25,20 @@ export function TableRow({ className, ...props }: TableViewProps) {
   return <View className={cn("flex-row border-b border-border", className)} {...props} />;
 }
 
-export function TableHead({ className, ...props }: TableTextProps) {
+export function TableHead({ className, textClassName, children, ...props }: TableCellProps) {
+  const isText = typeof children === "string" || typeof children === "number";
   return (
-    <Text className={cn("flex-1 px-4 py-3 text-sm font-medium text-muted-foreground", className)} {...props} />
+    <View className={cn("flex-1 px-4 py-3", className)} {...props}>
+      {isText ? <Text className={cn("text-sm font-medium text-muted-foreground", textClassName)}>{children}</Text> : children}
+    </View>
   );
 }
 
-export function TableCell({ className, ...props }: TableTextProps) {
+export function TableCell({ className, textClassName, children, ...props }: TableCellProps) {
+  const isText = typeof children === "string" || typeof children === "number";
   return (
-    <Text className={cn("flex-1 px-4 py-3 text-sm text-foreground", className)} {...props} />
+    <View className={cn("flex-1 px-4 py-3", className)} {...props}>
+      {isText ? <Text className={cn("text-sm text-foreground", textClassName)}>{children}</Text> : children}
+    </View>
   );
 }
