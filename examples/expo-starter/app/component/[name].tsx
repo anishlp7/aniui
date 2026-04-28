@@ -950,6 +950,20 @@ const demos: Record<string, () => React.ReactElement> = {
             striped
           />
         </View>
+        {/* Truncate (fits container, ellipsis on overflow) */}
+        <View className="gap-2">
+          <Text className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Truncate</Text>
+          <DataTable
+            columns={[
+              { key: "name", header: "Name" },
+              { key: "email", header: "Email" },
+              { key: "role", header: "Role" },
+            ]}
+            data={data.slice(0, 6)}
+            truncate
+            striped
+          />
+        </View>
       </View>
     );
   },

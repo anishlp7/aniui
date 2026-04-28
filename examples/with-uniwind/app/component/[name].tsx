@@ -823,6 +823,10 @@ const demos: Record<string, () => React.ReactElement> = {
           <Text className="text-xs font-semibold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">Striped</Text>
           <DataTable columns={[{ key: "name", header: "Name" }, { key: "email", header: "Email" }, { key: "role", header: "Role" }]} data={data} striped />
         </View>
+        <View className="gap-2">
+          <Text className="text-xs font-semibold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">Truncate (fits container, ellipsis on overflow)</Text>
+          <DataTable columns={[{ key: "name", header: "Name" }, { key: "email", header: "Email" }, { key: "role", header: "Role" }]} data={data} truncate striped />
+        </View>
       </View>
     );
   },

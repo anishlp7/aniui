@@ -51,12 +51,13 @@ export async function initCommand(opts?: { style?: string; yes?: boolean }): Pro
   logger.success(`Using ${pm} as package manager`);
   logger.success(`SDK generation: ${gen === "v5" ? "Tailwind v4" : "Tailwind v3"}`);
 
-  // Auto-detect style engine (CLI flag overrides detection)
-  const detectedStyle: StyleEngine = (opts?.style === "uniwind" || opts?.style === "nativewind")
-    ? opts.style
-    : project.hasUniwind ? "uniwind" : "nativewind";
+  // --style flag is authoritative; otherwise auto-detect from project deps
+  const styleFromFlag: StyleEngine | null =
+    opts?.style === "uniwind" || opts?.style === "nativewind" ? opts.style : null;
+  const detectedStyle: StyleEngine =
+    styleFromFlag ?? (project.hasUniwind ? "uniwind" : "nativewind");
 
-  // Step 1: Ask style engine + theme + paths upfront (skip with --yes)
+  // Step 1: Ask style engine + theme + paths upfront (skip with --yes or --style)
   let response: {
     style: StyleEngine;
     theme: string;
@@ -80,8 +81,13 @@ export async function initCommand(opts?: { style?: string; yes?: boolean }): Pro
     logger.info(`  Utils: ${response.utilPath}`);
     logger.info(`  TypeScript: yes`);
   } else {
-    response = await prompts([
-      {
+    if (styleFromFlag) {
+      logger.info(`Using ${styleFromFlag} (from --style flag)`);
+    }
+
+    const promptDefs: prompts.PromptObject[] = [];
+    if (!styleFromFlag) {
+      promptDefs.push({
         type: "select",
         name: "style",
         message: "Which styling engine?",
@@ -90,7 +96,9 @@ export async function initCommand(opts?: { style?: string; yes?: boolean }): Pro
           { title: "Uniwind" + (project.hasUniwind ? " (installed)" : ""), value: "uniwind" },
         ],
         initial: detectedStyle === "uniwind" ? 1 : 0,
-      },
+      });
+    }
+    promptDefs.push(
       {
         type: "select",
         name: "theme",
@@ -126,7 +134,16 @@ export async function initCommand(opts?: { style?: string; yes?: boolean }): Pro
         ],
         initial: 0,
       },
-    ]);
+    );
+
+    const partial = await prompts(promptDefs);
+    response = {
+      style: styleFromFlag ?? partial.style,
+      theme: partial.theme,
+      componentsDir: partial.componentsDir,
+      utilPath: partial.utilPath,
+      tsx: partial.tsx,
+    };
 
     if (!response.style || !response.componentsDir || !response.utilPath) {
       logger.warn("Setup cancelled.");
@@ -181,12 +198,12 @@ export async function initCommand(opts?: { style?: string; yes?: boolean }): Pro
       const { execSync } = require("child_process");
       try {
         if (project.type === "expo") {
-          // Use npx expo install for Expo projects — handles version pinning
+          // Use expo install for Expo projects — handles version pinning
           const rnPkgs = missing.filter(p => ["react-native-reanimated", "react-native-safe-area-context", "react-native-svg", "react-native-css"].includes(p.replace(/@.*$/, "")));
           const npmPkgs = missing.filter(p => !rnPkgs.includes(p));
           if (rnPkgs.length > 0) {
             logger.info(`Installing RN packages with expo install (auto-pins versions)...`);
-            execSync(`npx expo install ${rnPkgs.join(" ")}`, { cwd, stdio: "inherit" });
+            execSync(getDlxCommand(pm, `expo install ${rnPkgs.join(" ")}`), { cwd, stdio: "inherit" });
           }
           if (npmPkgs.length > 0) {
             execSync(getInstallCommand(pm, npmPkgs), { cwd, stdio: "inherit" });
@@ -375,18 +392,21 @@ export async function initCommand(opts?: { style?: string; yes?: boolean }): Pro
       logger.success("Created babel.config.js (NativeWind configured)");
     }
 
-    // Disable reactCompiler in app.json — it breaks NativeWind className transform
-    const appJsonPath = path.resolve(cwd, "app.json");
-    if (await fs.pathExists(appJsonPath)) {
-      try {
-        const appJson = await fs.readJson(appJsonPath);
-        if (appJson?.expo?.experiments?.reactCompiler) {
-          appJson.expo.experiments.reactCompiler = false;
-          await fs.writeJson(appJsonPath, appJson, { spaces: 2 });
-          logger.success("Disabled reactCompiler in app.json (incompatible with NativeWind)");
+    // Disable reactCompiler in app.json — it breaks NativeWind's className transform.
+    // Uniwind handles className differently (via its metro plugin), so leave RC alone there.
+    if (!isUniwind) {
+      const appJsonPath = path.resolve(cwd, "app.json");
+      if (await fs.pathExists(appJsonPath)) {
+        try {
+          const appJson = await fs.readJson(appJsonPath);
+          if (appJson?.expo?.experiments?.reactCompiler) {
+            appJson.expo.experiments.reactCompiler = false;
+            await fs.writeJson(appJsonPath, appJson, { spaces: 2 });
+            logger.success("Disabled reactCompiler in app.json (incompatible with NativeWind)");
+          }
+        } catch {
+          // Ignore if app.json can't be parsed
         }
-      } catch {
-        // Ignore if app.json can't be parsed
       }
     }
   }
@@ -543,8 +563,10 @@ export async function initCommand(opts?: { style?: string; yes?: boolean }): Pro
     logger.info(`${step}. Verify metro.config.js uses ${wrapperName} (created above)`);
     step++;
     if (!isUniwind) { logger.info(`${step}. Verify babel.config.js has jsxImportSource: "nativewind" (created above)`); step++; }
-    logger.info(`${step}. Make sure React Compiler is NOT enabled in app.json`);
-    step++;
+    if (!isUniwind) {
+      logger.info(`${step}. Make sure React Compiler is NOT enabled in app.json`);
+      step++;
+    }
     logger.break();
     logger.info(`${step}. Add components:`);
   }

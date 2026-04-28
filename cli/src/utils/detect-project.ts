@@ -19,8 +19,17 @@ export interface ProjectInfo {
   sdkGeneration: SDKGeneration;
 }
 
+function parseUserAgent(ua: string | undefined): PackageManager | null {
+  if (!ua) return null;
+  if (ua.startsWith("yarn/")) return "yarn";
+  if (ua.startsWith("pnpm/")) return "pnpm";
+  if (ua.startsWith("bun/")) return "bun";
+  if (ua.startsWith("npm/")) return "npm";
+  return null;
+}
+
 export async function detectPackageManager(cwd: string): Promise<PackageManager> {
-  // Check lockfiles first (most reliable)
+  // Check lockfiles first (most reliable — represents the project's committed PM)
   if (await fs.pathExists(path.join(cwd, "bun.lockb")) || await fs.pathExists(path.join(cwd, "bun.lock"))) {
     return "bun";
   }
@@ -33,6 +42,12 @@ export async function detectPackageManager(cwd: string): Promise<PackageManager>
   if (await fs.pathExists(path.join(cwd, "package-lock.json"))) {
     return "npm";
   }
+
+  // npm_config_user_agent is set by npm/yarn/pnpm/bun when invoking a script
+  // (yarn dlx, pnpm dlx, bunx, npx). Catches the fresh-project case where no
+  // lockfile exists yet but the user explicitly typed `yarn dlx` / `pnpm dlx`.
+  const fromUA = parseUserAgent(process.env.npm_config_user_agent);
+  if (fromUA) return fromUA;
 
   // Check packageManager field in package.json
   const pkgPath = path.join(cwd, "package.json");

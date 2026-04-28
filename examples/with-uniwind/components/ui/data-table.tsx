@@ -1,5 +1,5 @@
 import React, { useState, useMemo, useCallback } from "react";
-import { View, Text, TextInput, Pressable, ScrollView } from "react-native";
+import { View, Text, TextInput, Pressable, ScrollView, type ViewStyle } from "react-native";
 import { cn } from "@/lib/utils";
 import Svg, { Path } from "react-native-svg";
 
@@ -24,6 +24,12 @@ export interface DataTableProps<T> extends React.ComponentPropsWithoutRef<typeof
   emptyText?: string;
   className?: string;
   striped?: boolean;
+  /** When true, fit columns to container width and truncate long content with ellipsis.
+   *  Default false: each column has a fixed width (col.width or defaultColumnWidth) and the
+   *  table scrolls horizontally if total content exceeds the viewport. */
+  truncate?: boolean;
+  /** Default pixel width for columns that don't specify `col.width`. Used in scroll mode only. */
+  defaultColumnWidth?: number;
 }
 
 function SortIcon({ order }: { order?: "asc" | "desc" }) {
@@ -47,6 +53,8 @@ export function DataTable<T extends Record<string, unknown>>({
   emptyText = "No data",
   className,
   striped = false,
+  truncate = false,
+  defaultColumnWidth = 150,
   ...props
 }: DataTableProps<T>) {
   const [internalSortBy, setInternalSortBy] = useState<string | undefined>();
@@ -90,8 +98,21 @@ export function DataTable<T extends Record<string, unknown>>({
   const totalPages = pageSize ? Math.max(1, Math.ceil(sorted.length / pageSize)) : 1;
   const paged = pageSize ? sorted.slice(page * pageSize, (page + 1) * pageSize) : sorted;
 
-  const colStyle = (col: DataTableColumn<T>) =>
-    col.width ? { width: col.width, flexGrow: 0, flexShrink: 0 } : { flex: 1, minWidth: 100 };
+  const [contentWidth, setContentWidth] = useState(0);
+  const fixedSum = columns.reduce((s, c) => s + (c.width ?? 0), 0);
+  const autoCount = columns.filter((c) => !c.width).length;
+  const truncatedAutoWidth = autoCount > 0 && contentWidth > 0
+    ? Math.max((contentWidth - fixedSum) / autoCount, 80)
+    : 0;
+
+  const colStyle = (col: DataTableColumn<T>): ViewStyle => {
+    if (col.width) return { width: col.width, overflow: "hidden" };
+    if (truncate) {
+      if (truncatedAutoWidth > 0) return { width: truncatedAutoWidth, overflow: "hidden" };
+      return { flexGrow: 1, flexShrink: 1, flexBasis: 0, minWidth: 0, overflow: "hidden" };
+    }
+    return { width: defaultColumnWidth, overflow: "hidden" };
+  };
 
   return (
     <View className={cn("rounded-md border border-border overflow-hidden", className)} {...props}>
@@ -108,7 +129,10 @@ export function DataTable<T extends Record<string, unknown>>({
         </View>
       )}
       <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-        <View style={{ minWidth: "100%" }}>
+        <View
+          style={{ minWidth: "100%" }}
+          onLayout={truncate ? (e) => setContentWidth(e.nativeEvent.layout.width) : undefined}
+        >
           {/* Header */}
           <View className="flex-row bg-muted/50">
             {columns.map((col) => (

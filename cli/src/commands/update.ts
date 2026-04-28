@@ -2,6 +2,7 @@ import path from "path";
 import fs from "fs-extra";
 import prompts from "prompts";
 import { registry } from "../registry";
+import { detectPackageManager, getDlxCommand } from "../utils/detect-project";
 import { copyComponent } from "../utils/file-ops";
 import { hashFile } from "../utils/hash";
 import { logger } from "../utils/logger";
@@ -29,7 +30,8 @@ export async function updateCommand(names: string[]): Promise<void> {
   const configPath = path.join(cwd, ".aniui.json");
 
   if (!await fs.pathExists(configPath)) {
-    logger.error("AniUI is not initialized. Run `npx @aniui/cli init` first.");
+    const pm = await detectPackageManager(cwd);
+    logger.error(`AniUI is not initialized. Run \`${getDlxCommand(pm, "@aniui/cli init")}\` first.`);
     process.exit(1);
   }
 
@@ -47,8 +49,9 @@ export async function updateCommand(names: string[]): Promise<void> {
     : Object.keys(installed).filter((n) => registry[n]);
 
   if (targetNames.length === 0) {
+    const pm = await detectPackageManager(cwd);
     logger.warn("No installed components found to update.");
-    logger.info("Install components first with: npx @aniui/cli add <name>");
+    logger.info(`Install components first with: ${getDlxCommand(pm, "@aniui/cli add <name>")}`);
     return;
   }
 

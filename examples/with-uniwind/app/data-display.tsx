@@ -274,6 +274,57 @@ export default function DataDisplayScreen() {
           </Table>
         </Section>
 
+        {/* Table — custom children (Badge, Avatar, composite content) */}
+        <Section title="Table — custom cells">
+          <Table>
+            <TableHeader>
+              <TableRow>
+                <TableHead>User</TableHead>
+                <TableHead>Role</TableHead>
+                <TableHead>Status</TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              <TableRow>
+                <TableCell>
+                  <View className="flex-row items-center gap-2">
+                    <Avatar size="sm" fallback="AJ" />
+                    <Text variant="small">Alice Johnson</Text>
+                  </View>
+                </TableCell>
+                <TableCell>Engineer</TableCell>
+                <TableCell>
+                  <Badge variant="default">Active</Badge>
+                </TableCell>
+              </TableRow>
+              <TableRow>
+                <TableCell>
+                  <View className="flex-row items-center gap-2">
+                    <Avatar size="sm" fallback="BS" />
+                    <Text variant="small">Bob Smith</Text>
+                  </View>
+                </TableCell>
+                <TableCell>Designer</TableCell>
+                <TableCell>
+                  <Badge variant="secondary">Away</Badge>
+                </TableCell>
+              </TableRow>
+              <TableRow>
+                <TableCell>
+                  <View className="flex-row items-center gap-2">
+                    <Avatar size="sm" fallback="CL" />
+                    <Text variant="small">Carol Lee</Text>
+                  </View>
+                </TableCell>
+                <TableCell>PM</TableCell>
+                <TableCell>
+                  <Badge variant="destructive">Offline</Badge>
+                </TableCell>
+              </TableRow>
+            </TableBody>
+          </Table>
+        </Section>
+
         {/* Separator */}
         <Section title="Separator">
           <Text variant="p">Horizontal separator below:</Text>
