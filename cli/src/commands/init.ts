@@ -181,12 +181,12 @@ export async function initCommand(opts?: { style?: string; yes?: boolean }): Pro
       const { execSync } = require("child_process");
       try {
         if (project.type === "expo") {
-          // Use npx expo install for Expo projects — handles version pinning
+          // Use expo install for Expo projects — handles version pinning
           const rnPkgs = missing.filter(p => ["react-native-reanimated", "react-native-safe-area-context", "react-native-svg", "react-native-css"].includes(p.replace(/@.*$/, "")));
           const npmPkgs = missing.filter(p => !rnPkgs.includes(p));
           if (rnPkgs.length > 0) {
             logger.info(`Installing RN packages with expo install (auto-pins versions)...`);
-            execSync(`npx expo install ${rnPkgs.join(" ")}`, { cwd, stdio: "inherit" });
+            execSync(getDlxCommand(pm, `expo install ${rnPkgs.join(" ")}`), { cwd, stdio: "inherit" });
           }
           if (npmPkgs.length > 0) {
             execSync(getInstallCommand(pm, npmPkgs), { cwd, stdio: "inherit" });

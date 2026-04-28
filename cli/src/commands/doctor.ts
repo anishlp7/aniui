@@ -1,6 +1,6 @@
 import path from "path";
 import fs from "fs-extra";
-import { detectProject, getDlxCommand, type StyleEngine } from "../utils/detect-project";
+import { detectProject, getDlxCommand, getInstallCommand, type StyleEngine } from "../utils/detect-project";
 import { logger } from "../utils/logger";
 
 interface Check {
@@ -71,7 +71,7 @@ export async function doctorCommand(): Promise<void> {
     checks.push({
       label: `${dep.name} ${ver ? `(${ver})` : ""}`,
       pass: !!ver,
-      fix: `Install: npm install ${dep.name}`,
+      fix: `Install: ${getInstallCommand(pm, [dep.name])}`,
     });
   }
 
@@ -94,7 +94,7 @@ export async function doctorCommand(): Promise<void> {
       label: "@rn-primitives/portal",
       pass: hasPortal,
       detail: "Required for Dialog, Popover, Select, DropdownMenu, etc.",
-      fix: "Install: npm install @rn-primitives/portal",
+      fix: `Install: ${getInstallCommand(pm, ["@rn-primitives/portal"])}`,
     });
   }
 
@@ -110,7 +110,7 @@ export async function doctorCommand(): Promise<void> {
       fix: `Add ${wrapperName}(config, { ${configParam}: "./global.css" }) to metro.config.js`,
     });
   } else {
-    checks.push({ label: "metro.config.js exists", pass: false, fix: "Run: npx @aniui/cli init" });
+    checks.push({ label: "metro.config.js exists", pass: false, fix: `Run: ${getDlxCommand(pm, "@aniui/cli init")}` });
   }
 
   // babel.config.js — jsxImportSource check
@@ -121,7 +121,7 @@ export async function doctorCommand(): Promise<void> {
       checks.push({
         label: "babel.config.js has jsxImportSource: \"nativewind\"",
         pass: babelContent.includes("jsxImportSource"),
-        fix: "Run: npx @aniui/cli init",
+        fix: `Run: ${getDlxCommand(pm, "@aniui/cli init")}`,
       });
     }
     if ((gen === "v5" || isUniwind) && babelContent.includes("jsxImportSource")) {
@@ -140,7 +140,7 @@ export async function doctorCommand(): Promise<void> {
     checks.push({
       label: "global.css has theme tokens",
       pass: css.includes("--primary") || css.includes("--color-primary"),
-      fix: "Run: npx @aniui/cli init",
+      fix: `Run: ${getDlxCommand(pm, "@aniui/cli init")}`,
     });
     if (isUniwind) {
       checks.push({
@@ -155,7 +155,7 @@ export async function doctorCommand(): Promise<void> {
       });
     }
   } else {
-    checks.push({ label: "global.css exists", pass: false, fix: "Run: npx @aniui/cli init" });
+    checks.push({ label: "global.css exists", pass: false, fix: `Run: ${getDlxCommand(pm, "@aniui/cli init")}` });
   }
 
   // tailwind.config.js (v4) or postcss.config.js (v5)
@@ -164,14 +164,14 @@ export async function doctorCommand(): Promise<void> {
     checks.push({
       label: "tailwind.config.js exists",
       pass: await fs.pathExists(twPath),
-      fix: "Run: npx @aniui/cli init",
+      fix: `Run: ${getDlxCommand(pm, "@aniui/cli init")}`,
     });
   } else {
     const pcPath = path.join(cwd, "postcss.config.js");
     checks.push({
       label: "postcss.config.js exists (v5)",
       pass: await fs.pathExists(pcPath),
-      fix: "Run: npx @aniui/cli init",
+      fix: `Run: ${getDlxCommand(pm, "@aniui/cli init")}`,
     });
   }
 
@@ -180,7 +180,7 @@ export async function doctorCommand(): Promise<void> {
     checks.push({
       label: "nativewind-env.d.ts exists",
       pass: await fs.pathExists(path.join(cwd, "nativewind-env.d.ts")),
-      fix: "Run: npx @aniui/cli init",
+      fix: `Run: ${getDlxCommand(pm, "@aniui/cli init")}`,
     });
   }
 
@@ -202,20 +202,20 @@ export async function doctorCommand(): Promise<void> {
   checks.push({
     label: ".aniui.json config exists",
     pass: !!config,
-    fix: "Run: npx @aniui/cli init",
+    fix: `Run: ${getDlxCommand(pm, "@aniui/cli init")}`,
   });
 
   const utilPath = config?.utilPath ? path.resolve(cwd, config.utilPath) : path.resolve(cwd, "lib/utils.ts");
   checks.push({
     label: `${config?.utilPath || "lib/utils.ts"} exists`,
     pass: await fs.pathExists(utilPath),
-    fix: "Run: npx @aniui/cli init",
+    fix: `Run: ${getDlxCommand(pm, "@aniui/cli init")}`,
   });
 
   checks.push({
     label: `${config?.componentsDir || "components/ui"}/ directory exists`,
     pass: await fs.pathExists(componentsDir),
-    fix: "Run: npx @aniui/cli init",
+    fix: `Run: ${getDlxCommand(pm, "@aniui/cli init")}`,
   });
 
   // Print results

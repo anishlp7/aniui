@@ -2,6 +2,7 @@ import path from "path";
 import fs from "fs-extra";
 import chalk from "chalk";
 import { registry, getComponentNames } from "../registry";
+import { detectPackageManager, getDlxCommand } from "../utils/detect-project";
 import { hashFile } from "../utils/hash";
 import { logger } from "../utils/logger";
 import { getCliPackage } from "../utils/pkg";
@@ -28,7 +29,8 @@ export async function statusCommand(): Promise<void> {
   const configPath = path.join(cwd, ".aniui.json");
 
   if (!await fs.pathExists(configPath)) {
-    logger.error("AniUI is not initialized. Run `npx @aniui/cli init` first.");
+    const pm = await detectPackageManager(cwd);
+    logger.error(`AniUI is not initialized. Run \`${getDlxCommand(pm, "@aniui/cli init")}\` first.`);
     process.exit(1);
   }
 
