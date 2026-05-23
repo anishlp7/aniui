@@ -68,7 +68,7 @@ export const Input = React.forwardRef<
       {leadingIcon && <View className="me-2">{leadingIcon}</View>}
       <TextInput
         ref={ref}
-        className="flex-1 text-foreground p-0 text-base"
+        className="flex-1 text-foreground p-0"
         placeholderTextColor={dark ? "#a1a1aa" : "#71717a"}
         keyboardAppearance={dark ? "dark" : "light"}
         selectionColor={caret}
