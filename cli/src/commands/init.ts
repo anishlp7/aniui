@@ -33,7 +33,7 @@ const THEME_PRESETS: Record<string, ThemePreset> = {
   },
 };
 
-export async function initCommand(opts?: { style?: string; yes?: boolean }): Promise<void> {
+export async function initCommand(opts?: { style?: string; nw?: string; yes?: boolean }): Promise<void> {
   const cwd = process.cwd();
   logger.title("AniUI — Initialize");
 
@@ -46,9 +46,12 @@ export async function initCommand(opts?: { style?: string; yes?: boolean }): Pro
   }
 
   const pm = project.packageManager;
-  const gen = project.sdkGeneration;
+  let gen = project.sdkGeneration;
   logger.success(`Detected ${project.type === "expo" ? "Expo" : "React Native CLI"} project`);
   logger.success(`Using ${pm} as package manager`);
+  if (project.expoMajor >= 56) {
+    logger.success(`Expo SDK ${project.expoMajor} detected`);
+  }
   logger.success(`SDK generation: ${gen === "v5" ? "Tailwind v4" : "Tailwind v3"}`);
 
   // --style flag is authoritative; otherwise auto-detect from project deps
@@ -151,12 +154,64 @@ export async function initCommand(opts?: { style?: string; yes?: boolean }): Pro
     }
   }
 
-  // Step 2: Auto-install missing dependencies
+  // Step 1.5: NativeWind track selection (v4 stable vs v5 preview) for Expo SDK >=55.
+  // Three paths:
+  //   1. --nw flag passed — always respect, even if nativewind is already installed (track switch).
+  //   2. No flag, no nativewind installed — prompt (interactive) or default to v5 (--yes).
+  //   3. No flag, nativewind already installed — use the detected gen, no override.
+  // Skipped for Uniwind (single-track).
   const chosenStyle: StyleEngine = response.style;
   const isChosenUniwind = chosenStyle === "uniwind";
+
+  if (!isChosenUniwind && project.expoMajor >= 55) {
+    const flagTrack: "v4" | "v5" | null =
+      opts?.nw === "v4" || opts?.nw === "v5" ? (opts.nw as "v4" | "v5") : null;
+
+    let chosenTrack: "v4" | "v5" | null = null;
+
+    if (flagTrack) {
+      chosenTrack = flagTrack;
+      logger.info(`Using NativeWind ${flagTrack} (from --nw flag)`);
+    } else if (project.nativewindMajor === 0) {
+      if (opts?.yes) {
+        chosenTrack = "v5";
+        logger.info("Using NativeWind v5 preview (default for --yes on Expo 55+)");
+      } else {
+        const trackPrompt = await prompts({
+          type: "select",
+          name: "track",
+          message: "NativeWind track? Expo SDK 55+ supports both:",
+          choices: [
+            { title: "v5 preview (Tailwind v4, CSS-first config) — newest, still pre-release", value: "v5" },
+            { title: "v4 stable  (Tailwind v3, tailwind.config.js) — proven, recommended until v5 stable", value: "v4" },
+          ],
+          initial: 0,
+        });
+        if (!trackPrompt.track) {
+          logger.warn("Setup cancelled.");
+          process.exit(0);
+        }
+        chosenTrack = trackPrompt.track;
+      }
+    }
+
+    if (chosenTrack && chosenTrack !== gen) {
+      gen = chosenTrack;
+      logger.success(`SDK generation overridden: ${gen === "v5" ? "Tailwind v4 / NativeWind v5" : "Tailwind v3 / NativeWind v4"}`);
+    } else if (chosenTrack) {
+      logger.success(`NativeWind track: ${chosenTrack === "v5" ? "v5 preview" : "v4 stable"}`);
+    }
+  }
+
+  // Step 2: Auto-install missing dependencies
   const hasStyleEngine = isChosenUniwind ? project.hasUniwind : project.hasNativewind;
 
-  if (!hasStyleEngine || !project.hasReanimated || !project.hasTailwind) {
+  const isSdk56Plus = project.expoMajor >= 56;
+  const pkgJson = await fs.readJson(path.join(cwd, "package.json"));
+  const allDeps = { ...pkgJson.dependencies, ...pkgJson.devDependencies };
+  const hasWorklets = !!allDeps["react-native-worklets"];
+
+  if (!hasStyleEngine || !project.hasReanimated || !project.hasTailwind || (isSdk56Plus && !hasWorklets)) {
     const missing: string[] = [];
 
     if (!hasStyleEngine) {
@@ -173,6 +228,10 @@ export async function initCommand(opts?: { style?: string; yes?: boolean }): Pro
     }
     if (!project.hasReanimated) {
       missing.push("react-native-reanimated");
+    }
+    // SDK 56 requires react-native-worklets as a separate peer of Reanimated 4.3+
+    if (isSdk56Plus && !hasWorklets) {
+      missing.push("react-native-worklets");
     }
 
     // Always ensure these are present
@@ -529,6 +588,7 @@ export async function initCommand(opts?: { style?: string; yes?: boolean }): Pro
     theme: response.theme,
     style: styleEngine,
     tsx: useTsx,
+    sdkGeneration: gen,
   };
   await fs.writeJson(path.join(cwd, ".aniui.json"), config, { spaces: 2 });
   logger.success("Created .aniui.json");
