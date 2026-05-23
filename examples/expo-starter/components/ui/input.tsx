@@ -1,5 +1,5 @@
 import React from "react";
-import { View, TextInput, useColorScheme } from "react-native";
+import { View, TextInput, useColorScheme, Platform } from "react-native";
 import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
@@ -68,7 +68,9 @@ export const Input = React.forwardRef<
       {leadingIcon && <View className="me-2">{leadingIcon}</View>}
       <TextInput
         ref={ref}
-        className="flex-1 text-foreground p-0 text-base"
+        // text-base sets lineHeight which mis-centers the cursor on iOS.
+        // Keep it on Android so the input matches the variant font size.
+        className={cn("flex-1 text-foreground p-0", Platform.OS !== "ios" && "text-base")}
         placeholderTextColor={dark ? "#a1a1aa" : "#71717a"}
         keyboardAppearance={dark ? "dark" : "light"}
         selectionColor={caret}
