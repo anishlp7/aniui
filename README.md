@@ -14,7 +14,7 @@
   <a href="https://www.npmjs.com/package/@aniui/cli"><img src="https://img.shields.io/npm/v/@aniui/cli?style=flat-square&color=000" alt="npm version" /></a>
   <a href="https://github.com/anishlp7/aniui/blob/main/LICENSE"><img src="https://img.shields.io/github/license/anishlp7/aniui?style=flat-square&color=000" alt="license" /></a>
   <img src="https://img.shields.io/badge/platform-iOS%20%7C%20Android-000?style=flat-square" alt="platform" />
-  <img src="https://img.shields.io/badge/Expo%20SDK-53%20%7C%2054%20%7C%2055-000?style=flat-square" alt="expo" />
+  <img src="https://img.shields.io/badge/Expo%20SDK-53%20%7C%2054%20%7C%2055%20%7C%2056-000?style=flat-square" alt="expo" />
 </p>
 
 <p align="center">
@@ -42,9 +42,9 @@ Built with [NativeWind](https://www.nativewind.dev) (or [Uniwind](https://github
 
 | | Status |
 |---|---|
-| Expo | ✅ SDK 53, 54 & 55 |
+| Expo | ✅ SDK 53, 54, 55 & **56** |
 | Bare React Native | ✅ 0.76+ |
-| NativeWind | ✅ v4 + v5 |
+| NativeWind | ✅ v4 (stable) + v5 (preview) |
 | Uniwind | ✅ `--style uniwind` |
 | rn-primitives | ✅ Headless a11y layer |
 | TypeScript | ✅ Strict |
@@ -54,6 +54,8 @@ Built with [NativeWind](https://www.nativewind.dev) (or [Uniwind](https://github
 | Old Architecture | ✅ SDK 53/54 only |
 | iOS | ✅ 15+ |
 | Android | ✅ API 24+ |
+
+> **New: Expo SDK 56 →** AniUI 0.3.0 ships with two SDK 56 starters — one on NativeWind v5 preview (`examples/expo-56-starter`) and one on NativeWind v4 stable (`examples/expo-56-nw4-starter`). On Expo 55+ projects, `aniui init` now prompts which NativeWind track to use. See [the SDK 56 guide](https://aniui.dev/docs/expo-56) for migration steps.
 
 ## Quick Start
 
