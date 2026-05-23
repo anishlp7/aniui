@@ -1,5 +1,6 @@
 import React, { useState, useRef } from "react";
 import { View, Text, Pressable, TextInput, Modal, ScrollView, Dimensions, LayoutChangeEvent, useColorScheme } from "react-native";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { cn } from "@/lib/utils";
 import Svg, { Path } from "react-native-svg";
 
@@ -26,6 +27,13 @@ export function Select({
   const dark = useColorScheme() === "dark";
   const caret = dark ? "#fafafa" : "#18181b";
   const [pos, setPos] = useState({ x: 0, y: 0, w: 0, h: 0 });
+  const insets = useSafeAreaInsets();
+  // Fabric (new arch, mandatory on Expo SDK 55+) reports measureInWindow
+  // excluding the safe-area top inset on both iOS and Android edge-to-edge,
+  // but Modal (with statusBarTranslucent) renders from the screen origin.
+  // Add the inset back so the dropdown anchors to the trigger visually.
+  const isNewArch = !!(globalThis as { nativeFabricUIManager?: unknown }).nativeFabricUIManager;
+  const yOffset = isNewArch ? insets.top : 0;
   const selected = options.find((o) => o.value === value);
   const filtered = searchable && search
     ? options.filter((o) => o.label.toLowerCase().includes(search.toLowerCase()))
@@ -42,7 +50,8 @@ export function Select({
   const pick = (val: string) => { onValueChange?.(val); close(); };
 
   const screenH = Dimensions.get("window").height;
-  const belowY = pos.y + pos.h + 4;
+  const triggerY = pos.y + yOffset;
+  const belowY = triggerY + pos.h + 4;
   const listH = Math.min(filtered.length * 48, 264);
   const totalH = listH + (searchable ? 60 : 0);
   const fitsBelow = belowY + totalH < screenH;
@@ -63,7 +72,7 @@ export function Select({
         <Svg width={16} height={16} viewBox="0 0 24 24" fill="none" stroke="#71717a" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round"><Path d="m6 9 6 6 6-6" /></Svg>
       </Pressable>
 
-      <Modal visible={open} transparent animationType="none" onRequestClose={close}>
+      <Modal visible={open} transparent animationType="none" onRequestClose={close} statusBarTranslucent>
         {/* Backdrop */}
         <Pressable style={{ position: "absolute", top: 0, left: 0, right: 0, bottom: 0 }} onPress={close} />
 
@@ -75,7 +84,7 @@ export function Select({
             width: pos.w,
             ...(fitsBelow
               ? { top: belowY }
-              : { bottom: screenH - pos.y + 4 }),
+              : { bottom: screenH - triggerY + 4 }),
           }}
           className="rounded-xl border border-border bg-card shadow-2xl overflow-hidden"
         >

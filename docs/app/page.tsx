@@ -87,7 +87,7 @@ const jsonLd = {
   name: "AniUI",
   applicationCategory: "DeveloperApplication",
   operatingSystem: "iOS, Android",
-  description: "shadcn/ui for React Native. 89 accessible components built with NativeWind and TypeScript.",
+  description: "shadcn/ui for React Native. 89 accessible components built with NativeWind and TypeScript. Now supports Expo SDK 56.",
   url: "https://aniui.dev",
   author: { "@type": "Person", name: "Anish" },
   offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
@@ -189,6 +189,18 @@ export default function HomePage() {
           initial="hidden"
           animate="show"
         >
+          {/* SDK 56 announcement */}
+          <motion.div variants={heroItem} className="mb-4">
+            <Link
+              href="/docs/expo-56"
+              className="group inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 backdrop-blur-sm px-4 py-1.5 transition-colors hover:border-primary/50 hover:bg-primary/15"
+            >
+              <span className="rounded-full bg-primary px-1.5 py-0.5 text-[10px] font-bold uppercase tracking-wide text-primary-foreground">New</span>
+              <span className="text-xs font-medium text-foreground">Now supporting Expo SDK 56</span>
+              <span className="text-xs text-muted-foreground transition-transform group-hover:translate-x-0.5">→</span>
+            </Link>
+          </motion.div>
+
           {/* Component count badge */}
           <motion.div variants={heroItem} className="mb-6 inline-flex items-center gap-2 rounded-full border border-border bg-card/60 backdrop-blur-sm px-4 py-1.5">
             <motion.span

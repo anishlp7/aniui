@@ -14,6 +14,7 @@ export const gettingStartedItems: NavItem[] = [
   { title: "Theme Provider", href: "/docs/theme-provider" },
   { title: "RTL", href: "/docs/rtl" },
   { title: "Compatibility", href: "/docs/compatibility" },
+  { title: "Expo SDK 56", href: "/docs/expo-56" },
   { title: "Android", href: "/docs/android" },
   { title: "Uniwind", href: "/docs/uniwind" },
   { title: "Changelog", href: "/docs/changelog" },

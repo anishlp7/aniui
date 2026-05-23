@@ -17,7 +17,15 @@ export async function doctorCommand(): Promise<void> {
 
   const project = await detectProject(cwd);
   const pm = project.packageManager;
-  const gen = project.sdkGeneration;
+
+  // Prefer the user's persisted choice from .aniui.json (init may have applied a --nw
+  // override that the detector can't reconstruct from package.json alone).
+  const configPath = path.join(cwd, ".aniui.json");
+  const config = await fs.pathExists(configPath) ? await fs.readJson(configPath) : null;
+  const gen: "v4" | "v5" = config?.sdkGeneration === "v4" || config?.sdkGeneration === "v5"
+    ? config.sdkGeneration
+    : project.sdkGeneration;
+  const genSource = config?.sdkGeneration ? "from .aniui.json" : "detected";
   const checks: Check[] = [];
 
   // 1. Project type
@@ -32,7 +40,7 @@ export async function doctorCommand(): Promise<void> {
 
   // 3. SDK generation
   checks.push({
-    label: `SDK generation: ${gen === "v5" ? "Tailwind v4" : "Tailwind v3"} (${gen})`,
+    label: `SDK generation: ${gen === "v5" ? "Tailwind v4" : "Tailwind v3"} (${gen}, ${genSource})`,
     pass: true,
   });
 
@@ -43,8 +51,6 @@ export async function doctorCommand(): Promise<void> {
   const getVersion = (name: string) => allDeps[name] || null;
 
   // 5. Style engine
-  const configPath = path.join(cwd, ".aniui.json");
-  const config = await fs.pathExists(configPath) ? await fs.readJson(configPath) : null;
   const styleEngine: StyleEngine = config?.style || (project.hasUniwind ? "uniwind" : "nativewind");
   const isUniwind = styleEngine === "uniwind";
 
@@ -72,6 +78,17 @@ export async function doctorCommand(): Promise<void> {
       label: `${dep.name} ${ver ? `(${ver})` : ""}`,
       pass: !!ver,
       fix: `Install: ${getInstallCommand(pm, [dep.name])}`,
+    });
+  }
+
+  // 6b. SDK 56+ requires react-native-worklets as a separate peer of Reanimated 4.3+
+  if (project.expoMajor >= 56) {
+    const workletsVer = getVersion("react-native-worklets");
+    checks.push({
+      label: `react-native-worklets ${workletsVer ? `(${workletsVer})` : ""}`,
+      pass: !!workletsVer,
+      detail: "Required by Reanimated 4.3+ on Expo SDK 56.",
+      fix: `Install: ${getDlxCommand(pm, "expo install react-native-worklets")}`,
     });
   }
 

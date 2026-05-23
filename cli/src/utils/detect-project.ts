@@ -17,6 +17,8 @@ export interface ProjectInfo {
   hasReanimated: boolean;
   hasTailwind: boolean;
   sdkGeneration: SDKGeneration;
+  expoMajor: number;
+  nativewindMajor: number;
 }
 
 function parseUserAgent(ua: string | undefined): PackageManager | null {
@@ -112,7 +114,7 @@ export async function detectProject(cwd: string): Promise<ProjectInfo> {
   const packageManager = await detectPackageManager(cwd);
 
   if (!await fs.pathExists(pkgPath)) {
-    return { type: "unknown", root: cwd, packageManager, hasNativewind: false, hasUniwind: false, hasReanimated: false, hasTailwind: false, sdkGeneration: "v4" };
+    return { type: "unknown", root: cwd, packageManager, hasNativewind: false, hasUniwind: false, hasReanimated: false, hasTailwind: false, sdkGeneration: "v4", expoMajor: 0, nativewindMajor: 0 };
   }
 
   const pkg = await fs.readJson(pkgPath);
@@ -127,6 +129,8 @@ export async function detectProject(cwd: string): Promise<ProjectInfo> {
   else if (hasRN) type = "react-native-cli";
 
   const sdkGeneration = detectSDKGeneration(allDeps);
+  const expoMajor = parseMajor(allDeps["expo"] || "");
+  const nativewindMajor = parseMajor(allDeps["nativewind"] || "");
 
   return {
     type,
@@ -137,24 +141,25 @@ export async function detectProject(cwd: string): Promise<ProjectInfo> {
     hasReanimated: !!allDeps["react-native-reanimated"],
     hasTailwind: !!allDeps["tailwindcss"],
     sdkGeneration,
+    expoMajor,
+    nativewindMajor,
   };
 }
 
 function detectSDKGeneration(deps: Record<string, string>): SDKGeneration {
-  // Check Expo SDK version — ~55.x means v5
-  const expoVersion = deps["expo"] || "";
-  const expoMajor = parseMajor(expoVersion);
-  if (expoMajor >= 55) return "v5";
-
-  // Check NativeWind version — ^5.x means v5
-  const nativewindVersion = deps["nativewind"] || "";
-  const nwMajor = parseMajor(nativewindVersion);
+  // 1. Explicit NativeWind version wins — user's installed dep is the source of truth
+  const nwMajor = parseMajor(deps["nativewind"] || "");
   if (nwMajor >= 5) return "v5";
+  if (nwMajor === 4) return "v4";
 
-  // Check Tailwind CSS version — ^4.x means v5 generation
-  const twVersion = deps["tailwindcss"] || "";
-  const twMajor = parseMajor(twVersion);
+  // 2. Explicit Tailwind version
+  const twMajor = parseMajor(deps["tailwindcss"] || "");
   if (twMajor >= 4) return "v5";
+  if (twMajor === 3) return "v4";
+
+  // 3. Fall back to Expo SDK bucket (fresh inits where neither dep is installed yet)
+  const expoMajor = parseMajor(deps["expo"] || "");
+  if (expoMajor >= 55) return "v5";
 
   return "v4";
 }

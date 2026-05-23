@@ -45,16 +45,18 @@ DO NOT deviate from these versions. They are tested together.
 }
 ```
 
-**Dual SDK Support:** AniUI supports two generations:
-- **Expo SDK 54 (v4):** NativeWind v4 + Tailwind v3 + Reanimated v3 (Old + New Architecture)
-- **Expo SDK 55 (v5):** NativeWind v5 + Tailwind v4 + Reanimated v4 (New Architecture only)
+**Tri-SDK Support:** AniUI supports three Expo generations:
+- **Expo SDK 54 (template family `v4`):** NativeWind v4 + Tailwind v3 + Reanimated v3 (Old + New Architecture)
+- **Expo SDK 55 (template family `v5`):** NativeWind v5 preview + Tailwind v4 + Reanimated v4 (New Architecture only)
+- **Expo SDK 56:** React 19.2.3 / RN 0.85.3 / Reanimated 4.3 + new required peer `react-native-worklets ~0.8.3` / safe-area-context `~5.7.0`. New Architecture only. Runs on **either** track: NativeWind v5 preview (template family `v5`) **or** NativeWind v4 stable (template family `v4`). `aniui init` prompts the user to choose on Expo ≥55 projects without an existing `nativewind` dep (or accepts `--nw v4|v5`).
 
-Components use `className`/`cn()`/`cva()` which work identically on both. The CLI auto-detects the SDK generation and uses the matching templates.
+Components use `className`/`cn()`/`cva()` which work identically on all three. The CLI auto-detects the SDK generation, honouring an explicit `nativewind` / `tailwindcss` dep over the Expo SDK bucket.
 
 ## Supported Platforms
 
 - Expo SDK 54 (NativeWind v4 + Tailwind v3)
 - Expo SDK 55 (NativeWind v5 + Tailwind v4)
+- Expo SDK 56 (NativeWind v5 preview OR NativeWind v4 stable)
 - Bare React Native CLI 0.76+
 - iOS 15+, Android API 24+
 - New Architecture: supported on all SDKs
@@ -594,7 +596,8 @@ export type ComponentEntry = {
 4. **Test status:** Run `aniui status` — verify installed/not-installed table renders correctly
 5. **Test diff:** Run `aniui diff <name>` on an installed component — verify diff output
 6. **Test init:** Run `aniui init` in a fresh Expo project — verify config files are generated
-7. **Compiled path check:** Verify `require("../../package.json")` is NOT used anywhere — all files must use `getCliPackage()` from `utils/pkg.ts`
+7. **Test init on SDK 56 — both NativeWind tracks:** in a fresh Expo SDK 56 project with no `nativewind` installed yet, run `aniui init` and confirm the NativeWind track prompt fires. Pick **v4 stable** — verify `tailwind.config.js` is generated (not `postcss.config.js`), `babel.config.js` gets `jsxImportSource: "nativewind"`, and `nativewind@^4` is installed. Repeat with `--nw v5 --yes` in a clean dir and verify v5 templates (CSS-first `@theme`, `postcss.config.js`, no `jsxImportSource`) land without a prompt.
+8. **Compiled path check:** Verify `require("../../package.json")` is NOT used anywhere — all files must use `getCliPackage()` from `utils/pkg.ts`
 
 **Why:** The CLI compiles `src/` → `dist/src/`, which shifts `__dirname` one level deeper. Static `require("../../package.json")` resolves to `dist/package.json` (doesn't exist) instead of `cli/package.json`. This broke v0.2.20 for all npx users. Always test from the compiled `dist/` path, not the source.
 
