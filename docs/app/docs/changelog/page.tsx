@@ -26,6 +26,21 @@ const typeBadge: Record<ChangeType, { label: string; className: string }> = {
 
 const releases: Release[] = [
   {
+    version: "0.3.0",
+    date: "2026-05-23",
+    title: "Expo SDK 56 Support",
+    changes: [
+      { type: "feat", text: "Expo SDK 56 (React 19.2.3 / React Native 0.85.3 / Reanimated 4.3.1) is now officially supported alongside SDK 54 and 55. Two new starter examples ship with the repo: examples/expo-56-starter (NativeWind v5 preview, Tailwind v4, CSS-first config) and examples/expo-56-nw4-starter (NativeWind v4 stable, Tailwind v3, classic tailwind.config.js).", link: "/docs/expo-56" },
+      { type: "feat", text: "aniui init now prompts which NativeWind track to use on Expo SDK 55+ projects without an existing nativewind dependency. v5 preview is the default; v4 stable is the production-safer alternative. Pass --nw v4 or --nw v5 to skip the prompt in scripted runs. --yes preserves the previous default (v5).", link: "/docs/expo-56" },
+      { type: "feat", text: "aniui init installs react-native-worklets ~0.8.3 automatically when initialising on Expo SDK 56 (Reanimated 4.3 split the worklets runtime into a separate required peer). Also bumps react-native-safe-area-context to ~5.7.0.", link: "/docs/expo-56" },
+      { type: "feat", text: "aniui doctor warns when Expo SDK ≥56 is detected but react-native-worklets is missing.", link: "/docs/cli" },
+      { type: "fix", text: "SDK detection in cli/src/utils/detect-project.ts now honours explicit nativewind / tailwindcss versions over the Expo SDK version bucket. Previously, a project with expo@~56 + nativewind@^4 was incorrectly routed to the v5 (CSS-first) template family because the detector checked the Expo major first. Reordering fixes the bug while keeping fresh-init behaviour unchanged.", link: "/docs/expo-56" },
+      { type: "docs", text: "New /docs/expo-56 migration & setup guide with side-by-side v5-preview vs v4-stable trade-offs, fresh-install commands for each track, migration paths from SDK 54 and 55, and a footguns checklist (expo/fetch default, @expo/vector-icons deprecation, expo-router no longer transitively depending on @react-navigation).", link: "/docs/expo-56" },
+      { type: "docs", text: "Compatibility matrix gains a third column for Expo SDK 56. README badges now read SDK 53 | 54 | 55 | 56. CLAUDE.md rewrites the Dual-SDK Support section as Tri-SDK Support.", link: "/docs/compatibility" },
+      { type: "feat", text: "CLI bumped to 0.3.0.", link: "/docs/cli" },
+    ],
+  },
+  {
     version: "0.2.29",
     date: "2026-05-08",
     title: "TextInput Refs",
