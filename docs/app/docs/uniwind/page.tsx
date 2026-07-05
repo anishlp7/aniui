@@ -2,36 +2,45 @@ import { Heading } from "@/components/heading";
 import { CodeBlock } from "@/components/code-block-server";
 import { PackageManagerTabs } from "@/components/package-manager-tabs";
 
-const initCode = `npx @aniui/cli init --style uniwind`;
 const metroCode = `const { getDefaultConfig } = require("expo/metro-config");
-const { withUniwind } = require("uniwind/metro");
+const { withUniwindConfig } = require("uniwind/metro");
 
 const config = getDefaultConfig(__dirname);
 
-module.exports = withUniwind(config, { input: "./global.css" });`;
-const tailwindCode = `/** @type {import('tailwindcss').Config} */
-module.exports = {
-  content: ["./app/**/*.{ts,tsx}", "./components/**/*.{ts,tsx}"],
-  presets: [require("uniwind/preset")],
-  theme: {
-    extend: {
-      colors: {
-        background: "hsl(var(--background))",
-        foreground: "hsl(var(--foreground))",
-        primary: { DEFAULT: "hsl(var(--primary))", foreground: "hsl(var(--primary-foreground))" },
-        // ... same theme tokens as NativeWind
-      },
-    },
-  },
-};`;
+module.exports = withUniwindConfig(config, { cssEntryFile: "./global.css" });`;
+const globalCssCode = `@import "tailwindcss";
+@import "uniwind";
+
+@theme {
+  --radius: 0.5rem;
+}
+
+@layer theme {
+  :root {
+    @variant light {
+      --color-background: hsl(0 0% 100%);
+      --color-foreground: hsl(240 10% 3.9%);
+      --color-primary: hsl(240 5.9% 10%);
+      /* ...remaining tokens */
+    }
+    @variant dark {
+      --color-background: hsl(240 10% 3.9%);
+      --color-foreground: hsl(0 0% 98%);
+      --color-primary: hsl(0 0% 98%);
+      /* ...remaining tokens */
+    }
+  }
+}`;
 
 export default function UniwindPage() {
   return (
     <div className="space-y-10">
       <div>
-        <h1 className="text-3xl font-bold tracking-tight text-foreground">Uniwind Compatibility</h1>
+        <h1 className="text-3xl font-bold tracking-tight text-foreground">Uniwind (Recommended)</h1>
         <p className="mt-2 text-lg text-muted-foreground">
-          AniUI works with both NativeWind and Uniwind. Same components, same className API — different styling engine.
+          Uniwind is the recommended styling engine for AniUI — same components, same className API, but
+          ~2–3× faster than NativeWind, Tailwind v4 CSS-first, and no Babel transform. NativeWind remains
+          fully supported. Uniwind requires React 19, Tailwind v4, and the New Architecture (Expo SDK 55+).
         </p>
       </div>
 
@@ -67,12 +76,12 @@ export default function UniwindPage() {
               <tr className="border-b border-border/50">
                 <td className="py-3 pr-4 font-medium text-foreground">Metro wrapper</td>
                 <td className="py-3 pr-4"><code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">withNativeWind</code></td>
-                <td className="py-3"><code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">withUniwind</code></td>
+                <td className="py-3"><code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">withUniwindConfig</code></td>
               </tr>
               <tr className="border-b border-border/50">
-                <td className="py-3 pr-4 font-medium text-foreground">Tailwind preset</td>
-                <td className="py-3 pr-4"><code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">nativewind/preset</code></td>
-                <td className="py-3"><code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">uniwind/preset</code></td>
+                <td className="py-3 pr-4 font-medium text-foreground">Theme config</td>
+                <td className="py-3 pr-4"><code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">tailwind.config.js</code> (v4) or CSS <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">@theme</code> (v5)</td>
+                <td className="py-3">CSS-first <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">@theme</code> / <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">@variant</code> — no <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">tailwind.config.js</code></td>
               </tr>
               <tr className="border-b border-border/50">
                 <td className="py-3 pr-4 font-medium text-foreground">Babel config</td>
@@ -116,21 +125,25 @@ export default function UniwindPage() {
       </div>
 
       <div className="space-y-4">
-        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Tailwind Config</Heading>
-        <CodeBlock code={tailwindCode} title="tailwind.config.js" />
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Global CSS (CSS-first theme)</Heading>
+        <CodeBlock code={globalCssCode} title="global.css" />
         <p className="text-sm text-muted-foreground">
-          Theme tokens are identical — only the preset changes from <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">nativewind/preset</code> to{" "}
-          <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">uniwind/preset</code>.
+          Uniwind is Tailwind v4 CSS-first — there is <strong className="text-foreground">no tailwind.config.js</strong>.
+          Theme tokens live in <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">@theme</code> and{" "}
+          <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">@layer theme</code> with{" "}
+          <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">@variant light</code>/<code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">dark</code> blocks.
+          Uniwind also generates <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">uniwind-types.d.ts</code> automatically when Metro runs.
         </p>
       </div>
 
       <div className="space-y-4">
         <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Example App</Heading>
         <p className="text-sm text-muted-foreground">
-          A full working Uniwind example is available at{" "}
-          <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">examples/with-uniwind/</code> in the repository.
+          A full working Uniwind example on Expo SDK 57 is available at{" "}
+          <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">examples/expo-57-starter/</code> in the repository
+          (an SDK 55 variant lives at <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">examples/with-uniwind/</code>).
         </p>
-        <CodeBlock code={`cd examples/with-uniwind\nnpm install\nnpx expo start`} title="Run the example" />
+        <CodeBlock code={`cd examples/expo-57-starter\nnpm install\nnpx expo start`} title="Run the example" />
       </div>
     </div>
   );

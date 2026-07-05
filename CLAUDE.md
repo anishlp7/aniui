@@ -45,22 +45,31 @@ DO NOT deviate from these versions. They are tested together.
 }
 ```
 
-**Tri-SDK Support:** AniUI supports three Expo generations:
-- **Expo SDK 54 (template family `v4`):** NativeWind v4 + Tailwind v3 + Reanimated v3 (Old + New Architecture)
-- **Expo SDK 55 (template family `v5`):** NativeWind v5 preview + Tailwind v4 + Reanimated v4 (New Architecture only)
-- **Expo SDK 56:** React 19.2.3 / RN 0.85.3 / Reanimated 4.3 + new required peer `react-native-worklets ~0.8.3` / safe-area-context `~5.7.0`. New Architecture only. Runs on **either** track: NativeWind v5 preview (template family `v5`) **or** NativeWind v4 stable (template family `v4`). `aniui init` prompts the user to choose on Expo ≥55 projects without an existing `nativewind` dep (or accepts `--nw v4|v5`).
+**Styling engines — Uniwind is primary:** AniUI supports two className styling engines, both using the **identical** `className`/`cn()`/`cva()` API so component source is shared:
+- **Uniwind (recommended, default):** from the Unistyles team — Tailwind v4 CSS-first (`@theme`/`@variant`, no `tailwind.config.js`), Metro-plugin only (no Babel transform), no ThemeProvider needed for dark mode, ~2–3× faster than NativeWind. Requires React 19 + Tailwind v4 + New Architecture. Config generated inline by the CLI (`withUniwindConfig(config, { cssEntryFile })`, `uniwind-types.d.ts`). Single-track.
+- **NativeWind (soft-deprecated, still fully supported):** kept for Old-Arch / Expo ≤54 and existing projects. Two tracks: v4 stable (Tailwind v3, `tailwind.config.js`) and v5 preview (Tailwind v4, CSS-first).
 
-Components use `className`/`cn()`/`cva()` which work identically on all three. The CLI auto-detects the SDK generation, honouring an explicit `nativewind` / `tailwindcss` dep over the Expo SDK bucket.
+`aniui init` **defaults to Uniwind** on New-Arch-capable projects (Expo SDK ≥55); Old-Arch / Expo ≤54 / bare-RN fall back to NativeWind. NativeWind stays selectable via the prompt or `--style nativewind`; a soft-deprecation notice is shown. An already-installed engine always wins; `--style` is authoritative.
+
+**Quad-SDK Support:** AniUI supports four Expo generations:
+- **Expo SDK 54 (template family `v4`):** NativeWind v4 + Tailwind v3 + Reanimated v3 (Old + New Architecture). NativeWind default (Uniwind needs New Arch).
+- **Expo SDK 55 (template family `v5`):** Uniwind default; NativeWind v5 preview + Tailwind v4 + Reanimated v4 also available. New Architecture only.
+- **Expo SDK 56:** React 19.2 / RN 0.85.3 / Reanimated 4.3 + required peer `react-native-worklets ~0.8.3` / safe-area-context `~5.7.0`. New Architecture only. Uniwind default; NativeWind v5 preview **or** v4 stable available (`aniui init` prompts, or `--nw v4|v5`).
+- **Expo SDK 57:** React 19.2 / RN 0.86 / Reanimated ~4.5 / `react-native-worklets ~0.10` / gesture-handler ~2.32 / safe-area-context ~5.7. New Architecture only. Same engine choices as 56; Uniwind default. Native deps are pinned via `expo install` (including `react-native-worklets`).
+
+The CLI auto-detects the SDK generation and engine, honouring an explicit `nativewind` / `uniwind` / `tailwindcss` dep over the Expo SDK bucket.
 
 ## Supported Platforms
 
-- Expo SDK 54 (NativeWind v4 + Tailwind v3)
-- Expo SDK 55 (NativeWind v5 + Tailwind v4)
-- Expo SDK 56 (NativeWind v5 preview OR NativeWind v4 stable)
+- Expo SDK 54 (NativeWind v4 + Tailwind v3; Uniwind needs New Arch)
+- Expo SDK 55 (Uniwind default; or NativeWind v5 + Tailwind v4)
+- Expo SDK 56 (Uniwind default; or NativeWind v5 preview / v4 stable)
+- Expo SDK 57 (Uniwind default; or NativeWind v5 preview / v4 stable) — RN 0.86, Reanimated ~4.5, worklets ~0.10
 - Bare React Native CLI 0.76+
 - iOS 15+, Android API 24+
-- New Architecture: supported on all SDKs
-- Old Architecture: supported on SDK 54 and earlier
+- Styling engines: Uniwind (primary/default on New Arch) and NativeWind (soft-deprecated, supported)
+- New Architecture: supported on all SDKs (required for Uniwind)
+- Old Architecture: supported on SDK 54 and earlier (NativeWind only)
 
 ## Repository Structure
 
@@ -257,6 +266,8 @@ export function [Name]({ variant, size, className, ...props }: [Name]Props) {
 - For text content inside Pressable: always wrap in `<Text>` (never bare strings in RN)
 
 ## Component Tiers — What Gets Built When
+
+> **Source of truth:** `cli/src/registry.ts` is authoritative for every component's tier, npm deps, and registry deps — the table below is a human-readable overview that may lag. The `tier` type is `1 | 2 | 3` (SVG charts are tier 3, not "tier 4"). Components present in the registry but not (yet) in the table below: `calendar`, `stepper`, `field`, `input-group`, `kbd`, `hover-card`, `direction-provider`, `animate`, `data-table`, `command-menu`, `aspect-ratio`, `breadcrumb`, `menubar`, `sidebar`. When the table and registry disagree on tier/deps, trust the registry.
 
 ### Tier 1: Zero extra dependencies (use RN core + NativeWind + cva only)
 

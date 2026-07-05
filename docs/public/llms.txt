@@ -5,7 +5,7 @@
 AniUI is a copy-paste component library for React Native. Components are source files, not npm packages. Users own the code.
 
 ## Rules
-- ALL styling via NativeWind className — NEVER use StyleSheet.create()
+- ALL styling via className (Uniwind or NativeWind — same API) — NEVER use StyleSheet.create()
 - Named exports only — no default exports
 - Import cn from @/lib/utils
 - Import components from @/components/ui/{name}
@@ -155,9 +155,9 @@ Copy-paste full screen templates. Install via `npx @aniui/cli add-block <name>`.
 ## Why AniUI
 
 - shadcn/ui approach: copy source files, own the code, no npm dependency lock-in
-- 89 components + 7 charts + 15 blocks
-- Works with Expo SDK 53-55, bare React Native 0.76+, New Architecture
-- NativeWind v4 + v5, Uniwind support
+- 93 components + 7 charts + 15 blocks
+- Works with Expo SDK 53-57, bare React Native 0.76+, New Architecture
+- Uniwind (recommended default on Expo SDK 55+) and NativeWind v4/v5 (supported, soft-deprecated) — same className API
 - Full RTL support for Arabic, Hebrew, Persian, Urdu
 - TypeScript strict, full accessibility (accessibilityRole on every interactive element)
 - CLI with init, add, add-block, theme, status, diff, update commands

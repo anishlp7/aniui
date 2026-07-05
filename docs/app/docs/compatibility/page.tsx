@@ -95,7 +95,7 @@ export default function CompatibilityPage() {
       <div>
         <h1 className="text-3xl font-bold tracking-tight text-foreground">Compatibility</h1>
         <p className="mt-2 text-lg text-muted-foreground">
-          AniUI supports Expo SDK 53, 54, 55, and 56, plus Bare React Native 0.76+, NativeWind, and Uniwind. The CLI auto-detects your setup. For a focused SDK 56 walkthrough see the <a href="/docs/expo-56" className="text-primary hover:underline">Expo SDK 56 guide</a>.
+          AniUI supports Expo SDK 53, 54, 55, 56, and 57, plus Bare React Native 0.76+. It works with two className engines: <a href="/docs/uniwind" className="text-primary hover:underline">Uniwind</a> (the recommended default on New-Arch projects) and NativeWind (fully supported, soft-deprecated). The CLI auto-detects your setup and defaults to Uniwind on Expo SDK 55+.
         </p>
       </div>
 
