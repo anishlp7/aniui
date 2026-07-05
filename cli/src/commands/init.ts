@@ -54,11 +54,22 @@ export async function initCommand(opts?: { style?: string; nw?: string; yes?: bo
   }
   logger.success(`SDK generation: ${gen === "v5" ? "Tailwind v4" : "Tailwind v3"}`);
 
-  // --style flag is authoritative; otherwise auto-detect from project deps
+  // --style flag is authoritative; otherwise auto-detect from project deps.
+  // Uniwind is the recommended default, but it needs React 19 + Tailwind v4 + New
+  // Architecture — proxied by Expo SDK >= 55 (matches the v5 threshold). Old-Arch /
+  // Expo <= 54 / bare-RN / unknown projects default to NativeWind for compatibility.
+  const uniwindCompatible = project.expoMajor >= 55;
   const styleFromFlag: StyleEngine | null =
     opts?.style === "uniwind" || opts?.style === "nativewind" ? opts.style : null;
   const detectedStyle: StyleEngine =
-    styleFromFlag ?? (project.hasUniwind ? "uniwind" : "nativewind");
+    styleFromFlag ??
+    (project.hasUniwind
+      ? "uniwind"
+      : project.hasNativewind
+      ? "nativewind"
+      : uniwindCompatible
+      ? "uniwind"
+      : "nativewind");
 
   // Step 1: Ask style engine + theme + paths upfront (skip with --yes or --style)
   let response: {
@@ -95,10 +106,10 @@ export async function initCommand(opts?: { style?: string; nw?: string; yes?: bo
         name: "style",
         message: "Which styling engine?",
         choices: [
-          { title: "NativeWind" + (project.hasNativewind ? " (installed)" : ""), value: "nativewind" },
-          { title: "Uniwind" + (project.hasUniwind ? " (installed)" : ""), value: "uniwind" },
+          { title: "Uniwind (recommended)" + (project.hasUniwind ? " (installed)" : ""), value: "uniwind" },
+          { title: "NativeWind (supported)" + (project.hasNativewind ? " (installed)" : ""), value: "nativewind" },
         ],
-        initial: detectedStyle === "uniwind" ? 1 : 0,
+        initial: detectedStyle === "uniwind" ? 0 : 1,
       });
     }
     promptDefs.push(
@@ -162,6 +173,16 @@ export async function initCommand(opts?: { style?: string; nw?: string; yes?: bo
   // Skipped for Uniwind (single-track).
   const chosenStyle: StyleEngine = response.style;
   const isChosenUniwind = chosenStyle === "uniwind";
+
+  // Soft-deprecation notice: NativeWind is still fully supported, but Uniwind is now
+  // the recommended engine on New-Arch-capable projects (faster, Tailwind v4, no Babel step).
+  if (!isChosenUniwind && uniwindCompatible && !project.hasNativewind) {
+    logger.break();
+    logger.warn("NativeWind is still fully supported, but Uniwind is now the recommended engine");
+    logger.info("  (2–3× faster, Tailwind v4, CSS-first, no Babel transform).");
+    logger.info("  Re-run with `--style uniwind` to switch.");
+    logger.break();
+  }
 
   if (!isChosenUniwind && project.expoMajor >= 55) {
     const flagTrack: "v4" | "v5" | null =
@@ -258,7 +279,7 @@ export async function initCommand(opts?: { style?: string; nw?: string; yes?: bo
       try {
         if (project.type === "expo") {
           // Use expo install for Expo projects — handles version pinning
-          const rnPkgs = missing.filter(p => ["react-native-reanimated", "react-native-safe-area-context", "react-native-svg", "react-native-css"].includes(p.replace(/@.*$/, "")));
+          const rnPkgs = missing.filter(p => ["react-native-reanimated", "react-native-worklets", "react-native-safe-area-context", "react-native-svg", "react-native-css"].includes(p.replace(/@.*$/, "")));
           const npmPkgs = missing.filter(p => !rnPkgs.includes(p));
           if (rnPkgs.length > 0) {
             logger.info(`Installing RN packages with expo install (auto-pins versions)...`);

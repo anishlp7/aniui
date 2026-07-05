@@ -57,6 +57,9 @@ export async function doctorCommand(): Promise<void> {
   checks.push({
     label: `Style engine: ${isUniwind ? "Uniwind" : "NativeWind"} ${isUniwind ? (getVersion("uniwind") || "(not found)") : (getVersion("nativewind") || "(not found)")}`,
     pass: isUniwind ? project.hasUniwind : project.hasNativewind,
+    detail: !isUniwind && project.expoMajor >= 55
+      ? "NativeWind is still fully supported; Uniwind is now recommended (faster, Tailwind v4, no Babel step). Re-init with --style uniwind to switch."
+      : undefined,
     fix: isUniwind
       ? `Install: ${getDlxCommand(pm, "expo install uniwind")}`
       : `Install: ${getDlxCommand(pm, "expo install nativewind")}`,
@@ -87,7 +90,7 @@ export async function doctorCommand(): Promise<void> {
     checks.push({
       label: `react-native-worklets ${workletsVer ? `(${workletsVer})` : ""}`,
       pass: !!workletsVer,
-      detail: "Required by Reanimated 4.3+ on Expo SDK 56.",
+      detail: "Required by Reanimated 4.3+ on Expo SDK 56 and newer.",
       fix: `Install: ${getDlxCommand(pm, "expo install react-native-worklets")}`,
     });
   }
