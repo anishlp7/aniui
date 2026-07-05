@@ -2,5 +2,27 @@
   "componentsDir": "components/ui",
   "utilPath": "lib/utils.ts",
   "theme": "blue",
-  "tsx": true
+  "tsx": true,
+  "installed": {
+    "sidebar": {
+      "version": "0.3.0",
+      "hash": "dd632658",
+      "addedAt": "2026-07-05T05:22:13.833Z"
+    },
+    "menubar": {
+      "version": "0.3.0",
+      "hash": "a37a4c78",
+      "addedAt": "2026-07-05T05:22:13.835Z"
+    },
+    "breadcrumb": {
+      "version": "0.3.0",
+      "hash": "e6cebaa6",
+      "addedAt": "2026-07-05T05:22:13.835Z"
+    },
+    "aspect-ratio": {
+      "version": "0.3.0",
+      "hash": "e7a57924",
+      "addedAt": "2026-07-05T05:22:13.835Z"
+    }
+  }
 }

@@ -43,6 +43,10 @@ import { Badge } from "@/components/ui/badge";
 import { Card, CardHeader, CardTitle, CardContent, CardDescription, CardFooter } from "@/components/ui/card";
 import { Avatar } from "@/components/ui/avatar";
 import { Separator } from "@/components/ui/separator";
+import { AspectRatio } from "@/components/ui/aspect-ratio";
+import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbPage, BreadcrumbSeparator } from "@/components/ui/breadcrumb";
+import { Menubar, MenubarMenu, MenubarItem } from "@/components/ui/menubar";
+import { SidebarProvider, Sidebar, SidebarTrigger } from "@/components/ui/sidebar";
 import { LabeledSeparator } from "@/components/ui/labeled-separator";
 import { Image as AniImage } from "@/components/ui/image";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -1259,6 +1263,53 @@ const demos: Record<string, () => React.ReactElement> = {
           </View>
         </View>
       </View>
+    </View>
+  ),
+  "aspect-ratio": () => (
+    <View className="gap-3">
+      <AspectRatio ratio={16 / 9} className="rounded-lg bg-secondary items-center justify-center">
+        <Text className="text-secondary-foreground">16 : 9</Text>
+      </AspectRatio>
+      <AspectRatio ratio={1} className="w-28 rounded-lg bg-secondary items-center justify-center">
+        <Text className="text-secondary-foreground">1 : 1</Text>
+      </AspectRatio>
+    </View>
+  ),
+  breadcrumb: () => (
+    <Breadcrumb>
+      <BreadcrumbItem><BreadcrumbLink>Home</BreadcrumbLink></BreadcrumbItem>
+      <BreadcrumbSeparator />
+      <BreadcrumbItem><BreadcrumbLink>Library</BreadcrumbLink></BreadcrumbItem>
+      <BreadcrumbSeparator />
+      <BreadcrumbItem><BreadcrumbPage>Data</BreadcrumbPage></BreadcrumbItem>
+    </Breadcrumb>
+  ),
+  menubar: () => (
+    <Menubar>
+      <MenubarMenu trigger="File">
+        <MenubarItem>New</MenubarItem>
+        <MenubarItem>Open</MenubarItem>
+        <MenubarItem>Save</MenubarItem>
+      </MenubarMenu>
+      <MenubarMenu trigger="Edit">
+        <MenubarItem>Undo</MenubarItem>
+        <MenubarItem>Redo</MenubarItem>
+      </MenubarMenu>
+    </Menubar>
+  ),
+  sidebar: () => (
+    <View className="h-64 overflow-hidden rounded-lg border border-border">
+      <SidebarProvider>
+        <Sidebar width={180}>
+          <Text className="mb-2 font-semibold text-foreground">Menu</Text>
+          <Text className="text-muted-foreground">Dashboard</Text>
+          <Text className="text-muted-foreground">Settings</Text>
+        </Sidebar>
+        <View className="flex-1 p-4">
+          <SidebarTrigger />
+          <Text className="mt-2 text-muted-foreground">Tap the icon to toggle</Text>
+        </View>
+      </SidebarProvider>
     </View>
   ),
   separator: () => (
