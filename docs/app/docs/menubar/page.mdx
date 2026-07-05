@@ -1,0 +1,90 @@
+export const metadata = {
+  title: "Menubar",
+  description: "AniUI Menubar component for React Native. Horizontal bar of menus with dropdown items.",
+};
+
+import { PreviewMenubar } from "@/components/preview/menubar";
+
+# Menubar
+
+Horizontal bar of menus, each opening a dropdown of items.
+
+<PreviewToggle>
+  <ComponentPlayground code={`import { Menubar, MenubarMenu, MenubarItem } from "@/components/ui/menubar";
+
+export function MyScreen() {
+  return (
+    <Menubar>
+      <MenubarMenu trigger="File">
+        <MenubarItem onPress={() => {}}>New File</MenubarItem>
+        <MenubarItem onPress={() => {}}>Open…</MenubarItem>
+        <MenubarItem onPress={() => {}}>Save</MenubarItem>
+      </MenubarMenu>
+      <MenubarMenu trigger="Edit">
+        <MenubarItem onPress={() => {}}>Undo</MenubarItem>
+        <MenubarItem onPress={() => {}}>Redo</MenubarItem>
+      </MenubarMenu>
+    </Menubar>
+  );
+}`}>
+    <PreviewMenubar />
+  </ComponentPlayground>
+</PreviewToggle>
+
+## Installation
+
+<AddComponentTabs names="menubar" />
+
+## Usage
+
+```tsx title="app/index.tsx"
+import { Menubar, MenubarMenu, MenubarItem } from "@/components/ui/menubar";
+
+export function MyScreen() {
+  return (
+    <Menubar>
+      <MenubarMenu trigger="File">
+        <MenubarItem onPress={() => {}}>New File</MenubarItem>
+        <MenubarItem onPress={() => {}}>Save</MenubarItem>
+      </MenubarMenu>
+      <MenubarMenu trigger="Edit">
+        <MenubarItem onPress={() => {}}>Undo</MenubarItem>
+      </MenubarMenu>
+    </Menubar>
+  );
+}
+```
+
+## Props
+
+### Menubar
+
+<PropsTable props={[
+  { name: "children", type: "React.ReactNode" },
+  { name: "className", type: "string" },
+]} />
+
+Also accepts all `View` props from React Native.
+
+### MenubarMenu
+
+<PropsTable props={[
+  { name: "trigger", type: "React.ReactNode" },
+  { name: "children", type: "React.ReactNode" },
+  { name: "className", type: "string" },
+]} />
+
+### MenubarItem
+
+<PropsTable props={[
+  { name: "onPress", type: "() => void" },
+  { name: "children", type: "React.ReactNode" },
+  { name: "className", type: "string" },
+]} />
+
+Also accepts all `Pressable` props from React Native.
+
+## Accessibility
+
+- `Menubar` uses `accessibilityRole="menubar"`.
+- Triggers and items use `accessibilityRole="menuitem"`; the open panel uses `accessibilityRole="menu"`.

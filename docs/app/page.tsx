@@ -87,7 +87,7 @@ const jsonLd = {
   name: "AniUI",
   applicationCategory: "DeveloperApplication",
   operatingSystem: "iOS, Android",
-  description: "shadcn/ui for React Native. 89 accessible components built with NativeWind and TypeScript. Now supports Expo SDK 56.",
+  description: "shadcn/ui for React Native. 93 accessible components built with Uniwind or NativeWind and TypeScript. Now supports Expo SDK 57.",
   url: "https://aniui.dev",
   author: { "@type": "Person", name: "Anish" },
   offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
@@ -189,14 +189,14 @@ export default function HomePage() {
           initial="hidden"
           animate="show"
         >
-          {/* SDK 56 announcement */}
+          {/* SDK 57 + Uniwind announcement */}
           <motion.div variants={heroItem} className="mb-4">
             <Link
-              href="/docs/expo-56"
+              href="/docs/uniwind"
               className="group inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 backdrop-blur-sm px-4 py-1.5 transition-colors hover:border-primary/50 hover:bg-primary/15"
             >
               <span className="rounded-full bg-primary px-1.5 py-0.5 text-[10px] font-bold uppercase tracking-wide text-primary-foreground">New</span>
-              <span className="text-xs font-medium text-foreground">Now supporting Expo SDK 56</span>
+              <span className="text-xs font-medium text-foreground">Expo SDK 57 + Uniwind is now the default</span>
               <span className="text-xs text-muted-foreground transition-transform group-hover:translate-x-0.5">→</span>
             </Link>
           </motion.div>
@@ -208,7 +208,7 @@ export default function HomePage() {
               animate={prefersReducedMotion ? undefined : { scale: [1, 1.4, 1], opacity: [1, 0.7, 1] }}
               transition={{ duration: 1.8, ease: "easeInOut", repeat: Infinity }}
             />
-            <span className="text-xs font-medium text-muted-foreground">89+ components and counting</span>
+            <span className="text-xs font-medium text-muted-foreground">93+ components and counting</span>
           </motion.div>
 
           <motion.h1
@@ -235,7 +235,7 @@ export default function HomePage() {
             variants={heroItem}
             className="flex flex-wrap items-center justify-center gap-2.5 mt-5"
           >
-            {["Expo", "Bare RN", "NativeWind", "Uniwind", "TypeScript", "New Architecture"].map((label, i) => (
+            {["Expo", "Bare RN", "Uniwind", "NativeWind", "TypeScript", "New Architecture"].map((label, i) => (
               <motion.span
                 key={label}
                 variants={pillItem}
@@ -349,7 +349,7 @@ export default function HomePage() {
         <div className="text-center sm:text-left">
           <p className="text-base font-semibold text-foreground">Preview on your device</p>
           <p className="text-sm text-muted-foreground mt-1 max-w-sm">
-            Scan with Expo Go to try all 89 components live on a real device.
+            Scan with Expo Go to try all 93 components live on a real device.
           </p>
         </div>
       </motion.div>

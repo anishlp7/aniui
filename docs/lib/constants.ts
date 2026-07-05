@@ -14,10 +14,10 @@ export const SITE = {
 } as const;
 
 /** Total component count — derived from cli/src/registry.ts */
-export const COMPONENT_COUNT = 89;
+export const COMPONENT_COUNT = 93;
 
 export const DESCRIPTIONS = {
-  site: `shadcn/ui for React Native. ${COMPONENT_COUNT} accessible components built with NativeWind, rn-primitives, and TypeScript. Copy. Paste. Ship.`,
-  docs: `Browse ${COMPONENT_COUNT} React Native components. Button, Card, Dialog, Select, Toast, Data Table, Command Menu, and more. Built with NativeWind and rn-primitives.`,
+  site: `shadcn/ui for React Native. ${COMPONENT_COUNT} accessible components built with Uniwind or NativeWind, rn-primitives, and TypeScript. Copy. Paste. Ship.`,
+  docs: `Browse ${COMPONENT_COUNT} React Native components. Button, Card, Dialog, Select, Toast, Data Table, Command Menu, and more. Built with Uniwind or NativeWind and rn-primitives.`,
   og: `shadcn/ui for React Native. ${COMPONENT_COUNT} accessible components. Copy. Paste. Ship.`,
 } as const;

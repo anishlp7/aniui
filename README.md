@@ -14,7 +14,7 @@
   <a href="https://www.npmjs.com/package/@aniui/cli"><img src="https://img.shields.io/npm/v/@aniui/cli?style=flat-square&color=000" alt="npm version" /></a>
   <a href="https://github.com/anishlp7/aniui/blob/main/LICENSE"><img src="https://img.shields.io/github/license/anishlp7/aniui?style=flat-square&color=000" alt="license" /></a>
   <img src="https://img.shields.io/badge/platform-iOS%20%7C%20Android-000?style=flat-square" alt="platform" />
-  <img src="https://img.shields.io/badge/Expo%20SDK-53%20%7C%2054%20%7C%2055%20%7C%2056-000?style=flat-square" alt="expo" />
+  <img src="https://img.shields.io/badge/Expo%20SDK-53%20%7C%2054%20%7C%2055%20%7C%2056%20%7C%2057-000?style=flat-square" alt="expo" />
 </p>
 
 <p align="center">
@@ -30,7 +30,7 @@
 
 AniUI is a [shadcn/ui](https://ui.shadcn.com)-inspired component library for **React Native**. Instead of installing a package, you copy component source files directly into your project. You own the code. Customize everything.
 
-Built with [NativeWind](https://www.nativewind.dev) (or [Uniwind](https://github.com/nicepkg/uniwind)), [rn-primitives](https://rn-primitives.vercel.app) for accessibility, [class-variance-authority](https://cva.style), and strict TypeScript. Every component is a single file, styled with Tailwind classes, and works on both iOS and Android out of the box.
+Built with [Uniwind](https://uniwind.dev) (recommended) or [NativeWind](https://www.nativewind.dev), [rn-primitives](https://rn-primitives.vercel.app) for accessibility, [class-variance-authority](https://cva.style), and strict TypeScript. Every component is a single file, styled with Tailwind classes, and works on both iOS and Android out of the box.
 
 **Demo:** [YouTube Short](https://www.youtube.com/shorts/KxHLlLk8YkA) | [Live Demo (Expo Go)](https://expo.dev/projects/4d52bb77-8a04-4713-b4b9-e2ed4c5ec1a0)
 
@@ -42,10 +42,10 @@ Built with [NativeWind](https://www.nativewind.dev) (or [Uniwind](https://github
 
 | | Status |
 |---|---|
-| Expo | ✅ SDK 53, 54, 55 & **56** |
+| Expo | ✅ SDK 53, 54, 55, 56 & **57** |
 | Bare React Native | ✅ 0.76+ |
-| NativeWind | ✅ v4 (stable) + v5 (preview) |
-| Uniwind | ✅ `--style uniwind` |
+| Uniwind | ✅ **Recommended / default** on Expo 55+ |
+| NativeWind | ✅ v4 (stable) + v5 (preview) — supported |
 | rn-primitives | ✅ Headless a11y layer |
 | TypeScript | ✅ Strict |
 | JavaScript | ✅ Via CLI (`tsx: false`) |
@@ -55,7 +55,7 @@ Built with [NativeWind](https://www.nativewind.dev) (or [Uniwind](https://github
 | iOS | ✅ 15+ |
 | Android | ✅ API 24+ |
 
-> **New: Expo SDK 56 →** AniUI 0.3.0 ships with two SDK 56 starters — one on NativeWind v5 preview (`examples/expo-56-starter`) and one on NativeWind v4 stable (`examples/expo-56-nw4-starter`). On Expo 55+ projects, `aniui init` now prompts which NativeWind track to use. See [the SDK 56 guide](https://aniui.dev/docs/expo-56) for migration steps.
+> **New: Expo SDK 57 + Uniwind is now the default →** On Expo SDK 55+ projects, `aniui init` now defaults to [Uniwind](https://uniwind.dev) (2–3× faster than NativeWind, Tailwind v4 CSS-first, no Babel transform). NativeWind stays fully supported via `--style nativewind`. Ships with Expo 57 starters for both engines (`examples/expo-57-starter`, `examples/expo-57-nw5-starter`). See [the Uniwind guide](https://aniui.dev/docs/uniwind) and [SDK compatibility](https://aniui.dev/docs/compatibility).
 
 ## Quick Start
 
@@ -67,8 +67,8 @@ yarn dlx @aniui/cli init         # yarn
 bunx @aniui/cli init             # bun
 
 # Choose your styling engine during init:
-npx @aniui/cli init --style nativewind   # default
-npx @aniui/cli init --style uniwind      # Uniwind support
+npx @aniui/cli init --style uniwind      # default on Expo 55+ (recommended)
+npx @aniui/cli init --style nativewind   # NativeWind (supported)
 
 # Add components
 npx @aniui/cli add button card input text
@@ -100,7 +100,7 @@ export function WelcomeScreen() {
 
 ## Components
 
-**89 components** — all listed alphabetically. Each component's docs page tells you if it needs extra dependencies.
+**93 components** — all listed alphabetically. Each component's docs page tells you if it needs extra dependencies.
 
 | Component | Description |
 |-----------|-------------|
@@ -109,10 +109,12 @@ export function WelcomeScreen() {
 | [Animate](https://aniui.dev/docs/animate) | Animation presets, spring configs, and hooks |
 | [Alert](https://aniui.dev/docs/alert) | Alert with default, destructive, success, warning |
 | [Alert Dialog](https://aniui.dev/docs/alert-dialog) | Confirmation dialog with Action/Cancel |
+| [Aspect Ratio](https://aniui.dev/docs/aspect-ratio) | Constrain content to a fixed width/height ratio |
 | [Avatar](https://aniui.dev/docs/avatar) | Image with fallback initials, 3 sizes |
 | [Badge](https://aniui.dev/docs/badge) | Status indicator with 4 variants |
 | [Banner](https://aniui.dev/docs/banner) | Full-width notification with variants and dismiss |
 | [Bottom Sheet](https://aniui.dev/docs/bottom-sheet) | Bottom sheet overlay |
+| [Breadcrumb](https://aniui.dev/docs/breadcrumb) | Navigation trail for the current page's location |
 | [Button](https://aniui.dev/docs/button) | Pressable with 5 variants and 3 sizes |
 | [Calendar](https://aniui.dev/docs/calendar) | Month grid with single date and range selection |
 | [Card](https://aniui.dev/docs/card) | Card with Header, Title, Content, Footer |
@@ -148,6 +150,7 @@ export function WelcomeScreen() {
 | [Labeled Separator](https://aniui.dev/docs/labeled-separator) | Horizontal separator with centered text label |
 | [List](https://aniui.dev/docs/list) | Styled list with ListItem, Title, Description |
 | [Masked Input](https://aniui.dev/docs/masked-input) | Auto-format masks for credit cards, phones, dates |
+| [Menubar](https://aniui.dev/docs/menubar) | Horizontal bar of menus with dropdown items |
 | [Number Input](https://aniui.dev/docs/number-input) | Numeric input with +/- buttons and min/max |
 | [Pagination](https://aniui.dev/docs/pagination) | Page navigation with numbered buttons and prev/next |
 | [Password Input](https://aniui.dev/docs/password-input) | Password with show/hide toggle and strength indicator |
@@ -164,6 +167,7 @@ export function WelcomeScreen() {
 | [Segmented Control](https://aniui.dev/docs/segmented-control) | iOS-style segmented control |
 | [Select](https://aniui.dev/docs/select) | Dropdown select |
 | [Separator](https://aniui.dev/docs/separator) | Horizontal or vertical divider |
+| [Sidebar](https://aniui.dev/docs/sidebar) | Collapsible side navigation panel with toggle |
 | [Skeleton](https://aniui.dev/docs/skeleton) | Animated loading placeholder |
 | [Slider](https://aniui.dev/docs/slider) | Draggable slider for numeric values |
 | [Spinner](https://aniui.dev/docs/spinner) | Loading spinner with 3 sizes |
@@ -206,7 +210,7 @@ npm install @gorhom/bottom-sheet react-native-gesture-handler
 
 | Area | Status |
 |------|--------|
-| 89 components | ✅ |
+| 93 components | ✅ |
 | Component & CLI tests (Jest) | ✅ |
 | Accessibility audit | ✅ |
 | Performance benchmarks | ✅ |
