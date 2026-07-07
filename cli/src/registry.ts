@@ -747,10 +747,10 @@ export const registry: Record<string, ComponentEntry> = {
   "command-menu": {
     name: "CommandMenu",
     file: "components/ui/command-menu.tsx",
-    description: "Spotlight-style searchable command palette with groups and keyboard shortcuts",
-    dependencies: ["react-native-svg", "clsx", "tailwind-merge"],
-    registryDependencies: [],
-    tier: 1,
+    description: "Spotlight/kbar-style command palette — portal-based overlay with rigorous Android keyboard handling, groups, and shortcuts",
+    dependencies: ["@rn-primitives/dialog", "@rn-primitives/portal", "react-native-reanimated", "react-native-svg", "clsx", "tailwind-merge"],
+    registryDependencies: ["animate"],
+    tier: 3,
   },
 };
 
