@@ -1,6 +1,8 @@
-import React, { useRef, useState } from "react";
+import React, { createContext, useContext, useRef, useState } from "react";
 import { View, Text, Pressable, Modal } from "react-native";
 import { cn } from "@/lib/utils";
+
+const MenubarCloseContext = createContext<(() => void) | null>(null);
 
 export interface MenubarProps extends React.ComponentPropsWithoutRef<typeof View> {
   className?: string;
@@ -55,7 +57,7 @@ export function MenubarMenu({ trigger, className, children }: MenubarMenuProps) 
             style={{ position: "absolute", left: anchor.x, top: anchor.y }}
             accessibilityRole="menu"
           >
-            {children}
+            <MenubarCloseContext.Provider value={() => setOpen(false)}>{children}</MenubarCloseContext.Provider>
           </View>
         </Pressable>
       </Modal>
@@ -68,11 +70,16 @@ export interface MenubarItemProps extends React.ComponentPropsWithoutRef<typeof 
   children?: React.ReactNode;
 }
 
-export function MenubarItem({ className, children, ...props }: MenubarItemProps) {
+export function MenubarItem({ className, children, onPress, ...props }: MenubarItemProps) {
+  const close = useContext(MenubarCloseContext);
   return (
     <Pressable
       accessibilityRole="menuitem"
       accessible
+      onPress={(e) => {
+        onPress?.(e);
+        close?.();
+      }}
       className={cn("min-h-10 justify-center rounded-sm px-2", className)}
       {...props}
     >
