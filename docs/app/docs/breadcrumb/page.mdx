@@ -1,0 +1,114 @@
+export const metadata = {
+  title: "Breadcrumb",
+  description: "AniUI Breadcrumb component for React Native. Navigation trail showing the current page's location.",
+};
+
+import { PreviewBreadcrumb } from "@/components/preview/breadcrumb";
+
+# Breadcrumb
+
+Navigation trail showing the current page's location in a hierarchy.
+
+<PreviewToggle>
+  <ComponentPlayground code={`import {
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbPage,
+  BreadcrumbSeparator,
+} from "@/components/ui/breadcrumb";
+
+export function MyScreen() {
+  return (
+    <Breadcrumb>
+      <BreadcrumbItem>
+        <BreadcrumbLink onPress={() => {}}>Home</BreadcrumbLink>
+      </BreadcrumbItem>
+      <BreadcrumbSeparator />
+      <BreadcrumbItem>
+        <BreadcrumbLink onPress={() => {}}>Components</BreadcrumbLink>
+      </BreadcrumbItem>
+      <BreadcrumbSeparator />
+      <BreadcrumbItem>
+        <BreadcrumbPage>Breadcrumb</BreadcrumbPage>
+      </BreadcrumbItem>
+    </Breadcrumb>
+  );
+}`}>
+    <PreviewBreadcrumb />
+  </ComponentPlayground>
+</PreviewToggle>
+
+## Installation
+
+<AddComponentTabs names="breadcrumb" />
+
+## Usage
+
+```tsx title="app/index.tsx"
+import {
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbPage,
+  BreadcrumbSeparator,
+} from "@/components/ui/breadcrumb";
+
+export function MyScreen() {
+  return (
+    <Breadcrumb>
+      <BreadcrumbItem>
+        <BreadcrumbLink onPress={() => {}}>Home</BreadcrumbLink>
+      </BreadcrumbItem>
+      <BreadcrumbSeparator />
+      <BreadcrumbItem>
+        <BreadcrumbPage>Breadcrumb</BreadcrumbPage>
+      </BreadcrumbItem>
+    </Breadcrumb>
+  );
+}
+```
+
+## Props
+
+### Breadcrumb
+
+<PropsTable props={[
+  { name: "children", type: "React.ReactNode" },
+  { name: "className", type: "string" },
+]} />
+
+### BreadcrumbItem
+
+<PropsTable props={[
+  { name: "className", type: "string" },
+]} />
+
+### BreadcrumbLink
+
+<PropsTable props={[
+  { name: "onPress", type: "() => void" },
+  { name: "children", type: "React.ReactNode" },
+  { name: "className", type: "string" },
+]} />
+
+Also accepts all `Pressable` props from React Native.
+
+### BreadcrumbPage
+
+<PropsTable props={[
+  { name: "children", type: "React.ReactNode" },
+  { name: "className", type: "string" },
+]} />
+
+### BreadcrumbSeparator
+
+<PropsTable props={[
+  { name: "children", type: "React.ReactNode", default: '"/"' },
+  { name: "className", type: "string" },
+]} />
+
+## Accessibility
+
+- `BreadcrumbLink` uses `accessibilityRole="link"`.
+- `BreadcrumbPage` uses `accessibilityRole="header"` to mark the current page.

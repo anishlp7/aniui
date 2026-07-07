@@ -101,6 +101,11 @@ const components = [
   { name: "Radial Chart", section: "Charts" },
   // Providers
   { name: "Direction Provider", section: "Providers" },
+  // Layout & navigation
+  { name: "Aspect Ratio", section: "Display" },
+  { name: "Breadcrumb", section: "Navigation" },
+  { name: "Menubar", section: "Navigation" },
+  { name: "Sidebar", section: "Navigation" },
 ];
 
 const sectionOrder = ["Forms", "Display", "Feedback", "Navigation", "Overlays", "Charts", "Providers"];

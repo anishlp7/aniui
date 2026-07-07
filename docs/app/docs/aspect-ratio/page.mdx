@@ -1,0 +1,75 @@
+export const metadata = {
+  title: "Aspect Ratio",
+  description: "AniUI Aspect Ratio component for React Native. Constrain content to a fixed width/height ratio.",
+};
+
+import { PreviewAspectRatio } from "@/components/preview/aspect-ratio";
+
+# Aspect Ratio
+
+Constrain content to a fixed width/height ratio.
+
+<PreviewToggle>
+  <ComponentPlayground code={`import { AspectRatio } from "@/components/ui/aspect-ratio";
+import { Image } from "react-native";
+
+export function MyScreen() {
+  return (
+    <AspectRatio ratio={16 / 9}>
+      <Image source={{ uri: "https://example.com/cover.jpg" }} className="h-full w-full" />
+    </AspectRatio>
+  );
+}`}>
+    <div className="w-full max-w-sm">
+      <PreviewAspectRatio ratio={16 / 9} label="16 : 9" />
+    </div>
+  </ComponentPlayground>
+</PreviewToggle>
+
+## Installation
+
+<AddComponentTabs names="aspect-ratio" />
+
+## Usage
+
+```tsx title="app/index.tsx"
+import { AspectRatio } from "@/components/ui/aspect-ratio";
+import { Image } from "react-native";
+
+export function MyScreen() {
+  return (
+    <AspectRatio ratio={16 / 9}>
+      <Image source={{ uri: "https://example.com/cover.jpg" }} className="h-full w-full" />
+    </AspectRatio>
+  );
+}
+```
+
+## Ratios
+
+<ComponentPlayground code={`<AspectRatio ratio={1} />
+<AspectRatio ratio={16 / 9} />`}>
+  <div className="flex items-start gap-4">
+    <div className="w-40">
+      <PreviewAspectRatio ratio={1} label="1 : 1" />
+    </div>
+    <div className="w-56">
+      <PreviewAspectRatio ratio={16 / 9} label="16 : 9" />
+    </div>
+  </div>
+</ComponentPlayground>
+
+## Props
+
+<PropsTable props={[
+  { name: "ratio", type: "number", default: "1" },
+  { name: "children", type: "React.ReactNode" },
+  { name: "className", type: "string" },
+]} />
+
+Also accepts all `View` props from React Native.
+
+## Accessibility
+
+- Purely a layout wrapper — it adds no interaction of its own.
+- Interactive children keep their own accessibility roles.

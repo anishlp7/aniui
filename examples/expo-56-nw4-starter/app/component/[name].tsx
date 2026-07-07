@@ -43,6 +43,10 @@ import { Badge } from "@/components/ui/badge";
 import { Card, CardHeader, CardTitle, CardContent, CardDescription, CardFooter } from "@/components/ui/card";
 import { Avatar } from "@/components/ui/avatar";
 import { Separator } from "@/components/ui/separator";
+import { AspectRatio } from "@/components/ui/aspect-ratio";
+import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbPage, BreadcrumbSeparator } from "@/components/ui/breadcrumb";
+import { Menubar, MenubarMenu, MenubarItem } from "@/components/ui/menubar";
+import { SidebarProvider, Sidebar, SidebarTrigger } from "@/components/ui/sidebar";
 import { LabeledSeparator } from "@/components/ui/labeled-separator";
 import { Image as AniImage } from "@/components/ui/image";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -1261,6 +1265,125 @@ const demos: Record<string, () => React.ReactElement> = {
       </View>
     </View>
   ),
+  "aspect-ratio": () => (
+    <View className="gap-3">
+      <AspectRatio ratio={16 / 9} className="rounded-lg bg-secondary items-center justify-center">
+        <Text className="text-secondary-foreground">16 : 9</Text>
+      </AspectRatio>
+      <AspectRatio ratio={1} className="w-28 rounded-lg bg-secondary items-center justify-center">
+        <Text className="text-secondary-foreground">1 : 1</Text>
+      </AspectRatio>
+    </View>
+  ),
+  breadcrumb: () => (
+    <View className="gap-6">
+      <Text className="text-sm text-zinc-500 dark:text-zinc-400">Shows the current page's location within a navigation hierarchy.</Text>
+      <View className="gap-2">
+        <Text className="text-xs font-semibold uppercase tracking-wider text-zinc-500 dark:text-zinc-400">Basic</Text>
+        <View className="rounded-xl border border-zinc-200 dark:border-zinc-800 p-4">
+          <Breadcrumb>
+            <BreadcrumbItem><BreadcrumbLink>🏠 Home</BreadcrumbLink></BreadcrumbItem>
+            <BreadcrumbSeparator />
+            <BreadcrumbItem><BreadcrumbLink>Components</BreadcrumbLink></BreadcrumbItem>
+            <BreadcrumbSeparator />
+            <BreadcrumbItem><BreadcrumbPage>Breadcrumb</BreadcrumbPage></BreadcrumbItem>
+          </Breadcrumb>
+        </View>
+      </View>
+      <View className="gap-2">
+        <Text className="text-xs font-semibold uppercase tracking-wider text-zinc-500 dark:text-zinc-400">Collapsed</Text>
+        <View className="rounded-xl border border-zinc-200 dark:border-zinc-800 p-4">
+          <Breadcrumb>
+            <BreadcrumbItem><BreadcrumbLink>Home</BreadcrumbLink></BreadcrumbItem>
+            <BreadcrumbSeparator />
+            <BreadcrumbItem><BreadcrumbLink>…</BreadcrumbLink></BreadcrumbItem>
+            <BreadcrumbSeparator />
+            <BreadcrumbItem><BreadcrumbLink>Settings</BreadcrumbLink></BreadcrumbItem>
+            <BreadcrumbSeparator />
+            <BreadcrumbItem><BreadcrumbPage>Profile</BreadcrumbPage></BreadcrumbItem>
+          </Breadcrumb>
+        </View>
+      </View>
+      <View className="gap-2">
+        <Text className="text-xs font-semibold uppercase tracking-wider text-zinc-500 dark:text-zinc-400">Custom separator</Text>
+        <View className="rounded-xl border border-zinc-200 dark:border-zinc-800 p-4">
+          <Breadcrumb>
+            <BreadcrumbItem><BreadcrumbLink>Docs</BreadcrumbLink></BreadcrumbItem>
+            <BreadcrumbSeparator>›</BreadcrumbSeparator>
+            <BreadcrumbItem><BreadcrumbLink>Guides</BreadcrumbLink></BreadcrumbItem>
+            <BreadcrumbSeparator>›</BreadcrumbSeparator>
+            <BreadcrumbItem><BreadcrumbPage>Routing</BreadcrumbPage></BreadcrumbItem>
+          </Breadcrumb>
+        </View>
+      </View>
+    </View>
+  ),
+  menubar: () => (
+    <View className="gap-3">
+      <Text className="text-sm text-zinc-500 dark:text-zinc-400">A desktop-style menu bar — tap a menu to open it; picking an item closes it.</Text>
+      <Menubar>
+        <MenubarMenu trigger="File">
+          <MenubarItem>New File</MenubarItem>
+          <MenubarItem>Open…</MenubarItem>
+          <MenubarItem>Save</MenubarItem>
+          <MenubarItem>Save As…</MenubarItem>
+        </MenubarMenu>
+        <MenubarMenu trigger="Edit">
+          <MenubarItem>Undo</MenubarItem>
+          <MenubarItem>Redo</MenubarItem>
+          <MenubarItem>Cut</MenubarItem>
+          <MenubarItem>Copy</MenubarItem>
+          <MenubarItem>Paste</MenubarItem>
+        </MenubarMenu>
+        <MenubarMenu trigger="View">
+          <MenubarItem>Zoom In</MenubarItem>
+          <MenubarItem>Zoom Out</MenubarItem>
+          <MenubarItem>Toggle Sidebar</MenubarItem>
+        </MenubarMenu>
+      </Menubar>
+    </View>
+  ),
+  sidebar: () => {
+    const [active, setActive] = React.useState("Dashboard");
+    const navItems = [
+      { label: "Dashboard", icon: "▦" },
+      { label: "Analytics", icon: "📊" },
+      { label: "Projects", icon: "📁" },
+      { label: "Team", icon: "👥" },
+      { label: "Settings", icon: "⚙️" },
+    ];
+    return (
+      <View className="gap-3">
+        <Text className="text-sm text-zinc-500 dark:text-zinc-400">Collapsible side navigation for dashboards. Tap ☰ to toggle the panel.</Text>
+        <View className="h-80 overflow-hidden rounded-xl border border-zinc-200 dark:border-zinc-800">
+          <SidebarProvider>
+            <Sidebar width={200}>
+              <Text className="mb-3 px-2 text-xs font-semibold uppercase tracking-wider text-zinc-500 dark:text-zinc-400">Workspace</Text>
+              <View className="gap-1">
+                {navItems.map((it) => (
+                  <Pressable
+                    key={it.label}
+                    onPress={() => setActive(it.label)}
+                    className={active === it.label ? "flex-row items-center gap-3 rounded-lg px-3 py-2.5 bg-zinc-100 dark:bg-zinc-800" : "flex-row items-center gap-3 rounded-lg px-3 py-2.5"}
+                  >
+                    <Text className="text-base">{it.icon}</Text>
+                    <Text className={active === it.label ? "text-sm font-semibold text-zinc-900 dark:text-zinc-50" : "text-sm text-zinc-600 dark:text-zinc-400"}>{it.label}</Text>
+                  </Pressable>
+                ))}
+              </View>
+            </Sidebar>
+            <View className="flex-1 p-4">
+              <View className="flex-row items-center gap-3">
+                <SidebarTrigger />
+                <Text className="text-base font-semibold text-zinc-900 dark:text-zinc-50">{active}</Text>
+              </View>
+              <Text className="mt-3 text-sm text-zinc-500 dark:text-zinc-400">Content for the {active} section. Collapse the sidebar with the ☰ button.</Text>
+            </View>
+          </SidebarProvider>
+        </View>
+      </View>
+    );
+  },
   separator: () => (
     <View className="rounded-lg border border-border bg-card p-4 gap-3">
       <Text>Above the separator</Text>

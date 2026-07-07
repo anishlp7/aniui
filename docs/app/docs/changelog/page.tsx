@@ -26,6 +26,20 @@ const typeBadge: Record<ChangeType, { label: string; className: string }> = {
 
 const releases: Release[] = [
   {
+    version: "0.4.0",
+    date: "2026-07-05",
+    title: "Expo SDK 57 + Uniwind is now the default",
+    changes: [
+      { type: "feat", text: "Uniwind is now the default styling engine. On New-Architecture-capable projects (Expo SDK 55+), aniui init defaults to Uniwind — 2–3× faster than NativeWind, Tailwind v4 CSS-first (@theme/@variant, no tailwind.config.js), Metro-plugin only (no Babel transform). Old-Architecture / Expo ≤54 / bare-RN fall back to NativeWind. An already-installed engine and --style still take precedence.", link: "/docs/uniwind" },
+      { type: "feat", text: "Expo SDK 57 (React Native 0.86 / React 19.2 / Reanimated 4.5 / react-native-worklets 0.10 / gesture-handler 2.32) is now supported. Two new starters ship with the repo: examples/expo-57-starter (Uniwind) and examples/expo-57-nw5-starter (NativeWind v5); examples/with-uniwind bumped to SDK 57.", link: "/docs/compatibility" },
+      { type: "feat", text: "NativeWind is soft-deprecated but still fully supported. aniui init shows a recommendation notice on fresh NativeWind inits (suppressed for already-installed NativeWind), and aniui doctor surfaces the same non-blocking note.", link: "/docs/uniwind" },
+      { type: "feat", text: "Four new components: aspect-ratio, breadcrumb, menubar, and sidebar (93 components total).", link: "/docs/components" },
+      { type: "fix", text: "react-native-worklets is now installed via 'expo install' (SDK-pinned) instead of the plain package manager on Expo 56+.", link: "/docs/cli" },
+      { type: "docs", text: "Uniwind docs rewritten to match actual CLI output (withUniwindConfig/cssEntryFile, CSS-first @theme/@variant, no tailwind.config.js). Homepage, README, compatibility matrix, and llms.txt updated for SDK 57 and Uniwind-primary.", link: "/docs/uniwind" },
+      { type: "feat", text: "CLI bumped to 0.4.0.", link: "/docs/cli" },
+    ],
+  },
+  {
     version: "0.3.0",
     date: "2026-05-23",
     title: "Expo SDK 56 Support",

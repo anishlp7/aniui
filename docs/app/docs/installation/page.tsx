@@ -551,6 +551,14 @@ export default function InstallationPage() {
         <p className="mt-2 text-lg text-muted-foreground">
           Get AniUI set up in your React Native project in under 2 minutes.
         </p>
+        <div className="mt-4 rounded-lg border border-primary/30 bg-primary/10 p-4">
+          <p className="text-sm text-foreground">
+            <strong>Uniwind is the recommended engine</strong> on Expo SDK 55+ (faster, Tailwind v4, no Babel step) and is the
+            default for <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">aniui init</code>. The manual
+            NativeWind steps below still apply if you choose <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">--style nativewind</code>.
+            See the <Link href="/docs/uniwind" className="text-primary hover:underline">Uniwind guide</Link>.
+          </p>
+        </div>
       </div>
 
       {/* Recommended: Quick Start */}

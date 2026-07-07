@@ -1,0 +1,102 @@
+export const metadata = {
+  title: "Sidebar",
+  description: "AniUI Sidebar component for React Native. Collapsible side navigation panel with a toggle trigger.",
+};
+
+import { PreviewSidebar } from "@/components/preview/sidebar";
+
+# Sidebar
+
+Collapsible side navigation panel with a toggle trigger, animated with Reanimated.
+
+<PreviewToggle>
+  <ComponentPlayground code={`import { View } from "react-native";
+import { SidebarProvider, Sidebar, SidebarTrigger } from "@/components/ui/sidebar";
+import { Text } from "@/components/ui/text";
+
+export function MyScreen() {
+  return (
+    <SidebarProvider defaultOpen>
+      <Sidebar width={256}>
+        <Text>Dashboard</Text>
+        <Text>Projects</Text>
+        <Text>Settings</Text>
+      </Sidebar>
+      <View className="flex-1 p-3">
+        <SidebarTrigger />
+        <Text>Content area</Text>
+      </View>
+    </SidebarProvider>
+  );
+}`}>
+    <div className="w-full max-w-md">
+      <PreviewSidebar />
+    </div>
+  </ComponentPlayground>
+</PreviewToggle>
+
+## Installation
+
+<AddComponentTabs names="sidebar" />
+
+## Usage
+
+```tsx title="app/index.tsx"
+import { View } from "react-native";
+import { SidebarProvider, Sidebar, SidebarTrigger } from "@/components/ui/sidebar";
+import { Text } from "@/components/ui/text";
+
+export function MyScreen() {
+  return (
+    <SidebarProvider defaultOpen>
+      <Sidebar width={256}>
+        <Text>Dashboard</Text>
+        <Text>Settings</Text>
+      </Sidebar>
+      <View className="flex-1 p-3">
+        <SidebarTrigger />
+        <Text>Content area</Text>
+      </View>
+    </SidebarProvider>
+  );
+}
+```
+
+The `useSidebar()` hook exposes the sidebar state (`open`, `setOpen`, `toggle`) to any descendant of `SidebarProvider`.
+
+## Props
+
+### SidebarProvider
+
+<PropsTable props={[
+  { name: "defaultOpen", type: "boolean", default: "true" },
+  { name: "children", type: "React.ReactNode" },
+]} />
+
+### Sidebar
+
+<PropsTable props={[
+  { name: "width", type: "number", default: "256" },
+  { name: "children", type: "React.ReactNode" },
+  { name: "className", type: "string" },
+]} />
+
+Also accepts all `View` props from React Native.
+
+### SidebarTrigger
+
+<PropsTable props={[
+  { name: "children", type: "React.ReactNode" },
+  { name: "className", type: "string" },
+]} />
+
+Also accepts all `Pressable` props from React Native.
+
+### useSidebar()
+
+Returns `{ open: boolean; setOpen: (open: boolean) => void; toggle: () => void }`. Must be called within a `SidebarProvider`.
+
+## Accessibility
+
+- `Sidebar` uses `accessibilityRole="menu"`.
+- `SidebarTrigger` uses `accessibilityRole="button"` with a 48dp minimum touch target.
