@@ -1,0 +1,28 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "drawer-nav",
+  "type": "registry:block",
+  "title": "DrawerNavContent",
+  "description": "Side drawer with user profile and icon-labeled navigation",
+  "dependencies": [
+    "react-native-safe-area-context",
+    "clsx",
+    "tailwind-merge",
+    "class-variance-authority"
+  ],
+  "registryDependencies": [
+    "https://aniui.dev/r/utils.json",
+    "https://aniui.dev/r/text.json",
+    "https://aniui.dev/r/avatar.json",
+    "https://aniui.dev/r/separator.json"
+  ],
+  "files": [
+    {
+      "path": "blocks/drawer-nav.tsx",
+      "type": "registry:block",
+      "target": "components/blocks/drawer-nav.tsx",
+      "content": "import React, { useState } from \"react\";\nimport { View, Pressable, ScrollView } from \"react-native\";\nimport { SafeAreaView } from \"react-native-safe-area-context\";\nimport { Text } from \"@/components/ui/text\";\nimport { Avatar } from \"@/components/ui/avatar\";\nimport { Separator } from \"@/components/ui/separator\";\nimport { cn } from \"@/lib/utils\";\n\n// Icon components — Lucide React Native\n// https://github.com/lucide-icons/lucide\nimport {\n  House,\n  User,\n  BarChart2,\n  MessageCircle,\n  Bell,\n  Settings,\n  LogOut,\n} from \"lucide-react-native\";\n\ntype MenuItem = {\n  key: string;\n  label: string;\n  Icon: React.ComponentType<{ size: number; strokeWidth: number; color: string }>;\n};\n\nconst menuItems: MenuItem[] = [\n  { key: \"home\",          label: \"Home\",          Icon: House },\n  { key: \"profile\",       label: \"Profile\",       Icon: User },\n  { key: \"analytics\",    label: \"Analytics\",     Icon: BarChart2 },\n  { key: \"messages\",     label: \"Messages\",      Icon: MessageCircle },\n  { key: \"notifications\",label: \"Notifications\", Icon: Bell },\n  { key: \"settings\",     label: \"Settings\",      Icon: Settings },\n];\n\nexport function DrawerNavContent({\n  active,\n  onNavigate,\n}: {\n  active: string;\n  onNavigate: (key: string) => void;\n}) {\n  return (\n    <SafeAreaView className=\"flex-1 bg-background\">\n      {/* User section */}\n      <View className=\"px-5 py-6\">\n        <Avatar fallback=\"JD\" size=\"lg\" className=\"mb-3\" />\n        <Text variant=\"p\" className=\"font-semibold text-foreground\">John Doe</Text>\n        <Text variant=\"small\" className=\"text-muted-foreground\">john@example.com</Text>\n      </View>\n\n      <Separator />\n\n      {/* Menu items */}\n      <ScrollView className=\"flex-1 px-3 py-3\" showsVerticalScrollIndicator={false}>\n        {menuItems.map(({ key, label, Icon }) => {\n          const isActive = active === key;\n          return (\n            <Pressable\n              key={key}\n              onPress={() => onNavigate(key)}\n              accessible={true}\n              accessibilityRole=\"button\"\n              accessibilityLabel={label}\n              className={cn(\n                \"flex-row items-center gap-3 px-3 py-3 rounded-lg mb-0.5\",\n                isActive ? \"bg-accent\" : \"active:bg-accent/50\"\n              )}\n            >\n              <Icon\n                size={18}\n                strokeWidth={1.5}\n                color={isActive ? \"hsl(var(--foreground))\" : \"hsl(var(--muted-foreground))\"}\n              />\n              <Text\n                variant=\"small\"\n                className={cn(\n                  isActive\n                    ? \"font-semibold text-foreground\"\n                    : \"font-normal text-muted-foreground\"\n                )}\n              >\n                {label}\n              </Text>\n            </Pressable>\n          );\n        })}\n      </ScrollView>\n\n      <Separator />\n\n      {/* Log Out */}\n      <Pressable\n        accessible={true}\n        accessibilityRole=\"button\"\n        accessibilityLabel=\"Log Out\"\n        className=\"flex-row items-center gap-3 px-6 py-4 active:opacity-70\"\n        onPress={() => {}}\n      >\n        <LogOut size={18} strokeWidth={1.5} color=\"hsl(var(--destructive))\" />\n        <Text variant=\"small\" className=\"font-semibold text-destructive\">Log Out</Text>\n      </Pressable>\n    </SafeAreaView>\n  );\n}\n"
+    }
+  ],
+  "docs": "AniUI is React Native. On an existing RNR/NativeWind project, add and use directly — the tokens and aliases already match, no setup needed. On a fresh project, run `npx @aniui/cli init` first to configure NativeWind/Uniwind, theme tokens, and Metro/Babel. Blocks are full screens — move into your app/ route as needed."
+}

@@ -1,0 +1,28 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "notifications",
+  "type": "registry:block",
+  "title": "NotificationsScreen",
+  "description": "Grouped notifications list with unread indicators",
+  "dependencies": [
+    "react-native-safe-area-context",
+    "class-variance-authority",
+    "clsx",
+    "tailwind-merge"
+  ],
+  "registryDependencies": [
+    "https://aniui.dev/r/utils.json",
+    "https://aniui.dev/r/text.json",
+    "https://aniui.dev/r/separator.json",
+    "https://aniui.dev/r/badge.json"
+  ],
+  "files": [
+    {
+      "path": "blocks/notifications.tsx",
+      "type": "registry:block",
+      "target": "components/blocks/notifications.tsx",
+      "content": "import React from \"react\";\nimport { View, ScrollView, Pressable } from \"react-native\";\nimport { SafeAreaView } from \"react-native-safe-area-context\";\nimport { Text } from \"@/components/ui/text\";\nimport { Separator } from \"@/components/ui/separator\";\nimport { Badge } from \"@/components/ui/badge\";\n\ntype Notification = {\n  id: string;\n  iconType: \"message-circle\" | \"trophy\" | \"package\" | \"user-plus\" | \"credit-card\";\n  iconBg: string;\n  title: string;\n  description: string;\n  time: string;\n  unread: boolean;\n};\n\nconst todayNotifications: Notification[] = [\n  {\n    id: \"1\",\n    iconType: \"message-circle\",\n    iconBg: \"bg-primary/10\",\n    title: \"New Message\",\n    description: \"Sarah sent you a message\",\n    time: \"5m ago\",\n    unread: true,\n  },\n  {\n    id: \"2\",\n    iconType: \"trophy\",\n    iconBg: \"bg-primary/10\",\n    title: \"Achievement Unlocked\",\n    description: \"You've completed 10 tasks!\",\n    time: \"2h ago\",\n    unread: true,\n  },\n  {\n    id: \"3\",\n    iconType: \"package\",\n    iconBg: \"bg-accent\",\n    title: \"Order Update\",\n    description: \"Your order #1042 has shipped\",\n    time: \"5h ago\",\n    unread: false,\n  },\n];\n\nconst yesterdayNotifications: Notification[] = [\n  {\n    id: \"4\",\n    iconType: \"user-plus\",\n    iconBg: \"bg-accent\",\n    title: \"New Follower\",\n    description: \"Alex started following you\",\n    time: \"1d ago\",\n    unread: false,\n  },\n  {\n    id: \"5\",\n    iconType: \"credit-card\",\n    iconBg: \"bg-accent\",\n    title: \"Payment Received\",\n    description: \"Payment of $120 received\",\n    time: \"1d ago\",\n    unread: false,\n  },\n];\n\nfunction NotificationItem({ item }: { item: Notification }) {\n  return (\n    <Pressable\n      className={`flex-row items-center gap-3 px-5 py-3 rounded-xl ${item.unread ? \"bg-primary/5\" : \"bg-background\"}`}\n      accessible={true}\n      accessibilityRole=\"button\"\n      accessibilityLabel={`${item.title}: ${item.description}, ${item.time}`}\n    >\n      <View className=\"relative shrink-0\">\n        <View className={`h-10 w-10 rounded-full items-center justify-center ${item.iconBg}`}>\n          {/* Icon rendered via accessibilityLabel; swap with your SVG icon component */}\n          <Text variant=\"small\" className=\"text-foreground font-medium\">\n            {item.iconType === \"message-circle\" ? \"M\" :\n             item.iconType === \"trophy\" ? \"T\" :\n             item.iconType === \"package\" ? \"P\" :\n             item.iconType === \"user-plus\" ? \"U\" : \"C\"}\n          </Text>\n        </View>\n        {item.unread && (\n          <View className=\"absolute -top-0.5 -right-0.5 h-2 w-2 rounded-full bg-primary border border-background\" />\n        )}\n      </View>\n      <View className=\"flex-1\">\n        <View className=\"flex-row items-center justify-between mb-0.5\">\n          <Text variant=\"small\" className=\"font-semibold text-foreground\">{item.title}</Text>\n          <Text variant=\"small\" className=\"text-muted-foreground\">{item.time}</Text>\n        </View>\n        <Text variant=\"small\" className=\"text-muted-foreground\">{item.description}</Text>\n      </View>\n    </Pressable>\n  );\n}\n\nexport function NotificationsScreen() {\n  return (\n    <SafeAreaView className=\"flex-1 bg-background\">\n      <View className=\"flex-row items-center justify-between px-5 py-3 border-b border-border\">\n        <Text variant=\"h3\" className=\"font-bold\">Notifications</Text>\n        <Pressable accessible={true} accessibilityRole=\"button\">\n          <Text variant=\"small\" className=\"text-primary font-medium\">Mark all read</Text>\n        </Pressable>\n      </View>\n\n      <ScrollView className=\"flex-1\" showsVerticalScrollIndicator={false}>\n        <View className=\"px-5 pt-5 pb-2\">\n          <Text variant=\"small\" className=\"text-muted-foreground font-semibold uppercase tracking-widest\">Today</Text>\n        </View>\n        {todayNotifications.map((item) => (\n          <NotificationItem key={item.id} item={item} />\n        ))}\n\n        <View className=\"px-5 pt-5 pb-2\">\n          <Text variant=\"small\" className=\"text-muted-foreground font-semibold uppercase tracking-widest\">Yesterday</Text>\n        </View>\n        {yesterdayNotifications.map((item) => (\n          <NotificationItem key={item.id} item={item} />\n        ))}\n\n        <View className=\"h-8\" />\n      </ScrollView>\n    </SafeAreaView>\n  );\n}\n"
+    }
+  ],
+  "docs": "AniUI is React Native. On an existing RNR/NativeWind project, add and use directly — the tokens and aliases already match, no setup needed. On a fresh project, run `npx @aniui/cli init` first to configure NativeWind/Uniwind, theme tokens, and Metro/Babel. Blocks are full screens — move into your app/ route as needed."
+}

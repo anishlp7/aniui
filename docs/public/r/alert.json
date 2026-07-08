@@ -1,0 +1,23 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "alert",
+  "type": "registry:ui",
+  "title": "Alert",
+  "description": "Alert message with variants",
+  "dependencies": [
+    "class-variance-authority",
+    "clsx",
+    "tailwind-merge"
+  ],
+  "registryDependencies": [
+    "https://aniui.dev/r/utils.json"
+  ],
+  "files": [
+    {
+      "path": "components/ui/alert.tsx",
+      "type": "registry:ui",
+      "content": "import React from \"react\";\nimport { View, Text } from \"react-native\";\nimport { cva, type VariantProps } from \"class-variance-authority\";\nimport { cn } from \"@/lib/utils\";\n\nconst alertVariants = cva(\"rounded-lg border p-4\", {\n  variants: {\n    variant: {\n      default: \"border-border bg-background\",\n      destructive: \"border-destructive/50 bg-destructive/10\",\n      success: \"border-green-500/50 bg-green-500/10\",\n      warning: \"border-yellow-500/50 bg-yellow-500/10\",\n    },\n  },\n  defaultVariants: {\n    variant: \"default\",\n  },\n});\n\nconst alertTitleVariants = cva(\"text-base font-semibold mb-1\", {\n  variants: {\n    variant: {\n      default: \"text-foreground\",\n      destructive: \"text-destructive\",\n      success: \"text-green-600\",\n      warning: \"text-yellow-600\",\n    },\n  },\n  defaultVariants: { variant: \"default\" },\n});\n\nexport interface AlertProps\n  extends React.ComponentPropsWithoutRef<typeof View>,\n    VariantProps<typeof alertVariants> {\n  className?: string;\n  title?: string;\n  titleClassName?: string;\n  children?: React.ReactNode;\n}\n\nexport function Alert({ variant, className, title, titleClassName, children, ...props }: AlertProps) {\n  return (\n    <View className={cn(alertVariants({ variant }), className)} accessibilityRole=\"alert\" {...props}>\n      {title && <Text className={cn(alertTitleVariants({ variant }), titleClassName)}>{title}</Text>}\n      {children}\n    </View>\n  );\n}\n\nexport interface AlertDescriptionProps extends React.ComponentPropsWithoutRef<typeof Text> {\n  className?: string;\n}\n\nexport function AlertDescription({ className, ...props }: AlertDescriptionProps) {\n  return <Text className={cn(\"text-sm text-muted-foreground\", className)} {...props} />;\n}\n"
+    }
+  ],
+  "docs": "AniUI is React Native. On an existing RNR/NativeWind project, add and use directly — the tokens and aliases already match, no setup needed. On a fresh project, run `npx @aniui/cli init` first to configure NativeWind/Uniwind, theme tokens, and Metro/Babel."
+}

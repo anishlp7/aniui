@@ -1,0 +1,23 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "chip",
+  "type": "registry:ui",
+  "title": "Chip",
+  "description": "Interactive tag for filters and multi-select",
+  "dependencies": [
+    "class-variance-authority",
+    "clsx",
+    "tailwind-merge"
+  ],
+  "registryDependencies": [
+    "https://aniui.dev/r/utils.json"
+  ],
+  "files": [
+    {
+      "path": "components/ui/chip.tsx",
+      "type": "registry:ui",
+      "content": "import React from \"react\";\nimport { View, Text, Pressable } from \"react-native\";\nimport { cva, type VariantProps } from \"class-variance-authority\";\nimport { cn } from \"@/lib/utils\";\n\nconst chipVariants = cva(\n  \"flex-row items-center rounded-full min-h-8\",\n  {\n    variants: {\n      variant: {\n        default: \"bg-primary\",\n        secondary: \"bg-secondary\",\n        outline: \"border border-input bg-transparent\",\n        destructive: \"bg-destructive\",\n      },\n      size: {\n        sm: \"px-2.5 py-1 gap-1\",\n        md: \"px-3 py-1.5 gap-1.5\",\n        lg: \"px-4 py-2 gap-2\",\n      },\n    },\n    defaultVariants: { variant: \"default\", size: \"md\" },\n  }\n);\n\nconst chipTextVariants = cva(\"font-medium\", {\n  variants: {\n    variant: {\n      default: \"text-primary-foreground\",\n      secondary: \"text-secondary-foreground\",\n      outline: \"text-foreground\",\n      destructive: \"text-destructive-foreground\",\n    },\n    size: { sm: \"text-xs\", md: \"text-sm\", lg: \"text-base\" },\n  },\n  defaultVariants: { variant: \"default\", size: \"md\" },\n});\n\nexport interface ChipProps\n  extends React.ComponentPropsWithoutRef<typeof Pressable>,\n    VariantProps<typeof chipVariants> {\n  className?: string;\n  textClassName?: string;\n  children: string;\n  selected?: boolean;\n  onClose?: () => void;\n}\n\nexport function Chip({ variant, size, className, textClassName, children, selected, onClose, ...props }: ChipProps) {\n  const v = selected ? \"default\" : (variant ?? \"outline\");\n  return (\n    <Pressable className={cn(chipVariants({ variant: v, size }), className)} accessible={true} accessibilityRole=\"button\" accessibilityState={{ selected }} {...props}>\n      <Text className={cn(chipTextVariants({ variant: v, size }), textClassName)}>{children}</Text>\n      {onClose && (\n        <Pressable onPress={onClose} accessibilityRole=\"button\" accessibilityLabel={`Remove ${children}`} className=\"ms-0.5\">\n          <Text className={cn(\"text-xs\", v === \"outline\" ? \"text-muted-foreground\" : chipTextVariants({ variant: v, size: \"sm\" }))}>✕</Text>\n        </Pressable>\n      )}\n    </Pressable>\n  );\n}\n"
+    }
+  ],
+  "docs": "AniUI is React Native. On an existing RNR/NativeWind project, add and use directly — the tokens and aliases already match, no setup needed. On a fresh project, run `npx @aniui/cli init` first to configure NativeWind/Uniwind, theme tokens, and Metro/Babel."
+}

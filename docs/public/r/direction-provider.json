@@ -1,0 +1,22 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "direction-provider",
+  "type": "registry:ui",
+  "title": "DirectionProvider",
+  "description": "RTL/LTR direction context with I18nManager integration",
+  "dependencies": [
+    "clsx",
+    "tailwind-merge"
+  ],
+  "registryDependencies": [
+    "https://aniui.dev/r/utils.json"
+  ],
+  "files": [
+    {
+      "path": "components/ui/direction-provider.tsx",
+      "type": "registry:ui",
+      "content": "import React, { createContext, useContext, useState, useCallback } from \"react\";\nimport { I18nManager, View } from \"react-native\";\nimport { cn } from \"@/lib/utils\";\n\ntype Direction = \"ltr\" | \"rtl\";\n\ninterface DirectionContextValue {\n  direction: Direction;\n  isRTL: boolean;\n  setDirection: (dir: Direction) => void;\n}\n\nconst DirectionContext = createContext<DirectionContextValue>({\n  direction: I18nManager.isRTL ? \"rtl\" : \"ltr\",\n  isRTL: I18nManager.isRTL,\n  setDirection: () => {},\n});\n\nexport function useDirection() {\n  return useContext(DirectionContext);\n}\n\nexport interface DirectionProviderProps extends React.ComponentPropsWithoutRef<typeof View> {\n  children: React.ReactNode;\n  defaultDirection?: Direction;\n  className?: string;\n}\n\n/**\n * Provides RTL/LTR direction context for the app.\n * Note: Calling setDirection updates context immediately, but the full\n * layout flip via I18nManager requires an app restart on React Native.\n */\nexport function DirectionProvider({\n  children,\n  defaultDirection,\n  className,\n  ...props\n}: DirectionProviderProps) {\n  const initial = defaultDirection ?? (I18nManager.isRTL ? \"rtl\" : \"ltr\");\n  const [direction, setDir] = useState<Direction>(initial);\n\n  const setDirection = useCallback((dir: Direction) => {\n    setDir(dir);\n    I18nManager.allowRTL(true);\n    I18nManager.forceRTL(dir === \"rtl\");\n  }, []);\n\n  return (\n    <DirectionContext.Provider\n      value={{ direction, isRTL: direction === \"rtl\", setDirection }}\n    >\n      <View className={cn(\"flex-1\", className)} {...props}>\n        {children}\n      </View>\n    </DirectionContext.Provider>\n  );\n}\n"
+    }
+  ],
+  "docs": "AniUI is React Native. On an existing RNR/NativeWind project, add and use directly — the tokens and aliases already match, no setup needed. On a fresh project, run `npx @aniui/cli init` first to configure NativeWind/Uniwind, theme tokens, and Metro/Babel."
+}

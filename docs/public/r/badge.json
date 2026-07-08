@@ -1,0 +1,23 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "badge",
+  "type": "registry:ui",
+  "title": "Badge",
+  "description": "Small status indicator",
+  "dependencies": [
+    "class-variance-authority",
+    "clsx",
+    "tailwind-merge"
+  ],
+  "registryDependencies": [
+    "https://aniui.dev/r/utils.json"
+  ],
+  "files": [
+    {
+      "path": "components/ui/badge.tsx",
+      "type": "registry:ui",
+      "content": "import React from \"react\";\nimport { View, Text } from \"react-native\";\nimport { cva, type VariantProps } from \"class-variance-authority\";\nimport { cn } from \"@/lib/utils\";\n\nconst badgeVariants = cva(\"flex-row items-center rounded-full px-2.5 py-0.5\", {\n  variants: {\n    variant: {\n      default: \"bg-primary\",\n      secondary: \"bg-secondary\",\n      outline: \"border border-border bg-transparent\",\n      destructive: \"bg-destructive\",\n    },\n  },\n  defaultVariants: {\n    variant: \"default\",\n  },\n});\n\nconst badgeTextVariants = cva(\"text-xs font-semibold\", {\n  variants: {\n    variant: {\n      default: \"text-primary-foreground\",\n      secondary: \"text-secondary-foreground\",\n      outline: \"text-foreground\",\n      destructive: \"text-destructive-foreground\",\n    },\n  },\n  defaultVariants: {\n    variant: \"default\",\n  },\n});\n\nexport interface BadgeProps\n  extends React.ComponentPropsWithoutRef<typeof View>,\n    VariantProps<typeof badgeVariants> {\n  className?: string;\n  textClassName?: string;\n  children: string;\n}\n\nexport function Badge({ variant, className, textClassName, children, ...props }: BadgeProps) {\n  return (\n    <View className={cn(badgeVariants({ variant }), className)} {...props}>\n      <Text className={cn(badgeTextVariants({ variant }), textClassName)}>{children}</Text>\n    </View>\n  );\n}\n"
+    }
+  ],
+  "docs": "AniUI is React Native. On an existing RNR/NativeWind project, add and use directly — the tokens and aliases already match, no setup needed. On a fresh project, run `npx @aniui/cli init` first to configure NativeWind/Uniwind, theme tokens, and Metro/Babel."
+}

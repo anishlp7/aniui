@@ -1,0 +1,23 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "skeleton",
+  "type": "registry:ui",
+  "title": "Skeleton",
+  "description": "Animated loading placeholder",
+  "dependencies": [
+    "react-native-reanimated",
+    "clsx",
+    "tailwind-merge"
+  ],
+  "registryDependencies": [
+    "https://aniui.dev/r/utils.json"
+  ],
+  "files": [
+    {
+      "path": "components/ui/skeleton.tsx",
+      "type": "registry:ui",
+      "content": "import React, { useEffect } from \"react\";\nimport { View } from \"react-native\";\nimport Animated, {\n  useSharedValue,\n  useAnimatedStyle,\n  withRepeat,\n  withSequence,\n  withTiming,\n} from \"react-native-reanimated\";\nimport { cn } from \"@/lib/utils\";\n\nexport interface SkeletonProps extends React.ComponentPropsWithoutRef<typeof View> {\n  className?: string;\n}\n\nexport function Skeleton({ className, ...props }: SkeletonProps) {\n  const opacity = useSharedValue(1);\n\n  useEffect(() => {\n    opacity.value = withRepeat(\n      withSequence(\n        withTiming(0.4, { duration: 800 }),\n        withTiming(1, { duration: 800 })\n      ),\n      -1,\n      false\n    );\n  }, [opacity]);\n\n  const animatedStyle = useAnimatedStyle(() => ({\n    opacity: opacity.value,\n  }));\n\n  return (\n    <Animated.View\n      className={cn(\"rounded-md bg-muted\", className)}\n      style={animatedStyle}\n      {...props}\n    />\n  );\n}\n"
+    }
+  ],
+  "docs": "AniUI is React Native. On an existing RNR/NativeWind project, add and use directly — the tokens and aliases already match, no setup needed. On a fresh project, run `npx @aniui/cli init` first to configure NativeWind/Uniwind, theme tokens, and Metro/Babel."
+}

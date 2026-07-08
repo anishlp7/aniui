@@ -1,0 +1,23 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "radio-group",
+  "type": "registry:ui",
+  "title": "RadioGroup",
+  "description": "Radio button group",
+  "dependencies": [
+    "@rn-primitives/radio-group",
+    "clsx",
+    "tailwind-merge"
+  ],
+  "registryDependencies": [
+    "https://aniui.dev/r/utils.json"
+  ],
+  "files": [
+    {
+      "path": "components/ui/radio-group.tsx",
+      "type": "registry:ui",
+      "content": "import React from \"react\";\nimport { View, Pressable, Text } from \"react-native\";\nimport * as RadioGroupPrimitive from \"@rn-primitives/radio-group\";\nimport { cn } from \"@/lib/utils\";\n\nexport interface RadioGroupProps extends React.ComponentPropsWithoutRef<typeof View> {\n  className?: string;\n  value: string;\n  onValueChange: (value: string) => void;\n  children?: React.ReactNode;\n}\n\nexport function RadioGroup({ value, onValueChange, className, children, ...props }: RadioGroupProps) {\n  return (\n    <RadioGroupPrimitive.Root value={value} onValueChange={onValueChange} asChild>\n      <View className={cn(\"gap-3\", className)} accessibilityRole=\"radiogroup\" {...props}>\n        {children}\n      </View>\n    </RadioGroupPrimitive.Root>\n  );\n}\n\nexport interface RadioGroupItemProps extends React.ComponentPropsWithoutRef<typeof Pressable> {\n  className?: string;\n  value: string;\n  label?: string;\n}\n\nexport function RadioGroupItem({ value, label, className, ...props }: RadioGroupItemProps) {\n  return (\n    <RadioGroupPrimitive.Item value={value} asChild>\n      <Pressable\n        className={cn(\"flex-row items-center gap-3 min-h-12 min-w-12\", className)}\n        accessible={true}\n        {...props}\n      >\n        <View className=\"h-5 w-5 rounded-full border-2 border-input items-center justify-center\">\n          <RadioGroupPrimitive.Indicator>\n            <View className=\"h-2.5 w-2.5 rounded-full bg-primary\" />\n          </RadioGroupPrimitive.Indicator>\n        </View>\n        {label && <Text className=\"text-base text-foreground\">{label}</Text>}\n      </Pressable>\n    </RadioGroupPrimitive.Item>\n  );\n}\n"
+    }
+  ],
+  "docs": "AniUI is React Native. On an existing RNR/NativeWind project, add and use directly — the tokens and aliases already match, no setup needed. On a fresh project, run `npx @aniui/cli init` first to configure NativeWind/Uniwind, theme tokens, and Metro/Babel."
+}

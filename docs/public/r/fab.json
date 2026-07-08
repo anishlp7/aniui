@@ -1,0 +1,23 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "fab",
+  "type": "registry:ui",
+  "title": "FAB",
+  "description": "Floating action button for primary screen actions",
+  "dependencies": [
+    "class-variance-authority",
+    "clsx",
+    "tailwind-merge"
+  ],
+  "registryDependencies": [
+    "https://aniui.dev/r/utils.json"
+  ],
+  "files": [
+    {
+      "path": "components/ui/fab.tsx",
+      "type": "registry:ui",
+      "content": "import React from \"react\";\nimport { Pressable, Text } from \"react-native\";\nimport { cva, type VariantProps } from \"class-variance-authority\";\nimport { cn } from \"@/lib/utils\";\n\nconst fabVariants = cva(\n  \"items-center justify-center shadow-lg\",\n  {\n    variants: {\n      variant: {\n        default: \"bg-primary\",\n        secondary: \"bg-secondary\",\n        destructive: \"bg-destructive\",\n      },\n      size: {\n        sm: \"h-12 w-12 rounded-full\",\n        md: \"h-14 w-14 rounded-full\",\n        lg: \"h-16 w-16 rounded-full\",\n        extended: \"h-14 rounded-full px-6 flex-row gap-2\",\n      },\n      position: {\n        \"bottom-right\": \"absolute bottom-6 end-6\",\n        \"bottom-left\": \"absolute bottom-6 start-6\",\n        \"bottom-center\": \"absolute bottom-6 self-center\",\n        none: \"\",\n      },\n    },\n    defaultVariants: { variant: \"default\", size: \"md\", position: \"bottom-right\" },\n  }\n);\n\nconst fabTextVariants = cva(\"font-semibold\", {\n  variants: {\n    variant: {\n      default: \"text-primary-foreground\",\n      secondary: \"text-secondary-foreground\",\n      destructive: \"text-destructive-foreground\",\n    },\n  },\n  defaultVariants: { variant: \"default\" },\n});\n\nexport interface FABProps\n  extends React.ComponentPropsWithoutRef<typeof Pressable>,\n    VariantProps<typeof fabVariants> {\n  className?: string;\n  icon?: React.ReactNode;\n  label?: string;\n}\n\nexport function FAB({ variant, size, position, className, icon, label, ...props }: FABProps) {\n  return (\n    <Pressable className={cn(fabVariants({ variant, size: label ? \"extended\" : size, position }), className)} accessible={true} accessibilityRole=\"button\" accessibilityLabel={label ?? \"Action button\"} {...props}>\n      {icon}\n      {label && <Text className={cn(fabTextVariants({ variant }), \"text-base\")}>{label}</Text>}\n    </Pressable>\n  );\n}\n"
+    }
+  ],
+  "docs": "AniUI is React Native. On an existing RNR/NativeWind project, add and use directly — the tokens and aliases already match, no setup needed. On a fresh project, run `npx @aniui/cli init` first to configure NativeWind/Uniwind, theme tokens, and Metro/Babel."
+}

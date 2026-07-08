@@ -1,0 +1,22 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "field",
+  "type": "registry:ui",
+  "title": "Field",
+  "description": "Layout-focused form field with label, description, and error",
+  "dependencies": [
+    "clsx",
+    "tailwind-merge"
+  ],
+  "registryDependencies": [
+    "https://aniui.dev/r/utils.json"
+  ],
+  "files": [
+    {
+      "path": "components/ui/field.tsx",
+      "type": "registry:ui",
+      "content": "import React, { createContext, useContext } from \"react\";\nimport { View, Text } from \"react-native\";\nimport { cn } from \"@/lib/utils\";\n\ntype Orientation = \"vertical\" | \"horizontal\";\n\nconst FieldContext = createContext<{ orientation: Orientation }>({\n  orientation: \"vertical\",\n});\n\nexport interface FieldProps extends React.ComponentPropsWithoutRef<typeof View> {\n  className?: string;\n  orientation?: Orientation;\n  children?: React.ReactNode;\n}\n\nexport function Field({ orientation = \"vertical\", className, children, ...props }: FieldProps) {\n  return (\n    <FieldContext.Provider value={{ orientation }}>\n      <View\n        className={cn(\n          orientation === \"vertical\" ? \"gap-1.5\" : \"flex-row items-start gap-3\",\n          className\n        )}\n        {...props}\n      >\n        {children}\n      </View>\n    </FieldContext.Provider>\n  );\n}\n\nexport interface FieldLabelProps extends React.ComponentPropsWithoutRef<typeof Text> {\n  className?: string;\n}\n\nexport function FieldLabel({ className, ...props }: FieldLabelProps) {\n  const { orientation } = useContext(FieldContext);\n  return (\n    <Text\n      className={cn(\n        \"text-sm font-medium text-foreground\",\n        orientation === \"horizontal\" && \"min-w-[100px] pt-3\",\n        className\n      )}\n      accessibilityRole=\"text\"\n      {...props}\n    />\n  );\n}\n\nexport interface FieldDescriptionProps extends React.ComponentPropsWithoutRef<typeof Text> {\n  className?: string;\n}\n\nexport function FieldDescription({ className, ...props }: FieldDescriptionProps) {\n  return (\n    <Text className={cn(\"text-xs text-muted-foreground\", className)} {...props} />\n  );\n}\n\nexport interface FieldErrorProps extends React.ComponentPropsWithoutRef<typeof View> {\n  className?: string;\n  errors?: string[];\n  children?: React.ReactNode;\n}\n\nexport function FieldError({ className, errors, children, ...props }: FieldErrorProps) {\n  if (!errors?.length && !children) return null;\n\n  return (\n    <View className={cn(\"gap-0.5\", className)} accessibilityRole=\"alert\" {...props}>\n      {errors?.map((err, i) => (\n        <Text key={i} className=\"text-sm text-destructive\">{err}</Text>\n      ))}\n      {children}\n    </View>\n  );\n}\n"
+    }
+  ],
+  "docs": "AniUI is React Native. On an existing RNR/NativeWind project, add and use directly — the tokens and aliases already match, no setup needed. On a fresh project, run `npx @aniui/cli init` first to configure NativeWind/Uniwind, theme tokens, and Metro/Babel."
+}

@@ -1,0 +1,24 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "drawer",
+  "type": "registry:ui",
+  "title": "Drawer",
+  "description": "Slide-in side navigation panel",
+  "dependencies": [
+    "react-native-reanimated",
+    "clsx",
+    "tailwind-merge"
+  ],
+  "registryDependencies": [
+    "https://aniui.dev/r/utils.json",
+    "https://aniui.dev/r/animate.json"
+  ],
+  "files": [
+    {
+      "path": "components/ui/drawer.tsx",
+      "type": "registry:ui",
+      "content": "import React, { useEffect } from \"react\";\nimport { View, Pressable, Modal } from \"react-native\";\nimport Animated, { useSharedValue, useAnimatedStyle, withSpring, withTiming } from \"react-native-reanimated\";\nimport { springs, duration } from \"@/components/ui/animate\";\nimport { cn } from \"@/lib/utils\";\n\nexport interface DrawerProps {\n  open: boolean;\n  onOpenChange: (open: boolean) => void;\n  side?: \"left\" | \"right\";\n  children: React.ReactNode;\n}\n\nexport function Drawer({ open, onOpenChange, side = \"left\", children }: DrawerProps) {\n  const translate = useSharedValue(side === \"left\" ? -300 : 300);\n  const opacity = useSharedValue(0);\n\n  useEffect(() => {\n    translate.value = open ? withSpring(0, springs.snappy) : withTiming(side === \"left\" ? -300 : 300, { duration: duration.normal });\n    opacity.value = withTiming(open ? 0.5 : 0, { duration: duration.normal });\n  }, [open, side, translate, opacity]);\n\n  const overlayStyle = useAnimatedStyle(() => ({ opacity: opacity.value }));\n  const drawerStyle = useAnimatedStyle(() => ({\n    transform: [{ translateX: translate.value }],\n  }));\n\n  const close = () => onOpenChange(false);\n\n  return (\n    <Modal visible={open} transparent animationType=\"none\" onRequestClose={close}>\n      <Pressable style={{ position: \"absolute\", top: 0, left: 0, right: 0, bottom: 0 }} onPress={close} accessible={false}>\n        <Animated.View style={[{ flex: 1, backgroundColor: \"#000000\" }, overlayStyle]} />\n      </Pressable>\n      <Animated.View\n        style={[\n          {\n            position: \"absolute\",\n            top: 0,\n            bottom: 0,\n            width: 288,\n            ...(side === \"left\" ? { left: 0 } : { right: 0 }),\n          },\n          drawerStyle,\n        ]}\n      >\n        <View className={cn(\"flex-1 bg-card\", side === \"left\" ? \"border-r border-border\" : \"border-l border-border\")} accessibilityRole=\"menu\">\n          {children}\n        </View>\n      </Animated.View>\n    </Modal>\n  );\n}\n\nexport interface DrawerContentProps extends React.ComponentPropsWithoutRef<typeof View> {\n  className?: string;\n  children?: React.ReactNode;\n}\n\nexport function DrawerContent({ className, ...props }: DrawerContentProps) {\n  return <View className={cn(\"flex-1 p-4\", className)} {...props} />;\n}\n"
+    }
+  ],
+  "docs": "AniUI is React Native. On an existing RNR/NativeWind project, add and use directly — the tokens and aliases already match, no setup needed. On a fresh project, run `npx @aniui/cli init` first to configure NativeWind/Uniwind, theme tokens, and Metro/Babel."
+}

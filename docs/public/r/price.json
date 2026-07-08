@@ -1,0 +1,22 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "price",
+  "type": "registry:ui",
+  "title": "Price",
+  "description": "Formatted currency display with locale and strikethrough support",
+  "dependencies": [
+    "clsx",
+    "tailwind-merge"
+  ],
+  "registryDependencies": [
+    "https://aniui.dev/r/utils.json"
+  ],
+  "files": [
+    {
+      "path": "components/ui/price.tsx",
+      "type": "registry:ui",
+      "content": "import React from \"react\";\nimport { View, Text } from \"react-native\";\nimport { cn } from \"@/lib/utils\";\n\nexport interface PriceProps extends React.ComponentPropsWithoutRef<typeof View> {\n  className?: string;\n  amount: number;\n  currency?: string;\n  locale?: string;\n  strikethrough?: boolean;\n  prefix?: string;\n  textClassName?: string;\n}\n\nexport function Price({\n  className,\n  amount,\n  currency = \"USD\",\n  locale = \"en-US\",\n  strikethrough,\n  prefix,\n  textClassName,\n  ...props\n}: PriceProps) {\n  const formatted = new Intl.NumberFormat(locale, { style: \"currency\", currency }).format(amount);\n\n  return (\n    <View className={cn(\"flex-row items-baseline\", className)} {...props}>\n      {prefix && <Text className={cn(\"text-sm text-muted-foreground me-1\", textClassName)}>{prefix}</Text>}\n      <Text\n        className={cn(\n          \"text-lg font-semibold text-foreground\",\n          strikethrough && \"line-through text-muted-foreground\",\n          textClassName\n        )}\n      >\n        {formatted}\n      </Text>\n    </View>\n  );\n}\n"
+    }
+  ],
+  "docs": "AniUI is React Native. On an existing RNR/NativeWind project, add and use directly — the tokens and aliases already match, no setup needed. On a fresh project, run `npx @aniui/cli init` first to configure NativeWind/Uniwind, theme tokens, and Metro/Babel."
+}

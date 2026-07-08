@@ -1,0 +1,30 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "login",
+  "type": "registry:block",
+  "title": "LoginScreen",
+  "description": "Email/password login with social sign-in",
+  "dependencies": [
+    "react-native-safe-area-context",
+    "clsx",
+    "tailwind-merge",
+    "class-variance-authority"
+  ],
+  "registryDependencies": [
+    "https://aniui.dev/r/utils.json",
+    "https://aniui.dev/r/text.json",
+    "https://aniui.dev/r/input.json",
+    "https://aniui.dev/r/button.json",
+    "https://aniui.dev/r/separator.json",
+    "https://aniui.dev/r/label.json"
+  ],
+  "files": [
+    {
+      "path": "blocks/login.tsx",
+      "type": "registry:block",
+      "target": "components/blocks/login.tsx",
+      "content": "import React, { useState } from \"react\";\nimport { View, Pressable } from \"react-native\";\nimport { SafeAreaView } from \"react-native-safe-area-context\";\nimport { Text } from \"@/components/ui/text\";\nimport { Input } from \"@/components/ui/input\";\nimport { Button } from \"@/components/ui/button\";\nimport { Separator } from \"@/components/ui/separator\";\nimport { Label } from \"@/components/ui/label\";\n// Use your preferred icon library, e.g. lucide-react-native:\n// import { ShieldCheck, Mail, Lock } from \"lucide-react-native\";\n\nexport function LoginScreen({\n  onSignUp,\n  onForgotPassword,\n  onSignIn,\n}: {\n  onSignUp?: () => void;\n  onForgotPassword?: () => void;\n  onSignIn?: (email: string, password: string) => void;\n}) {\n  const [email, setEmail] = useState(\"\");\n  const [password, setPassword] = useState(\"\");\n\n  return (\n    <SafeAreaView className=\"flex-1 bg-background\">\n      <View className=\"flex-1 justify-center px-6 py-8\">\n\n        {/* Logo area */}\n        <View className=\"items-center mb-8\">\n          <View className=\"w-16 h-16 rounded-2xl bg-primary items-center justify-center mb-4 shadow-sm\">\n            {/* <ShieldCheck size={32} color=\"white\" strokeWidth={1.5} /> */}\n          </View>\n          <Text variant=\"h2\" className=\"text-center font-bold\">\n            Welcome back\n          </Text>\n          <Text variant=\"muted\" className=\"text-center mt-1\">\n            Sign in to your account\n          </Text>\n        </View>\n\n        {/* Form */}\n        <View className=\"gap-4\">\n          <View className=\"gap-1.5\">\n            <Label>Email address</Label>\n            <View className=\"relative\">\n              {/* <Mail size={16} color=\"gray\" className=\"absolute left-3 top-3.5 z-10\" /> */}\n              <Input\n                placeholder=\"name@example.com\"\n                value={email}\n                onChangeText={setEmail}\n                autoCapitalize=\"none\"\n                keyboardType=\"email-address\"\n                autoComplete=\"email\"\n                className=\"pl-10\"\n              />\n            </View>\n          </View>\n\n          <View className=\"gap-1.5\">\n            <View className=\"flex-row justify-between items-center\">\n              <Label>Password</Label>\n              <Pressable onPress={onForgotPassword} accessible accessibilityRole=\"button\">\n                <Text className=\"text-sm font-medium text-primary\">\n                  Forgot password?\n                </Text>\n              </Pressable>\n            </View>\n            <View className=\"relative\">\n              {/* <Lock size={16} color=\"gray\" className=\"absolute left-3 top-3.5 z-10\" /> */}\n              <Input\n                placeholder=\"Enter your password\"\n                value={password}\n                onChangeText={setPassword}\n                secureTextEntry\n                autoComplete=\"password\"\n                className=\"pl-10\"\n              />\n            </View>\n          </View>\n\n          <Button\n            onPress={() => onSignIn?.(email, password)}\n            className=\"mt-2 h-12 rounded-xl\"\n            accessible\n            accessibilityRole=\"button\"\n            accessibilityLabel=\"Sign in\"\n          >\n            Sign In\n          </Button>\n        </View>\n\n        {/* Divider */}\n        <View className=\"flex-row items-center gap-3 my-6\">\n          <Separator className=\"flex-1\" />\n          <Text variant=\"small\" className=\"text-muted-foreground\">\n            or continue with\n          </Text>\n          <Separator className=\"flex-1\" />\n        </View>\n\n        {/* Social buttons */}\n        <View className=\"flex-row gap-3\">\n          <Button\n            variant=\"outline\"\n            className=\"flex-1 h-12 rounded-xl\"\n            onPress={() => {}}\n            accessible\n            accessibilityRole=\"button\"\n            accessibilityLabel=\"Sign in with Google\"\n          >\n            Google\n          </Button>\n          <Button\n            variant=\"outline\"\n            className=\"flex-1 h-12 rounded-xl\"\n            onPress={() => {}}\n            accessible\n            accessibilityRole=\"button\"\n            accessibilityLabel=\"Sign in with Apple\"\n          >\n            Apple\n          </Button>\n        </View>\n\n        {/* Sign up link */}\n        <View className=\"flex-row justify-center items-center mt-8 gap-1\">\n          <Text variant=\"small\" className=\"text-muted-foreground\">\n            Don't have an account?\n          </Text>\n          <Pressable onPress={onSignUp} accessible accessibilityRole=\"button\">\n            <Text className=\"text-sm font-semibold text-primary\">Sign up</Text>\n          </Pressable>\n        </View>\n\n      </View>\n    </SafeAreaView>\n  );\n}\n"
+    }
+  ],
+  "docs": "AniUI is React Native. On an existing RNR/NativeWind project, add and use directly — the tokens and aliases already match, no setup needed. On a fresh project, run `npx @aniui/cli init` first to configure NativeWind/Uniwind, theme tokens, and Metro/Babel. Blocks are full screens — move into your app/ route as needed."
+}
