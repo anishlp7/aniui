@@ -1,36 +1,38 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# AniUI Docs
 
-## Getting Started
+The documentation site for [AniUI](https://aniui.dev) — a Next.js app deployed on Vercel. It also **hosts the `@aniui` shadcn-compatible registry**.
 
-First, run the development server:
+## Develop
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+npm run dev      # http://localhost:3000
+npm run build    # production build (also runs in CI)
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Registry hosting
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+The full component catalog is served as static JSON from `public/`:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- `public/registry.json` — the registry index
+- `public/r/<name>.json` — one shadcn `registry-item` per component / block / `utils` / `theme`
 
-## Learn More
+→ live at `https://aniui.dev/registry.json` and `https://aniui.dev/r/<name>.json`.
 
-To learn more about Next.js, take a look at the following resources:
+**These files are generated — do not edit them by hand.** The generator lives in the CLI package and reads the single source of truth (`cli/src/registry.ts` + `cli/src/block-registry.ts`):
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+# from the repo root
+npm run registry:build      # → writes docs/public/registry.json + docs/public/r/*.json
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+CI fails if the committed registry is out of date (see `.github/workflows/ci.yml` → `registry-drift`). After changing any component, re-run `registry:build` and commit the result.
 
-## Deploy on Vercel
+Consumer usage (shadcn CLI + React Native Reusables CLI) is documented at [aniui.dev/docs/shadcn-registry](https://aniui.dev/docs/shadcn-registry).
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Structure
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- `app/` — routes (App Router). `app/docs/**` guides + per-component pages, `app/sitemap.ts`, `app/robots.ts`.
+- `components/` — web-adapted preview components for the docs.
+- `lib/` — `nav-data.ts` (nav source of truth), `constants.ts`.
+- `public/` — static assets, `llms.txt`, and the generated registry.
