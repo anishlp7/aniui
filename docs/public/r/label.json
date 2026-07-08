@@ -1,0 +1,22 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "label",
+  "type": "registry:ui",
+  "title": "Label",
+  "description": "Form field label",
+  "dependencies": [
+    "clsx",
+    "tailwind-merge"
+  ],
+  "registryDependencies": [
+    "https://aniui.dev/r/utils.json"
+  ],
+  "files": [
+    {
+      "path": "components/ui/label.tsx",
+      "type": "registry:ui",
+      "content": "import React from \"react\";\nimport { Text } from \"react-native\";\nimport { cn } from \"@/lib/utils\";\n\nexport interface LabelProps extends React.ComponentPropsWithoutRef<typeof Text> {\n  className?: string;\n}\n\nexport function Label({ className, ...props }: LabelProps) {\n  return (\n    <Text\n      className={cn(\"text-sm font-medium text-foreground leading-none mb-2\", className)}\n      {...props}\n    />\n  );\n}\n"
+    }
+  ],
+  "docs": "AniUI is React Native. On an existing RNR/NativeWind project, add and use directly — the tokens and aliases already match, no setup needed. On a fresh project, run `npx @aniui/cli init` first to configure NativeWind/Uniwind, theme tokens, and Metro/Babel."
+}

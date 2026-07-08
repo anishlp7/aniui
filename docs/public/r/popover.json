@@ -1,0 +1,26 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "popover",
+  "type": "registry:ui",
+  "title": "Popover",
+  "description": "Contextual overlay with trigger positioning",
+  "dependencies": [
+    "@rn-primitives/popover",
+    "@rn-primitives/portal",
+    "react-native-reanimated",
+    "clsx",
+    "tailwind-merge"
+  ],
+  "registryDependencies": [
+    "https://aniui.dev/r/utils.json",
+    "https://aniui.dev/r/animate.json"
+  ],
+  "files": [
+    {
+      "path": "components/ui/popover.tsx",
+      "type": "registry:ui",
+      "content": "import React from \"react\";\nimport { View, Pressable } from \"react-native\";\nimport * as PopoverPrimitive from \"@rn-primitives/popover\";\nimport Animated from \"react-native-reanimated\";\nimport { entering, exiting } from \"@/components/ui/animate\";\nimport { cn } from \"@/lib/utils\";\n\nexport interface PopoverProps {\n  open?: boolean;\n  onOpenChange?: (open: boolean) => void;\n  children: React.ReactNode;\n}\n\nexport function Popover({ open, onOpenChange, children }: PopoverProps) {\n  return <PopoverPrimitive.Root open={open} onOpenChange={onOpenChange}>{children}</PopoverPrimitive.Root>;\n}\n\nexport interface PopoverTriggerProps extends React.ComponentPropsWithoutRef<typeof Pressable> {\n  className?: string;\n  children?: React.ReactNode;\n}\n\nexport function PopoverTrigger({ className, children, ...props }: PopoverTriggerProps) {\n  return (\n    <PopoverPrimitive.Trigger asChild>\n      <Pressable className={cn(\"min-h-12 min-w-12\", className)} accessible={true} accessibilityRole=\"button\" {...props}>\n        {children}\n      </Pressable>\n    </PopoverPrimitive.Trigger>\n  );\n}\n\nexport interface PopoverContentProps extends React.ComponentPropsWithoutRef<typeof View> {\n  className?: string;\n  children?: React.ReactNode;\n  side?: \"top\" | \"bottom\" | \"left\" | \"right\";\n  sideOffset?: number;\n  align?: \"start\" | \"center\" | \"end\";\n}\n\nexport function PopoverContent({ className, children, side = \"bottom\", sideOffset = 8, align = \"center\", ...props }: PopoverContentProps) {\n  return (\n    <PopoverPrimitive.Portal>\n      <PopoverPrimitive.Overlay className=\"absolute inset-0\" />\n      <PopoverPrimitive.Content side={side} sideOffset={sideOffset} align={align} avoidCollisions>\n        <Animated.View entering={entering.fadeIn} exiting={exiting.fadeOut}>\n          <View className={cn(\"w-72 rounded-lg border border-border bg-card p-4 shadow-lg\", className)} {...props}>\n            {children}\n          </View>\n        </Animated.View>\n      </PopoverPrimitive.Content>\n    </PopoverPrimitive.Portal>\n  );\n}\n\nexport function PopoverClose({ children, className, ...props }: React.ComponentPropsWithoutRef<typeof Pressable> & { className?: string; children?: React.ReactNode }) {\n  return (\n    <PopoverPrimitive.Close asChild>\n      <Pressable className={cn(\"\", className)} accessible={true} accessibilityRole=\"button\" {...props}>\n        {children}\n      </Pressable>\n    </PopoverPrimitive.Close>\n  );\n}\n"
+    }
+  ],
+  "docs": "AniUI is React Native. On an existing RNR/NativeWind project, add and use directly — the tokens and aliases already match, no setup needed. On a fresh project, run `npx @aniui/cli init` first to configure NativeWind/Uniwind, theme tokens, and Metro/Babel."
+}

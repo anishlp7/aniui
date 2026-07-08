@@ -1,0 +1,27 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "onboarding",
+  "type": "registry:block",
+  "title": "OnboardingScreen",
+  "description": "Welcome carousel with step indicators and skip option",
+  "dependencies": [
+    "react-native-safe-area-context",
+    "class-variance-authority",
+    "clsx",
+    "tailwind-merge"
+  ],
+  "registryDependencies": [
+    "https://aniui.dev/r/utils.json",
+    "https://aniui.dev/r/text.json",
+    "https://aniui.dev/r/button.json"
+  ],
+  "files": [
+    {
+      "path": "blocks/onboarding.tsx",
+      "type": "registry:block",
+      "target": "components/blocks/onboarding.tsx",
+      "content": "import React, { useState } from \"react\";\nimport { View, Pressable } from \"react-native\";\nimport { SafeAreaView } from \"react-native-safe-area-context\";\nimport { Text } from \"@/components/ui/text\";\nimport { Button } from \"@/components/ui/button\";\n\nconst steps = [\n  {\n    title: \"Welcome\",\n    description: \"Discover a new way to manage your tasks and boost productivity.\",\n    icon: (\n      <Svg width={64} height={64} viewBox=\"0 0 64 64\" fill=\"none\">\n        <Path\n          d=\"M32 4C32 4 20 16 20 32c0 6.627 5.373 12 12 12s12-5.373 12-12C44 16 32 4 32 4z\"\n          stroke=\"hsl(var(--primary))\" strokeWidth=\"2.5\" strokeLinecap=\"round\" strokeLinejoin=\"round\"\n        />\n        <Path d=\"M20 40l-8 8M44 40l8 8\" stroke=\"hsl(var(--primary))\" strokeWidth=\"2.5\" strokeLinecap=\"round\" />\n        <Circle cx=\"32\" cy=\"32\" r=\"4\" fill=\"hsl(var(--primary))\" />\n      </Svg>\n    ),\n  },\n  {\n    title: \"Stay Focused\",\n    description: \"Set goals, track progress, and achieve more every day.\",\n    icon: (\n      <Svg width={64} height={64} viewBox=\"0 0 64 64\" fill=\"none\">\n        <Circle cx=\"32\" cy=\"32\" r=\"28\" stroke=\"hsl(var(--primary))\" strokeWidth=\"2.5\" />\n        <Circle cx=\"32\" cy=\"32\" r=\"18\" stroke=\"hsl(var(--primary))\" strokeWidth=\"2.5\" />\n        <Circle cx=\"32\" cy=\"32\" r=\"8\" stroke=\"hsl(var(--primary))\" strokeWidth=\"2.5\" />\n        <Circle cx=\"32\" cy=\"32\" r=\"3\" fill=\"hsl(var(--primary))\" />\n        <Path d=\"M32 4v8M32 52v8M4 32h8M52 32h8\" stroke=\"hsl(var(--primary))\" strokeWidth=\"2.5\" strokeLinecap=\"round\" />\n      </Svg>\n    ),\n  },\n  {\n    title: \"Connect\",\n    description: \"Collaborate with your team and share updates in real-time.\",\n    icon: (\n      <Svg width={64} height={64} viewBox=\"0 0 64 64\" fill=\"none\">\n        <Circle cx=\"20\" cy=\"24\" r=\"8\" stroke=\"hsl(var(--primary))\" strokeWidth=\"2.5\" />\n        <Circle cx=\"44\" cy=\"24\" r=\"8\" stroke=\"hsl(var(--primary))\" strokeWidth=\"2.5\" />\n        <Path d=\"M4 52c0-8.837 7.163-16 16-16h4\" stroke=\"hsl(var(--primary))\" strokeWidth=\"2.5\" strokeLinecap=\"round\" />\n        <Path d=\"M60 52c0-8.837-7.163-16-16-16h-4\" stroke=\"hsl(var(--primary))\" strokeWidth=\"2.5\" strokeLinecap=\"round\" />\n        <Path d=\"M24 36h16\" stroke=\"hsl(var(--primary))\" strokeWidth=\"2.5\" strokeLinecap=\"round\" />\n      </Svg>\n    ),\n  },\n];\n\nexport function OnboardingScreen({ onFinish }: { onFinish?: () => void }) {\n  const [step, setStep] = useState(0);\n  const isLast = step === steps.length - 1;\n  const current = steps[step];\n\n  return (\n    <SafeAreaView className=\"flex-1 bg-background\">\n      <View className=\"flex-1 justify-between px-6 py-8\">\n        {/* Skip */}\n        <View className=\"items-end\">\n          <Pressable\n            onPress={() => setStep(steps.length - 1)}\n            accessible={true}\n            accessibilityRole=\"button\"\n          >\n            <Text className=\"text-sm text-muted-foreground\">Skip</Text>\n          </Pressable>\n        </View>\n\n        {/* Slide content */}\n        <View className=\"flex-1 items-center justify-center gap-8\">\n          <View className=\"w-24 h-24 rounded-full bg-primary/10 items-center justify-center\">\n            {current.icon}\n          </View>\n          <View className=\"items-center gap-3\">\n            <Text variant=\"h2\" className=\"text-center\">{current.title}</Text>\n            <Text variant=\"muted\" className=\"text-center px-4\">\n              {current.description}\n            </Text>\n          </View>\n        </View>\n\n        {/* Dots */}\n        <View className=\"flex-row justify-center gap-2 mb-6\">\n          {steps.map((_, i) => (\n            <View\n              key={i}\n              className={`h-2 rounded-full ${\n                i === step ? \"w-8 bg-primary\" : \"w-2 bg-primary/20\"\n              }`}\n            />\n          ))}\n        </View>\n\n        {/* Next / Get Started */}\n        <Button\n          className=\"h-12 rounded-xl\"\n          onPress={() => {\n            if (isLast) {\n              onFinish?.();\n            } else {\n              setStep((s) => s + 1);\n            }\n          }}\n        >\n          {isLast ? \"Get Started\" : \"Next\"}\n        </Button>\n      </View>\n    </SafeAreaView>\n  );\n}\n"
+    }
+  ],
+  "docs": "AniUI is React Native. On an existing RNR/NativeWind project, add and use directly — the tokens and aliases already match, no setup needed. On a fresh project, run `npx @aniui/cli init` first to configure NativeWind/Uniwind, theme tokens, and Metro/Babel. Blocks are full screens — move into your app/ route as needed."
+}

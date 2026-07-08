@@ -1,0 +1,30 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "profile",
+  "type": "registry:block",
+  "title": "ProfileScreen",
+  "description": "User profile with avatar, stats, menu items, and log out",
+  "dependencies": [
+    "react-native-safe-area-context",
+    "class-variance-authority",
+    "clsx",
+    "tailwind-merge"
+  ],
+  "registryDependencies": [
+    "https://aniui.dev/r/utils.json",
+    "https://aniui.dev/r/text.json",
+    "https://aniui.dev/r/avatar.json",
+    "https://aniui.dev/r/button.json",
+    "https://aniui.dev/r/separator.json",
+    "https://aniui.dev/r/badge.json"
+  ],
+  "files": [
+    {
+      "path": "blocks/profile.tsx",
+      "type": "registry:block",
+      "target": "components/blocks/profile.tsx",
+      "content": "import React from \"react\";\nimport { View, ScrollView, Pressable } from \"react-native\";\nimport { SafeAreaView } from \"react-native-safe-area-context\";\nimport { Text } from \"@/components/ui/text\";\nimport { Avatar } from \"@/components/ui/avatar\";\nimport { Button } from \"@/components/ui/button\";\nimport { Separator } from \"@/components/ui/separator\";\nimport { Badge } from \"@/components/ui/badge\";\n\nconst menuItems = [\n  { label: \"My Posts\", count: \"24\" },\n  { label: \"Saved Items\", count: \"5\" },\n  { label: \"Privacy\" },\n  { label: \"Help & Support\" },\n];\n\nexport function ProfileScreen({ onLogOut }: { onLogOut?: () => void }) {\n  return (\n    <SafeAreaView className=\"flex-1 bg-background\">\n      <ScrollView className=\"flex-1\" showsVerticalScrollIndicator={false}>\n        {/* Header */}\n        <View className=\"items-center px-6 pt-8 pb-6\">\n          <Avatar\n            fallback=\"JD\"\n            size=\"lg\"\n            className=\"mb-4\"\n          />\n          <Text variant=\"h3\" className=\"mb-1\">John Doe</Text>\n          <Text variant=\"muted\">john@example.com</Text>\n          <Badge variant=\"secondary\" className=\"mt-2\">Pro Member</Badge>\n          <Button variant=\"outline\" size=\"sm\" className=\"mt-4 rounded-xl w-36\">\n            Edit Profile\n          </Button>\n        </View>\n\n        <Separator />\n\n        {/* Stats */}\n        <View className=\"flex-row bg-card rounded-2xl mx-4 my-4 shadow-sm\">\n          {[\n            { label: \"Posts\", value: \"24\" },\n            { label: \"Followers\", value: \"1.2k\" },\n            { label: \"Following\", value: \"380\" },\n          ].map(({ label, value }, i, arr) => (\n            <View key={label} className=\"flex-1 items-center py-4\">\n              {i > 0 && (\n                <View className=\"absolute left-0 top-3 bottom-3 w-px bg-border\" />\n              )}\n              <Text variant=\"h3\">{value}</Text>\n              <Text variant=\"muted\">{label}</Text>\n            </View>\n          ))}\n        </View>\n\n        {/* Menu Items */}\n        <View className=\"px-4 mt-2\">\n          {menuItems.map(({ label, count }) => (\n            <Pressable\n              key={label}\n              accessible={true}\n              accessibilityRole=\"button\"\n              className=\"flex-row items-center py-3.5 px-4 mb-2 bg-card rounded-2xl shadow-sm\"\n            >\n              <View className=\"h-9 w-9 rounded-xl bg-accent items-center justify-center mr-3\" />\n              <Text variant=\"p\" className=\"flex-1 font-medium\">{label}</Text>\n              {count && (\n                <Badge variant=\"secondary\" className=\"mr-2\">{count}</Badge>\n              )}\n            </Pressable>\n          ))}\n        </View>\n\n        {/* Log Out */}\n        <View className=\"px-4 mt-4 mb-10\">\n          <Button variant=\"destructive\" onPress={onLogOut} className=\"rounded-xl\">\n            Log Out\n          </Button>\n        </View>\n      </ScrollView>\n    </SafeAreaView>\n  );\n}\n"
+    }
+  ],
+  "docs": "AniUI is React Native. On an existing RNR/NativeWind project, add and use directly — the tokens and aliases already match, no setup needed. On a fresh project, run `npx @aniui/cli init` first to configure NativeWind/Uniwind, theme tokens, and Metro/Babel. Blocks are full screens — move into your app/ route as needed."
+}

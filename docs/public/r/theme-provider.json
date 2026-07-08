@@ -1,0 +1,22 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "theme-provider",
+  "type": "registry:ui",
+  "title": "ThemeProvider",
+  "description": "Theme context provider with light/dark/system mode and toggle",
+  "dependencies": [
+    "clsx",
+    "tailwind-merge"
+  ],
+  "registryDependencies": [
+    "https://aniui.dev/r/utils.json"
+  ],
+  "files": [
+    {
+      "path": "components/ui/theme-provider.tsx",
+      "type": "registry:ui",
+      "content": "import React, { createContext, useCallback, useContext, useEffect, useState } from \"react\";\nimport { Appearance, useColorScheme as useNativeColorScheme, View } from \"react-native\";\nimport { cn } from \"@/lib/utils\";\n\ntype Theme = \"light\" | \"dark\" | \"system\";\n\nconst ThemeContext = createContext<{\n  theme: Theme;\n  resolvedTheme: \"light\" | \"dark\";\n  setTheme: (theme: Theme) => void;\n  toggleTheme: () => void;\n}>({\n  theme: \"system\",\n  resolvedTheme: \"light\",\n  setTheme: () => {},\n  toggleTheme: () => {},\n});\n\nexport function useTheme() {\n  return useContext(ThemeContext);\n}\n\nexport interface ThemeProviderProps {\n  children: React.ReactNode;\n  defaultTheme?: Theme;\n  className?: string;\n}\n\n// Try to detect and use Uniwind's setTheme if available\nlet uniwindSetTheme: ((theme: string) => void) | null = null;\ntry {\n  const mod = require(\"uniwind\");\n  if (mod?.Uniwind?.setTheme) {\n    uniwindSetTheme = (theme: string) => mod.Uniwind.setTheme(theme);\n  }\n} catch {}\n\nexport function ThemeProvider({\n  children,\n  defaultTheme = \"system\",\n  className,\n}: ThemeProviderProps) {\n  const systemScheme = useNativeColorScheme();\n  const [theme, setThemeState] = useState<Theme>(defaultTheme);\n\n  const resolvedTheme: \"light\" | \"dark\" =\n    theme === \"system\" ? (systemScheme ?? \"light\") : theme;\n\n  const applyTheme = useCallback((resolved: \"light\" | \"dark\") => {\n    if (uniwindSetTheme) {\n      // Uniwind handles Appearance.setColorScheme internally\n      uniwindSetTheme(resolved);\n    } else {\n      // NativeWind v4/v5: set system appearance directly\n      try { Appearance.setColorScheme(resolved); } catch {}\n    }\n  }, []);\n\n  const setTheme = useCallback((newTheme: Theme) => {\n    setThemeState(newTheme);\n    const resolved = newTheme === \"system\" ? (systemScheme ?? \"light\") : newTheme;\n    applyTheme(resolved);\n  }, [systemScheme, applyTheme]);\n\n  const toggleTheme = useCallback(() => {\n    setThemeState((prev) => {\n      const current = prev === \"system\" ? (systemScheme ?? \"light\") : prev;\n      const next = current === \"dark\" ? \"light\" : \"dark\";\n      applyTheme(next);\n      return next;\n    });\n  }, [systemScheme, applyTheme]);\n\n  // Apply initial theme\n  useEffect(() => {\n    if (defaultTheme !== \"system\") {\n      applyTheme(defaultTheme === \"dark\" ? \"dark\" : \"light\");\n    }\n  }, [defaultTheme, applyTheme]);\n\n  return (\n    <ThemeContext.Provider value={{ theme, resolvedTheme, setTheme, toggleTheme }}>\n      <View className={cn(resolvedTheme === \"dark\" ? \"dark\" : \"\", \"flex-1 bg-background\", className)}>\n        {children}\n      </View>\n    </ThemeContext.Provider>\n  );\n}\n"
+    }
+  ],
+  "docs": "AniUI is React Native. On an existing RNR/NativeWind project, add and use directly — the tokens and aliases already match, no setup needed. On a fresh project, run `npx @aniui/cli init` first to configure NativeWind/Uniwind, theme tokens, and Metro/Babel."
+}

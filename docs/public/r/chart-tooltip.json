@@ -1,0 +1,22 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "chart-tooltip",
+  "type": "registry:ui",
+  "title": "ChartTooltip",
+  "description": "Tooltip overlay for chart data points",
+  "dependencies": [
+    "clsx",
+    "tailwind-merge"
+  ],
+  "registryDependencies": [
+    "https://aniui.dev/r/utils.json"
+  ],
+  "files": [
+    {
+      "path": "components/ui/chart-tooltip.tsx",
+      "type": "registry:ui",
+      "content": "import React from \"react\";\nimport { View, Text } from \"react-native\";\nimport { cn } from \"@/lib/utils\";\n\nexport interface ChartTooltipProps\n  extends React.ComponentPropsWithoutRef<typeof View> {\n  className?: string;\n  label?: string;\n  value?: string | number;\n  indicator?: \"line\" | \"dot\" | \"dashed\";\n  color?: string;\n  items?: { label: string; value: string | number; color: string }[];\n}\n\nexport function ChartTooltip({\n  className,\n  label,\n  value,\n  indicator = \"dot\",\n  color = \"#000\",\n  items,\n  ...props\n}: ChartTooltipProps) {\n  const indicatorEl = (c: string) =>\n    indicator === \"line\" ? (\n      <View className=\"w-1 h-3 rounded-full\" style={{ backgroundColor: c }} />\n    ) : indicator === \"dashed\" ? (\n      <View\n        className=\"w-1 h-3 rounded-full\"\n        style={{ backgroundColor: c, opacity: 0.5 }}\n      />\n    ) : (\n      <View\n        className=\"w-2.5 h-2.5 rounded-full\"\n        style={{ backgroundColor: c }}\n      />\n    );\n\n  return (\n    <View\n      className={cn(\n        \"rounded-lg border border-border bg-card px-3 py-2 shadow-sm\",\n        className\n      )}\n      accessibilityRole=\"summary\"\n      {...props}\n    >\n      {label && (\n        <Text className=\"text-xs text-muted-foreground mb-1\">{label}</Text>\n      )}\n      {items ? (\n        items.map((item, i) => (\n          <View key={i} className=\"flex-row items-center gap-2 py-0.5\">\n            {indicatorEl(item.color)}\n            <Text className=\"text-xs text-muted-foreground\">{item.label}</Text>\n            <Text className=\"text-xs font-medium text-foreground ms-auto\">\n              {item.value}\n            </Text>\n          </View>\n        ))\n      ) : (\n        <View className=\"flex-row items-center gap-2\">\n          {indicatorEl(color)}\n          <Text className=\"text-sm font-medium text-foreground\">{value}</Text>\n        </View>\n      )}\n    </View>\n  );\n}\n"
+    }
+  ],
+  "docs": "AniUI is React Native. On an existing RNR/NativeWind project, add and use directly — the tokens and aliases already match, no setup needed. On a fresh project, run `npx @aniui/cli init` first to configure NativeWind/Uniwind, theme tokens, and Metro/Babel."
+}

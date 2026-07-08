@@ -1,0 +1,23 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "stepper",
+  "type": "registry:ui",
+  "title": "Stepper",
+  "description": "Numeric increment/decrement control with min/max/step",
+  "dependencies": [
+    "class-variance-authority",
+    "clsx",
+    "tailwind-merge"
+  ],
+  "registryDependencies": [
+    "https://aniui.dev/r/utils.json"
+  ],
+  "files": [
+    {
+      "path": "components/ui/stepper.tsx",
+      "type": "registry:ui",
+      "content": "import React from \"react\";\nimport { View, Text, Pressable } from \"react-native\";\nimport { cva, type VariantProps } from \"class-variance-authority\";\nimport { cn } from \"@/lib/utils\";\n\nconst stepperVariants = cva(\"flex-row items-center self-start rounded-lg border border-border\", {\n  variants: {\n    size: {\n      sm: \"h-9\",\n      md: \"h-11\",\n      lg: \"h-14\",\n    },\n  },\n  defaultVariants: { size: \"md\" },\n});\n\nconst buttonVariants = cva(\"items-center justify-center border-border\", {\n  variants: {\n    size: {\n      sm: \"w-9\",\n      md: \"w-11\",\n      lg: \"w-14\",\n    },\n  },\n  defaultVariants: { size: \"md\" },\n});\n\nexport interface StepperProps\n  extends React.ComponentPropsWithoutRef<typeof View>,\n    VariantProps<typeof stepperVariants> {\n  className?: string;\n  value: number;\n  onChange: (value: number) => void;\n  min?: number;\n  max?: number;\n  step?: number;\n}\n\nexport function Stepper({ size, className, value, onChange, min = 0, max = 99, step = 1, ...props }: StepperProps) {\n  const canDec = value - step >= min;\n  const canInc = value + step <= max;\n\n  return (\n    <View\n      className={cn(stepperVariants({ size }), className)}\n      accessibilityRole=\"adjustable\"\n      accessibilityValue={{ min, max, now: value }}\n      {...props}\n    >\n      <Pressable\n        className={cn(buttonVariants({ size }), \"h-full border-e\", !canDec && \"opacity-30\")}\n        onPress={() => { if (canDec) onChange(value - step); }}\n        disabled={!canDec}\n        accessible={true}\n        accessibilityRole=\"button\"\n        accessibilityLabel=\"Decrease\"\n      >\n        <Text className=\"text-lg text-foreground\">−</Text>\n      </Pressable>\n      <View className=\"w-14 items-center justify-center\">\n        <Text className=\"text-base font-medium text-foreground\">{value}</Text>\n      </View>\n      <Pressable\n        className={cn(buttonVariants({ size }), \"h-full border-s\", !canInc && \"opacity-30\")}\n        onPress={() => { if (canInc) onChange(value + step); }}\n        disabled={!canInc}\n        accessible={true}\n        accessibilityRole=\"button\"\n        accessibilityLabel=\"Increase\"\n      >\n        <Text className=\"text-lg text-foreground\">+</Text>\n      </Pressable>\n    </View>\n  );\n}\n"
+    }
+  ],
+  "docs": "AniUI is React Native. On an existing RNR/NativeWind project, add and use directly — the tokens and aliases already match, no setup needed. On a fresh project, run `npx @aniui/cli init` first to configure NativeWind/Uniwind, theme tokens, and Metro/Babel."
+}

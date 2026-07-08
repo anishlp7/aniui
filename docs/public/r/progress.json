@@ -1,0 +1,23 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "progress",
+  "type": "registry:ui",
+  "title": "Progress",
+  "description": "Progress bar",
+  "dependencies": [
+    "@rn-primitives/progress",
+    "clsx",
+    "tailwind-merge"
+  ],
+  "registryDependencies": [
+    "https://aniui.dev/r/utils.json"
+  ],
+  "files": [
+    {
+      "path": "components/ui/progress.tsx",
+      "type": "registry:ui",
+      "content": "import React from \"react\";\nimport { View } from \"react-native\";\nimport * as ProgressPrimitive from \"@rn-primitives/progress\";\nimport { cn } from \"@/lib/utils\";\n\nexport interface ProgressProps extends React.ComponentPropsWithoutRef<typeof View> {\n  className?: string;\n  value?: number;\n  indicatorClassName?: string;\n}\n\nexport function Progress({ value = 0, className, indicatorClassName, ...props }: ProgressProps) {\n  const clampedValue = Math.min(100, Math.max(0, value));\n\n  return (\n    <ProgressPrimitive.Root value={clampedValue} asChild>\n      <View\n        className={cn(\"h-2 w-full overflow-hidden rounded-full bg-secondary\", className)}\n        accessibilityRole=\"progressbar\"\n        accessibilityValue={{ min: 0, max: 100, now: clampedValue }}\n        {...props}\n      >\n        <ProgressPrimitive.Indicator asChild>\n          <View\n            className={cn(\"h-full rounded-full bg-primary\", indicatorClassName)}\n            style={{ width: `${clampedValue}%` }}\n          />\n        </ProgressPrimitive.Indicator>\n      </View>\n    </ProgressPrimitive.Root>\n  );\n}\n"
+    }
+  ],
+  "docs": "AniUI is React Native. On an existing RNR/NativeWind project, add and use directly — the tokens and aliases already match, no setup needed. On a fresh project, run `npx @aniui/cli init` first to configure NativeWind/Uniwind, theme tokens, and Metro/Babel."
+}

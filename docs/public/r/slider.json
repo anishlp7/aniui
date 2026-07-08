@@ -1,0 +1,25 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "slider",
+  "type": "registry:ui",
+  "title": "Slider",
+  "description": "Draggable slider for numeric values",
+  "dependencies": [
+    "react-native-gesture-handler",
+    "react-native-reanimated",
+    "class-variance-authority",
+    "clsx",
+    "tailwind-merge"
+  ],
+  "registryDependencies": [
+    "https://aniui.dev/r/utils.json"
+  ],
+  "files": [
+    {
+      "path": "components/ui/slider.tsx",
+      "type": "registry:ui",
+      "content": "import React, { useCallback } from \"react\";\nimport { View, useColorScheme } from \"react-native\";\nimport { Gesture, GestureDetector } from \"react-native-gesture-handler\";\nimport Animated, { useSharedValue, useAnimatedStyle, runOnJS } from \"react-native-reanimated\";\nimport { cva, type VariantProps } from \"class-variance-authority\";\nimport { cn } from \"@/lib/utils\";\n\nconst sliderVariants = cva(\"w-full justify-center\", {\n  variants: {\n    size: {\n      sm: \"h-8\",\n      md: \"h-10\",\n      lg: \"h-12\",\n    },\n  },\n  defaultVariants: { size: \"md\" },\n});\n\nexport interface SliderProps\n  extends React.ComponentPropsWithoutRef<typeof View>,\n    VariantProps<typeof sliderVariants> {\n  className?: string;\n  value?: number;\n  min?: number;\n  max?: number;\n  step?: number;\n  disabled?: boolean;\n  onValueChange?: (value: number) => void;\n}\n\nexport function Slider({\n  value = 0, min = 0, max = 100, step = 1, disabled, size,\n  onValueChange, className, ...props\n}: SliderProps) {\n  const trackWidth = useSharedValue(0);\n  const pct = max > min ? ((value - min) / (max - min)) * 100 : 0;\n  const thumbSize = size === \"lg\" ? 24 : size === \"sm\" ? 16 : 20;\n  const dark = useColorScheme() === \"dark\";\n\n  const emitValue = useCallback((locationX: number) => {\n    \"worklet\";\n    const w = trackWidth.value;\n    if (w <= 0) return;\n    const ratio = Math.max(0, Math.min(1, locationX / w));\n    const raw = min + ratio * (max - min);\n    const stepped = Math.round(raw / step) * step;\n    const clamped = Math.max(min, Math.min(max, stepped));\n    if (onValueChange) runOnJS(onValueChange)(clamped);\n  }, [min, max, step, onValueChange, trackWidth]);\n\n  const gesture = Gesture.Pan()\n    .enabled(!disabled)\n    .onBegin((e) => { emitValue(e.x); })\n    .onUpdate((e) => { emitValue(e.x); })\n    .minDistance(0);\n\n  const thumbStyle = useAnimatedStyle(() => ({\n    position: \"absolute\" as const,\n    left: `${pct}%`,\n    marginLeft: -(thumbSize / 2),\n    width: thumbSize,\n    height: thumbSize,\n    borderRadius: thumbSize / 2,\n    borderWidth: 2,\n    borderColor: dark ? \"#fafafa\" : \"#18181b\",\n    backgroundColor: dark ? \"#18181b\" : \"#ffffff\",\n  }));\n\n  return (\n    <GestureDetector gesture={gesture}>\n      <View\n        className={cn(sliderVariants({ size }), disabled && \"opacity-50\", className)}\n        accessible={true}\n        accessibilityRole=\"adjustable\"\n        accessibilityValue={{ min, max, now: value }}\n        onLayout={(e) => { trackWidth.value = e.nativeEvent.layout.width; }}\n        {...props}\n      >\n        <View className=\"h-1.5 w-full rounded-full bg-secondary overflow-hidden\">\n          <View className=\"h-full rounded-full bg-primary\" style={{ width: `${pct}%` }} />\n        </View>\n        <Animated.View style={thumbStyle} />\n      </View>\n    </GestureDetector>\n  );\n}\n"
+    }
+  ],
+  "docs": "AniUI is React Native. On an existing RNR/NativeWind project, add and use directly — the tokens and aliases already match, no setup needed. On a fresh project, run `npx @aniui/cli init` first to configure NativeWind/Uniwind, theme tokens, and Metro/Babel."
+}

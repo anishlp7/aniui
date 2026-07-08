@@ -1,0 +1,23 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "toggle",
+  "type": "registry:ui",
+  "title": "Toggle",
+  "description": "Two-state toggle button",
+  "dependencies": [
+    "class-variance-authority",
+    "clsx",
+    "tailwind-merge"
+  ],
+  "registryDependencies": [
+    "https://aniui.dev/r/utils.json"
+  ],
+  "files": [
+    {
+      "path": "components/ui/toggle.tsx",
+      "type": "registry:ui",
+      "content": "import React from \"react\";\nimport { Pressable, Text } from \"react-native\";\nimport { cva, type VariantProps } from \"class-variance-authority\";\nimport { cn } from \"@/lib/utils\";\n\nconst toggleVariants = cva(\n  \"items-center justify-center rounded-md min-h-12 min-w-12\",\n  {\n    variants: {\n      variant: {\n        default: \"bg-transparent\",\n        outline: \"border border-input bg-transparent\",\n      },\n      size: {\n        sm: \"px-2 py-1.5\",\n        md: \"px-3 py-2\",\n        lg: \"px-4 py-2.5\",\n      },\n    },\n    defaultVariants: { variant: \"default\", size: \"md\" },\n  }\n);\n\nexport interface ToggleProps\n  extends React.ComponentPropsWithoutRef<typeof Pressable>,\n    VariantProps<typeof toggleVariants> {\n  className?: string;\n  pressed?: boolean;\n  onPressedChange?: (pressed: boolean) => void;\n  children: React.ReactNode;\n}\n\nexport function Toggle({\n  pressed = false, onPressedChange, variant, size, className, children, ...props\n}: ToggleProps) {\n  return (\n    <Pressable\n      className={cn(\n        toggleVariants({ variant, size }),\n        pressed && \"bg-accent\",\n        className\n      )}\n      onPress={() => onPressedChange?.(!pressed)}\n      accessibilityRole=\"button\"\n      accessibilityState={{ selected: pressed }}\n      accessible={true}\n      {...props}\n    >\n      {typeof children === \"string\" ? (\n        <Text className={cn(\"text-sm font-medium\", pressed ? \"text-accent-foreground\" : \"text-muted-foreground\")}>\n          {children}\n        </Text>\n      ) : children}\n    </Pressable>\n  );\n}\n"
+    }
+  ],
+  "docs": "AniUI is React Native. On an existing RNR/NativeWind project, add and use directly — the tokens and aliases already match, no setup needed. On a fresh project, run `npx @aniui/cli init` first to configure NativeWind/Uniwind, theme tokens, and Metro/Babel."
+}

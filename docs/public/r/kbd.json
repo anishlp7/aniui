@@ -1,0 +1,23 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "kbd",
+  "type": "registry:ui",
+  "title": "Kbd",
+  "description": "Keyboard key display with grouping and separator",
+  "dependencies": [
+    "class-variance-authority",
+    "clsx",
+    "tailwind-merge"
+  ],
+  "registryDependencies": [
+    "https://aniui.dev/r/utils.json"
+  ],
+  "files": [
+    {
+      "path": "components/ui/kbd.tsx",
+      "type": "registry:ui",
+      "content": "import React from \"react\";\nimport { View, Text } from \"react-native\";\nimport { cva, type VariantProps } from \"class-variance-authority\";\nimport { cn } from \"@/lib/utils\";\n\nconst kbdVariants = cva(\n  \"items-center justify-center rounded-md border border-border bg-muted\",\n  {\n    variants: {\n      size: {\n        sm: \"min-h-5 px-1\",\n        md: \"min-h-6 px-1.5\",\n        lg: \"min-h-7 px-2\",\n      },\n    },\n    defaultVariants: { size: \"md\" },\n  }\n);\n\nconst kbdTextVariants = cva(\"font-mono text-muted-foreground\", {\n  variants: {\n    size: {\n      sm: \"text-[10px]\",\n      md: \"text-xs\",\n      lg: \"text-sm\",\n    },\n  },\n  defaultVariants: { size: \"md\" },\n});\n\nexport interface KbdProps\n  extends React.ComponentPropsWithoutRef<typeof View>,\n    VariantProps<typeof kbdVariants> {\n  className?: string;\n  textClassName?: string;\n  children: string;\n}\n\nexport function Kbd({ size, className, textClassName, children, ...props }: KbdProps) {\n  return (\n    <View className={cn(kbdVariants({ size }), className)} {...props}>\n      <Text className={cn(kbdTextVariants({ size }), textClassName)}>{children}</Text>\n    </View>\n  );\n}\n\nexport interface KbdGroupProps extends React.ComponentPropsWithoutRef<typeof View> {\n  className?: string;\n  separator?: string;\n  children: React.ReactNode;\n}\n\nexport function KbdGroup({ className, separator = \"+\", children, ...props }: KbdGroupProps) {\n  const items = React.Children.toArray(children);\n\n  return (\n    <View className={cn(\"flex-row items-center gap-1\", className)} {...props}>\n      {items.map((child, i) => (\n        <React.Fragment key={i}>\n          {child}\n          {i < items.length - 1 && (\n            <Text className=\"text-xs text-muted-foreground\">{separator}</Text>\n          )}\n        </React.Fragment>\n      ))}\n    </View>\n  );\n}\n"
+    }
+  ],
+  "docs": "AniUI is React Native. On an existing RNR/NativeWind project, add and use directly — the tokens and aliases already match, no setup needed. On a fresh project, run `npx @aniui/cli init` first to configure NativeWind/Uniwind, theme tokens, and Metro/Babel."
+}

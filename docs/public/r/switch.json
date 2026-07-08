@@ -1,0 +1,22 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "switch",
+  "type": "registry:ui",
+  "title": "Switch",
+  "description": "Toggle switch",
+  "dependencies": [
+    "clsx",
+    "tailwind-merge"
+  ],
+  "registryDependencies": [
+    "https://aniui.dev/r/utils.json"
+  ],
+  "files": [
+    {
+      "path": "components/ui/switch.tsx",
+      "type": "registry:ui",
+      "content": "import React from \"react\";\nimport { View, Switch as RNSwitch, useColorScheme } from \"react-native\";\nimport { cn } from \"@/lib/utils\";\n\nexport interface SwitchProps extends React.ComponentPropsWithoutRef<typeof RNSwitch> {\n  className?: string;\n  trackColorOff?: string;\n  trackColorOn?: string;\n  thumbColor?: string;\n}\n\nexport function Switch({ className, trackColorOff, trackColorOn, thumbColor, value, ...props }: SwitchProps) {\n  const dark = useColorScheme() === \"dark\";\n  const off = trackColorOff ?? (dark ? \"#27272a\" : \"#e4e4e7\");\n  const on = trackColorOn ?? (dark ? \"#fafafa\" : \"#18181b\");\n  // Thumb must contrast with the track in every state. In dark mode the ON\n  // track is near-white, so a default white thumb would disappear on iOS.\n  const thumb = thumbColor ?? (value ? (dark ? \"#18181b\" : \"#ffffff\") : \"#ffffff\");\n\n  return (\n    <View className={cn(\"\", className)}>\n      <RNSwitch\n        value={value}\n        trackColor={{ false: off, true: on }}\n        thumbColor={thumb}\n        ios_backgroundColor={off}\n        accessibilityRole=\"switch\"\n        {...props}\n      />\n    </View>\n  );\n}\n"
+    }
+  ],
+  "docs": "AniUI is React Native. On an existing RNR/NativeWind project, add and use directly — the tokens and aliases already match, no setup needed. On a fresh project, run `npx @aniui/cli init` first to configure NativeWind/Uniwind, theme tokens, and Metro/Babel."
+}

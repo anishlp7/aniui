@@ -1,0 +1,22 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "table",
+  "type": "registry:ui",
+  "title": "Table",
+  "description": "Data table with header, body, rows, and cells",
+  "dependencies": [
+    "clsx",
+    "tailwind-merge"
+  ],
+  "registryDependencies": [
+    "https://aniui.dev/r/utils.json"
+  ],
+  "files": [
+    {
+      "path": "components/ui/table.tsx",
+      "type": "registry:ui",
+      "content": "import React, { createContext, useContext } from \"react\";\nimport { View, Text, ScrollView, type StyleProp, type ViewStyle } from \"react-native\";\nimport { cn } from \"@/lib/utils\";\n\ntype TableContextValue = { truncate: boolean; defaultColumnWidth: number };\nconst TableContext = createContext<TableContextValue>({ truncate: false, defaultColumnWidth: 150 });\n\nexport type TableViewProps = React.ComponentPropsWithoutRef<typeof View> & { className?: string; children?: React.ReactNode };\nexport interface TableProps extends React.ComponentPropsWithoutRef<typeof ScrollView> {\n  className?: string;\n  children?: React.ReactNode;\n  /** When true, fit columns to container width and truncate long content. Default false: each cell\n   *  has a fixed pixel width and the table scrolls horizontally if total content exceeds the viewport. */\n  truncate?: boolean;\n  /** Default pixel width for each cell. Used in scroll mode (truncate=false). Defaults to 150. */\n  defaultColumnWidth?: number;\n}\nexport interface TableCellProps extends TableViewProps { textClassName?: string }\n\nconst truncateCellStyle: StyleProp<ViewStyle> = { flexGrow: 1, flexShrink: 1, flexBasis: 0, minWidth: 0, overflow: \"hidden\" };\n\nexport function Table({ className, children, truncate = false, defaultColumnWidth = 150, ...props }: TableProps) {\n  return (\n    <TableContext.Provider value={{ truncate, defaultColumnWidth }}>\n      <ScrollView horizontal scrollEnabled={!truncate} className={cn(\"rounded-md border border-border\", className)} {...props}>\n        <View className=\"min-w-full\">{children}</View>\n      </ScrollView>\n    </TableContext.Provider>\n  );\n}\n\nexport function TableHeader({ className, ...props }: TableViewProps) {\n  return <View className={cn(\"bg-muted/50\", className)} {...props} />;\n}\n\nexport function TableBody({ className, ...props }: TableViewProps) {\n  return <View className={className} {...props} />;\n}\n\nexport function TableRow({ className, ...props }: TableViewProps) {\n  return <View className={cn(\"flex-row border-b border-border\", className)} {...props} />;\n}\n\nexport function TableHead({ className, textClassName, children, style, ...props }: TableCellProps) {\n  const { truncate, defaultColumnWidth } = useContext(TableContext);\n  const isText = typeof children === \"string\" || typeof children === \"number\";\n  const widthStyle: StyleProp<ViewStyle> = truncate ? truncateCellStyle : { width: defaultColumnWidth, overflow: \"hidden\" };\n  return (\n    <View style={[widthStyle, style]} className={cn(\"justify-center px-4 py-3\", className)} {...props}>\n      {isText ? <Text className={cn(\"text-sm font-medium text-muted-foreground\", textClassName)} numberOfLines={1}>{children}</Text> : children}\n    </View>\n  );\n}\n\nexport function TableCell({ className, textClassName, children, style, ...props }: TableCellProps) {\n  const { truncate, defaultColumnWidth } = useContext(TableContext);\n  const isText = typeof children === \"string\" || typeof children === \"number\";\n  const widthStyle: StyleProp<ViewStyle> = truncate ? truncateCellStyle : { width: defaultColumnWidth, overflow: \"hidden\" };\n  return (\n    <View style={[widthStyle, style]} className={cn(\"justify-center px-4 py-3\", className)} {...props}>\n      {isText ? <Text className={cn(\"text-sm text-foreground\", textClassName)} numberOfLines={1}>{children}</Text> : children}\n    </View>\n  );\n}\n"
+    }
+  ],
+  "docs": "AniUI is React Native. On an existing RNR/NativeWind project, add and use directly — the tokens and aliases already match, no setup needed. On a fresh project, run `npx @aniui/cli init` first to configure NativeWind/Uniwind, theme tokens, and Metro/Babel."
+}

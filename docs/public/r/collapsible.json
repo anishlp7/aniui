@@ -1,0 +1,24 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "collapsible",
+  "type": "registry:ui",
+  "title": "Collapsible",
+  "description": "Animated show/hide content",
+  "dependencies": [
+    "react-native-reanimated",
+    "clsx",
+    "tailwind-merge"
+  ],
+  "registryDependencies": [
+    "https://aniui.dev/r/utils.json",
+    "https://aniui.dev/r/animate.json"
+  ],
+  "files": [
+    {
+      "path": "components/ui/collapsible.tsx",
+      "type": "registry:ui",
+      "content": "import React, { createContext, useContext, useState } from \"react\";\nimport { View, Pressable } from \"react-native\";\nimport Animated from \"react-native-reanimated\";\nimport { entering, exiting } from \"@/components/ui/animate\";\nimport { cn } from \"@/lib/utils\";\n\nconst CollapsibleCtx = createContext<{ isOpen: boolean; toggle: () => void }>({ isOpen: false, toggle: () => {} });\n\nexport interface CollapsibleProps extends React.ComponentPropsWithoutRef<typeof View> {\n  className?: string;\n  open?: boolean;\n  onOpenChange?: (open: boolean) => void;\n  children?: React.ReactNode;\n}\n\nexport function Collapsible({ open: controlledOpen, onOpenChange, className, children, ...props }: CollapsibleProps) {\n  const [uncontrolled, setUncontrolled] = useState(false);\n  const isOpen = controlledOpen ?? uncontrolled;\n  const toggle = () => {\n    const next = !isOpen;\n    setUncontrolled(next);\n    onOpenChange?.(next);\n  };\n\n  return (\n    <CollapsibleCtx.Provider value={{ isOpen, toggle }}>\n      <View className={cn(\"\", className)} {...props}>{children}</View>\n    </CollapsibleCtx.Provider>\n  );\n}\n\nexport interface CollapsibleTriggerProps extends React.ComponentPropsWithoutRef<typeof Pressable> {\n  className?: string;\n  children?: React.ReactNode;\n}\n\nexport function CollapsibleTrigger({ className, children, ...props }: CollapsibleTriggerProps) {\n  const { toggle } = useContext(CollapsibleCtx);\n  return (\n    <Pressable className={cn(\"\", className)} onPress={toggle} accessible={true} accessibilityRole=\"button\" {...props}>\n      {children}\n    </Pressable>\n  );\n}\n\nexport interface CollapsibleContentProps extends React.ComponentPropsWithoutRef<typeof View> {\n  className?: string;\n  children?: React.ReactNode;\n}\n\nexport function CollapsibleContent({ className, children, ...props }: CollapsibleContentProps) {\n  const { isOpen } = useContext(CollapsibleCtx);\n  if (!isOpen) return null;\n  return (\n    <Animated.View entering={entering.fadeInDown} exiting={exiting.fadeOutUp}>\n      <View className={cn(\"\", className)} {...props}>{children}</View>\n    </Animated.View>\n  );\n}\n"
+    }
+  ],
+  "docs": "AniUI is React Native. On an existing RNR/NativeWind project, add and use directly — the tokens and aliases already match, no setup needed. On a fresh project, run `npx @aniui/cli init` first to configure NativeWind/Uniwind, theme tokens, and Metro/Babel."
+}

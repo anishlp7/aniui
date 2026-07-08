@@ -1,0 +1,23 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "textarea",
+  "type": "registry:ui",
+  "title": "Textarea",
+  "description": "Multi-line text input",
+  "dependencies": [
+    "class-variance-authority",
+    "clsx",
+    "tailwind-merge"
+  ],
+  "registryDependencies": [
+    "https://aniui.dev/r/utils.json"
+  ],
+  "files": [
+    {
+      "path": "components/ui/textarea.tsx",
+      "type": "registry:ui",
+      "content": "import React from \"react\";\nimport { TextInput, useColorScheme } from \"react-native\";\nimport { cva, type VariantProps } from \"class-variance-authority\";\nimport { cn } from \"@/lib/utils\";\n\nconst textareaVariants = cva(\n  \"rounded-md border text-foreground placeholder:text-muted-foreground align-top\",\n  {\n    variants: {\n      variant: {\n        default: \"border-input bg-background\",\n        ghost: \"border-transparent bg-transparent\",\n      },\n    },\n    defaultVariants: {\n      variant: \"default\",\n    },\n  }\n);\n\nexport interface TextareaProps\n  extends React.ComponentPropsWithoutRef<typeof TextInput>,\n    VariantProps<typeof textareaVariants> {\n  className?: string;\n}\n\nexport const Textarea = React.forwardRef<\n  React.ElementRef<typeof TextInput>,\n  TextareaProps\n>(function Textarea({ variant, className, ...props }, ref) {\n  const dark = useColorScheme() === \"dark\";\n  const caret = dark ? \"#fafafa\" : \"#18181b\";\n  return (\n    <TextInput\n      ref={ref}\n      className={cn(textareaVariants({ variant }), \"min-h-24 px-4 py-3 text-base\", className)}\n      placeholderTextColor={dark ? \"#a1a1aa\" : \"#71717a\"}\n      keyboardAppearance={dark ? \"dark\" : \"light\"}\n      selectionColor={caret}\n      cursorColor={caret}\n      multiline\n      textAlignVertical=\"top\"\n      {...props}\n    />\n  );\n});\n"
+    }
+  ],
+  "docs": "AniUI is React Native. On an existing RNR/NativeWind project, add and use directly — the tokens and aliases already match, no setup needed. On a fresh project, run `npx @aniui/cli init` first to configure NativeWind/Uniwind, theme tokens, and Metro/Babel."
+}

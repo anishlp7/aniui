@@ -1,0 +1,22 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "list",
+  "type": "registry:ui",
+  "title": "List",
+  "description": "Styled list items",
+  "dependencies": [
+    "clsx",
+    "tailwind-merge"
+  ],
+  "registryDependencies": [
+    "https://aniui.dev/r/utils.json"
+  ],
+  "files": [
+    {
+      "path": "components/ui/list.tsx",
+      "type": "registry:ui",
+      "content": "import React from \"react\";\nimport { View, Text, Pressable } from \"react-native\";\nimport { cn } from \"@/lib/utils\";\n\nexport interface ListProps extends React.ComponentPropsWithoutRef<typeof View> {\n  className?: string;\n  children?: React.ReactNode;\n}\n\nexport function List({ className, ...props }: ListProps) {\n  return <View className={cn(\"\", className)} {...props} />;\n}\n\nexport interface ListItemProps extends React.ComponentPropsWithoutRef<typeof Pressable> {\n  className?: string;\n  children?: React.ReactNode;\n}\n\nexport function ListItem({ className, ...props }: ListItemProps) {\n  return (\n    <Pressable\n      className={cn(\"flex-row items-center px-4 py-3 min-h-12 border-b border-border\", className)}\n      accessible={true}\n      accessibilityRole=\"button\"\n      {...props}\n    />\n  );\n}\n\nexport interface ListItemTitleProps extends React.ComponentPropsWithoutRef<typeof Text> {\n  className?: string;\n}\n\nexport function ListItemTitle({ className, ...props }: ListItemTitleProps) {\n  return <Text className={cn(\"text-base font-medium text-foreground\", className)} {...props} />;\n}\n\nexport interface ListItemDescriptionProps extends React.ComponentPropsWithoutRef<typeof Text> {\n  className?: string;\n}\n\nexport function ListItemDescription({ className, ...props }: ListItemDescriptionProps) {\n  return <Text className={cn(\"text-sm text-muted-foreground\", className)} {...props} />;\n}\n"
+    }
+  ],
+  "docs": "AniUI is React Native. On an existing RNR/NativeWind project, add and use directly — the tokens and aliases already match, no setup needed. On a fresh project, run `npx @aniui/cli init` first to configure NativeWind/Uniwind, theme tokens, and Metro/Babel."
+}

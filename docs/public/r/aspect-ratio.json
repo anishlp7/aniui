@@ -1,0 +1,22 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "aspect-ratio",
+  "type": "registry:ui",
+  "title": "AspectRatio",
+  "description": "Constrains children to a fixed width/height ratio",
+  "dependencies": [
+    "clsx",
+    "tailwind-merge"
+  ],
+  "registryDependencies": [
+    "https://aniui.dev/r/utils.json"
+  ],
+  "files": [
+    {
+      "path": "components/ui/aspect-ratio.tsx",
+      "type": "registry:ui",
+      "content": "import React from \"react\";\nimport { View } from \"react-native\";\nimport { cn } from \"@/lib/utils\";\n\nexport interface AspectRatioProps extends React.ComponentPropsWithoutRef<typeof View> {\n  className?: string;\n  ratio?: number;\n  children?: React.ReactNode;\n}\n\n// `aspectRatio` is a dynamic numeric layout value, so it goes through the style\n// prop — NativeWind/Uniwind only expose static `aspect-*` utility classes.\nexport function AspectRatio({ ratio = 1, className, style, children, ...props }: AspectRatioProps) {\n  return (\n    <View\n      className={cn(\"w-full overflow-hidden\", className)}\n      style={[{ aspectRatio: ratio }, style]}\n      {...props}\n    >\n      {children}\n    </View>\n  );\n}\n"
+    }
+  ],
+  "docs": "AniUI is React Native. On an existing RNR/NativeWind project, add and use directly — the tokens and aliases already match, no setup needed. On a fresh project, run `npx @aniui/cli init` first to configure NativeWind/Uniwind, theme tokens, and Metro/Babel."
+}

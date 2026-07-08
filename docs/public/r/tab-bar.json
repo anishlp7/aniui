@@ -1,0 +1,25 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "tab-bar",
+  "type": "registry:ui",
+  "title": "TabBar",
+  "description": "Bottom tab bar with badge support and active states",
+  "dependencies": [
+    "class-variance-authority",
+    "clsx",
+    "tailwind-merge"
+  ],
+  "registryDependencies": [
+    "https://aniui.dev/r/utils.json",
+    "https://aniui.dev/r/badge.json",
+    "https://aniui.dev/r/text.json"
+  ],
+  "files": [
+    {
+      "path": "components/ui/tab-bar.tsx",
+      "type": "registry:ui",
+      "content": "import React from \"react\";\nimport { View, Pressable, Text } from \"react-native\";\nimport { cva, type VariantProps } from \"class-variance-authority\";\nimport { cn } from \"@/lib/utils\";\n\nconst tabBarVariants = cva(\"flex-row border-t pb-6 pt-2 px-2\", {\n  variants: {\n    variant: {\n      default: \"bg-background border-border\",\n      card: \"bg-card border-border\",\n      transparent: \"bg-transparent border-transparent\",\n    },\n  },\n  defaultVariants: { variant: \"default\" },\n});\n\nexport interface TabBarProps\n  extends React.ComponentPropsWithoutRef<typeof View>,\n    VariantProps<typeof tabBarVariants> {\n  className?: string;\n  children?: React.ReactNode;\n}\n\nexport function TabBar({ variant, className, children, ...props }: TabBarProps) {\n  return (\n    <View className={cn(tabBarVariants({ variant }), className)} accessibilityRole=\"tablist\" {...props}>\n      {children}\n    </View>\n  );\n}\n\nexport interface TabBarItemProps extends React.ComponentPropsWithoutRef<typeof Pressable> {\n  className?: string;\n  active?: boolean;\n  icon?: React.ReactNode;\n  label?: string;\n  badge?: number;\n  onPress?: () => void;\n}\n\nexport function TabBarItem({ active, icon, label, badge, className, onPress, ...props }: TabBarItemProps) {\n  return (\n    <Pressable\n      className={cn(\"flex-1 items-center justify-center gap-1 min-h-12\", className)}\n      accessible={true}\n      accessibilityRole=\"tab\"\n      accessibilityState={{ selected: active }}\n      onPress={onPress}\n      {...props}\n    >\n      {icon && <View>{icon}</View>}\n      {label && (\n        <Text className={cn(\"text-xs\", active ? \"text-primary font-medium\" : \"text-muted-foreground\")}>\n          {label}\n        </Text>\n      )}\n      {badge !== undefined && badge > 0 && (\n        <View className=\"absolute -top-1 end-1/4 bg-destructive rounded-full min-w-5 h-5 items-center justify-center px-1\">\n          <Text className=\"text-destructive-foreground text-[10px] font-bold\">\n            {badge > 99 ? \"99+\" : badge}\n          </Text>\n        </View>\n      )}\n    </Pressable>\n  );\n}\n"
+    }
+  ],
+  "docs": "AniUI is React Native. On an existing RNR/NativeWind project, add and use directly — the tokens and aliases already match, no setup needed. On a fresh project, run `npx @aniui/cli init` first to configure NativeWind/Uniwind, theme tokens, and Metro/Babel."
+}

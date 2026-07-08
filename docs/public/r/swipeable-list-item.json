@@ -1,0 +1,25 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "swipeable-list-item",
+  "type": "registry:ui",
+  "title": "SwipeableListItem",
+  "description": "Swipeable list item revealing action buttons on swipe",
+  "dependencies": [
+    "react-native-reanimated",
+    "react-native-gesture-handler",
+    "clsx",
+    "tailwind-merge"
+  ],
+  "registryDependencies": [
+    "https://aniui.dev/r/utils.json",
+    "https://aniui.dev/r/animate.json"
+  ],
+  "files": [
+    {
+      "path": "components/ui/swipeable-list-item.tsx",
+      "type": "registry:ui",
+      "content": "import React, { useCallback } from \"react\";\nimport { View, Text, Pressable } from \"react-native\";\nimport { Gesture, GestureDetector } from \"react-native-gesture-handler\";\nimport Animated, { useSharedValue, useAnimatedStyle, withSpring, runOnJS } from \"react-native-reanimated\";\nimport { cn } from \"@/lib/utils\";\nimport { springs } from \"@/components/ui/animate\";\n\nconst ACTION_WIDTH = 80;\n\nexport interface SwipeableAction {\n  key: string;\n  label: string;\n  icon?: React.ReactNode;\n  color: string;\n  textColor?: string;\n  onPress: () => void;\n}\n\nexport interface SwipeableListItemProps extends React.ComponentPropsWithoutRef<typeof View> {\n  children: React.ReactNode;\n  leftActions?: SwipeableAction[];\n  rightActions?: SwipeableAction[];\n  onSwipeOpen?: (direction: \"left\" | \"right\") => void;\n  enabled?: boolean;\n  className?: string;\n}\n\nfunction ActionTray({ actions, side }: { actions: SwipeableAction[]; side: \"left\" | \"right\" }) {\n  return (\n    <View\n      style={{\n        position: \"absolute\",\n        top: 0,\n        bottom: 0,\n        ...(side === \"left\" ? { left: 0 } : { right: 0 }),\n        width: actions.length * ACTION_WIDTH,\n        flexDirection: \"row\",\n      }}\n    >\n      {actions.map((action) => (\n        <Pressable\n          key={action.key}\n          onPress={action.onPress}\n          className={cn(\"items-center justify-center\", action.color)}\n          style={{ width: ACTION_WIDTH }}\n          accessible={true}\n          accessibilityRole=\"button\"\n          accessibilityLabel={action.label}\n        >\n          {action.icon}\n          <Text className={cn(\"text-xs font-medium mt-1\", action.textColor ?? \"text-white\")}>\n            {action.label}\n          </Text>\n        </Pressable>\n      ))}\n    </View>\n  );\n}\n\nexport function SwipeableListItem({\n  children,\n  leftActions = [],\n  rightActions = [],\n  onSwipeOpen,\n  enabled = true,\n  className,\n  ...props\n}: SwipeableListItemProps) {\n  const translateX = useSharedValue(0);\n  const startX = useSharedValue(0);\n  const leftWidth = leftActions.length * ACTION_WIDTH;\n  const rightWidth = rightActions.length * ACTION_WIDTH;\n\n  const notifyOpen = useCallback(\n    (dir: \"left\" | \"right\") => onSwipeOpen?.(dir),\n    [onSwipeOpen]\n  );\n\n  const pan = Gesture.Pan()\n    .activeOffsetX([-10, 10])\n    .enabled(enabled)\n    .onStart(() => { startX.value = translateX.value; })\n    .onUpdate((e) => {\n      translateX.value = Math.max(-rightWidth, Math.min(leftWidth, startX.value + e.translationX));\n    })\n    .onEnd((e) => {\n      const x = translateX.value;\n      if (x > 0 && leftWidth > 0) {\n        const open = x > leftWidth * 0.5 || e.velocityX > 500;\n        translateX.value = withSpring(open ? leftWidth : 0, springs.snappy);\n        if (open) runOnJS(notifyOpen)(\"left\");\n      } else if (x < 0 && rightWidth > 0) {\n        const open = Math.abs(x) > rightWidth * 0.5 || e.velocityX < -500;\n        translateX.value = withSpring(open ? -rightWidth : 0, springs.snappy);\n        if (open) runOnJS(notifyOpen)(\"right\");\n      } else {\n        translateX.value = withSpring(0, springs.snappy);\n      }\n    });\n\n  const contentStyle = useAnimatedStyle(() => ({\n    transform: [{ translateX: translateX.value }],\n  }));\n\n  return (\n    <View className={cn(\"overflow-hidden\", className)} {...props}>\n      {leftActions.length > 0 && <ActionTray actions={leftActions} side=\"left\" />}\n      {rightActions.length > 0 && <ActionTray actions={rightActions} side=\"right\" />}\n      <GestureDetector gesture={pan}>\n        <Animated.View style={contentStyle} className=\"bg-background\">\n          {children}\n        </Animated.View>\n      </GestureDetector>\n    </View>\n  );\n}\n"
+    }
+  ],
+  "docs": "AniUI is React Native. On an existing RNR/NativeWind project, add and use directly — the tokens and aliases already match, no setup needed. On a fresh project, run `npx @aniui/cli init` first to configure NativeWind/Uniwind, theme tokens, and Metro/Babel."
+}

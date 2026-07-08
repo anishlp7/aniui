@@ -1,0 +1,24 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "connection-banner",
+  "type": "registry:ui",
+  "title": "ConnectionBanner",
+  "description": "Animated banner showing online/offline connection status",
+  "dependencies": [
+    "react-native-reanimated",
+    "clsx",
+    "tailwind-merge"
+  ],
+  "registryDependencies": [
+    "https://aniui.dev/r/utils.json",
+    "https://aniui.dev/r/animate.json"
+  ],
+  "files": [
+    {
+      "path": "components/ui/connection-banner.tsx",
+      "type": "registry:ui",
+      "content": "import React from \"react\";\nimport { Text } from \"react-native\";\nimport Animated from \"react-native-reanimated\";\nimport { entering, exiting } from \"@/components/ui/animate\";\nimport { cn } from \"@/lib/utils\";\n\nexport interface ConnectionBannerProps {\n  className?: string;\n  connected: boolean;\n  offlineText?: string;\n  onlineText?: string;\n}\n\nexport function ConnectionBanner({\n  className,\n  connected,\n  offlineText = \"No internet connection\",\n  onlineText = \"Back online\",\n}: ConnectionBannerProps) {\n  if (connected === undefined) return null;\n\n  return (\n    <Animated.View\n      entering={entering.slideInDown}\n      exiting={exiting.slideOutUp}\n      className={cn(\n        \"px-4 py-2 items-center\",\n        connected ? \"bg-green-600\" : \"bg-destructive\",\n        className\n      )}\n      accessibilityRole=\"alert\"\n      accessibilityLiveRegion=\"polite\"\n    >\n      <Text className=\"text-white text-sm font-medium\">\n        {connected ? onlineText : offlineText}\n      </Text>\n    </Animated.View>\n  );\n}\n"
+    }
+  ],
+  "docs": "AniUI is React Native. On an existing RNR/NativeWind project, add and use directly — the tokens and aliases already match, no setup needed. On a fresh project, run `npx @aniui/cli init` first to configure NativeWind/Uniwind, theme tokens, and Metro/Babel."
+}

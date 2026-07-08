@@ -1,0 +1,24 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "safe-area",
+  "type": "registry:ui",
+  "title": "SafeArea",
+  "description": "Styled SafeAreaView wrapper with theme variants",
+  "dependencies": [
+    "class-variance-authority",
+    "clsx",
+    "tailwind-merge",
+    "react-native-safe-area-context"
+  ],
+  "registryDependencies": [
+    "https://aniui.dev/r/utils.json"
+  ],
+  "files": [
+    {
+      "path": "components/ui/safe-area.tsx",
+      "type": "registry:ui",
+      "content": "import React from \"react\";\nimport { SafeAreaView } from \"react-native-safe-area-context\";\nimport { cva, type VariantProps } from \"class-variance-authority\";\nimport { cn } from \"@/lib/utils\";\n\nconst safeAreaVariants = cva(\"flex-1\", {\n  variants: {\n    variant: {\n      default: \"bg-background\",\n      card: \"bg-card\",\n      transparent: \"bg-transparent\",\n    },\n  },\n  defaultVariants: { variant: \"default\" },\n});\n\nexport interface SafeAreaProps\n  extends React.ComponentPropsWithoutRef<typeof SafeAreaView>,\n    VariantProps<typeof safeAreaVariants> {\n  className?: string;\n}\n\nexport function SafeArea({ variant, className, ...props }: SafeAreaProps) {\n  return (\n    <SafeAreaView\n      className={cn(safeAreaVariants({ variant }), className)}\n      {...props}\n    />\n  );\n}\n"
+    }
+  ],
+  "docs": "AniUI is React Native. On an existing RNR/NativeWind project, add and use directly — the tokens and aliases already match, no setup needed. On a fresh project, run `npx @aniui/cli init` first to configure NativeWind/Uniwind, theme tokens, and Metro/Babel."
+}

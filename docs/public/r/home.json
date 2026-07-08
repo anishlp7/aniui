@@ -1,0 +1,30 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "home",
+  "type": "registry:block",
+  "title": "HomeScreen",
+  "description": "Dashboard home with greeting, quick actions, stats, and activity",
+  "dependencies": [
+    "react-native-safe-area-context",
+    "class-variance-authority",
+    "clsx",
+    "tailwind-merge"
+  ],
+  "registryDependencies": [
+    "https://aniui.dev/r/utils.json",
+    "https://aniui.dev/r/text.json",
+    "https://aniui.dev/r/card.json",
+    "https://aniui.dev/r/avatar.json",
+    "https://aniui.dev/r/badge.json",
+    "https://aniui.dev/r/button.json"
+  ],
+  "files": [
+    {
+      "path": "blocks/home.tsx",
+      "type": "registry:block",
+      "target": "components/blocks/home.tsx",
+      "content": "import React from \"react\";\nimport { View, ScrollView, Pressable } from \"react-native\";\nimport { SafeAreaView } from \"react-native-safe-area-context\";\nimport { Text } from \"@/components/ui/text\";\nimport { Card, CardContent } from \"@/components/ui/card\";\nimport { Avatar } from \"@/components/ui/avatar\";\nimport { Badge } from \"@/components/ui/badge\";\nimport { Button } from \"@/components/ui/button\";\n\nexport function HomeScreen() {\n  return (\n    <SafeAreaView className=\"flex-1 bg-background\">\n      {/* Header */}\n      <View className=\"flex-row items-center justify-between px-6 py-4\">\n        <View>\n          <Text variant=\"small\" className=\"text-muted-foreground\">Good morning</Text>\n          <Text variant=\"h3\">John Doe</Text>\n        </View>\n        <Avatar src=\"https://i.pravatar.cc/100\" fallback=\"JD\" size=\"md\" />\n      </View>\n\n      <ScrollView className=\"flex-1 px-6\" showsVerticalScrollIndicator={false}>\n        {/* Quick Actions */}\n        <View className=\"flex-row gap-3 mb-6\">\n          <Card className=\"flex-1\">\n            <CardContent className=\"items-center py-4 gap-2\">\n              <View className=\"h-9 w-9 rounded-full bg-primary/10 items-center justify-center\">\n                {/* bar-chart icon */}\n              </View>\n              <Text variant=\"small\" className=\"font-medium\">Analytics</Text>\n            </CardContent>\n          </Card>\n          <Card className=\"flex-1\">\n            <CardContent className=\"items-center py-4 gap-2\">\n              <View className=\"h-9 w-9 rounded-full bg-primary/10 items-center justify-center\">\n                {/* message-circle icon */}\n              </View>\n              <Text variant=\"small\" className=\"font-medium\">Messages</Text>\n            </CardContent>\n          </Card>\n          <Card className=\"flex-1\">\n            <CardContent className=\"items-center py-4 gap-2\">\n              <View className=\"h-9 w-9 rounded-full bg-primary/10 items-center justify-center\">\n                {/* settings icon */}\n              </View>\n              <Text variant=\"small\" className=\"font-medium\">Settings</Text>\n            </CardContent>\n          </Card>\n        </View>\n\n        {/* Stats Card */}\n        <Card className=\"mb-6\">\n          <CardContent className=\"py-4\">\n            <View className=\"flex-row justify-between items-center mb-3\">\n              <Text variant=\"p\" className=\"font-semibold\">This Week</Text>\n              <Badge variant=\"secondary\">+12%</Badge>\n            </View>\n            <Text variant=\"h2\">$4,280</Text>\n            <Text variant=\"muted\">Revenue across all products</Text>\n          </CardContent>\n        </Card>\n\n        {/* Recent Activity */}\n        <Text variant=\"p\" className=\"font-semibold mb-3\">Recent Activity</Text>\n        {[\n          \"Payment received — $120\",\n          \"New subscriber — Sarah K.\",\n          \"Order shipped — #1042\",\n        ].map((item, i) => (\n          <Pressable key={i} className=\"flex-row items-center py-3 border-b border-border\">\n            <View className=\"h-8 w-8 rounded-full bg-primary/10 items-center justify-center mr-3\" />\n            <Text variant=\"small\" className=\"flex-1\">{item}</Text>\n            <Text variant=\"small\" className=\"text-muted-foreground\">2h ago</Text>\n          </Pressable>\n        ))}\n\n        <Button variant=\"outline\" className=\"mt-4 mb-8\">View All Activity</Button>\n      </ScrollView>\n    </SafeAreaView>\n  );\n}\n"
+    }
+  ],
+  "docs": "AniUI is React Native. On an existing RNR/NativeWind project, add and use directly — the tokens and aliases already match, no setup needed. On a fresh project, run `npx @aniui/cli init` first to configure NativeWind/Uniwind, theme tokens, and Metro/Babel. Blocks are full screens — move into your app/ route as needed."
+}

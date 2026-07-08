@@ -1,0 +1,23 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "status-indicator",
+  "type": "registry:ui",
+  "title": "StatusIndicator",
+  "description": "Colored dot for online/offline/away/busy status",
+  "dependencies": [
+    "class-variance-authority",
+    "clsx",
+    "tailwind-merge"
+  ],
+  "registryDependencies": [
+    "https://aniui.dev/r/utils.json"
+  ],
+  "files": [
+    {
+      "path": "components/ui/status-indicator.tsx",
+      "type": "registry:ui",
+      "content": "import React from \"react\";\nimport { View } from \"react-native\";\nimport { cva, type VariantProps } from \"class-variance-authority\";\nimport { cn } from \"@/lib/utils\";\n\nconst statusVariants = cva(\"rounded-full\", {\n  variants: {\n    status: {\n      online: \"bg-green-500\",\n      offline: \"bg-muted-foreground\",\n      away: \"bg-amber-500\",\n      busy: \"bg-destructive\",\n    },\n    size: {\n      sm: \"h-2 w-2\",\n      md: \"h-3 w-3\",\n      lg: \"h-4 w-4\",\n    },\n  },\n  defaultVariants: { status: \"offline\", size: \"md\" },\n});\n\nexport interface StatusIndicatorProps\n  extends React.ComponentPropsWithoutRef<typeof View>,\n    VariantProps<typeof statusVariants> {\n  className?: string;\n  pulse?: boolean;\n}\n\nexport function StatusIndicator({ status, size, pulse, className, ...props }: StatusIndicatorProps) {\n  return (\n    <View\n      className={cn(\n        statusVariants({ status, size }),\n        pulse && status === \"online\" && \"animate-pulse\",\n        className\n      )}\n      accessibilityLabel={`Status: ${status ?? \"offline\"}`}\n      {...props}\n    />\n  );\n}\n"
+    }
+  ],
+  "docs": "AniUI is React Native. On an existing RNR/NativeWind project, add and use directly — the tokens and aliases already match, no setup needed. On a fresh project, run `npx @aniui/cli init` first to configure NativeWind/Uniwind, theme tokens, and Metro/Babel."
+}

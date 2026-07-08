@@ -1,0 +1,22 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "spinner",
+  "type": "registry:ui",
+  "title": "Spinner",
+  "description": "Loading spinner with sizes",
+  "dependencies": [
+    "clsx",
+    "tailwind-merge"
+  ],
+  "registryDependencies": [
+    "https://aniui.dev/r/utils.json"
+  ],
+  "files": [
+    {
+      "path": "components/ui/spinner.tsx",
+      "type": "registry:ui",
+      "content": "import React from \"react\";\nimport { ActivityIndicator, View, useColorScheme } from \"react-native\";\nimport { cn } from \"@/lib/utils\";\n\nconst sizeMap = { sm: \"small\", md: \"small\", lg: \"large\" } as const;\n\nexport interface SpinnerProps extends React.ComponentPropsWithoutRef<typeof View> {\n  className?: string;\n  size?: \"sm\" | \"md\" | \"lg\";\n  color?: string;\n}\n\nexport function Spinner({ size = \"md\", color, className, ...props }: SpinnerProps) {\n  const dark = useColorScheme() === \"dark\";\n  return (\n    <View className={cn(\"items-center justify-center\", className)} {...props}>\n      <ActivityIndicator\n        size={sizeMap[size]}\n        color={color ?? (dark ? \"#fafafa\" : \"#18181b\")}\n        accessibilityRole=\"progressbar\"\n      />\n    </View>\n  );\n}\n"
+    }
+  ],
+  "docs": "AniUI is React Native. On an existing RNR/NativeWind project, add and use directly — the tokens and aliases already match, no setup needed. On a fresh project, run `npx @aniui/cli init` first to configure NativeWind/Uniwind, theme tokens, and Metro/Babel."
+}
