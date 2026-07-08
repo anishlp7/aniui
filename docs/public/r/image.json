@@ -1,0 +1,23 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "image",
+  "type": "registry:ui",
+  "title": "Image",
+  "description": "Image with loading placeholder, error fallback, and rounded variants",
+  "dependencies": [
+    "class-variance-authority",
+    "clsx",
+    "tailwind-merge"
+  ],
+  "registryDependencies": [
+    "https://aniui.dev/r/utils.json"
+  ],
+  "files": [
+    {
+      "path": "components/ui/image.tsx",
+      "type": "registry:ui",
+      "content": "import React, { useState } from \"react\";\nimport { Image as RNImage, View, Text } from \"react-native\";\nimport { cva, type VariantProps } from \"class-variance-authority\";\nimport { cn } from \"@/lib/utils\";\n\nconst imageVariants = cva(\"overflow-hidden bg-muted\", {\n  variants: {\n    rounded: {\n      none: \"\",\n      sm: \"rounded-sm\",\n      md: \"rounded-md\",\n      lg: \"rounded-lg\",\n      xl: \"rounded-xl\",\n      full: \"rounded-full\",\n    },\n  },\n  defaultVariants: { rounded: \"md\" },\n});\n\nexport interface ImageProps\n  extends Omit<React.ComponentPropsWithoutRef<typeof RNImage>, \"source\">,\n    VariantProps<typeof imageVariants> {\n  className?: string;\n  src: string;\n  alt?: string;\n  width?: number;\n  height?: number;\n  fallback?: React.ReactNode;\n}\n\nexport function Image({ rounded, className, src, alt, width, height, fallback, style, ...props }: ImageProps) {\n  const [status, setStatus] = useState<\"loading\" | \"loaded\" | \"error\">(\"loading\");\n\n  return (\n    <View className={cn(imageVariants({ rounded }), className)} style={[width && height ? { width, height } : undefined, style as object]}>\n      {status === \"loading\" && (\n        <View className=\"absolute inset-0 items-center justify-center bg-muted\">\n          <View className=\"h-8 w-8 rounded-full bg-muted-foreground/10\" />\n        </View>\n      )}\n      {status === \"error\" ? (\n        fallback ?? (\n          <View className=\"flex-1 items-center justify-center bg-muted\">\n            <Text className=\"text-xs text-muted-foreground\">Failed to load</Text>\n          </View>\n        )\n      ) : (\n        <RNImage\n          source={{ uri: src }}\n          className=\"w-full h-full\"\n          accessibilityLabel={alt}\n          onLoad={() => setStatus(\"loaded\")}\n          onError={() => setStatus(\"error\")}\n          {...props}\n        />\n      )}\n    </View>\n  );\n}\n"
+    }
+  ],
+  "docs": "AniUI is React Native. On an existing RNR/NativeWind project, add and use directly — the tokens and aliases already match, no setup needed. On a fresh project, run `npx @aniui/cli init` first to configure NativeWind/Uniwind, theme tokens, and Metro/Babel."
+}

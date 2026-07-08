@@ -1,0 +1,24 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "alert-dialog",
+  "type": "registry:ui",
+  "title": "AlertDialog",
+  "description": "Confirmation dialog with actions",
+  "dependencies": [
+    "react-native-reanimated",
+    "clsx",
+    "tailwind-merge"
+  ],
+  "registryDependencies": [
+    "https://aniui.dev/r/utils.json",
+    "https://aniui.dev/r/animate.json"
+  ],
+  "files": [
+    {
+      "path": "components/ui/alert-dialog.tsx",
+      "type": "registry:ui",
+      "content": "import React from \"react\";\nimport { View, Pressable, Text, Modal } from \"react-native\";\nimport Animated from \"react-native-reanimated\";\nimport { entering, exiting } from \"@/components/ui/animate\";\nimport { cn } from \"@/lib/utils\";\n\nexport interface AlertDialogProps {\n  open: boolean;\n  onOpenChange: (open: boolean) => void;\n  children: React.ReactNode;\n}\n\nexport function AlertDialog({ open, onOpenChange, children }: AlertDialogProps) {\n  return (\n    <Modal visible={open} transparent animationType=\"none\" onRequestClose={() => onOpenChange(false)}>\n      <Animated.View entering={entering.fadeIn} exiting={exiting.fadeOut} className=\"flex-1 items-center justify-center bg-black/50\">\n        <Animated.View entering={entering.zoomIn} exiting={exiting.zoomOut}>\n          {children}\n        </Animated.View>\n      </Animated.View>\n    </Modal>\n  );\n}\n\nexport function AlertDialogContent({ className, children, ...props }: React.ComponentPropsWithoutRef<typeof View> & { className?: string; children?: React.ReactNode }) {\n  return (\n    <View className={cn(\"mx-6 w-80 rounded-lg bg-card p-6 shadow-xl\", className)} accessibilityRole=\"alert\" {...props}>\n      {children}\n    </View>\n  );\n}\n\nexport function AlertDialogHeader({ className, ...props }: React.ComponentPropsWithoutRef<typeof View> & { className?: string }) {\n  return <View className={cn(\"pb-4\", className)} {...props} />;\n}\n\nexport function AlertDialogTitle({ className, ...props }: React.ComponentPropsWithoutRef<typeof Text> & { className?: string }) {\n  return <Text className={cn(\"text-lg font-semibold text-card-foreground\", className)} {...props} />;\n}\n\nexport function AlertDialogDescription({ className, ...props }: React.ComponentPropsWithoutRef<typeof Text> & { className?: string }) {\n  return <Text className={cn(\"text-sm text-muted-foreground mt-1\", className)} {...props} />;\n}\n\nexport function AlertDialogFooter({ className, ...props }: React.ComponentPropsWithoutRef<typeof View> & { className?: string }) {\n  return <View className={cn(\"flex-row justify-end gap-3 pt-4\", className)} {...props} />;\n}\n\nexport function AlertDialogAction({ className, children, ...props }: React.ComponentPropsWithoutRef<typeof Pressable> & { className?: string; children: React.ReactNode }) {\n  return (\n    <Pressable className={cn(\"items-center justify-center rounded-md bg-primary px-4 py-2.5 min-h-12\", className)} accessible={true} accessibilityRole=\"button\" {...props}>\n      {typeof children === \"string\" ? <Text className=\"text-sm font-medium text-primary-foreground\">{children}</Text> : children}\n    </Pressable>\n  );\n}\n\nexport function AlertDialogCancel({ className, children, ...props }: React.ComponentPropsWithoutRef<typeof Pressable> & { className?: string; children: React.ReactNode }) {\n  return (\n    <Pressable className={cn(\"items-center justify-center rounded-md border border-input px-4 py-2.5 min-h-12\", className)} accessible={true} accessibilityRole=\"button\" {...props}>\n      {typeof children === \"string\" ? <Text className=\"text-sm font-medium text-foreground\">{children}</Text> : children}\n    </Pressable>\n  );\n}\n"
+    }
+  ],
+  "docs": "AniUI is React Native. On an existing RNR/NativeWind project, add and use directly — the tokens and aliases already match, no setup needed. On a fresh project, run `npx @aniui/cli init` first to configure NativeWind/Uniwind, theme tokens, and Metro/Babel."
+}

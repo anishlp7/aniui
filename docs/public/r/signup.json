@@ -1,0 +1,32 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "signup",
+  "type": "registry:block",
+  "title": "SignUpScreen",
+  "description": "Registration with name, email, password, and terms checkbox",
+  "dependencies": [
+    "react-native-safe-area-context",
+    "@rn-primitives/checkbox",
+    "clsx",
+    "tailwind-merge",
+    "class-variance-authority"
+  ],
+  "registryDependencies": [
+    "https://aniui.dev/r/utils.json",
+    "https://aniui.dev/r/text.json",
+    "https://aniui.dev/r/input.json",
+    "https://aniui.dev/r/button.json",
+    "https://aniui.dev/r/separator.json",
+    "https://aniui.dev/r/label.json",
+    "https://aniui.dev/r/checkbox.json"
+  ],
+  "files": [
+    {
+      "path": "blocks/signup.tsx",
+      "type": "registry:block",
+      "target": "components/blocks/signup.tsx",
+      "content": "import React, { useState } from \"react\";\nimport { View, Pressable } from \"react-native\";\nimport { SafeAreaView } from \"react-native-safe-area-context\";\nimport { Text } from \"@/components/ui/text\";\nimport { Input } from \"@/components/ui/input\";\nimport { Button } from \"@/components/ui/button\";\nimport { Separator } from \"@/components/ui/separator\";\nimport { Label } from \"@/components/ui/label\";\nimport { Checkbox } from \"@/components/ui/checkbox\";\n\nexport function SignUpScreen({ onSignIn }: { onSignIn?: () => void }) {\n  const [name, setName] = useState(\"\");\n  const [email, setEmail] = useState(\"\");\n  const [password, setPassword] = useState(\"\");\n  const [agreed, setAgreed] = useState(false);\n\n  return (\n    <SafeAreaView className=\"flex-1 bg-background\">\n      <View className=\"flex-1 justify-center px-6\">\n\n        {/* Logo */}\n        <View className=\"items-center mb-8\">\n          <View className=\"h-16 w-16 rounded-2xl bg-primary items-center justify-center mb-4\">\n            {/* user-plus icon rendered via accessibilityLabel */}\n          </View>\n          <Text variant=\"h2\" className=\"text-center\">Create account</Text>\n          <Text variant=\"muted\" className=\"text-center mt-1\">\n            Start your journey today\n          </Text>\n        </View>\n\n        {/* Form */}\n        <View className=\"gap-4\">\n          <View className=\"gap-1.5\">\n            <Label>Full Name</Label>\n            <Input\n              placeholder=\"John Doe\"\n              value={name}\n              onChangeText={setName}\n              autoCapitalize=\"words\"\n            />\n          </View>\n\n          <View className=\"gap-1.5\">\n            <Label>Email</Label>\n            <Input\n              placeholder=\"name@example.com\"\n              value={email}\n              onChangeText={setEmail}\n              autoCapitalize=\"none\"\n              keyboardType=\"email-address\"\n            />\n          </View>\n\n          <View className=\"gap-1.5\">\n            <Label>Password</Label>\n            <Input\n              placeholder=\"Create a password\"\n              value={password}\n              onChangeText={setPassword}\n              secureTextEntry\n            />\n            <Text variant=\"small\" className=\"text-muted-foreground\">\n              Must be at least 8 characters\n            </Text>\n          </View>\n\n          <Pressable\n            className=\"flex-row items-center gap-2\"\n            onPress={() => setAgreed(!agreed)}\n            accessible={true}\n            accessibilityRole=\"checkbox\"\n            accessibilityState={{ checked: agreed }}\n          >\n            <Checkbox checked={agreed} onChange={setAgreed} />\n            <Text variant=\"small\" className=\"text-muted-foreground flex-1\">\n              I agree to the{\" \"}\n              <Text variant=\"small\" className=\"text-primary font-medium\">Terms of Service</Text>\n              {\" \"}and{\" \"}\n              <Text variant=\"small\" className=\"text-primary font-medium\">Privacy Policy</Text>\n            </Text>\n          </Pressable>\n\n          <Button onPress={() => {}} className=\"mt-2 h-12 rounded-xl\">\n            Create Account\n          </Button>\n        </View>\n\n        {/* Separator */}\n        <View className=\"my-6 flex-row items-center gap-3\">\n          <Separator className=\"flex-1\" />\n          <Text variant=\"small\" className=\"text-muted-foreground\">or continue with</Text>\n          <Separator className=\"flex-1\" />\n        </View>\n\n        {/* Social Buttons */}\n        <View className=\"flex-row gap-3\">\n          <Button variant=\"outline\" className=\"flex-1\" onPress={() => {}}>\n            Google\n          </Button>\n          <Button variant=\"outline\" className=\"flex-1\" onPress={() => {}}>\n            Apple\n          </Button>\n        </View>\n\n        {/* Sign In Link */}\n        <View className=\"flex-row justify-center mt-8 gap-1\">\n          <Text variant=\"small\" className=\"text-muted-foreground\">\n            Already have an account?\n          </Text>\n          <Pressable onPress={onSignIn} accessible={true} accessibilityRole=\"link\">\n            <Text className=\"text-sm font-medium text-primary\">Sign in</Text>\n          </Pressable>\n        </View>\n\n      </View>\n    </SafeAreaView>\n  );\n}\n"
+    }
+  ],
+  "docs": "AniUI is React Native. On an existing RNR/NativeWind project, add and use directly — the tokens and aliases already match, no setup needed. On a fresh project, run `npx @aniui/cli init` first to configure NativeWind/Uniwind, theme tokens, and Metro/Babel. Blocks are full screens — move into your app/ route as needed."
+}

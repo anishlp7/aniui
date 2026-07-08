@@ -1,0 +1,23 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "text",
+  "type": "registry:ui",
+  "title": "Text",
+  "description": "Typography with heading and body variants",
+  "dependencies": [
+    "class-variance-authority",
+    "clsx",
+    "tailwind-merge"
+  ],
+  "registryDependencies": [
+    "https://aniui.dev/r/utils.json"
+  ],
+  "files": [
+    {
+      "path": "components/ui/text.tsx",
+      "type": "registry:ui",
+      "content": "import React from \"react\";\nimport { Text as RNText } from \"react-native\";\nimport { cva, type VariantProps } from \"class-variance-authority\";\nimport { cn } from \"@/lib/utils\";\n\nconst textVariants = cva(\"text-foreground\", {\n  variants: {\n    variant: {\n      h1: \"text-4xl font-extrabold tracking-tight\",\n      h2: \"text-3xl font-bold tracking-tight\",\n      h3: \"text-2xl font-semibold tracking-tight\",\n      h4: \"text-xl font-semibold tracking-tight\",\n      p: \"text-base leading-7\",\n      lead: \"text-xl text-muted-foreground\",\n      large: \"text-lg font-semibold\",\n      small: \"text-sm font-medium leading-none\",\n      muted: \"text-sm text-muted-foreground\",\n    },\n  },\n  defaultVariants: {\n    variant: \"p\",\n  },\n});\n\nexport interface TextProps\n  extends React.ComponentPropsWithoutRef<typeof RNText>,\n    VariantProps<typeof textVariants> {\n  className?: string;\n}\n\nexport function Text({ variant, className, ...props }: TextProps) {\n  return (\n    <RNText\n      className={cn(textVariants({ variant }), className)}\n      {...props}\n    />\n  );\n}\n"
+    }
+  ],
+  "docs": "AniUI is React Native. On an existing RNR/NativeWind project, add and use directly — the tokens and aliases already match, no setup needed. On a fresh project, run `npx @aniui/cli init` first to configure NativeWind/Uniwind, theme tokens, and Metro/Babel."
+}

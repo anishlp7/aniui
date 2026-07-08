@@ -1,0 +1,23 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "labeled-separator",
+  "type": "registry:ui",
+  "title": "LabeledSeparator",
+  "description": "Horizontal separator with centered text label",
+  "dependencies": [
+    "clsx",
+    "tailwind-merge"
+  ],
+  "registryDependencies": [
+    "https://aniui.dev/r/utils.json",
+    "https://aniui.dev/r/separator.json"
+  ],
+  "files": [
+    {
+      "path": "components/ui/labeled-separator.tsx",
+      "type": "registry:ui",
+      "content": "import React from \"react\";\nimport { View, Text } from \"react-native\";\nimport { cn } from \"@/lib/utils\";\n\nexport interface LabeledSeparatorProps extends React.ComponentPropsWithoutRef<typeof View> {\n  className?: string;\n  label: string;\n  labelClassName?: string;\n}\n\nexport function LabeledSeparator({ label, className, labelClassName, ...props }: LabeledSeparatorProps) {\n  return (\n    <View className={cn(\"flex-row items-center gap-3 my-2\", className)} {...props}>\n      <View className=\"flex-1 h-px bg-border\" />\n      <Text className={cn(\"text-sm text-muted-foreground\", labelClassName)}>{label}</Text>\n      <View className=\"flex-1 h-px bg-border\" />\n    </View>\n  );\n}\n"
+    }
+  ],
+  "docs": "AniUI is React Native. On an existing RNR/NativeWind project, add and use directly — the tokens and aliases already match, no setup needed. On a fresh project, run `npx @aniui/cli init` first to configure NativeWind/Uniwind, theme tokens, and Metro/Babel."
+}

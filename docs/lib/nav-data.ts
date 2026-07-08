@@ -8,6 +8,7 @@ export const gettingStartedItems: NavItem[] = [
   { title: "Installation", href: "/docs/installation" },
   { title: "JavaScript", href: "/docs/javascript" },
   { title: "CLI", href: "/docs/cli" },
+  { title: "shadcn / RNR Registry", href: "/docs/shadcn-registry" },
   { title: "MCP", href: "/docs/mcp" },
   { title: "Theming", href: "/docs/theming" },
   { title: "Dark Mode", href: "/docs/dark-mode" },

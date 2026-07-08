@@ -98,6 +98,24 @@ export function WelcomeScreen() {
 }
 ```
 
+### Or install with the shadcn CLI / React Native Reusables
+
+The full catalog is also published as a **shadcn-compatible registry** at `https://aniui.dev/r`, so you don't need the `aniui` CLI. Add the namespace to your `components.json`…
+
+```jsonc
+{ "registries": { "@aniui": "https://aniui.dev/r/{name}.json" } }
+```
+
+…then install with the **shadcn CLI**, or by raw URL with the **React Native Reusables (RNR) CLI**:
+
+```bash
+npx shadcn@latest add @aniui/button
+npx shadcn@latest add https://aniui.dev/r/card.json
+npx @react-native-reusables/cli@latest add https://aniui.dev/r/card.json
+```
+
+Already on RNR / NativeWind / Uniwind? Components drop in with **zero extra setup** — same theme tokens and aliases. See the [shadcn / RNR registry guide](https://aniui.dev/docs/shadcn-registry).
+
 ## Components
 
 **93 components** — all listed alphabetically. Each component's docs page tells you if it needs extra dependencies.

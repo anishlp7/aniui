@@ -1,0 +1,25 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "accordion",
+  "type": "registry:ui",
+  "title": "Accordion",
+  "description": "Expandable content sections",
+  "dependencies": [
+    "@rn-primitives/accordion",
+    "react-native-reanimated",
+    "clsx",
+    "tailwind-merge"
+  ],
+  "registryDependencies": [
+    "https://aniui.dev/r/utils.json",
+    "https://aniui.dev/r/animate.json"
+  ],
+  "files": [
+    {
+      "path": "components/ui/accordion.tsx",
+      "type": "registry:ui",
+      "content": "import React from \"react\";\nimport { View, Pressable, Text } from \"react-native\";\nimport * as AccordionPrimitive from \"@rn-primitives/accordion\";\nimport Animated from \"react-native-reanimated\";\nimport { entering, exiting } from \"@/components/ui/animate\";\nimport { cn } from \"@/lib/utils\";\n\nexport interface AccordionProps extends React.ComponentPropsWithoutRef<typeof View> {\n  className?: string;\n  defaultValue?: string;\n  children?: React.ReactNode;\n  type?: \"single\" | \"multiple\";\n}\n\nexport function Accordion({ className, defaultValue, children, type = \"single\", ...props }: AccordionProps) {\n  return (\n    <AccordionPrimitive.Root\n      type={type}\n      defaultValue={type === \"single\" ? defaultValue : defaultValue ? [defaultValue] : undefined}\n      asChild\n    >\n      <View className={cn(\"\", className)} {...props}>{children}</View>\n    </AccordionPrimitive.Root>\n  );\n}\n\nexport interface AccordionItemProps extends React.ComponentPropsWithoutRef<typeof View> {\n  className?: string;\n  value: string;\n  trigger: string;\n  children?: React.ReactNode;\n}\n\nexport function AccordionItem({ value, trigger, className, children, ...props }: AccordionItemProps) {\n  return (\n    <AccordionPrimitive.Item value={value} asChild>\n      <View className={cn(\"border-b border-border\", className)} {...props}>\n        <AccordionPrimitive.Trigger asChild>\n          <Pressable className=\"flex-row items-center justify-between px-4 py-4 min-h-12\" accessible={true} accessibilityRole=\"button\">\n            <Text className=\"text-base font-medium text-foreground flex-1\">{trigger}</Text>\n            <Text className=\"text-muted-foreground text-lg\">+</Text>\n          </Pressable>\n        </AccordionPrimitive.Trigger>\n        <AccordionPrimitive.Content>\n          <Animated.View entering={entering.fadeInDown} exiting={exiting.fadeOutUp}>\n            <View className=\"px-4 pb-4\">{children}</View>\n          </Animated.View>\n        </AccordionPrimitive.Content>\n      </View>\n    </AccordionPrimitive.Item>\n  );\n}\n"
+    }
+  ],
+  "docs": "AniUI is React Native. On an existing RNR/NativeWind project, add and use directly — the tokens and aliases already match, no setup needed. On a fresh project, run `npx @aniui/cli init` first to configure NativeWind/Uniwind, theme tokens, and Metro/Babel."
+}

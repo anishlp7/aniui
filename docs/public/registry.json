@@ -1,0 +1,667 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "aniui",
+  "homepage": "https://aniui.dev",
+  "items": [
+    {
+      "name": "accordion",
+      "type": "registry:ui",
+      "title": "Accordion",
+      "description": "Expandable content sections"
+    },
+    {
+      "name": "action-sheet",
+      "type": "registry:ui",
+      "title": "ActionSheet",
+      "description": "Action sheet with options"
+    },
+    {
+      "name": "alert",
+      "type": "registry:ui",
+      "title": "Alert",
+      "description": "Alert message with variants"
+    },
+    {
+      "name": "alert-dialog",
+      "type": "registry:ui",
+      "title": "AlertDialog",
+      "description": "Confirmation dialog with actions"
+    },
+    {
+      "name": "animate",
+      "type": "registry:ui",
+      "title": "Animate",
+      "description": "Animation presets, spring configs, easing, and hooks for Reanimated 4"
+    },
+    {
+      "name": "area-chart",
+      "type": "registry:ui",
+      "title": "AreaChart",
+      "description": "SVG area chart with gradient fill and grid"
+    },
+    {
+      "name": "aspect-ratio",
+      "type": "registry:ui",
+      "title": "AspectRatio",
+      "description": "Constrains children to a fixed width/height ratio"
+    },
+    {
+      "name": "avatar",
+      "type": "registry:ui",
+      "title": "Avatar",
+      "description": "User avatar with image and fallback"
+    },
+    {
+      "name": "badge",
+      "type": "registry:ui",
+      "title": "Badge",
+      "description": "Small status indicator"
+    },
+    {
+      "name": "banner",
+      "type": "registry:ui",
+      "title": "Banner",
+      "description": "Full-width notification banner with variants and dismiss"
+    },
+    {
+      "name": "bar-chart",
+      "type": "registry:ui",
+      "title": "BarChart",
+      "description": "Vertical and horizontal bar chart"
+    },
+    {
+      "name": "bottom-sheet",
+      "type": "registry:ui",
+      "title": "BottomSheet",
+      "description": "Bottom sheet overlay"
+    },
+    {
+      "name": "bottom-tabs",
+      "type": "registry:block",
+      "title": "BottomTabsScreen",
+      "description": "Bottom tab navigation bar with active state indicators"
+    },
+    {
+      "name": "breadcrumb",
+      "type": "registry:ui",
+      "title": "Breadcrumb",
+      "description": "Navigation trail: Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbPage, BreadcrumbSeparator"
+    },
+    {
+      "name": "button",
+      "type": "registry:ui",
+      "title": "Button",
+      "description": "A pressable button with variants"
+    },
+    {
+      "name": "calendar",
+      "type": "registry:ui",
+      "title": "Calendar",
+      "description": "Month calendar with single and range selection"
+    },
+    {
+      "name": "card",
+      "type": "registry:ui",
+      "title": "Card",
+      "description": "Card container with header, content, footer"
+    },
+    {
+      "name": "carousel",
+      "type": "registry:ui",
+      "title": "Carousel",
+      "description": "Horizontal scrollable carousel with pagination dots"
+    },
+    {
+      "name": "chart-tooltip",
+      "type": "registry:ui",
+      "title": "ChartTooltip",
+      "description": "Tooltip overlay for chart data points"
+    },
+    {
+      "name": "chat",
+      "type": "registry:block",
+      "title": "ChatScreen",
+      "description": "Messaging screen with chat bubbles and input bar"
+    },
+    {
+      "name": "chat-bubble",
+      "type": "registry:ui",
+      "title": "ChatBubble",
+      "description": "Message bubble for chat with sent/received variants and status"
+    },
+    {
+      "name": "checkbox",
+      "type": "registry:ui",
+      "title": "Checkbox",
+      "description": "Checkbox with checked state"
+    },
+    {
+      "name": "chip",
+      "type": "registry:ui",
+      "title": "Chip",
+      "description": "Interactive tag for filters and multi-select"
+    },
+    {
+      "name": "collapsible",
+      "type": "registry:ui",
+      "title": "Collapsible",
+      "description": "Animated show/hide content"
+    },
+    {
+      "name": "combobox",
+      "type": "registry:ui",
+      "title": "Combobox",
+      "description": "Searchable select with multi-select, groups, clear, and custom rendering"
+    },
+    {
+      "name": "command-menu",
+      "type": "registry:ui",
+      "title": "CommandMenu",
+      "description": "Spotlight-style searchable command palette with groups and keyboard shortcuts"
+    },
+    {
+      "name": "connection-banner",
+      "type": "registry:ui",
+      "title": "ConnectionBanner",
+      "description": "Animated banner showing online/offline connection status"
+    },
+    {
+      "name": "context-menu",
+      "type": "registry:ui",
+      "title": "ContextMenu",
+      "description": "Long-press context menu with items and separators"
+    },
+    {
+      "name": "data-table",
+      "type": "registry:ui",
+      "title": "DataTable",
+      "description": "Sortable, filterable data table with pagination and custom cell rendering"
+    },
+    {
+      "name": "date-picker",
+      "type": "registry:ui",
+      "title": "DatePicker",
+      "description": "Date picker with calendar popup and range support"
+    },
+    {
+      "name": "dialog",
+      "type": "registry:ui",
+      "title": "Dialog",
+      "description": "Modal dialog overlay"
+    },
+    {
+      "name": "direction-provider",
+      "type": "registry:ui",
+      "title": "DirectionProvider",
+      "description": "RTL/LTR direction context with I18nManager integration"
+    },
+    {
+      "name": "drawer",
+      "type": "registry:ui",
+      "title": "Drawer",
+      "description": "Slide-in side navigation panel"
+    },
+    {
+      "name": "drawer-nav",
+      "type": "registry:block",
+      "title": "DrawerNavContent",
+      "description": "Side drawer with user profile and icon-labeled navigation"
+    },
+    {
+      "name": "dropdown-menu",
+      "type": "registry:ui",
+      "title": "DropdownMenu",
+      "description": "Dropdown menu with items, separators, and destructive actions"
+    },
+    {
+      "name": "empty-state",
+      "type": "registry:ui",
+      "title": "EmptyState",
+      "description": "Placeholder for empty screens and error states"
+    },
+    {
+      "name": "fab",
+      "type": "registry:ui",
+      "title": "FAB",
+      "description": "Floating action button for primary screen actions"
+    },
+    {
+      "name": "field",
+      "type": "registry:ui",
+      "title": "Field",
+      "description": "Layout-focused form field with label, description, and error"
+    },
+    {
+      "name": "file-picker",
+      "type": "registry:ui",
+      "title": "FilePicker",
+      "description": "File upload UI with dashed border, preview, and remove button"
+    },
+    {
+      "name": "forgot-password",
+      "type": "registry:block",
+      "title": "ForgotPasswordScreen",
+      "description": "Password reset flow with email input and confirmation"
+    },
+    {
+      "name": "form",
+      "type": "registry:ui",
+      "title": "Form",
+      "description": "Form context with validation, error handling, and compound components"
+    },
+    {
+      "name": "grid",
+      "type": "registry:ui",
+      "title": "Grid",
+      "description": "FlatList-based grid layout with configurable columns and gap"
+    },
+    {
+      "name": "header",
+      "type": "registry:ui",
+      "title": "Header",
+      "description": "Navigation header with back button, title, and right actions"
+    },
+    {
+      "name": "home",
+      "type": "registry:block",
+      "title": "HomeScreen",
+      "description": "Dashboard home with greeting, quick actions, stats, and activity"
+    },
+    {
+      "name": "hover-card",
+      "type": "registry:ui",
+      "title": "HoverCard",
+      "description": "Preview content card triggered by hover or long-press"
+    },
+    {
+      "name": "image",
+      "type": "registry:ui",
+      "title": "Image",
+      "description": "Image with loading placeholder, error fallback, and rounded variants"
+    },
+    {
+      "name": "image-gallery",
+      "type": "registry:ui",
+      "title": "ImageGallery",
+      "description": "Horizontal image carousel with fullscreen modal and pagination"
+    },
+    {
+      "name": "infinite-list",
+      "type": "registry:ui",
+      "title": "InfiniteList",
+      "description": "FlatList with auto-loading more items on scroll"
+    },
+    {
+      "name": "input",
+      "type": "registry:ui",
+      "title": "Input",
+      "description": "Text input with variants and states"
+    },
+    {
+      "name": "input-group",
+      "type": "registry:ui",
+      "title": "InputGroup",
+      "description": "Compose inputs with addons, buttons, text, and focus-aware container"
+    },
+    {
+      "name": "input-otp",
+      "type": "registry:ui",
+      "title": "InputOTP",
+      "description": "One-time password input with individual cells"
+    },
+    {
+      "name": "kbd",
+      "type": "registry:ui",
+      "title": "Kbd",
+      "description": "Keyboard key display with grouping and separator"
+    },
+    {
+      "name": "label",
+      "type": "registry:ui",
+      "title": "Label",
+      "description": "Form field label"
+    },
+    {
+      "name": "labeled-separator",
+      "type": "registry:ui",
+      "title": "LabeledSeparator",
+      "description": "Horizontal separator with centered text label"
+    },
+    {
+      "name": "line-chart",
+      "type": "registry:ui",
+      "title": "LineChart",
+      "description": "Multi-series line chart with data points"
+    },
+    {
+      "name": "list",
+      "type": "registry:ui",
+      "title": "List",
+      "description": "Styled list items"
+    },
+    {
+      "name": "login",
+      "type": "registry:block",
+      "title": "LoginScreen",
+      "description": "Email/password login with social sign-in"
+    },
+    {
+      "name": "masked-input",
+      "type": "registry:ui",
+      "title": "MaskedInput",
+      "description": "Text input with mask formatting for credit cards, phones, dates"
+    },
+    {
+      "name": "menubar",
+      "type": "registry:ui",
+      "title": "Menubar",
+      "description": "Horizontal menu bar with dropdown menus: Menubar, MenubarMenu, MenubarItem"
+    },
+    {
+      "name": "notifications",
+      "type": "registry:block",
+      "title": "NotificationsScreen",
+      "description": "Grouped notifications list with unread indicators"
+    },
+    {
+      "name": "number-input",
+      "type": "registry:ui",
+      "title": "NumberInput",
+      "description": "Numeric input with increment/decrement buttons and min/max"
+    },
+    {
+      "name": "onboarding",
+      "type": "registry:block",
+      "title": "OnboardingScreen",
+      "description": "Welcome carousel with step indicators and skip option"
+    },
+    {
+      "name": "pagination",
+      "type": "registry:ui",
+      "title": "Pagination",
+      "description": "Page navigation with numbered buttons and prev/next"
+    },
+    {
+      "name": "password-input",
+      "type": "registry:ui",
+      "title": "PasswordInput",
+      "description": "Password input with show/hide toggle and strength indicator"
+    },
+    {
+      "name": "phone-input",
+      "type": "registry:ui",
+      "title": "PhoneInput",
+      "description": "Phone number input with country code selector"
+    },
+    {
+      "name": "pie-chart",
+      "type": "registry:ui",
+      "title": "PieChart",
+      "description": "Pie and donut chart with segments"
+    },
+    {
+      "name": "popover",
+      "type": "registry:ui",
+      "title": "Popover",
+      "description": "Contextual overlay with trigger positioning"
+    },
+    {
+      "name": "price",
+      "type": "registry:ui",
+      "title": "Price",
+      "description": "Formatted currency display with locale and strikethrough support"
+    },
+    {
+      "name": "pricing",
+      "type": "registry:block",
+      "title": "PricingScreen",
+      "description": "Subscription plan selector with monthly/yearly toggle"
+    },
+    {
+      "name": "product-detail",
+      "type": "registry:block",
+      "title": "ProductDetailScreen",
+      "description": "Product detail with size selector, quantity picker, and CTA"
+    },
+    {
+      "name": "product-list",
+      "type": "registry:block",
+      "title": "ProductListScreen",
+      "description": "E-commerce product grid with category filters and wishlist"
+    },
+    {
+      "name": "profile",
+      "type": "registry:block",
+      "title": "ProfileScreen",
+      "description": "User profile with avatar, stats, menu items, and log out"
+    },
+    {
+      "name": "progress",
+      "type": "registry:ui",
+      "title": "Progress",
+      "description": "Progress bar"
+    },
+    {
+      "name": "progress-steps",
+      "type": "registry:ui",
+      "title": "ProgressSteps",
+      "description": "Multi-step progress indicator for wizards and onboarding"
+    },
+    {
+      "name": "radar-chart",
+      "type": "registry:ui",
+      "title": "RadarChart",
+      "description": "Radar/spider chart with polygon grid"
+    },
+    {
+      "name": "radial-chart",
+      "type": "registry:ui",
+      "title": "RadialChart",
+      "description": "Circular radial progress chart"
+    },
+    {
+      "name": "radio-group",
+      "type": "registry:ui",
+      "title": "RadioGroup",
+      "description": "Radio button group"
+    },
+    {
+      "name": "rating",
+      "type": "registry:ui",
+      "title": "Rating",
+      "description": "Star rating with interactive and read-only modes"
+    },
+    {
+      "name": "refresh-control",
+      "type": "registry:ui",
+      "title": "RefreshControl",
+      "description": "Themed pull-to-refresh control for ScrollView and FlatList"
+    },
+    {
+      "name": "safe-area",
+      "type": "registry:ui",
+      "title": "SafeArea",
+      "description": "Styled SafeAreaView wrapper with theme variants"
+    },
+    {
+      "name": "search",
+      "type": "registry:block",
+      "title": "SearchScreen",
+      "description": "Search screen with recent searches, trending, and live results"
+    },
+    {
+      "name": "search-bar",
+      "type": "registry:ui",
+      "title": "SearchBar",
+      "description": "Search input with icon, clear button, and cancel"
+    },
+    {
+      "name": "segmented-control",
+      "type": "registry:ui",
+      "title": "SegmentedControl",
+      "description": "iOS-style segmented control for view switching"
+    },
+    {
+      "name": "select",
+      "type": "registry:ui",
+      "title": "Select",
+      "description": "Dropdown select with search support"
+    },
+    {
+      "name": "separator",
+      "type": "registry:ui",
+      "title": "Separator",
+      "description": "Visual divider"
+    },
+    {
+      "name": "settings",
+      "type": "registry:block",
+      "title": "SettingsScreen",
+      "description": "Settings screen with toggles, navigation rows, and danger zone"
+    },
+    {
+      "name": "sidebar",
+      "type": "registry:ui",
+      "title": "Sidebar",
+      "description": "Collapsible animated side navigation panel: SidebarProvider, Sidebar, SidebarTrigger, useSidebar"
+    },
+    {
+      "name": "signup",
+      "type": "registry:block",
+      "title": "SignUpScreen",
+      "description": "Registration with name, email, password, and terms checkbox"
+    },
+    {
+      "name": "skeleton",
+      "type": "registry:ui",
+      "title": "Skeleton",
+      "description": "Animated loading placeholder"
+    },
+    {
+      "name": "slider",
+      "type": "registry:ui",
+      "title": "Slider",
+      "description": "Draggable slider for numeric values"
+    },
+    {
+      "name": "spinner",
+      "type": "registry:ui",
+      "title": "Spinner",
+      "description": "Loading spinner with sizes"
+    },
+    {
+      "name": "stat-card",
+      "type": "registry:ui",
+      "title": "StatCard",
+      "description": "KPI display card with value, trend indicator, and change percentage"
+    },
+    {
+      "name": "status-indicator",
+      "type": "registry:ui",
+      "title": "StatusIndicator",
+      "description": "Colored dot for online/offline/away/busy status"
+    },
+    {
+      "name": "stepper",
+      "type": "registry:ui",
+      "title": "Stepper",
+      "description": "Numeric increment/decrement control with min/max/step"
+    },
+    {
+      "name": "swipeable-list-item",
+      "type": "registry:ui",
+      "title": "SwipeableListItem",
+      "description": "Swipeable list item revealing action buttons on swipe"
+    },
+    {
+      "name": "switch",
+      "type": "registry:ui",
+      "title": "Switch",
+      "description": "Toggle switch"
+    },
+    {
+      "name": "tab-bar",
+      "type": "registry:ui",
+      "title": "TabBar",
+      "description": "Bottom tab bar with badge support and active states"
+    },
+    {
+      "name": "table",
+      "type": "registry:ui",
+      "title": "Table",
+      "description": "Data table with header, body, rows, and cells"
+    },
+    {
+      "name": "tabs",
+      "type": "registry:ui",
+      "title": "Tabs",
+      "description": "Tab navigation with filled/line variants, sizes, vertical, disabled, and icon support"
+    },
+    {
+      "name": "text",
+      "type": "registry:ui",
+      "title": "Text",
+      "description": "Typography with heading and body variants"
+    },
+    {
+      "name": "textarea",
+      "type": "registry:ui",
+      "title": "Textarea",
+      "description": "Multi-line text input"
+    },
+    {
+      "name": "theme",
+      "type": "registry:theme",
+      "title": "AniUI Theme",
+      "description": "AniUI light/dark color tokens and radius. Convenience only — `aniui init` is authoritative for full RN theme setup."
+    },
+    {
+      "name": "theme-provider",
+      "type": "registry:ui",
+      "title": "ThemeProvider",
+      "description": "Theme context provider with light/dark/system mode and toggle"
+    },
+    {
+      "name": "timeline",
+      "type": "registry:ui",
+      "title": "Timeline",
+      "description": "Vertical timeline for events, order tracking, activity feeds"
+    },
+    {
+      "name": "toast",
+      "type": "registry:ui",
+      "title": "Toast",
+      "description": "Notification toast with auto-dismiss, position (top/bottom), and slide-in direction (top/bottom/left/right)"
+    },
+    {
+      "name": "toggle",
+      "type": "registry:ui",
+      "title": "Toggle",
+      "description": "Two-state toggle button"
+    },
+    {
+      "name": "toggle-group",
+      "type": "registry:ui",
+      "title": "ToggleGroup",
+      "description": "Group of exclusive toggle buttons"
+    },
+    {
+      "name": "tooltip",
+      "type": "registry:ui",
+      "title": "Tooltip",
+      "description": "Accessible tooltip with positioning"
+    },
+    {
+      "name": "typing-indicator",
+      "type": "registry:ui",
+      "title": "TypingIndicator",
+      "description": "Animated typing dots for chat interfaces"
+    },
+    {
+      "name": "utils",
+      "type": "registry:lib",
+      "title": "cn utility",
+      "description": "Tailwind class-merge helper (clsx + tailwind-merge)."
+    }
+  ]
+}

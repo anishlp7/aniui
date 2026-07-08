@@ -1,0 +1,25 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "action-sheet",
+  "type": "registry:ui",
+  "title": "ActionSheet",
+  "description": "Action sheet with options",
+  "dependencies": [
+    "@gorhom/bottom-sheet",
+    "react-native-gesture-handler",
+    "clsx",
+    "tailwind-merge"
+  ],
+  "registryDependencies": [
+    "https://aniui.dev/r/utils.json",
+    "https://aniui.dev/r/bottom-sheet.json"
+  ],
+  "files": [
+    {
+      "path": "components/ui/action-sheet.tsx",
+      "type": "registry:ui",
+      "content": "import React, { forwardRef, useCallback } from \"react\";\nimport { View, Pressable, Text, useColorScheme } from \"react-native\";\nimport {\n  BottomSheetModal,\n  BottomSheetBackdrop,\n  BottomSheetView,\n} from \"@gorhom/bottom-sheet\";\nimport { cn } from \"@/lib/utils\";\n\nexport interface ActionSheetAction {\n  label: string;\n  onPress: () => void;\n  destructive?: boolean;\n}\n\nexport interface ActionSheetProps {\n  className?: string;\n  title?: string;\n  actions: ActionSheetAction[];\n  onCancel?: () => void;\n}\n\nexport const ActionSheet = forwardRef<BottomSheetModal, ActionSheetProps>(\n  ({ className, title, actions, onCancel }, ref) => {\n    const dark = useColorScheme() === \"dark\";\n    const renderBackdrop = useCallback(\n      (backdropProps: React.ComponentProps<typeof BottomSheetBackdrop>) => (\n        <BottomSheetBackdrop {...backdropProps} disappearsOnIndex={-1} appearsOnIndex={0} opacity={0.5} />\n      ),\n      []\n    );\n\n    return (\n      <BottomSheetModal\n        ref={ref}\n        enableDynamicSizing\n        enablePanDownToClose\n        backdropComponent={renderBackdrop}\n        backgroundStyle={{ backgroundColor: dark ? \"#0a0a0a\" : \"#ffffff\" }}\n        handleIndicatorStyle={{ backgroundColor: dark ? \"#52525b\" : \"#a1a1aa\" }}\n      >\n        <BottomSheetView>\n          <View className={cn(\"pb-8 px-4\", className)}>\n            {title && <Text className=\"text-sm text-muted-foreground text-center py-3\">{title}</Text>}\n            {actions.map((action, i) => (\n              <Pressable\n                key={i}\n                className=\"py-4 items-center border-b border-border min-h-12\"\n                onPress={action.onPress}\n                accessible={true}\n                accessibilityRole=\"button\"\n              >\n                <Text className={cn(\"text-base font-medium\", action.destructive ? \"text-destructive\" : \"text-foreground\")}>\n                  {action.label}\n                </Text>\n              </Pressable>\n            ))}\n            {onCancel && (\n              <Pressable className=\"py-4 items-center mt-2 min-h-12\" onPress={onCancel} accessible={true} accessibilityRole=\"button\">\n                <Text className=\"text-base font-semibold text-muted-foreground\">Cancel</Text>\n              </Pressable>\n            )}\n          </View>\n        </BottomSheetView>\n      </BottomSheetModal>\n    );\n  }\n);\n\nActionSheet.displayName = \"ActionSheet\";\n"
+    }
+  ],
+  "docs": "AniUI is React Native. On an existing RNR/NativeWind project, add and use directly — the tokens and aliases already match, no setup needed. On a fresh project, run `npx @aniui/cli init` first to configure NativeWind/Uniwind, theme tokens, and Metro/Babel."
+}

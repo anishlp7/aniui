@@ -1,0 +1,26 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "bottom-tabs",
+  "type": "registry:block",
+  "title": "BottomTabsScreen",
+  "description": "Bottom tab navigation bar with active state indicators",
+  "dependencies": [
+    "react-native-safe-area-context",
+    "class-variance-authority",
+    "clsx",
+    "tailwind-merge"
+  ],
+  "registryDependencies": [
+    "https://aniui.dev/r/utils.json",
+    "https://aniui.dev/r/text.json"
+  ],
+  "files": [
+    {
+      "path": "blocks/bottom-tabs.tsx",
+      "type": "registry:block",
+      "target": "components/blocks/bottom-tabs.tsx",
+      "content": "import React, { useState } from \"react\";\nimport { View, Pressable } from \"react-native\";\nimport { Text } from \"@/components/ui/text\";\nimport { cn } from \"@/lib/utils\";\n\nfunction HomeIcon({ active }: { active: boolean }) {\n  return (\n    <svg width=\"22\" height=\"22\" viewBox=\"0 0 24 24\" fill={active ? \"currentColor\" : \"none\"} stroke=\"currentColor\" strokeWidth=\"1.5\" strokeLinecap=\"round\" strokeLinejoin=\"round\">\n      <path d=\"M3 9.5L12 3l9 6.5V20a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9.5z\" />\n      <path d=\"M9 21V12h6v9\" />\n    </svg>\n  );\n}\n\nfunction SearchIcon() {\n  return (\n    <svg width=\"22\" height=\"22\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" strokeWidth=\"1.5\" strokeLinecap=\"round\" strokeLinejoin=\"round\">\n      <circle cx=\"11\" cy=\"11\" r=\"8\" />\n      <line x1=\"21\" y1=\"21\" x2=\"16.65\" y2=\"16.65\" />\n    </svg>\n  );\n}\n\nfunction CartIcon({ active }: { active: boolean }) {\n  return (\n    <svg width=\"22\" height=\"22\" viewBox=\"0 0 24 24\" fill={active ? \"currentColor\" : \"none\"} stroke=\"currentColor\" strokeWidth=\"1.5\" strokeLinecap=\"round\" strokeLinejoin=\"round\">\n      <path d=\"M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z\" />\n      <line x1=\"3\" y1=\"6\" x2=\"21\" y2=\"6\" />\n      <path d=\"M16 10a4 4 0 0 1-8 0\" />\n    </svg>\n  );\n}\n\nfunction ProfileIcon({ active }: { active: boolean }) {\n  return (\n    <svg width=\"22\" height=\"22\" viewBox=\"0 0 24 24\" fill={active ? \"currentColor\" : \"none\"} stroke=\"currentColor\" strokeWidth=\"1.5\" strokeLinecap=\"round\" strokeLinejoin=\"round\">\n      <path d=\"M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2\" />\n      <circle cx=\"12\" cy=\"7\" r=\"4\" />\n    </svg>\n  );\n}\n\nconst tabs = [\n  { key: \"home\", label: \"Home\" },\n  { key: \"search\", label: \"Search\" },\n  { key: \"cart\", label: \"Cart\" },\n  { key: \"profile\", label: \"Profile\" },\n] as const;\n\ntype TabKey = typeof tabs[number][\"key\"];\n\nfunction TabIcon({ tabKey, active }: { tabKey: TabKey; active: boolean }) {\n  if (tabKey === \"home\") return <HomeIcon active={active} />;\n  if (tabKey === \"search\") return <SearchIcon />;\n  if (tabKey === \"cart\") return <CartIcon active={active} />;\n  return <ProfileIcon active={active} />;\n}\n\nexport function BottomTabBar({\n  active,\n  onTabPress,\n}: {\n  active: TabKey;\n  onTabPress: (key: TabKey) => void;\n}) {\n  return (\n    <View className=\"flex-row border-t border-border bg-background pb-6 pt-2 px-2\">\n      {tabs.map((tab) => {\n        const isActive = tab.key === active;\n        return (\n          <Pressable\n            key={tab.key}\n            onPress={() => onTabPress(tab.key)}\n            className=\"flex-1 items-center gap-1 py-1\"\n            accessible={true}\n            accessibilityRole=\"tab\"\n            accessibilityState={{ selected: isActive }}\n            accessibilityLabel={tab.label}\n          >\n            <View className={cn(isActive ? \"text-primary\" : \"text-muted-foreground opacity-50\")}>\n              <TabIcon tabKey={tab.key} active={isActive} />\n            </View>\n            <Text\n              className={cn(\n                \"text-[10px] leading-none\",\n                isActive ? \"text-primary font-semibold\" : \"text-muted-foreground\"\n              )}\n            >\n              {tab.label}\n            </Text>\n            {isActive && (\n              <View className=\"absolute -bottom-0 h-0.5 w-5 rounded-full bg-primary\" />\n            )}\n          </Pressable>\n        );\n      })}\n    </View>\n  );\n}\n\nexport function BottomTabsScreen() {\n  const [active, setActive] = useState<TabKey>(\"home\");\n  return (\n    <View className=\"flex-1 bg-background\">\n      <View className=\"flex-1 items-center justify-center\">\n        <Text variant=\"h3\" className=\"capitalize mb-1\">{active}</Text>\n        <Text variant=\"muted\">Screen content goes here</Text>\n      </View>\n      <BottomTabBar active={active} onTabPress={setActive} />\n    </View>\n  );\n}\n"
+    }
+  ],
+  "docs": "AniUI is React Native. On an existing RNR/NativeWind project, add and use directly — the tokens and aliases already match, no setup needed. On a fresh project, run `npx @aniui/cli init` first to configure NativeWind/Uniwind, theme tokens, and Metro/Babel. Blocks are full screens — move into your app/ route as needed."
+}

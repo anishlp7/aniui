@@ -21,7 +21,7 @@ const componentPages = [
 
 const guidePages = [
   "installation", "components", "theming", "dark-mode", "rtl", "compatibility",
-  "cli", "mcp", "javascript", "android", "changelog", "uniwind",
+  "cli", "mcp", "javascript", "android", "changelog", "uniwind", "shadcn-registry",
 ];
 
 const chartPages = [

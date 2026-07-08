@@ -1,0 +1,23 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "button",
+  "type": "registry:ui",
+  "title": "Button",
+  "description": "A pressable button with variants",
+  "dependencies": [
+    "class-variance-authority",
+    "clsx",
+    "tailwind-merge"
+  ],
+  "registryDependencies": [
+    "https://aniui.dev/r/utils.json"
+  ],
+  "files": [
+    {
+      "path": "components/ui/button.tsx",
+      "type": "registry:ui",
+      "content": "import React from \"react\";\nimport { Pressable, Text, ActivityIndicator } from \"react-native\";\nimport { cva, type VariantProps } from \"class-variance-authority\";\nimport { cn } from \"@/lib/utils\";\n\nconst buttonVariants = cva(\n  \"flex-row items-center justify-center rounded-md min-h-12 min-w-12\",\n  {\n    variants: {\n      variant: {\n        default: \"bg-primary\",\n        secondary: \"bg-secondary\",\n        outline: \"border border-input bg-transparent\",\n        ghost: \"bg-transparent\",\n        destructive: \"bg-destructive\",\n        link: \"bg-transparent\",\n      },\n      size: {\n        sm: \"px-3 py-1.5 gap-1.5\",\n        md: \"px-4 py-2.5 gap-2\",\n        lg: \"px-6 py-3.5 gap-2.5\",\n        icon: \"h-10 w-10 p-0\",\n      },\n    },\n    defaultVariants: { variant: \"default\", size: \"md\" },\n  }\n);\n\nconst buttonTextVariants = cva(\"text-center font-medium\", {\n  variants: {\n    variant: {\n      default: \"text-primary-foreground\",\n      secondary: \"text-secondary-foreground\",\n      outline: \"text-foreground\",\n      ghost: \"text-foreground\",\n      destructive: \"text-destructive-foreground\",\n      link: \"text-primary underline\",\n    },\n    size: { sm: \"text-sm\", md: \"text-base\", lg: \"text-lg\", icon: \"text-sm\" },\n  },\n  defaultVariants: { variant: \"default\", size: \"md\" },\n});\n\nexport interface ButtonProps\n  extends React.ComponentPropsWithoutRef<typeof Pressable>,\n    VariantProps<typeof buttonVariants> {\n  className?: string;\n  textClassName?: string;\n  children?: string;\n  icon?: React.ReactNode;\n  iconAfter?: React.ReactNode;\n  loading?: boolean;\n}\n\nexport function Button({ variant, size, className, textClassName, children, icon, iconAfter, loading, disabled, ...props }: ButtonProps) {\n  const isDisabled = disabled || loading;\n  const light = variant === \"default\" || variant === \"destructive\";\n\n  return (\n    <Pressable\n      className={cn(buttonVariants({ variant, size }), isDisabled && \"opacity-50\", \"active:opacity-80\", className)}\n      accessibilityRole=\"button\"\n      accessible={true}\n      disabled={isDisabled}\n      {...props}\n    >\n      {loading ? (\n        <ActivityIndicator size=\"small\" color={light ? \"#fafafa\" : \"#18181b\"} />\n      ) : icon ?? null}\n      {children ? (\n        <Text className={cn(buttonTextVariants({ variant, size }), textClassName)}>{children}</Text>\n      ) : null}\n      {!loading && iconAfter ? iconAfter : null}\n    </Pressable>\n  );\n}\n"
+    }
+  ],
+  "docs": "AniUI is React Native. On an existing RNR/NativeWind project, add and use directly — the tokens and aliases already match, no setup needed. On a fresh project, run `npx @aniui/cli init` first to configure NativeWind/Uniwind, theme tokens, and Metro/Babel."
+}

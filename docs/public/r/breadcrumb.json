@@ -1,0 +1,22 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "breadcrumb",
+  "type": "registry:ui",
+  "title": "Breadcrumb",
+  "description": "Navigation trail: Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbPage, BreadcrumbSeparator",
+  "dependencies": [
+    "clsx",
+    "tailwind-merge"
+  ],
+  "registryDependencies": [
+    "https://aniui.dev/r/utils.json"
+  ],
+  "files": [
+    {
+      "path": "components/ui/breadcrumb.tsx",
+      "type": "registry:ui",
+      "content": "import React from \"react\";\nimport { View, Text, Pressable } from \"react-native\";\nimport { cn } from \"@/lib/utils\";\n\nexport interface BreadcrumbProps extends React.ComponentPropsWithoutRef<typeof View> {\n  className?: string;\n  children?: React.ReactNode;\n}\n\nexport function Breadcrumb({ className, ...props }: BreadcrumbProps) {\n  return (\n    <View\n      className={cn(\"flex-row flex-wrap items-center gap-1.5\", className)}\n      accessibilityRole=\"none\"\n      {...props}\n    />\n  );\n}\n\nexport interface BreadcrumbItemProps extends React.ComponentPropsWithoutRef<typeof View> {\n  className?: string;\n}\n\nexport function BreadcrumbItem({ className, ...props }: BreadcrumbItemProps) {\n  return <View className={cn(\"flex-row items-center gap-1.5\", className)} {...props} />;\n}\n\nexport interface BreadcrumbLinkProps extends React.ComponentPropsWithoutRef<typeof Pressable> {\n  className?: string;\n  children?: React.ReactNode;\n}\n\nexport function BreadcrumbLink({ className, children, ...props }: BreadcrumbLinkProps) {\n  return (\n    <Pressable accessibilityRole=\"link\" accessible {...props}>\n      <Text className={cn(\"text-sm text-muted-foreground\", className)}>{children}</Text>\n    </Pressable>\n  );\n}\n\nexport interface BreadcrumbPageProps extends React.ComponentPropsWithoutRef<typeof Text> {\n  className?: string;\n}\n\nexport function BreadcrumbPage({ className, ...props }: BreadcrumbPageProps) {\n  return (\n    <Text\n      className={cn(\"text-sm font-medium text-foreground\", className)}\n      accessibilityRole=\"header\"\n      {...props}\n    />\n  );\n}\n\nexport interface BreadcrumbSeparatorProps extends React.ComponentPropsWithoutRef<typeof Text> {\n  className?: string;\n}\n\nexport function BreadcrumbSeparator({ className, children, ...props }: BreadcrumbSeparatorProps) {\n  return (\n    <Text className={cn(\"text-sm text-muted-foreground\", className)} {...props}>\n      {children ?? \"/\"}\n    </Text>\n  );\n}\n"
+    }
+  ],
+  "docs": "AniUI is React Native. On an existing RNR/NativeWind project, add and use directly — the tokens and aliases already match, no setup needed. On a fresh project, run `npx @aniui/cli init` first to configure NativeWind/Uniwind, theme tokens, and Metro/Babel."
+}

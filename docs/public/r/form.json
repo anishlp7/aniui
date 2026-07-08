@@ -1,0 +1,24 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "form",
+  "type": "registry:ui",
+  "title": "Form",
+  "description": "Form context with validation, error handling, and compound components",
+  "dependencies": [
+    "clsx",
+    "tailwind-merge"
+  ],
+  "registryDependencies": [
+    "https://aniui.dev/r/utils.json",
+    "https://aniui.dev/r/label.json",
+    "https://aniui.dev/r/text.json"
+  ],
+  "files": [
+    {
+      "path": "components/ui/form.tsx",
+      "type": "registry:ui",
+      "content": "import React, { createContext, useContext, useState, useCallback } from \"react\";\nimport { View, Text } from \"react-native\";\nimport { cn } from \"@/lib/utils\";\n\ntype FieldError = string | undefined;\ntype Validator = (value: string) => FieldError;\ntype FormErrors = Record<string, FieldError>;\n\nconst FormContext = createContext<{\n  errors: FormErrors;\n  setFieldError: (field: string, error: FieldError) => void;\n  validateField: (field: string, value: string, rules?: FieldRules) => boolean;\n}>({ errors: {}, setFieldError: () => {}, validateField: () => true });\n\nconst FormFieldContext = createContext<{ name: string; error: FieldError }>({\n  name: \"\",\n  error: undefined,\n});\n\nexport type FieldRules = {\n  required?: string | boolean;\n  pattern?: { value: RegExp; message: string };\n  validate?: Validator;\n};\n\nexport interface FormProps extends React.ComponentPropsWithoutRef<typeof View> {\n  className?: string;\n  children?: React.ReactNode;\n}\n\nexport function Form({ className, children, ...props }: FormProps) {\n  const [errors, setErrors] = useState<FormErrors>({});\n\n  const setFieldError = useCallback((field: string, error: FieldError) => {\n    setErrors((prev) => ({ ...prev, [field]: error }));\n  }, []);\n\n  const validateField = useCallback(\n    (field: string, value: string, rules?: FieldRules): boolean => {\n      if (!rules) return true;\n      if (rules.required && !value.trim()) {\n        const msg = typeof rules.required === \"string\" ? rules.required : \"This field is required\";\n        setErrors((prev) => ({ ...prev, [field]: msg }));\n        return false;\n      }\n      if (rules.pattern && !rules.pattern.value.test(value)) {\n        setErrors((prev) => ({ ...prev, [field]: rules.pattern!.message }));\n        return false;\n      }\n      if (rules.validate) {\n        const error = rules.validate(value);\n        setErrors((prev) => ({ ...prev, [field]: error }));\n        return !error;\n      }\n      setErrors((prev) => ({ ...prev, [field]: undefined }));\n      return true;\n    },\n    []\n  );\n\n  return (\n    <FormContext.Provider value={{ errors, setFieldError, validateField }}>\n      <View className={cn(\"gap-4\", className)} {...props}>\n        {children}\n      </View>\n    </FormContext.Provider>\n  );\n}\n\nexport function useFormField() {\n  const form = useContext(FormContext);\n  const field = useContext(FormFieldContext);\n  return { ...field, ...form };\n}\n\nexport interface FormFieldProps {\n  name: string;\n  children: React.ReactNode;\n}\n\nexport function FormField({ name, children }: FormFieldProps) {\n  const { errors } = useContext(FormContext);\n  return (\n    <FormFieldContext.Provider value={{ name, error: errors[name] }}>\n      {children}\n    </FormFieldContext.Provider>\n  );\n}\n\nexport interface FormItemProps extends React.ComponentPropsWithoutRef<typeof View> {\n  className?: string;\n  children?: React.ReactNode;\n}\n\nexport function FormItem({ className, children, ...props }: FormItemProps) {\n  return <View className={cn(\"gap-1\", className)} {...props}>{children}</View>;\n}\n\nexport function FormMessage({ className, ...props }: { className?: string }) {\n  const { error } = useContext(FormFieldContext);\n  if (!error) return null;\n  return (\n    <Text className={cn(\"text-sm text-destructive\", className)} accessibilityRole=\"alert\" {...props}>\n      {error}\n    </Text>\n  );\n}\n"
+    }
+  ],
+  "docs": "AniUI is React Native. On an existing RNR/NativeWind project, add and use directly — the tokens and aliases already match, no setup needed. On a fresh project, run `npx @aniui/cli init` first to configure NativeWind/Uniwind, theme tokens, and Metro/Babel."
+}

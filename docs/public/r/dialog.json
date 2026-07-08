@@ -1,0 +1,22 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "dialog",
+  "type": "registry:ui",
+  "title": "Dialog",
+  "description": "Modal dialog overlay",
+  "dependencies": [
+    "clsx",
+    "tailwind-merge"
+  ],
+  "registryDependencies": [
+    "https://aniui.dev/r/utils.json"
+  ],
+  "files": [
+    {
+      "path": "components/ui/dialog.tsx",
+      "type": "registry:ui",
+      "content": "import React from \"react\";\nimport { View, Pressable, Text, Modal } from \"react-native\";\nimport { cn } from \"@/lib/utils\";\n\nexport interface DialogProps {\n  open: boolean;\n  onOpenChange: (open: boolean) => void;\n  children: React.ReactNode;\n}\n\nexport function Dialog({ open, onOpenChange, children }: DialogProps) {\n  return (\n    <Modal visible={open} transparent animationType=\"fade\" onRequestClose={() => onOpenChange(false)}>\n      <View className=\"flex-1 items-center justify-center bg-black/50\">\n        <Pressable className=\"absolute inset-0\" onPress={() => onOpenChange(false)} />\n        {children}\n      </View>\n    </Modal>\n  );\n}\n\nexport function DialogContent({ className, children, ...props }: React.ComponentPropsWithoutRef<typeof View> & { className?: string; children?: React.ReactNode }) {\n  return (\n    <View className={cn(\"mx-6 w-80 rounded-lg bg-card p-6 shadow-xl\", className)} accessibilityRole=\"alert\" accessible={true} {...props}>\n      {children}\n    </View>\n  );\n}\n\nexport function DialogHeader({ className, ...props }: React.ComponentPropsWithoutRef<typeof View> & { className?: string }) {\n  return <View className={cn(\"pb-4\", className)} {...props} />;\n}\n\nexport function DialogTitle({ className, ...props }: React.ComponentPropsWithoutRef<typeof Text> & { className?: string }) {\n  return <Text className={cn(\"text-lg font-semibold text-card-foreground\", className)} {...props} />;\n}\n\nexport function DialogDescription({ className, ...props }: React.ComponentPropsWithoutRef<typeof Text> & { className?: string }) {\n  return <Text className={cn(\"text-sm text-muted-foreground mt-1\", className)} {...props} />;\n}\n\nexport function DialogFooter({ className, ...props }: React.ComponentPropsWithoutRef<typeof View> & { className?: string }) {\n  return <View className={cn(\"flex-row justify-end gap-3 pt-4\", className)} {...props} />;\n}\n\nexport function DialogTrigger({ children }: { children: React.ReactNode }) {\n  return <>{children}</>;\n}\n\nexport function DialogClose({ children }: { children: React.ReactNode }) {\n  return <>{children}</>;\n}\n"
+    }
+  ],
+  "docs": "AniUI is React Native. On an existing RNR/NativeWind project, add and use directly — the tokens and aliases already match, no setup needed. On a fresh project, run `npx @aniui/cli init` first to configure NativeWind/Uniwind, theme tokens, and Metro/Babel."
+}

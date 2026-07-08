@@ -1,0 +1,24 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "masked-input",
+  "type": "registry:ui",
+  "title": "MaskedInput",
+  "description": "Text input with mask formatting for credit cards, phones, dates",
+  "dependencies": [
+    "class-variance-authority",
+    "clsx",
+    "tailwind-merge"
+  ],
+  "registryDependencies": [
+    "https://aniui.dev/r/utils.json",
+    "https://aniui.dev/r/input.json"
+  ],
+  "files": [
+    {
+      "path": "components/ui/masked-input.tsx",
+      "type": "registry:ui",
+      "content": "import React, { useCallback } from \"react\";\nimport { TextInput, useColorScheme } from \"react-native\";\nimport { cva, type VariantProps } from \"class-variance-authority\";\nimport { cn } from \"@/lib/utils\";\n\nconst maskedVariants = cva(\n  \"rounded-md border py-2 text-foreground placeholder:text-muted-foreground\",\n  {\n    variants: {\n      variant: {\n        default: \"border-input bg-background\",\n        ghost: \"border-transparent bg-transparent\",\n      },\n      size: {\n        sm: \"min-h-9 px-3 text-sm\",\n        md: \"min-h-12 px-4 text-base\",\n        lg: \"min-h-14 px-5 text-lg\",\n      },\n    },\n    defaultVariants: { variant: \"default\", size: \"md\" },\n  }\n);\n\ntype MaskPreset = \"credit-card\" | \"phone\" | \"date\";\n\nconst masks: Record<MaskPreset, string> = {\n  \"credit-card\": \"#### #### #### ####\",\n  phone: \"(###) ###-####\",\n  date: \"##/##/####\",\n};\n\nfunction applyMask(raw: string, mask: string): string {\n  const digits = raw.replace(/\\D/g, \"\");\n  let result = \"\";\n  let digitIdx = 0;\n  for (let i = 0; i < mask.length && digitIdx < digits.length; i++) {\n    if (mask[i] === \"#\") {\n      result += digits[digitIdx++];\n    } else {\n      result += mask[i];\n    }\n  }\n  return result;\n}\n\nexport interface MaskedInputProps\n  extends Omit<React.ComponentPropsWithoutRef<typeof TextInput>, \"onChangeText\">,\n    VariantProps<typeof maskedVariants> {\n  className?: string;\n  mask?: string;\n  preset?: MaskPreset;\n  onChangeText?: (masked: string, raw: string) => void;\n}\n\nexport const MaskedInput = React.forwardRef<\n  React.ElementRef<typeof TextInput>,\n  MaskedInputProps & { value?: string }\n>(function MaskedInput(\n  { variant, size, className, mask: customMask, preset, onChangeText, value: controlledValue, ...props },\n  ref\n) {\n  const maskPattern = customMask ?? (preset ? masks[preset] : \"\");\n  const [internal, setInternal] = React.useState(\"\");\n  const displayValue = controlledValue ?? internal;\n\n  const handleChange = useCallback(\n    (text: string) => {\n      if (!maskPattern) {\n        setInternal(text);\n        onChangeText?.(text, text);\n        return;\n      }\n      const raw = text.replace(/\\D/g, \"\");\n      const masked = applyMask(raw, maskPattern);\n      setInternal(masked);\n      onChangeText?.(masked, raw);\n    },\n    [maskPattern, onChangeText]\n  );\n\n  const dark = useColorScheme() === \"dark\";\n  const caret = dark ? \"#fafafa\" : \"#18181b\";\n\n  return (\n    <TextInput\n      ref={ref}\n      className={cn(maskedVariants({ variant, size }), className)}\n      placeholderTextColor={dark ? \"#a1a1aa\" : \"#71717a\"}\n      keyboardAppearance={dark ? \"dark\" : \"light\"}\n      selectionColor={caret}\n      cursorColor={caret}\n      keyboardType=\"number-pad\"\n      value={displayValue}\n      onChangeText={handleChange}\n      accessibilityRole=\"text\"\n      {...props}\n    />\n  );\n});\n"
+    }
+  ],
+  "docs": "AniUI is React Native. On an existing RNR/NativeWind project, add and use directly — the tokens and aliases already match, no setup needed. On a fresh project, run `npx @aniui/cli init` first to configure NativeWind/Uniwind, theme tokens, and Metro/Babel."
+}

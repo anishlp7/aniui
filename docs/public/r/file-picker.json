@@ -1,0 +1,22 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "file-picker",
+  "type": "registry:ui",
+  "title": "FilePicker",
+  "description": "File upload UI with dashed border, preview, and remove button",
+  "dependencies": [
+    "clsx",
+    "tailwind-merge"
+  ],
+  "registryDependencies": [
+    "https://aniui.dev/r/utils.json"
+  ],
+  "files": [
+    {
+      "path": "components/ui/file-picker.tsx",
+      "type": "registry:ui",
+      "content": "import React from \"react\";\nimport { View, Pressable, Text } from \"react-native\";\nimport Svg, { Path } from \"react-native-svg\";\nimport { cn } from \"@/lib/utils\";\n\nexport interface FileInfo {\n  name: string;\n  size?: number;\n  type?: string;\n  uri?: string;\n}\n\nexport interface FilePickerProps extends React.ComponentPropsWithoutRef<typeof View> {\n  className?: string;\n  file?: FileInfo;\n  onPress: () => void;\n  onRemove?: () => void;\n  label?: string;\n  accept?: string;\n}\n\nfunction formatSize(bytes: number): string {\n  if (bytes < 1024) return `${bytes} B`;\n  if (bytes < 1024 * 1024) return `${(bytes / 1024).toFixed(1)} KB`;\n  return `${(bytes / (1024 * 1024)).toFixed(1)} MB`;\n}\n\nexport function FilePicker({\n  className,\n  file,\n  onPress,\n  onRemove,\n  label = \"Tap to select a file\",\n  ...props\n}: FilePickerProps) {\n  return (\n    <View className={cn(\"\", className)} {...props}>\n      {!file ? (\n        <Pressable\n          onPress={onPress}\n          accessible={true}\n          accessibilityRole=\"button\"\n          accessibilityLabel={label}\n          className=\"min-h-24 items-center justify-center rounded-lg border-2 border-dashed border-input bg-background px-4 py-6\"\n        >\n          <View className=\"mb-2\">\n            <Svg width={24} height={24} viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"#71717a\" strokeWidth={2} strokeLinecap=\"round\" strokeLinejoin=\"round\">\n              <Path d=\"M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4\" />\n              <Path d=\"m17 8-5-5-5 5\" /><Path d=\"M12 3v12\" />\n            </Svg>\n          </View>\n          <Text className=\"text-sm text-muted-foreground text-center\">{label}</Text>\n        </Pressable>\n      ) : (\n        <View className=\"flex-row items-center rounded-lg border border-border bg-card px-4 py-3\">\n          <View className=\"flex-1 me-3\">\n            <Text className=\"text-sm font-medium text-foreground\" numberOfLines={1}>{file.name}</Text>\n            {file.size !== undefined && (\n              <Text className=\"text-xs text-muted-foreground mt-0.5\">{formatSize(file.size)}</Text>\n            )}\n          </View>\n          {onRemove && (\n            <Pressable\n              onPress={onRemove}\n              accessible={true}\n              accessibilityRole=\"button\"\n              accessibilityLabel=\"Remove file\"\n              className=\"min-h-8 min-w-8 items-center justify-center\"\n            >\n              <Text className=\"text-destructive text-lg\">\n              <Svg width={24} height={24} viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"#71717a\" strokeWidth={2} strokeLinecap=\"round\" strokeLinejoin=\"round\">\n                <Path d=\"M18 6 6 18\" />\n                <Path d=\"m6 6 12 12\" />\n              </Svg>\n              </Text>\n            </Pressable>\n          )}\n        </View>\n      )}\n    </View>\n  );\n}\n"
+    }
+  ],
+  "docs": "AniUI is React Native. On an existing RNR/NativeWind project, add and use directly — the tokens and aliases already match, no setup needed. On a fresh project, run `npx @aniui/cli init` first to configure NativeWind/Uniwind, theme tokens, and Metro/Babel."
+}
