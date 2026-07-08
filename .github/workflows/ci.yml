@@ -85,6 +85,34 @@ jobs:
         working-directory: docs
         run: npm run build
 
+  registry-drift:
+    name: Registry Up-to-date
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: ".nvmrc"
+          cache: "npm"
+          cache-dependency-path: "cli/package-lock.json"
+
+      - name: Install CLI dependencies
+        working-directory: cli
+        run: npm ci
+
+      - name: Regenerate the shadcn registry
+        working-directory: cli
+        run: npm run registry:build
+
+      - name: Fail if the committed registry is stale
+        run: |
+          if ! git diff --exit-code docs/public/registry.json docs/public/r; then
+            echo "ERROR: docs/public/r is out of date. Run 'npm run registry:build' and commit the result."
+            exit 1
+          fi
+          echo "OK: registry is up to date"
+
   lint-components:
     name: Lint Components
     runs-on: ubuntu-latest
