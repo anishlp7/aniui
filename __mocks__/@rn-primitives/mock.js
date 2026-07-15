@@ -37,4 +37,6 @@ module.exports = {
   Indicator: passthrough,
   Provider: ({ children }) => children,
   PortalHost: passthrough,
+  useItemContext: () => ({ isExpanded: false }),
+  useRootContext: () => ({ value: undefined, onValueChange: () => {} }),
 };

@@ -2,7 +2,7 @@ import React from "react";
 import { View, Text, Pressable } from "react-native";
 import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
-import Svg, { Path } from "react-native-svg";
+import { ArrowLeft } from "lucide-react-native";
 
 const headerVariants = cva("flex-row items-center min-h-14 px-4", {
   variants: {
@@ -68,26 +68,21 @@ export interface HeaderBackButtonProps extends React.ComponentPropsWithoutRef<ty
   onPress: () => void;
 }
 
-function BackIcon() {
-  return (
-    <Svg width={24} height={24} viewBox="0 0 24 24" fill="none" stroke="#71717a" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
-      <Path d="m12 19-7-7 7-7" />
-      <Path d="M19 12H5" />
-    </Svg>
-  );
-}
-
-export function HeaderBackButton({ className, label = <BackIcon /> , onPress, ...props }: HeaderBackButtonProps) {
+export function HeaderBackButton({ className, label = <ArrowLeft size={24} color="#71717a" />, onPress, ...props }: HeaderBackButtonProps) {
   return (
     <Pressable
       onPress={onPress}
       accessible={true}
       accessibilityRole="button"
       accessibilityLabel="Go back"
-      className={cn("min-h-12 min-w-12 items-center justify-center", className)}
+      className={cn("min-h-12 min-w-12 flex-row items-center justify-center", className)}
       {...props}
     >
-      <Text className="text-primary text-lg">{label}</Text>
+      {typeof label === "string" || typeof label === "number" ? (
+        <Text className="text-primary text-lg">{label}</Text>
+      ) : (
+        label
+      )}
     </Pressable>
   );
 }

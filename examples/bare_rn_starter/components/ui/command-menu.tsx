@@ -3,7 +3,7 @@ import { View, Text, TextInput, Pressable, SectionList, useColorScheme, useWindo
 import * as DialogPrimitive from "@rn-primitives/dialog";
 import Animated, { useAnimatedStyle, useSharedValue, withTiming } from "react-native-reanimated";
 import { entering, exiting } from "@/components/ui/animate";
-import Svg, { Path } from "react-native-svg";
+import { Search } from "lucide-react-native";
 import { cn } from "@/lib/utils";
 
 export interface CommandItem {
@@ -120,10 +120,7 @@ export function CommandMenu({
             {...props}
           >
             <View className="flex-row items-center px-4 border-b border-border">
-              <Svg width={16} height={16} viewBox="0 0 24 24" fill="none" stroke="#71717a" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
-                <Path d="M11 17.25a6.25 6.25 0 1 1 0-12.5 6.25 6.25 0 0 1 0 12.5Z" />
-                <Path d="m16 16 4.5 4.5" />
-              </Svg>
+              <Search size={16} color="#71717a" strokeWidth={2} />
               <TextInput
                 ref={inputRef}
                 className="flex-1 min-h-12 ps-3 text-base text-foreground"

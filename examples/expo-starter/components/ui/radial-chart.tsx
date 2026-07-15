@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, LayoutChangeEvent } from "react-native";
+import { View, LayoutChangeEvent, useColorScheme } from "react-native";
 import Svg, { Path, G, Text as SvgText } from "react-native-svg";
 import { cn } from "@/lib/utils";
 
@@ -48,6 +48,10 @@ export function RadialChart({
   ...props
 }: RadialChartProps) {
   const [width, setWidth] = useState(0);
+  const dark = useColorScheme() === "dark";
+  const gridColor = dark ? "#27272a" : "#e5e7eb";
+  const labelColor = dark ? "#a1a1aa" : "#6b7280";
+  const centerColor = dark ? "#fafafa" : "#18181b";
   const onLayout = (e: LayoutChangeEvent) => setWidth(e.nativeEvent.layout.width);
   if (width === 0) return <View className={cn("w-full", className)} onLayout={onLayout} style={{ height }} {...props} />;
 
@@ -72,18 +76,18 @@ export function RadialChart({
             const bgEnd = range >= 360 ? startAngle + 359.99 : startAngle + range;
             return (
               <G key={i}>
-                <Path d={arcPath(cx, cy, r, startAngle, bgEnd)} fill="none" stroke="#e5e7eb" strokeWidth={strokeWidth} strokeLinecap="round" />
+                <Path d={arcPath(cx, cy, r, startAngle, bgEnd)} fill="none" stroke={gridColor} strokeWidth={strokeWidth} strokeLinecap="round" />
                 {sweep > 0 && <Path d={arcPath(cx, cy, r, startAngle, safeEnd)} fill="none" stroke={seg.color} strokeWidth={strokeWidth} strokeLinecap="round" />}
               </G>
             );
           })}
           {centerText && (
-            <SvgText x={cx} y={cy + (centerSubText ? -4 : 5)} fontSize={20} fontWeight="700" fill="#1f2937" textAnchor="middle">
+            <SvgText x={cx} y={cy + (centerSubText ? -4 : 5)} fontSize={20} fontWeight="700" fill={centerColor} textAnchor="middle">
               {centerText}
             </SvgText>
           )}
           {centerSubText && (
-            <SvgText x={cx} y={cy + 16} fontSize={11} fill="#6b7280" textAnchor="middle">
+            <SvgText x={cx} y={cy + 16} fontSize={11} fill={labelColor} textAnchor="middle">
               {centerSubText}
             </SvgText>
           )}
@@ -91,7 +95,7 @@ export function RadialChart({
             const r = maxR - i * (strokeWidth + 6);
             if (r <= 0) return null;
             const labelPos = polarToCartesian(cx, cy, r, startAngle - 10);
-            return <SvgText key={i} x={labelPos.x} y={labelPos.y} fontSize={9} fill="#6b7280" textAnchor="end">{seg.label ?? `${seg.value}`}</SvgText>;
+            return <SvgText key={i} x={labelPos.x} y={labelPos.y} fontSize={9} fill={labelColor} textAnchor="end">{seg.label ?? `${seg.value}`}</SvgText>;
           })}
         </G>
       </Svg>

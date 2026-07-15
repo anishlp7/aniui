@@ -17,7 +17,7 @@ AniUI is a copy-paste component library for React Native. Components are source 
 npx @aniui/cli init
 npx @aniui/cli add button text input card
 
-## Components (89 total, alphabetical)
+## Components (92 total, alphabetical)
 
 - Accordion: `import { Accordion, AccordionItem } from "@/components/ui/accordion"` — needs @rn-primitives/accordion, react-native-reanimated
 - ActionSheet: `import { ActionSheet } from "@/components/ui/action-sheet"` — needs @gorhom/bottom-sheet, react-native-gesture-handler
@@ -26,6 +26,7 @@ npx @aniui/cli add button text input card
 - AlertDialog: `import { AlertDialog, AlertDialogContent, AlertDialogHeader, AlertDialogTitle, AlertDialogDescription, AlertDialogFooter, AlertDialogAction, AlertDialogCancel } from "@/components/ui/alert-dialog"` — needs react-native-reanimated
 - AreaChart: `import { AreaChart } from "@/components/ui/area-chart"` — SVG area chart with gradient fill, needs react-native-svg
 - Avatar: `import { Avatar } from "@/components/ui/avatar"` — size: sm|md|lg, with fallback initials
+- AvatarGroup: `import { AvatarGroup } from "@/components/ui/avatar-group"` — overlapping avatar stack with +N overflow, max (default 4), spacing: sm|md|lg
 - Badge: `import { Badge } from "@/components/ui/badge"` — variant: default|secondary|outline|destructive
 - Banner: `import { Banner } from "@/components/ui/banner"` — variant: default|info|warning|destructive|success, dismiss, action
 - BarChart: `import { BarChart } from "@/components/ui/bar-chart"` — Vertical and horizontal bar chart, needs react-native-svg
@@ -54,6 +55,7 @@ npx @aniui/cli add button text input card
 - Field: `import { Field, FieldLabel, FieldDescription, FieldError } from "@/components/ui/field"` — Layout-focused form field with label, description, and error — variant: default|secondary|destructive, position: bottom-right|bottom-left|bottom-center|none
 - FilePicker: `import { FilePicker } from "@/components/ui/file-picker"` — File upload UI with dashed border, preview, and remove
 - Form: `import { Form, FormField, FormItem, FormMessage, useFormField } from "@/components/ui/form"` — Form context with validation and error handling
+- Gradient: `import { Gradient } from "@/components/ui/gradient"` — linear gradient background container with colors, start/end direction, needs react-native-svg
 - Grid: `import { Grid } from "@/components/ui/grid"` — FlatList-based grid layout with configurable columns and gap
 - Header: `import { Header, HeaderLeft, HeaderTitle, HeaderRight, HeaderBackButton } from "@/components/ui/header"`
 - HoverCard: `import { HoverCard, HoverCardTrigger, HoverCardContent } from "@/components/ui/hover-card"` — Preview card triggered by hover or long-press, needs @rn-primitives/hover-card, react-native-reanimated — Navigation header with back button, title, and actions
@@ -64,6 +66,7 @@ npx @aniui/cli add button text input card
 - InputGroup: `import { InputGroup, InputGroupAddon, InputGroupInput, InputGroupButton, InputGroupText } from "@/components/ui/input-group"` — Compose inputs with prefix/suffix addons, buttons, and text — variant: default|ghost, size: sm|md|lg
 - InputOTP: `import { InputOTP } from "@/components/ui/input-otp"` — OTP verification input with individual cells
 - Kbd: `import { Kbd, KbdGroup } from "@/components/ui/kbd"` — Keyboard key display with grouping and separator, size: sm|md|lg
+- KeyboardView: `import { KeyboardView } from "@/components/ui/keyboard-view"` — KeyboardAvoidingView wrapper, offset prop, platform-correct behavior defaults
 - Label: `import { Label } from "@/components/ui/label"` — Form field label
 - LabeledSeparator: `import { LabeledSeparator } from "@/components/ui/labeled-separator"` — Horizontal separator with centered text label
 - LineChart: `import { LineChart } from "@/components/ui/line-chart"` — Multi-series line chart with data points, needs react-native-svg
@@ -155,7 +158,7 @@ Copy-paste full screen templates. Install via `npx @aniui/cli add-block <name>`.
 ## Why AniUI
 
 - shadcn/ui approach: copy source files, own the code, no npm dependency lock-in
-- 93 components + 7 charts + 15 blocks
+- 96 components + 7 charts + 15 blocks
 - Works with Expo SDK 53-57, bare React Native 0.76+, New Architecture
 - Uniwind (recommended default on Expo SDK 55+) and NativeWind v4/v5 (supported, soft-deprecated) — same className API
 - Full RTL support for Arabic, Hebrew, Persian, Urdu

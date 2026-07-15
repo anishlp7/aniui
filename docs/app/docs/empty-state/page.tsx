@@ -10,9 +10,9 @@ import { PreviewToggle } from "@/components/preview-toggle";
 import { EmptyStateMainDemo, EmptyStateNoResultsDemo, EmptyStateErrorDemo } from "./_demos";
 const installCode = `npx @aniui/cli add empty-state`;
 const usageCode = `import { EmptyState } from "@/components/ui/empty-state";
-import { Ionicons } from "@expo/vector-icons";
+import { SearchX } from "lucide-react-native";
 <EmptyState
-  icon={<Ionicons name="search-outline" size={48} color="#a1a1aa" />}
+  icon={<SearchX size={48} color="#a1a1aa" />}
   title="No results found"
   description="Try adjusting your search or filters to find what you're looking for."
   action={{ label: "Clear Filters", onPress: () => {} }}

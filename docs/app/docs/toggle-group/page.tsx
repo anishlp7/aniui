@@ -46,7 +46,10 @@ const itemVariants = cva(
     defaultVariants: { variant: "default", size: "md" },
   }
 );
-type GroupCtx = { value: string; onValueChange: (v: string) => void };
+type GroupCtx = {
+  value: string;
+  onValueChange: (v: string) => void;
+} & VariantProps<typeof itemVariants>;
 const Ctx = createContext<GroupCtx>({ value: "", onValueChange: () => {} });
 export interface ToggleGroupProps
   extends React.ComponentPropsWithoutRef<typeof View>,
@@ -58,24 +61,30 @@ export interface ToggleGroupProps
 }
 export function ToggleGroup({ value, onValueChange, variant, size, className, children, ...props }: ToggleGroupProps) {
   return (
-    <Ctx.Provider value={{ value, onValueChange }}>
+    <Ctx.Provider value={{ value, onValueChange, variant, size }}>
       <View className={cn("flex-row gap-1", className)} accessibilityRole="radiogroup" {...props}>
         {children}
       </View>
     </Ctx.Provider>
   );
 }
-export interface ToggleGroupItemProps extends React.ComponentPropsWithoutRef<typeof Pressable> {
+export interface ToggleGroupItemProps
+  extends React.ComponentPropsWithoutRef<typeof Pressable>,
+    VariantProps<typeof itemVariants> {
   className?: string;
   value: string;
   children: React.ReactNode;
 }
-export function ToggleGroupItem({ value, className, children, ...props }: ToggleGroupItemProps) {
-  const { value: selected, onValueChange } = useContext(Ctx);
+export function ToggleGroupItem({ value, variant, size, className, children, ...props }: ToggleGroupItemProps) {
+  const { value: selected, onValueChange, variant: groupVariant, size: groupSize } = useContext(Ctx);
   const active = selected === value;
   return (
     <Pressable
-      className={cn(itemVariants({ variant: "default", size: "md" }), active && "bg-accent", className)}
+      className={cn(
+        itemVariants({ variant: variant ?? groupVariant, size: size ?? groupSize }),
+        active && "bg-accent",
+        className
+      )}
       onPress={() => onValueChange(value)}
       accessibilityRole="radio"
       accessibilityState={{ selected: active }}
@@ -134,6 +143,8 @@ export default function ToggleGroupPage() {
         <PropsTable props={[
           { name: "value", type: "string", default: "required" },
           { name: "onValueChange", type: "(value: string) => void", default: "required" },
+          { name: "variant", type: "\"default\" | \"outline\"", default: "\"default\"" },
+          { name: "size", type: "\"sm\" | \"md\" | \"lg\"", default: "\"md\"" },
           { name: "className", type: "string" },
         ]} />
         <p className="text-sm text-muted-foreground">
@@ -143,6 +154,8 @@ export default function ToggleGroupPage() {
         <Heading as="h3" className="text-lg font-medium text-foreground mt-6">ToggleGroupItem</Heading>
         <PropsTable props={[
           { name: "value", type: "string", default: "required" },
+          { name: "variant", type: "\"default\" | \"outline\"", default: "inherited from group" },
+          { name: "size", type: "\"sm\" | \"md\" | \"lg\"", default: "inherited from group" },
           { name: "className", type: "string" },
           { name: "children", type: "ReactNode", default: "required" },
         ]} />

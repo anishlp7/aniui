@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text } from "react-native";
+import { View, Text, useColorScheme } from "react-native";
 import { cn } from "@/lib/utils";
 
 export interface ChartTooltipProps
@@ -17,10 +17,12 @@ export function ChartTooltip({
   label,
   value,
   indicator = "dot",
-  color = "#000",
+  color,
   items,
   ...props
 }: ChartTooltipProps) {
+  const dark = useColorScheme() === "dark";
+  const resolvedColor = color ?? (dark ? "#fafafa" : "#18181b");
   const indicatorEl = (c: string) =>
     indicator === "line" ? (
       <View className="w-1 h-3 rounded-full" style={{ backgroundColor: c }} />
@@ -60,7 +62,7 @@ export function ChartTooltip({
         ))
       ) : (
         <View className="flex-row items-center gap-2">
-          {indicatorEl(color)}
+          {indicatorEl(resolvedColor)}
           <Text className="text-sm font-medium text-foreground">{value}</Text>
         </View>
       )}

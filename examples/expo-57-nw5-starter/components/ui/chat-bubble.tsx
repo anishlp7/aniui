@@ -1,6 +1,7 @@
 import React from "react";
-import { View, Text } from "react-native";
+import { View, Text, useColorScheme } from "react-native";
 import { cva, type VariantProps } from "class-variance-authority";
+import { Check, CheckCheck } from "lucide-react-native";
 import { cn } from "@/lib/utils";
 
 const bubbleVariants = cva("max-w-[80%] rounded-2xl px-4 py-2.5", {
@@ -32,12 +33,6 @@ export interface ChatBubbleProps
   status?: "sent" | "delivered" | "read";
 }
 
-const statusIcons: Record<string, string> = {
-  sent: "✓",
-  delivered: "✓✓",
-  read: "✓✓",
-};
-
 export function ChatBubble({
   variant,
   className,
@@ -47,6 +42,8 @@ export function ChatBubble({
   ...props
 }: ChatBubbleProps) {
   const isSent = variant === "sent";
+  const dark = useColorScheme() === "dark";
+  const tick = dark ? "#18181b99" : "#fafafa99";
 
   return (
     <View className={cn(bubbleVariants({ variant }), className)} {...props}>
@@ -58,11 +55,12 @@ export function ChatBubble({
               {timestamp}
             </Text>
           )}
-          {status && isSent && (
-            <Text className={cn("text-[10px]", status === "read" ? "text-blue-300" : "text-primary-foreground/60")}>
-              {statusIcons[status]}
-            </Text>
-          )}
+          {status && isSent &&
+            (status === "sent" ? (
+              <Check size={12} color={tick} />
+            ) : (
+              <CheckCheck size={12} color={status === "read" ? "#93c5fd" : tick} />
+            ))}
         </View>
       )}
     </View>

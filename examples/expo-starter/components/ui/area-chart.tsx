@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, LayoutChangeEvent } from "react-native";
+import { View, LayoutChangeEvent, useColorScheme } from "react-native";
 import Svg, { Path, Defs, LinearGradient, Stop, Line, G, Text as SvgText } from "react-native-svg";
 import { cn } from "@/lib/utils";
 
@@ -33,6 +33,9 @@ export function AreaChart({
   ...props
 }: AreaChartProps) {
   const [width, setWidth] = useState(0);
+  const dark = useColorScheme() === "dark";
+  const gridColor = dark ? "#27272a" : "#e5e7eb";
+  const labelColor = dark ? "#a1a1aa" : "#6b7280";
   const onLayout = (e: LayoutChangeEvent) => setWidth(e.nativeEvent.layout.width);
   if (width === 0) return <View className={cn("w-full", className)} onLayout={onLayout} style={{ height }} {...props} />;
 
@@ -78,7 +81,7 @@ export function AreaChart({
         </Defs>
         {showGrid && [3, 2, 1, 0].map((i) => {
           const y = pad.top + (i / 3) * ch;
-          return <Line key={i} x1={pad.left} y1={y} x2={pad.left + cw} y2={y} stroke="#e5e7eb" strokeWidth={1} />;
+          return <Line key={i} x1={pad.left} y1={y} x2={pad.left + cw} y2={y} stroke={gridColor} strokeWidth={1} />;
         })}
         {allSeries.map((s, i) => (
           <G key={i}>
@@ -87,12 +90,12 @@ export function AreaChart({
           </G>
         ))}
         {showLabels && data.map((d, i) => (
-          <SvgText key={i} x={pad.left + (i / Math.max(data.length - 1, 1)) * cw} y={height - 4} fontSize={10} fill="#6b7280" textAnchor="middle">
+          <SvgText key={i} x={pad.left + (i / Math.max(data.length - 1, 1)) * cw} y={height - 4} fontSize={10} fill={labelColor} textAnchor="middle">
             {d.label}
           </SvgText>
         ))}
         {showLabels && [0, 1, 2, 3].map((i) => (
-          <SvgText key={`y${i}`} x={pad.left - 4} y={pad.top + ((3 - i) / 3) * ch + 3} fontSize={9} fill="#6b7280" textAnchor="end">
+          <SvgText key={`y${i}`} x={pad.left - 4} y={pad.top + ((3 - i) / 3) * ch + 3} fontSize={9} fill={labelColor} textAnchor="end">
             {Math.round((i / 3) * maxVal)}
           </SvgText>
         ))}

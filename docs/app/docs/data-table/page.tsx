@@ -81,9 +81,9 @@ const stripedCode = `<DataTable
   striped
 />`;
 const sourceCode = `import React, { useState, useMemo, useCallback } from "react";
-import { View, Text, TextInput, Pressable, FlatList, ScrollView } from "react-native";
+import { View, Text, TextInput, Pressable, ScrollView, useColorScheme, type ViewStyle } from "react-native";
 import { cn } from "@/lib/utils";
-import Svg, { Path } from "react-native-svg";
+import { ChevronDown, ChevronUp } from "lucide-react-native";
 
 export interface DataTableColumn<T> {
   key: keyof T & string;
@@ -106,13 +106,19 @@ export interface DataTableProps<T> extends React.ComponentPropsWithoutRef<typeof
   emptyText?: string;
   className?: string;
   striped?: boolean;
+  /** When true, fit columns to container width and truncate long content with ellipsis.
+   *  Default false: each column has a fixed width (col.width or defaultColumnWidth) and the
+   *  table scrolls horizontally if total content exceeds the viewport. */
+  truncate?: boolean;
+  /** Default pixel width for columns that don't specify \`col.width\`. Used in scroll mode only. */
+  defaultColumnWidth?: number;
 }
 
 function SortIcon({ order }: { order?: "asc" | "desc" }) {
-  return (
-    <Svg width={12} height={12} viewBox="0 0 24 24" fill="none" stroke="#71717a" strokeWidth={2.5}>
-      {order === "asc" ? <Path d="m18 15-6-6-6 6" /> : <Path d="m6 9 6 6 6-6" />}
-    </Svg>
+  return order === "asc" ? (
+    <ChevronUp size={12} color="#71717a" strokeWidth={2.5} />
+  ) : (
+    <ChevronDown size={12} color="#71717a" strokeWidth={2.5} />
   );
 }
 
@@ -129,6 +135,8 @@ export function DataTable<T extends Record<string, unknown>>({
   emptyText = "No data",
   className,
   striped = false,
+  truncate = false,
+  defaultColumnWidth = 150,
   ...props
 }: DataTableProps<T>) {
   const [internalSortBy, setInternalSortBy] = useState<string | undefined>();
@@ -149,7 +157,7 @@ export function DataTable<T extends Record<string, unknown>>({
     setPage(0);
   }, [sortBy, sortOrder, internalSortOrder, onSort]);
 
-  const keys = searchKeys ?? columns.map((c) => c.key);
+  const keys = useMemo(() => searchKeys ?? columns.map((c) => c.key), [searchKeys, columns]);
 
   const filtered = useMemo(() => {
     if (!search.trim()) return data;
@@ -172,21 +180,23 @@ export function DataTable<T extends Record<string, unknown>>({
   const totalPages = pageSize ? Math.max(1, Math.ceil(sorted.length / pageSize)) : 1;
   const paged = pageSize ? sorted.slice(page * pageSize, (page + 1) * pageSize) : sorted;
 
-  const renderRow = useCallback(({ item, index }: { item: T; index: number }) => (
-    <View className={cn("flex-row border-b border-border", striped && index % 2 === 1 && "bg-muted/30")}>
-      {columns.map((col) => (
-        <View key={col.key} className="flex-1 px-4 py-3" style={col.width ? { width: col.width, flex: 0 } : undefined}>
-          {col.render ? (
-            col.render(item[col.key], item)
-          ) : (
-            <Text className="text-sm text-foreground" numberOfLines={1}>
-              {String(item[col.key] ?? "")}
-            </Text>
-          )}
-        </View>
-      ))}
-    </View>
-  ), [columns, striped]);
+  const [contentWidth, setContentWidth] = useState(0);
+  const fixedSum = columns.reduce((s, c) => s + (c.width ?? 0), 0);
+  const autoCount = columns.filter((c) => !c.width).length;
+  const truncatedAutoWidth = autoCount > 0 && contentWidth > 0
+    ? Math.max((contentWidth - fixedSum) / autoCount, 80)
+    : 0;
+
+  const colStyle = (col: DataTableColumn<T>): ViewStyle => {
+    if (col.width) return { width: col.width, overflow: "hidden" };
+    if (truncate) {
+      if (truncatedAutoWidth > 0) return { width: truncatedAutoWidth, overflow: "hidden" };
+      return { flexGrow: 1, flexShrink: 1, flexBasis: 0, minWidth: 0, overflow: "hidden" };
+    }
+    return { width: defaultColumnWidth, overflow: "hidden" };
+  };
+
+  const dark = useColorScheme() === "dark";
 
   return (
     <View className={cn("rounded-md border border-border overflow-hidden", className)} {...props}>
@@ -195,21 +205,25 @@ export function DataTable<T extends Record<string, unknown>>({
           <TextInput
             className="min-h-10 px-3 rounded-md border border-input bg-background text-foreground text-sm"
             placeholder={searchPlaceholder}
-            placeholderTextColor="#71717a"
+            placeholderTextColor={dark ? "#a1a1aa" : "#71717a"}
             value={search}
             onChangeText={(v) => { setSearch(v); setPage(0); }}
             accessibilityLabel="Search table"
           />
         </View>
       )}
-      <ScrollView horizontal>
-        <View className="min-w-full">
+      <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+        <View
+          style={{ minWidth: "100%" }}
+          onLayout={truncate ? (e) => setContentWidth(e.nativeEvent.layout.width) : undefined}
+        >
+          {/* Header */}
           <View className="flex-row bg-muted/50">
             {columns.map((col) => (
               <Pressable
                 key={col.key}
-                className="flex-1 flex-row items-center px-4 py-3 gap-1"
-                style={col.width ? { width: col.width, flex: 0 } : undefined}
+                className="flex-row items-center px-4 py-3 gap-1"
+                style={colStyle(col)}
                 onPress={() => col.sortable && handleSort(col.key)}
                 disabled={!col.sortable}
                 accessible={true}
@@ -220,16 +234,28 @@ export function DataTable<T extends Record<string, unknown>>({
               </Pressable>
             ))}
           </View>
-          <FlatList
-            data={paged}
-            keyExtractor={(_, i) => String(i)}
-            renderItem={renderRow}
-            ListEmptyComponent={
-              <View className="py-8 items-center">
-                <Text className="text-sm text-muted-foreground">{emptyText}</Text>
+          {/* Body */}
+          {paged.length === 0 ? (
+            <View className="py-8 items-center">
+              <Text className="text-sm text-muted-foreground">{emptyText}</Text>
+            </View>
+          ) : (
+            paged.map((item, index) => (
+              <View key={index} className={cn("flex-row border-t border-border", striped && index % 2 === 1 && "bg-muted/30")}>
+                {columns.map((col) => (
+                  <View key={col.key} className="px-4 py-3" style={colStyle(col)}>
+                    {col.render ? (
+                      col.render(item[col.key], item)
+                    ) : (
+                      <Text className="text-sm text-foreground" numberOfLines={1}>
+                        {String(item[col.key] ?? "")}
+                      </Text>
+                    )}
+                  </View>
+                ))}
               </View>
-            }
-          />
+            ))
+          )}
         </View>
       </ScrollView>
       {pageSize && totalPages > 1 && (

@@ -9,9 +9,9 @@ import { AddComponentTabs } from "@/components/package-manager-tabs";
 import { PreviewToggle } from "@/components/preview-toggle";
 const installCode = `npx @aniui/cli add fab`;
 const usageCode = `import { FAB } from "@/components/ui/fab";
-import { Ionicons } from "@expo/vector-icons";
+import { Plus } from "lucide-react-native";
 // Basic FAB (bottom-right by default)
-<FAB icon={<Ionicons name="add" size={24} color="white" />} onPress={() => {}} />`;
+<FAB icon={<Plus size={24} color="white" />} onPress={() => {}} />`;
 const variantsCode = `<FAB variant="default" icon={<PlusIcon />} />
 <FAB variant="secondary" icon={<PlusIcon />} />
 <FAB variant="destructive" icon={<TrashIcon />} />`;

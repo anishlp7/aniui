@@ -7,7 +7,7 @@ import { PropsTable } from "@/components/props-table";
 import { AddComponentTabs } from "@/components/package-manager-tabs";
 const installCode = `npx @aniui/cli add tab-bar`;
 const usageCode = `import { TabBar, TabBarItem } from "@/components/ui/tab-bar";
-import { Ionicons } from "@expo/vector-icons";
+import { Home, Search, Mail, User } from "lucide-react-native";
 
 export function MyScreen() {
   const [active, setActive] = useState("home");
@@ -16,26 +16,26 @@ export function MyScreen() {
     <TabBar>
       <TabBarItem
         active={active === "home"}
-        icon={<Ionicons name="home" size={20} />}
+        icon={<Home size={20} />}
         label="Home"
         onPress={() => setActive("home")}
       />
       <TabBarItem
         active={active === "search"}
-        icon={<Ionicons name="search" size={20} />}
+        icon={<Search size={20} />}
         label="Search"
         onPress={() => setActive("search")}
       />
       <TabBarItem
         active={active === "inbox"}
-        icon={<Ionicons name="mail" size={20} />}
+        icon={<Mail size={20} />}
         label="Inbox"
         badge={3}
         onPress={() => setActive("inbox")}
       />
       <TabBarItem
         active={active === "profile"}
-        icon={<Ionicons name="person" size={20} />}
+        icon={<User size={20} />}
         label="Profile"
         onPress={() => setActive("profile")}
       />

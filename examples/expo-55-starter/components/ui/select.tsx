@@ -2,7 +2,7 @@ import React, { useState, useRef } from "react";
 import { View, Text, Pressable, TextInput, Modal, ScrollView, Dimensions, LayoutChangeEvent, useColorScheme } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { cn } from "@/lib/utils";
-import Svg, { Path } from "react-native-svg";
+import { Check, ChevronDown } from "lucide-react-native";
 
 export interface SelectOption { label: string; value: string }
 
@@ -69,7 +69,7 @@ export function Select({
         <Text className={cn("text-base flex-1", selected ? "text-foreground" : "text-muted-foreground")} numberOfLines={1}>
           {selected?.label ?? placeholder}
         </Text>
-        <Svg width={16} height={16} viewBox="0 0 24 24" fill="none" stroke="#71717a" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round"><Path d="m6 9 6 6 6-6" /></Svg>
+        <ChevronDown size={16} color="#71717a" />
       </Pressable>
 
       <Modal visible={open} transparent animationType="none" onRequestClose={close} statusBarTranslucent>
@@ -117,7 +117,7 @@ export function Select({
                   accessibilityState={{ selected: isSelected }}
                 >
                   <Text className={cn("flex-1 text-base text-foreground", isSelected && "font-semibold")} numberOfLines={1}>{o.label}</Text>
-                  {isSelected && <Text className="text-base text-primary font-bold">✓</Text>}
+                  {isSelected && <Check size={16} color={caret} strokeWidth={3} />}
                 </Pressable>
               );
             })}

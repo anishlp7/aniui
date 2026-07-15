@@ -1,4 +1,4 @@
-import React, { createContext, useCallback, useContext, useState } from "react";
+import React, { createContext, useCallback, useContext, useEffect, useRef, useState } from "react";
 import { View, Text, Pressable } from "react-native";
 import Animated from "react-native-reanimated";
 import { Portal } from "@rn-primitives/portal";
@@ -16,7 +16,9 @@ type ToastData = {
   position?: ToastPosition;
   from?: ToastFrom;
 };
-
+const positions: ToastPosition[] = ["top", "bottom"];
+// Monotonic id — Date.now() collides for toasts fired in the same millisecond.
+let nextId = 0;
 const ToastContext = createContext<{ toast: (data: Omit<ToastData, "id">) => void }>({ toast: () => {} });
 
 export function useToast() {
@@ -29,10 +31,8 @@ export interface ToastProviderProps {
   defaultFrom?: ToastFrom;
 }
 
-// Reanimated naming: SlideIn<Side> means the element STARTS on that side and
-// slides into place. So `from: "top"` (element comes from above) maps to
-// SlideInUp — "Up" describes the starting position. Exit symmetrically:
-// SlideOut<Side> moves the element OFF in that direction.
+// Reanimated naming: SlideIn<Side> = the element STARTS on that side, so
+// `from: "top"` maps to SlideInUp; exits mirror in the same direction.
 const animationFor: Record<ToastFrom, { enter: typeof entering.slideInUp; exit: typeof exiting.slideOutUp }> = {
   top:    { enter: entering.slideInUp,    exit: exiting.slideOutUp },
   bottom: { enter: entering.slideInDown,  exit: exiting.slideOutDown },
@@ -45,26 +45,34 @@ const containerStyles: Record<ToastPosition, string> = {
   bottom: "absolute bottom-14 start-4 end-4 gap-2 z-50",
 };
 
-const positions: ToastPosition[] = ["top", "bottom"];
-
 export function ToastProvider({ children, defaultPosition = "top", defaultFrom }: ToastProviderProps) {
   const [toasts, setToasts] = useState<ToastData[]>([]);
+  const timers = useRef<Map<string, ReturnType<typeof setTimeout>>>(new Map());
+
+  const dismiss = useCallback((id: string) => {
+    const timer = timers.current.get(id);
+    if (timer) clearTimeout(timer);
+    timers.current.delete(id);
+    setToasts((prev) => prev.filter((t) => t.id !== id));
+  }, []);
 
   const toast = useCallback((data: Omit<ToastData, "id">) => {
-    const id = Date.now().toString();
+    const id = String(++nextId);
     const position = data.position ?? defaultPosition;
     const from = data.from ?? defaultFrom ?? position;
     setToasts((prev) => [...prev, { ...data, id, position, from }]);
-    setTimeout(() => setToasts((prev) => prev.filter((t) => t.id !== id)), 3000);
-  }, [defaultPosition, defaultFrom]);
+    timers.current.set(id, setTimeout(() => dismiss(id), 3000));
+  }, [defaultPosition, defaultFrom, dismiss]);
 
-  const dismiss = (id: string) => setToasts((prev) => prev.filter((t) => t.id !== id));
+  useEffect(() => {
+    const pending = timers.current;
+    return () => pending.forEach(clearTimeout);
+  }, []);
 
   return (
     <ToastContext.Provider value={{ toast }}>
       {children}
-      {/* Render via Portal so toasts always anchor to the screen, not to whatever
-          ancestor the ToastProvider happens to live inside (e.g. a ScrollView). */}
+      {/* Portal anchors toasts to the screen, not the provider's ancestor. */}
       <Portal name="aniui-toast">
         {positions.map((pos) => {
           const items = toasts.filter((t) => t.position === pos);

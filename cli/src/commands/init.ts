@@ -232,7 +232,10 @@ export async function initCommand(opts?: { style?: string; nw?: string; yes?: bo
   const allDeps = { ...pkgJson.dependencies, ...pkgJson.devDependencies };
   const hasWorklets = !!allDeps["react-native-worklets"];
 
-  if (!hasStyleEngine || !project.hasReanimated || !project.hasTailwind || (isSdk56Plus && !hasWorklets)) {
+  const baseDeps = ["react-native-safe-area-context", "react-native-svg", "lucide-react-native", "class-variance-authority", "clsx", "tailwind-merge"];
+  const missingBase = baseDeps.filter((d) => !allDeps[d]);
+
+  if (!hasStyleEngine || !project.hasReanimated || !project.hasTailwind || (isSdk56Plus && !hasWorklets) || missingBase.length > 0) {
     const missing: string[] = [];
 
     if (!hasStyleEngine) {
@@ -255,8 +258,8 @@ export async function initCommand(opts?: { style?: string; nw?: string; yes?: bo
       missing.push("react-native-worklets");
     }
 
-    // Always ensure these are present
-    missing.push("react-native-safe-area-context", "react-native-svg", "class-variance-authority", "clsx", "tailwind-merge");
+    // Always ensure these are present (icons ship via lucide-react-native)
+    missing.push(...missingBase);
 
     logger.break();
     logger.info("Missing dependencies detected. Installing...");

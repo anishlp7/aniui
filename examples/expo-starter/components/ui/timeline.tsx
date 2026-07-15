@@ -1,6 +1,7 @@
 import React from "react";
 import { View, Text } from "react-native";
 import { cva, type VariantProps } from "class-variance-authority";
+import { Check } from "lucide-react-native";
 import { cn } from "@/lib/utils";
 
 export interface TimelineProps extends React.ComponentPropsWithoutRef<typeof View> {
@@ -62,7 +63,7 @@ export function TimelineItem({
           <View className={cn(dotVariants({ variant }), isActive && "border-2 border-primary/30")}>
             {variant === "completed" && (
               <View className="flex-1 items-center justify-center">
-                <Text className="text-[8px] text-white leading-none">✓</Text>
+                <Check size={8} color="#ffffff" strokeWidth={3} />
               </View>
             )}
           </View>
@@ -71,7 +72,7 @@ export function TimelineItem({
       </View>
 
       {/* Content */}
-      <View className={cn("flex-1 ml-3 pb-6", isLast && "pb-0")}>
+      <View className={cn("flex-1 ms-3 pb-6", isLast && "pb-0")}>
         <View className="flex-row items-start justify-between gap-2">
           <Text className={cn("text-sm font-medium flex-1", variant === "pending" ? "text-muted-foreground" : "text-foreground")}>{title}</Text>
           {time && <Text className="text-[11px] text-muted-foreground">{time}</Text>}

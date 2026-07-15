@@ -21,7 +21,10 @@ const itemVariants = cva(
   }
 );
 
-type GroupCtx = { value: string; onValueChange: (v: string) => void };
+type GroupCtx = {
+  value: string;
+  onValueChange: (v: string) => void;
+} & VariantProps<typeof itemVariants>;
 const Ctx = createContext<GroupCtx>({ value: "", onValueChange: () => {} });
 
 export interface ToggleGroupProps
@@ -35,7 +38,7 @@ export interface ToggleGroupProps
 
 export function ToggleGroup({ value, onValueChange, variant, size, className, children, ...props }: ToggleGroupProps) {
   return (
-    <Ctx.Provider value={{ value, onValueChange }}>
+    <Ctx.Provider value={{ value, onValueChange, variant, size }}>
       <View className={cn("flex-row gap-1", className)} accessibilityRole="radiogroup" {...props}>
         {children}
       </View>
@@ -43,18 +46,24 @@ export function ToggleGroup({ value, onValueChange, variant, size, className, ch
   );
 }
 
-export interface ToggleGroupItemProps extends React.ComponentPropsWithoutRef<typeof Pressable> {
+export interface ToggleGroupItemProps
+  extends React.ComponentPropsWithoutRef<typeof Pressable>,
+    VariantProps<typeof itemVariants> {
   className?: string;
   value: string;
   children: React.ReactNode;
 }
 
-export function ToggleGroupItem({ value, className, children, ...props }: ToggleGroupItemProps) {
-  const { value: selected, onValueChange } = useContext(Ctx);
+export function ToggleGroupItem({ value, variant, size, className, children, ...props }: ToggleGroupItemProps) {
+  const { value: selected, onValueChange, variant: groupVariant, size: groupSize } = useContext(Ctx);
   const active = selected === value;
   return (
     <Pressable
-      className={cn(itemVariants({ variant: "default", size: "md" }), active && "bg-accent", className)}
+      className={cn(
+        itemVariants({ variant: variant ?? groupVariant, size: size ?? groupSize }),
+        active && "bg-accent",
+        className
+      )}
       onPress={() => onValueChange(value)}
       accessibilityRole="radio"
       accessibilityState={{ selected: active }}

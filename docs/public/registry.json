@@ -52,6 +52,12 @@
       "description": "User avatar with image and fallback"
     },
     {
+      "name": "avatar-group",
+      "type": "registry:ui",
+      "title": "AvatarGroup",
+      "description": "Overlapping avatar stack with max count and +N overflow bubble"
+    },
+    {
       "name": "badge",
       "type": "registry:ui",
       "title": "Badge",
@@ -157,7 +163,7 @@
       "name": "command-menu",
       "type": "registry:ui",
       "title": "CommandMenu",
-      "description": "Spotlight-style searchable command palette with groups and keyboard shortcuts"
+      "description": "Spotlight/kbar-style command palette — portal-based overlay with rigorous Android keyboard handling, groups, and shortcuts"
     },
     {
       "name": "connection-banner",
@@ -250,6 +256,12 @@
       "description": "Form context with validation, error handling, and compound components"
     },
     {
+      "name": "gradient",
+      "type": "registry:ui",
+      "title": "Gradient",
+      "description": "Linear gradient view with configurable colors and direction"
+    },
+    {
       "name": "grid",
       "type": "registry:ui",
       "title": "Grid",
@@ -314,6 +326,12 @@
       "type": "registry:ui",
       "title": "Kbd",
       "description": "Keyboard key display with grouping and separator"
+    },
+    {
+      "name": "keyboard-view",
+      "type": "registry:ui",
+      "title": "KeyboardView",
+      "description": "Keyboard-avoiding wrapper so forms stay visible above the keyboard"
     },
     {
       "name": "label",

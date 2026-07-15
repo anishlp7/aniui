@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { View, TextInput, Pressable, Text, useColorScheme } from "react-native";
 import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
-import Svg, { Circle, Line, Path } from "react-native-svg";
+import { Eye, EyeOff } from "lucide-react-native";
 
 const passwordVariants = cva(
   "flex-row items-center rounded-md border py-2 text-foreground",
@@ -79,10 +79,7 @@ export const PasswordInput = React.forwardRef<
           {...props}
         />
         <Pressable onPress={() => setVisible(!visible)} accessible={true} accessibilityRole="button" accessibilityLabel={visible ? "Hide password" : "Show password"} className="ms-2 min-h-8 min-w-8 items-center justify-center">
-          <Svg width={20} height={20} viewBox="0 0 24 24" fill="none" stroke="#71717a" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
-            {visible ? (<><Path d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0" /><Circle cx="12" cy="12" r="3" /></>
-            ) : (<><Path d="M10.733 5.076a10.744 10.744 0 0 1 11.205 6.575 1 1 0 0 1 0 .696 10.747 10.747 0 0 1-1.444 2.49" /><Path d="M14.084 14.158a3 3 0 0 1-4.242-4.242" /><Path d="M17.479 17.499a10.75 10.75 0 0 1-15.417-5.151 1 1 0 0 1 0-.696 10.75 10.75 0 0 1 4.446-5.143" /><Line x1="2" y1="2" x2="22" y2="22" /></>)}
-          </Svg>
+          {visible ? <Eye size={20} color="#71717a" /> : <EyeOff size={20} color="#71717a" />}
         </Pressable>
       </View>
       {showStrength && value.length > 0 && (

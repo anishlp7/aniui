@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useCallback } from "react";
+import React, { useState, useMemo, useCallback, useEffect } from "react";
 import {
   View,
   TextInput,
@@ -9,9 +9,11 @@ import {
   Modal,
   ScrollView,
   useColorScheme,
+  Keyboard,
+  Platform,
 } from "react-native";
 import { cn } from "@/lib/utils";
-import Svg, { Path } from "react-native-svg";
+import { X, ChevronDown } from "lucide-react-native";
 
 export interface ComboboxOption {
   label: string;
@@ -57,9 +59,7 @@ function Chip({ label, onRemove }: { label: string; onRemove: () => void }) {
         accessibilityRole="button"
         accessibilityLabel={`Remove ${label}`}
       >
-        <Svg width={12} height={12} viewBox="0 0 24 24" fill="none" stroke="#71717a" strokeWidth={2.5}>
-          <Path d="M18 6 6 18M6 6l12 12" />
-        </Svg>
+        <X size={12} color="#71717a" strokeWidth={2.5} />
       </Pressable>
     </View>
   );
@@ -88,8 +88,22 @@ export function Combobox({
 }: ComboboxProps) {
   const [open, setOpen] = useState(false);
   const [search, setSearch] = useState("");
+  const [kbHeight, setKbHeight] = useState(0);
   const dark = useColorScheme() === "dark";
   const caret = dark ? "#fafafa" : "#18181b";
+
+  // RN Modal doesn't resize for the keyboard on Android (and the sheet is
+  // bottom-anchored), so track the keyboard height and pad the sheet up.
+  useEffect(() => {
+    const showEvt = Platform.OS === "ios" ? "keyboardWillShow" : "keyboardDidShow";
+    const hideEvt = Platform.OS === "ios" ? "keyboardWillHide" : "keyboardDidHide";
+    const show = Keyboard.addListener(showEvt, (e) => setKbHeight(e.endCoordinates.height));
+    const hide = Keyboard.addListener(hideEvt, () => setKbHeight(0));
+    return () => {
+      show.remove();
+      hide.remove();
+    };
+  }, []);
 
   const allOptions = useMemo(
     () => (groups ? groups.flatMap((g) => g.options) : options),
@@ -215,14 +229,10 @@ export function Combobox({
               accessibilityRole="button"
               accessibilityLabel="Clear selection"
             >
-              <Svg width={14} height={14} viewBox="0 0 24 24" fill="none" stroke="#71717a" strokeWidth={2}>
-                <Path d="M18 6 6 18M6 6l12 12" />
-              </Svg>
+              <X size={14} color="#71717a" strokeWidth={2} />
             </Pressable>
           )}
-          <Svg width={16} height={16} viewBox="0 0 24 24" fill="none" stroke="#71717a" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
-            <Path d="m6 9 6 6 6-6" />
-          </Svg>
+          <ChevronDown size={16} color="#71717a" strokeWidth={2} />
         </View>
       </Pressable>
 
@@ -248,7 +258,11 @@ export function Combobox({
 
       {/* Modal */}
       <Modal visible={open} transparent animationType="fade" onRequestClose={() => setOpen(false)}>
-        <Pressable className="flex-1 bg-black/50 justify-end" onPress={() => setOpen(false)}>
+        <Pressable
+          className="flex-1 bg-black/50 justify-end"
+          style={{ paddingBottom: kbHeight }}
+          onPress={() => setOpen(false)}
+        >
           <Pressable className="bg-card rounded-t-2xl max-h-96 pb-8" onPress={() => {}}>
             <View className="items-center py-3">
               <View className="w-10 h-1 rounded-full bg-muted" />

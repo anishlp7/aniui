@@ -22,6 +22,8 @@ export function Grid<T>({
 }: GridProps<T>) {
   return (
     <FlatList
+      // numColumns cannot change on the fly — remount the list when it does
+      key={`grid-${columns}`}
       className={cn("", className)}
       data={data}
       numColumns={columns}

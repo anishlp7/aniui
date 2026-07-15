@@ -48,9 +48,9 @@ describe("Accessibility Audit", () => {
       expect(el.props.accessible).toBe(true);
     });
 
-    it("shows checkmark when checked", () => {
-      const { getByText } = render(<Checkbox checked={true} />);
-      expect(getByText("\u2713")).toBeTruthy();
+    it("shows check icon when checked", () => {
+      const { toJSON } = render(<Checkbox checked={true} />);
+      expect(JSON.stringify(toJSON())).toContain("Svg");
     });
 
     it("renders without crashing when unchecked", () => {

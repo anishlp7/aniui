@@ -265,6 +265,17 @@ export function [Name]({ variant, size, className, ...props }: [Name]Props) {
 - For Pressable components: add `accessible={true}` and minimum touch target `min-h-12 min-w-12` (48dp)
 - For text content inside Pressable: always wrap in `<Text>` (never bare strings in RN)
 
+## Icons — lucide-react-native
+
+All component-internal icons come from **`lucide-react-native`** (peer: `react-native-svg`). Never draw icons with unicode glyphs (`✓`, `×`, `☰`, …) or hand-rolled `<Svg><Path/></Svg>`.
+
+- Named imports only: `import { X, Check, ChevronDown } from "lucide-react-native"`.
+- Icons take `size` / `color` / `strokeWidth` props. **Never pass `className` to an icon** — it isn't interop-registered, and components must behave identically under NativeWind and Uniwind.
+- Colors are hex, matching the existing caret/placeholder convention: muted icons `#71717a`; dark-aware pairs via `useColorScheme()` (foreground `dark ? "#fafafa" : "#18181b"`, primary-foreground inverted, muted-foreground `dark ? "#a1a1aa" : "#71717a"`).
+- Never render an icon inside `<Text>` — icons are Views; lay them out as flex-row siblings.
+- Components exposing icon props (`icon`, `leadingIcon`, `trailingIcon`) keep them as `React.ReactNode` — bring-your-own-icon stays supported.
+- Registry entries for components importing lucide must declare `"lucide-react-native", "react-native-svg"` in `dependencies` (in BOTH `cli/src/registry.ts` and `mcp/src/registry-data.ts`). `aniui init` always installs both.
+
 ## Component Tiers — What Gets Built When
 
 > **Source of truth:** `cli/src/registry.ts` is authoritative for every component's tier, npm deps, and registry deps — the table below is a human-readable overview that may lag. The `tier` type is `1 | 2 | 3` (SVG charts are tier 3, not "tier 4"). Components present in the registry but not (yet) in the table below: `calendar`, `stepper`, `field`, `input-group`, `kbd`, `hover-card`, `direction-provider`, `animate`, `data-table`, `command-menu`, `aspect-ratio`, `breadcrumb`, `menubar`, `sidebar`. When the table and registry disagree on tier/deps, trust the registry.

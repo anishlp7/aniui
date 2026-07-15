@@ -1,8 +1,7 @@
 import React from "react";
 import { View, Pressable, Text } from "react-native";
 import { cn } from "@/lib/utils";
-import { Path } from "react-native-svg";
-import { Svg } from "react-native-svg";
+import { ChevronLeft, ChevronRight, Ellipsis } from "lucide-react-native";
 
 export interface PaginationProps extends React.ComponentPropsWithoutRef<typeof View> {
   className?: string;
@@ -43,16 +42,13 @@ export function Pagination({
         accessibilityLabel="Previous page"
         className="min-h-10 min-w-10 items-center justify-center rounded-md"
       >
-        <Text className={cn("text-base font-bold", current <= 1 ? "text-muted" : "text-foreground")}>
-        <Svg width={24} height={24} viewBox="0 0 24 24" fill="none" stroke="#71717a" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
-          <Path d="m12 19-7-7 7-7" />
-          <Path d="M19 12H5" />
-        </Svg>  
-        </Text>
+        <ChevronLeft size={24} color="#71717a" />
       </Pressable>
       {pages.map((page, i) =>
         page === "..." ? (
-          <Text key={`e${i}`} className="text-muted-foreground px-1">…</Text>
+          <View key={`e${i}`} className="px-1">
+            <Ellipsis size={16} color="#71717a" />
+          </View>
         ) : (
           <Pressable
             key={page}
@@ -80,12 +76,7 @@ export function Pagination({
         accessibilityLabel="Next page"
         className="min-h-10 min-w-10 items-center justify-center rounded-md"
       >
-        <Text className={cn("text-base font-bold", current >= total ? "text-muted" : "text-foreground")}>
-        <Svg width={24} height={24} viewBox="0 0 24 24" fill="none" stroke="#71717a" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
-          <Path d="M5 12h14" />
-          <Path d="m12 5 7 7-7 7" />
-        </Svg>  
-        </Text>
+        <ChevronRight size={24} color="#71717a" />
       </Pressable>
     </View>
   );

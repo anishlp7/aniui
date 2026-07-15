@@ -1,6 +1,7 @@
 import React from "react";
-import { View, Text, Pressable } from "react-native";
+import { View, Text, Pressable, useColorScheme } from "react-native";
 import { cva, type VariantProps } from "class-variance-authority";
+import { Minus, Plus } from "lucide-react-native";
 import { cn } from "@/lib/utils";
 
 const stepperVariants = cva("flex-row items-center self-start rounded-lg border border-border", {
@@ -37,6 +38,8 @@ export interface StepperProps
 }
 
 export function Stepper({ size, className, value, onChange, min = 0, max = 99, step = 1, ...props }: StepperProps) {
+  const dark = useColorScheme() === "dark";
+  const fg = dark ? "#fafafa" : "#18181b";
   const canDec = value - step >= min;
   const canInc = value + step <= max;
 
@@ -55,7 +58,7 @@ export function Stepper({ size, className, value, onChange, min = 0, max = 99, s
         accessibilityRole="button"
         accessibilityLabel="Decrease"
       >
-        <Text className="text-lg text-foreground">−</Text>
+        <Minus size={18} color={fg} />
       </Pressable>
       <View className="w-14 items-center justify-center">
         <Text className="text-base font-medium text-foreground">{value}</Text>
@@ -68,7 +71,7 @@ export function Stepper({ size, className, value, onChange, min = 0, max = 99, s
         accessibilityRole="button"
         accessibilityLabel="Increase"
       >
-        <Text className="text-lg text-foreground">+</Text>
+        <Plus size={18} color={fg} />
       </Pressable>
     </View>
   );

@@ -19,8 +19,8 @@ const fabVariants = cva(
         extended: "h-14 rounded-full px-6 flex-row gap-2",
       },
       position: {
-        "bottom-right": "absolute bottom-6 right-6",
-        "bottom-left": "absolute bottom-6 left-6",
+        "bottom-right": "absolute bottom-6 end-6",
+        "bottom-left": "absolute bottom-6 start-6",
         "bottom-center": "absolute bottom-6 self-center",
         none: "",
       },

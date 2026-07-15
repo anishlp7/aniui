@@ -55,7 +55,7 @@ export function TabBarItem({ active, icon, label, badge, className, onPress, ...
         </Text>
       )}
       {badge !== undefined && badge > 0 && (
-        <View className="absolute -top-1 right-1/4 bg-destructive rounded-full min-w-5 h-5 items-center justify-center px-1">
+        <View className="absolute -top-1 end-1/4 bg-destructive rounded-full min-w-5 h-5 items-center justify-center px-1">
           <Text className="text-destructive-foreground text-[10px] font-bold">
             {badge > 99 ? "99+" : badge}
           </Text>

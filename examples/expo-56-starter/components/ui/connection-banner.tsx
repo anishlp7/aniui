@@ -6,7 +6,8 @@ import { cn } from "@/lib/utils";
 
 export interface ConnectionBannerProps {
   className?: string;
-  connected: boolean;
+  /** Undefined = connectivity not yet known; the banner stays hidden. */
+  connected?: boolean;
   offlineText?: string;
   onlineText?: string;
 }

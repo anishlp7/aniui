@@ -87,7 +87,7 @@ const jsonLd = {
   name: "AniUI",
   applicationCategory: "DeveloperApplication",
   operatingSystem: "iOS, Android",
-  description: "shadcn/ui for React Native. 93 accessible components built with Uniwind or NativeWind and TypeScript. Now supports Expo SDK 57.",
+  description: "shadcn/ui for React Native. 96 accessible components built with Uniwind or NativeWind and TypeScript. Now supports Expo SDK 57.",
   url: "https://aniui.dev",
   author: { "@type": "Person", name: "Anish" },
   offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
@@ -208,7 +208,7 @@ export default function HomePage() {
               animate={prefersReducedMotion ? undefined : { scale: [1, 1.4, 1], opacity: [1, 0.7, 1] }}
               transition={{ duration: 1.8, ease: "easeInOut", repeat: Infinity }}
             />
-            <span className="text-xs font-medium text-muted-foreground">93+ components and counting</span>
+            <span className="text-xs font-medium text-muted-foreground">96+ components and counting</span>
           </motion.div>
 
           <motion.h1
@@ -253,7 +253,7 @@ export default function HomePage() {
           <motion.div variants={heroItem} className="flex flex-col sm:flex-row items-center gap-3 mt-8">
             <motion.div whileHover={prefersReducedMotion ? undefined : { scale: 1.03 }} whileTap={{ scale: 0.97 }} transition={{ type: "spring", stiffness: 320, damping: 20 }}>
               <Link
-                href="/docs"
+                href="/docs/accordion"
                 className="h-12 px-8 rounded-lg bg-primary text-primary-foreground text-sm font-semibold flex items-center hover:opacity-90 transition-opacity"
               >
                 View Components &rarr;
@@ -349,7 +349,7 @@ export default function HomePage() {
         <div className="text-center sm:text-left">
           <p className="text-base font-semibold text-foreground">Preview on your device</p>
           <p className="text-sm text-muted-foreground mt-1 max-w-sm">
-            Scan with Expo Go to try all 93 components live on a real device.
+            Scan with Expo Go to try all 96 components live on a real device.
           </p>
         </div>
       </motion.div>

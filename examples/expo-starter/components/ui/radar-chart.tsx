@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, LayoutChangeEvent } from "react-native";
+import { View, LayoutChangeEvent, useColorScheme } from "react-native";
 import Svg, { Polygon, Line, Circle, G, Text as SvgText } from "react-native-svg";
 import { cn } from "@/lib/utils";
 
@@ -46,6 +46,9 @@ export function RadarChart({
   ...props
 }: RadarChartProps) {
   const [width, setWidth] = useState(0);
+  const dark = useColorScheme() === "dark";
+  const gridColor = dark ? "#27272a" : "#e5e7eb";
+  const labelColor = dark ? "#a1a1aa" : "#6b7280";
   const onLayout = (e: LayoutChangeEvent) => setWidth(e.nativeEvent.layout.width);
   if (width === 0) return <View className={cn("w-full", className)} onLayout={onLayout} style={{ height }} {...props} />;
 
@@ -67,11 +70,11 @@ export function RadarChart({
         {showGrid && Array.from({ length: gridLevels }).map((_, level) => {
           const r = ((level + 1) / gridLevels) * radius;
           const pts = Array.from({ length: n }).map((_, i) => polarToXY(cx, cy, r, i, n));
-          return <Polygon key={level} points={pts.map((p) => `${p.x},${p.y}`).join(" ")} fill="none" stroke="#e5e7eb" strokeWidth={1} />;
+          return <Polygon key={level} points={pts.map((p) => `${p.x},${p.y}`).join(" ")} fill="none" stroke={gridColor} strokeWidth={1} />;
         })}
         {showGrid && Array.from({ length: n }).map((_, i) => {
           const p = polarToXY(cx, cy, radius, i, n);
-          return <Line key={i} x1={cx} y1={cy} x2={p.x} y2={p.y} stroke="#e5e7eb" strokeWidth={1} />;
+          return <Line key={i} x1={cx} y1={cy} x2={p.x} y2={p.y} stroke={gridColor} strokeWidth={1} />;
         })}
         {allSeries.map((s, si) => {
           const pts = getPoints(s.data);
@@ -84,7 +87,7 @@ export function RadarChart({
         })}
         {showLabels && labels.map((d, i) => {
           const p = polarToXY(cx, cy, radius + 14, i, n);
-          return <SvgText key={i} x={p.x} y={p.y + 4} fontSize={11} fill="#6b7280" textAnchor="middle">{d.label}</SvgText>;
+          return <SvgText key={i} x={p.x} y={p.y + 4} fontSize={11} fill={labelColor} textAnchor="middle">{d.label}</SvgText>;
         })}
       </Svg>
     </View>

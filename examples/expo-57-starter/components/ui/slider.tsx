@@ -1,4 +1,4 @@
-import React, { useCallback } from "react";
+import React, { useCallback, useEffect } from "react";
 import { View, useColorScheme } from "react-native";
 import { Gesture, GestureDetector } from "react-native-gesture-handler";
 import Animated, { useSharedValue, useAnimatedStyle, runOnJS } from "react-native-reanimated";
@@ -33,11 +33,20 @@ export function Slider({
   onValueChange, className, ...props
 }: SliderProps) {
   const trackWidth = useSharedValue(0);
-  const pct = max > min ? ((value - min) / (max - min)) * 100 : 0;
+  // The thumb/fill follow this shared value so they track the finger even if
+  // the consumer doesn't echo `value` back synchronously.
+  const pct = useSharedValue(max > min ? ((value - min) / (max - min)) * 100 : 0);
+  const isDragging = useSharedValue(false);
   const thumbSize = size === "lg" ? 24 : size === "sm" ? 16 : 20;
   const dark = useColorScheme() === "dark";
 
-  const emitValue = useCallback((locationX: number) => {
+  useEffect(() => {
+    if (!isDragging.value) {
+      pct.value = max > min ? ((value - min) / (max - min)) * 100 : 0;
+    }
+  }, [value, min, max, pct, isDragging]);
+
+  const setFromX = useCallback((locationX: number) => {
     "worklet";
     const w = trackWidth.value;
     if (w <= 0) return;
@@ -45,18 +54,22 @@ export function Slider({
     const raw = min + ratio * (max - min);
     const stepped = Math.round(raw / step) * step;
     const clamped = Math.max(min, Math.min(max, stepped));
+    pct.value = max > min ? ((clamped - min) / (max - min)) * 100 : 0;
     if (onValueChange) runOnJS(onValueChange)(clamped);
-  }, [min, max, step, onValueChange, trackWidth]);
+  }, [min, max, step, onValueChange, trackWidth, pct]);
 
   const gesture = Gesture.Pan()
     .enabled(!disabled)
-    .onBegin((e) => { emitValue(e.x); })
-    .onUpdate((e) => { emitValue(e.x); })
+    .onBegin((e) => { isDragging.value = true; setFromX(e.x); })
+    .onUpdate((e) => { setFromX(e.x); })
+    .onFinalize(() => { isDragging.value = false; })
     .minDistance(0);
+
+  const fillStyle = useAnimatedStyle(() => ({ width: `${pct.value}%` }));
 
   const thumbStyle = useAnimatedStyle(() => ({
     position: "absolute" as const,
-    left: `${pct}%`,
+    left: `${pct.value}%`,
     marginLeft: -(thumbSize / 2),
     width: thumbSize,
     height: thumbSize,
@@ -77,7 +90,7 @@ export function Slider({
         {...props}
       >
         <View className="h-1.5 w-full rounded-full bg-secondary overflow-hidden">
-          <View className="h-full rounded-full bg-primary" style={{ width: `${pct}%` }} />
+          <Animated.View className="h-full rounded-full bg-primary" style={fillStyle} />
         </View>
         <Animated.View style={thumbStyle} />
       </View>
