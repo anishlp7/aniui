@@ -312,13 +312,32 @@ export default function CommandMenuPage() {
       <div>
         <h1 className="text-3xl font-bold tracking-tight text-foreground">Command Menu</h1>
         <p className="mt-2 text-lg text-muted-foreground">
-          Spotlight-style searchable command palette with groups and keyboard shortcuts.
+          Spotlight/kbar-style searchable command palette — portal-based overlay with groups, keyboard shortcuts, and solid keyboard handling on iOS and Android.
         </p>
       </div>
       {/* Installation */}
       <div className="space-y-4">
         <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Installation</Heading>
         <AddComponentTabs names="command-menu" />
+        <div className="rounded-lg border border-primary/30 bg-primary/10 p-4 text-sm text-foreground">
+          <p className="font-medium">Requires a PortalHost</p>
+          <p className="mt-1 text-muted-foreground">
+            The palette renders through <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">@rn-primitives/portal</code>, so your root layout needs a <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">&lt;PortalHost /&gt;</code>. <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">aniui add command-menu</code> injects it automatically — if you installed via the shadcn CLI or copied manually, add it yourself:
+          </p>
+          <CodeBlock
+            code={`import { PortalHost } from "@rn-primitives/portal";
+
+export default function RootLayout() {
+  return (
+    <>
+      {/* your app */}
+      <PortalHost />
+    </>
+  );
+}`}
+            title="app/_layout.tsx"
+          />
+        </div>
       </div>
       {/* Preview */}
       <PreviewToggle>
@@ -417,8 +436,8 @@ export default function CommandMenuPage() {
           <li>Search input has <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">accessibilityLabel=&quot;Command search&quot;</code>.</li>
           <li>Each item has <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">accessibilityRole=&quot;button&quot;</code>.</li>
           <li><code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">accessibilityState</code> tracks <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">disabled</code> state for each item.</li>
-          <li>Modal can be dismissed via Android back button (<code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">onRequestClose</code>).</li>
           <li>Backdrop press closes the menu for intuitive dismissal.</li>
+          <li>Keyboard-aware: the palette tracks <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">keyboardWillShow</code>/<code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">keyboardDidShow</code> directly, so results stay visible above the keyboard on both iOS and Android (RN Modal-style <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">adjustResize</code> doesn&apos;t apply to portals).</li>
         </ul>
       </div>
       {/* Source */}
