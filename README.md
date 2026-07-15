@@ -118,7 +118,7 @@ Already on RNR / NativeWind / Uniwind? Components drop in with **zero extra setu
 
 ## Components
 
-**93 components** — all listed alphabetically. Each component's docs page tells you if it needs extra dependencies.
+**96 components** — all listed alphabetically. Each component's docs page tells you if it needs extra dependencies. Component icons come from [lucide-react-native](https://lucide.dev) (installed automatically by `aniui init`/`add`); icon props (`icon`, `leadingIcon`, …) accept any ReactNode, so you can bring your own.
 
 | Component | Description |
 |-----------|-------------|
@@ -129,6 +129,7 @@ Already on RNR / NativeWind / Uniwind? Components drop in with **zero extra setu
 | [Alert Dialog](https://aniui.dev/docs/alert-dialog) | Confirmation dialog with Action/Cancel |
 | [Aspect Ratio](https://aniui.dev/docs/aspect-ratio) | Constrain content to a fixed width/height ratio |
 | [Avatar](https://aniui.dev/docs/avatar) | Image with fallback initials, 3 sizes |
+| [Avatar Group](https://aniui.dev/docs/avatar-group) | Overlapping avatar stack with +N overflow |
 | [Badge](https://aniui.dev/docs/badge) | Status indicator with 4 variants |
 | [Banner](https://aniui.dev/docs/banner) | Full-width notification with variants and dismiss |
 | [Bottom Sheet](https://aniui.dev/docs/bottom-sheet) | Bottom sheet overlay |
@@ -154,6 +155,7 @@ Already on RNR / NativeWind / Uniwind? Components drop in with **zero extra setu
 | [Field](https://aniui.dev/docs/field) | Form field with label, description, and error |
 | [File Picker](https://aniui.dev/docs/file-picker) | Upload UI with dashed border, preview, and remove |
 | [Form](https://aniui.dev/docs/form) | Form context with validation, error messages, compound components |
+| [Gradient](https://aniui.dev/docs/gradient) | Linear gradient view with configurable colors and direction |
 | [Grid](https://aniui.dev/docs/grid) | FlatList-based grid layout with configurable columns |
 | [Header](https://aniui.dev/docs/header) | Navigation header with back button, title, and actions |
 | [Hover Card](https://aniui.dev/docs/hover-card) | Preview content card triggered by long-press |
@@ -164,6 +166,7 @@ Already on RNR / NativeWind / Uniwind? Components drop in with **zero extra setu
 | [Input Group](https://aniui.dev/docs/input-group) | Compose inputs with addons, buttons, and text |
 | [Input OTP](https://aniui.dev/docs/input-otp) | OTP verification input with individual cells |
 | [Kbd](https://aniui.dev/docs/kbd) | Keyboard key display with grouping |
+| [Keyboard View](https://aniui.dev/docs/keyboard-view) | Keyboard-avoiding wrapper so forms stay visible |
 | [Label](https://aniui.dev/docs/label) | Form field label |
 | [Labeled Separator](https://aniui.dev/docs/labeled-separator) | Horizontal separator with centered text label |
 | [List](https://aniui.dev/docs/list) | Styled list with ListItem, Title, Description |
@@ -228,7 +231,7 @@ npm install @gorhom/bottom-sheet react-native-gesture-handler
 
 | Area | Status |
 |------|--------|
-| 93 components | ✅ |
+| 96 components | ✅ |
 | Component & CLI tests (Jest) | ✅ |
 | Accessibility audit | ✅ |
 | Performance benchmarks | ✅ |

@@ -26,6 +26,20 @@ const typeBadge: Record<ChangeType, { label: string; className: string }> = {
 
 const releases: Release[] = [
   {
+    version: "0.5.0",
+    date: "2026-07-15",
+    title: "Lucide icons everywhere + 96 components",
+    changes: [
+      { type: "feat", text: "All component icons now come from lucide-react-native — 28 components dropped unicode glyphs and hand-rolled SVG paths for crisp, consistent icons on iOS and Android, under both NativeWind and Uniwind. aniui init installs lucide-react-native automatically, and aniui add lists it per component. Icon props (icon, leadingIcon, trailingIcon) still accept any ReactNode.", link: "/docs/installation" },
+      { type: "feat", text: "Three new components: avatar-group (overlapping stack with +N overflow), gradient (SVG linear gradient view), and keyboard-view (keyboard-avoiding form wrapper) — 96 components total.", link: "/docs/avatar-group" },
+      { type: "fix", text: "Android: Header back button, FilePicker remove button, and Pagination arrows rendered blank (SVG inside <Text> is invalid in RN) — all fixed by the icon migration restructure.", link: "/docs/header" },
+      { type: "fix", text: "Charts (area/bar/line/radar/radial + tooltip) now adapt gridlines, labels, and center text to dark mode.", link: "/docs/compatibility" },
+      { type: "fix", text: "Carousel and ImageGallery size slides to their own measured width (rotation/split-screen safe); Input's whole box is tappable again; Drawer plays its close animation; ToggleGroup's variant/size props actually apply; PhoneInput works uncontrolled; Combobox search is no longer covered by the keyboard; Toast ids no longer collide and timers are cleaned up; Calendar range mode no longer fires onSelect; NumberInput can be cleared while typing; Slider thumb tracks the finger.", link: "/docs/carousel" },
+      { type: "docs", text: "Docs pages for the three new components; homepage and navbar Components links now start at Accordion; icon examples converted from Ionicons to lucide-react-native; inlined sources re-synced; component counts updated to 96.", link: "/docs/accordion" },
+      { type: "feat", text: "CLI bumped to 0.5.0.", link: "/docs/cli" },
+    ],
+  },
+  {
     version: "0.4.0",
     date: "2026-07-05",
     title: "Expo SDK 57 + Uniwind is now the default",
