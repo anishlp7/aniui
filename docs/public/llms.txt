@@ -17,7 +17,7 @@ AniUI is a copy-paste component library for React Native. Components are source 
 npx @aniui/cli init
 npx @aniui/cli add button text input card
 
-## Components (96 total, alphabetical)
+## Components (97 total, alphabetical)
 
 - Accordion: `import { Accordion, AccordionItem } from "@/components/ui/accordion"` — needs @rn-primitives/accordion, react-native-reanimated
 - ActionSheet: `import { ActionSheet } from "@/components/ui/action-sheet"` — needs @gorhom/bottom-sheet, react-native-gesture-handler
@@ -81,7 +81,7 @@ npx @aniui/cli add button text input card
 - Price: `import { Price } from "@/components/ui/price"` — Formatted currency display with locale and strikethrough support
 - Progress: `import { Progress } from "@/components/ui/progress"` — needs @rn-primitives/progress
 - ProgressSteps: `import { ProgressSteps, ProgressStep } from "@/components/ui/progress-steps"` — Multi-step progress indicator for wizards
-- PromptInput: `import { PromptInput } from "@/components/ui/prompt-input"` — ChatGPT/Claude-style AI chat composer with auto-growing input, optional attach/voice buttons, and a send arrow that becomes a stop button while streaming, needs lucide-react-native
+- PromptInput: `import { PromptInput, PromptInputTextarea, PromptInputToolbar, PromptInputSpacer, PromptInputButton, PromptInputSend, usePromptInput } from "@/components/ui/prompt-input"` — Compound ChatGPT/Claude-style AI composer: auto-growing textarea on top, toolbar slot for attach/model/voice buttons below, send arrow becomes a stop button while streaming (emptyFallback swaps in a voice button while empty), needs lucide-react-native
 - RadarChart: `import { RadarChart } from "@/components/ui/radar-chart"` — Radar/spider chart with polygon grid, needs react-native-svg
 - RadialChart: `import { RadialChart } from "@/components/ui/radial-chart"` — Circular radial progress chart, needs react-native-svg
 - RadioGroup: `import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"` — needs @rn-primitives/radio-group
@@ -115,6 +115,7 @@ npx @aniui/cli add button text input card
 - ToggleGroup: `import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group"` — Exclusive selection group
 - Tooltip: `import { Tooltip } from "@/components/ui/tooltip"` — needs @rn-primitives/tooltip, react-native-reanimated
 - TypingIndicator: `import { TypingIndicator } from "@/components/ui/typing-indicator"` — Animated typing dots for chat, needs react-native-reanimated
+- Waveform: `import { Waveform } from "@/components/ui/waveform"` — Animated audio waveform bars for voice-recording/playback states, bars (default 28), active (default true, false = static wave), size: sm|md|lg, color defaults to theme foreground, needs react-native-reanimated
 
 ## Theme Tokens
 Available as Tailwind classes via CSS variables:
@@ -162,7 +163,7 @@ Copy-paste full screen templates. Install via `npx @aniui/cli add-block <name>`.
 ## Why AniUI
 
 - shadcn/ui approach: copy source files, own the code, no npm dependency lock-in
-- 100 components + 7 charts + 15 blocks
+- 101 components + 7 charts + 15 blocks
 - Works with Expo SDK 53-57, bare React Native 0.76+, New Architecture
 - Uniwind (recommended default on Expo SDK 55+) and NativeWind v4/v5 (supported, soft-deprecated) — same className API
 - Full RTL support for Arabic, Hebrew, Persian, Urdu

@@ -27,8 +27,8 @@ describe("component source files", () => {
     expect(content).not.toMatch(/as\s+any\b/);
   });
 
-  // Complex components with many features (multi-select, groups, search-with-positioning, etc.) justifiably exceed 120 lines
-  const largeComponents = new Set(["combobox", "input-group", "command-menu", "data-table", "tabs", "select", "phone-input"]);
+  // Complex components with many features (multi-select, groups, search-with-positioning, compound composers, etc.) justifiably exceed 120 lines
+  const largeComponents = new Set(["combobox", "input-group", "command-menu", "data-table", "tabs", "select", "phone-input", "prompt-input"]);
 
   it.each(names)("%s is under 120 lines", (name) => {
     const filePath = path.join(repoRoot, registry[name].file);

@@ -779,10 +779,18 @@ export const registry: Record<string, ComponentEntry> = {
   "prompt-input": {
     name: "PromptInput",
     file: "components/ui/prompt-input.tsx",
-    description: "ChatGPT/Claude-style AI composer — auto-growing input with attach, voice, and send/stop",
+    description: "ChatGPT/Claude-style AI composer — compound: PromptInput, Textarea, Toolbar, Button, Send (stop while streaming)",
     dependencies: ["lucide-react-native", "react-native-svg", "clsx", "tailwind-merge"],
     registryDependencies: [],
     tier: 1,
+  },
+  waveform: {
+    name: "Waveform",
+    file: "components/ui/waveform.tsx",
+    description: "Animated audio waveform bars for voice recording and playback states",
+    dependencies: ["react-native-reanimated", "clsx", "tailwind-merge"],
+    registryDependencies: [],
+    tier: 2,
   },
   "streaming-text": {
     name: "StreamingText",

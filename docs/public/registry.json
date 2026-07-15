@@ -469,7 +469,7 @@
       "name": "prompt-input",
       "type": "registry:ui",
       "title": "PromptInput",
-      "description": "ChatGPT/Claude-style AI composer — auto-growing input with attach, voice, and send/stop"
+      "description": "ChatGPT/Claude-style AI composer — compound: PromptInput, Textarea, Toolbar, Button, Send (stop while streaming)"
     },
     {
       "name": "radar-chart",
@@ -704,6 +704,12 @@
       "type": "registry:lib",
       "title": "cn utility",
       "description": "Tailwind class-merge helper (clsx + tailwind-merge)."
+    },
+    {
+      "name": "waveform",
+      "type": "registry:ui",
+      "title": "Waveform",
+      "description": "Animated audio waveform bars for voice recording and playback states"
     }
   ]
 }

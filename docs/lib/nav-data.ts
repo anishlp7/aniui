@@ -115,6 +115,7 @@ export const componentItems: NavItem[] = [
   { title: "Toggle Group", href: "/docs/toggle-group" },
   { title: "Tooltip", href: "/docs/tooltip" },
   { title: "Typing Indicator", href: "/docs/typing-indicator" },
+  { title: "Waveform", href: "/docs/waveform" },
 ];
 
 export const chartItems: NavItem[] = [

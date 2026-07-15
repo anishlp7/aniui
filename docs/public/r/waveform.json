@@ -1,0 +1,23 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "waveform",
+  "type": "registry:ui",
+  "title": "Waveform",
+  "description": "Animated audio waveform bars for voice recording and playback states",
+  "dependencies": [
+    "react-native-reanimated",
+    "clsx",
+    "tailwind-merge"
+  ],
+  "registryDependencies": [
+    "https://aniui.dev/r/utils.json"
+  ],
+  "files": [
+    {
+      "path": "components/ui/waveform.tsx",
+      "type": "registry:ui",
+      "content": "import React, { useEffect } from \"react\";\nimport { View, useColorScheme } from \"react-native\";\nimport Animated, { useSharedValue, useAnimatedStyle, withRepeat, withSequence, withTiming, cancelAnimation } from \"react-native-reanimated\";\nimport { cn } from \"@/lib/utils\";\n\nconst sizes = { sm: 12, md: 20, lg: 28 } as const;\n\n// Deterministic per-bar amplitude/tempo so the wave looks organic without\n// Math.random (keeps renders stable and tests deterministic).\nconst amp = (i: number) => 0.35 + 0.65 * Math.abs(Math.sin(i * 2.4) * Math.cos(i * 0.7));\n\nfunction Bar({ index, max, active, color }: { index: number; max: number; active: boolean; color: string }) {\n  const scale = useSharedValue(active ? 0.3 : 1);\n  useEffect(() => {\n    if (active) {\n      const duration = 260 + (index % 5) * 70;\n      scale.value = withRepeat(\n        withSequence(withTiming(1, { duration }), withTiming(0.25, { duration })),\n        -1,\n        true\n      );\n    } else {\n      cancelAnimation(scale);\n      scale.value = withTiming(1, { duration: 150 });\n    }\n    return () => cancelAnimation(scale);\n  }, [active, index, scale]);\n\n  const height = Math.max(3, max * amp(index));\n  const style = useAnimatedStyle(() => ({ height, transform: [{ scaleY: scale.value }] }));\n  return <Animated.View style={[style, { backgroundColor: color }]} className=\"w-0.5 rounded-full\" />;\n}\n\nexport interface WaveformProps extends React.ComponentPropsWithoutRef<typeof View> {\n  className?: string;\n  /** Number of bars (default 28). */\n  bars?: number;\n  /** Animate the bars (recording/playing). false renders a static wave. */\n  active?: boolean;\n  size?: keyof typeof sizes;\n  /** Bar color; defaults to the theme foreground. */\n  color?: string;\n}\n\nexport function Waveform({ className, bars = 28, active = true, size = \"md\", color, ...props }: WaveformProps) {\n  const dark = useColorScheme() === \"dark\";\n  const barColor = color ?? (dark ? \"#fafafa\" : \"#18181b\");\n  return (\n    <View\n      className={cn(\"flex-row items-center justify-center gap-0.5\", className)}\n      accessibilityLabel={active ? \"Recording\" : \"Audio waveform\"}\n      {...props}\n    >\n      {Array.from({ length: bars }, (_, i) => (\n        <Bar key={i} index={i} max={sizes[size]} active={active} color={barColor} />\n      ))}\n    </View>\n  );\n}\n"
+    }
+  ],
+  "docs": "AniUI is React Native. On an existing RNR/NativeWind project, add and use directly — the tokens and aliases already match, no setup needed. On a fresh project, run `npx @aniui/cli init` first to configure NativeWind/Uniwind, theme tokens, and Metro/Babel."
+}

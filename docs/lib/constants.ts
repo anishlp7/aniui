@@ -14,7 +14,7 @@ export const SITE = {
 } as const;
 
 /** Total component count — derived from cli/src/registry.ts */
-export const COMPONENT_COUNT = 100;
+export const COMPONENT_COUNT = 101;
 
 export const DESCRIPTIONS = {
   site: `shadcn/ui for React Native. ${COMPONENT_COUNT} accessible components built with Uniwind or NativeWind, rn-primitives, and TypeScript. Copy. Paste. Ship.`,

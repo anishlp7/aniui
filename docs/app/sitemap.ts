@@ -16,7 +16,7 @@ const componentPages = [
   "sidebar", "skeleton", "slide-to-confirm", "slider", "spinner", "stat-card", "status-indicator",
   "stepper", "streaming-text", "swipe-deck", "swipeable-list-item", "switch", "tab-bar", "table", "tabs",
   "text", "textarea", "theme-provider", "timeline", "toast", "toggle",
-  "toggle-group", "tooltip", "typing-indicator",
+  "toggle-group", "tooltip", "typing-indicator", "waveform",
 ];
 
 const guidePages = [
