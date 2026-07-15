@@ -54,7 +54,7 @@ export interface WaveformProps extends React.ComponentPropsWithoutRef<typeof Vie
   color?: string;
 }
 
-export function Waveform({ className, bars = 28, levels, active = true, size = "md", color, ...props }: WaveformProps) {
+export function Waveform({ className, bars = 28, levels, active = true, size = "md", color, style, ...props }: WaveformProps) {
   const dark = useColorScheme() === "dark";
   const barColor = color ?? (dark ? "#fafafa" : "#18181b");
   const window = levels?.slice(-bars);
@@ -62,6 +62,9 @@ export function Waveform({ className, bars = 28, levels, active = true, size = "
   return (
     <View
       className={cn("flex-row items-center justify-center gap-0.5", className)}
+      // Fixed to the tallest bar so the row never changes height while the
+      // bars animate (no layout bounce in composers / recording rows).
+      style={[{ height: sizes[size] }, style]}
       accessibilityLabel={active ? "Recording" : "Audio waveform"}
       {...props}
     >

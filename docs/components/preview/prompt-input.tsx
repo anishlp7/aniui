@@ -5,28 +5,28 @@ import { cn } from "@/lib/utils";
 import { PreviewWaveform } from "@/components/preview/waveform";
 
 function PlusIcon() {
-  return <svg className="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><path d="M12 5v14M5 12h14" /></svg>;
+  return <svg className="h-[18px] w-[18px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><path d="M12 5v14M5 12h14" /></svg>;
 }
 function ChevronDownIcon() {
-  return <svg className="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m6 9 6 6 6-6" /></svg>;
+  return <svg className="h-3 w-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m6 9 6 6 6-6" /></svg>;
 }
 function MicIcon() {
-  return <svg className="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z" /><path d="M19 10v2a7 7 0 0 1-14 0v-2" /><line x1="12" x2="12" y1="19" y2="22" /></svg>;
+  return <svg className="h-[18px] w-[18px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z" /><path d="M19 10v2a7 7 0 0 1-14 0v-2" /><line x1="12" x2="12" y1="19" y2="22" /></svg>;
 }
 function AudioLinesIcon() {
-  return <svg className="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M2 10v3M6 6v11M10 3v18M14 8v7M18 5v13M22 10v3" /></svg>;
+  return <svg className="h-[18px] w-[18px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M2 10v3M6 6v11M10 3v18M14 8v7M18 5v13M22 10v3" /></svg>;
 }
 function ArrowUpIcon() {
-  return <svg className="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="m5 12 7-7 7 7M12 19V5" /></svg>;
+  return <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="m5 12 7-7 7 7M12 19V5" /></svg>;
 }
 function StopIcon() {
   return <svg className="h-3.5 w-3.5" viewBox="0 0 24 24" fill="currentColor"><rect x="4" y="4" width="16" height="16" rx="2" /></svg>;
 }
 function XIcon() {
-  return <svg className="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><path d="M18 6 6 18M6 6l12 12" /></svg>;
+  return <svg className="h-[18px] w-[18px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><path d="M18 6 6 18M6 6l12 12" /></svg>;
 }
 function CheckIcon() {
-  return <svg className="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M20 6 9 17l-5-5" /></svg>;
+  return <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M20 6 9 17l-5-5" /></svg>;
 }
 
 function ToolbarButton({ label, onClick, className, children }: {
@@ -37,7 +37,7 @@ function ToolbarButton({ label, onClick, className, children }: {
       type="button"
       onClick={onClick}
       aria-label={label}
-      className={cn("flex h-11 min-w-11 shrink-0 items-center justify-center gap-1 rounded-full px-2 text-zinc-500 hover:bg-accent transition-colors cursor-pointer dark:text-zinc-400", className)}
+      className={cn("flex h-9 min-w-9 shrink-0 items-center justify-center gap-1 rounded-full px-2 text-zinc-500 hover:bg-accent transition-colors cursor-pointer dark:text-zinc-400", className)}
     >
       {children}
     </button>
@@ -97,7 +97,7 @@ export function PreviewPromptInput({
         onKeyDown={(e) => {
           if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); handleSend(); }
         }}
-        className="max-h-[120px] w-full resize-none bg-transparent text-base text-foreground outline-none placeholder:text-muted-foreground"
+        className="max-h-[120px] w-full resize-none bg-transparent text-sm text-foreground outline-none placeholder:text-muted-foreground"
       />
       <div className="flex items-center gap-1 pt-2">
         <ToolbarButton label="Add attachment" onClick={onAttach}><PlusIcon /></ToolbarButton>
@@ -105,7 +105,7 @@ export function PreviewPromptInput({
         {fullToolbar && (
           <>
             <ToolbarButton label="Choose model" className="px-2">
-              <span className="text-sm">Opus 4.8</span>
+              <span className="text-xs">Opus 4.8</span>
               <ChevronDownIcon />
             </ToolbarButton>
             <ToolbarButton label="Dictate"><MicIcon /></ToolbarButton>
@@ -120,7 +120,7 @@ export function PreviewPromptInput({
             disabled={!canSend && !streaming}
             aria-label={streaming ? "Stop generating" : "Send message"}
             className={cn(
-              "flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-primary text-primary-foreground transition-opacity cursor-pointer",
+              "flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-primary text-primary-foreground transition-opacity cursor-pointer",
               !canSend && !streaming && "opacity-40 cursor-default"
             )}
           >
@@ -169,14 +169,12 @@ export function PreviewPromptInputRecordingDemo() {
   return (
     <div className="w-full max-w-sm space-y-2">
       <div className="rounded-3xl border border-input bg-background px-3 pt-3 pb-2">
-        {!recording && (
-          <textarea
-            rows={1}
-            readOnly
-            placeholder="How can I help you today?"
-            className="w-full resize-none bg-transparent text-base text-foreground outline-none placeholder:text-muted-foreground"
-          />
-        )}
+        <textarea
+          rows={1}
+          readOnly
+          placeholder={recording ? "Listening…" : "How can I help you today?"}
+          className="w-full resize-none bg-transparent text-sm text-foreground outline-none placeholder:text-muted-foreground"
+        />
         <div className="flex items-center gap-1 pt-2">
           {recording ? (
             <>
@@ -185,7 +183,7 @@ export function PreviewPromptInputRecordingDemo() {
               <ToolbarButton
                 label="Finish recording"
                 onClick={() => setRecording(false)}
-                className="w-11 bg-primary text-primary-foreground hover:bg-primary/90 dark:text-primary-foreground"
+                className="w-9 bg-primary text-primary-foreground hover:bg-primary/90 dark:text-primary-foreground"
               >
                 <CheckIcon />
               </ToolbarButton>
@@ -198,7 +196,7 @@ export function PreviewPromptInputRecordingDemo() {
                 type="button"
                 disabled
                 aria-label="Send message"
-                className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-primary text-primary-foreground opacity-40"
+                className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-primary text-primary-foreground opacity-40"
               >
                 <ArrowUpIcon />
               </button>

@@ -26,28 +26,33 @@ export function PreviewWaveform({ className, bars = 28, levels, active = true, s
   return (
     <div
       className={cn("flex items-center justify-center gap-0.5", className)}
+      // Fixed to the tallest bar so animating bars never reflow the layout
+      // (mirrors the RN source).
+      style={{ height: max }}
       role="img"
       aria-label={active ? "Recording" : "Audio waveform"}
     >
       {Array.from({ length: bars }, (_, i) => {
         const level = window ? (i < pad ? 0 : window[i - pad]) : undefined;
+        // Integer px — float heights hydrate differently than the browser
+        // re-serializes them (SSR mismatch), and sub-pixel bars look fuzzy.
+        const height =
+          level !== undefined
+            ? Math.max(3, Math.round(max * Math.min(1, Math.max(0, level))))
+            : Math.max(3, Math.round(max * amp(i)));
         return (
           <div
             key={i}
             className={cn("w-0.5 rounded-full", !color && "bg-foreground")}
             style={{
-              height:
-                level !== undefined
-                  ? Math.max(3, max * Math.min(1, Math.max(0, level)))
-                  : Math.max(3, max * amp(i)),
-              backgroundColor: color,
+              height,
               // Audio-driven bars follow the signal (~100ms, like the RN source);
               // otherwise the ambient pulse animation is the fallback.
-              transition: level !== undefined ? "height 100ms linear" : undefined,
-              animation:
-                level === undefined && active
-                  ? `waveformPulse ${(260 + (i % 5) * 70) * 2}ms ease-in-out infinite`
-                  : undefined,
+              ...(color ? { backgroundColor: color } : null),
+              ...(level !== undefined ? { transition: "height 100ms linear" } : null),
+              ...(level === undefined && active
+                ? { animation: `waveformPulse ${(260 + (i % 5) * 70) * 2}ms ease-in-out infinite` }
+                : null),
             }}
           />
         );
