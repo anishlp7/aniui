@@ -1,0 +1,24 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "prompt-input",
+  "type": "registry:ui",
+  "title": "PromptInput",
+  "description": "ChatGPT/Claude-style AI composer — auto-growing input with attach, voice, and send/stop",
+  "dependencies": [
+    "lucide-react-native",
+    "react-native-svg",
+    "clsx",
+    "tailwind-merge"
+  ],
+  "registryDependencies": [
+    "https://aniui.dev/r/utils.json"
+  ],
+  "files": [
+    {
+      "path": "components/ui/prompt-input.tsx",
+      "type": "registry:ui",
+      "content": "import React, { useState } from \"react\";\nimport { View, TextInput, Pressable, useColorScheme } from \"react-native\";\nimport { Plus, Mic, ArrowUp, Square } from \"lucide-react-native\";\nimport { cn } from \"@/lib/utils\";\n\nexport interface PromptInputProps\n  extends Omit<React.ComponentPropsWithoutRef<typeof TextInput>, \"multiline\"> {\n  className?: string;\n  onSend?: (text: string) => void;\n  /** Rendered while `streaming` — the send button becomes a stop button. */\n  onStop?: () => void;\n  onAttach?: () => void;\n  onVoice?: () => void;\n  streaming?: boolean;\n  /** Max height the input grows to before scrolling (default 132). */\n  maxHeight?: number;\n  clearOnSend?: boolean;\n}\n\nexport const PromptInput = React.forwardRef<\n  React.ElementRef<typeof TextInput>,\n  PromptInputProps\n>(function PromptInput(\n  { className, value, onChangeText, onSend, onStop, onAttach, onVoice,\n    streaming, maxHeight = 132, clearOnSend = true, style, ...props },\n  ref\n) {\n  // Internal fallback so the composer works uncontrolled.\n  const [internal, setInternal] = useState(\"\");\n  const [height, setHeight] = useState(0);\n  const text = value ?? internal;\n  const dark = useColorScheme() === \"dark\";\n  const muted = dark ? \"#a1a1aa\" : \"#71717a\";\n  const canSend = text.trim().length > 0;\n\n  const handleChange = (t: string) => {\n    if (value === undefined) setInternal(t);\n    onChangeText?.(t);\n  };\n  const handleSend = () => {\n    if (streaming) return onStop?.();\n    if (!canSend) return;\n    onSend?.(text.trim());\n    if (clearOnSend && value === undefined) {\n      setInternal(\"\");\n      setHeight(0);\n    }\n  };\n\n  return (\n    <View className={cn(\"flex-row items-end gap-2 rounded-3xl border border-input bg-background p-2\", className)}>\n      {onAttach && (\n        <Pressable\n          onPress={onAttach}\n          className=\"h-9 w-9 items-center justify-center rounded-full\"\n          accessible={true}\n          accessibilityRole=\"button\"\n          accessibilityLabel=\"Add attachment\"\n        >\n          <Plus size={20} color={muted} />\n        </Pressable>\n      )}\n      <TextInput\n        ref={ref}\n        multiline\n        value={text}\n        onChangeText={handleChange}\n        onContentSizeChange={(e) => setHeight(e.nativeEvent.contentSize.height)}\n        // Grow with content up to maxHeight, then scroll (font size inline so\n        // the cursor stays centered on iOS — same convention as input.tsx).\n        style={[{ fontSize: 16, maxHeight, height: Math.min(Math.max(36, height), maxHeight) }, style]}\n        className=\"flex-1 p-0 px-1 pb-2 text-foreground placeholder:text-muted-foreground\"\n        placeholder=\"Message...\"\n        placeholderTextColor={muted}\n        keyboardAppearance={dark ? \"dark\" : \"light\"}\n        selectionColor={dark ? \"#fafafa\" : \"#18181b\"}\n        cursorColor={dark ? \"#fafafa\" : \"#18181b\"}\n        {...props}\n      />\n      {onVoice && !canSend && !streaming && (\n        <Pressable\n          onPress={onVoice}\n          className=\"h-9 w-9 items-center justify-center rounded-full\"\n          accessible={true}\n          accessibilityRole=\"button\"\n          accessibilityLabel=\"Voice input\"\n        >\n          <Mic size={20} color={muted} />\n        </Pressable>\n      )}\n      <Pressable\n        onPress={handleSend}\n        disabled={!canSend && !streaming}\n        className={cn(\"h-9 w-9 items-center justify-center rounded-full bg-primary\", !canSend && !streaming && \"opacity-40\")}\n        accessible={true}\n        accessibilityRole=\"button\"\n        accessibilityLabel={streaming ? \"Stop generating\" : \"Send message\"}\n        accessibilityState={{ disabled: !canSend && !streaming }}\n      >\n        {streaming ? (\n          <Square size={14} color={dark ? \"#18181b\" : \"#fafafa\"} fill={dark ? \"#18181b\" : \"#fafafa\"} />\n        ) : (\n          <ArrowUp size={18} color={dark ? \"#18181b\" : \"#fafafa\"} strokeWidth={2.5} />\n        )}\n      </Pressable>\n    </View>\n  );\n});\n"
+    }
+  ],
+  "docs": "AniUI is React Native. On an existing RNR/NativeWind project, add and use directly — the tokens and aliases already match, no setup needed. On a fresh project, run `npx @aniui/cli init` first to configure NativeWind/Uniwind, theme tokens, and Metro/Babel."
+}

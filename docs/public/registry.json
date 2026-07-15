@@ -466,6 +466,12 @@
       "description": "Multi-step progress indicator for wizards and onboarding"
     },
     {
+      "name": "prompt-input",
+      "type": "registry:ui",
+      "title": "PromptInput",
+      "description": "ChatGPT/Claude-style AI composer — auto-growing input with attach, voice, and send/stop"
+    },
+    {
       "name": "radar-chart",
       "type": "registry:ui",
       "title": "RadarChart",
@@ -556,6 +562,12 @@
       "description": "Animated loading placeholder"
     },
     {
+      "name": "slide-to-confirm",
+      "type": "registry:ui",
+      "title": "SlideToConfirm",
+      "description": "Slide-to-pay/confirm control with spring-back and confirmed state"
+    },
+    {
       "name": "slider",
       "type": "registry:ui",
       "title": "Slider",
@@ -584,6 +596,18 @@
       "type": "registry:ui",
       "title": "Stepper",
       "description": "Numeric increment/decrement control with min/max/step"
+    },
+    {
+      "name": "streaming-text",
+      "type": "registry:ui",
+      "title": "StreamingText",
+      "description": "Typewriter-style streaming AI response text with a blinking cursor"
+    },
+    {
+      "name": "swipe-deck",
+      "type": "registry:ui",
+      "title": "SwipeDeck",
+      "description": "Tinder-style swipeable card stack with fling physics and swipe callbacks"
     },
     {
       "name": "swipeable-list-item",

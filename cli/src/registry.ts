@@ -776,6 +776,38 @@ export const registry: Record<string, ComponentEntry> = {
     registryDependencies: [],
     tier: 1,
   },
+  "prompt-input": {
+    name: "PromptInput",
+    file: "components/ui/prompt-input.tsx",
+    description: "ChatGPT/Claude-style AI composer — auto-growing input with attach, voice, and send/stop",
+    dependencies: ["lucide-react-native", "react-native-svg", "clsx", "tailwind-merge"],
+    registryDependencies: [],
+    tier: 1,
+  },
+  "streaming-text": {
+    name: "StreamingText",
+    file: "components/ui/streaming-text.tsx",
+    description: "Typewriter-style streaming AI response text with a blinking cursor",
+    dependencies: ["react-native-reanimated", "clsx", "tailwind-merge"],
+    registryDependencies: [],
+    tier: 2,
+  },
+  "swipe-deck": {
+    name: "SwipeDeck",
+    file: "components/ui/swipe-deck.tsx",
+    description: "Tinder-style swipeable card stack with fling physics and swipe callbacks",
+    dependencies: ["react-native-gesture-handler", "react-native-reanimated", "clsx", "tailwind-merge"],
+    registryDependencies: [],
+    tier: 3,
+  },
+  "slide-to-confirm": {
+    name: "SlideToConfirm",
+    file: "components/ui/slide-to-confirm.tsx",
+    description: "Slide-to-pay/confirm control with spring-back and confirmed state",
+    dependencies: ["lucide-react-native", "react-native-svg", "react-native-gesture-handler", "react-native-reanimated", "clsx", "tailwind-merge"],
+    registryDependencies: [],
+    tier: 3,
+  },
 };
 
 export function getComponentNames(): string[] {

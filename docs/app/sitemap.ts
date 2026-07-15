@@ -11,10 +11,10 @@ const componentPages = [
   "header", "hover-card", "image", "image-gallery", "infinite-list", "input", "input-group", "input-otp",
   "kbd", "keyboard-view", "label", "labeled-separator", "list", "masked-input", "menubar", "number-input",
   "pagination", "password-input", "phone-input", "popover", "price",
-  "progress", "progress-steps", "radio-group", "rating", "refresh-control",
+  "progress", "progress-steps", "prompt-input", "radio-group", "rating", "refresh-control",
   "safe-area", "search-bar", "segmented-control", "select", "separator",
-  "sidebar", "skeleton", "slider", "spinner", "stat-card", "status-indicator",
-  "stepper", "swipeable-list-item", "switch", "tab-bar", "table", "tabs",
+  "sidebar", "skeleton", "slide-to-confirm", "slider", "spinner", "stat-card", "status-indicator",
+  "stepper", "streaming-text", "swipe-deck", "swipeable-list-item", "switch", "tab-bar", "table", "tabs",
   "text", "textarea", "theme-provider", "timeline", "toast", "toggle",
   "toggle-group", "tooltip", "typing-indicator",
 ];
