@@ -472,7 +472,7 @@ export async function initCommand(opts?: { style?: string; nw?: string; yes?: bo
       // Will be patched in step 8 below if needed
     } else {
       await copyTemplate("babel.config.expo.js", babelConfigPath, gen);
-      logger.success("Created babel.config.js (NativeWind configured)");
+      logger.success(isUniwind ? "Created babel.config.js" : "Created babel.config.js (NativeWind configured)");
     }
 
     // Disable reactCompiler in app.json — it breaks NativeWind's className transform.
@@ -514,11 +514,13 @@ export async function initCommand(opts?: { style?: string; nw?: string; yes?: bo
 
     const babelConfigPath = path.resolve(cwd, "babel.config.js");
     if (await fs.pathExists(babelConfigPath)) {
-      logger.warn('babel.config.js already exists — add "nativewind/babel" to presets:');
-      logger.info('  presets: [...existing, "nativewind/babel"]');
+      if (!isUniwind) {
+        logger.warn('babel.config.js already exists — add "nativewind/babel" to presets:');
+        logger.info('  presets: [...existing, "nativewind/babel"]');
+      }
     } else {
       await copyTemplate("babel.config.bare.js", babelConfigPath, gen);
-      logger.success("Created babel.config.js (NativeWind configured)");
+      logger.success(isUniwind ? "Created babel.config.js" : "Created babel.config.js (NativeWind configured)");
     }
   }
 

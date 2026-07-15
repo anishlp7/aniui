@@ -70,6 +70,8 @@ export async function doctorCommand(): Promise<void> {
     { name: "tailwindcss", required: true },
     { name: "react-native-reanimated", required: true },
     { name: "react-native-safe-area-context", required: true },
+    { name: "react-native-svg", required: true },
+    { name: "lucide-react-native", required: true },
     { name: "class-variance-authority", required: true },
     { name: "clsx", required: true },
     { name: "tailwind-merge", required: true },
