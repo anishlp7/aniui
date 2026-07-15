@@ -29,18 +29,18 @@ export function ComponentPlaygroundClient({ code, highlightedCode, children, var
       <div className="flex items-center justify-center bg-[repeating-linear-gradient(45deg,var(--color-secondary)_0,var(--color-secondary)_1px,transparent_0,transparent_50%)] bg-[length:6px_6px] bg-secondary/20 p-4 sm:p-8">
         {variant === "phone" ? (
           /* Phone frame mockup */
-          <div className="relative w-full max-w-[320px] rounded-[2.5rem] border-[3px] border-foreground/10 bg-background shadow-xl overflow-hidden">
+          <div className="relative w-full max-w-[320px] overflow-hidden rounded-[2.75rem] border-[3px] border-foreground/[0.08] bg-background shadow-xl shadow-black/10 ring-1 ring-black/5 dark:border-foreground/[0.14] dark:ring-white/5">
             {/* Dynamic Island */}
-            <div className="flex justify-center pt-2 pb-1 bg-background">
-              <div className="h-[22px] w-[90px] rounded-full bg-foreground/10" />
+            <div className="flex justify-center pt-2.5 pb-1.5">
+              <div className="h-[22px] w-[84px] rounded-full bg-zinc-950 ring-1 ring-white/5 dark:bg-black dark:ring-white/10" />
             </div>
             {/* Screen content */}
-            <div className="px-5 py-4 min-h-[200px] flex items-center justify-center">
+            <div className="flex min-h-[220px] items-center justify-center px-5 py-5">
               {children}
             </div>
             {/* Home indicator */}
-            <div className="flex justify-center pb-2 pt-1 bg-background">
-              <div className="h-1 w-28 rounded-full bg-foreground/15" />
+            <div className="flex justify-center pb-2.5 pt-1.5">
+              <div className="h-1 w-28 rounded-full bg-foreground/20" />
             </div>
           </div>
         ) : (

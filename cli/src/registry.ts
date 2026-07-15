@@ -787,7 +787,7 @@ export const registry: Record<string, ComponentEntry> = {
   waveform: {
     name: "Waveform",
     file: "components/ui/waveform.tsx",
-    description: "Animated audio waveform bars for voice recording and playback states",
+    description: "Audio waveform bars — driven by real amplitude levels, with an ambient recording fallback",
     dependencies: ["react-native-reanimated", "clsx", "tailwind-merge"],
     registryDependencies: [],
     tier: 2,

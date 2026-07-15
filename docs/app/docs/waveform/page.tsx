@@ -2,7 +2,8 @@ import Link from "next/link";
 import { Heading } from "@/components/heading";
 import {
   PreviewWaveformDemo,
-  PreviewWaveformStaticDemo,
+  PreviewWaveformLevelsDemo,
+  PreviewWaveformPlaybackDemo,
   PreviewWaveformCustomDemo,
 } from "@/components/preview/waveform";
 import { PreviewPromptInputRecordingDemo } from "@/components/preview/prompt-input";
@@ -25,11 +26,37 @@ export function VoiceRecorder() {
     </View>
   );
 }`;
-const staticCode = `// active={false} renders a frozen wave — a playback scrubber look
-// for voice-message bubbles.
+const levelsCode = `// npx expo install expo-av
+import { Audio } from "expo-av";
+import { Waveform } from "@/components/ui/waveform";
+
+const BARS = 28;
+const [levels, setLevels] = useState<number[]>([]);
+
+async function startRecording() {
+  await Audio.requestPermissionsAsync();
+  await Audio.setAudioModeAsync({ allowsRecordingIOS: true });
+  await Audio.Recording.createAsync(
+    { ...Audio.RecordingOptionsPresets.HIGH_QUALITY, isMeteringEnabled: true },
+    (status) => {
+      if (!status.isRecording || status.metering === undefined) return;
+      // metering is dBFS (-160…0) — convert to a 0-1 linear amplitude
+      const level = Math.min(1, 10 ** (status.metering / 20));
+      setLevels((prev) => [...prev.slice(-(BARS - 1)), level]);
+    },
+    100 // progressUpdateIntervalMillis — matches the bars' ~100ms follow timing
+  );
+}
+
+// Newest values render on the right; the wave scrolls left as you speak.
+<Waveform levels={levels} bars={BARS} />`;
+const playbackCode = `// levels also draws real playback data: decodedPeaks is a number[]
+// of 0-1 amplitudes extracted from the audio file (precomputed
+// server-side or decoded on load). active={false} keeps it still —
+// a static wave of the actual audio, not the ambient shape.
 <View className="flex-row items-center gap-3 rounded-2xl border border-input bg-background px-4 py-3">
   <PlayButton onPress={play} />
-  <Waveform active={false} size="sm" className="flex-1" />
+  <Waveform levels={decodedPeaks} active={false} bars={32} size="sm" className="flex-1" />
   <Text className="text-xs text-muted-foreground">0:12</Text>
 </View>`;
 const customCode = `// Fewer, smaller bars for tight spaces
@@ -41,16 +68,16 @@ const customCode = `// Fewer, smaller bars for tight spaces
 // Big and branded — color overrides the theme foreground
 <Waveform size="lg" bars={40} color="#ef4444" />`;
 const composerCode = `// Inside the Prompt Input composer: while recording, the toolbar
-// swaps its tools for a live waveform with cancel/confirm buttons.
+// swaps its tools for a live waveform with cancel/confirm on the right.
 import { X, Check } from "lucide-react-native";
 import { Waveform } from "@/components/ui/waveform";
 import { PromptInputToolbar, PromptInputButton } from "@/components/ui/prompt-input";
 
 <PromptInputToolbar>
+  <Waveform active size="sm" className="flex-1" />
   <PromptInputButton onPress={cancelRecording} accessibilityLabel="Cancel recording">
     <X size={20} color="#71717a" />
   </PromptInputButton>
-  <Waveform active size="sm" className="flex-1" />
   <PromptInputButton onPress={finishRecording} accessibilityLabel="Finish recording" className="bg-primary">
     <Check size={20} color="#fafafa" />
   </PromptInputButton>
@@ -62,29 +89,35 @@ import { cn } from "@/lib/utils";
 
 const sizes = { sm: 12, md: 20, lg: 28 } as const;
 
-// Deterministic per-bar amplitude/tempo so the wave looks organic without
-// Math.random (keeps renders stable and tests deterministic).
-const amp = (i: number) => 0.35 + 0.65 * Math.abs(Math.sin(i * 2.4) * Math.cos(i * 0.7));
+// Ambient fallback shape when no real audio \`levels\` are wired up —
+// deterministic per-bar (no Math.random) so renders and tests are stable.
+const ambient = (i: number) => 0.35 + 0.65 * Math.abs(Math.sin(i * 2.4) * Math.cos(i * 0.7));
 
-function Bar({ index, max, active, color }: { index: number; max: number; active: boolean; color: string }) {
-  const scale = useSharedValue(active ? 0.3 : 1);
+function Bar({ index, max, active, color, level }: {
+  index: number; max: number; active: boolean; color: string; level?: number;
+}) {
+  const height = useSharedValue(3);
+
   useEffect(() => {
-    if (active) {
+    if (level !== undefined) {
+      // Audio-driven: follow the measured amplitude for this bar.
+      cancelAnimation(height);
+      height.value = withTiming(Math.max(3, max * Math.min(1, Math.max(0, level))), { duration: 100 });
+    } else if (active) {
       const duration = 260 + (index % 5) * 70;
-      scale.value = withRepeat(
-        withSequence(withTiming(1, { duration }), withTiming(0.25, { duration })),
+      height.value = withRepeat(
+        withSequence(withTiming(max * ambient(index), { duration }), withTiming(max * 0.2, { duration })),
         -1,
         true
       );
     } else {
-      cancelAnimation(scale);
-      scale.value = withTiming(1, { duration: 150 });
+      cancelAnimation(height);
+      height.value = withTiming(Math.max(3, max * ambient(index)), { duration: 150 });
     }
-    return () => cancelAnimation(scale);
-  }, [active, index, scale]);
+    return () => cancelAnimation(height);
+  }, [level, active, index, max, height]);
 
-  const height = Math.max(3, max * amp(index));
-  const style = useAnimatedStyle(() => ({ height, transform: [{ scaleY: scale.value }] }));
+  const style = useAnimatedStyle(() => ({ height: height.value }));
   return <Animated.View style={[style, { backgroundColor: color }]} className="w-0.5 rounded-full" />;
 }
 
@@ -92,16 +125,24 @@ export interface WaveformProps extends React.ComponentPropsWithoutRef<typeof Vie
   className?: string;
   /** Number of bars (default 28). */
   bars?: number;
-  /** Animate the bars (recording/playing). false renders a static wave. */
+  /**
+   * Real audio amplitudes in 0–1 (e.g. from mic metering or decoded playback
+   * data). The most recent \`bars\` values are shown, newest on the right.
+   * When provided, the bars follow the audio instead of the ambient animation.
+   */
+  levels?: number[];
+  /** Without \`levels\`: animate an ambient wave (recording). false = static. */
   active?: boolean;
   size?: keyof typeof sizes;
   /** Bar color; defaults to the theme foreground. */
   color?: string;
 }
 
-export function Waveform({ className, bars = 28, active = true, size = "md", color, ...props }: WaveformProps) {
+export function Waveform({ className, bars = 28, levels, active = true, size = "md", color, ...props }: WaveformProps) {
   const dark = useColorScheme() === "dark";
   const barColor = color ?? (dark ? "#fafafa" : "#18181b");
+  const window = levels?.slice(-bars);
+  const pad = window ? bars - window.length : 0;
   return (
     <View
       className={cn("flex-row items-center justify-center gap-0.5", className)}
@@ -109,7 +150,14 @@ export function Waveform({ className, bars = 28, active = true, size = "md", col
       {...props}
     >
       {Array.from({ length: bars }, (_, i) => (
-        <Bar key={i} index={i} max={sizes[size]} active={active} color={barColor} />
+        <Bar
+          key={i}
+          index={i}
+          max={sizes[size]}
+          active={active}
+          color={barColor}
+          level={window ? (i < pad ? 0 : window[i - pad]) : undefined}
+        />
       ))}
     </View>
   );
@@ -138,15 +186,23 @@ export default function WaveformPage() {
       {/* Usage */}
       <div className="space-y-4">
         <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Usage</Heading>
-        <p className="text-sm text-muted-foreground">Each bar pulses on its own tempo while <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">active</code> (the default) — drop it in wherever the app is listening. Bar heights are deterministic, so the wave looks organic but renders identically every time.</p>
+        <p className="text-sm text-muted-foreground">Each bar pulses on its own tempo while <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">active</code> (the default) — drop it in wherever the app is listening. This ambient animation is the fallback when no real audio <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">levels</code> are wired up; bar heights are deterministic, so the wave looks organic but renders identically every time.</p>
         <CodeBlock code={usageCode} title="app/recorder.tsx" />
       </div>
-      {/* Static playback */}
+      {/* Driven by real audio */}
       <div className="space-y-4">
-        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Static playback wave</Heading>
-        <p className="text-sm text-muted-foreground">Set <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">active={"{false}"}</code> for a frozen wave — the classic voice-message bubble in chat UIs.</p>
-        <ComponentPlayground code={staticCode}>
-          <PreviewWaveformStaticDemo />
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Driven by real audio</Heading>
+        <p className="text-sm text-muted-foreground">Pass <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">levels</code> — an array of 0–1 amplitudes — and the bars follow the audio instead of the ambient animation. Push mic metering from expo-av into a rolling state array: metering arrives in dBFS, so convert with <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">10 ** (metering / 20)</code>. The newest <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">bars</code> values are shown (newest on the right, left-padded with silence), and each bar eases to its level over ~100ms.</p>
+        <ComponentPlayground code={levelsCode}>
+          <PreviewWaveformLevelsDemo />
+        </ComponentPlayground>
+      </div>
+      {/* Playback waveform */}
+      <div className="space-y-4">
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Playback waveform</Heading>
+        <p className="text-sm text-muted-foreground"><code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">levels</code> works for playback too: pass decoded peaks from the audio file with <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">active={"{false}"}</code> to render a static wave of the actual recording — the classic voice-message bubble in chat UIs.</p>
+        <ComponentPlayground code={playbackCode}>
+          <PreviewWaveformPlaybackDemo />
         </ComponentPlayground>
       </div>
       {/* Bars, size & color */}
@@ -160,7 +216,7 @@ export default function WaveformPage() {
       {/* In the composer */}
       <div className="space-y-4">
         <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">In the composer</Heading>
-        <p className="text-sm text-muted-foreground">Built for the <Link href="/docs/prompt-input" className="text-primary hover:underline">Prompt Input</Link> recording state — while recording, the composer toolbar swaps its tools for a live waveform between cancel and confirm buttons.</p>
+        <p className="text-sm text-muted-foreground">Built for the <Link href="/docs/prompt-input" className="text-primary hover:underline">Prompt Input</Link> recording state — while recording, the composer toolbar swaps its tools for a live waveform with cancel and confirm buttons on the right.</p>
         <ComponentPlayground code={composerCode}>
           <PreviewPromptInputRecordingDemo />
         </ComponentPlayground>
@@ -170,7 +226,8 @@ export default function WaveformPage() {
         <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Props</Heading>
         <PropsTable props={[
           { name: "bars", type: "number", default: "28", description: "Number of bars in the wave." },
-          { name: "active", type: "boolean", default: "true", description: "Animate the bars (recording/playing). false renders a static wave." },
+          { name: "levels", type: "number[]", default: "-", description: "Real audio amplitudes in 0–1 (mic metering or decoded playback data). The most recent bars values are shown, newest on the right, left-padded with silence; when provided, the bars follow the audio instead of the ambient animation." },
+          { name: "active", type: "boolean", default: "true", description: "Without levels: animate the ambient wave (recording). false renders a static wave. Also drives the accessibility label." },
           { name: "size", type: '"sm" | "md" | "lg"', default: '"md"' },
           { name: "color", type: "string", default: "-", description: "Bar color; defaults to the theme foreground." },
           { name: "className", type: "string", default: "-" },

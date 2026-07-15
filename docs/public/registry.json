@@ -709,7 +709,7 @@
       "name": "waveform",
       "type": "registry:ui",
       "title": "Waveform",
-      "description": "Animated audio waveform bars for voice recording and playback states"
+      "description": "Audio waveform bars — driven by real amplitude levels, with an ambient recording fallback"
     }
   ]
 }

@@ -37,7 +37,7 @@ function ToolbarButton({ label, onClick, className, children }: {
       type="button"
       onClick={onClick}
       aria-label={label}
-      className={cn("flex h-9 min-w-9 shrink-0 items-center justify-center gap-1 rounded-full px-1.5 text-muted-foreground hover:bg-accent transition-colors cursor-pointer", className)}
+      className={cn("flex h-11 min-w-11 shrink-0 items-center justify-center gap-1 rounded-full px-2 text-zinc-500 hover:bg-accent transition-colors cursor-pointer dark:text-zinc-400", className)}
     >
       {children}
     </button>
@@ -53,12 +53,14 @@ export interface PreviewPromptInputProps {
   clearOnSend?: boolean;
   /** Renders the full Claude-style toolbar (+, model selector, mic, voice fallback). */
   fullToolbar?: boolean;
+  /** Wired to the + button — e.g. opens an attachment sheet. */
+  onAttach?: () => void;
 }
 
 // Web mimic of the compound composer: auto-growing textarea on top, action
 // toolbar below. The trailing voice icon becomes a send arrow while typing.
 export function PreviewPromptInput({
-  className, placeholder = "How can I help you today?", onSend, onStop, streaming, clearOnSend = true, fullToolbar,
+  className, placeholder = "How can I help you today?", onSend, onStop, streaming, clearOnSend = true, fullToolbar, onAttach,
 }: PreviewPromptInputProps) {
   const [text, setText] = useState("");
   const ref = useRef<HTMLTextAreaElement>(null);
@@ -95,10 +97,10 @@ export function PreviewPromptInput({
         onKeyDown={(e) => {
           if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); handleSend(); }
         }}
-        className="max-h-[120px] w-full resize-none bg-transparent text-sm text-foreground outline-none placeholder:text-muted-foreground"
+        className="max-h-[120px] w-full resize-none bg-transparent text-base text-foreground outline-none placeholder:text-muted-foreground"
       />
       <div className="flex items-center gap-1 pt-2">
-        <ToolbarButton label="Add attachment"><PlusIcon /></ToolbarButton>
+        <ToolbarButton label="Add attachment" onClick={onAttach}><PlusIcon /></ToolbarButton>
         <div className="flex-1" />
         {fullToolbar && (
           <>
@@ -118,7 +120,7 @@ export function PreviewPromptInput({
             disabled={!canSend && !streaming}
             aria-label={streaming ? "Stop generating" : "Send message"}
             className={cn(
-              "flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-primary text-primary-foreground transition-opacity cursor-pointer",
+              "flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-primary text-primary-foreground transition-opacity cursor-pointer",
               !canSend && !streaming && "opacity-40 cursor-default"
             )}
           >
@@ -172,18 +174,18 @@ export function PreviewPromptInputRecordingDemo() {
             rows={1}
             readOnly
             placeholder="How can I help you today?"
-            className="w-full resize-none bg-transparent text-sm text-foreground outline-none placeholder:text-muted-foreground"
+            className="w-full resize-none bg-transparent text-base text-foreground outline-none placeholder:text-muted-foreground"
           />
         )}
         <div className="flex items-center gap-1 pt-2">
           {recording ? (
             <>
+              <PreviewWaveform active size="sm" className="flex-1 px-2" />
               <ToolbarButton label="Cancel recording" onClick={() => setRecording(false)}><XIcon /></ToolbarButton>
-              <PreviewWaveform active size="sm" className="flex-1" />
               <ToolbarButton
                 label="Finish recording"
                 onClick={() => setRecording(false)}
-                className="bg-primary text-primary-foreground hover:bg-primary/90"
+                className="w-11 bg-primary text-primary-foreground hover:bg-primary/90 dark:text-primary-foreground"
               >
                 <CheckIcon />
               </ToolbarButton>
@@ -196,7 +198,7 @@ export function PreviewPromptInputRecordingDemo() {
                 type="button"
                 disabled
                 aria-label="Send message"
-                className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-primary text-primary-foreground opacity-40"
+                className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-primary text-primary-foreground opacity-40"
               >
                 <ArrowUpIcon />
               </button>
@@ -206,6 +208,62 @@ export function PreviewPromptInputRecordingDemo() {
       </div>
       <p className="text-xs text-muted-foreground">
         {recording ? "Recording — X cancels, the check confirms." : "Tap the mic to enter the recording state."}
+      </p>
+    </div>
+  );
+}
+
+// Web mimic of the ActionSheet pattern: the + button presents a bottom sheet —
+// the mobile-friendly attachment menu.
+export function PreviewPromptInputAttachDemo() {
+  const [open, setOpen] = useState(false);
+  return (
+    <div className="w-full max-w-sm space-y-2">
+      <div className="relative h-72 w-full overflow-hidden rounded-2xl border border-border/60 bg-secondary/30">
+        <div className="absolute inset-x-3 bottom-3">
+          <PreviewPromptInput onAttach={() => setOpen(true)} />
+        </div>
+        {/* Backdrop */}
+        <div
+          className={cn(
+            "absolute inset-0 bg-black/50 transition-opacity duration-300",
+            open ? "opacity-100" : "pointer-events-none opacity-0"
+          )}
+          onClick={() => setOpen(false)}
+          aria-hidden="true"
+        />
+        {/* Bottom sheet */}
+        <div
+          className={cn(
+            "absolute inset-x-0 bottom-0 rounded-t-2xl bg-background px-4 pb-3 pt-2 shadow-[0_-8px_30px_rgba(0,0,0,0.12)] transition-transform duration-300 ease-out",
+            open ? "translate-y-0" : "translate-y-full"
+          )}
+          role="dialog"
+          aria-label="Add to your message"
+        >
+          <div className="mx-auto mb-1 h-1 w-9 rounded-full bg-muted-foreground/40" />
+          <p className="py-2 text-center text-sm text-muted-foreground">Add to your message</p>
+          {["Add photos", "Take a screenshot", "Files"].map((label) => (
+            <button
+              key={label}
+              type="button"
+              onClick={() => setOpen(false)}
+              className="w-full border-b border-border py-3 text-center text-sm font-medium text-foreground hover:bg-accent/50 transition-colors cursor-pointer"
+            >
+              {label}
+            </button>
+          ))}
+          <button
+            type="button"
+            onClick={() => setOpen(false)}
+            className="mt-1 w-full py-3 text-center text-sm font-semibold text-muted-foreground hover:text-foreground transition-colors cursor-pointer"
+          >
+            Cancel
+          </button>
+        </div>
+      </div>
+      <p className="text-xs text-muted-foreground">
+        Tap + to present the action sheet — the thumb-friendly menu on phones.
       </p>
     </div>
   );

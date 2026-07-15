@@ -4,6 +4,7 @@ import {
   PreviewPromptInputDemo,
   PreviewPromptInputStreamingDemo,
   PreviewPromptInputRecordingDemo,
+  PreviewPromptInputAttachDemo,
 } from "@/components/preview/prompt-input";
 import { ComponentPlayground } from "@/components/highlighted-playground";
 import { CodeBlock } from "@/components/code-block-server";
@@ -74,6 +75,37 @@ import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuIte
     />
   </PromptInputToolbar>
 </PromptInput>`;
+const actionSheetCode = `// npx @aniui/cli add action-sheet
+import { useRef } from "react";
+import { Plus } from "lucide-react-native";
+import { BottomSheetModal } from "@gorhom/bottom-sheet";
+import { ActionSheet } from "@/components/ui/action-sheet";
+
+const sheetRef = useRef<BottomSheetModal>(null);
+
+<>
+  <PromptInput onSend={(text) => sendMessage(text)}>
+    <PromptInputTextarea />
+    <PromptInputToolbar>
+      {/* Any PromptInputButton onPress can present an overlay */}
+      <PromptInputButton onPress={() => sheetRef.current?.present()} accessibilityLabel="Add attachment">
+        <Plus size={20} color="#71717a" />
+      </PromptInputButton>
+      <PromptInputSpacer />
+      <PromptInputSend />
+    </PromptInputToolbar>
+  </PromptInput>
+  <ActionSheet
+    ref={sheetRef}
+    title="Add to your message"
+    actions={[
+      { label: "Add photos", onPress: () => pickPhotos() },
+      { label: "Take a screenshot", onPress: () => takeScreenshot() },
+      { label: "Files", onPress: () => pickFiles() },
+    ]}
+    onCancel={() => sheetRef.current?.dismiss()}
+  />
+</>`;
 const attachMenuCode = `// npx @aniui/cli add dropdown-menu
 import { Plus } from "lucide-react-native";
 import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuItem } from "@/components/ui/dropdown-menu";
@@ -108,10 +140,10 @@ const [recording, setRecording] = useState(false);
   <PromptInputToolbar>
     {recording ? (
       <>
+        <Waveform active size="sm" className="flex-1" />
         <PromptInputButton onPress={() => setRecording(false)} accessibilityLabel="Cancel recording">
           <X size={20} color="#71717a" />
         </PromptInputButton>
-        <Waveform active size="sm" className="flex-1" />
         <PromptInputButton
           onPress={() => { setRecording(false); finishRecording(); }}
           accessibilityLabel="Finish recording"
@@ -335,6 +367,16 @@ export default function PromptInputPage() {
           <PreviewPromptInputDemo />
         </ComponentPlayground>
       </PreviewToggle>
+      {/* Composability note */}
+      <div className="rounded-lg border border-border bg-secondary/40 px-4 py-3 text-sm text-muted-foreground">
+        <span className="font-medium text-foreground">Every toolbar control is an optional slot.</span>{" "}
+        Compose only what you need — a textarea and a send arrow is already a complete composer. And any{" "}
+        <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">PromptInputButton</code>&apos;s{" "}
+        <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">onPress</code> can open a{" "}
+        <Link href="/docs/dropdown-menu" className="text-primary hover:underline">Dropdown Menu</Link>,{" "}
+        <Link href="/docs/action-sheet" className="text-primary hover:underline">Action Sheet</Link>,{" "}
+        <Link href="/docs/bottom-sheet" className="text-primary hover:underline">Bottom Sheet</Link>, or navigate to another screen.
+      </div>
       {/* Installation */}
       <div className="space-y-4">
         <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Installation</Heading>
@@ -352,16 +394,24 @@ export default function PromptInputPage() {
         <p className="text-sm text-muted-foreground">The full composer from the preview above: a + attachment button, a model selector wired to <a href="/docs/dropdown-menu" className="text-primary hover:underline">Dropdown Menu</a>, a mic for dictation, and <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">PromptInputSend</code> with an <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">emptyFallback</code> — the voice button shows while the draft is empty, and the send arrow takes its place as soon as you type.</p>
         <CodeBlock code={toolbarCode} title="Claude-style composer" />
       </div>
+      {/* Attachment action sheet */}
+      <div className="space-y-4">
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Attachment action sheet</Heading>
+        <p className="text-sm text-muted-foreground">The mobile-first pattern: on phones, wire the + button&apos;s <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">onPress</code> to an <Link href="/docs/action-sheet" className="text-primary hover:underline">Action Sheet</Link> — a thumb-reachable bottom sheet feels native and gives each option a full-width touch target.</p>
+        <ComponentPlayground code={actionSheetCode}>
+          <PreviewPromptInputAttachDemo />
+        </ComponentPlayground>
+      </div>
       {/* Attachment menu */}
       <div className="space-y-4">
         <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Attachment menu</Heading>
-        <p className="text-sm text-muted-foreground">Toolbar buttons compose with any AniUI overlay. Here the + button is the trigger for a <a href="/docs/dropdown-menu" className="text-primary hover:underline">Dropdown Menu</a> that opens upward, ChatGPT-style.</p>
+        <p className="text-sm text-muted-foreground">Toolbar buttons compose with any AniUI overlay. Here the + button is the trigger for a <a href="/docs/dropdown-menu" className="text-primary hover:underline">Dropdown Menu</a> that opens upward, ChatGPT-style. Prefer this anchored menu on larger screens and tablets, where a pointer or a wide layout makes it feel natural — and reach for the action sheet above on phones.</p>
         <CodeBlock code={attachMenuCode} title="Attachment menu" />
       </div>
       {/* Voice recording */}
       <div className="space-y-4">
         <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Voice recording</Heading>
-        <p className="text-sm text-muted-foreground">The toolbar is just a slot, so state can swap its contents entirely. While recording, replace the tools with an animated <a href="/docs/waveform" className="text-primary hover:underline">Waveform</a>, an X to cancel, and a check to confirm.</p>
+        <p className="text-sm text-muted-foreground">The toolbar is just a slot, so state can swap its contents entirely. While recording, replace the tools with an animated <a href="/docs/waveform" className="text-primary hover:underline">Waveform</a>, an X to cancel, and a check to confirm. The Waveform can also follow real mic metering — pass expo-av amplitudes via its <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">levels</code> prop (see <Link href="/docs/waveform" className="text-primary hover:underline">Waveform</Link>).</p>
         <ComponentPlayground code={recordingCode}>
           <PreviewPromptInputRecordingDemo />
         </ComponentPlayground>
