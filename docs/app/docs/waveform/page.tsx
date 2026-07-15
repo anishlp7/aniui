@@ -50,14 +50,25 @@ async function startRecording() {
 
 // Newest values render on the right; the wave scrolls left as you speak.
 <Waveform levels={levels} bars={BARS} />`;
-const playbackCode = `// levels also draws real playback data: decodedPeaks is a number[]
-// of 0-1 amplitudes extracted from the audio file (precomputed
-// server-side or decoded on load). active={false} keeps it still —
-// a static wave of the actual audio, not the ambient shape.
+const playbackCode = `// levels draws real playback data: decodedPeaks is a number[] of 0-1
+// amplitudes extracted from the audio file (precomputed server-side or
+// decoded on load). active={false} keeps it still, and progress fades
+// the bars past the playhead — the voice-message scrubber look.
+const [status, setStatus] = useState({ position: 0, duration: 1 });
+// e.g. expo-av: sound.setOnPlaybackStatusUpdate((s) =>
+//   s.isLoaded && setStatus({ position: s.positionMillis, duration: s.durationMillis ?? 1 }));
+
 <View className="flex-row items-center gap-3 rounded-2xl border border-input bg-background px-4 py-3">
-  <PlayButton onPress={play} />
-  <Waveform levels={decodedPeaks} active={false} bars={32} size="sm" className="flex-1" />
-  <Text className="text-xs text-muted-foreground">0:12</Text>
+  <PlayButton onPress={togglePlay} />
+  <Waveform
+    levels={decodedPeaks}
+    active={false}
+    progress={status.position / status.duration}
+    bars={32}
+    size="sm"
+    className="flex-1"
+  />
+  <Text className="text-xs text-muted-foreground">{remaining}</Text>
 </View>`;
 const customCode = `// Fewer, smaller bars for tight spaces
 <Waveform size="sm" bars={16} />
@@ -93,8 +104,8 @@ const sizes = { sm: 12, md: 20, lg: 28 } as const;
 // deterministic per-bar (no Math.random) so renders and tests are stable.
 const ambient = (i: number) => 0.35 + 0.65 * Math.abs(Math.sin(i * 2.4) * Math.cos(i * 0.7));
 
-function Bar({ index, max, active, color, level }: {
-  index: number; max: number; active: boolean; color: string; level?: number;
+function Bar({ index, max, active, color, level, faded }: {
+  index: number; max: number; active: boolean; color: string; level?: number; faded?: boolean;
 }) {
   const height = useSharedValue(3);
 
@@ -118,7 +129,7 @@ function Bar({ index, max, active, color, level }: {
   }, [level, active, index, max, height]);
 
   const style = useAnimatedStyle(() => ({ height: height.value }));
-  return <Animated.View style={[style, { backgroundColor: color }]} className="w-0.5 rounded-full" />;
+  return <Animated.View style={[style, { backgroundColor: color, opacity: faded ? 0.35 : 1 }]} className="w-0.5 rounded-full" />;
 }
 
 export interface WaveformProps extends React.ComponentPropsWithoutRef<typeof View> {
@@ -133,19 +144,25 @@ export interface WaveformProps extends React.ComponentPropsWithoutRef<typeof Vie
   levels?: number[];
   /** Without \`levels\`: animate an ambient wave (recording). false = static. */
   active?: boolean;
+  /** Playback position 0–1 — bars past the playhead are faded (scrubber look). */
+  progress?: number;
   size?: keyof typeof sizes;
   /** Bar color; defaults to the theme foreground. */
   color?: string;
 }
 
-export function Waveform({ className, bars = 28, levels, active = true, size = "md", color, ...props }: WaveformProps) {
+export function Waveform({ className, bars = 28, levels, active = true, progress, size = "md", color, style, ...props }: WaveformProps) {
   const dark = useColorScheme() === "dark";
   const barColor = color ?? (dark ? "#fafafa" : "#18181b");
   const window = levels?.slice(-bars);
   const pad = window ? bars - window.length : 0;
+  const playhead = progress !== undefined ? Math.round(Math.min(1, Math.max(0, progress)) * bars) : undefined;
   return (
     <View
       className={cn("flex-row items-center justify-center gap-0.5", className)}
+      // Fixed to the tallest bar so the row never changes height while the
+      // bars animate (no layout bounce in composers / recording rows).
+      style={[{ height: sizes[size] }, style]}
       accessibilityLabel={active ? "Recording" : "Audio waveform"}
       {...props}
     >
@@ -157,6 +174,7 @@ export function Waveform({ className, bars = 28, levels, active = true, size = "
           active={active}
           color={barColor}
           level={window ? (i < pad ? 0 : window[i - pad]) : undefined}
+          faded={playhead !== undefined && i >= playhead}
         />
       ))}
     </View>
@@ -228,6 +246,7 @@ export default function WaveformPage() {
           { name: "bars", type: "number", default: "28", description: "Number of bars in the wave." },
           { name: "levels", type: "number[]", default: "-", description: "Real audio amplitudes in 0–1 (mic metering or decoded playback data). The most recent bars values are shown, newest on the right, left-padded with silence; when provided, the bars follow the audio instead of the ambient animation." },
           { name: "active", type: "boolean", default: "true", description: "Without levels: animate the ambient wave (recording). false renders a static wave. Also drives the accessibility label." },
+          { name: "progress", type: "number", default: "-", description: "Playback position 0–1 — bars past the playhead render faded, the classic voice-message scrubber look." },
           { name: "size", type: '"sm" | "md" | "lg"', default: '"md"' },
           { name: "color", type: "string", default: "-", description: "Bar color; defaults to the theme foreground." },
           { name: "className", type: "string", default: "-" },

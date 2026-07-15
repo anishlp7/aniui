@@ -9,8 +9,8 @@ const sizes = { sm: 12, md: 20, lg: 28 } as const;
 // deterministic per-bar (no Math.random) so renders and tests are stable.
 const ambient = (i: number) => 0.35 + 0.65 * Math.abs(Math.sin(i * 2.4) * Math.cos(i * 0.7));
 
-function Bar({ index, max, active, color, level }: {
-  index: number; max: number; active: boolean; color: string; level?: number;
+function Bar({ index, max, active, color, level, faded }: {
+  index: number; max: number; active: boolean; color: string; level?: number; faded?: boolean;
 }) {
   const height = useSharedValue(3);
 
@@ -34,7 +34,7 @@ function Bar({ index, max, active, color, level }: {
   }, [level, active, index, max, height]);
 
   const style = useAnimatedStyle(() => ({ height: height.value }));
-  return <Animated.View style={[style, { backgroundColor: color }]} className="w-0.5 rounded-full" />;
+  return <Animated.View style={[style, { backgroundColor: color, opacity: faded ? 0.35 : 1 }]} className="w-0.5 rounded-full" />;
 }
 
 export interface WaveformProps extends React.ComponentPropsWithoutRef<typeof View> {
@@ -49,16 +49,19 @@ export interface WaveformProps extends React.ComponentPropsWithoutRef<typeof Vie
   levels?: number[];
   /** Without `levels`: animate an ambient wave (recording). false = static. */
   active?: boolean;
+  /** Playback position 0–1 — bars past the playhead are faded (scrubber look). */
+  progress?: number;
   size?: keyof typeof sizes;
   /** Bar color; defaults to the theme foreground. */
   color?: string;
 }
 
-export function Waveform({ className, bars = 28, levels, active = true, size = "md", color, style, ...props }: WaveformProps) {
+export function Waveform({ className, bars = 28, levels, active = true, progress, size = "md", color, style, ...props }: WaveformProps) {
   const dark = useColorScheme() === "dark";
   const barColor = color ?? (dark ? "#fafafa" : "#18181b");
   const window = levels?.slice(-bars);
   const pad = window ? bars - window.length : 0;
+  const playhead = progress !== undefined ? Math.round(Math.min(1, Math.max(0, progress)) * bars) : undefined;
   return (
     <View
       className={cn("flex-row items-center justify-center gap-0.5", className)}
@@ -76,6 +79,7 @@ export function Waveform({ className, bars = 28, levels, active = true, size = "
           active={active}
           color={barColor}
           level={window ? (i < pad ? 0 : window[i - pad]) : undefined}
+          faded={playhead !== undefined && i >= playhead}
         />
       ))}
     </View>

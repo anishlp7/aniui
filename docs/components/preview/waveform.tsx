@@ -15,14 +15,17 @@ export interface PreviewWaveformProps {
   /** Real audio amplitudes 0–1 — the newest `bars` values are shown, newest right, left-padded with silence (mirrors the RN source). */
   levels?: number[];
   active?: boolean;
+  /** Playback position 0–1 — bars past the playhead are faded (mirrors the RN source). */
+  progress?: number;
   size?: keyof typeof sizes;
   color?: string;
 }
 
-export function PreviewWaveform({ className, bars = 28, levels, active = true, size = "md", color }: PreviewWaveformProps) {
+export function PreviewWaveform({ className, bars = 28, levels, active = true, progress, size = "md", color }: PreviewWaveformProps) {
   const max = sizes[size];
   const window = levels?.slice(-bars);
   const pad = window ? bars - window.length : 0;
+  const playhead = progress !== undefined ? Math.round(Math.min(1, Math.max(0, progress)) * bars) : undefined;
   return (
     <div
       className={cn("flex items-center justify-center gap-0.5", className)}
@@ -48,6 +51,7 @@ export function PreviewWaveform({ className, bars = 28, levels, active = true, s
               height,
               // Audio-driven bars follow the signal (~100ms, like the RN source);
               // otherwise the ambient pulse animation is the fallback.
+              ...(playhead !== undefined && i >= playhead ? { opacity: 0.35 } : null),
               ...(color ? { backgroundColor: color } : null),
               ...(level !== undefined ? { transition: "height 100ms linear" } : null),
               ...(level === undefined && active
@@ -156,14 +160,50 @@ const decodedPeaks = Array.from({ length: 32 }, (_, i) =>
   Math.min(1, Math.max(0.08, Math.abs(Math.sin(i * 0.9) * 0.8 + Math.sin(i * 0.35) * 0.5)))
 );
 
+const CLIP_SECONDS = 12;
+
 export function PreviewWaveformPlaybackDemo() {
+  const [playing, setPlaying] = useState(false);
+  const [elapsed, setElapsed] = useState(0);
+
+  useEffect(() => {
+    if (!playing) return;
+    const id = setInterval(() => {
+      setElapsed((t) => {
+        if (t + 0.1 >= CLIP_SECONDS) {
+          setPlaying(false);
+          return CLIP_SECONDS;
+        }
+        return t + 0.1;
+      });
+    }, 100);
+    return () => clearInterval(id);
+  }, [playing]);
+
+  const togglePlay = () => {
+    if (!playing && elapsed >= CLIP_SECONDS) setElapsed(0);
+    setPlaying((p) => !p);
+  };
+  const remaining = Math.ceil(CLIP_SECONDS - elapsed);
+
   return (
     <div className="flex w-full max-w-sm items-center gap-3 rounded-2xl border border-input bg-background px-4 py-3">
-      <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-primary text-primary-foreground">
-        <svg className="h-4 w-4 translate-x-px" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z" /></svg>
-      </div>
-      <PreviewWaveform levels={decodedPeaks} active={false} bars={32} size="sm" className="flex-1" />
-      <span className="text-xs tabular-nums text-muted-foreground">0:12</span>
+      <button
+        type="button"
+        onClick={togglePlay}
+        aria-label={playing ? "Pause" : "Play"}
+        className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-primary text-primary-foreground transition-transform hover:scale-105 cursor-pointer"
+      >
+        {playing ? (
+          <svg className="h-4 w-4" viewBox="0 0 24 24" fill="currentColor"><path d="M6 4h4v16H6zM14 4h4v16h-4z" /></svg>
+        ) : (
+          <svg className="h-4 w-4 translate-x-px" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z" /></svg>
+        )}
+      </button>
+      <PreviewWaveform levels={decodedPeaks} active={false} progress={elapsed / CLIP_SECONDS} bars={32} size="sm" className="flex-1" />
+      <span className="w-8 text-right text-xs tabular-nums text-muted-foreground">
+        0:{String(remaining).padStart(2, "0")}
+      </span>
     </div>
   );
 }
