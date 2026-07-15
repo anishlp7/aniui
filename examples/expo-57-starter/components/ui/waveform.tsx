@@ -9,10 +9,16 @@ const sizes = { sm: 12, md: 20, lg: 28 } as const;
 // deterministic per-bar (no Math.random) so renders and tests are stable.
 const ambient = (i: number) => 0.35 + 0.65 * Math.abs(Math.sin(i * 2.4) * Math.cos(i * 0.7));
 
-function Bar({ index, max, active, color, level, faded }: {
-  index: number; max: number; active: boolean; color: string; level?: number; faded?: boolean;
+function Bar({ index, max, active, color, level, dim = 1 }: {
+  index: number; max: number; active: boolean; color: string; level?: number; dim?: number;
 }) {
   const height = useSharedValue(3);
+  const opacity = useSharedValue(dim);
+
+  useEffect(() => {
+    // Follows the playhead smoothly (100ms matches typical status-update ticks).
+    opacity.value = withTiming(dim, { duration: 100 });
+  }, [dim, opacity]);
 
   useEffect(() => {
     if (level !== undefined) {
@@ -33,8 +39,8 @@ function Bar({ index, max, active, color, level, faded }: {
     return () => cancelAnimation(height);
   }, [level, active, index, max, height]);
 
-  const style = useAnimatedStyle(() => ({ height: height.value }));
-  return <Animated.View style={[style, { backgroundColor: color, opacity: faded ? 0.35 : 1 }]} className="w-0.5 rounded-full" />;
+  const style = useAnimatedStyle(() => ({ height: height.value, opacity: opacity.value }));
+  return <Animated.View style={[style, { backgroundColor: color }]} className="w-0.5 rounded-full" />;
 }
 
 export interface WaveformProps extends React.ComponentPropsWithoutRef<typeof View> {
@@ -61,7 +67,15 @@ export function Waveform({ className, bars = 28, levels, active = true, progress
   const barColor = color ?? (dark ? "#fafafa" : "#18181b");
   const window = levels?.slice(-bars);
   const pad = window ? bars - window.length : 0;
-  const playhead = progress !== undefined ? Math.round(Math.min(1, Math.max(0, progress)) * bars) : undefined;
+  // Continuous playhead in bar units — the boundary bar gets an interpolated
+  // opacity so the sweep is smooth instead of stepping bar-by-bar.
+  const playhead = progress !== undefined ? Math.min(1, Math.max(0, progress)) * bars : undefined;
+  const dimFor = (i: number) => {
+    if (playhead === undefined) return 1;
+    if (i + 1 <= playhead) return 1;
+    if (i >= playhead) return 0.35;
+    return 0.35 + 0.65 * (playhead - i);
+  };
   return (
     <View
       className={cn("flex-row items-center justify-center gap-0.5", className)}
@@ -79,7 +93,7 @@ export function Waveform({ className, bars = 28, levels, active = true, progress
           active={active}
           color={barColor}
           level={window ? (i < pad ? 0 : window[i - pad]) : undefined}
-          faded={playhead !== undefined && i >= playhead}
+          dim={dimFor(i)}
         />
       ))}
     </View>

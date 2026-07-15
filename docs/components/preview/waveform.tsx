@@ -25,7 +25,15 @@ export function PreviewWaveform({ className, bars = 28, levels, active = true, p
   const max = sizes[size];
   const window = levels?.slice(-bars);
   const pad = window ? bars - window.length : 0;
-  const playhead = progress !== undefined ? Math.round(Math.min(1, Math.max(0, progress)) * bars) : undefined;
+  // Continuous playhead in bar units — the boundary bar gets an interpolated
+  // opacity + a 100ms transition, so the sweep glides instead of stepping.
+  const playhead = progress !== undefined ? Math.min(1, Math.max(0, progress)) * bars : undefined;
+  const dimFor = (i: number) => {
+    if (playhead === undefined) return 1;
+    if (i + 1 <= playhead) return 1;
+    if (i >= playhead) return 0.35;
+    return Math.round((0.35 + 0.65 * (playhead - i)) * 100) / 100;
+  };
   return (
     <div
       className={cn("flex items-center justify-center gap-0.5", className)}
@@ -51,9 +59,11 @@ export function PreviewWaveform({ className, bars = 28, levels, active = true, p
               height,
               // Audio-driven bars follow the signal (~100ms, like the RN source);
               // otherwise the ambient pulse animation is the fallback.
-              ...(playhead !== undefined && i >= playhead ? { opacity: 0.35 } : null),
+              ...(playhead !== undefined
+                ? { opacity: dimFor(i), transition: "opacity 100ms linear, height 100ms linear" }
+                : null),
               ...(color ? { backgroundColor: color } : null),
-              ...(level !== undefined ? { transition: "height 100ms linear" } : null),
+              ...(level !== undefined && playhead === undefined ? { transition: "height 100ms linear" } : null),
               ...(level === undefined && active
                 ? { animation: `waveformPulse ${(260 + (i % 5) * 70) * 2}ms ease-in-out infinite` }
                 : null),
