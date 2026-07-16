@@ -1,5 +1,6 @@
 import React, { createContext, useContext } from "react";
-import { View, Text } from "react-native";
+import { View, Text, useColorScheme } from "react-native";
+import { Check } from "lucide-react-native";
 import { cn } from "@/lib/utils";
 
 const StepsContext = createContext<{ current: number }>({ current: 0 });
@@ -38,6 +39,7 @@ export interface ProgressStepProps extends React.ComponentPropsWithoutRef<typeof
 
 export function ProgressStep({ label, icon, className, _index = 0, ...props }: ProgressStepProps) {
   const { current } = useContext(StepsContext);
+  const dark = useColorScheme() === "dark";
   const isCompleted = _index < current;
   const isActive = _index === current;
 
@@ -49,16 +51,19 @@ export function ProgressStep({ label, icon, className, _index = 0, ...props }: P
           isCompleted ? "bg-primary" : isActive ? "border-2 border-primary bg-background" : "bg-muted"
         )}
       >
-        {icon ?? (
-          <Text
-            className={cn(
-              "text-sm font-semibold",
-              isCompleted ? "text-primary-foreground" : isActive ? "text-primary" : "text-muted-foreground"
-            )}
-          >
-            {isCompleted ? "✓" : _index + 1}
-          </Text>
-        )}
+        {icon ??
+          (isCompleted ? (
+            <Check size={14} color={dark ? "#18181b" : "#fafafa"} strokeWidth={3} />
+          ) : (
+            <Text
+              className={cn(
+                "text-sm font-semibold",
+                isActive ? "text-primary" : "text-muted-foreground"
+              )}
+            >
+              {_index + 1}
+            </Text>
+          ))}
       </View>
       {label && (
         <Text

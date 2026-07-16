@@ -20,19 +20,20 @@ const sizesCode = `<Input size="sm" placeholder="Small" />
 <Input size="md" placeholder="Medium" />
 <Input size="lg" placeholder="Large" />`;
 const leadingIconCode = `import { Input } from "@/components/ui/input";
-import { Ionicons } from "@expo/vector-icons";
+import { Search } from "lucide-react-native";
 
 <Input
-  leadingIcon={<Ionicons name="search" size={18} color="#71717a" />}
+  leadingIcon={<Search size={18} color="#71717a" />}
   placeholder="Search..."
 />`;
 const trailingIconCode = `import { Input } from "@/components/ui/input";
-import { Pressable, Text } from "react-native";
+import { Pressable } from "react-native";
+import { XCircle } from "lucide-react-native";
 
 <Input
   trailingIcon={
     <Pressable onPress={() => setValue("")}>
-      <Ionicons name="close-circle" size={18} color="#71717a" />
+      <XCircle size={18} color="#71717a" />
     </Pressable>
   }
   placeholder="Type something..."
@@ -40,7 +41,7 @@ import { Pressable, Text } from "react-native";
 />`;
 const passwordCode = `import { Input } from "@/components/ui/input";
 import { Pressable } from "react-native";
-import { Ionicons } from "@expo/vector-icons";
+import { Eye, EyeOff } from "lucide-react-native";
 
 const [visible, setVisible] = useState(false);
 
@@ -48,7 +49,7 @@ const [visible, setVisible] = useState(false);
   secureTextEntry={!visible}
   trailingIcon={
     <Pressable onPress={() => setVisible(!visible)}>
-      <Ionicons name={visible ? "eye-off" : "eye"} size={18} color="#71717a" />
+      {visible ? <EyeOff size={18} color="#71717a" /> : <Eye size={18} color="#71717a" />}
     </Pressable>
   }
   placeholder="Password"
@@ -78,8 +79,11 @@ import { View, TextInput, useColorScheme } from "react-native";
 import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
+// Padding lives on the wrapping View, never on the raw TextInput — a TextInput
+// doesn't honor \`px-*\` reliably, so keeping padding on the View gives a
+// consistent inset with or without icons, under both NativeWind and Uniwind.
 const inputVariants = cva(
-  "rounded-md border py-2 text-foreground placeholder:text-muted-foreground",
+  "flex-row items-center rounded-md border py-2",
   {
     variants: {
       variant: {
@@ -87,14 +91,19 @@ const inputVariants = cva(
         ghost: "border-transparent bg-transparent",
       },
       size: {
-        sm: "min-h-9 px-3 text-sm",
-        md: "min-h-12 px-4 text-base",
-        lg: "min-h-14 px-5 text-lg",
+        sm: "min-h-9 px-3",
+        md: "min-h-12 px-4",
+        lg: "min-h-14 px-5",
       },
     },
-    defaultVariants: { variant: "default", size: "md" },
+    defaultVariants: {
+      variant: "default",
+      size: "md",
+    },
   }
 );
+
+const fontSizes = { sm: 14, md: 16, lg: 18 } as const;
 
 export interface InputProps
   extends React.ComponentPropsWithoutRef<typeof TextInput>,
@@ -108,35 +117,25 @@ export const Input = React.forwardRef<
   React.ElementRef<typeof TextInput>,
   InputProps
 >(function Input(
-  { variant, size, className, leadingIcon, trailingIcon, ...props },
+  { variant, size, className, leadingIcon, trailingIcon, style, ...props },
   ref
 ) {
-  const hasIcons = !!(leadingIcon || trailingIcon);
   const dark = useColorScheme() === "dark";
   const caret = dark ? "#fafafa" : "#18181b";
-
-  if (!hasIcons) {
-    return (
-      <TextInput
-        ref={ref}
-        className={cn(inputVariants({ variant, size }), className)}
-        placeholderTextColor={dark ? "#a1a1aa" : "#71717a"}
-        keyboardAppearance={dark ? "dark" : "light"}
-        selectionColor={caret}
-        cursorColor={caret}
-        {...props}
-      />
-    );
-  }
+  const resolvedSize = size ?? "md";
 
   return (
-    <View
-      className={cn("flex-row items-center", inputVariants({ variant, size }), className)}
-    >
+    <View className={cn(inputVariants({ variant, size }), className)}>
       {leadingIcon && <View className="me-2">{leadingIcon}</View>}
       <TextInput
         ref={ref}
-        className="flex-1 text-foreground p-0 text-base"
+        // font-size is set inline (no lineHeight) so the cursor stays centered
+        // on iOS while the size still matches the variant on every platform.
+        // self-stretch makes the TextInput fill the row height so taps on the
+        // wrapper's vertical padding still focus the field.
+        className="flex-1 self-stretch p-0 text-foreground placeholder:text-muted-foreground"
+        style={[{ fontSize: fontSizes[resolvedSize] }, style]}
+        textAlignVertical="center"
         placeholderTextColor={dark ? "#a1a1aa" : "#71717a"}
         keyboardAppearance={dark ? "dark" : "light"}
         selectionColor={caret}

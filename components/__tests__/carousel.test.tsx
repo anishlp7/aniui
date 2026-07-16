@@ -1,6 +1,6 @@
 import React from "react";
 import { Text } from "react-native";
-import { render } from "@testing-library/react-native";
+import { render, fireEvent } from "@testing-library/react-native";
 import { Carousel } from "../ui/carousel";
 
 describe("Carousel", () => {
@@ -15,8 +15,11 @@ describe("Carousel", () => {
     expect(toJSON()).toBeTruthy();
   });
 
-  it("renders slide content", () => {
-    const { getByText } = render(<Carousel data={slides} />);
+  it("renders slide content once its width is measured", () => {
+    const { getByLabelText, getByText } = render(<Carousel data={slides} />);
+    fireEvent(getByLabelText("Carousel, item 1 of 3"), "layout", {
+      nativeEvent: { layout: { width: 375, height: 200 } },
+    });
     expect(getByText("Slide 1")).toBeTruthy();
   });
 

@@ -116,6 +116,17 @@ const v4GlobalCss = `/* SDK 56 + NativeWind v4 stable */
 export default function Expo56Page() {
   return (
     <div className="space-y-10">
+      {/* SDK 57 callout */}
+      <div className="rounded-lg border border-primary/30 bg-primary/10 p-4">
+        <p className="text-sm text-foreground">
+          <strong>On SDK 57?</strong> See the{" "}
+          <Link href="/docs/expo-57" className="text-primary hover:underline">
+            Expo SDK 57 guide
+          </Link>{" "}
+          — the newest supported SDK (React 19.2.3 / RN 0.86 / Reanimated 4.5, Uniwind by default).
+        </p>
+      </div>
+
       {/* Header */}
       <div>
         <div className="mb-3 inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-3 py-1">

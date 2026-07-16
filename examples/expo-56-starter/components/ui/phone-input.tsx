@@ -2,7 +2,7 @@ import React, { useState, useCallback } from "react";
 import { View, TextInput, Pressable, Text, ScrollView, Modal, useColorScheme } from "react-native";
 import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
-import Svg, { Path } from "react-native-svg";
+import { ChevronDown } from "lucide-react-native";
 
 const phoneVariants = cva("flex-row items-center rounded-md border", {
   variants: {
@@ -47,21 +47,26 @@ export const PhoneInput = React.forwardRef<
   React.ElementRef<typeof TextInput>,
   PhoneInputProps
 >(function PhoneInput(
-  { variant, size, className, defaultCountry = "US", value = "", onChangeText, ...props },
+  { variant, size, className, defaultCountry = "US", value, onChangeText, ...props },
   ref
 ) {
   const [country, setCountry] = useState(countries.find((c) => c.code === defaultCountry) ?? countries[0]);
   const [open, setOpen] = useState(false);
+  const [internal, setInternal] = useState("");
   const dark = useColorScheme() === "dark";
   const caret = dark ? "#fafafa" : "#18181b";
 
+  // Internal state is the fallback when no `value` prop is wired (uncontrolled usage)
+  const fullPhone = value ?? internal;
   // Strip the dial code prefix to get just the number for display
-  const rawNumber = value.startsWith(country.dial) ? value.slice(country.dial.length) : value.replace(/^\+\d+/, "");
+  const rawNumber = fullPhone.startsWith(country.dial) ? fullPhone.slice(country.dial.length) : fullPhone.replace(/^\+\d+/, "");
 
   const handleChange = useCallback(
     (text: string) => {
       const digits = text.replace(/\D/g, "");
-      onChangeText?.(`${country.dial}${digits}`);
+      const full = `${country.dial}${digits}`;
+      setInternal(full);
+      onChangeText?.(full);
     },
     [country, onChangeText]
   );
@@ -76,9 +81,7 @@ export const PhoneInput = React.forwardRef<
         className="flex-row items-center me-2 pe-2 border-e border-border min-h-8"
       >
         <Text className="text-foreground text-base">{country.dial}</Text>
-        <Svg width={14} height={14} viewBox="0 0 24 24" fill="none" stroke="#71717a" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
-      <Path d="m6 9 6 6 6-6" />
-    </Svg>
+        <ChevronDown size={14} color="#71717a" />
       </Pressable>
       <TextInput
         ref={ref}

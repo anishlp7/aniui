@@ -1,0 +1,23 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "gradient",
+  "type": "registry:ui",
+  "title": "Gradient",
+  "description": "Linear gradient view with configurable colors and direction",
+  "dependencies": [
+    "react-native-svg",
+    "clsx",
+    "tailwind-merge"
+  ],
+  "registryDependencies": [
+    "https://aniui.dev/r/utils.json"
+  ],
+  "files": [
+    {
+      "path": "components/ui/gradient.tsx",
+      "type": "registry:ui",
+      "content": "import React from \"react\";\nimport { View } from \"react-native\";\nimport Svg, { Defs, LinearGradient as SvgLinearGradient, Stop, Rect } from \"react-native-svg\";\nimport { cn } from \"@/lib/utils\";\n\nexport interface GradientPoint {\n  x: number;\n  y: number;\n}\n\nexport interface GradientProps extends React.ComponentPropsWithoutRef<typeof View> {\n  className?: string;\n  colors?: string[];\n  start?: GradientPoint;\n  end?: GradientPoint;\n  children?: React.ReactNode;\n}\n\nexport function Gradient({\n  colors = [\"#18181b\", \"#3f3f46\"],\n  start = { x: 0, y: 0 },\n  end = { x: 0, y: 1 },\n  className,\n  children,\n  ...props\n}: GradientProps) {\n  // useId output contains \":\" which is unsafe inside url(#...) references.\n  const id = `grad-${React.useId().replace(/[^a-zA-Z0-9]/g, \"\")}`;\n\n  return (\n    <View className={cn(\"overflow-hidden\", className)} {...props}>\n      <Svg\n        pointerEvents=\"none\"\n        style={{ position: \"absolute\", top: 0, left: 0, right: 0, bottom: 0 }}\n      >\n        <Defs>\n          <SvgLinearGradient\n            id={id}\n            x1={`${start.x * 100}%`}\n            y1={`${start.y * 100}%`}\n            x2={`${end.x * 100}%`}\n            y2={`${end.y * 100}%`}\n          >\n            {colors.map((color, i) => (\n              <Stop\n                key={i}\n                offset={`${(i / Math.max(colors.length - 1, 1)) * 100}%`}\n                stopColor={color}\n              />\n            ))}\n          </SvgLinearGradient>\n        </Defs>\n        <Rect width=\"100%\" height=\"100%\" fill={`url(#${id})`} />\n      </Svg>\n      {children}\n    </View>\n  );\n}\n"
+    }
+  ],
+  "docs": "AniUI is React Native. On an existing RNR/NativeWind project, add and use directly — the tokens and aliases already match, no setup needed. On a fresh project, run `npx @aniui/cli init` first to configure NativeWind/Uniwind, theme tokens, and Metro/Babel."
+}

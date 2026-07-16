@@ -1,7 +1,7 @@
 import React, { useState, useMemo, useCallback } from "react";
 import { View, Text, TextInput, Pressable, ScrollView, useColorScheme, type ViewStyle } from "react-native";
 import { cn } from "@/lib/utils";
-import Svg, { Path } from "react-native-svg";
+import { ChevronDown, ChevronUp } from "lucide-react-native";
 
 export interface DataTableColumn<T> {
   key: keyof T & string;
@@ -33,10 +33,10 @@ export interface DataTableProps<T> extends React.ComponentPropsWithoutRef<typeof
 }
 
 function SortIcon({ order }: { order?: "asc" | "desc" }) {
-  return (
-    <Svg width={12} height={12} viewBox="0 0 24 24" fill="none" stroke="#71717a" strokeWidth={2.5}>
-      {order === "asc" ? <Path d="m18 15-6-6-6 6" /> : <Path d="m6 9 6 6 6-6" />}
-    </Svg>
+  return order === "asc" ? (
+    <ChevronUp size={12} color="#71717a" strokeWidth={2.5} />
+  ) : (
+    <ChevronDown size={12} color="#71717a" strokeWidth={2.5} />
   );
 }
 
@@ -75,7 +75,7 @@ export function DataTable<T extends Record<string, unknown>>({
     setPage(0);
   }, [sortBy, sortOrder, internalSortOrder, onSort]);
 
-  const keys = searchKeys ?? columns.map((c) => c.key);
+  const keys = useMemo(() => searchKeys ?? columns.map((c) => c.key), [searchKeys, columns]);
 
   const filtered = useMemo(() => {
     if (!search.trim()) return data;

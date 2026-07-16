@@ -1,5 +1,6 @@
 import React from "react";
 import { View, Text } from "react-native";
+import { ArrowDown, ArrowUp } from "lucide-react-native";
 import { cn } from "@/lib/utils";
 
 export interface StatCardProps extends React.ComponentPropsWithoutRef<typeof View> {
@@ -14,7 +15,6 @@ export interface StatCardProps extends React.ComponentPropsWithoutRef<typeof Vie
 export function StatCard({ className, label, value, change, trend, icon, ...props }: StatCardProps) {
   const trendColor =
     trend === "up" ? "text-green-500" : trend === "down" ? "text-destructive" : "text-muted-foreground";
-  const trendArrow = trend === "up" ? "↑" : trend === "down" ? "↓" : "";
 
   return (
     <View
@@ -29,8 +29,10 @@ export function StatCard({ className, label, value, change, trend, icon, ...prop
       <Text className="text-2xl font-bold text-card-foreground">{value}</Text>
       {change !== undefined && (
         <View className="flex-row items-center mt-1 gap-1">
+          {trend === "up" && <ArrowUp size={14} color="#22c55e" />}
+          {trend === "down" && <ArrowDown size={14} color="#ef4444" />}
           <Text className={cn("text-sm font-medium", trendColor)}>
-            {trendArrow} {change > 0 ? "+" : ""}{change}%
+            {change > 0 ? "+" : ""}{change}%
           </Text>
         </View>
       )}

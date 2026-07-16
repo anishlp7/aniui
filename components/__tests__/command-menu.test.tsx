@@ -1,5 +1,5 @@
 import React from "react";
-import { render } from "@testing-library/react-native";
+import { render, fireEvent } from "@testing-library/react-native";
 import { CommandMenu } from "../ui/command-menu";
 
 const items = [
@@ -9,18 +9,33 @@ const items = [
 ];
 
 describe("CommandMenu", () => {
-  it("renders nothing when open is false", () => {
-    const { toJSON } = render(
-      <CommandMenu open={false} onOpenChange={jest.fn()} items={items} />
-    );
-    // Modal with visible=false renders null in the test environment
-    expect(toJSON()).toBeNull();
+  it("renders without crashing", () => {
+    const { toJSON } = render(<CommandMenu open onOpenChange={jest.fn()} items={items} />);
+    expect(toJSON()).toBeTruthy();
   });
 
-  it("renders when open is true", () => {
-    const { toJSON } = render(
-      <CommandMenu open={true} onOpenChange={jest.fn()} items={items} />
+  it("shows items and group headers (primitive/mock manages visibility)", () => {
+    const { getByText } = render(<CommandMenu open onOpenChange={jest.fn()} items={items} />);
+    expect(getByText("Copy")).toBeTruthy();
+    expect(getByText("Settings")).toBeTruthy();
+    expect(getByText("Actions")).toBeTruthy();
+  });
+
+  it("selecting an item fires onSelect and closes", () => {
+    const onSelect = jest.fn();
+    const onOpenChange = jest.fn();
+    const { getByText } = render(
+      <CommandMenu open onOpenChange={onOpenChange} items={items} onSelect={onSelect} />
     );
-    expect(toJSON()).toBeTruthy();
+    fireEvent.press(getByText("Copy"));
+    expect(onSelect).toHaveBeenCalledWith("copy");
+    expect(onOpenChange).toHaveBeenCalledWith(false);
+  });
+
+  it("shows empty text when there are no items", () => {
+    const { getByText } = render(
+      <CommandMenu open onOpenChange={jest.fn()} items={[]} emptyText="Nothing here" />
+    );
+    expect(getByText("Nothing here")).toBeTruthy();
   });
 });

@@ -1,0 +1,24 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "avatar-group",
+  "type": "registry:ui",
+  "title": "AvatarGroup",
+  "description": "Overlapping avatar stack with max count and +N overflow bubble",
+  "dependencies": [
+    "class-variance-authority",
+    "clsx",
+    "tailwind-merge"
+  ],
+  "registryDependencies": [
+    "https://aniui.dev/r/utils.json",
+    "https://aniui.dev/r/avatar.json"
+  ],
+  "files": [
+    {
+      "path": "components/ui/avatar-group.tsx",
+      "type": "registry:ui",
+      "content": "import React from \"react\";\nimport { View, Text } from \"react-native\";\nimport { cva, type VariantProps } from \"class-variance-authority\";\nimport { cn } from \"@/lib/utils\";\n\n// spacing is applied as a negative left margin per item (not -space-x-*) because\n// neither NativeWind nor Uniwind supports Tailwind's sibling-selector space utilities.\nconst avatarGroupItemVariants = cva(\"rounded-full border-2 border-background\", {\n  variants: {\n    spacing: {\n      sm: \"-ml-2\",\n      md: \"-ml-3\",\n      lg: \"-ml-4\",\n    },\n  },\n  defaultVariants: {\n    spacing: \"md\",\n  },\n});\n\nexport interface AvatarGroupProps\n  extends React.ComponentPropsWithoutRef<typeof View>,\n    VariantProps<typeof avatarGroupItemVariants> {\n  className?: string;\n  max?: number;\n  children?: React.ReactNode;\n}\n\nexport function AvatarGroup({ spacing, max = 4, className, children, ...props }: AvatarGroupProps) {\n  const items = React.Children.toArray(children);\n  const visible = items.slice(0, max);\n  const overflow = items.length - visible.length;\n\n  return (\n    <View className={cn(\"flex-row items-center\", className)} {...props}>\n      {visible.map((child, index) => (\n        <View\n          key={index}\n          className={cn(avatarGroupItemVariants({ spacing }), index === 0 && \"ml-0\")}\n        >\n          {child}\n        </View>\n      ))}\n      {overflow > 0 && (\n        <View\n          className={cn(\n            avatarGroupItemVariants({ spacing }),\n            \"h-10 w-10 items-center justify-center bg-muted\",\n            visible.length === 0 && \"ml-0\"\n          )}\n        >\n          <Text className=\"text-sm font-medium text-muted-foreground\">+{overflow}</Text>\n        </View>\n      )}\n    </View>\n  );\n}\n"
+    }
+  ],
+  "docs": "AniUI is React Native. On an existing RNR/NativeWind project, add and use directly — the tokens and aliases already match, no setup needed. On a fresh project, run `npx @aniui/cli init` first to configure NativeWind/Uniwind, theme tokens, and Metro/Babel."
+}

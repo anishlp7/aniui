@@ -110,6 +110,7 @@ export default function CompatibilityPage() {
                 <th className="text-left p-3 font-medium text-foreground">Expo SDK 53/54</th>
                 <th className="text-left p-3 font-medium text-foreground">Expo SDK 55</th>
                 <th className="text-left p-3 font-medium text-foreground">Expo SDK 56</th>
+                <th className="text-left p-3 font-medium text-foreground">Expo SDK 57</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-border">
@@ -118,11 +119,13 @@ export default function CompatibilityPage() {
                 <td className="p-3"><code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">v4</code></td>
                 <td className="p-3"><code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">v5</code></td>
                 <td className="p-3"><code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">v4</code> or <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">v5</code></td>
+                <td className="p-3"><code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">v4</code> or <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">v5</code></td>
               </tr>
               <tr>
                 <td className="p-3 font-medium text-muted-foreground">Tailwind CSS</td>
                 <td className="p-3"><code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">v3</code></td>
                 <td className="p-3"><code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">v4</code></td>
+                <td className="p-3"><code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">v3</code> or <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">v4</code></td>
                 <td className="p-3"><code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">v3</code> or <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">v4</code></td>
               </tr>
               <tr>
@@ -130,11 +133,13 @@ export default function CompatibilityPage() {
                 <td className="p-3"><code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">v3</code></td>
                 <td className="p-3"><code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">v4</code></td>
                 <td className="p-3"><code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">v4.3</code> + worklets</td>
+                <td className="p-3"><code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">v4.5</code> + worklets <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">~0.10</code></td>
               </tr>
               <tr>
                 <td className="p-3 font-medium text-muted-foreground">React</td>
                 <td className="p-3"><code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">18.x</code></td>
                 <td className="p-3"><code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">19.x</code></td>
+                <td className="p-3"><code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">19.2.3</code></td>
                 <td className="p-3"><code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">19.2.3</code></td>
               </tr>
               <tr>
@@ -142,15 +147,18 @@ export default function CompatibilityPage() {
                 <td className="p-3"><code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">0.79</code></td>
                 <td className="p-3"><code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">0.83</code></td>
                 <td className="p-3"><code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">0.85.3</code></td>
+                <td className="p-3"><code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">0.86</code></td>
               </tr>
               <tr>
                 <td className="p-3 font-medium text-muted-foreground">Uniwind</td>
                 <td className="p-3">✅ Supported</td>
                 <td className="p-3">✅ Supported</td>
                 <td className="p-3">✅ Supported</td>
+                <td className="p-3">✅ Default</td>
               </tr>
               <tr>
                 <td className="p-3 font-medium text-muted-foreground">rn-primitives</td>
+                <td className="p-3">✅ v1.3+</td>
                 <td className="p-3">✅ v1.3+</td>
                 <td className="p-3">✅ v1.3+</td>
                 <td className="p-3">✅ v1.3+</td>
@@ -160,10 +168,12 @@ export default function CompatibilityPage() {
                 <td className="p-3">✅ 0.76+</td>
                 <td className="p-3">✅ 0.83+</td>
                 <td className="p-3">✅ 0.85+</td>
+                <td className="p-3">✅ 0.86+</td>
               </tr>
               <tr>
                 <td className="p-3 font-medium text-muted-foreground">Architecture</td>
                 <td className="p-3">Old + New</td>
+                <td className="p-3">New only</td>
                 <td className="p-3">New only</td>
                 <td className="p-3">New only</td>
               </tr>
@@ -212,14 +222,15 @@ export default function CompatibilityPage() {
 
       {/* Setup for SDK 56 */}
       <div className="space-y-4">
-        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Setup for Expo SDK 56</Heading>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Setup for Expo SDK 56/57</Heading>
         <p className="text-sm text-muted-foreground leading-relaxed">
-          SDK 56 (React 19.2.3 / RN 0.85.3 / Reanimated 4.3) runs on either NativeWind track.{" "}
+          SDK 56 (React 19.2.3 / RN 0.85.3 / Reanimated 4.3) and SDK 57 (React 19.2.3 / RN 0.86 / Reanimated 4.5) default to Uniwind and run on either NativeWind track.{" "}
           <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">aniui init</code>{" "}
           prompts you to pick v5 preview or v4 stable when no <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">nativewind</code> dep is already installed.
           Pass <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">--nw v4</code> or{" "}
           <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">--nw v5</code> to skip the prompt.{" "}
-          See the dedicated <a href="/docs/expo-56" className="text-primary hover:underline">Expo SDK 56 guide</a> for the full migration + setup walkthrough.
+          See the dedicated <a href="/docs/expo-57" className="text-primary hover:underline">Expo SDK 57 guide</a> and{" "}
+          <a href="/docs/expo-56" className="text-primary hover:underline">Expo SDK 56 guide</a> for the full migration + setup walkthroughs.
         </p>
         <CodeBlock
           code={`# Fresh SDK 56 project, AniUI v4 stable track (recommended for production)

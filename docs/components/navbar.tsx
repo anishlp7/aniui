@@ -98,7 +98,7 @@ export function Navbar() {
             <Link href="/docs" className="text-muted-foreground hover:text-foreground transition-colors">
               Docs
             </Link>
-            <Link href="/docs/button" className="text-muted-foreground hover:text-foreground transition-colors">
+            <Link href="/docs/accordion" className="text-muted-foreground hover:text-foreground transition-colors">
               Components
             </Link>
             <Link href="/charts" className="text-muted-foreground hover:text-foreground transition-colors">

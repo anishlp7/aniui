@@ -6,6 +6,8 @@
   "description": "Registration with name, email, password, and terms checkbox",
   "dependencies": [
     "react-native-safe-area-context",
+    "lucide-react-native",
+    "react-native-svg",
     "@rn-primitives/checkbox",
     "clsx",
     "tailwind-merge",

@@ -1,20 +1,23 @@
 import React from "react";
-import { View, TextInput, useColorScheme, Platform } from "react-native";
+import { View, TextInput, useColorScheme } from "react-native";
 import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
+// Padding lives on the wrapping View, never on the raw TextInput — a TextInput
+// doesn't honor `px-*` reliably, so keeping padding on the View gives a
+// consistent inset with or without icons, under both NativeWind and Uniwind.
 const inputVariants = cva(
-  "rounded-md border py-2 text-foreground placeholder:text-muted-foreground",
+  "flex-row items-center rounded-md border py-2",
   {
     variants: {
       variant: {
-        default: "border-input bg-background p-2",
-        ghost: "border-transparent bg-transparent p-2",
+        default: "border-input bg-background",
+        ghost: "border-transparent bg-transparent",
       },
       size: {
-        sm: "min-h-9 px-3 text-sm",
-        md: "min-h-12 px-4 text-base",
-        lg: "min-h-14 px-5 text-lg",
+        sm: "min-h-9 px-3",
+        md: "min-h-12 px-4",
+        lg: "min-h-14 px-5",
       },
     },
     defaultVariants: {
@@ -23,6 +26,8 @@ const inputVariants = cva(
     },
   }
 );
+
+const fontSizes = { sm: 14, md: 16, lg: 18 } as const;
 
 export interface InputProps
   extends React.ComponentPropsWithoutRef<typeof TextInput>,
@@ -36,41 +41,25 @@ export const Input = React.forwardRef<
   React.ElementRef<typeof TextInput>,
   InputProps
 >(function Input(
-  { variant, size, className, leadingIcon, trailingIcon, ...props },
+  { variant, size, className, leadingIcon, trailingIcon, style, ...props },
   ref
 ) {
-  const hasIcons = !!(leadingIcon || trailingIcon);
   const dark = useColorScheme() === "dark";
   const caret = dark ? "#fafafa" : "#18181b";
-
-  if (!hasIcons) {
-    return (
-      <TextInput
-        ref={ref}
-        className={cn(inputVariants({ variant, size }), className)}
-        placeholderTextColor={dark ? "#a1a1aa" : "#71717a"}
-        keyboardAppearance={dark ? "dark" : "light"}
-        selectionColor={caret}
-        cursorColor={caret}
-        {...props}
-      />
-    );
-  }
+  const resolvedSize = size ?? "md";
 
   return (
-    <View
-      className={cn(
-        "flex-row items-center",
-        inputVariants({ variant, size }),
-        className
-      )}
-    >
+    <View className={cn(inputVariants({ variant, size }), className)}>
       {leadingIcon && <View className="me-2">{leadingIcon}</View>}
       <TextInput
         ref={ref}
-        // text-base sets lineHeight which mis-centers the cursor on iOS.
-        // Keep it on Android so the input matches the variant font size.
-        className={cn("flex-1 text-foreground p-0", Platform.OS !== "ios" && "text-base")}
+        // font-size is set inline (no lineHeight) so the cursor stays centered
+        // on iOS while the size still matches the variant on every platform.
+        // self-stretch makes the TextInput fill the row height so taps on the
+        // wrapper's vertical padding still focus the field.
+        className="flex-1 self-stretch p-0 text-foreground placeholder:text-muted-foreground"
+        style={[{ fontSize: fontSizes[resolvedSize] }, style]}
+        textAlignVertical="center"
         placeholderTextColor={dark ? "#a1a1aa" : "#71717a"}
         keyboardAppearance={dark ? "dark" : "light"}
         selectionColor={caret}

@@ -60,18 +60,11 @@ const shortcutsCode = `const items = [
   items={items}
   onSelect={handleSelect}
 />`;
-const iconsCode = `import Svg, { Path } from "react-native-svg";
-
-const FileIcon = (
-  <Svg width={16} height={16} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}>
-    <Path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
-    <Path d="M14 2v6h6" />
-  </Svg>
-);
+const iconsCode = `import { FileText, Settings } from "lucide-react-native";
 
 const items = [
-  { label: "New File", value: "new-file", icon: FileIcon, group: "Actions" },
-  { label: "Settings", value: "settings", icon: GearIcon, group: "Navigation" },
+  { label: "New File", value: "new-file", icon: <FileText size={16} color="#71717a" />, group: "Actions" },
+  { label: "Settings", value: "settings", icon: <Settings size={16} color="#71717a" />, group: "Navigation" },
 ];
 
 <CommandMenu
@@ -100,10 +93,13 @@ const customPlaceholderCode = `<CommandMenu
   emptyText="Nothing matches your search."
   onSelect={handleSelect}
 />`;
-const sourceCode = `import React, { useState, useMemo } from "react";
-import { View, Text, TextInput, Pressable, Modal, SectionList } from "react-native";
+const sourceCode = `import React, { useEffect, useMemo, useRef, useState } from "react";
+import { View, Text, TextInput, Pressable, SectionList, useColorScheme, useWindowDimensions, Keyboard, Platform } from "react-native";
+import * as DialogPrimitive from "@rn-primitives/dialog";
+import Animated, { useAnimatedStyle, useSharedValue, withTiming } from "react-native-reanimated";
+import { entering, exiting } from "@/components/ui/animate";
+import { Search } from "lucide-react-native";
 import { cn } from "@/lib/utils";
-import Svg, { Path } from "react-native-svg";
 
 export interface CommandItem {
   label: string;
@@ -125,6 +121,10 @@ export interface CommandMenuProps extends React.ComponentPropsWithoutRef<typeof 
   className?: string;
 }
 
+// Anchored below the status bar; the palette grows down and the results list
+// scrolls within whatever space is left above the keyboard.
+const TOP_OFFSET = 96;
+
 export function CommandMenu({
   open,
   onOpenChange,
@@ -136,6 +136,10 @@ export function CommandMenu({
   ...props
 }: CommandMenuProps) {
   const [search, setSearch] = useState("");
+  const dark = useColorScheme() === "dark";
+  const { height: winH } = useWindowDimensions();
+  const inputRef = useRef<TextInput>(null);
+  const kb = useSharedValue(0);
 
   const filtered = useMemo(() => {
     const q = search.toLowerCase();
@@ -156,104 +160,135 @@ export function CommandMenu({
     return Object.entries(groups).map(([title, data]) => ({ title, data }));
   }, [filtered]);
 
+  // Track the keyboard directly. RN Modal doesn't resize for the keyboard on
+  // Android, so the old version's results got covered — rendering via the rn-
+  // primitives Portal plus this listener keeps the palette above the keyboard.
+  useEffect(() => {
+    const showEvt = Platform.OS === "ios" ? "keyboardWillShow" : "keyboardDidShow";
+    const hideEvt = Platform.OS === "ios" ? "keyboardWillHide" : "keyboardDidHide";
+    const show = Keyboard.addListener(showEvt, (e) => {
+      kb.value = withTiming(e.endCoordinates.height, { duration: 160 });
+    });
+    const hide = Keyboard.addListener(hideEvt, () => {
+      kb.value = withTiming(0, { duration: 160 });
+    });
+    return () => {
+      show.remove();
+      hide.remove();
+    };
+  }, [kb]);
+
+  // Focus via ref on open (autoFocus is unreliable inside overlays on Android).
+  useEffect(() => {
+    if (!open) {
+      setSearch("");
+      return;
+    }
+    const t = setTimeout(() => inputRef.current?.focus(), Platform.OS === "android" ? 150 : 50);
+    return () => clearTimeout(t);
+  }, [open]);
+
+  const cardStyle = useAnimatedStyle(() => ({
+    maxHeight: Math.max(180, winH - TOP_OFFSET - kb.value - 24),
+  }));
+
   const handleSelect = (item: CommandItem) => {
     if (item.disabled) return;
     item.onSelect?.();
     onSelect?.(item.value);
     onOpenChange(false);
-    setSearch("");
-  };
-
-  const close = () => {
-    onOpenChange(false);
-    setSearch("");
   };
 
   return (
-    <Modal visible={open} transparent animationType="fade" onRequestClose={close}>
-      <Pressable className="flex-1 bg-black/50 justify-start pt-24" onPress={close}>
-        <Pressable
-          className={cn("mx-4 rounded-xl border border-border bg-card shadow-lg overflow-hidden max-h-[70%]", className)}
-          onPress={() => {}}
-          {...props}
-        >
-          <View className="flex-row items-center px-4 border-b border-border">
-            <Svg width={16} height={16} viewBox="0 0 24 24" fill="none" stroke="#71717a" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
-              <Path d="M11 17.25a6.25 6.25 0 1 1 0-12.5 6.25 6.25 0 0 1 0 12.5Z" />
-              <Path d="m16 16 4.5 4.5" />
-            </Svg>
-            <TextInput
-              className="flex-1 min-h-12 ps-3 text-base text-foreground"
-              placeholder={placeholder}
-              placeholderTextColor="#71717a"
-              value={search}
-              onChangeText={setSearch}
-              autoFocus
-              accessibilityLabel="Command search"
-            />
-          </View>
-          {filtered.length === 0 ? (
-            <View className="py-8 items-center">
-              <Text className="text-sm text-muted-foreground">{emptyText}</Text>
+    <DialogPrimitive.Root open={open} onOpenChange={onOpenChange}>
+      <DialogPrimitive.Portal>
+        <DialogPrimitive.Overlay closeOnPress className="absolute inset-0 bg-black/50" />
+        <DialogPrimitive.Content style={{ position: "absolute", top: TOP_OFFSET, left: 16, right: 16 }}>
+          <DialogPrimitive.Title style={{ position: "absolute", width: 1, height: 1, opacity: 0 }}>
+            Command menu
+          </DialogPrimitive.Title>
+          <Animated.View
+            entering={entering.fadeInDown}
+            exiting={exiting.fadeOutUp}
+            style={cardStyle}
+            className={cn("rounded-xl border border-border bg-card shadow-lg overflow-hidden", className)}
+            {...props}
+          >
+            <View className="flex-row items-center px-4 border-b border-border">
+              <Search size={16} color="#71717a" strokeWidth={2} />
+              <TextInput
+                ref={inputRef}
+                className="flex-1 min-h-12 ps-3 text-base text-foreground"
+                placeholder={placeholder}
+                placeholderTextColor={dark ? "#a1a1aa" : "#71717a"}
+                value={search}
+                onChangeText={setSearch}
+                accessibilityLabel="Command search"
+              />
             </View>
-          ) : (
-            <SectionList
-              sections={sections}
-              keyExtractor={(item) => item.value}
-              renderSectionHeader={({ section }) =>
-                section.title ? (
-                  <View className="px-4 pt-3 pb-1.5 bg-card">
-                    <Text className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">
-                      {section.title}
-                    </Text>
-                  </View>
-                ) : null
-              }
-              renderItem={({ item }) => (
-                <Pressable
-                  className={cn(
-                    "flex-row items-center px-4 py-2.5 gap-3",
-                    item.disabled && "opacity-40"
-                  )}
-                  onPress={() => handleSelect(item)}
-                  disabled={item.disabled}
-                  accessibilityRole="button"
-                  accessibilityState={{ disabled: item.disabled }}
-                >
-                  {item.icon && <View className="w-5 items-center">{item.icon}</View>}
-                  <Text className="flex-1 text-sm text-foreground">{item.label}</Text>
-                  {item.shortcut && (
-                    <View className="flex-row items-center gap-0.5">
-                      {item.shortcut.split("+").map((key, i) => (
-                        <React.Fragment key={i}>
-                          {i > 0 && <Text className="text-[10px] text-muted-foreground">+</Text>}
-                          <View className="items-center justify-center rounded border border-border bg-muted px-1.5 min-h-5">
-                            <Text className="text-[10px] font-mono text-muted-foreground">{key.trim()}</Text>
-                          </View>
-                        </React.Fragment>
-                      ))}
+            {filtered.length === 0 ? (
+              <View className="py-8 items-center">
+                <Text className="text-sm text-muted-foreground">{emptyText}</Text>
+              </View>
+            ) : (
+              <SectionList
+                sections={sections}
+                keyExtractor={(item) => item.value}
+                style={{ flexShrink: 1 }}
+                keyboardShouldPersistTaps="handled"
+                keyboardDismissMode="on-drag"
+                renderSectionHeader={({ section }) =>
+                  section.title ? (
+                    <View className="px-4 pt-3 pb-1.5 bg-card">
+                      <Text className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">{section.title}</Text>
                     </View>
-                  )}
-                </Pressable>
-              )}
-              stickySectionHeadersEnabled={false}
-            />
-          )}
-        </Pressable>
-      </Pressable>
-    </Modal>
+                  ) : null
+                }
+                renderItem={({ item }) => (
+                  <Pressable
+                    className={cn("flex-row items-center px-4 py-2.5 gap-3", item.disabled && "opacity-40")}
+                    onPress={() => handleSelect(item)}
+                    disabled={item.disabled}
+                    accessibilityRole="button"
+                    accessibilityState={{ disabled: item.disabled }}
+                  >
+                    {item.icon && <View className="w-5 items-center">{item.icon}</View>}
+                    <Text className="flex-1 text-sm text-foreground">{item.label}</Text>
+                    {item.shortcut && (
+                      <View className="flex-row items-center gap-0.5">
+                        {item.shortcut.split("+").map((key, i) => (
+                          <React.Fragment key={i}>
+                            {i > 0 && <Text className="text-[10px] text-muted-foreground">+</Text>}
+                            <View className="items-center justify-center rounded border border-border bg-muted px-1.5 min-h-5">
+                              <Text className="text-[10px] font-mono text-muted-foreground">{key.trim()}</Text>
+                            </View>
+                          </React.Fragment>
+                        ))}
+                      </View>
+                    )}
+                  </Pressable>
+                )}
+                stickySectionHeadersEnabled={false}
+              />
+            )}
+          </Animated.View>
+        </DialogPrimitive.Content>
+      </DialogPrimitive.Portal>
+    </DialogPrimitive.Root>
   );
 }
 
+// Convenience sub-components for composition pattern
 export interface CommandInputProps extends React.ComponentPropsWithoutRef<typeof TextInput> {
   className?: string;
 }
 
 export function CommandInput({ className, ...props }: CommandInputProps) {
+  const dark = useColorScheme() === "dark";
   return (
     <TextInput
       className={cn("min-h-12 px-4 text-base text-foreground border-b border-border", className)}
-      placeholderTextColor="#71717a"
+      placeholderTextColor={dark ? "#a1a1aa" : "#71717a"}
       {...props}
     />
   );
@@ -277,13 +312,32 @@ export default function CommandMenuPage() {
       <div>
         <h1 className="text-3xl font-bold tracking-tight text-foreground">Command Menu</h1>
         <p className="mt-2 text-lg text-muted-foreground">
-          Spotlight-style searchable command palette with groups and keyboard shortcuts.
+          Spotlight/kbar-style searchable command palette — portal-based overlay with groups, keyboard shortcuts, and solid keyboard handling on iOS and Android.
         </p>
       </div>
       {/* Installation */}
       <div className="space-y-4">
         <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Installation</Heading>
         <AddComponentTabs names="command-menu" />
+        <div className="rounded-lg border border-primary/30 bg-primary/10 p-4 text-sm text-foreground">
+          <p className="font-medium">Requires a PortalHost</p>
+          <p className="mt-1 text-muted-foreground">
+            The palette renders through <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">@rn-primitives/portal</code>, so your root layout needs a <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">&lt;PortalHost /&gt;</code>. <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">aniui add command-menu</code> injects it automatically — if you installed via the shadcn CLI or copied manually, add it yourself:
+          </p>
+          <CodeBlock
+            code={`import { PortalHost } from "@rn-primitives/portal";
+
+export default function RootLayout() {
+  return (
+    <>
+      {/* your app */}
+      <PortalHost />
+    </>
+  );
+}`}
+            title="app/_layout.tsx"
+          />
+        </div>
       </div>
       {/* Preview */}
       <PreviewToggle>
@@ -382,8 +436,8 @@ export default function CommandMenuPage() {
           <li>Search input has <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">accessibilityLabel=&quot;Command search&quot;</code>.</li>
           <li>Each item has <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">accessibilityRole=&quot;button&quot;</code>.</li>
           <li><code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">accessibilityState</code> tracks <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">disabled</code> state for each item.</li>
-          <li>Modal can be dismissed via Android back button (<code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">onRequestClose</code>).</li>
           <li>Backdrop press closes the menu for intuitive dismissal.</li>
+          <li>Keyboard-aware: the palette tracks <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">keyboardWillShow</code>/<code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">keyboardDidShow</code> directly, so results stay visible above the keyboard on both iOS and Android (RN Modal-style <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">adjustResize</code> doesn&apos;t apply to portals).</li>
         </ul>
       </div>
       {/* Source */}

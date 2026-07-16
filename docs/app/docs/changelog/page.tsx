@@ -26,6 +26,22 @@ const typeBadge: Record<ChangeType, { label: string; className: string }> = {
 
 const releases: Release[] = [
   {
+    version: "0.5.0",
+    date: "2026-07-15",
+    title: "Lucide icons, AI components + 101 components",
+    changes: [
+      { type: "feat", text: "Five flagship components land: prompt-input (compound ChatGPT/Claude-style AI composer — auto-growing textarea on top, toolbar slots below for attach/model/mic buttons, and a send arrow with a voice fallback that becomes a stop button while streaming), streaming-text (typewriter AI response with blinking cursor), swipe-deck (Tinder-style card stack), slide-to-confirm (slide-to-pay control), and waveform (animated voice-recording bars) — 101 components total.", link: "/docs/prompt-input" },
+      { type: "feat", text: "Command Menu rebuilt as a portal-based kbar-style palette (@rn-primitives/dialog + portal, no more RN Modal) with direct keyboard tracking so results stay visible above the keyboard on iOS and Android. Requires a PortalHost in the root layout — aniui add injects it automatically, and the starters mount it out of the box.", link: "/docs/command-menu" },
+      { type: "feat", text: "All component icons now come from lucide-react-native — 28 components dropped unicode glyphs and hand-rolled SVG paths for crisp, consistent icons on iOS and Android, under both NativeWind and Uniwind. aniui init installs lucide-react-native automatically, and aniui add lists it per component. Icon props (icon, leadingIcon, trailingIcon) still accept any ReactNode.", link: "/docs/installation" },
+      { type: "feat", text: "Three new components: avatar-group (overlapping stack with +N overflow), gradient (SVG linear gradient view), and keyboard-view (keyboard-avoiding form wrapper) — these brought the count to 96 before the AI components above took it to 101.", link: "/docs/avatar-group" },
+      { type: "fix", text: "Android: Header back button, FilePicker remove button, and Pagination arrows rendered blank (SVG inside <Text> is invalid in RN) — all fixed by the icon migration restructure.", link: "/docs/header" },
+      { type: "fix", text: "Charts (area/bar/line/radar/radial + tooltip) now adapt gridlines, labels, and center text to dark mode.", link: "/docs/compatibility" },
+      { type: "fix", text: "Carousel and ImageGallery size slides to their own measured width (rotation/split-screen safe); Input's whole box is tappable again; Drawer plays its close animation; ToggleGroup's variant/size props actually apply; PhoneInput works uncontrolled; Combobox search is no longer covered by the keyboard; Toast ids no longer collide and timers are cleaned up; Calendar range mode no longer fires onSelect; NumberInput can be cleared while typing; Slider thumb tracks the finger.", link: "/docs/carousel" },
+      { type: "docs", text: "Docs pages for the three new components; homepage and navbar Components links now start at Accordion; icon examples converted from Ionicons to lucide-react-native; inlined sources re-synced; component counts updated to 96.", link: "/docs/accordion" },
+      { type: "feat", text: "CLI bumped to 0.5.0.", link: "/docs/cli" },
+    ],
+  },
+  {
     version: "0.4.0",
     date: "2026-07-05",
     title: "Expo SDK 57 + Uniwind is now the default",
@@ -33,7 +49,7 @@ const releases: Release[] = [
       { type: "feat", text: "Uniwind is now the default styling engine. On New-Architecture-capable projects (Expo SDK 55+), aniui init defaults to Uniwind — 2–3× faster than NativeWind, Tailwind v4 CSS-first (@theme/@variant, no tailwind.config.js), Metro-plugin only (no Babel transform). Old-Architecture / Expo ≤54 / bare-RN fall back to NativeWind. An already-installed engine and --style still take precedence.", link: "/docs/uniwind" },
       { type: "feat", text: "Expo SDK 57 (React Native 0.86 / React 19.2 / Reanimated 4.5 / react-native-worklets 0.10 / gesture-handler 2.32) is now supported. Two new starters ship with the repo: examples/expo-57-starter (Uniwind) and examples/expo-57-nw5-starter (NativeWind v5); examples/with-uniwind bumped to SDK 57.", link: "/docs/compatibility" },
       { type: "feat", text: "NativeWind is soft-deprecated but still fully supported. aniui init shows a recommendation notice on fresh NativeWind inits (suppressed for already-installed NativeWind), and aniui doctor surfaces the same non-blocking note.", link: "/docs/uniwind" },
-      { type: "feat", text: "Four new components: aspect-ratio, breadcrumb, menubar, and sidebar (93 components total).", link: "/docs/components" },
+      { type: "feat", text: "Four new components: aspect-ratio, breadcrumb, menubar, and sidebar (93 components total).", link: "/docs/accordion" },
       { type: "fix", text: "react-native-worklets is now installed via 'expo install' (SDK-pinned) instead of the plain package manager on Expo 56+.", link: "/docs/cli" },
       { type: "docs", text: "Uniwind docs rewritten to match actual CLI output (withUniwindConfig/cssEntryFile, CSS-first @theme/@variant, no tailwind.config.js). Homepage, README, compatibility matrix, and llms.txt updated for SDK 57 and Uniwind-primary.", link: "/docs/uniwind" },
       { type: "feat", text: "CLI bumped to 0.4.0.", link: "/docs/cli" },

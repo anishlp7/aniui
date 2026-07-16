@@ -26,6 +26,7 @@ const edgesCode = `// Only apply safe area to top and bottom
   {/* Content */}
 </SafeArea>`;
 const sourceCode = `import React from "react";
+import { View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
@@ -45,14 +46,20 @@ export interface SafeAreaProps
   extends React.ComponentPropsWithoutRef<typeof SafeAreaView>,
     VariantProps<typeof safeAreaVariants> {
   className?: string;
+  children?: React.ReactNode;
 }
 
-export function SafeArea({ variant, className, ...props }: SafeAreaProps) {
+export function SafeArea({ variant, className, children, style, ...props }: SafeAreaProps) {
+  // Background + flex live on a plain View (className works reliably under both
+  // NativeWind and Uniwind, and colors the full screen incl. the inset areas).
+  // The SafeAreaView only applies the insets — className isn't applied to that
+  // third-party component by the styling engines, so we keep flex inline there.
   return (
-    <SafeAreaView
-      className={cn(safeAreaVariants({ variant }), className)}
-      {...props}
-    />
+    <View className={cn(safeAreaVariants({ variant }), className)} style={{ flex: 1 }}>
+      <SafeAreaView style={[{ flex: 1 }, style]} {...props}>
+        {children}
+      </SafeAreaView>
+    </View>
   );
 }`;
 export default function SafeAreaPage() {

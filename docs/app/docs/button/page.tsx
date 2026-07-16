@@ -60,17 +60,17 @@ const variantsCode = `<Button variant="default">Default</Button>
 const sizesCode = `<Button size="sm">Small</Button>
 <Button size="md">Medium</Button>
 <Button size="lg">Large</Button>`;
-const iconCode = `import { Ionicons } from "@expo/vector-icons";
+const iconCode = `import { Plus, Send, Heart } from "lucide-react-native";
 // Icon before text
-<Button icon={<Ionicons name="add" size={18} color="#fff" />}>
+<Button icon={<Plus size={18} color="#fff" />}>
   Create
 </Button>
 // Icon after text
-<Button iconAfter={<Ionicons name="send" size={18} color="#fff" />}>
+<Button iconAfter={<Send size={18} color="#fff" />}>
   Send
 </Button>
 // Icon only
-<Button size="icon" icon={<Ionicons name="heart" size={18} color="#fff" />} />`;
+<Button size="icon" icon={<Heart size={18} color="#fff" />} />`;
 const loadingCode = `<Button loading>Saving...</Button>
 <Button loading variant="outline">Loading</Button>
 <Button loading variant="destructive">Deleting</Button>`;

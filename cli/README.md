@@ -21,7 +21,7 @@
 
 AniUI is a [shadcn/ui](https://ui.shadcn.com)-inspired component library for **React Native**. Instead of installing a package, you copy component source files directly into your project. You own the code. Customize everything.
 
-Built with [Uniwind](https://uniwind.dev) (recommended) or [NativeWind](https://www.nativewind.dev), [rn-primitives](https://rn-primitives.vercel.app) for accessibility, [class-variance-authority](https://cva.style), and strict TypeScript. **93 components** + 15 pre-built screen blocks.
+Built with [Uniwind](https://uniwind.dev) (recommended) or [NativeWind](https://www.nativewind.dev), [rn-primitives](https://rn-primitives.vercel.app) for accessibility, [lucide-react-native](https://lucide.dev) icons, [class-variance-authority](https://cva.style), and strict TypeScript. **101 components** + 15 pre-built screen blocks.
 
 **Demo:** [Live Preview (Expo Go)](https://expo.dev/projects/4d52bb77-8a04-4713-b4b9-e2ed4c5ec1a0) | [Docs](https://aniui.dev)
 
@@ -85,11 +85,13 @@ If you already have an RNR / NativeWind / Uniwind project, components drop in wi
 
 ## Components
 
-**93 components** in `cli/src/registry.ts` (tiers 1–3; the source of truth for installs and the registry):
+**101 components** in `cli/src/registry.ts` (tiers 1–3; the source of truth for installs and the registry):
 
-- **Tier 1 — light deps (cva / RN core):** inputs, display, layout, and form helpers — Button, Card, Text, Calendar, Breadcrumb, ChartTooltip, ImageGallery, ThemeProvider, and more.
-- **Tier 2 — `react-native-reanimated`:** Skeleton, Drawer, Collapsible, Sidebar, Connection Banner, Typing Indicator.
-- **Tier 3 — extra packages:** `@rn-primitives/*`, `@gorhom/bottom-sheet`, `react-native-svg` (charts), `react-native-gesture-handler` — e.g. Checkbox, Accordion, Command Menu, Bottom Sheet, Area/Line/Pie charts.
+- **Tier 1 — light deps (cva / RN core):** inputs, display, layout, and form helpers — Button, Card, Text, Calendar, Breadcrumb, ChartTooltip, ImageGallery, AvatarGroup, KeyboardView, PromptInput (ChatGPT/Claude-style AI composer), ThemeProvider, and more.
+- **Tier 2 — `react-native-reanimated`:** Skeleton, Drawer, Collapsible, Sidebar, Connection Banner, Typing Indicator, StreamingText (typewriter AI responses), Waveform (voice recording bars).
+- **Tier 3 — extra packages:** `@rn-primitives/*`, `@gorhom/bottom-sheet`, `react-native-svg` (charts, Gradient), `react-native-gesture-handler` — e.g. Checkbox, Accordion, Command Menu, Bottom Sheet, SwipeDeck, SlideToConfirm, Area/Line/Pie charts.
+
+Component icons use [lucide-react-native](https://lucide.dev) — `init` installs it automatically, and `add` lists it whenever a component needs it. Icon props (`icon`, `leadingIcon`, …) accept any ReactNode, so you can bring your own icons.
 
 Plus **15 blocks** (full screens) via `add-block`.
 

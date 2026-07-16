@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { View, Text, Pressable } from "react-native";
-import Svg, { Path } from "react-native-svg";
+import { ChevronLeft, ChevronRight } from "lucide-react-native";
 import { cn } from "@/lib/utils";
 
 export interface CalendarProps {
@@ -25,6 +25,7 @@ export function Calendar({ className, selected, onSelect, rangeStart, rangeEnd, 
     if (onRangeChange) {
       if (!rangeStart || rangeEnd || date < rangeStart) onRangeChange(date, undefined);
       else onRangeChange(rangeStart, date);
+      return;
     }
     onSelect?.(date);
   };
@@ -38,13 +39,13 @@ export function Calendar({ className, selected, onSelect, rangeStart, rangeEnd, 
     <View className={cn("rounded-lg bg-background p-3", className)}>
       <View className="flex-row items-center justify-between mb-3">
         <Pressable onPress={() => mode === "days" ? setViewing(new Date(year, month - 1, 1)) : mode === "months" ? setViewing(new Date(year - 1, month, 1)) : setViewing(new Date(decadeStart - 12, month, 1))} className="h-9 w-9 items-center justify-center rounded-md" accessibilityRole="button" accessibilityLabel="Previous">
-          <Svg width={18} height={18} viewBox="0 0 24 24" fill="none" stroke="#71717a" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round"><Path d="m15 18-6-6 6-6" /></Svg>
+          <ChevronLeft size={18} color="#71717a" />
         </Pressable>
         <Pressable onPress={handleHeaderPress} accessibilityRole="button">
           <Text className="text-sm font-semibold text-foreground">{mode === "days" ? label : mode === "months" ? `${year}` : `${decadeStart} – ${decadeStart + 11}`}</Text>
         </Pressable>
         <Pressable onPress={() => mode === "days" ? setViewing(new Date(year, month + 1, 1)) : mode === "months" ? setViewing(new Date(year + 1, month, 1)) : setViewing(new Date(decadeStart + 12, month, 1))} className="h-9 w-9 items-center justify-center rounded-md" accessibilityRole="button" accessibilityLabel="Next">
-          <Svg width={18} height={18} viewBox="0 0 24 24" fill="none" stroke="#71717a" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round"><Path d="m9 18 6-6-6-6" /></Svg>
+          <ChevronRight size={18} color="#71717a" />
         </Pressable>
       </View>
       {mode === "years" && (

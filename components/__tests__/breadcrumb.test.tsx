@@ -25,9 +25,9 @@ describe("Breadcrumb", () => {
     expect(getByText("Details")).toBeTruthy();
   });
 
-  it("renders a default separator", () => {
-    const { getByText } = render(<BreadcrumbSeparator />);
-    expect(getByText("/")).toBeTruthy();
+  it("renders a default chevron separator icon", () => {
+    const { toJSON } = render(<BreadcrumbSeparator />);
+    expect(JSON.stringify(toJSON())).toContain("Svg");
   });
 
   it("renders a custom separator", () => {

@@ -1,6 +1,7 @@
 import React from "react";
 import { View, Text, Pressable } from "react-native";
-import { cn } from "../../lib/utils";
+import { ChevronRight } from "lucide-react-native";
+import { cn } from "@/lib/utils";
 
 export interface BreadcrumbProps extends React.ComponentPropsWithoutRef<typeof View> {
   className?: string;
@@ -57,9 +58,10 @@ export interface BreadcrumbSeparatorProps extends React.ComponentPropsWithoutRef
 }
 
 export function BreadcrumbSeparator({ className, children, ...props }: BreadcrumbSeparatorProps) {
+  if (children == null) return <ChevronRight size={14} color="#71717a" />;
   return (
     <Text className={cn("text-sm text-muted-foreground", className)} {...props}>
-      {children ?? "/"}
+      {children}
     </Text>
   );
 }

@@ -3,6 +3,7 @@ import { createContext, useContext, useCallback } from "react";
 import { LogBox } from "react-native";
 import { Uniwind, useUniwind } from "uniwind";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
+import { PortalHost } from "@rn-primitives/portal";
 import { Stack } from "expo-router";
 
 LogBox.ignoreLogs(["Unable to activate keep awake"]);
@@ -47,6 +48,7 @@ export default function RootLayout() {
     <ThemeCtx.Provider value={{ theme: theme as Theme, toggle }}>
       <GestureHandlerRootView style={{ flex: 1 }}>
         <AppStack />
+        <PortalHost />
       </GestureHandlerRootView>
     </ThemeCtx.Provider>
   );

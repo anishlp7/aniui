@@ -33,10 +33,10 @@ const [focused, setFocused] = useState(false);
   showCancel={focused}
   onCancel={() => { setQuery(""); setFocused(false); }}
 />`;
-const iconCode = `import { Ionicons } from "@expo/vector-icons";
+const iconCode = `import { Search } from "lucide-react-native";
 
 <SearchBar
-  icon={<Ionicons name="search" size={18} color="#71717a" style={{ marginRight: 8 }} />}
+  icon={<Search size={18} color="#71717a" style={{ marginRight: 8 }} />}
   value={query}
   onChangeText={setQuery}
   onClear={() => setQuery("")}

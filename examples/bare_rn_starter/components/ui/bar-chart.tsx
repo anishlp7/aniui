@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, LayoutChangeEvent } from "react-native";
+import { View, LayoutChangeEvent, useColorScheme } from "react-native";
 import Svg, { Rect, Line, G, Text as SvgText } from "react-native-svg";
 import { cn } from "@/lib/utils";
 
@@ -36,6 +36,9 @@ export function BarChart({
   ...props
 }: BarChartProps) {
   const [width, setWidth] = useState(0);
+  const dark = useColorScheme() === "dark";
+  const gridColor = dark ? "#27272a" : "#e5e7eb";
+  const labelColor = dark ? "#a1a1aa" : "#6b7280";
   const onLayout = (e: LayoutChangeEvent) => setWidth(e.nativeEvent.layout.width);
   if (width === 0) return <View className={cn("w-full", className)} onLayout={onLayout} style={{ height }} {...props} />;
 
@@ -50,14 +53,14 @@ export function BarChart({
     return (
       <View className={cn("w-full", className)} onLayout={onLayout} style={{ height }} accessibilityRole="image" {...props}>
         <Svg width={width} height={height}>
-          {showGrid && [3, 2, 1, 0].map((i) => <Line key={i} x1={pad.left} y1={pad.top + (i / 3) * ch} x2={pad.left + cw} y2={pad.top + (i / 3) * ch} stroke="#e5e7eb" strokeWidth={1} />)}
+          {showGrid && [3, 2, 1, 0].map((i) => <Line key={i} x1={pad.left} y1={pad.top + (i / 3) * ch} x2={pad.left + cw} y2={pad.top + (i / 3) * ch} stroke={gridColor} strokeWidth={1} />)}
           {groupedData.map((d, gi) => d.values.map((v, bi) => {
             const bh = (v / maxVal) * ch;
             const x = pad.left + gi * groupW + (groupW * 0.15) + bi * barW;
             return <Rect key={`${gi}-${bi}`} x={x} y={pad.top + ch - bh} width={barW * 0.85} height={bh} fill={grouped[bi]?.color ?? color} rx={barRadius} />;
           }))}
           {showLabels && groupedData.map((d, i) => (
-            <SvgText key={i} x={pad.left + i * groupW + groupW / 2} y={height - 4} fontSize={10} fill="#6b7280" textAnchor="middle">{d.label}</SvgText>
+            <SvgText key={i} x={pad.left + i * groupW + groupW / 2} y={height - 4} fontSize={10} fill={labelColor} textAnchor="middle">{d.label}</SvgText>
           ))}
         </Svg>
       </View>
@@ -71,7 +74,7 @@ export function BarChart({
   return (
     <View className={cn("w-full", className)} onLayout={onLayout} style={{ height }} accessibilityRole="image" {...props}>
       <Svg width={width} height={height}>
-        {showGrid && !horizontal && [3, 2, 1, 0].map((i) => <Line key={i} x1={pad.left} y1={pad.top + (i / 3) * ch} x2={pad.left + cw} y2={pad.top + (i / 3) * ch} stroke="#e5e7eb" strokeWidth={1} />)}
+        {showGrid && !horizontal && [3, 2, 1, 0].map((i) => <Line key={i} x1={pad.left} y1={pad.top + (i / 3) * ch} x2={pad.left + cw} y2={pad.top + (i / 3) * ch} stroke={gridColor} strokeWidth={1} />)}
         {data.map((d, i) => {
           const c = d.color ?? color;
           if (horizontal) {
@@ -86,12 +89,12 @@ export function BarChart({
           return <Rect key={i} x={x} y={y} width={barW} height={bh} fill={c} rx={barRadius} />;
         })}
         {showLabels && !horizontal && data.map((d, i) => (
-          <SvgText key={i} x={pad.left + i * (barW + gap) + gap / 2 + barW / 2} y={height - 4} fontSize={10} fill="#6b7280" textAnchor="middle">{d.label}</SvgText>
+          <SvgText key={i} x={pad.left + i * (barW + gap) + gap / 2 + barW / 2} y={height - 4} fontSize={10} fill={labelColor} textAnchor="middle">{d.label}</SvgText>
         ))}
         {showLabels && horizontal && data.map((d, i) => {
           const bh = (ch / data.length) * 0.7;
           const y = pad.top + (i / data.length) * ch + ((ch / data.length) * 0.15) + bh / 2 + 3;
-          return <SvgText key={i} x={pad.left - 4} y={y} fontSize={10} fill="#6b7280" textAnchor="end">{d.label}</SvgText>;
+          return <SvgText key={i} x={pad.left - 4} y={y} fontSize={10} fill={labelColor} textAnchor="end">{d.label}</SvgText>;
         })}
       </Svg>
     </View>

@@ -3,24 +3,25 @@ import type { MetadataRoute } from "next";
 const BASE_URL = "https://aniui.dev";
 
 const componentPages = [
-  "accordion", "action-sheet", "alert", "alert-dialog", "animate", "aspect-ratio", "avatar", "badge",
+  "accordion", "action-sheet", "alert", "alert-dialog", "animate", "aspect-ratio", "avatar", "avatar-group", "badge",
   "banner", "bottom-sheet", "breadcrumb", "button", "calendar", "card", "carousel",
   "chat-bubble", "checkbox", "chip", "collapsible", "combobox", "command-menu",
   "connection-banner", "context-menu", "data-table", "date-picker", "dialog", "direction-provider", "drawer",
-  "dropdown-menu", "empty-state", "fab", "field", "file-picker", "form", "grid",
+  "dropdown-menu", "empty-state", "fab", "field", "file-picker", "form", "gradient", "grid",
   "header", "hover-card", "image", "image-gallery", "infinite-list", "input", "input-group", "input-otp",
-  "kbd", "label", "labeled-separator", "list", "masked-input", "menubar", "number-input",
+  "kbd", "keyboard-view", "label", "labeled-separator", "list", "masked-input", "menubar", "number-input",
   "pagination", "password-input", "phone-input", "popover", "price",
-  "progress", "progress-steps", "radio-group", "rating", "refresh-control",
+  "progress", "progress-steps", "prompt-input", "radio-group", "rating", "refresh-control",
   "safe-area", "search-bar", "segmented-control", "select", "separator",
-  "sidebar", "skeleton", "slider", "spinner", "stat-card", "status-indicator",
-  "stepper", "swipeable-list-item", "switch", "tab-bar", "table", "tabs",
+  "sidebar", "skeleton", "slide-to-confirm", "slider", "spinner", "stat-card", "status-indicator",
+  "stepper", "streaming-text", "swipe-deck", "swipeable-list-item", "switch", "tab-bar", "table", "tabs",
   "text", "textarea", "theme-provider", "timeline", "toast", "toggle",
-  "toggle-group", "tooltip", "typing-indicator",
+  "toggle-group", "tooltip", "typing-indicator", "waveform",
 ];
 
 const guidePages = [
   "installation", "components", "theming", "dark-mode", "rtl", "compatibility",
+  "expo-57", "expo-56",
   "cli", "mcp", "javascript", "android", "changelog", "uniwind", "shadcn-registry",
 ];
 

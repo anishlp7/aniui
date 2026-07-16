@@ -63,6 +63,7 @@ jest.mock("react-native-gesture-handler", () => {
         onStart: function () { return this; },
         onUpdate: function () { return this; },
         onEnd: function () { return this; },
+        onFinalize: function () { return this; },
         minDistance: function () { return this; },
       }),
     },

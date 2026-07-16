@@ -1,6 +1,7 @@
 import React from "react";
-import { View, Text, Pressable } from "react-native";
+import { Text, Pressable, useColorScheme } from "react-native";
 import { cva, type VariantProps } from "class-variance-authority";
+import { X } from "lucide-react-native";
 import { cn } from "@/lib/utils";
 
 const chipVariants = cva(
@@ -48,12 +49,18 @@ export interface ChipProps
 
 export function Chip({ variant, size, className, textClassName, children, selected, onClose, ...props }: ChipProps) {
   const v = selected ? "default" : (variant ?? "outline");
+  const dark = useColorScheme() === "dark";
+  const closeColor =
+    v === "outline" ? (dark ? "#a1a1aa" : "#71717a")
+    : v === "default" ? (dark ? "#18181b" : "#fafafa")
+    : v === "secondary" ? (dark ? "#fafafa" : "#18181b")
+    : "#fafafa";
   return (
     <Pressable className={cn(chipVariants({ variant: v, size }), className)} accessible={true} accessibilityRole="button" accessibilityState={{ selected }} {...props}>
       <Text className={cn(chipTextVariants({ variant: v, size }), textClassName)}>{children}</Text>
       {onClose && (
-        <Pressable onPress={onClose} accessibilityRole="button" accessibilityLabel={`Remove ${children}`} className="ml-0.5">
-          <Text className={cn("text-xs", v === "outline" ? "text-muted-foreground" : chipTextVariants({ variant: v, size: "sm" }))}>✕</Text>
+        <Pressable onPress={onClose} accessibilityRole="button" accessibilityLabel={`Remove ${children}`} className="ms-0.5">
+          <X size={12} color={closeColor} />
         </Pressable>
       )}
     </Pressable>

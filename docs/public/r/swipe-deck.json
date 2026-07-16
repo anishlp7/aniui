@@ -1,0 +1,24 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "swipe-deck",
+  "type": "registry:ui",
+  "title": "SwipeDeck",
+  "description": "Tinder-style swipeable card stack with fling physics and swipe callbacks",
+  "dependencies": [
+    "react-native-gesture-handler",
+    "react-native-reanimated",
+    "clsx",
+    "tailwind-merge"
+  ],
+  "registryDependencies": [
+    "https://aniui.dev/r/utils.json"
+  ],
+  "files": [
+    {
+      "path": "components/ui/swipe-deck.tsx",
+      "type": "registry:ui",
+      "content": "import React, { useState } from \"react\";\nimport { View } from \"react-native\";\nimport { Gesture, GestureDetector } from \"react-native-gesture-handler\";\nimport Animated, { useSharedValue, useAnimatedStyle, withSpring, withTiming, interpolate, runOnJS } from \"react-native-reanimated\";\nimport { cn } from \"@/lib/utils\";\n\nexport interface SwipeDeckProps<T> extends React.ComponentPropsWithoutRef<typeof View> {\n  className?: string;\n  data: T[];\n  renderCard: (item: T, index: number) => React.ReactNode;\n  onSwipeLeft?: (item: T, index: number) => void;\n  onSwipeRight?: (item: T, index: number) => void;\n  /** Fired after the last card is swiped away. */\n  onEmpty?: () => void;\n}\n\nexport function SwipeDeck<T>({\n  className, data, renderCard, onSwipeLeft, onSwipeRight, onEmpty, onLayout, ...props\n}: SwipeDeckProps<T>) {\n  const [index, setIndex] = useState(0);\n  const [width, setWidth] = useState(0);\n  const tx = useSharedValue(0);\n  const ty = useSharedValue(0);\n\n  const advance = (dir: 1 | -1) => {\n    const item = data[index];\n    (dir === 1 ? onSwipeRight : onSwipeLeft)?.(item, index);\n    tx.value = 0;\n    ty.value = 0;\n    const next = index + 1;\n    setIndex(next);\n    if (next >= data.length) onEmpty?.();\n  };\n\n  const gesture = Gesture.Pan()\n    .enabled(index < data.length && width > 0)\n    .onUpdate((e) => { tx.value = e.translationX; ty.value = e.translationY; })\n    .onEnd((e) => {\n      const threshold = width * 0.35;\n      if (Math.abs(tx.value) > threshold || Math.abs(e.velocityX) > 900) {\n        const dir: 1 | -1 = tx.value > 0 || (Math.abs(tx.value) <= threshold && e.velocityX > 0) ? 1 : -1;\n        tx.value = withTiming(dir * width * 1.4, { duration: 200 }, () => runOnJS(advance)(dir));\n        ty.value = withTiming(ty.value + e.velocityY * 0.05, { duration: 200 });\n      } else {\n        tx.value = withSpring(0);\n        ty.value = withSpring(0);\n      }\n    });\n\n  const topStyle = useAnimatedStyle(() => ({\n    transform: [\n      { translateX: tx.value },\n      { translateY: ty.value },\n      { rotate: `${interpolate(tx.value, [-width || -1, width || 1], [-12, 12])}deg` },\n    ],\n  }));\n  // The card behind grows into place as the top card is dragged away.\n  const nextStyle = useAnimatedStyle(() => {\n    const progress = Math.min(1, Math.abs(tx.value) / ((width || 1) * 0.5));\n    return { transform: [{ scale: 0.95 + 0.05 * progress }, { translateY: 8 - 8 * progress }] };\n  });\n\n  const top = data[index];\n  const next = data[index + 1];\n\n  return (\n    <View\n      className={cn(\"w-full\", className)}\n      onLayout={(e) => { setWidth(e.nativeEvent.layout.width); onLayout?.(e); }}\n      {...props}\n    >\n      {next !== undefined && (\n        <Animated.View className=\"absolute inset-0\" style={nextStyle} pointerEvents=\"none\">\n          {renderCard(next, index + 1)}\n        </Animated.View>\n      )}\n      {top !== undefined && (\n        <GestureDetector gesture={gesture}>\n          <Animated.View style={topStyle} accessible={true} accessibilityLabel={`Card ${index + 1} of ${data.length}`}>\n            {renderCard(top, index)}\n          </Animated.View>\n        </GestureDetector>\n      )}\n    </View>\n  );\n}\n"
+    }
+  ],
+  "docs": "AniUI is React Native. On an existing RNR/NativeWind project, add and use directly — the tokens and aliases already match, no setup needed. On a fresh project, run `npx @aniui/cli init` first to configure NativeWind/Uniwind, theme tokens, and Metro/Babel."
+}

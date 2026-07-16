@@ -1,6 +1,7 @@
 import React from "react";
-import { View, Pressable, Text } from "react-native";
+import { View, Pressable } from "react-native";
 import { cva, type VariantProps } from "class-variance-authority";
+import { Star } from "lucide-react-native";
 import { cn } from "@/lib/utils";
 
 const ratingVariants = cva("flex-row items-center", {
@@ -14,7 +15,7 @@ const ratingVariants = cva("flex-row items-center", {
   defaultVariants: { size: "md" },
 });
 
-const starSizes = { sm: "text-base", md: "text-xl", lg: "text-2xl" } as const;
+const starSizes = { sm: 16, md: 20, lg: 24 } as const;
 
 export interface RatingProps
   extends React.ComponentPropsWithoutRef<typeof View>,
@@ -33,7 +34,11 @@ export function Rating({ size, className, value, max = 5, onChange, readOnly, ..
       {Array.from({ length: max }, (_, i) => {
         const filled = i < value;
         const star = (
-          <Text className={cn(starSizes[s], filled ? "text-yellow-400" : "text-muted-foreground/30")}>★</Text>
+          <Star
+            size={starSizes[s]}
+            color={filled ? "#facc15" : "#71717a"}
+            fill={filled ? "#facc15" : "none"}
+          />
         );
         return readOnly ? (
           <View key={i}>{star}</View>

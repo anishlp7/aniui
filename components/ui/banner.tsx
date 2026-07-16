@@ -1,6 +1,7 @@
 import React from "react";
 import { View, Text, Pressable } from "react-native";
 import { cva, type VariantProps } from "class-variance-authority";
+import { X } from "lucide-react-native";
 import { cn } from "@/lib/utils";
 
 const bannerVariants = cva(
@@ -86,14 +87,7 @@ export function Banner({
           accessibilityRole="button"
           accessibilityLabel="Dismiss"
         >
-          <Text
-            className={cn(
-              bannerTextVariants({ variant }),
-              "text-base opacity-60"
-            )}
-          >
-            ×
-          </Text>
+          <X size={16} color="#71717a" />
         </Pressable>
       )}
     </View>

@@ -118,7 +118,9 @@ Already on RNR / NativeWind / Uniwind? Components drop in with **zero extra setu
 
 ## Components
 
-**93 components** — all listed alphabetically. Each component's docs page tells you if it needs extra dependencies.
+**101 components** — all listed alphabetically. Each component's docs page tells you if it needs extra dependencies. Component icons come from [lucide-react-native](https://lucide.dev) (installed automatically by `aniui init`/`add`); icon props (`icon`, `leadingIcon`, …) accept any ReactNode, so you can bring your own.
+
+Building an AI app? Pair [Prompt Input](https://aniui.dev/docs/prompt-input) (ChatGPT/Claude-style composer with toolbar slots), [Streaming Text](https://aniui.dev/docs/streaming-text), [Chat Bubble](https://aniui.dev/docs/chat-bubble), [Typing Indicator](https://aniui.dev/docs/typing-indicator), and [Waveform](https://aniui.dev/docs/waveform) (voice recording) for a complete chat UI.
 
 | Component | Description |
 |-----------|-------------|
@@ -129,6 +131,7 @@ Already on RNR / NativeWind / Uniwind? Components drop in with **zero extra setu
 | [Alert Dialog](https://aniui.dev/docs/alert-dialog) | Confirmation dialog with Action/Cancel |
 | [Aspect Ratio](https://aniui.dev/docs/aspect-ratio) | Constrain content to a fixed width/height ratio |
 | [Avatar](https://aniui.dev/docs/avatar) | Image with fallback initials, 3 sizes |
+| [Avatar Group](https://aniui.dev/docs/avatar-group) | Overlapping avatar stack with +N overflow |
 | [Badge](https://aniui.dev/docs/badge) | Status indicator with 4 variants |
 | [Banner](https://aniui.dev/docs/banner) | Full-width notification with variants and dismiss |
 | [Bottom Sheet](https://aniui.dev/docs/bottom-sheet) | Bottom sheet overlay |
@@ -154,6 +157,7 @@ Already on RNR / NativeWind / Uniwind? Components drop in with **zero extra setu
 | [Field](https://aniui.dev/docs/field) | Form field with label, description, and error |
 | [File Picker](https://aniui.dev/docs/file-picker) | Upload UI with dashed border, preview, and remove |
 | [Form](https://aniui.dev/docs/form) | Form context with validation, error messages, compound components |
+| [Gradient](https://aniui.dev/docs/gradient) | Linear gradient view with configurable colors and direction |
 | [Grid](https://aniui.dev/docs/grid) | FlatList-based grid layout with configurable columns |
 | [Header](https://aniui.dev/docs/header) | Navigation header with back button, title, and actions |
 | [Hover Card](https://aniui.dev/docs/hover-card) | Preview content card triggered by long-press |
@@ -164,6 +168,7 @@ Already on RNR / NativeWind / Uniwind? Components drop in with **zero extra setu
 | [Input Group](https://aniui.dev/docs/input-group) | Compose inputs with addons, buttons, and text |
 | [Input OTP](https://aniui.dev/docs/input-otp) | OTP verification input with individual cells |
 | [Kbd](https://aniui.dev/docs/kbd) | Keyboard key display with grouping |
+| [Keyboard View](https://aniui.dev/docs/keyboard-view) | Keyboard-avoiding wrapper so forms stay visible |
 | [Label](https://aniui.dev/docs/label) | Form field label |
 | [Labeled Separator](https://aniui.dev/docs/labeled-separator) | Horizontal separator with centered text label |
 | [List](https://aniui.dev/docs/list) | Styled list with ListItem, Title, Description |
@@ -177,6 +182,7 @@ Already on RNR / NativeWind / Uniwind? Components drop in with **zero extra setu
 | [Price](https://aniui.dev/docs/price) | Formatted currency display with locale support |
 | [Progress](https://aniui.dev/docs/progress) | Progress bar |
 | [Progress Steps](https://aniui.dev/docs/progress-steps) | Multi-step wizard progress indicator |
+| [Prompt Input](https://aniui.dev/docs/prompt-input) | ChatGPT/Claude-style AI composer with attach, voice, send/stop |
 | [Radio Group](https://aniui.dev/docs/radio-group) | Radio button group with context |
 | [Rating](https://aniui.dev/docs/rating) | Star rating with interactive and read-only modes |
 | [Refresh Control](https://aniui.dev/docs/refresh-control) | Themed pull-to-refresh for ScrollView and FlatList |
@@ -187,11 +193,14 @@ Already on RNR / NativeWind / Uniwind? Components drop in with **zero extra setu
 | [Separator](https://aniui.dev/docs/separator) | Horizontal or vertical divider |
 | [Sidebar](https://aniui.dev/docs/sidebar) | Collapsible side navigation panel with toggle |
 | [Skeleton](https://aniui.dev/docs/skeleton) | Animated loading placeholder |
+| [Slide to Confirm](https://aniui.dev/docs/slide-to-confirm) | Slide-to-pay/confirm control with spring-back |
 | [Slider](https://aniui.dev/docs/slider) | Draggable slider for numeric values |
 | [Spinner](https://aniui.dev/docs/spinner) | Loading spinner with 3 sizes |
 | [Stat Card](https://aniui.dev/docs/stat-card) | KPI display with value, trend, and change percentage |
 | [Status Indicator](https://aniui.dev/docs/status-indicator) | Online/offline/away/busy status dot |
 | [Stepper](https://aniui.dev/docs/stepper) | Numeric increment/decrement with min/max/step |
+| [Streaming Text](https://aniui.dev/docs/streaming-text) | Typewriter AI response text with blinking cursor |
+| [Swipe Deck](https://aniui.dev/docs/swipe-deck) | Tinder-style swipeable card stack |
 | [Swipeable List Item](https://aniui.dev/docs/swipeable-list-item) | Swipe to reveal action buttons (delete, archive, etc.) |
 | [Switch](https://aniui.dev/docs/switch) | Themed toggle switch |
 | [Tab Bar](https://aniui.dev/docs/tab-bar) | Bottom tab bar with badge support and active states |
@@ -206,6 +215,7 @@ Already on RNR / NativeWind / Uniwind? Components drop in with **zero extra setu
 | [Toggle Group](https://aniui.dev/docs/toggle-group) | Exclusive selection group |
 | [Tooltip](https://aniui.dev/docs/tooltip) | Fade-in tooltip on press |
 | [Typing Indicator](https://aniui.dev/docs/typing-indicator) | Animated typing dots for chat interfaces |
+| [Waveform](https://aniui.dev/docs/waveform) | Animated audio waveform bars for voice recording |
 
 ## Prerequisites
 
@@ -228,7 +238,7 @@ npm install @gorhom/bottom-sheet react-native-gesture-handler
 
 | Area | Status |
 |------|--------|
-| 93 components | ✅ |
+| 101 components | ✅ |
 | Component & CLI tests (Jest) | ✅ |
 | Accessibility audit | ✅ |
 | Performance benchmarks | ✅ |

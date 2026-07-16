@@ -48,6 +48,7 @@
     "expo-system-ui": "~56.0.0",
     "expo-updates": "~56.0.0",
     "expo-web-browser": "~56.0.0",
+    "lucide-react-native": "^1.24.0",
     "nativewind": "^5.0.0-preview.4",
     "react": "19.2.3",
     "react-dom": "19.2.3",

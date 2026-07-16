@@ -141,7 +141,7 @@ export default function UniwindPage() {
         <p className="text-sm text-muted-foreground">
           A full working Uniwind example on Expo SDK 57 is available at{" "}
           <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">examples/expo-57-starter/</code> in the repository
-          (an SDK 55 variant lives at <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">examples/with-uniwind/</code>).
+          (a second SDK 57 showcase lives at <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">examples/with-uniwind/</code>).
         </p>
         <CodeBlock code={`cd examples/expo-57-starter\nnpm install\nnpx expo start`} title="Run the example" />
       </div>

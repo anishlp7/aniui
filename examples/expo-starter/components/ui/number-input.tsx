@@ -1,6 +1,7 @@
 import React, { useState, useCallback } from "react";
-import { View, TextInput, Pressable, Text, useColorScheme } from "react-native";
+import { View, TextInput, Pressable, useColorScheme } from "react-native";
 import { cva, type VariantProps } from "class-variance-authority";
+import { Minus, Plus } from "lucide-react-native";
 import { cn } from "@/lib/utils";
 
 const numberVariants = cva("flex-row items-center rounded-md border", {
@@ -33,13 +34,15 @@ export const NumberInput = React.forwardRef<
   React.ElementRef<typeof TextInput>,
   NumberInputProps
 >(function NumberInput(
-  { variant, size, className, value: controlledValue, onValueChange, min = 0, max = 999999, step = 1, ...props },
+  { variant, size, className, value: controlledValue, onValueChange, min = 0, max = 999999, step = 1, onBlur, ...props },
   ref
 ) {
   const [internal, setInternal] = useState(controlledValue ?? min);
+  const [text, setText] = useState<string | null>(null);
   const value = controlledValue ?? internal;
   const dark = useColorScheme() === "dark";
   const caret = dark ? "#fafafa" : "#18181b";
+  const mutedIcon = dark ? "#27272a" : "#f4f4f5";
 
   const update = useCallback(
     (next: number) => {
@@ -53,14 +56,14 @@ export const NumberInput = React.forwardRef<
   return (
     <View className={cn(numberVariants({ variant, size }), className)}>
       <Pressable
-        onPress={() => update(value - step)}
+        onPress={() => { setText(null); update(value - step); }}
         disabled={value <= min}
         accessible={true}
         accessibilityRole="button"
         accessibilityLabel="Decrease"
         className="min-h-10 min-w-10 items-center justify-center"
       >
-        <Text className={cn("text-lg font-bold", value <= min ? "text-muted" : "text-foreground")}>−</Text>
+        <Minus size={18} color={value <= min ? mutedIcon : caret} strokeWidth={2.5} />
       </Pressable>
       <TextInput
         ref={ref}
@@ -70,20 +73,25 @@ export const NumberInput = React.forwardRef<
         keyboardAppearance={dark ? "dark" : "light"}
         selectionColor={caret}
         cursorColor={caret}
-        value={String(value)}
-        onChangeText={(t) => update(Number(t) || min)}
+        value={text ?? String(value)}
+        onChangeText={(t) => {
+          setText(t);
+          const n = Number(t);
+          if (t.trim() !== "" && !Number.isNaN(n)) update(n);
+        }}
+        onBlur={(e) => { setText(null); onBlur?.(e); }}
         accessibilityLabel="Number value"
         {...props}
       />
       <Pressable
-        onPress={() => update(value + step)}
+        onPress={() => { setText(null); update(value + step); }}
         disabled={value >= max}
         accessible={true}
         accessibilityRole="button"
         accessibilityLabel="Increase"
         className="min-h-10 min-w-10 items-center justify-center"
       >
-        <Text className={cn("text-lg font-bold", value >= max ? "text-muted" : "text-foreground")}>+</Text>
+        <Plus size={18} color={value >= max ? mutedIcon : caret} strokeWidth={2.5} />
       </Pressable>
     </View>
   );
