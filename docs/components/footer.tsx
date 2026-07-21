@@ -3,13 +3,13 @@ import { Heart } from "lucide-react";
 export function Footer() {
   return (
     <footer className="border-t border-border bg-background">
-      <div className="mx-auto max-w-sm px-4 sm:px-6 py-10 text-center">
-        <h2 className="text-sm font-semibold text-foreground">Stay in the loop</h2>
-        <p className="mt-1 text-xs text-muted-foreground">
+      <div className="mx-auto max-w-md px-4 sm:px-6 py-12 text-center">
+        <h2 className="text-base font-semibold text-foreground">Stay in the loop</h2>
+        <p className="mt-1.5 text-sm text-muted-foreground">
           New components, guides, and release notes — no spam, unsubscribe anytime.
         </p>
-        <div className="mt-4">
-          {/* Beehiiv subscribe form — the loader mounts the form in place. */}
+        <div className="mt-5 w-full">
+          {/* Beehiiv subscribe form (inline mode) — the loader mounts the form in place. */}
           <script async src="https://subscribe-forms.beehiiv.com/v3/loader.js" data-beehiiv-form="942f25c3-4d3c-4cff-9f2c-399020d11e16" />
         </div>
       </div>
