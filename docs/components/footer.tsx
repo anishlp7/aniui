@@ -1,3 +1,4 @@
+import Script from "next/script";
 import { Heart } from "lucide-react";
 
 export function Footer() {
@@ -9,8 +10,15 @@ export function Footer() {
           New components, guides, and release notes — no spam, unsubscribe anytime.
         </p>
         <div className="mt-5 w-full">
-          {/* Beehiiv subscribe form (inline mode) — the loader mounts the form in place. */}
-          <script async src="https://subscribe-forms.beehiiv.com/v3/loader.js" data-beehiiv-form="942f25c3-4d3c-4cff-9f2c-399020d11e16" />
+          {/* Beehiiv subscribe form (inline mode) — the loader mounts the form in
+              place. Loaded via next/script (afterInteractive) so it runs once React
+              has finished hydrating; a raw <script> tag here gets its injected DOM
+              wiped out by hydration reconciliation before it ever becomes visible. */}
+          <Script
+            src="https://subscribe-forms.beehiiv.com/v3/loader.js"
+            data-beehiiv-form="942f25c3-4d3c-4cff-9f2c-399020d11e16"
+            strategy="afterInteractive"
+          />
         </div>
       </div>
       <div className="border-t border-border px-4 sm:px-6 py-8 text-center text-sm text-muted-foreground">
