@@ -110,6 +110,17 @@ export function Navbar() {
             <Link href="/create" className="text-muted-foreground hover:text-foreground transition-colors">
               Create
             </Link>
+            <a
+              href="https://pro.aniui.dev"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 rounded-full border border-primary/30 bg-primary/10 px-3 py-1 text-primary transition-colors hover:bg-primary/15"
+            >
+              AniUI Pro
+              <span className="rounded-full bg-primary px-1.5 py-0.5 text-[9px] font-bold uppercase tracking-wide text-primary-foreground">
+                New
+              </span>
+            </a>
           </nav>
 
           <div className="ml-auto flex items-center gap-2">
@@ -148,6 +159,18 @@ export function Navbar() {
       {mobileOpen && (
         <div className="fixed inset-0 top-14 z-40 bg-background md:hidden overflow-y-auto">
           <nav className="space-y-4 p-6 pb-20">
+            <a
+              href="https://pro.aniui.dev"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center justify-center gap-1.5 rounded-full border border-primary/30 bg-primary/10 px-3 py-2 text-sm font-medium text-primary"
+              onClick={() => setMobileOpen(false)}
+            >
+              AniUI Pro
+              <span className="rounded-full bg-primary px-1.5 py-0.5 text-[9px] font-bold uppercase tracking-wide text-primary-foreground">
+                New
+              </span>
+            </a>
             {gettingStartedItems.map((item) => (
               <Link key={item.href} href={item.href} className="block text-sm text-muted-foreground hover:text-foreground" onClick={() => setMobileOpen(false)}>
                 {item.title}

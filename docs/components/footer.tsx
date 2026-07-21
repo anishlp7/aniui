@@ -3,7 +3,17 @@ import { Heart } from "lucide-react";
 export function Footer() {
   return (
     <footer className="border-t border-border bg-background">
-      <div className="px-4 sm:px-6 py-8 text-center text-sm text-muted-foreground">
+      <div className="mx-auto max-w-sm px-4 sm:px-6 py-10 text-center">
+        <h2 className="text-sm font-semibold text-foreground">Stay in the loop</h2>
+        <p className="mt-1 text-xs text-muted-foreground">
+          New components, guides, and release notes — no spam, unsubscribe anytime.
+        </p>
+        <div className="mt-4">
+          {/* Beehiiv subscribe form — the loader mounts the form in place. */}
+          <script async src="https://subscribe-forms.beehiiv.com/v3/loader.js" data-beehiiv-form="942f25c3-4d3c-4cff-9f2c-399020d11e16" />
+        </div>
+      </div>
+      <div className="border-t border-border px-4 sm:px-6 py-8 text-center text-sm text-muted-foreground">
         <p className="flex flex-wrap items-center justify-center gap-1.5">
           Made with <Heart className="h-3.5 w-3.5 fill-red-500 text-red-500" /> by{" "}
           <a
