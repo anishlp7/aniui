@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import Link from "next/link";
+import { PrefetchLink } from "@/components/prefetch-link";
 import { blockCategories } from "@/components/block-nav";
 
 const categoryIcons: Record<string, React.ReactNode> = {
@@ -52,7 +52,7 @@ export default function BlocksPage() {
 
           <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
             {category.blocks.map((block) => (
-              <Link
+              <PrefetchLink
                 key={block.href}
                 href={block.href}
                 className="group flex items-center gap-3 rounded-xl border border-border bg-card p-4 transition-all hover:border-primary/30 hover:shadow-sm"
@@ -76,7 +76,7 @@ export default function BlocksPage() {
                 >
                   <polyline points="9 18 15 12 9 6" />
                 </svg>
-              </Link>
+              </PrefetchLink>
             ))}
           </div>
         </section>

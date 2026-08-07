@@ -1,9 +1,9 @@
 "use client";
 
 import React, { useState, useRef, useEffect } from "react";
-import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
+import { PrefetchLink } from "./prefetch-link";
 
 const chartTypes = [
   { title: "Area Chart", href: "/charts/area-chart" },
@@ -69,12 +69,12 @@ export function ChartNav() {
   return (
     <div className="mb-8" ref={ref}>
       <div className="flex items-center gap-2 mb-3">
-        <Link
+        <PrefetchLink
           href="/charts"
           className="text-sm text-muted-foreground hover:text-foreground transition-colors"
         >
           Charts
-        </Link>
+        </PrefetchLink>
         <span className="text-muted-foreground/40">/</span>
       </div>
 
@@ -101,7 +101,7 @@ export function ChartNav() {
               {chartTypes.map((chart) => {
                 const isActive = pathname === chart.href;
                 return (
-                  <Link
+                  <PrefetchLink
                     key={chart.href}
                     href={chart.href}
                     className={cn(
@@ -117,7 +117,7 @@ export function ChartNav() {
                         <CheckIcon />
                       </span>
                     )}
-                  </Link>
+                  </PrefetchLink>
                 );
               })}
             </div>
@@ -144,7 +144,7 @@ export function ChartPagination() {
   return (
     <div className="mt-16 pt-6 border-t border-border flex items-stretch gap-3">
       {prev ? (
-        <Link
+        <PrefetchLink
           href={prev.href}
           className="group flex-1 flex items-center gap-3 rounded-xl border border-border bg-card p-4 transition-all hover:border-primary/30 hover:shadow-sm"
         >
@@ -159,12 +159,12 @@ export function ChartPagination() {
               {prev.title}
             </span>
           </div>
-        </Link>
+        </PrefetchLink>
       ) : (
         <div className="flex-1" />
       )}
       {next ? (
-        <Link
+        <PrefetchLink
           href={next.href}
           className="group flex-1 flex items-center justify-end gap-3 rounded-xl border border-border bg-card p-4 transition-all hover:border-primary/30 hover:shadow-sm text-right"
         >
@@ -179,7 +179,7 @@ export function ChartPagination() {
           <span className="text-muted-foreground group-hover:text-primary transition-colors">
             <ArrowRight />
           </span>
-        </Link>
+        </PrefetchLink>
       ) : (
         <div className="flex-1" />
       )}

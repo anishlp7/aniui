@@ -1,7 +1,7 @@
 "use client";
 
-import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { PrefetchLink } from "./prefetch-link";
 import { gettingStartedItems, componentItems, type NavItem } from "@/lib/nav-data";
 
 const allPages: NavItem[] = [...gettingStartedItems.filter(i => i.href !== "/create"), ...componentItems];
@@ -18,22 +18,22 @@ export function DocsPagination() {
   return (
     <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border-t border-border pt-6 mt-10">
       {prev ? (
-        <Link
+        <PrefetchLink
           href={prev.href}
           className="group flex flex-col items-start gap-1 text-sm text-muted-foreground hover:text-foreground transition-colors"
         >
           <span className="text-xs text-muted-foreground/60">Previous</span>
           <span className="font-medium">← {prev.title}</span>
-        </Link>
+        </PrefetchLink>
       ) : <div />}
       {next ? (
-        <Link
+        <PrefetchLink
           href={next.href}
           className="group flex flex-col items-end gap-1 text-sm text-muted-foreground hover:text-foreground transition-colors"
         >
           <span className="text-xs text-muted-foreground/60">Next</span>
           <span className="font-medium">{next.title} →</span>
-        </Link>
+        </PrefetchLink>
       ) : <div />}
     </div>
   );

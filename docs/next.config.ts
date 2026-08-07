@@ -5,6 +5,13 @@ const nextConfig: NextConfig = {
   pageExtensions: ["ts", "tsx", "md", "mdx"],
   experimental: {
     turbopackUseSystemTlsCerts: true,
+    // Every route here is statically prerendered and only changes on deploy, so
+    // holding prefetched payloads longer than the 5min default stops a browsing
+    // session from re-requesting pages it already has.
+    staleTimes: {
+      static: 1800,
+      dynamic: 30,
+    },
   },
   turbopack: {
     root: "..",
