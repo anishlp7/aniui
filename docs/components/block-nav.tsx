@@ -1,9 +1,9 @@
 "use client";
 
 import React, { useState, useRef, useEffect } from "react";
-import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
+import { PrefetchLink } from "./prefetch-link";
 
 const blockCategories = [
   {
@@ -115,12 +115,12 @@ export function BlockNav() {
     <div className="mb-8" ref={ref}>
       {/* Breadcrumb + Selector Row */}
       <div className="flex items-center gap-2 mb-3">
-        <Link
+        <PrefetchLink
           href="/blocks"
           className="text-sm text-muted-foreground hover:text-foreground transition-colors"
         >
           Blocks
-        </Link>
+        </PrefetchLink>
         <span className="text-muted-foreground/40">/</span>
         {current && (
           <span className="text-xs text-muted-foreground bg-muted rounded-full px-2 py-0.5">
@@ -161,7 +161,7 @@ export function BlockNav() {
                   {cat.blocks.map((block) => {
                     const isActive = pathname === block.href;
                     return (
-                      <Link
+                      <PrefetchLink
                         key={block.href}
                         href={block.href}
                         className={cn(
@@ -177,7 +177,7 @@ export function BlockNav() {
                             <CheckIcon />
                           </span>
                         )}
-                      </Link>
+                      </PrefetchLink>
                     );
                   })}
                 </div>
@@ -206,7 +206,7 @@ export function BlockPagination() {
   return (
     <div className="mt-16 pt-6 border-t border-border flex items-stretch gap-3">
       {prev ? (
-        <Link
+        <PrefetchLink
           href={prev.href}
           className="group flex-1 flex items-center gap-3 rounded-xl border border-border bg-card p-4 transition-all hover:border-primary/30 hover:shadow-sm"
         >
@@ -221,12 +221,12 @@ export function BlockPagination() {
               {prev.title}
             </span>
           </div>
-        </Link>
+        </PrefetchLink>
       ) : (
         <div className="flex-1" />
       )}
       {next ? (
-        <Link
+        <PrefetchLink
           href={next.href}
           className="group flex-1 flex items-center justify-end gap-3 rounded-xl border border-border bg-card p-4 transition-all hover:border-primary/30 hover:shadow-sm text-right"
         >
@@ -241,7 +241,7 @@ export function BlockPagination() {
           <span className="text-muted-foreground group-hover:text-primary transition-colors">
             <ArrowRight />
           </span>
-        </Link>
+        </PrefetchLink>
       ) : (
         <div className="flex-1" />
       )}

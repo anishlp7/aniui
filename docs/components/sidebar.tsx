@@ -1,10 +1,10 @@
 "use client";
 
 import React from "react";
-import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion, useReducedMotion, type Variants } from "motion/react";
 import { cn } from "@/lib/utils";
+import { PrefetchLink } from "./prefetch-link";
 import { sidebarSections } from "@/lib/nav-data";
 
 const sectionContainer: Variants = {
@@ -57,7 +57,7 @@ export function Sidebar() {
                           }
                         />
                       )}
-                      <Link
+                      <PrefetchLink
                         href={item.href}
                         className={cn(
                           "relative block rounded-md px-3 py-1.5 text-sm transition-colors",
@@ -67,7 +67,7 @@ export function Sidebar() {
                         )}
                       >
                         {item.title}
-                      </Link>
+                      </PrefetchLink>
                     </motion.li>
                   );
                 })}

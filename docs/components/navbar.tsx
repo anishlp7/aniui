@@ -2,8 +2,8 @@
 
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
-import Link from "next/link";
 import { useTheme } from "./theme-provider";
+import { PrefetchLink } from "./prefetch-link";
 import { gettingStartedItems, componentItems, chartItems, blockItems } from "@/lib/nav-data";
 import { CommandSearch } from "./command-search";
 
@@ -85,31 +85,31 @@ export function Navbar() {
             {mobileOpen ? <CloseIcon /> : <MenuIcon />}
           </button>
 
-          <Link href="/" className="flex items-center">
+          <PrefetchLink href="/" className="flex items-center">
             <Image
               src={theme === "dark" ? "/logo-dark.png" : "/logo-light.png"}
               alt="AniUI"
               width={90}
               height={90}
             />
-          </Link>
+          </PrefetchLink>
 
           <nav className="hidden md:flex items-center gap-6 text-sm font-medium">
-            <Link href="/docs" className="text-muted-foreground hover:text-foreground transition-colors">
+            <PrefetchLink href="/docs" className="text-muted-foreground hover:text-foreground transition-colors">
               Docs
-            </Link>
-            <Link href="/docs/accordion" className="text-muted-foreground hover:text-foreground transition-colors">
+            </PrefetchLink>
+            <PrefetchLink href="/docs/accordion" className="text-muted-foreground hover:text-foreground transition-colors">
               Components
-            </Link>
-            <Link href="/charts" className="text-muted-foreground hover:text-foreground transition-colors">
+            </PrefetchLink>
+            <PrefetchLink href="/charts" className="text-muted-foreground hover:text-foreground transition-colors">
               Charts
-            </Link>
-            <Link href="/blocks" className="text-muted-foreground hover:text-foreground transition-colors">
+            </PrefetchLink>
+            <PrefetchLink href="/blocks" className="text-muted-foreground hover:text-foreground transition-colors">
               Blocks
-            </Link>
-            <Link href="/create" className="text-muted-foreground hover:text-foreground transition-colors">
+            </PrefetchLink>
+            <PrefetchLink href="/create" className="text-muted-foreground hover:text-foreground transition-colors">
               Create
-            </Link>
+            </PrefetchLink>
             <a
               href="https://pro.aniui.dev"
               target="_blank"
@@ -172,32 +172,32 @@ export function Navbar() {
               </span>
             </a>
             {gettingStartedItems.map((item) => (
-              <Link key={item.href} href={item.href} className="block text-sm text-muted-foreground hover:text-foreground" onClick={() => setMobileOpen(false)}>
+              <PrefetchLink key={item.href} href={item.href} className="block text-sm text-muted-foreground hover:text-foreground" onClick={() => setMobileOpen(false)}>
                 {item.title}
-              </Link>
+              </PrefetchLink>
             ))}
             <div className="border-t border-border pt-4 mt-4">
               <p className="text-xs font-semibold text-foreground mb-2">Components</p>
               {componentItems.map((item, i) => (
-                <Link key={item.href} href={item.href} className={`block text-sm text-muted-foreground hover:text-foreground${i > 0 ? " mt-2" : ""}`} onClick={() => setMobileOpen(false)}>
+                <PrefetchLink key={item.href} href={item.href} className={`block text-sm text-muted-foreground hover:text-foreground${i > 0 ? " mt-2" : ""}`} onClick={() => setMobileOpen(false)}>
                   {item.title}
-                </Link>
+                </PrefetchLink>
               ))}
             </div>
             <div className="border-t border-border pt-4 mt-4">
               <p className="text-xs font-semibold text-foreground mb-2">Charts</p>
               {chartItems.map((item, i) => (
-                <Link key={item.href} href={item.href} className={`block text-sm text-muted-foreground hover:text-foreground${i > 0 ? " mt-2" : ""}`} onClick={() => setMobileOpen(false)}>
+                <PrefetchLink key={item.href} href={item.href} className={`block text-sm text-muted-foreground hover:text-foreground${i > 0 ? " mt-2" : ""}`} onClick={() => setMobileOpen(false)}>
                   {item.title}
-                </Link>
+                </PrefetchLink>
               ))}
             </div>
             <div className="border-t border-border pt-4 mt-4">
               <p className="text-xs font-semibold text-foreground mb-2">Blocks</p>
               {blockItems.map((item, i) => (
-                <Link key={item.href} href={item.href} className={`block text-sm text-muted-foreground hover:text-foreground${i > 0 ? " mt-2" : ""}`} onClick={() => setMobileOpen(false)}>
+                <PrefetchLink key={item.href} href={item.href} className={`block text-sm text-muted-foreground hover:text-foreground${i > 0 ? " mt-2" : ""}`} onClick={() => setMobileOpen(false)}>
                   {item.title}
-                </Link>
+                </PrefetchLink>
               ))}
             </div>
           </nav>
