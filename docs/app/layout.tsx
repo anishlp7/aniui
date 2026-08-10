@@ -1,9 +1,12 @@
 import type { Metadata } from "next";
 import { Inter, JetBrains_Mono } from "next/font/google";
+import Script from "next/script";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
+import { ADSENSE_CLIENT } from "@/lib/ads";
+import { consentInitScript } from "@/lib/consent";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -69,6 +72,10 @@ export default function RootLayout({
       <head>
         <link rel="icon" href="/favicon-light.ico" media="(prefers-color-scheme: light)" />
         <link rel="icon" href="/favicon-dark.ico" media="(prefers-color-scheme: dark)" />
+        {/* Ahead of the ad script below, which is the whole point of putting it
+            here: it is what stops a cookie being set in Europe in the moment
+            before Google's consent dialog has loaded. */}
+        <script dangerouslySetInnerHTML={{ __html: consentInitScript }} />
       </head>
       <body className={`${inter.variable} ${jetbrainsMono.variable} antialiased font-sans`}>
         <ThemeProvider>
@@ -76,6 +83,15 @@ export default function RootLayout({
           {children}
           <Footer />
         </ThemeProvider>
+        {/* Verification for the whole aniui.dev domain, which is how AdSense
+            reaches academy.aniui.dev. No ad unit on this site consumes it. */}
+        <Script
+          id="adsbygoogle"
+          async
+          crossOrigin="anonymous"
+          strategy="afterInteractive"
+          src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${ADSENSE_CLIENT}`}
+        />
       </body>
     </html>
   );
