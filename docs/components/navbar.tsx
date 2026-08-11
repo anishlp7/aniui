@@ -111,6 +111,17 @@ export function Navbar() {
               Create
             </PrefetchLink>
             <a
+              href="https://academy.aniui.dev"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 rounded-full border border-primary/30 bg-primary/10 px-3 py-1 text-primary transition-colors hover:bg-primary/15"
+            >
+              Academy
+              <span className="rounded-full bg-primary px-1.5 py-0.5 text-[9px] font-bold uppercase tracking-wide text-primary-foreground">
+                New
+              </span>
+            </a>
+            <a
               href="https://pro.aniui.dev"
               target="_blank"
               rel="noopener noreferrer"
@@ -159,6 +170,18 @@ export function Navbar() {
       {mobileOpen && (
         <div className="fixed inset-0 top-14 z-40 bg-background md:hidden overflow-y-auto">
           <nav className="space-y-4 p-6 pb-20">
+            <a
+              href="https://academy.aniui.dev"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center justify-center gap-1.5 rounded-full border border-primary/30 bg-primary/10 px-3 py-2 text-sm font-medium text-primary"
+              onClick={() => setMobileOpen(false)}
+            >
+              Academy
+              <span className="rounded-full bg-primary px-1.5 py-0.5 text-[9px] font-bold uppercase tracking-wide text-primary-foreground">
+                New
+              </span>
+            </a>
             <a
               href="https://pro.aniui.dev"
               target="_blank"
