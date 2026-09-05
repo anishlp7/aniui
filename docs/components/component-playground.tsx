@@ -1,12 +1,12 @@
 "use client";
 
-import React, { useState, useMemo } from "react";
-import { highlight } from "sugar-high";
+import React, { useState } from "react";
 
 interface ComponentPlaygroundProps {
   code: string;
-  /** Pre-rendered highlighted HTML from server-side shiki */
-  highlightedCode?: string;
+  /** Pre-rendered highlighted HTML from server-side shiki — the sole caller
+   * (highlighted-playground.tsx) always computes and passes this. */
+  highlightedCode: string;
   children: React.ReactNode;
   /** Use "inline" for overlay components (dialog, drawer, toast) that escape containment */
   variant?: "phone" | "inline";
@@ -69,25 +69,12 @@ export function ComponentPlaygroundClient({ code, highlightedCode, children, var
         >
           {copied ? "Copied!" : "Copy"}
         </button>
-        {highlightedCode ? (
-          <div
-            className="shiki-wrapper overflow-x-auto bg-secondary/50 p-4 text-sm leading-relaxed [&_pre]:!bg-transparent [&_code]:font-mono"
-            dangerouslySetInnerHTML={{ __html: highlightedCode }}
-          />
-        ) : (
-          <SugarHighBlock code={code} />
-        )}
+        <div
+          className="shiki-wrapper overflow-x-auto bg-secondary/50 p-4 text-sm leading-relaxed [&_pre]:!bg-transparent [&_code]:font-mono"
+          dangerouslySetInnerHTML={{ __html: highlightedCode }}
+        />
       </div>
     </div>
-  );
-}
-
-function SugarHighBlock({ code }: { code: string }) {
-  const html = useMemo(() => highlight(code), [code]);
-  return (
-    <pre className="overflow-x-auto bg-secondary/50 p-4 text-sm leading-relaxed">
-      <code className="font-mono" dangerouslySetInnerHTML={{ __html: html }} />
-    </pre>
   );
 }
 
