@@ -24,8 +24,13 @@ export interface PopoverTriggerProps extends React.ComponentPropsWithoutRef<type
 export function PopoverTrigger({ className, children, ...props }: PopoverTriggerProps) {
   return (
     <PopoverPrimitive.Trigger asChild>
-      <Pressable className={cn("min-h-12 min-w-12", className)} accessible={true} accessibilityRole="button" {...props}>
-        <View className="flex-1 items-center justify-center">{children}</View>
+      {/* rn-primitives measures this exact box to position PopoverContent below
+          it — min-h-12/min-w-12 would force a 48x48 measured box even when the
+          child is a small icon, opening the content ~48px below the trigger's
+          top edge instead of just past the icon. hitSlop expands the tappable
+          area to the 48dp minimum without inflating what gets measured. */}
+      <Pressable hitSlop={14} className={cn("", className)} accessible={true} accessibilityRole="button" {...props}>
+        {children}
       </Pressable>
     </PopoverPrimitive.Trigger>
   );

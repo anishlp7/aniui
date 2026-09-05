@@ -35,13 +35,20 @@ export interface HoverCardTriggerProps extends React.ComponentPropsWithoutRef<ty
 export function HoverCardTrigger({ className, children, ...props }: HoverCardTriggerProps) {
   return (
     <HoverCardPrimitive.Trigger asChild>
+      {/* rn-primitives measures this exact box to position HoverCardContent
+          below it — min-h-12/min-w-12 would force a 48x48 measured box even
+          for a small icon child, opening the content ~48px below the
+          trigger's top edge instead of just past the icon. hitSlop expands
+          the tappable area to the 48dp minimum without inflating what gets
+          measured. */}
       <Pressable
-        className={cn("min-h-12 min-w-12", className)}
+        hitSlop={14}
+        className={cn("", className)}
         accessible={true}
         accessibilityRole="button"
         {...props}
       >
-        <View className="flex-1 items-center justify-center">{children}</View>
+        {children}
       </Pressable>
     </HoverCardPrimitive.Trigger>
   );

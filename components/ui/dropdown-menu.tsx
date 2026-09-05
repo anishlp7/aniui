@@ -19,8 +19,13 @@ export function DropdownMenu({ children, open, onOpenChange }: DropdownMenuProps
 export function DropdownMenuTrigger({ className, children, ...props }: React.ComponentPropsWithoutRef<typeof Pressable> & { className?: string; children: React.ReactNode }) {
   return (
     <DropdownMenuPrimitive.Trigger asChild>
-      <Pressable className={cn("min-h-12 min-w-12", className)} accessible={true} accessibilityRole="button" {...props}>
-        <View className="flex-1 items-center justify-center">{children}</View>
+      {/* rn-primitives measures this exact box to position the menu below it —
+          min-h-12/min-w-12 would force a 48x48 measured box even for a small
+          icon child, opening the menu ~48px below the trigger's top edge
+          instead of just past the icon. hitSlop expands the tappable area to
+          the 48dp minimum without inflating what gets measured. */}
+      <Pressable hitSlop={14} className={cn("", className)} accessible={true} accessibilityRole="button" {...props}>
+        {children}
       </Pressable>
     </DropdownMenuPrimitive.Trigger>
   );
