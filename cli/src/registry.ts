@@ -32,6 +32,14 @@ export const registry: Record<string, ComponentEntry> = {
     registryDependencies: [],
     tier: 1,
   },
+  autocomplete: {
+    name: "AutoComplete",
+    file: "components/ui/autocomplete.tsx",
+    description: "Free-text input with inline filtered suggestions, keyboard-safe dropdown, and async loading state",
+    dependencies: ["lucide-react-native", "react-native-svg", "class-variance-authority", "clsx", "tailwind-merge"],
+    registryDependencies: [],
+    tier: 1,
+  },
   textarea: {
     name: "Textarea",
     file: "components/ui/textarea.tsx",

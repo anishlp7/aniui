@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { Heading } from "@/components/heading";
 import { PreviewInput, PreviewInputLeadingIcon, PreviewInputTrailingIcon, PreviewInputPasswordToggle } from "@/components/preview/input";
 import { ComponentPlayground } from "@/components/highlighted-playground";
@@ -255,6 +256,11 @@ export default function InputPage() {
           <li>Placeholder text color uses the theme variable for consistent contrast.</li>
         </ul>
       </div>
+      {/* Related */}
+      <p className="text-sm text-muted-foreground">
+        See also: <Link href="/docs/search-bar" className="text-primary hover:underline">Search Bar</Link>{" "}
+        &middot; <Link href="/docs/autocomplete" className="text-primary hover:underline">AutoComplete</Link>
+      </p>
       {/* Source */}
       <div className="space-y-4">
         <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Source</Heading>

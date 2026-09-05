@@ -46,6 +46,12 @@
       "description": "Constrains children to a fixed width/height ratio"
     },
     {
+      "name": "autocomplete",
+      "type": "registry:ui",
+      "title": "AutoComplete",
+      "description": "Free-text input with inline filtered suggestions, keyboard-safe dropdown, and async loading state"
+    },
+    {
       "name": "avatar",
       "type": "registry:ui",
       "title": "Avatar",

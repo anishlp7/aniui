@@ -30,6 +30,7 @@ export const componentItems: NavItem[] = [
   { title: "Alert Dialog", href: "/docs/alert-dialog" },
   { title: "Animate", href: "/docs/animate" },
   { title: "Aspect Ratio", href: "/docs/aspect-ratio" },
+  { title: "AutoComplete", href: "/docs/autocomplete" },
   { title: "Avatar", href: "/docs/avatar" },
   { title: "Avatar Group", href: "/docs/avatar-group" },
   { title: "Badge", href: "/docs/badge" },

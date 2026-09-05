@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { Heading } from "@/components/heading";
 import { PreviewSearchBar } from "@/components/preview/search-bar";
 import { ComponentPlayground } from "@/components/highlighted-playground";
@@ -42,9 +43,10 @@ const iconCode = `import { Search } from "lucide-react-native";
   onClear={() => setQuery("")}
 />`;
 const sourceCode = `import React from "react";
-import { View, TextInput, Pressable, Text } from "react-native";
+import { View, TextInput, Pressable, Text, useColorScheme } from "react-native";
 import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
+import { Search, X } from "lucide-react-native";
 
 const searchBarVariants = cva(
   "flex-row items-center rounded-lg bg-muted px-3 min-h-12",
@@ -71,25 +73,39 @@ export interface SearchBarProps
   showCancel?: boolean;
   onCancel?: () => void;
 }
-export function SearchBar({ size = "md", className, value, icon, onClear, showCancel, onCancel, ...props }: SearchBarProps) {
+
+export const SearchBar = React.forwardRef<
+  React.ElementRef<typeof TextInput>,
+  SearchBarProps
+>(function SearchBar(
+  { size = "md", className, value, icon, onClear, showCancel, onCancel, ...props },
+  ref
+) {
   const iconSize = iconSizes[size ?? "md"];
+  const dark = useColorScheme() === "dark";
+  const caret = dark ? "#fafafa" : "#18181b";
+
   return (
     <View className="flex-row items-center gap-2">
       <View className={cn(searchBarVariants({ size }), className)}>
-        <View className="mr-2">
-          {icon ?? <Text style={{ fontSize: iconSize, color: "#71717a" }}>\\u2315</Text>}
+        <View className="me-2">
+          {icon ?? <Search size={iconSize} color="#71717a" />}
         </View>
         <TextInput
+          ref={ref}
           className="flex-1 text-base text-foreground p-0"
-          placeholderTextColor="#71717a"
+          placeholderTextColor={dark ? "#a1a1aa" : "#71717a"}
+          keyboardAppearance={dark ? "dark" : "light"}
+          selectionColor={caret}
+          cursorColor={caret}
           placeholder="Search..."
           value={value}
           accessibilityRole="search"
           {...props}
         />
         {value ? (
-          <Pressable onPress={onClear} className="ml-1 h-5 w-5 items-center justify-center rounded-full bg-muted-foreground/20" accessible={true} accessibilityRole="button" accessibilityLabel="Clear search">
-            <Text className="text-xs text-muted-foreground">\\u2715</Text>
+          <Pressable onPress={() => { onClear?.(); props.onChangeText?.(""); }} className="ms-1 h-6 w-6 items-center justify-center rounded-full bg-muted-foreground/20" accessible={true} accessibilityRole="button" accessibilityLabel="Clear search" hitSlop={{ top: 12, bottom: 12, left: 12, right: 12 }}>
+            <X size={14} color="#71717a" />
           </Pressable>
         ) : null}
       </View>
@@ -100,7 +116,7 @@ export function SearchBar({ size = "md", className, value, icon, onClear, showCa
       )}
     </View>
   );
-}`;
+});`;
 export default function SearchBarPage() {
   return (
     <div className="space-y-12">
@@ -166,6 +182,10 @@ export default function SearchBarPage() {
           <li>Clear button has <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">accessibilityLabel</code> for screen readers.</li>
         </ul>
       </div>
+      <p className="text-sm text-muted-foreground">
+        See also: <Link href="/docs/input" className="text-primary hover:underline">Input</Link>{" "}
+        &middot; <Link href="/docs/autocomplete" className="text-primary hover:underline">AutoComplete</Link>
+      </p>
       <div>
         <Heading as="h2" className="text-xl font-semibold mb-3">Source</Heading>
         <CodeBlock code={sourceCode} title="components/ui/search-bar.tsx" />
