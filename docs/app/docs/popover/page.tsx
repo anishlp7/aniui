@@ -1,3 +1,4 @@
+import { getComponentSource } from "@/lib/registry-source";
 import { Heading } from "@/components/heading";
 import { PreviewPopoverDemo } from "@/components/preview/popover";
 import { ComponentPlayground } from "@/components/highlighted-playground";
@@ -29,69 +30,7 @@ export function MyScreen() {
     </Popover>
   );
 }`;
-const sourceCode = `import React from "react";
-import { View, Pressable } from "react-native";
-import * as PopoverPrimitive from "@rn-primitives/popover";
-import Animated, { FadeIn, FadeOut } from "react-native-reanimated";
-import { cn } from "@/lib/utils";
-
-export interface PopoverProps {
-  open?: boolean;
-  onOpenChange?: (open: boolean) => void;
-  children: React.ReactNode;
-}
-
-export function Popover({ open, onOpenChange, children }: PopoverProps) {
-  return <PopoverPrimitive.Root open={open} onOpenChange={onOpenChange}>{children}</PopoverPrimitive.Root>;
-}
-
-export interface PopoverTriggerProps extends React.ComponentPropsWithoutRef<typeof Pressable> {
-  className?: string;
-  children?: React.ReactNode;
-}
-
-export function PopoverTrigger({ className, children, ...props }: PopoverTriggerProps) {
-  return (
-    <PopoverPrimitive.Trigger asChild>
-      <Pressable className={cn("min-h-12 min-w-12", className)} accessible={true} accessibilityRole="button" {...props}>
-        {children}
-      </Pressable>
-    </PopoverPrimitive.Trigger>
-  );
-}
-
-export interface PopoverContentProps extends React.ComponentPropsWithoutRef<typeof View> {
-  className?: string;
-  children?: React.ReactNode;
-  side?: "top" | "bottom" | "left" | "right";
-  sideOffset?: number;
-  align?: "start" | "center" | "end";
-}
-
-export function PopoverContent({ className, children, side = "bottom", sideOffset = 8, align = "center", ...props }: PopoverContentProps) {
-  return (
-    <PopoverPrimitive.Portal>
-      <PopoverPrimitive.Overlay className="absolute inset-0" />
-      <PopoverPrimitive.Content side={side} sideOffset={sideOffset} align={align} avoidCollisions>
-        <Animated.View entering={FadeIn.duration(150)} exiting={FadeOut.duration(100)}>
-          <View className={cn("w-72 rounded-lg border border-border bg-card p-4 shadow-lg", className)} {...props}>
-            {children}
-          </View>
-        </Animated.View>
-      </PopoverPrimitive.Content>
-    </PopoverPrimitive.Portal>
-  );
-}
-
-export function PopoverClose({ children, className, ...props }: React.ComponentPropsWithoutRef<typeof Pressable> & { className?: string; children?: React.ReactNode }) {
-  return (
-    <PopoverPrimitive.Close asChild>
-      <Pressable className={cn("", className)} accessible={true} accessibilityRole="button" {...props}>
-        {children}
-      </Pressable>
-    </PopoverPrimitive.Close>
-  );
-}`;
+const sourceCode = getComponentSource("popover");
 export default function PopoverPage() {
   return (
     <div className="space-y-10">

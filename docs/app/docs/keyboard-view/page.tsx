@@ -1,3 +1,4 @@
+import { getComponentSource } from "@/lib/registry-source";
 import { Heading } from "@/components/heading";
 import { PreviewKeyboardViewDemo } from "@/components/preview/keyboard-view";
 import { ComponentPlayground } from "@/components/highlighted-playground";
@@ -36,28 +37,7 @@ const behaviorCode = `// The default behavior is "padding" on iOS and undefined 
 <KeyboardView behavior="height">
   {/* Screen content */}
 </KeyboardView>`;
-const sourceCode = `import React from "react";
-import { KeyboardAvoidingView, Platform } from "react-native";
-import { cn } from "@/lib/utils";
-
-export interface KeyboardViewProps
-  extends React.ComponentPropsWithoutRef<typeof KeyboardAvoidingView> {
-  className?: string;
-  offset?: number;
-}
-
-export function KeyboardView({ className, offset, behavior, ...props }: KeyboardViewProps) {
-  return (
-    <KeyboardAvoidingView
-      className={cn("flex-1", className)}
-      // iOS needs "padding"; Android's windowSoftInputMode="adjustResize" already
-      // resizes the window, so no behavior avoids double-shifting the layout.
-      behavior={behavior ?? (Platform.OS === "ios" ? "padding" : undefined)}
-      keyboardVerticalOffset={offset}
-      {...props}
-    />
-  );
-}`;
+const sourceCode = getComponentSource("keyboard-view");
 export default function KeyboardViewPage() {
   return (
     <div className="space-y-10">

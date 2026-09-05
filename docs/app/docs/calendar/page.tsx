@@ -1,3 +1,4 @@
+import { getComponentSource } from "@/lib/registry-source";
 import { Heading } from "@/components/heading";
 import { PreviewCalendar } from "@/components/preview/calendar";
 import { ComponentPlayground } from "@/components/highlighted-playground";
@@ -33,44 +34,7 @@ const constrainedCode = `<Calendar
   min={new Date(2024, 0, 1)}
   max={new Date(2024, 11, 31)}
 />`;
-const sourceCode = `import React, { useState } from "react";
-import { View, Text, Pressable } from "react-native";
-import { cn } from "@/lib/utils";
-
-export interface CalendarProps {
-  className?: string;
-  selected?: Date;
-  onSelect?: (date: Date) => void;
-  rangeStart?: Date;
-  rangeEnd?: Date;
-  onRangeChange?: (start: Date, end: Date | undefined) => void;
-  min?: Date;
-  max?: Date;
-}
-const DAYS = ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"];
-const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-const same = (a: Date, b: Date) => a.getFullYear() === b.getFullYear() && a.getMonth() === b.getMonth() && a.getDate() === b.getDate();
-type Mode = "days" | "months" | "years";
-export function Calendar({ className, selected, onSelect, rangeStart, rangeEnd, onRangeChange, min, max }: CalendarProps) {
-  const [viewing, setViewing] = useState(() => selected ?? rangeStart ?? new Date());
-  const [mode, setMode] = useState<Mode>("days");
-  const year = viewing.getFullYear(), month = viewing.getMonth();
-  const handlePress = (day: number) => {
-    const date = new Date(year, month, day);
-    if ((min && date < min) || (max && date > max)) return;
-    if (onRangeChange) {
-      if (!rangeStart || rangeEnd || date < rangeStart) onRangeChange(date, undefined);
-      else onRangeChange(rangeStart, date);
-    }
-    onSelect?.(date);
-  };
-  const handleHeaderPress = () => setMode(mode === "days" ? "years" : "days");
-  const pickYear = (y: number) => { setViewing(new Date(y, month, 1)); setMode("months"); };
-  const pickMonth = (m: number) => { setViewing(new Date(year, m, 1)); setMode("days"); };
-  const decadeStart = Math.floor(year / 12) * 12;
-  const label = new Date(year, month).toLocaleString("default", { month: "long", year: "numeric" });
-  // ... renders year grid, month grid, and day grid based on mode
-}`;
+const sourceCode = getComponentSource("calendar");
 export default function CalendarPage() {
   return (
     <div className="space-y-10">

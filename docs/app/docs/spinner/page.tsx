@@ -1,3 +1,4 @@
+import { getComponentSource } from "@/lib/registry-source";
 import { Heading } from "@/components/heading";
 import { PreviewSpinner } from "@/components/preview/spinner";
 import { ComponentPlayground } from "@/components/highlighted-playground";
@@ -15,27 +16,7 @@ export function MyScreen() {
 const sizesCode = `<Spinner size="sm" />
 <Spinner size="md" />
 <Spinner size="lg" />`;
-const sourceCode = `import React from "react";
-import { ActivityIndicator, View } from "react-native";
-import { cn } from "@/lib/utils";
-
-const sizeMap = { sm: "small", md: "small", lg: "large" } as const;
-export interface SpinnerProps extends React.ComponentPropsWithoutRef<typeof View> {
-  className?: string;
-  size?: "sm" | "md" | "lg";
-  color?: string;
-}
-export function Spinner({ size = "md", color, className, ...props }: SpinnerProps) {
-  return (
-    <View className={cn("items-center justify-center", className)} {...props}>
-      <ActivityIndicator
-        size={sizeMap[size]}
-        color={color ?? "hsl(240, 5.9%, 10%)"}
-        accessibilityRole="progressbar"
-      />
-    </View>
-  );
-}`;
+const sourceCode = getComponentSource("spinner");
 export default function SpinnerPage() {
   return (
     <div className="space-y-10">

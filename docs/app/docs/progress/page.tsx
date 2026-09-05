@@ -1,3 +1,4 @@
+import { getComponentSource } from "@/lib/registry-source";
 import { Heading } from "@/components/heading";
 import { PreviewProgress } from "@/components/preview/progress";
 import { ComponentPlayground } from "@/components/highlighted-playground";
@@ -19,38 +20,7 @@ const examplesCode = `<Progress value={0} />
 <Progress value={50} />
 <Progress value={75} />
 <Progress value={100} />`;
-const sourceCode = `import React from "react";
-import { View } from "react-native";
-import * as ProgressPrimitive from "@rn-primitives/progress";
-import { cn } from "@/lib/utils";
-
-export interface ProgressProps extends React.ComponentPropsWithoutRef<typeof View> {
-  className?: string;
-  value?: number;
-  indicatorClassName?: string;
-}
-
-export function Progress({ value = 0, className, indicatorClassName, ...props }: ProgressProps) {
-  const clampedValue = Math.min(100, Math.max(0, value));
-
-  return (
-    <ProgressPrimitive.Root value={clampedValue} asChild>
-      <View
-        className={cn("h-2 w-full overflow-hidden rounded-full bg-secondary", className)}
-        accessibilityRole="progressbar"
-        accessibilityValue={{ min: 0, max: 100, now: clampedValue }}
-        {...props}
-      >
-        <ProgressPrimitive.Indicator asChild>
-          <View
-            className={cn("h-full rounded-full bg-primary", indicatorClassName)}
-            style={{ width: \`\${clampedValue}%\` }}
-          />
-        </ProgressPrimitive.Indicator>
-      </View>
-    </ProgressPrimitive.Root>
-  );
-}`;
+const sourceCode = getComponentSource("progress");
 export default function ProgressPage() {
   return (
     <div className="space-y-10">

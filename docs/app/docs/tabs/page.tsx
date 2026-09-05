@@ -1,3 +1,4 @@
+import { getComponentSource } from "@/lib/registry-source";
 import { Heading } from "@/components/heading";
 import { PreviewTabsDemo, PreviewTabsLine, PreviewTabsVertical, PreviewTabsDisabled, PreviewTabsIcons, PreviewTabsSizes, PreviewTabsRTL } from "@/components/preview/tabs";
 import { ComponentPlayground } from "@/components/highlighted-playground";
@@ -84,36 +85,7 @@ const rtlCode = `import { DirectionProvider } from "@/components/ui/direction-pr
     <TabsContent value="home">...</TabsContent>
   </Tabs>
 </DirectionProvider>`;
-const sourceCode = `import React, { createContext, useContext, useState } from "react";
-import { View, Pressable, Text } from "react-native";
-import { cva } from "class-variance-authority";
-import { cn } from "@/lib/utils";
-
-type TabsVariant = "filled" | "line";
-type TabsSize = "sm" | "md" | "lg";
-type TabsOrientation = "horizontal" | "vertical";
-
-const TabsCtx = createContext<{
-  value: string; onValueChange: (v: string) => void;
-  variant: TabsVariant; size: TabsSize; orientation: TabsOrientation;
-}>({ value: "", onValueChange: () => {}, variant: "filled", size: "md", orientation: "horizontal" });
-
-export interface TabsProps extends React.ComponentPropsWithoutRef<typeof View> {
-  className?: string; defaultValue: string;
-  variant?: TabsVariant; size?: TabsSize; orientation?: TabsOrientation;
-  children?: React.ReactNode;
-}
-
-export function Tabs({ defaultValue, variant = "filled", size = "md", orientation = "horizontal", className, children, ...props }: TabsProps) {
-  const [value, setValue] = useState(defaultValue);
-  return (
-    <TabsCtx.Provider value={{ value, onValueChange: setValue, variant, size, orientation }}>
-      <View className={cn(orientation === "vertical" && "flex-row", className)} {...props}>{children}</View>
-    </TabsCtx.Provider>
-  );
-}
-
-// ... TabsList, TabsTrigger, TabsContent (see source)`;
+const sourceCode = getComponentSource("tabs");
 export default function TabsPage() {
   return (
     <div className="space-y-10">

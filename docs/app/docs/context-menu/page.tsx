@@ -1,3 +1,4 @@
+import { getComponentSource } from "@/lib/registry-source";
 import { Heading } from "@/components/heading";
 import { ComponentPlayground } from "@/components/highlighted-playground";
 import { CodeBlock } from "@/components/code-block-server";
@@ -26,9 +27,7 @@ const usageCode = `import {
     <ContextMenuItem destructive onPress={() => {}}>Delete</ContextMenuItem>
   </ContextMenuContent>
 </ContextMenu>`;
-const sourceCode = `// See components/ui/context-menu.tsx
-// Built on @rn-primitives/context-menu
-// Triggered by long press on ContextMenuTrigger`;
+const sourceCode = getComponentSource("context-menu");
 
 export default function ContextMenuPage() {
   return (

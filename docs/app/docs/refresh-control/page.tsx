@@ -1,3 +1,4 @@
+import { getComponentSource } from "@/lib/registry-source";
 import { Heading } from "@/components/heading";
 import { PreviewRefreshControlDemo } from "@/components/preview/refresh-control";
 import { ComponentPlayground } from "@/components/highlighted-playground";
@@ -27,25 +28,7 @@ export function MyScreen() {
     </ScrollView>
   );
 }`;
-const sourceCode = `import React from "react";
-import { RefreshControl as RNRefreshControl } from "react-native";
-
-export interface RefreshControlProps extends React.ComponentPropsWithoutRef<typeof RNRefreshControl> {
-  refreshing: boolean;
-  onRefresh: () => void;
-}
-
-export function RefreshControl({ refreshing, onRefresh, ...props }: RefreshControlProps) {
-  return (
-    <RNRefreshControl
-      refreshing={refreshing}
-      onRefresh={onRefresh}
-      tintColor="hsl(240 5.9% 10%)"
-      colors={["hsl(240 5.9% 10%)"]}
-      {...props}
-    />
-  );
-}`;
+const sourceCode = getComponentSource("refresh-control");
 export default function RefreshControlPage() {
   return (
     <div className="space-y-10">
