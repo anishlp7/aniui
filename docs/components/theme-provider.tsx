@@ -13,7 +13,12 @@ const ThemeContext = createContext<{
 });
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
-  const [theme, setTheme] = useState<Theme>("light");
+  // The blocking script in <head> (docs/lib/theme-init.ts) already applied the
+  // "dark" class before this ever renders — read it back so this state starts
+  // in sync instead of flashing from the "light" SSR default.
+  const [theme, setTheme] = useState<Theme>(() =>
+    typeof document !== "undefined" && document.documentElement.classList.contains("dark") ? "dark" : "light"
+  );
 
   useEffect(() => {
     const stored = localStorage.getItem("aniui-theme") as Theme | null;
