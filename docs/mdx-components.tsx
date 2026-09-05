@@ -5,6 +5,7 @@ import { ComponentPlayground } from "@/components/highlighted-playground";
 import { AddComponentTabs } from "@/components/package-manager-tabs";
 import { PropsTable, ComponentTable } from "@/components/props-table";
 import { PreviewToggle } from "@/components/preview-toggle";
+import { Source } from "@/components/source-block";
 import type { BundledLanguage } from "shiki";
 
 /** Extract plain text from React children (handles strings and nested elements) */
@@ -40,5 +41,6 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     PropsTable,
     ComponentTable,
     PreviewToggle,
+    Source,
   };
 }

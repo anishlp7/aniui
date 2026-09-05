@@ -4,7 +4,7 @@ import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import { useTheme } from "./theme-provider";
 import { PrefetchLink } from "./prefetch-link";
-import { gettingStartedItems, componentItems, chartItems, blockItems } from "@/lib/nav-data";
+import { gettingStartedItems, sidebarSections } from "@/lib/nav-data";
 import { CommandSearch } from "./command-search";
 
 function SunIcon() {
@@ -98,7 +98,7 @@ export function Navbar() {
             <PrefetchLink href="/docs" className="text-muted-foreground hover:text-foreground transition-colors">
               Docs
             </PrefetchLink>
-            <PrefetchLink href="/docs/accordion" className="text-muted-foreground hover:text-foreground transition-colors">
+            <PrefetchLink href="/docs/components" className="text-muted-foreground hover:text-foreground transition-colors">
               Components
             </PrefetchLink>
             <PrefetchLink href="/charts" className="text-muted-foreground hover:text-foreground transition-colors">
@@ -176,30 +176,18 @@ export function Navbar() {
                 {item.title}
               </PrefetchLink>
             ))}
-            <div className="border-t border-border pt-4 mt-4">
-              <p className="text-xs font-semibold text-foreground mb-2">Components</p>
-              {componentItems.map((item, i) => (
-                <PrefetchLink key={item.href} href={item.href} className={`block text-sm text-muted-foreground hover:text-foreground${i > 0 ? " mt-2" : ""}`} onClick={() => setMobileOpen(false)}>
-                  {item.title}
-                </PrefetchLink>
+            {sidebarSections
+              .filter((section) => section.title !== "Getting Started")
+              .map((section) => (
+                <div key={section.title} className="border-t border-border pt-4 mt-4">
+                  <p className="text-xs font-semibold text-foreground mb-2">{section.title}</p>
+                  {section.items.map((item, i) => (
+                    <PrefetchLink key={item.href} href={item.href} className={`block text-sm text-muted-foreground hover:text-foreground${i > 0 ? " mt-2" : ""}`} onClick={() => setMobileOpen(false)}>
+                      {item.title}
+                    </PrefetchLink>
+                  ))}
+                </div>
               ))}
-            </div>
-            <div className="border-t border-border pt-4 mt-4">
-              <p className="text-xs font-semibold text-foreground mb-2">Charts</p>
-              {chartItems.map((item, i) => (
-                <PrefetchLink key={item.href} href={item.href} className={`block text-sm text-muted-foreground hover:text-foreground${i > 0 ? " mt-2" : ""}`} onClick={() => setMobileOpen(false)}>
-                  {item.title}
-                </PrefetchLink>
-              ))}
-            </div>
-            <div className="border-t border-border pt-4 mt-4">
-              <p className="text-xs font-semibold text-foreground mb-2">Blocks</p>
-              {blockItems.map((item, i) => (
-                <PrefetchLink key={item.href} href={item.href} className={`block text-sm text-muted-foreground hover:text-foreground${i > 0 ? " mt-2" : ""}`} onClick={() => setMobileOpen(false)}>
-                  {item.title}
-                </PrefetchLink>
-              ))}
-            </div>
           </nav>
         </div>
       )}

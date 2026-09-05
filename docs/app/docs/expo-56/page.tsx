@@ -6,6 +6,7 @@ export const metadata = {
   title: "Expo SDK 56 · AniUI",
   description:
     "Set up AniUI on Expo SDK 56 (React 19.2.3, React Native 0.85.3). Two NativeWind tracks supported: v5 preview (Tailwind v4) and v4 stable (Tailwind v3).",
+  alternates: { canonical: "/docs/expo-56" },
 };
 
 const sdk56Versions = `# Pinned by Expo SDK 56 (expo@56.0.3, released 2026-05-21)
