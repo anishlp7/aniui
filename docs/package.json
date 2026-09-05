@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "prebuild": "cd ../cli && npm run registry:build",
+    "prebuild": "cd ../cli && npm install && npm run registry:build",
     "build": "next build",
     "start": "next start",
     "lint": "eslint"
