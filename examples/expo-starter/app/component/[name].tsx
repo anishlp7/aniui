@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { ScrollView, View, Pressable, Modal } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useLocalSearchParams, Stack } from "expo-router";
+import { Plus, ChevronDown, Mic } from "lucide-react-native";
 import { Text } from "@/components/ui/text";
 
 // Forms
@@ -61,6 +62,14 @@ import { StatCard } from "@/components/ui/stat-card";
 import { Price } from "@/components/ui/price";
 import { StatusIndicator } from "@/components/ui/status-indicator";
 import { TypingIndicator } from "@/components/ui/typing-indicator";
+import {
+  PromptInput,
+  PromptInputTextarea,
+  PromptInputToolbar,
+  PromptInputSpacer,
+  PromptInputButton,
+  PromptInputSend,
+} from "@/components/ui/prompt-input";
 import { ConnectionBanner } from "@/components/ui/connection-banner";
 import { AreaChart } from "@/components/ui/area-chart";
 import { BarChart } from "@/components/ui/bar-chart";
@@ -2594,6 +2603,59 @@ const demos: Record<string, () => React.ReactElement> = {
       </View>
     </View>
   ),
+  "prompt-input": () => {
+    const MODELS = ["Opus 4.8", "Sonnet 4.9", "Haiku 4.5"];
+    const [messages, setMessages] = useState<string[]>([]);
+    const [model, setModel] = useState(MODELS[0]);
+    const [attached, setAttached] = useState<string | null>(null);
+
+    return (
+      <View className="gap-6">
+        <Text className="text-sm text-muted-foreground">
+          Compound ChatGPT/Claude-style composer. The + button and model selector are real working
+          controls — the + button attaches a file, and the model selector opens an actual{" "}
+          <Text className="text-sm font-medium text-foreground">DropdownMenu</Text>.
+        </Text>
+        <View className="gap-2">
+          {messages.map((m, i) => (
+            <View key={i} className="self-end max-w-[85%] rounded-2xl rounded-br-sm bg-primary px-3.5 py-2">
+              <Text className="text-sm text-primary-foreground">{m}</Text>
+            </View>
+          ))}
+          {attached ? <Text variant="muted">Attached: {attached}</Text> : null}
+          <PromptInput onSend={(text) => setMessages((prev) => [...prev, text])}>
+            <PromptInputTextarea />
+            <PromptInputToolbar>
+              <PromptInputButton
+                onPress={() => setAttached("photo.jpg")}
+                accessibilityLabel="Add attachment"
+              >
+                <Plus size={20} color="#71717a" />
+              </PromptInputButton>
+              <PromptInputSpacer />
+              <DropdownMenu>
+                <DropdownMenuTrigger>
+                  <PromptInputButton accessibilityLabel="Choose model">
+                    <Text className="text-sm text-muted-foreground">{model}</Text>
+                    <ChevronDown size={14} color="#71717a" />
+                  </PromptInputButton>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent side="top" align="end">
+                  {MODELS.map((m) => (
+                    <DropdownMenuItem key={m} onPress={() => setModel(m)}>{m}</DropdownMenuItem>
+                  ))}
+                </DropdownMenuContent>
+              </DropdownMenu>
+              <PromptInputButton accessibilityLabel="Dictate">
+                <Mic size={20} color="#71717a" />
+              </PromptInputButton>
+              <PromptInputSend />
+            </PromptInputToolbar>
+          </PromptInput>
+        </View>
+      </View>
+    );
+  },
 };
 
 function formatName(slug: string): string {

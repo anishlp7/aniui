@@ -12,7 +12,7 @@ export interface MenubarProps extends React.ComponentPropsWithoutRef<typeof View
 export function Menubar({ className, ...props }: MenubarProps) {
   return (
     <View
-      className={cn("h-10 flex-row items-center gap-1 rounded-md border border-border bg-card px-1", className)}
+      className={cn("h-12 flex-row items-center gap-1 rounded-md border border-border bg-card px-1", className)}
       accessibilityRole="menubar"
       {...props}
     />
@@ -46,7 +46,7 @@ export function MenubarMenu({ trigger, className, children }: MenubarMenuProps) 
         onPress={openMenu}
         accessibilityRole="menuitem"
         accessible
-        className="h-8 justify-center rounded-sm px-3"
+        className="min-h-12 min-w-12 justify-center rounded-sm px-3"
       >
         {typeof trigger === "string" ? <Text className="text-sm font-medium text-foreground">{trigger}</Text> : trigger}
       </Pressable>
@@ -80,7 +80,7 @@ export function MenubarItem({ className, children, onPress, ...props }: MenubarI
         onPress?.(e);
         close?.();
       }}
-      className={cn("min-h-10 justify-center rounded-sm px-2", className)}
+      className={cn("min-h-12 min-w-12 justify-center rounded-sm px-2", className)}
       {...props}
     >
       {typeof children === "string" ? <Text className="text-sm text-foreground">{children}</Text> : children}

@@ -78,7 +78,7 @@ export const PasswordInput = React.forwardRef<
           accessibilityLabel="Password"
           {...props}
         />
-        <Pressable onPress={() => setVisible(!visible)} accessible={true} accessibilityRole="button" accessibilityLabel={visible ? "Hide password" : "Show password"} className="ms-2 min-h-8 min-w-8 items-center justify-center">
+        <Pressable onPress={() => setVisible(!visible)} accessible={true} accessibilityRole="button" accessibilityLabel={visible ? "Hide password" : "Show password"} className="ms-2 min-h-8 min-w-8 items-center justify-center" hitSlop={{ top: 8, bottom: 8, left: 8, right: 8 }}>
           {visible ? <Eye size={20} color="#71717a" /> : <EyeOff size={20} color="#71717a" />}
         </Pressable>
       </View>

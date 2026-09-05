@@ -19,6 +19,7 @@
     "test:perf": "jest --testPathPattern=performance",
     "test:all": "npm test && jest",
     "bundle-size": "node scripts/bundle-size.js",
+    "sync:examples": "node scripts/sync-examples.js",
     "registry:build": "cd cli && npm run registry:build",
     "build:cli": "cd cli && npm run build",
     "build:mcp": "cd mcp && npm run build",

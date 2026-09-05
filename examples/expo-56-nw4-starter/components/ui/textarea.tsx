@@ -38,6 +38,7 @@ export const Textarea = React.forwardRef<
       <TextInput
         ref={ref}
         className="flex-1 p-0 text-foreground placeholder:text-muted-foreground text-base"
+        // keep in sync with prompt-input.tsx's PromptInputTextarea caret/placeholder colors
         placeholderTextColor={dark ? "#a1a1aa" : "#71717a"}
         keyboardAppearance={dark ? "dark" : "light"}
         selectionColor={caret}

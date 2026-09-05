@@ -8,7 +8,7 @@ const stepperVariants = cva("flex-row items-center self-start rounded-lg border 
   variants: {
     size: {
       sm: "h-9",
-      md: "h-11",
+      md: "h-12",
       lg: "h-14",
     },
   },
@@ -19,7 +19,7 @@ const buttonVariants = cva("items-center justify-center border-border", {
   variants: {
     size: {
       sm: "w-9",
-      md: "w-11",
+      md: "w-12",
       lg: "w-14",
     },
   },

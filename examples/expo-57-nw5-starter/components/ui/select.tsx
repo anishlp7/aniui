@@ -91,7 +91,7 @@ export function Select({
           {searchable && (
             <View className="px-3 pt-3 pb-2">
               <TextInput
-                className="h-11 px-4 rounded-lg border border-input bg-background text-foreground text-base"
+                className="h-12 px-4 rounded-lg border border-input bg-background text-foreground text-base"
                 placeholder={searchPlaceholder}
                 placeholderTextColor={dark ? "#a1a1aa" : "#71717a"}
                 keyboardAppearance={dark ? "dark" : "light"}

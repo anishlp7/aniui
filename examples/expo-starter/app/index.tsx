@@ -64,6 +64,7 @@ const components = [
   { name: "Kbd", section: "Display" },
   { name: "Banner", section: "Display" },
   { name: "Typing Indicator", section: "Display" },
+  { name: "Prompt Input", section: "Display" },
   // Feedback
   { name: "Alert", section: "Feedback" },
   { name: "Dialog", section: "Feedback" },

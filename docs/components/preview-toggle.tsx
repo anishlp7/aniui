@@ -2,17 +2,27 @@
 
 import React, { useState, useId } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
+import { ExpoSnack } from "@/components/expo-snack";
 
 const GLOBAL_QR_URL = "https://qr.expo.dev/eas-update?slug=exp&projectId=4d52bb77-8a04-4713-b4b9-e2ed4c5ec1a0&groupId=92d11b98-2c25-469d-bafd-8ae5522e9487&host=u.expo.dev";
+
+// Set once a real "AniUI Playground" Snack (importing examples/expo-starter) is
+// published at snack.expo.dev — publishing is a manual step tied to an Expo
+// account, not something this code can do on its own. Until then the native
+// tab falls back to the QR code only, same as before this was wired up.
+const GLOBAL_SNACK_ID: string | null = null;
 
 interface PreviewToggleProps {
   /** Web preview content (component playground) */
   children: React.ReactNode;
   /** Override QR code URL (defaults to global AniUI demo QR) */
   qrCodeUrl?: string;
+  /** Published Expo Snack ID to embed live above the QR code (defaults to the global AniUI playground Snack, once published) */
+  snackId?: string | null;
 }
 
-export function PreviewToggle({ children, qrCodeUrl }: PreviewToggleProps) {
+export function PreviewToggle({ children, qrCodeUrl, snackId }: PreviewToggleProps) {
+  const resolvedSnackId = snackId !== undefined ? snackId : GLOBAL_SNACK_ID;
   const [mode, setMode] = useState<"web" | "native">("web");
   const prefersReducedMotion = useReducedMotion();
   const layoutId = useId();
@@ -61,6 +71,9 @@ export function PreviewToggle({ children, qrCodeUrl }: PreviewToggleProps) {
           ) : (
             <div className="w-full rounded-lg border border-border overflow-hidden">
               <div className="flex flex-col items-center gap-4 p-8 bg-card/50">
+                {resolvedSnackId && (
+                  <ExpoSnack snackId={resolvedSnackId} height={420} platform="mydevice" />
+                )}
                 <motion.img
                   src={qrCodeUrl || GLOBAL_QR_URL}
                   alt="Scan with Expo Go"

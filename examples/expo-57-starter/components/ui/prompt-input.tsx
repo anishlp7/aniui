@@ -89,6 +89,8 @@ export const PromptInputTextarea = React.forwardRef<
       keyboardAppearance={dark ? "dark" : "light"}
       selectionColor={dark ? "#fafafa" : "#18181b"}
       cursorColor={dark ? "#fafafa" : "#18181b"}
+      // keep in sync with textarea.tsx's caret/placeholder colors
+      textAlignVertical="top"
       {...props}
     />
   );
@@ -115,7 +117,7 @@ export interface PromptInputButtonProps extends React.ComponentPropsWithoutRef<t
 export function PromptInputButton({ className, ...props }: PromptInputButtonProps) {
   return (
     <Pressable
-      className={cn("h-11 min-w-11 flex-row items-center justify-center gap-1 rounded-full px-2 active:bg-muted", className)}
+      className={cn("h-12 min-w-12 flex-row items-center justify-center gap-1 rounded-full px-2 active:bg-muted", className)}
       accessible={true}
       accessibilityRole="button"
       {...props}
@@ -138,7 +140,7 @@ export function PromptInputSend({ className, emptyFallback, ...props }: PromptIn
     <Pressable
       onPress={send}
       disabled={!canSend && !streaming}
-      className={cn("h-11 w-11 items-center justify-center rounded-full bg-primary", !canSend && !streaming && "opacity-40", className)}
+      className={cn("h-12 w-12 items-center justify-center rounded-full bg-primary", !canSend && !streaming && "opacity-40", className)}
       accessible={true}
       accessibilityRole="button"
       accessibilityLabel={streaming ? "Stop generating" : "Send message"}
