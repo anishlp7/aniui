@@ -1,3 +1,41 @@
+/* ── Mock react-native-worklets ───────────────────────────── */
+// Reanimated v4 delegates worklet init to this separate package, and its
+// real index.ts runs a __DEV__-only self-test *at import time* — creating a
+// worklet and checking it was transformed by the Babel plugin. Jest doesn't
+// run that plugin over node_modules, so requiring the real package (even
+// transitively, via reanimated's own mock) always throws. Stub it before
+// reanimated/mock ever gets a chance to pull in the real one.
+jest.mock("react-native-worklets", () => ({
+  __esModule: true,
+  runOnJS: (fn) => fn,
+  runOnUI: (fn) => fn,
+  runOnUIAsync: (fn) => fn,
+  runOnUISync: (fn) => fn,
+  scheduleOnRN: (fn) => fn,
+  scheduleOnUI: (fn) => fn,
+  createWorkletRuntime: () => ({}),
+  runOnRuntime: (_runtime, fn) => fn,
+  isWorkletFunction: () => true,
+  getRuntimeKind: () => 0,
+  RuntimeKind: { ReactNative: 0, UI: 1, Worklet: 2 },
+  isShareableRef: () => false,
+  makeShareable: (v) => v,
+  makeShareableCloneOnUIRecursive: (v) => v,
+  makeShareableCloneRecursive: (v) => v,
+  shareableMappingCache: new WeakMap(),
+  createSerializable: (v) => v,
+  isSerializableRef: () => false,
+  serializableMappingCache: new WeakMap(),
+  createSynchronizable: (v) => v,
+  isSynchronizable: () => false,
+  getStaticFeatureFlag: () => false,
+  setDynamicFeatureFlag: () => {},
+  callMicrotasks: () => {},
+  executeOnUIRuntimeSync: (fn) => fn,
+  unstable_eventLoopTask: () => {},
+  WorkletsModule: {},
+}));
+
 /* ── Mock react-native-reanimated ─────────────────────────── */
 jest.mock("react-native-reanimated", () => {
   const Reanimated = require("react-native-reanimated/mock");
