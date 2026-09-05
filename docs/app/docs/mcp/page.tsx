@@ -88,7 +88,7 @@ export default function MCPPage() {
             <tbody className="text-muted-foreground">
               <tr className="border-b border-border">
                 <td className="py-2 pr-4 font-mono text-xs text-foreground">list_components</td>
-                <td className="py-2">List all 101 components with names, descriptions, and tiers</td>
+                <td className="py-2">List all 102 components with names, descriptions, and tiers</td>
               </tr>
               <tr className="border-b border-border">
                 <td className="py-2 pr-4 font-mono text-xs text-foreground">get_component</td>

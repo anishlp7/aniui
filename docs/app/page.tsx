@@ -87,7 +87,7 @@ const jsonLd = {
   name: "AniUI",
   applicationCategory: "DeveloperApplication",
   operatingSystem: "iOS, Android",
-  description: "shadcn/ui for React Native. 101 accessible components built with Uniwind or NativeWind and TypeScript. Now supports Expo SDK 57.",
+  description: "shadcn/ui for React Native. 102 accessible components built with Uniwind or NativeWind and TypeScript. Now supports Expo SDK 57.",
   url: "https://aniui.dev",
   author: { "@type": "Person", name: "Anish" },
   offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
@@ -208,7 +208,7 @@ export default function HomePage() {
               animate={prefersReducedMotion ? undefined : { scale: [1, 1.4, 1], opacity: [1, 0.7, 1] }}
               transition={{ duration: 1.8, ease: "easeInOut", repeat: Infinity }}
             />
-            <span className="text-xs font-medium text-muted-foreground">100+ components and counting</span>
+            <span className="text-xs font-medium text-muted-foreground"><span className="font-semibold text-foreground">102 components</span> and counting</span>
           </motion.div>
 
           <motion.h1
@@ -246,6 +246,21 @@ export default function HomePage() {
               >
                 <span className="text-green-500">✓</span> {label}
               </motion.span>
+            ))}
+          </motion.div>
+
+          {/* Stat strip */}
+          <motion.div variants={heroItem} className="flex flex-wrap items-center justify-center gap-x-8 gap-y-2 mt-8">
+            {[
+              { value: "102", label: "Components" },
+              { value: "15", label: "Screen Blocks" },
+              { value: "4", label: "Expo SDKs" },
+              { value: "MIT", label: "Licensed" },
+            ].map((stat) => (
+              <div key={stat.label} className="flex flex-col items-center">
+                <span className="text-2xl font-extrabold tracking-tight text-foreground">{stat.value}</span>
+                <span className="text-xs text-muted-foreground">{stat.label}</span>
+              </div>
             ))}
           </motion.div>
 
@@ -349,7 +364,7 @@ export default function HomePage() {
         <div className="text-center sm:text-left">
           <p className="text-base font-semibold text-foreground">Preview on your device</p>
           <p className="text-sm text-muted-foreground mt-1 max-w-sm">
-            Scan with Expo Go to try all 101 components live on a real device.
+            Scan with Expo Go to try all 102 components live on a real device.
           </p>
         </div>
       </motion.div>
