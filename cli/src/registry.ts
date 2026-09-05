@@ -133,7 +133,7 @@ export const registry: Record<string, ComponentEntry> = {
     file: "components/ui/skeleton.tsx",
     description: "Animated loading placeholder",
     dependencies: ["react-native-reanimated", "clsx", "tailwind-merge"],
-    registryDependencies: [],
+    registryDependencies: ["animate"],
     tier: 2,
   },
   switch: {
@@ -685,7 +685,7 @@ export const registry: Record<string, ComponentEntry> = {
     file: "components/ui/typing-indicator.tsx",
     description: "Animated typing dots for chat interfaces",
     dependencies: ["react-native-reanimated", "clsx", "tailwind-merge"],
-    registryDependencies: [],
+    registryDependencies: ["animate"],
     tier: 2,
   },
   "image-gallery": {
@@ -797,7 +797,7 @@ export const registry: Record<string, ComponentEntry> = {
     file: "components/ui/waveform.tsx",
     description: "Audio waveform bars — driven by real amplitude levels, with an ambient recording fallback",
     dependencies: ["react-native-reanimated", "clsx", "tailwind-merge"],
-    registryDependencies: [],
+    registryDependencies: ["animate"],
     tier: 2,
   },
   "streaming-text": {
@@ -805,7 +805,7 @@ export const registry: Record<string, ComponentEntry> = {
     file: "components/ui/streaming-text.tsx",
     description: "Typewriter-style streaming AI response text with a blinking cursor",
     dependencies: ["react-native-reanimated", "clsx", "tailwind-merge"],
-    registryDependencies: [],
+    registryDependencies: ["animate"],
     tier: 2,
   },
   "swipe-deck": {

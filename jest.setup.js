@@ -2,6 +2,10 @@
 jest.mock("react-native-reanimated", () => {
   const Reanimated = require("react-native-reanimated/mock");
   Reanimated.default.call = () => {};
+  // The library's own mock doesn't implement this yet (its source has a
+  // literal "ADD ME IF NEEDED" placeholder) — components read it to skip
+  // looping animations under reduced motion, so tests need a stable value.
+  Reanimated.useReducedMotion = () => false;
   return Reanimated;
 });
 

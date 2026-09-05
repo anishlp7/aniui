@@ -1,11 +1,12 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import { usePathname } from "next/navigation";
 import { motion, useReducedMotion, type Variants } from "motion/react";
 import { cn } from "@/lib/utils";
 import { PrefetchLink } from "./prefetch-link";
 import { sidebarSections } from "@/lib/nav-data";
+import { activePillSpring, reducedMotionTransition } from "@/lib/motion";
 
 const sectionContainer: Variants = {
   hidden: {},
@@ -22,9 +23,31 @@ const linkItem: Variants = {
   show: { opacity: 1, x: 0, transition: { type: "spring", stiffness: 240, damping: 24 } },
 };
 
+// Same variants with motion dropped, for prefers-reduced-motion — the sidebar
+// used to guard only the active-pill transition, leaving the entrance stagger
+// sliding in regardless of the setting.
+const sectionItemReduced: Variants = {
+  hidden: { opacity: 0 },
+  show: { opacity: 1, transition: reducedMotionTransition },
+};
+const linkItemReduced: Variants = {
+  hidden: { opacity: 0 },
+  show: { opacity: 1, transition: reducedMotionTransition },
+};
+
 export function Sidebar() {
   const pathname = usePathname();
   const prefersReducedMotion = useReducedMotion();
+  const activeItemRef = useRef<HTMLLIElement>(null);
+
+  // Scroll the active item into view on route change — a deep link landing
+  // far down the list previously left the nav pane unscrolled to reveal it.
+  useEffect(() => {
+    activeItemRef.current?.scrollIntoView({
+      block: "nearest",
+      behavior: prefersReducedMotion ? "auto" : "smooth",
+    });
+  }, [pathname, prefersReducedMotion]);
 
   return (
     <aside className="fixed top-14 left-0 z-30 hidden h-[calc(100vh-3.5rem)] w-64 shrink-0 overflow-y-auto border-r border-border bg-background md:block scrollbar-hidden">
@@ -37,7 +60,7 @@ export function Sidebar() {
           animate="show"
         >
           {sidebarSections.map((section) => (
-            <motion.div key={section.title} variants={sectionItem}>
+            <motion.div key={section.title} variants={prefersReducedMotion ? sectionItemReduced : sectionItem}>
               <h4 className="mb-2 text-sm font-semibold text-foreground">
                 {section.title}
               </h4>
@@ -45,16 +68,17 @@ export function Sidebar() {
                 {section.items.map((item) => {
                   const isActive = pathname === item.href;
                   return (
-                    <motion.li key={item.href} variants={linkItem} className="relative">
+                    <motion.li
+                      key={item.href}
+                      ref={isActive ? activeItemRef : undefined}
+                      variants={prefersReducedMotion ? linkItemReduced : linkItem}
+                      className="relative"
+                    >
                       {isActive && (
                         <motion.span
                           layoutId="sidebar-active-pill"
                           className="absolute inset-0 rounded-md bg-accent"
-                          transition={
-                            prefersReducedMotion
-                              ? { duration: 0 }
-                              : { type: "spring", stiffness: 380, damping: 32 }
-                          }
+                          transition={prefersReducedMotion ? reducedMotionTransition : activePillSpring}
                         />
                       )}
                       <PrefetchLink

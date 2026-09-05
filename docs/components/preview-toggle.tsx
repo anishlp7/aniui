@@ -3,6 +3,7 @@
 import React, { useState, useId } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { ExpoSnack } from "@/components/expo-snack";
+import { activePillSpring, reducedMotionTransition } from "@/lib/motion";
 
 const GLOBAL_QR_URL = "https://qr.expo.dev/eas-update?slug=exp&projectId=4d52bb77-8a04-4713-b4b9-e2ed4c5ec1a0&groupId=92d11b98-2c25-469d-bafd-8ae5522e9487&host=u.expo.dev";
 
@@ -27,9 +28,7 @@ export function PreviewToggle({ children, qrCodeUrl, snackId }: PreviewTogglePro
   const prefersReducedMotion = useReducedMotion();
   const layoutId = useId();
 
-  const transition = prefersReducedMotion
-    ? { duration: 0 }
-    : { type: "spring" as const, stiffness: 380, damping: 30 };
+  const transition = prefersReducedMotion ? reducedMotionTransition : activePillSpring;
 
   return (
     <div className="w-full">

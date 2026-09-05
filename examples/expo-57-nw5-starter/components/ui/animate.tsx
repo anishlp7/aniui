@@ -10,11 +10,18 @@ import {
   FlipInXUp,
   useSharedValue,
   useAnimatedStyle,
+  useReducedMotion,
   withSpring,
   withTiming,
   withDelay,
   type WithSpringConfig,
 } from "react-native-reanimated";
+
+// Single choke point for reduced-motion checks across the animated component
+// set (skeleton, typing-indicator, waveform, streaming-text, …) — components
+// import this instead of react-native-reanimated's useReducedMotion directly,
+// so a future change to how "reduced motion" is detected only touches one file.
+export { useReducedMotion };
 
 // ── Spring Presets (iOS-quality physics) ──────────────────────
 export const springs: Record<string, WithSpringConfig> = {
