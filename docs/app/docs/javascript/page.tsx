@@ -1,5 +1,5 @@
 import { Heading } from "@/components/heading";
-import { CodeBlock } from "@/components/code-block";
+import { CodeBlock } from "@/components/code-block-server";
 
 export default function JavaScriptPage() {
   return (

@@ -1,6 +1,6 @@
 "use client";
 import { PreviewAreaChartDefault, PreviewAreaChartStacked, PreviewAreaChartStep, PreviewAreaChartGradient, PreviewAreaChartInteractive, PreviewAreaChartAxes } from "@/components/preview/area-chart";
-import { CodeBlock } from "@/components/code-block";
+import { CodeBlock } from "@/components/code-block-server";
 import { PropsTable } from "@/components/props-table";
 
 const installCode = `npx @aniui/cli add area-chart`;

@@ -1,6 +1,6 @@
 "use client";
 import { PreviewBarChartDefault, PreviewBarChartHorizontal, PreviewBarChartStacked, PreviewBarChartGrouped, PreviewBarChartNegative, PreviewBarChartLabels } from "@/components/preview/bar-chart";
-import { CodeBlock } from "@/components/code-block";
+import { CodeBlock } from "@/components/code-block-server";
 import { PropsTable } from "@/components/props-table";
 
 const installCode = `npx @aniui/cli add bar-chart`;

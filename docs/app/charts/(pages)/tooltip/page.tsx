@@ -1,6 +1,6 @@
 "use client";
 import { PreviewChartTooltipDefault, PreviewChartTooltipCustom, PreviewChartTooltipIndicator, PreviewChartTooltipAnimated, PreviewChartTooltipStyled, PreviewChartTooltipFormatter } from "@/components/preview/chart-tooltip";
-import { CodeBlock } from "@/components/code-block";
+import { CodeBlock } from "@/components/code-block-server";
 import { PropsTable } from "@/components/props-table";
 
 const installCode = `npx @aniui/cli add chart-tooltip`;

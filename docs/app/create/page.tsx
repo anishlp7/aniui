@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useMemo } from "react";
-import { CodeBlock } from "@/components/code-block";
+import { CodeBlock } from "@/components/code-block-server";
 import { ThemePreview } from "@/components/theme-preview";
 import { type ColorDef, themeColors, radiusOptions, hsl, resolveVars, generateCSS, shuffleTheme } from "@/lib/theme-data";
 

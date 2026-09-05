@@ -1,6 +1,6 @@
 "use client";
 import { PreviewRadialChartDefault, PreviewRadialChartMultiple, PreviewRadialChartText, PreviewRadialChartStacked, PreviewRadialChartHalf, PreviewRadialChartLabel } from "@/components/preview/radial-chart";
-import { CodeBlock } from "@/components/code-block";
+import { CodeBlock } from "@/components/code-block-server";
 import { PropsTable } from "@/components/props-table";
 
 const installCode = `npx @aniui/cli add radial-chart`;

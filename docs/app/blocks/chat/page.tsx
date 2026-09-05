@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useRef, useEffect } from "react";
-import { CodeBlock } from "@/components/code-block";
+import { CodeBlock } from "@/components/code-block-server";
 
 const rnCode = `import React, { useState, useRef } from "react";
 import { View, ScrollView, Pressable, KeyboardAvoidingView, Platform } from "react-native";

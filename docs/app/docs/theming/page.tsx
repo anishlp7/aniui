@@ -1,5 +1,5 @@
 import { Heading } from "@/components/heading";
-import { CodeBlock } from "@/components/code-block";
+import { CodeBlock } from "@/components/code-block-server";
 import { PropsTable } from "@/components/props-table";
 
 export default function ThemingPage() {
