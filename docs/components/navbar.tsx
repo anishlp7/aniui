@@ -59,7 +59,7 @@ function GitHubIcon() {
 }
 
 export function Navbar() {
-  const { theme, toggleTheme } = useTheme();
+  const { toggleTheme } = useTheme();
   const [mobileOpen, setMobileOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
 
@@ -86,12 +86,12 @@ export function Navbar() {
           </button>
 
           <PrefetchLink href="/" className="flex items-center">
-            <Image
-              src={theme === "dark" ? "/logo-dark.png" : "/logo-light.png"}
-              alt="AniUI"
-              width={90}
-              height={90}
-            />
+            {/* Both logos always render; dark: is a static className (not
+                driven by theme state) so server and client markup match —
+                only CSS decides which one is visible, same as the favicon
+                <link media="(prefers-color-scheme)"> tags in layout.tsx. */}
+            <Image src="/logo-light.png" alt="AniUI" width={90} height={90} className="dark:hidden" />
+            <Image src="/logo-dark.png" alt="AniUI" width={90} height={90} className="hidden dark:block" />
           </PrefetchLink>
 
           <nav className="hidden md:flex items-center gap-6 text-sm font-medium">
@@ -160,7 +160,10 @@ export function Navbar() {
               onClick={toggleTheme}
               className="inline-flex items-center justify-center rounded-md p-2 text-muted-foreground hover:text-foreground hover:bg-accent transition-colors"
             >
-              {theme === "dark" ? <SunIcon /> : <MoonIcon />}
+              {/* Both icons always render; dark: is a static className (not
+                  driven by theme state) so server and client markup match. */}
+              <span className="dark:hidden"><MoonIcon /></span>
+              <span className="hidden dark:block"><SunIcon /></span>
             </button>
           </div>
         </div>
