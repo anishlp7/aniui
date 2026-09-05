@@ -227,7 +227,9 @@ export async function initCommand(opts?: { style?: string; nw?: string; yes?: bo
   // Step 2: Auto-install missing dependencies
   const hasStyleEngine = isChosenUniwind ? project.hasUniwind : project.hasNativewind;
 
-  const isSdk56Plus = project.expoMajor >= 56;
+  // project.sdk57Plus is also available here — currently identical behavior to
+  // sdk56Plus, but named so a future SDK58 divergence has a seam to attach to.
+  const isSdk56Plus = project.sdk56Plus;
   const pkgJson = await fs.readJson(path.join(cwd, "package.json"));
   const allDeps = { ...pkgJson.dependencies, ...pkgJson.devDependencies };
   const hasWorklets = !!allDeps["react-native-worklets"];

@@ -86,8 +86,9 @@ export async function doctorCommand(): Promise<void> {
     });
   }
 
-  // 6b. SDK 56+ requires react-native-worklets as a separate peer of Reanimated 4.3+
-  if (project.expoMajor >= 56) {
+  // 6b. SDK 56+ requires react-native-worklets as a separate peer of Reanimated 4.3+.
+  // project.sdk57Plus is also available here for a future SDK58-specific check.
+  if (project.sdk56Plus) {
     const workletsVer = getVersion("react-native-worklets");
     checks.push({
       label: `react-native-worklets ${workletsVer ? `(${workletsVer})` : ""}`,

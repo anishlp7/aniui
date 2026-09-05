@@ -1,6 +1,12 @@
 import { Heading } from "@/components/heading";
 
 import { CodeBlock } from "@/components/code-block-server";
+import { DEP_VERSIONS } from "../../../../cli/src/deps-versions";
+
+const reanimatedCell = (bucket: "sdk54" | "sdk55" | "sdk56" | "sdk57") => {
+  const v = DEP_VERSIONS[bucket];
+  return v.worklets ? `${v.reanimated} + worklets ${v.worklets}` : v.reanimated;
+};
 
 const installSdk54 = `# Expo SDK 53/54 — NativeWind v4 + Tailwind v3
 
@@ -130,10 +136,10 @@ export default function CompatibilityPage() {
               </tr>
               <tr>
                 <td className="p-3 font-medium text-muted-foreground">Reanimated</td>
-                <td className="p-3"><code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">v3</code></td>
-                <td className="p-3"><code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">v4</code></td>
-                <td className="p-3"><code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">v4.3</code> + worklets</td>
-                <td className="p-3"><code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">v4.5</code> + worklets <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">~0.10</code></td>
+                <td className="p-3"><code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">{reanimatedCell("sdk54")}</code></td>
+                <td className="p-3"><code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">{reanimatedCell("sdk55")}</code></td>
+                <td className="p-3"><code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">{reanimatedCell("sdk56")}</code></td>
+                <td className="p-3"><code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">{reanimatedCell("sdk57")}</code></td>
               </tr>
               <tr>
                 <td className="p-3 font-medium text-muted-foreground">React</td>

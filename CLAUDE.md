@@ -27,6 +27,12 @@
 
 DO NOT deviate from these versions. They are tested together.
 
+> **Source of truth: `cli/src/deps-versions.ts`.** The block below states the
+> loosest floor supported across all of SDK 54–57 (e.g. Reanimated v3 still
+> works on SDK 54); it is not the version actually pinned in any given SDK
+> bucket's example app or `aniui init` output. Check the manifest for exact
+> per-SDK-bucket versions before assuming a number here is current.
+
 ```json
 {
   "peerDependencies": {
@@ -40,7 +46,7 @@ DO NOT deviate from these versions. They are tested together.
   "dependencies_for_components": {
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
-    "tailwind-merge": "^2.6.0"
+    "tailwind-merge": "^3.6.0"
   }
 }
 ```
@@ -554,7 +560,7 @@ export type ComponentEntry = {
 1. **React Native Reusables** built their CLI on top of shadcn's CLI → it breaks when shadcn changes. BUILD YOUR OWN CLI from scratch.
 2. **Gluestack** tries to serve web + mobile → creates rendering bugs and CSS confusion. MOBILE ONLY.
 3. **Gluestack** has Grid broken on Expo SDK 52+ and svg version conflicts. PIN EXACT VERSIONS and test before every release.
-4. **NativeBase** bloated over time with too many features. KEEP IT MINIMAL — say no to feature creep.
+4. **NativeBase** bloated over time with too many features, and is now officially in maintenance mode (its own maintainers direct new projects to gluestack-ui instead). KEEP IT MINIMAL and ACTIVELY MAINTAINED — say no to feature creep.
 5. **Tamagui** requires a compiler setup. ZERO BUILD CONFIG for users — just copy files and import.
 6. **All competitors** lack good live demos. RECORD iOS + Android GIFs for every component.
 7. **All competitors** have weak accessibility. EVERY component gets accessibilityRole on day one.
