@@ -60,7 +60,7 @@ export const SearchBar = React.forwardRef<
           {...props}
         />
         {value ? (
-          <Pressable onPress={() => { onClear?.(); props.onChangeText?.(""); }} className="ms-1 h-6 w-6 items-center justify-center rounded-full bg-muted-foreground/20" accessible={true} accessibilityRole="button" accessibilityLabel="Clear search">
+          <Pressable onPress={() => { onClear?.(); props.onChangeText?.(""); }} className="ms-1 h-6 w-6 items-center justify-center rounded-full bg-muted-foreground/20" accessible={true} accessibilityRole="button" accessibilityLabel="Clear search" hitSlop={{ top: 12, bottom: 12, left: 12, right: 12 }}>
             <X size={14} color="#71717a" />
           </Pressable>
         ) : null}

@@ -35,6 +35,7 @@
     "build": "tsc && npm run copy-assets",
     "copy-assets": "rm -rf components lib templates blocks && cp -r ../components . && cp -r ../lib . && cp -r ../templates . && (cp -r ../blocks . 2>/dev/null || true)",
     "registry:build": "tsc && node scripts/build-registry.js && node scripts/sync-mcp-registry.js",
+    "lint:components": "node scripts/check-component-rules.js",
     "prepublishOnly": "npm run build",
     "dev": "tsc --watch",
     "test": "vitest run",

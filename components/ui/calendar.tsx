@@ -38,13 +38,13 @@ export function Calendar({ className, selected, onSelect, rangeStart, rangeEnd, 
   return (
     <View className={cn("rounded-lg bg-background p-3", className)}>
       <View className="flex-row items-center justify-between mb-3">
-        <Pressable onPress={() => mode === "days" ? setViewing(new Date(year, month - 1, 1)) : mode === "months" ? setViewing(new Date(year - 1, month, 1)) : setViewing(new Date(decadeStart - 12, month, 1))} className="h-9 w-9 items-center justify-center rounded-md" accessibilityRole="button" accessibilityLabel="Previous">
+        <Pressable onPress={() => mode === "days" ? setViewing(new Date(year, month - 1, 1)) : mode === "months" ? setViewing(new Date(year - 1, month, 1)) : setViewing(new Date(decadeStart - 12, month, 1))} className="h-12 w-12 items-center justify-center rounded-md" accessibilityRole="button" accessibilityLabel="Previous">
           <ChevronLeft size={18} color="#71717a" />
         </Pressable>
         <Pressable onPress={handleHeaderPress} accessibilityRole="button">
           <Text className="text-sm font-semibold text-foreground">{mode === "days" ? label : mode === "months" ? `${year}` : `${decadeStart} – ${decadeStart + 11}`}</Text>
         </Pressable>
-        <Pressable onPress={() => mode === "days" ? setViewing(new Date(year, month + 1, 1)) : mode === "months" ? setViewing(new Date(year + 1, month, 1)) : setViewing(new Date(decadeStart + 12, month, 1))} className="h-9 w-9 items-center justify-center rounded-md" accessibilityRole="button" accessibilityLabel="Next">
+        <Pressable onPress={() => mode === "days" ? setViewing(new Date(year, month + 1, 1)) : mode === "months" ? setViewing(new Date(year + 1, month, 1)) : setViewing(new Date(decadeStart + 12, month, 1))} className="h-12 w-12 items-center justify-center rounded-md" accessibilityRole="button" accessibilityLabel="Next">
           <ChevronRight size={18} color="#71717a" />
         </Pressable>
       </View>
@@ -52,7 +52,7 @@ export function Calendar({ className, selected, onSelect, rangeStart, rangeEnd, 
         <View className="flex-row flex-wrap">
           {Array.from({ length: 12 }, (_, i) => decadeStart + i).map((y) => (
             <View key={y} className="w-1/3 items-center p-1">
-              <Pressable onPress={() => pickYear(y)} className={cn("h-9 w-full items-center justify-center rounded-md", y === year && "bg-primary")} accessibilityRole="button">
+              <Pressable onPress={() => pickYear(y)} className={cn("h-12 w-full items-center justify-center rounded-md", y === year && "bg-primary")} accessibilityRole="button">
                 <Text className={cn("text-sm", y === year ? "text-primary-foreground font-semibold" : "text-foreground")}>{y}</Text>
               </Pressable>
             </View>
@@ -65,7 +65,7 @@ export function Calendar({ className, selected, onSelect, rangeStart, rangeEnd, 
         <View className="flex-row flex-wrap">
           {MONTHS.map((m, i) => (
             <View key={m} className="w-1/3 items-center p-1">
-              <Pressable onPress={() => pickMonth(i)} className={cn("h-9 w-full items-center justify-center rounded-md", i === month && year === viewing.getFullYear() && "bg-primary")} accessibilityRole="button">
+              <Pressable onPress={() => pickMonth(i)} className={cn("h-12 w-full items-center justify-center rounded-md", i === month && year === viewing.getFullYear() && "bg-primary")} accessibilityRole="button">
                 <Text className={cn("text-sm", i === month && year === viewing.getFullYear() ? "text-primary-foreground font-semibold" : "text-foreground")}>{m}</Text>
               </Pressable>
             </View>
@@ -85,7 +85,7 @@ export function Calendar({ className, selected, onSelect, rangeStart, rangeEnd, 
               const daysInMonth = new Date(year, month + 1, 0).getDate();
               const cells: (number | null)[] = [...Array(firstDay).fill(null), ...Array.from({ length: daysInMonth }, (_, i) => i + 1)];
               return cells.map((day, i) => {
-                if (day === null) return <View key={`e-${i}`} className="w-[14.28%] h-9" />;
+                if (day === null) return <View key={`e-${i}`} className="w-[14.28%] h-12" />;
                 const date = new Date(year, month, day);
                 const sel = selected && same(date, selected);
                 const rs = rangeStart && same(date, rangeStart);
@@ -95,7 +95,7 @@ export function Calendar({ className, selected, onSelect, rangeStart, rangeEnd, 
                 const off = (min && date < min) || (max && date > max);
                 return (
                   <View key={day} className="w-[14.28%] items-center">
-                    <Pressable onPress={() => handlePress(day)} disabled={!!off} className={cn("h-9 w-9 items-center justify-center rounded-full", sel || rs || re ? "bg-primary" : inR ? "bg-accent" : "", today && !sel && "border border-primary", off && "opacity-30")} accessibilityRole="button" accessibilityLabel={`${label} ${day}`}>
+                    <Pressable onPress={() => handlePress(day)} disabled={!!off} className={cn("h-12 w-12 items-center justify-center rounded-full", sel || rs || re ? "bg-primary" : inR ? "bg-accent" : "", today && !sel && "border border-primary", off && "opacity-30")} accessibilityRole="button" accessibilityLabel={`${label} ${day}`}>
                       <Text className={cn("text-sm", sel || rs || re ? "text-primary-foreground font-semibold" : "text-foreground")}>{day}</Text>
                     </Pressable>
                   </View>

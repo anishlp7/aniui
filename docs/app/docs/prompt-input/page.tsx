@@ -291,6 +291,8 @@ export const PromptInputTextarea = React.forwardRef<
       keyboardAppearance={dark ? "dark" : "light"}
       selectionColor={dark ? "#fafafa" : "#18181b"}
       cursorColor={dark ? "#fafafa" : "#18181b"}
+      // keep in sync with textarea.tsx's caret/placeholder colors
+      textAlignVertical="top"
       {...props}
     />
   );
@@ -317,7 +319,7 @@ export interface PromptInputButtonProps extends React.ComponentPropsWithoutRef<t
 export function PromptInputButton({ className, ...props }: PromptInputButtonProps) {
   return (
     <Pressable
-      className={cn("h-11 min-w-11 flex-row items-center justify-center gap-1 rounded-full px-2 active:bg-muted", className)}
+      className={cn("h-12 min-w-12 flex-row items-center justify-center gap-1 rounded-full px-2 active:bg-muted", className)}
       accessible={true}
       accessibilityRole="button"
       {...props}
@@ -340,7 +342,7 @@ export function PromptInputSend({ className, emptyFallback, ...props }: PromptIn
     <Pressable
       onPress={send}
       disabled={!canSend && !streaming}
-      className={cn("h-11 w-11 items-center justify-center rounded-full bg-primary", !canSend && !streaming && "opacity-40", className)}
+      className={cn("h-12 w-12 items-center justify-center rounded-full bg-primary", !canSend && !streaming && "opacity-40", className)}
       accessible={true}
       accessibilityRole="button"
       accessibilityLabel={streaming ? "Stop generating" : "Send message"}
@@ -476,7 +478,7 @@ export default function PromptInputPage() {
         <ul className="list-disc list-inside space-y-2 text-sm text-muted-foreground">
           <li><code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">PromptInputButton</code> and <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">PromptInputSend</code> set <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">accessibilityRole=&quot;button&quot;</code> — give each toolbar button a descriptive <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">accessibilityLabel</code>.</li>
           <li>The send button announces &ldquo;Stop generating&rdquo; while streaming and exposes its disabled state via <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">accessibilityState</code> when the draft is empty.</li>
-          <li>Toolbar buttons meet the 44dp minimum touch target; keyboard appearance, selection, and cursor colors follow the system color scheme.</li>
+          <li>Toolbar buttons meet the 48dp minimum touch target; keyboard appearance, selection, and cursor colors follow the system color scheme.</li>
         </ul>
       </div>
       {/* Source */}

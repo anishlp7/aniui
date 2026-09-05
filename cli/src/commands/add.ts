@@ -173,9 +173,6 @@ export async function addCommand(names: string[]): Promise<void> {
     const needsGorhom = tier3Components.some((n) =>
       registry[n].dependencies.includes("@gorhom/bottom-sheet")
     );
-    const needsDatePicker = tier3Components.some((n) =>
-      registry[n].dependencies.includes("@react-native-community/datetimepicker")
-    );
 
     if (needsGorhom && !allDeps["@gorhom/bottom-sheet"]) {
       logger.info(`  ${getInstallCommand(pm, ["@gorhom/bottom-sheet", "react-native-gesture-handler"])}`);
@@ -192,10 +189,6 @@ export async function addCommand(names: string[]): Promise<void> {
       logger.info("    </BottomSheetModalProvider>");
       logger.info("  </GestureHandlerRootView>");
     }
-    if (needsDatePicker && !allDeps["@react-native-community/datetimepicker"]) {
-      logger.info(`  ${getInstallCommand(pm, ["@react-native-community/datetimepicker"])}`);
-    }
-
     // Auto-inject PortalHost for portal-based components
     const needsPortal = tier3Components.some((n) =>
       registry[n].dependencies.includes("@rn-primitives/portal")

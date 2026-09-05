@@ -329,45 +329,45 @@ All component-internal icons come from **`lucide-react-native`** (peer: `react-n
 | 43 | pagination | View+Pressable | Numbered page navigation |
 | 44 | file-picker | Pressable | Upload UI with dashed border and preview |
 | 45 | image-gallery | FlatList+Modal | Horizontal carousel with fullscreen viewer |
+| 46 | date-picker | View | Custom calendar-based picker — no external date-picker dependency |
+| 47 | carousel | FlatList | Paged horizontal carousel via native FlatList — no reanimated |
+| 48 | toggle | Pressable | Two-state toggle button — no reanimated |
+| 49 | toggle-group | View+Context | Group of exclusive toggle buttons — no reanimated |
 
 ### Tier 2: Needs react-native-reanimated v3
 
 | # | Component | Animation |
 |---|-----------|-----------|
-| 46 | skeleton | Animated pulse via opacity |
-| 47 | toggle | Pressable toggle button |
-| 48 | toggle-group | Multi-toggle group |
-| 49 | drawer | Slide-in drawer overlay |
-| 50 | input-otp | OTP code input |
-| 51 | table | Data table with rows/cells |
-| 52 | segmented-control | Animated segment indicator |
-| 53 | carousel | Swipeable carousel |
-| 54 | rating | Star/icon rating |
-| 55 | connection-banner | Slide-in online/offline banner |
-| 56 | typing-indicator | Animated typing dots for chat |
+| 50 | skeleton | Animated pulse via opacity |
+| 51 | drawer | Slide-in drawer overlay |
+| 52 | input-otp | OTP code input |
+| 53 | table | Data table with rows/cells |
+| 54 | segmented-control | Animated segment indicator |
+| 55 | rating | Star/icon rating |
+| 56 | connection-banner | Slide-in online/offline banner |
+| 57 | typing-indicator | Animated typing dots for chat |
 
 ### Tier 3: Needs rn-primitives or external packages
 
 | # | Component | Extra Dep |
 |---|-----------|-----------|
-| 57 | dialog | @rn-primitives/dialog + @rn-primitives/portal |
-| 58 | alert-dialog | @rn-primitives/alert-dialog + @rn-primitives/portal |
-| 59 | popover | @rn-primitives/popover + @rn-primitives/portal |
-| 60 | tooltip | @rn-primitives/tooltip + @rn-primitives/portal |
-| 61 | dropdown-menu | @rn-primitives/dropdown-menu + @rn-primitives/portal |
-| 62 | context-menu | @rn-primitives/context-menu + @rn-primitives/portal |
-| 63 | select | @rn-primitives/select + @rn-primitives/portal |
-| 64 | accordion | @rn-primitives/accordion |
-| 65 | tabs | @rn-primitives/tabs |
-| 66 | collapsible | @rn-primitives/collapsible |
-| 67 | slider | @rn-primitives/slider |
-| 68 | checkbox | @rn-primitives/checkbox |
-| 69 | radio-group | @rn-primitives/radio-group |
-| 70 | progress | @rn-primitives/progress |
-| 71 | toast | @rn-primitives/toast |
-| 72 | bottom-sheet | @gorhom/bottom-sheet |
-| 73 | action-sheet | @gorhom/bottom-sheet |
-| 74 | date-picker | @react-native-community/datetimepicker |
+| 58 | dialog | @rn-primitives/dialog + @rn-primitives/portal |
+| 59 | alert-dialog | @rn-primitives/alert-dialog + @rn-primitives/portal |
+| 60 | popover | @rn-primitives/popover + @rn-primitives/portal |
+| 61 | tooltip | @rn-primitives/tooltip + @rn-primitives/portal |
+| 62 | dropdown-menu | @rn-primitives/dropdown-menu + @rn-primitives/portal |
+| 63 | context-menu | @rn-primitives/context-menu + @rn-primitives/portal |
+| 64 | select | @rn-primitives/select + @rn-primitives/portal |
+| 65 | accordion | @rn-primitives/accordion |
+| 66 | tabs | @rn-primitives/tabs |
+| 67 | collapsible | @rn-primitives/collapsible |
+| 68 | slider | @rn-primitives/slider |
+| 69 | checkbox | @rn-primitives/checkbox |
+| 70 | radio-group | @rn-primitives/radio-group |
+| 71 | progress | @rn-primitives/progress |
+| 72 | toast | @rn-primitives/toast |
+| 73 | bottom-sheet | @gorhom/bottom-sheet |
+| 74 | action-sheet | @gorhom/bottom-sheet |
 | 75 | swipeable-list-item | react-native-gesture-handler |
 
 ### Tier 4: Chart components (needs react-native-svg)

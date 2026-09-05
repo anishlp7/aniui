@@ -57,7 +57,7 @@ export interface DropdownMenuItemProps extends React.ComponentPropsWithoutRef<ty
 export function DropdownMenuItem({ className, children, destructive, ...props }: DropdownMenuItemProps) {
   return (
     <DropdownMenuPrimitive.Item asChild>
-      <Pressable className={cn("flex-row items-center rounded-md px-3 py-2.5 min-h-11", className)} accessible={true} accessibilityRole="menuitem" {...props}>
+      <Pressable className={cn("flex-row items-center rounded-md px-3 py-2.5 min-h-12", className)} accessible={true} accessibilityRole="menuitem" {...props}>
         {typeof children === "string" ? (
           <Text className={cn("text-sm", destructive ? "text-destructive" : "text-foreground")}>{children}</Text>
         ) : children}
