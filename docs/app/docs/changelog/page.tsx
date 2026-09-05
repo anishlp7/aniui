@@ -26,6 +26,21 @@ const typeBadge: Record<ChangeType, { label: string; className: string }> = {
 
 const releases: Release[] = [
   {
+    version: "0.6.1",
+    date: "2026-09-05",
+    title: "Realistic example demos + overlay positioning fixes",
+    changes: [
+      { type: "feat", text: "Rewrote all 102 example-app demos from generic variant showcases into realistic use cases a real app would ship — settings screens, checkout flows, a full ChatGPT/Claude-style chat composer, dashboards, a swipe-to-archive inbox, and more — with genuinely wired-up state instead of static prop galleries. Full variant/size/state coverage was kept as additional sections on the most-used primitives (Button, Input, Textarea) so nothing already documented got lost. Also recategorized every example app's home-screen catalog to match the docs sidebar's 8-category taxonomy instead of one flat alphabetical list." },
+      { type: "fix", text: "Select's dropdown opened ~30px below its trigger on New Architecture: measureInWindow() already returns window-absolute coordinates, and the component was adding insets.top back on top of that, double-counting it. Removed the extra offset." },
+      { type: "fix", text: "Popover, HoverCard, DropdownMenu, and Tooltip content also opened with unwanted extra space before this fix, for a different reason: their Trigger wrapped children in a Pressable forced to a 48x48 box via min-h-12/min-w-12, and @rn-primitives measures that exact box to position content — so a small icon child always opened content ~48px below the trigger's top edge instead of just past the icon. Removed the forced sizing and added hitSlop={14} to keep the 48dp accessible tap target without inflating what gets measured. Also wired real useSafeAreaInsets() into all four Contents, which had none before.", link: "/docs/popover" },
+      { type: "fix", text: "Tooltip needed one more fix beyond the above: its default side=\"top\" positioning clamps against insets.top, and its Trigger measures via the plain measure() API (not measureInWindow()) — the same status-bar-offset inaccuracy documented elsewhere in this codebase — which kept pinning the tooltip near the top inset instead of near the trigger. Zeroes out just insets.top for Tooltip specifically; Popover/HoverCard/DropdownMenu's side=\"bottom\" default doesn't hit this.", link: "/docs/tooltip" },
+      { type: "fix", text: "The example apps' shared component-preview screen sized its outer ScrollView and SafeAreaView with flex-1 via className, which didn't reliably reach either component under this styling setup — both collapsed to zero height, hiding every demo's content while the native header still rendered fine. Switched both to a plain style prop, matching the pattern already used on the catalog screen." },
+      { type: "fix", text: "All 7 example apps now default to the light theme on launch regardless of the device's system setting." },
+      { type: "docs", text: "Bumped stale \"101\"/\"89\" component-count references to 102 across the root and CLI READMEs, the MCP docs page, the homepage, and the bare-RN-starter screens. Homepage hero also gets a small stat strip (Components / Screen Blocks / Expo SDKs / License)." },
+      { type: "fix", text: "Docs site always painted light first and only switched to dark after a client-side effect ran — a visible flash for visitors whose system prefers dark. A blocking inline script now applies the stored or system-preferred theme before the page paints." },
+    ],
+  },
+  {
     version: "0.6.0",
     date: "2026-09-05",
     title: "AutoComplete, 48dp touch-target sweep + docs overhaul",
