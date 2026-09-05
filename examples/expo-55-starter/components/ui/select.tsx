@@ -1,6 +1,5 @@
 import React, { useState, useRef } from "react";
 import { View, Text, Pressable, TextInput, Modal, ScrollView, Dimensions, LayoutChangeEvent, useColorScheme } from "react-native";
-import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { cn } from "@/lib/utils";
 import { Check, ChevronDown } from "lucide-react-native";
 
@@ -27,13 +26,6 @@ export function Select({
   const dark = useColorScheme() === "dark";
   const caret = dark ? "#fafafa" : "#18181b";
   const [pos, setPos] = useState({ x: 0, y: 0, w: 0, h: 0 });
-  const insets = useSafeAreaInsets();
-  // Fabric (new arch, mandatory on Expo SDK 55+) reports measureInWindow
-  // excluding the safe-area top inset on both iOS and Android edge-to-edge,
-  // but Modal (with statusBarTranslucent) renders from the screen origin.
-  // Add the inset back so the dropdown anchors to the trigger visually.
-  const isNewArch = !!(globalThis as { nativeFabricUIManager?: unknown }).nativeFabricUIManager;
-  const yOffset = isNewArch ? insets.top : 0;
   const selected = options.find((o) => o.value === value);
   const filtered = searchable && search
     ? options.filter((o) => o.label.toLowerCase().includes(search.toLowerCase()))
@@ -50,7 +42,7 @@ export function Select({
   const pick = (val: string) => { onValueChange?.(val); close(); };
 
   const screenH = Dimensions.get("window").height;
-  const triggerY = pos.y + yOffset;
+  const triggerY = pos.y;
   const belowY = triggerY + pos.h + 4;
   const listH = Math.min(filtered.length * 48, 264);
   const totalH = listH + (searchable ? 60 : 0);
