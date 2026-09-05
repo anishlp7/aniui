@@ -1,5 +1,6 @@
 import React from "react";
 import { View, Text, Pressable } from "react-native";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 import * as TooltipPrimitive from "@rn-primitives/tooltip";
 import Animated from "react-native-reanimated";
 import { entering, exiting } from "@/components/ui/animate";
@@ -24,7 +25,7 @@ export function TooltipTrigger({ className, children, ...props }: TooltipTrigger
   return (
     <TooltipPrimitive.Trigger asChild>
       <Pressable className={cn("min-h-12 min-w-12", className)} accessible={true} accessibilityRole="button" {...props}>
-        {children}
+        <View className="flex-1 items-center justify-center">{children}</View>
       </Pressable>
     </TooltipPrimitive.Trigger>
   );
@@ -38,9 +39,10 @@ export interface TooltipContentProps extends React.ComponentPropsWithoutRef<type
 }
 
 export function TooltipContent({ className, children, side = "top", sideOffset = 8, ...props }: TooltipContentProps) {
+  const insets = useSafeAreaInsets();
   return (
     <TooltipPrimitive.Portal>
-      <TooltipPrimitive.Content side={side} sideOffset={sideOffset} avoidCollisions>
+      <TooltipPrimitive.Content side={side} sideOffset={sideOffset} avoidCollisions insets={insets}>
         <Animated.View entering={entering.fadeIn} exiting={exiting.fadeOut}>
           <View className={cn("rounded-md bg-primary px-3 py-1.5", className)} {...props}>
             {typeof children === "string" ? (

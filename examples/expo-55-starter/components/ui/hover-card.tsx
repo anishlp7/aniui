@@ -1,5 +1,6 @@
 import React from "react";
 import { View, Pressable } from "react-native";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 import * as HoverCardPrimitive from "@rn-primitives/hover-card";
 import Animated from "react-native-reanimated";
 import { entering, exiting } from "@/components/ui/animate";
@@ -40,7 +41,7 @@ export function HoverCardTrigger({ className, children, ...props }: HoverCardTri
         accessibilityRole="button"
         {...props}
       >
-        {children}
+        <View className="flex-1 items-center justify-center">{children}</View>
       </Pressable>
     </HoverCardPrimitive.Trigger>
   );
@@ -62,6 +63,7 @@ export function HoverCardContent({
   align = "center",
   ...props
 }: HoverCardContentProps) {
+  const insets = useSafeAreaInsets();
   return (
     <HoverCardPrimitive.Portal>
       <HoverCardPrimitive.Overlay className="absolute inset-0" />
@@ -70,6 +72,7 @@ export function HoverCardContent({
         sideOffset={sideOffset}
         align={align}
         avoidCollisions
+        insets={insets}
       >
         <Animated.View entering={entering.fadeIn} exiting={exiting.fadeOut}>
           <View

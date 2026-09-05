@@ -1,5 +1,6 @@
 import React from "react";
 import { View, Text, Pressable } from "react-native";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 import * as DropdownMenuPrimitive from "@rn-primitives/dropdown-menu";
 import Animated from "react-native-reanimated";
 import { entering, exiting } from "@/components/ui/animate";
@@ -19,7 +20,7 @@ export function DropdownMenuTrigger({ className, children, ...props }: React.Com
   return (
     <DropdownMenuPrimitive.Trigger asChild>
       <Pressable className={cn("min-h-12 min-w-12", className)} accessible={true} accessibilityRole="button" {...props}>
-        {children}
+        <View className="flex-1 items-center justify-center">{children}</View>
       </Pressable>
     </DropdownMenuPrimitive.Trigger>
   );
@@ -34,10 +35,11 @@ export interface DropdownMenuContentProps extends React.ComponentPropsWithoutRef
 }
 
 export function DropdownMenuContent({ className, children, side = "bottom", sideOffset = 4, align = "start", ...props }: DropdownMenuContentProps) {
+  const insets = useSafeAreaInsets();
   return (
     <DropdownMenuPrimitive.Portal>
       <DropdownMenuPrimitive.Overlay className="absolute inset-0" />
-      <DropdownMenuPrimitive.Content side={side} sideOffset={sideOffset} align={align} avoidCollisions>
+      <DropdownMenuPrimitive.Content side={side} sideOffset={sideOffset} align={align} avoidCollisions insets={insets}>
         <Animated.View entering={entering.fadeIn} exiting={exiting.fadeOut}>
           <View className={cn("min-w-[180px] rounded-lg border border-border bg-card p-1 shadow-lg", className)} {...props}>
             {children}
