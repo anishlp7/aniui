@@ -100,7 +100,38 @@ const components = [
   { name: "Price", section: "Data Display & Media" },
   { name: "Avatar Group", section: "Data Display & Media" },
   { name: "Image Gallery", section: "Data Display & Media" },
-  { name: "Carousel", section: "Data Display & Media" },
+  { name: "Carousel", section: "Motion & Effects" },
+  { name: "Carousel 3D", section: "Motion & Effects" },
+  { name: "Carousel Parallax", section: "Motion & Effects" },
+  { name: "Carousel Circular", section: "Motion & Effects" },
+  { name: "Carousel Scale", section: "Motion & Effects" },
+  { name: "Carousel Tilt", section: "Motion & Effects" },
+  { name: "Curved Bottom Tabs", section: "Motion & Effects" },
+  { name: "Morphing Tab Bar", section: "Motion & Effects" },
+  { name: "Mobile Dock", section: "Motion & Effects" },
+  { name: "Fan Menu", section: "Motion & Effects" },
+  { name: "Shimmer", section: "Motion & Effects" },
+  { name: "Loader", section: "Motion & Effects" },
+  { name: "Flip Card", section: "Motion & Effects" },
+  { name: "Marquee", section: "Motion & Effects" },
+  { name: "Disclosure Group", section: "Motion & Effects" },
+  { name: "Event Ticket", section: "UI Pieces" },
+  { name: "Receipt Card", section: "UI Pieces" },
+  { name: "Coupon", section: "UI Pieces" },
+  { name: "Polaroid", section: "UI Pieces" },
+  { name: "Profile Card", section: "UI Pieces" },
+  { name: "Photo Stack", section: "UI Pieces" },
+  { name: "Book Page", section: "UI Pieces" },
+  { name: "Barcode Badge", section: "UI Pieces" },
+  { name: "Social Button", section: "UI Pieces" },
+  { name: "Verified Badge", section: "UI Pieces" },
+  { name: "QR Code", section: "UI Pieces" },
+  { name: "Rolling Counter", section: "UI Pieces" },
+  { name: "Border Beam", section: "Motion & Effects" },
+  { name: "Gooey Switch", section: "Motion & Effects" },
+  { name: "Morph Loader", section: "Motion & Effects" },
+  { name: "Verified Shine", section: "Motion & Effects" },
+  { name: "Radiant Button", section: "Motion & Effects" },
   { name: "Infinite List", section: "Data Display & Media" },
   { name: "Refresh Control", section: "Data Display & Media" },
   // Chat & AI
@@ -123,7 +154,7 @@ const components = [
   { name: "Chart Tooltip", section: "Charts" },
 ];
 
-const sectionOrder = ["Foundation", "Forms & Inputs", "Feedback & Status", "Overlays & Menus", "Navigation & Structure", "Data Display & Media", "Chat & AI", "Gestures & Actions", "Charts"];
+const sectionOrder = ["Foundation", "Forms & Inputs", "Feedback & Status", "Overlays & Menus", "Navigation & Structure", "Data Display & Media", "Motion & Effects", "UI Pieces", "Chat & AI", "Gestures & Actions", "Charts"];
 
 export default function HomeScreen() {
   const router = useRouter();

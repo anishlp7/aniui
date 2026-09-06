@@ -1,5 +1,5 @@
 import React, { useState, useRef } from "react";
-import { ScrollView, View, Pressable, Modal } from "react-native";
+import { ScrollView, View, Pressable, Modal, Image } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useLocalSearchParams, Stack } from "expo-router";
 import {
@@ -7,6 +7,7 @@ import {
   List as ListIcon, LayoutGrid, Upload, Search, Inbox, AlertTriangle, Download, Play, Pause,
   MoreVertical, Home, User, LayoutDashboard, BarChart3, FolderKanban, Users, Settings,
   Eye, Lock, Shield, ChevronRight, DollarSign, ShoppingCart, Info, HelpCircle,
+  Camera, Image as ImageIcon, Share2, Star, Heart, Bookmark,
 } from "lucide-react-native";
 import { Text } from "@/components/ui/text";
 
@@ -111,6 +112,37 @@ import { FAB } from "@/components/ui/fab";
 import { Header, HeaderLeft, HeaderTitle, HeaderRight, HeaderBackButton } from "@/components/ui/header";
 import { TabBar, TabBarItem } from "@/components/ui/tab-bar";
 import { Carousel } from "@/components/ui/carousel";
+import { Carousel3D } from "@/components/ui/carousel-3d";
+import { CarouselParallax } from "@/components/ui/carousel-parallax";
+import { Shimmer } from "@/components/ui/shimmer";
+import { Loader } from "@/components/ui/loader";
+import { FlipCard } from "@/components/ui/flip-card";
+import { Marquee } from "@/components/ui/marquee";
+import { DisclosureGroup, DisclosureItem } from "@/components/ui/disclosure-group";
+import { EventTicket } from "@/components/ui/event-ticket";
+import { ReceiptCard } from "@/components/ui/receipt-card";
+import { Coupon } from "@/components/ui/coupon";
+import { Polaroid } from "@/components/ui/polaroid";
+import { RadiantButton } from "@/components/ui/radiant-button";
+import { VerifiedShine } from "@/components/ui/verified-shine";
+import { MorphLoader } from "@/components/ui/morph-loader";
+import { GooeySwitch } from "@/components/ui/gooey-switch";
+import { BorderBeam } from "@/components/ui/border-beam";
+import { RollingCounter } from "@/components/ui/rolling-counter";
+import { QrCode } from "@/components/ui/qr-code";
+import { VerifiedBadge, VerifiedBadgeCheck, VerifiedBadgeContent, VerifiedBadgeName, VerifiedBadgeHandle } from "@/components/ui/verified-badge";
+import { SocialButton } from "@/components/ui/social-button";
+import { BarcodeBadge } from "@/components/ui/barcode-badge";
+import { BookPage, BookPagePages, BookPageCover, BookPageAuthor, BookPageTitle, BookPageNote, BookPageFooter } from "@/components/ui/book-page";
+import { PhotoStack } from "@/components/ui/photo-stack";
+import { ProfileCard, ProfileCardCover, ProfileCardAvatar, ProfileCardBody, ProfileCardHeader, ProfileCardBio, ProfileCardLocation, ProfileCardAction } from "@/components/ui/profile-card";
+import { FanMenu } from "@/components/ui/fan-menu";
+import { MobileDock } from "@/components/ui/mobile-dock";
+import { MorphingTabBar } from "@/components/ui/morphing-tabbar";
+import { CurvedBottomTabs } from "@/components/ui/curved-bottom-tabs";
+import { CarouselTilt } from "@/components/ui/carousel-tilt";
+import { CarouselScale } from "@/components/ui/carousel-scale";
+import { CarouselCircular } from "@/components/ui/carousel-circular";
 import { Pagination } from "@/components/ui/pagination";
 import { SwipeableListItem } from "@/components/ui/swipeable-list-item";
 import { SwipeDeck } from "@/components/ui/swipe-deck";
@@ -122,6 +154,26 @@ import { RefreshControl } from "@/components/ui/refresh-control";
 import { Grid } from "@/components/ui/grid";
 import { Form } from "@/components/ui/form";
 import { ContextMenu, ContextMenuTrigger, ContextMenuContent, ContextMenuItem, ContextMenuSeparator } from "@/components/ui/context-menu";
+import { MorphFab, MorphFabTrigger, MorphFabItem, MorphFabItemIcon, MorphFabItemLabel } from "@/components/ui/morph-fab";
+import { GooeyPopover, GooeyPopoverTrigger, GooeyPopoverContent } from "@/components/ui/gooey-popover";
+import { GooeySearchTabs, GooeySearchTabsTrigger, GooeySearchTabsTabs, GooeySearchTabsTab, GooeySearchTabsTabIcon, GooeySearchTabsTabLabel } from "@/components/ui/gooey-search-tabs";
+import { Tray, TrayTrigger, TrayContent, TrayHeader, TrayTitle, TrayClose, TrayBody } from "@/components/ui/tray";
+import { UnfoldMenu, UnfoldMenuTrigger, UnfoldMenuIcon, UnfoldMenuLabel, UnfoldMenuContent, UnfoldMenuHeader, UnfoldMenuTitle, UnfoldMenuClose, UnfoldMenuGrid, UnfoldMenuItem } from "@/components/ui/unfold-menu";
+import { ActionRail, ActionRailGroup, ActionRailAction, ActionRailIcon, ActionRailLabel, ActionRailOverflow, ActionRailTrigger } from "@/components/ui/action-rail";
+import { SplitView, SplitViewTop, SplitViewTitle, SplitViewHandle, SplitViewBottom } from "@/components/ui/split-view";
+import { ExpandableView, ExpandableViewCollapsed, ExpandableViewExpanded, ExpandableViewClose } from "@/components/ui/expandable-view";
+import { MatchedGeometryProvider, MatchedGeometryView } from "@/components/ui/matched-geometry";
+import { ArcList, ArcListItem, ArcListLabel } from "@/components/ui/arc-list";
+import { FlexiButton } from "@/components/ui/flexi-button";
+import { SaveButton } from "@/components/ui/save-button";
+import { SpinButton } from "@/components/ui/spin-button";
+import { StackedChips, StackedChipsTrigger, StackedChipsContent } from "@/components/ui/stacked-chips";
+import { FillingStack } from "@/components/ui/filling-stack";
+import { Hamburger } from "@/components/ui/hamburger";
+import { ThemeSwitch } from "@/components/ui/theme-switch";
+import { AnimatedHeaderScrollView } from "@/components/ui/animated-header-scrollview";
+import { AnimatedInputBar } from "@/components/ui/animated-input-bar";
+import { SquircleView } from "@/components/ui/squircle-view";
 
 // Providers
 import { ThemeProvider, useTheme as useAniTheme } from "@/components/ui/theme-provider";
@@ -3196,6 +3248,535 @@ const demos: Record<string, () => React.ReactElement> = {
       </View>
     );
   },
+
+  "carousel-3d": () => (
+    <View className="gap-4">
+      <Text className="text-sm text-muted-foreground">Pan a 3D cylindrical carousel — great for product galleries and featured collections.</Text>
+      <Carousel3D
+        data={[
+          <View className="h-full w-full items-center justify-center bg-primary"><Text className="text-primary-foreground font-semibold">Slide 1</Text></View>,
+          <View className="h-full w-full items-center justify-center bg-secondary"><Text className="text-secondary-foreground font-semibold">Slide 2</Text></View>,
+          <View className="h-full w-full items-center justify-center bg-accent"><Text className="text-accent-foreground font-semibold">Slide 3</Text></View>,
+        ]}
+      />
+    </View>
+  ),
+
+  "carousel-parallax": () => (
+    <View className="gap-4">
+      <Text className="text-sm text-muted-foreground">Scale and fade parallax as you swipe — the photo itself shifts inside the frame.</Text>
+      <CarouselParallax
+        data={[
+          <Image key="1" source={{ uri: "https://picsum.photos/seed/aniui-parallax-1/800/600" }} className="h-56 w-full" resizeMode="cover" />,
+          <Image key="2" source={{ uri: "https://picsum.photos/seed/aniui-parallax-2/800/600" }} className="h-56 w-full" resizeMode="cover" />,
+          <Image key="3" source={{ uri: "https://picsum.photos/seed/aniui-parallax-3/800/600" }} className="h-56 w-full" resizeMode="cover" />,
+        ]}
+      />
+    </View>
+  ),
+
+  shimmer: () => (
+    <View className="gap-4">
+      <Text className="text-sm text-muted-foreground">Shimmer placeholders while content loads.</Text>
+      <Shimmer className="h-4 w-3/4" />
+      <Shimmer className="h-4 w-full" />
+      <Shimmer className="h-32 w-full rounded-xl" />
+    </View>
+  ),
+
+  loader: () => (
+    <View className="gap-6">
+      <View className="items-center gap-2"><Text className="text-xs text-muted-foreground uppercase">Circle</Text><Loader variant="circle" /></View>
+      <View className="items-center gap-2"><Text className="text-xs text-muted-foreground uppercase">Dots</Text><Loader variant="dots" /></View>
+    </View>
+  ),
+
+  "flip-card": () => (
+    <FlipCard
+      front={<Card className="h-40 items-center justify-center"><Text className="font-semibold">Tap to flip</Text></Card>}
+      back={<Card className="h-40 items-center justify-center bg-primary"><Text className="text-primary-foreground font-semibold">Back side</Text></Card>}
+    />
+  ),
+
+  marquee: () => <Marquee>AniUI — Beautiful React Native components. Copy. Paste. Ship.</Marquee>,
+
+  "disclosure-group": () => (
+    <DisclosureGroup>
+      <DisclosureItem value="shipping" title="Shipping"><Text className="text-sm text-muted-foreground">Free shipping on orders over $50.</Text></DisclosureItem>
+      <DisclosureItem value="returns" title="Returns"><Text className="text-sm text-muted-foreground">30-day hassle-free returns.</Text></DisclosureItem>
+    </DisclosureGroup>
+  ),
+
+  "event-ticket": () => (
+    <EventTicket title="AniUI Live" date="Sep 6, 2026 · 7:00 PM" venue="Mumbai, IN" seat="A-12" code="AX7K2" />
+  ),
+
+  "receipt-card": () => (
+    <ReceiptCard
+      merchant="Blue Bottle Coffee"
+      date="Sep 6, 2026"
+      lines={[
+        { label: "Flat White", value: "$5.50" },
+        { label: "Croissant", value: "$4.00" },
+        { label: "Tax", value: "$0.86" },
+      ]}
+      total="$10.36"
+    />
+  ),
+
+  coupon: () => <Coupon code="ANIUI20" discount="20% OFF" description="First order discount" expires="Dec 31, 2026" />,
+
+  polaroid: () => (
+    <Polaroid source={{ uri: "https://picsum.photos/seed/aniui-polaroid/400/400" }} caption="Summer '26" />
+  ),
+
+  "profile-card": () => (
+    <ProfileCard>
+      <ProfileCardCover source={{ uri: "https://picsum.photos/seed/aniui-profile-cover/600/240" }} />
+      <ProfileCardAvatar source="https://picsum.photos/seed/aniui-profile-avatar/150/150" fallback="A" />
+      <ProfileCardBody>
+        <ProfileCardHeader name="Anish" handle="@aniui" />
+        <ProfileCardBio>Building beautiful React Native components, one file at a time.</ProfileCardBio>
+        <ProfileCardLocation label="Mumbai, IN" />
+        <ProfileCardAction label="Follow" onPress={() => {}} />
+      </ProfileCardBody>
+    </ProfileCard>
+  ),
+
+  "carousel-circular": () => (
+    <CarouselCircular
+      data={["🎵", "📷", "✈️", "⭐", "🎨"].map((emoji) => (
+        <Text key={emoji} className="text-2xl">{emoji}</Text>
+      ))}
+    />
+  ),
+
+  "carousel-scale": () => (
+    <CarouselScale
+      data={[
+        <View key="1" className="h-44 rounded-2xl bg-primary items-center justify-center"><Text className="text-primary-foreground font-bold">Pro</Text></View>,
+        <View key="2" className="h-44 rounded-2xl bg-secondary items-center justify-center"><Text className="text-secondary-foreground font-bold">Team</Text></View>,
+        <View key="3" className="h-44 rounded-2xl bg-accent items-center justify-center"><Text className="text-accent-foreground font-bold">Free</Text></View>,
+      ]}
+    />
+  ),
+
+  "carousel-tilt": () => (
+    <CarouselTilt
+      data={[
+        <View key="1" className="h-40 rounded-xl bg-card border border-border items-center justify-center"><Text className="font-semibold">Design</Text></View>,
+        <View key="2" className="h-40 rounded-xl bg-card border border-border items-center justify-center"><Text className="font-semibold">Build</Text></View>,
+        <View key="3" className="h-40 rounded-xl bg-card border border-border items-center justify-center"><Text className="font-semibold">Ship</Text></View>,
+      ]}
+    />
+  ),
+
+  "curved-bottom-tabs": () => {
+    const [index, setIndex] = useState(0);
+    return (
+      <View className="gap-4">
+        <Text className="text-sm text-muted-foreground">Curved notch tab bar — any tab can become the raised floating action.</Text>
+        <CurvedBottomTabs
+          tabs={[
+            { key: "home", label: "Home", icon: <Home size={18} color={index === 0 ? "#fafafa" : "#71717a"} /> },
+            { key: "search", label: "Search", icon: <Search size={18} color={index === 1 ? "#fafafa" : "#71717a"} /> },
+            { key: "add", label: "Add", icon: <Plus size={18} color={index === 2 ? "#fafafa" : "#71717a"} /> },
+            { key: "profile", label: "Profile", icon: <User size={18} color={index === 3 ? "#fafafa" : "#71717a"} /> },
+          ]}
+          activeIndex={index}
+          onTabPress={setIndex}
+        />
+      </View>
+    );
+  },
+
+  "morphing-tabbar": () => {
+    const [key, setKey] = useState("all");
+    return (
+      <MorphingTabBar
+        tabs={[
+          { key: "all", label: "All" },
+          { key: "music", label: "Music" },
+          { key: "podcasts", label: "Podcasts" },
+        ]}
+        activeKey={key}
+        onTabPress={setKey}
+      />
+    );
+  },
+
+  "mobile-dock": () => (
+    <View className="gap-4">
+      <Text className="text-sm text-muted-foreground">A touch-tracked fisheye dock — drag your finger across the icons.</Text>
+      <MobileDock
+        items={[
+          { key: "mail", label: "Mail", icon: <Mail size={22} color="#18181b" />, onPress: () => {} },
+          { key: "chart", label: "Stats", icon: <BarChart3 size={22} color="#18181b" />, onPress: () => {} },
+          { key: "folder", label: "Projects", icon: <FolderKanban size={22} color="#18181b" />, onPress: () => {} },
+          { key: "users", label: "Team", icon: <Users size={22} color="#18181b" />, onPress: () => {} },
+          { key: "settings", label: "Settings", icon: <Settings size={22} color="#18181b" />, onPress: () => {} },
+        ]}
+      />
+    </View>
+  ),
+
+  "fan-menu": () => (
+    <FanMenu
+      items={[
+        { key: "mail", icon: <Mail size={18} color="#18181b" />, onPress: () => {} },
+        { key: "camera", icon: <Mic size={18} color="#18181b" />, onPress: () => {} },
+        { key: "chat", icon: <MessageSquare size={18} color="#18181b" />, onPress: () => {} },
+      ]}
+    />
+  ),
+
+  "photo-stack": () => (
+    <PhotoStack
+      sources={[
+        { uri: "https://picsum.photos/seed/a/200" },
+        { uri: "https://picsum.photos/seed/b/200" },
+        { uri: "https://picsum.photos/seed/c/200" },
+      ]}
+    />
+  ),
+
+  "book-page": () => (
+    <View className="items-center gap-4">
+      <Text className="text-sm text-muted-foreground">A hardcover cover with a real photo, swung open on its spine.</Text>
+      <BookPage openAngle={35}>
+        <BookPagePages />
+        <BookPageCover source={{ uri: "https://picsum.photos/seed/aniui-book/400/560" }}>
+          <BookPageAuthor>AniUI Press</BookPageAuthor>
+          <BookPageFooter>
+            <BookPageTitle>The AniUI Way</BookPageTitle>
+            <BookPageNote>First Edition · 2026</BookPageNote>
+          </BookPageFooter>
+        </BookPageCover>
+      </BookPage>
+    </View>
+  ),
+
+  "barcode-badge": () => <BarcodeBadge value="ANIUI-2026" label="Pass ID" />,
+
+  "social-button": () => (
+    <View className="gap-3">
+      <SocialButton provider="google" onPress={() => {}} />
+      <SocialButton provider="apple" onPress={() => {}} />
+    </View>
+  ),
+
+  "verified-badge": () => (
+    <VerifiedBadge>
+      <VerifiedBadgeCheck />
+      <VerifiedBadgeContent>
+        <VerifiedBadgeName>Anish</VerifiedBadgeName>
+        <VerifiedBadgeHandle>@aniui</VerifiedBadgeHandle>
+      </VerifiedBadgeContent>
+    </VerifiedBadge>
+  ),
+
+  "qr-code": () => (
+    <View className="gap-4">
+      <Text className="text-sm text-muted-foreground">Tap the pill to spring open a real, scannable QR code with copy/close actions.</Text>
+      <QrCode value="https://aniui.dev" size={180} />
+    </View>
+  ),
+
+  "rolling-counter": () => {
+    const [n, setN] = useState(1284);
+    return (
+      <View className="gap-4 items-center">
+        <RollingCounter value={n} prefix="$" />
+        <Button variant="outline" onPress={() => setN((v) => v + 137)}>+137</Button>
+      </View>
+    );
+  },
+
+  "border-beam": () => (
+    <BorderBeam className="rounded-xl border border-border bg-card">
+      <Text className="text-base font-semibold text-foreground">Pro Plan</Text>
+      <Text className="text-sm text-muted-foreground mt-1">Skia beam traces the card edge.</Text>
+    </BorderBeam>
+  ),
+
+  "gooey-switch": () => {
+    const [on, setOn] = useState(true);
+    return (
+      <View className="gap-3 items-center">
+        <GooeySwitch value={on} onValueChange={setOn} />
+        <Text className="text-sm text-muted-foreground">{on ? "On" : "Off"}</Text>
+      </View>
+    );
+  },
+
+  "morph-loader": () => (
+    <View className="items-center gap-2">
+      <MorphLoader size="lg" />
+      <Text className="text-xs text-muted-foreground uppercase">Loading</Text>
+    </View>
+  ),
+
+  "verified-shine": () => <VerifiedShine label="Verified Pro" />,
+
+  "radiant-button": () => <RadiantButton label="Upgrade Now" onPress={() => {}} />,
+
+  "morph-fab": () => (
+    <View className="h-64 items-end justify-end">
+      <MorphFab direction="up">
+        <MorphFabTrigger />
+        <MorphFabItem value="camera" onSelect={() => {}}>
+          <MorphFabItemIcon><Camera size={20} color="#fafafa" /></MorphFabItemIcon>
+          <MorphFabItemLabel>Camera</MorphFabItemLabel>
+        </MorphFabItem>
+        <MorphFabItem value="photo" onSelect={() => {}}>
+          <MorphFabItemIcon><ImageIcon size={20} color="#fafafa" /></MorphFabItemIcon>
+          <MorphFabItemLabel>Photo</MorphFabItemLabel>
+        </MorphFabItem>
+        <MorphFabItem value="audio" onSelect={() => {}}>
+          <MorphFabItemIcon><Mic size={20} color="#fafafa" /></MorphFabItemIcon>
+          <MorphFabItemLabel>Audio</MorphFabItemLabel>
+        </MorphFabItem>
+      </MorphFab>
+    </View>
+  ),
+
+  "gooey-popover": () => (
+    <View className="h-40 items-center justify-center">
+      <GooeyPopover side="bottom" align="center">
+        <GooeyPopoverTrigger>
+          <Text className="text-sm font-medium text-primary-foreground">Options</Text>
+        </GooeyPopoverTrigger>
+        <GooeyPopoverContent>
+          <Text className="text-sm text-foreground">Popover content goes here.</Text>
+        </GooeyPopoverContent>
+      </GooeyPopover>
+    </View>
+  ),
+
+  "gooey-search-tabs": () => (
+    <GooeySearchTabs onSearch={() => {}}>
+      <GooeySearchTabsTrigger />
+      <GooeySearchTabsTabs>
+        <GooeySearchTabsTab value="home">
+          <GooeySearchTabsTabIcon><Home size={18} color="#1d1d1f" /></GooeySearchTabsTabIcon>
+          <GooeySearchTabsTabLabel>Home</GooeySearchTabsTabLabel>
+        </GooeySearchTabsTab>
+        <GooeySearchTabsTab value="profile">
+          <GooeySearchTabsTabIcon><User size={18} color="#1d1d1f" /></GooeySearchTabsTabIcon>
+          <GooeySearchTabsTabLabel>Profile</GooeySearchTabsTabLabel>
+        </GooeySearchTabsTab>
+      </GooeySearchTabsTabs>
+    </GooeySearchTabs>
+  ),
+
+  tray: () => (
+    <Tray detents={["50%", "90%"]}>
+      <TrayTrigger>
+        <Text className="text-sm font-medium text-foreground">Open Tray</Text>
+      </TrayTrigger>
+      <TrayContent>
+        <TrayHeader>
+          <TrayTitle>Settings</TrayTitle>
+          <TrayClose />
+        </TrayHeader>
+        <TrayBody>
+          <Text className="text-sm text-muted-foreground">Tray content goes here.</Text>
+        </TrayBody>
+      </TrayContent>
+    </Tray>
+  ),
+
+  "unfold-menu": () => (
+    <UnfoldMenu onSelect={() => {}}>
+      <UnfoldMenuTrigger>
+        <UnfoldMenuIcon><Share2 size={20} color="#111111" /></UnfoldMenuIcon>
+        <UnfoldMenuLabel>Share</UnfoldMenuLabel>
+      </UnfoldMenuTrigger>
+      <UnfoldMenuContent>
+        <UnfoldMenuHeader>
+          <UnfoldMenuTitle>Share</UnfoldMenuTitle>
+          <UnfoldMenuClose />
+        </UnfoldMenuHeader>
+        <UnfoldMenuGrid columns={3}>
+          <UnfoldMenuItem value="favorite">
+            <Star size={20} color="#6d7480" />
+          </UnfoldMenuItem>
+          <UnfoldMenuItem value="mail">
+            <Mail size={20} color="#6d7480" />
+          </UnfoldMenuItem>
+          <UnfoldMenuItem value="bookmark">
+            <Bookmark size={20} color="#6d7480" />
+          </UnfoldMenuItem>
+        </UnfoldMenuGrid>
+      </UnfoldMenuContent>
+    </UnfoldMenu>
+  ),
+
+  "action-rail": () => (
+    <ActionRail onAction={() => {}}>
+      <ActionRailGroup>
+        <ActionRailAction value="like">
+          <ActionRailIcon>{({ color, size }: { color: string; size: number }) => <Heart color={color} size={size} />}</ActionRailIcon>
+          <ActionRailLabel>Like</ActionRailLabel>
+        </ActionRailAction>
+      </ActionRailGroup>
+      <ActionRailOverflow>
+        <ActionRailAction value="share">
+          <ActionRailIcon>{({ color, size }: { color: string; size: number }) => <Share2 color={color} size={size} />}</ActionRailIcon>
+          <ActionRailLabel>Share</ActionRailLabel>
+        </ActionRailAction>
+        <ActionRailAction value="save">
+          <ActionRailIcon>{({ color, size }: { color: string; size: number }) => <Bookmark color={color} size={size} />}</ActionRailIcon>
+          <ActionRailLabel>Save</ActionRailLabel>
+        </ActionRailAction>
+      </ActionRailOverflow>
+      <ActionRailTrigger />
+    </ActionRail>
+  ),
+
+  "split-view": () => (
+    <SplitView initialTopHeight={180}>
+      <SplitViewTop>
+        <SplitViewTitle>Map</SplitViewTitle>
+      </SplitViewTop>
+      <SplitViewHandle />
+      <SplitViewBottom>
+        <Text className="p-4 text-sm text-muted-foreground">Results list goes here.</Text>
+      </SplitViewBottom>
+    </SplitView>
+  ),
+
+  "expandable-view": () => (
+    <ExpandableView>
+      <ExpandableViewCollapsed>
+        <Text className="text-sm font-medium text-foreground">Tap to expand</Text>
+      </ExpandableViewCollapsed>
+      <ExpandableViewExpanded>
+        <Text className="p-4 text-sm text-foreground">Expanded content goes here.</Text>
+        <ExpandableViewClose />
+      </ExpandableViewExpanded>
+    </ExpandableView>
+  ),
+
+  "matched-geometry": () => {
+    const [expanded, setExpanded] = useState(false);
+    return (
+      <MatchedGeometryProvider>
+        <Pressable onPress={() => setExpanded((v) => !v)} accessibilityRole="button" accessible={true}>
+          {expanded ? (
+            <MatchedGeometryView id="card" className="h-40 w-full rounded-2xl bg-primary" />
+          ) : (
+            <MatchedGeometryView id="card" className="h-16 w-16 rounded-full bg-primary" />
+          )}
+        </Pressable>
+      </MatchedGeometryProvider>
+    );
+  },
+
+  "arc-list": () => {
+    const days = ["Mon", "Tue", "Wed", "Thu", "Fri"];
+    return (
+      <ArcList itemHeight={56} height={280} onValueChange={() => {}}>
+        {days.map((day) => (
+          <ArcListItem key={day}>
+            <ArcListLabel>{day}</ArcListLabel>
+          </ArcListItem>
+        ))}
+      </ArcList>
+    );
+  },
+
+  "flexi-button": () => <FlexiButton label="Clear all" onExpandedChange={() => {}} />,
+
+  "save-button": () => (
+    <SaveButton
+      label="Save"
+      onSave={() => new Promise<void>((resolve) => setTimeout(resolve, 1000))}
+      onSaved={() => {}}
+    />
+  ),
+
+  "spin-button": () => {
+    const [saving, setSaving] = useState(false);
+    return <SpinButton saving={saving} onSavingChange={setSaving} />;
+  },
+
+  "stacked-chips": () => (
+    <StackedChips>
+      <StackedChipsTrigger>Filters</StackedChipsTrigger>
+      <StackedChipsContent>
+        <StackedChips>
+          <StackedChipsTrigger>Color</StackedChipsTrigger>
+          <StackedChipsContent>
+            <Text className="text-sm text-foreground">Red</Text>
+            <Text className="text-sm text-foreground">Blue</Text>
+          </StackedChipsContent>
+        </StackedChips>
+      </StackedChipsContent>
+    </StackedChips>
+  ),
+
+  "filling-stack": () => {
+    const cards = [
+      { seed: "aniui-fill-1", title: "Mountains" },
+      { seed: "aniui-fill-2", title: "Coastline" },
+      { seed: "aniui-fill-3", title: "Forest" },
+      { seed: "aniui-fill-4", title: "Desert" },
+    ];
+    return (
+      <FillingStack
+        data={cards}
+        onIndexChange={() => {}}
+        renderItem={(card) => (
+          <View className="flex-1">
+            <Image source={{ uri: `https://picsum.photos/seed/${card.seed}/500/500` }} className="h-full w-full" resizeMode="cover" />
+            <View className="absolute inset-x-0 bottom-0 bg-black/40 px-4 py-3">
+              <Text className="text-base font-semibold text-white">{card.title}</Text>
+            </View>
+          </View>
+        )}
+      />
+    );
+  },
+
+  hamburger: () => {
+    const [open, setOpen] = useState(false);
+    return <Hamburger open={open} onOpenChange={setOpen} />;
+  },
+
+  "theme-switch": () => {
+    const [isDark, setIsDark] = useState(false);
+    return <ThemeSwitch isDark={isDark} onToggle={() => setIsDark((d) => !d)} wipe />;
+  },
+
+  "animated-header-scrollview": () => (
+    <View className="h-96 overflow-hidden rounded-xl border border-border">
+      <AnimatedHeaderScrollView title="Settings" subtitle="Manage your account">
+        {Array.from({ length: 12 }).map((_, i) => (
+          <View key={i} className="border-b border-border px-4 py-4">
+            <Text className="text-sm text-foreground">Setting row {i + 1}</Text>
+          </View>
+        ))}
+      </AnimatedHeaderScrollView>
+    </View>
+  ),
+
+  "animated-input-bar": () => {
+    const [query, setQuery] = useState("");
+    return (
+      <AnimatedInputBar
+        placeholders={["Search flights", "Search hotels", "Search cars"]}
+        value={query}
+        onChangeText={setQuery}
+      />
+    );
+  },
+
+  "squircle-view": () => (
+    <SquircleView width={120} height={120} cornerRadius={28} cornerSmoothing={0.8} backgroundColor="#6366f1">
+      <Text className="text-sm font-semibold text-white">Squircle</Text>
+    </SquircleView>
+  ),
 
 };
 
