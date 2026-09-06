@@ -230,6 +230,14 @@ export async function addCommand(names: string[]): Promise<void> {
     }
   }
 
+  const tier4Components = allNames.filter((n) => registry[n].tier === 4);
+  if (tier4Components.length > 0 && !allDeps["@shopify/react-native-skia"]) {
+    logger.break();
+    logger.warn("Tier 4 components require @shopify/react-native-skia (GPU effects):");
+    logger.info(`  ${getInstallCommand(pm, ["@shopify/react-native-skia"])}`);
+    logger.info("  Expo: npx expo install @shopify/react-native-skia");
+  }
+
   // Show import example
   if (created.length > 0) {
     logger.break();
