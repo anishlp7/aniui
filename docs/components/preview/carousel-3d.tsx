@@ -4,17 +4,19 @@ import React, { useState } from "react";
 import { cn } from "@/lib/utils";
 
 const slides = [
-  { label: "1", className: "bg-primary text-primary-foreground" },
-  { label: "2", className: "bg-secondary text-secondary-foreground" },
-  { label: "3", className: "bg-accent text-accent-foreground" },
+  { label: "Alpine", seed: "aniui-3d-1" },
+  { label: "Harbor", seed: "aniui-3d-2" },
+  { label: "Skyline", seed: "aniui-3d-3" },
+  { label: "Desert", seed: "aniui-3d-4" },
+  { label: "Forest", seed: "aniui-3d-5" },
 ];
 
 export function PreviewCarousel3D({ className }: { className?: string }) {
-  const [active, setActive] = useState(1);
+  const [active, setActive] = useState(2);
 
   return (
-    <div className={cn("w-full max-w-[260px]", className)}>
-      <div className="relative h-36 [perspective:800px]">
+    <div className={cn("w-full max-w-xl mx-auto", className)}>
+      <div className="relative h-56 [perspective:1100px]">
         {slides.map((slide, i) => {
           const offset = i - active;
           return (
@@ -22,22 +24,27 @@ export function PreviewCarousel3D({ className }: { className?: string }) {
               key={slide.label}
               type="button"
               onClick={() => setActive(i)}
-              className={cn(
-                "absolute left-1/2 top-1/2 h-28 w-20 -translate-x-1/2 -translate-y-1/2 rounded-xl border border-border shadow-md transition-all duration-300 flex items-center justify-center text-sm font-semibold cursor-pointer",
-                slide.className
-              )}
+              className="absolute left-1/2 top-1/2 h-44 w-32 -translate-x-1/2 -translate-y-1/2 overflow-hidden rounded-2xl border border-border shadow-lg transition-all duration-300 cursor-pointer"
               style={{
-                transform: `translate(-50%, -50%) translateX(${offset * 56}px) rotateY(${offset * -28}deg) scale(${i === active ? 1 : 0.82})`,
-                zIndex: i === active ? 3 : 1,
-                opacity: i === active ? 1 : 0.65,
+                transform: `translate(-50%, -50%) translateX(${offset * 92}px) rotateY(${offset * -32}deg) scale(${i === active ? 1 : 0.82})`,
+                zIndex: i === active ? 3 : 3 - Math.abs(offset),
+                opacity: Math.abs(offset) > 1 ? 0 : i === active ? 1 : 0.55,
               }}
             >
-              {slide.label}
+              <img
+                src={`https://picsum.photos/seed/${slide.seed}/260/360`}
+                alt={slide.label}
+                className="absolute inset-0 h-full w-full object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
+              <span className="absolute bottom-2 left-0 right-0 text-center text-xs font-semibold text-white drop-shadow">
+                {slide.label}
+              </span>
             </button>
           );
         })}
       </div>
-      <p className="text-center text-[10px] text-muted-foreground mt-2">Tap a slide</p>
+      <p className="text-center text-xs text-muted-foreground mt-3">Tap a card to rotate the cylinder</p>
     </div>
   );
 }

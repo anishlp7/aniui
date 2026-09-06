@@ -16,7 +16,7 @@ export default function Page() {
         <h1 className="text-3xl font-bold mb-2">Carousel Parallax</h1>
         <p className="text-muted-foreground text-lg">Horizontal carousel with inner-layer parallax translation and a haptic tick on release.</p>
       </div>
-      <ShowcaseDocPlayground slug="carousel-parallax" code={usageCode} />
+      <ShowcaseDocPlayground slug="carousel-parallax" code={usageCode} variant="inline" />
       <div>
         <Heading as="h2" className="text-xl font-semibold mb-3">Installation</Heading>
         <AddComponentTabs names="carousel-parallax" />

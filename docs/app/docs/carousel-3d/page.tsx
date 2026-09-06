@@ -16,7 +16,7 @@ export default function Page() {
         <h1 className="text-3xl font-bold mb-2">Carousel 3D</h1>
         <p className="text-muted-foreground text-lg">3D cylindrical carousel with pan gestures and snap physics.</p>
       </div>
-      <ShowcaseDocPlayground slug="carousel-3d" code={usageCode} />
+      <ShowcaseDocPlayground slug="carousel-3d" code={usageCode} variant="inline" />
       <div>
         <Heading as="h2" className="text-xl font-semibold mb-3">Installation</Heading>
         <AddComponentTabs names="carousel-3d" />

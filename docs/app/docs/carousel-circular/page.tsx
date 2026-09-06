@@ -11,7 +11,7 @@ export default function Page() {
   return (
     <div className="space-y-12">
       <div><h1 className="text-3xl font-bold mb-2">Carousel Circular</h1><p className="text-muted-foreground text-lg">Circular orbit carousel — pan to rotate items around a ring.</p></div>
-      <ShowcaseDocPlayground slug="carousel-circular" code={usageCode} />
+      <ShowcaseDocPlayground slug="carousel-circular" code={usageCode} variant="inline" />
       <div><Heading as="h2" className="text-xl font-semibold mb-3">Installation</Heading><AddComponentTabs names="carousel-circular" /></div>
       <div><Heading as="h2" className="text-xl font-semibold mb-3">Usage</Heading><ComponentPlayground code={usageCode} /></div>
       <div><Heading as="h2" className="text-xl font-semibold mb-3">Source</Heading><CodeBlock code={sourceCode} title="components/ui/carousel-circular.tsx" /></div>

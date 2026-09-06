@@ -11,7 +11,7 @@ export default function Page() {
   return (
     <div className="space-y-12">
       <div><h1 className="text-3xl font-bold mb-2">Carousel Scale</h1><p className="text-muted-foreground text-lg">Center-focused carousel with dramatic scale on the active slide.</p></div>
-      <ShowcaseDocPlayground slug="carousel-scale" code={usageCode} />
+      <ShowcaseDocPlayground slug="carousel-scale" code={usageCode} variant="inline" />
       <div><Heading as="h2" className="text-xl font-semibold mb-3">Installation</Heading><AddComponentTabs names="carousel-scale" /></div>
       <div><Heading as="h2" className="text-xl font-semibold mb-3">Usage</Heading><ComponentPlayground code={usageCode} /></div>
       <div><Heading as="h2" className="text-xl font-semibold mb-3">Source</Heading><CodeBlock code={sourceCode} title="components/ui/carousel-scale.tsx" /></div>
