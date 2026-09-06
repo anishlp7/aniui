@@ -74,6 +74,60 @@ jest.mock("react-native-svg", () => {
   };
 });
 
+/* ── Mock @shopify/react-native-skia ─────────────────────── */
+// Skia is a native C++ binding (via JSI) whose JS entry point (index.js)
+// unconditionally `import`s "./skia/NativeSetup" at module load time to wire
+// up the native module — there's no lazy/guarded path, so requiring the real
+// package under Jest throws immediately (and its lib/module build is ESM,
+// which Jest doesn't transform inside node_modules by default either). Stub
+// it the same way react-native-svg is stubbed above: every drawing
+// "component" it exports renders as a plain View, and the handful of
+// imperative helpers (vec, useClock, Skia.Path.Make) return inert stand-ins
+// good enough for components to run their effects without crashing.
+jest.mock("@shopify/react-native-skia", () => {
+  const React = require("react");
+  const { View } = require("react-native");
+  const mockComponent = (name) => {
+    const C = (props) => React.createElement(View, { ...props, testID: name });
+    C.displayName = name;
+    return C;
+  };
+  const chainablePath = {
+    moveTo: () => chainablePath,
+    lineTo: () => chainablePath,
+    cubicTo: () => chainablePath,
+    quadTo: () => chainablePath,
+    close: () => chainablePath,
+    addCircle: () => chainablePath,
+    addRect: () => chainablePath,
+  };
+  return {
+    __esModule: true,
+    Canvas: mockComponent("Canvas"),
+    Circle: mockComponent("Circle"),
+    Rect: mockComponent("Rect"),
+    RoundedRect: mockComponent("RoundedRect"),
+    Path: mockComponent("Path"),
+    Group: mockComponent("Group"),
+    Mask: mockComponent("Mask"),
+    Paint: mockComponent("Paint"),
+    Blur: mockComponent("Blur"),
+    BlurMask: mockComponent("BlurMask"),
+    ColorMatrix: mockComponent("ColorMatrix"),
+    DashPathEffect: mockComponent("DashPathEffect"),
+    LinearGradient: mockComponent("LinearGradient"),
+    RadialGradient: mockComponent("RadialGradient"),
+    SweepGradient: mockComponent("SweepGradient"),
+    vec: (x = 0, y = 0) => ({ x, y }),
+    useClock: () => ({ value: 0 }),
+    Skia: {
+      Path: {
+        Make: () => ({ ...chainablePath }),
+      },
+    },
+  };
+});
+
 /* ── Mock @gorhom/bottom-sheet ───────────────────────────── */
 jest.mock("@gorhom/bottom-sheet", () => {
   const React = require("react");
