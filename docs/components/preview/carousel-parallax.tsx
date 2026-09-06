@@ -13,7 +13,7 @@ export function PreviewCarouselParallax({ className }: { className?: string }) {
   const [active, setActive] = useState(1);
 
   return (
-    <div className={cn("w-full max-w-xl mx-auto", className)}>
+    <div className={cn("w-full", className)}>
       <div className="flex items-center justify-center gap-3 h-56">
         {slides.map((slide, i) => (
           <button

@@ -39,7 +39,7 @@ export default function HoverCardPage() {
         </p>
       </div>
       {/* Preview */}
-      <ComponentPlayground code={usageCode} variant="inline">
+      <ComponentPlayground code={usageCode}>
         <PreviewHoverCardDemo />
       </ComponentPlayground>
       {/* Installation */}

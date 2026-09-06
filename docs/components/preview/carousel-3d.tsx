@@ -15,7 +15,7 @@ export function PreviewCarousel3D({ className }: { className?: string }) {
   const [active, setActive] = useState(2);
 
   return (
-    <div className={cn("w-full max-w-xl mx-auto", className)}>
+    <div className={cn("w-full max-w-md mx-auto", className)}>
       <div className="relative h-56 [perspective:1100px]">
         {slides.map((slide, i) => {
           const offset = i - active;

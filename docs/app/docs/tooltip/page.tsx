@@ -41,7 +41,7 @@ export default function TooltipPage() {
         </p>
       </div>
       {/* Preview */}
-      <ComponentPlayground code={usageCode} variant="inline">
+      <ComponentPlayground code={usageCode}>
         <div className="flex flex-wrap items-center gap-4 py-6">
           <PreviewTooltip content="This is a tooltip">
             <button type="button" className="inline-flex items-center gap-2 rounded-md border border-input bg-background px-4 py-2 text-sm font-medium text-foreground hover:bg-accent cursor-pointer">
@@ -66,7 +66,7 @@ export default function TooltipPage() {
       {/* Sides */}
       <div className="space-y-4">
         <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Tooltip Position</Heading>
-        <ComponentPlayground code={sidesCode} variant="inline">
+        <ComponentPlayground code={sidesCode}>
           <div className="flex flex-wrap items-center gap-8 py-8">
             <PreviewTooltip content="Tooltip above" side="top">
               <button type="button" className="inline-flex items-center rounded-md border border-input bg-background px-4 py-2 text-sm font-medium text-foreground hover:bg-accent cursor-pointer">Top</button>

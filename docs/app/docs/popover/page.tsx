@@ -42,7 +42,7 @@ export default function PopoverPage() {
         </p>
       </div>
       {/* Preview */}
-      <ComponentPlayground code={usageCode} variant="inline">
+      <ComponentPlayground code={usageCode}>
         <PreviewPopoverDemo />
       </ComponentPlayground>
       {/* Installation */}

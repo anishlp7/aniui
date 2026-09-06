@@ -81,7 +81,7 @@ export default function TablePage() {
       </div>
       {/* Preview */}
       <PreviewToggle>
-        <ComponentPlayground code={previewCode} variant="inline">
+        <ComponentPlayground code={previewCode}>
           <PreviewTable />
         </ComponentPlayground>
       </PreviewToggle>
@@ -99,7 +99,7 @@ export default function TablePage() {
       <div className="space-y-4">
         <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Examples</Heading>
         <Heading as="h3" className="text-lg font-medium text-foreground">Default</Heading>
-        <ComponentPlayground code={previewCode} variant="inline">
+        <ComponentPlayground code={previewCode}>
           <PreviewTable />
         </ComponentPlayground>
       </div>

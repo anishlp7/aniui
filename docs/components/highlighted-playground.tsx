@@ -4,8 +4,6 @@ import { ComponentPlaygroundClient } from "@/components/component-playground";
 interface ComponentPlaygroundProps {
   code: string;
   children?: React.ReactNode;
-  /** Use "inline" for overlay components (dialog, drawer, toast) that escape containment */
-  variant?: "phone" | "inline";
   /** Optional Expo Snack URL for real device preview */
   snackUrl?: string;
 }

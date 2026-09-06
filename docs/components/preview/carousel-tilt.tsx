@@ -14,7 +14,7 @@ export function PreviewCarouselTilt({ className }: { className?: string }) {
   const [active, setActive] = useState(1);
 
   return (
-    <div className={cn("w-full max-w-xl mx-auto", className)}>
+    <div className={cn("w-full", className)}>
       <div className="flex items-end justify-center gap-4 h-56 [perspective:900px]">
         {slides.map((slide, i) => (
           <button
