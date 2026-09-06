@@ -4,6 +4,7 @@ import { ComponentPlayground } from "@/components/highlighted-playground";
 import { CodeBlock } from "@/components/code-block-server";
 import { PropsTable, ComponentTable } from "@/components/props-table";
 import { PreviewToggle } from "@/components/preview-toggle";
+import { PreviewContextMenu } from "@/components/preview/context-menu";
 import { AddComponentTabs } from "@/components/package-manager-tabs";
 
 const installCode = `npx @aniui/cli add context-menu`;
@@ -41,9 +42,7 @@ export default function ContextMenuPage() {
 
       <PreviewToggle>
         <ComponentPlayground code={usageCode}>
-          <div className="h-32 w-full flex items-center justify-center rounded-lg border-2 border-dashed border-gray-300 text-sm text-gray-500">
-            Long press to open context menu
-          </div>
+          <PreviewContextMenu />
         </ComponentPlayground>
       </PreviewToggle>
 

@@ -1,0 +1,24 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "carousel-scale",
+  "type": "registry:ui",
+  "title": "CarouselScale",
+  "description": "Center-focused carousel where neighbors zoom up and rotate out, with a haptic tick on release",
+  "dependencies": [
+    "react-native-reanimated",
+    "expo-haptics",
+    "clsx",
+    "tailwind-merge"
+  ],
+  "registryDependencies": [
+    "https://aniui.dev/r/utils.json"
+  ],
+  "files": [
+    {
+      "path": "components/ui/carousel-scale.tsx",
+      "type": "registry:ui",
+      "content": "import React, { useState } from \"react\";\nimport { View, useWindowDimensions } from \"react-native\";\nimport Animated, {\n  Extrapolation,\n  interpolate,\n  runOnJS,\n  useAnimatedScrollHandler,\n  useAnimatedStyle,\n  useSharedValue,\n} from \"react-native-reanimated\";\nimport * as Haptics from \"expo-haptics\";\nimport { cn } from \"@/lib/utils\";\n\nexport interface CarouselScaleProps extends React.ComponentPropsWithoutRef<typeof View> {\n  className?: string;\n  data: React.ReactNode[];\n  itemWidth?: number;\n  spacing?: number;\n  scaleRange?: [number, number, number];\n  rotationRange?: [number, number, number];\n  showDots?: boolean;\n}\n\nexport function CarouselScale({\n  className,\n  data,\n  itemWidth: itemWidthProp,\n  spacing = 12,\n  scaleRange = [1.6, 1, 1.6],\n  rotationRange = [15, 0, -10],\n  showDots = true,\n  ...props\n}: CarouselScaleProps) {\n  const { width } = useWindowDimensions();\n  const itemWidth = itemWidthProp ?? width * 0.62;\n  const snap = itemWidth + spacing;\n  const scrollX = useSharedValue(0);\n  const [active, setActive] = useState(0);\n\n  const onScroll = useAnimatedScrollHandler({\n    onScroll: (e) => {\n      scrollX.value = e.contentOffset.x;\n    },\n    onEndDrag: () => {\n      runOnJS(Haptics.impactAsync)(Haptics.ImpactFeedbackStyle.Rigid);\n    },\n  });\n\n  return (\n    <View className={cn(\"\", className)} accessibilityRole=\"adjustable\" {...props}>\n      <Animated.ScrollView\n        horizontal\n        showsHorizontalScrollIndicator={false}\n        snapToInterval={snap}\n        decelerationRate=\"fast\"\n        contentContainerStyle={{ paddingHorizontal: (width - itemWidth) / 2, gap: spacing }}\n        onScroll={onScroll}\n        scrollEventThrottle={16}\n        onMomentumScrollEnd={(e) => setActive(Math.round(e.nativeEvent.contentOffset.x / snap))}\n      >\n        {data.map((item, index) => (\n          <ScaleSlide key={index} index={index} scrollX={scrollX} snap={snap} width={itemWidth} scaleRange={scaleRange} rotationRange={rotationRange}>\n            {item}\n          </ScaleSlide>\n        ))}\n      </Animated.ScrollView>\n      {showDots && data.length > 1 && (\n        <View className=\"mt-3 flex-row items-center justify-center gap-1.5\">\n          {data.map((_, i) => (\n            <View key={i} className={cn(\"h-2 rounded-full\", i === active ? \"w-4 bg-primary\" : \"w-2 bg-muted-foreground/30\")} />\n          ))}\n        </View>\n      )}\n    </View>\n  );\n}\n\nfunction ScaleSlide({\n  index,\n  scrollX,\n  snap,\n  width,\n  scaleRange,\n  rotationRange,\n  children,\n}: {\n  index: number;\n  scrollX: Animated.SharedValue<number>;\n  snap: number;\n  width: number;\n  scaleRange: [number, number, number];\n  rotationRange: [number, number, number];\n  children: React.ReactNode;\n}) {\n  const style = useAnimatedStyle(() => {\n    const input = [(index - 1) * snap, index * snap, (index + 1) * snap];\n    const scale = interpolate(scrollX.value, input, scaleRange, Extrapolation.CLAMP);\n    const rotate = interpolate(scrollX.value, input, rotationRange, Extrapolation.CLAMP);\n    return { transform: [{ scale }, { rotate: `${rotate}deg` }] };\n  });\n  return (\n    <Animated.View style={[{ width }, style]} className=\"overflow-hidden rounded-2xl\">\n      {children}\n    </Animated.View>\n  );\n}\n"
+    }
+  ],
+  "docs": "AniUI is React Native. On an existing RNR/NativeWind project, add and use directly — the tokens and aliases already match, no setup needed. On a fresh project, run `npx @aniui/cli init` first to configure NativeWind/Uniwind, theme tokens, and Metro/Babel."
+}

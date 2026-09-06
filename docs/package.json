@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "node scripts/generate-showcase-preview.mjs && next build",
+    "generate:previews": "node scripts/generate-showcase-preview.mjs",
     "start": "next start",
     "lint": "eslint"
   },

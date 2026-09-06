@@ -1,7 +1,13 @@
 /* ── Shared navigation data — single source of truth ────────── */
 
 export type NavItem = { title: string; href: string };
-export type NavSection = { title: string; items: NavItem[]; collapsible?: boolean };
+export type NavGroup = { title: string; items: NavItem[] };
+export type NavSection = {
+  title: string;
+  items?: NavItem[];
+  groups?: NavGroup[];
+  collapsible?: boolean;
+};
 
 export const gettingStartedItems: NavItem[] = [
   { title: "Introduction", href: "/docs" },
@@ -19,15 +25,10 @@ export const gettingStartedItems: NavItem[] = [
   { title: "Expo SDK 56", href: "/docs/expo-56" },
   { title: "Android", href: "/docs/android" },
   { title: "Uniwind", href: "/docs/uniwind" },
+  { title: "Roadmap", href: "/docs/roadmap" },
   { title: "Changelog", href: "/docs/changelog" },
   { title: "Create", href: "/create" },
 ];
-
-// Components are grouped by what they're for (a user browsing docs doesn't
-// care that Dialog needs @rn-primitives/dialog while Card doesn't — that's
-// an implementation detail already surfaced per-page, not a navigation axis).
-// componentItems below stays a flat, alphabetically-ordered-within-category
-// list for the consumers that need one (pagination, search, mobile nav).
 
 export const foundationItems: NavItem[] = [
   { title: "Animate", href: "/docs/animate" },
@@ -119,7 +120,6 @@ export const navigationItems: NavItem[] = [
 export const dataDisplayItems: NavItem[] = [
   { title: "Avatar", href: "/docs/avatar" },
   { title: "Avatar Group", href: "/docs/avatar-group" },
-  { title: "Carousel", href: "/docs/carousel" },
   { title: "Data Table", href: "/docs/data-table" },
   { title: "Grid", href: "/docs/grid" },
   { title: "Image", href: "/docs/image" },
@@ -131,6 +131,117 @@ export const dataDisplayItems: NavItem[] = [
   { title: "Stat Card", href: "/docs/stat-card" },
   { title: "Table", href: "/docs/table" },
   { title: "Timeline", href: "/docs/timeline" },
+];
+
+export const motionGroups: NavGroup[] = [
+  {
+    title: "Carousels",
+    items: [
+      { title: "Carousel", href: "/docs/carousel" },
+      { title: "3D Carousel", href: "/docs/carousel-3d" },
+      { title: "Parallax Carousel", href: "/docs/carousel-parallax" },
+      { title: "Orbit Carousel", href: "/docs/carousel-circular" },
+      { title: "Carousel Scale", href: "/docs/carousel-scale" },
+      { title: "Carousel Tilt", href: "/docs/carousel-tilt" },
+    ],
+  },
+  {
+    title: "Loaders",
+    items: [
+      { title: "Shimmer", href: "/docs/shimmer" },
+      { title: "Loader", href: "/docs/loader" },
+    ],
+  },
+  {
+    title: "Micro-interactions",
+    items: [
+      { title: "Flip Card", href: "/docs/flip-card" },
+      { title: "Marquee", href: "/docs/marquee" },
+      { title: "Disclosure Group", href: "/docs/disclosure-group" },
+      { title: "Flexi Button", href: "/docs/flexi-button" },
+      { title: "Save Button", href: "/docs/save-button" },
+      { title: "Spin Button", href: "/docs/spin-button" },
+      { title: "Stacked Chips", href: "/docs/stacked-chips" },
+      { title: "Filling Stack", href: "/docs/filling-stack" },
+      { title: "Hamburger", href: "/docs/hamburger" },
+      { title: "Theme Switch", href: "/docs/theme-switch" },
+      { title: "Animated Input Bar", href: "/docs/animated-input-bar" },
+    ],
+  },
+  {
+    title: "Navigation Chrome",
+    items: [
+      { title: "Curved Bottom Tabs", href: "/docs/curved-bottom-tabs" },
+      { title: "Animated Tabs", href: "/docs/morphing-tabbar" },
+      { title: "App Dock", href: "/docs/mobile-dock" },
+      { title: "Fan Menu", href: "/docs/fan-menu" },
+      { title: "Animated Header ScrollView", href: "/docs/animated-header-scrollview" },
+    ],
+  },
+  {
+    title: "Skia Effects",
+    items: [
+      { title: "Border Beam", href: "/docs/border-beam" },
+      { title: "Blob Switch", href: "/docs/gooey-switch" },
+      { title: "Morph Loader", href: "/docs/morph-loader" },
+      { title: "Verified Shine", href: "/docs/verified-shine" },
+      { title: "Glow Button", href: "/docs/radiant-button" },
+      { title: "Morph Fab", href: "/docs/morph-fab" },
+      { title: "Gooey Popover", href: "/docs/gooey-popover" },
+      { title: "Gooey Search Tabs", href: "/docs/gooey-search-tabs" },
+    ],
+  },
+  {
+    title: "Layout Primitives",
+    items: [
+      { title: "Matched Geometry", href: "/docs/matched-geometry" },
+      { title: "Arc List", href: "/docs/arc-list" },
+    ],
+  },
+];
+
+export const navigationOverlayGroups: NavGroup[] = [
+  {
+    title: "Compound Overlays",
+    items: [
+      { title: "Tray", href: "/docs/tray" },
+      { title: "Unfold Menu", href: "/docs/unfold-menu" },
+      { title: "Action Rail", href: "/docs/action-rail" },
+      { title: "Split View", href: "/docs/split-view" },
+      { title: "Expandable View", href: "/docs/expandable-view" },
+    ],
+  },
+];
+
+export const piecesGroups: NavGroup[] = [
+  {
+    title: "Cards & Tickets",
+    items: [
+      { title: "Event Ticket", href: "/docs/event-ticket" },
+      { title: "Receipt Card", href: "/docs/receipt-card" },
+      { title: "Coupon", href: "/docs/coupon" },
+      { title: "Polaroid", href: "/docs/polaroid" },
+      { title: "Profile Card", href: "/docs/profile-card" },
+      { title: "Photo Stack", href: "/docs/photo-stack" },
+      { title: "Book Page", href: "/docs/book-page" },
+    ],
+  },
+  {
+    title: "Identity & Social",
+    items: [
+      { title: "Barcode Badge", href: "/docs/barcode-badge" },
+      { title: "Social Button", href: "/docs/social-button" },
+      { title: "Verified Badge", href: "/docs/verified-badge" },
+      { title: "QR Code", href: "/docs/qr-code" },
+      { title: "Number Counter", href: "/docs/rolling-counter" },
+    ],
+  },
+  {
+    title: "Shapes & Containers",
+    items: [
+      { title: "Squircle View", href: "/docs/squircle-view" },
+    ],
+  },
 ];
 
 export const chatItems: NavItem[] = [
@@ -147,6 +258,12 @@ export const gesturesItems: NavItem[] = [
   { title: "Swipeable List Item", href: "/docs/swipeable-list-item" },
 ];
 
+/** Flatten items from a section that may use groups or a flat list. */
+export function flattenSectionItems(section: NavSection): NavItem[] {
+  if (section.groups) return section.groups.flatMap((g) => g.items);
+  return section.items ?? [];
+}
+
 export const componentCategories: NavSection[] = [
   { title: "Foundation", items: foundationItems, collapsible: true },
   { title: "Forms & Inputs", items: formsItems, collapsible: true },
@@ -154,11 +271,14 @@ export const componentCategories: NavSection[] = [
   { title: "Overlays & Menus", items: overlaysItems, collapsible: true },
   { title: "Navigation & Structure", items: navigationItems, collapsible: true },
   { title: "Data Display & Media", items: dataDisplayItems, collapsible: true },
+  { title: "Motion & Effects", groups: motionGroups, collapsible: true },
+  { title: "Navigation & Overlays", groups: navigationOverlayGroups, collapsible: true },
+  { title: "UI Pieces", groups: piecesGroups, collapsible: true },
   { title: "Chat & AI", items: chatItems, collapsible: true },
   { title: "Gestures & Actions", items: gesturesItems, collapsible: true },
 ];
 
-export const componentItems: NavItem[] = componentCategories.flatMap((c) => c.items);
+export const componentItems: NavItem[] = componentCategories.flatMap(flattenSectionItems);
 
 export const chartItems: NavItem[] = [
   { title: "Area Chart", href: "/charts/area-chart" },
@@ -194,3 +314,9 @@ export const sidebarSections: NavSection[] = [
   { title: "Charts", items: chartItems, collapsible: true },
   { title: "Blocks", items: blockItems, collapsible: true },
 ];
+
+/** Find the top-level sidebar section containing a pathname. */
+export function findSectionForPath(pathname: string | null): string | undefined {
+  if (!pathname) return undefined;
+  return sidebarSections.find((s) => flattenSectionItems(s).some((i) => i.href === pathname))?.title;
+}

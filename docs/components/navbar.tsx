@@ -4,7 +4,7 @@ import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import { useTheme } from "./theme-provider";
 import { PrefetchLink } from "./prefetch-link";
-import { gettingStartedItems, sidebarSections } from "@/lib/nav-data";
+import { flattenSectionItems, gettingStartedItems, sidebarSections } from "@/lib/nav-data";
 import { CommandSearch } from "./command-search";
 
 function SunIcon() {
@@ -207,7 +207,7 @@ export function Navbar() {
               .map((section) => (
                 <div key={section.title} className="border-t border-border pt-4 mt-4">
                   <p className="text-xs font-semibold text-foreground mb-2">{section.title}</p>
-                  {section.items.map((item, i) => (
+                  {flattenSectionItems(section).map((item, i) => (
                     <PrefetchLink key={item.href} href={item.href} className={`block text-sm text-muted-foreground hover:text-foreground${i > 0 ? " mt-2" : ""}`} onClick={() => setMobileOpen(false)}>
                       {item.title}
                     </PrefetchLink>

@@ -6,7 +6,7 @@ import { motion, AnimatePresence, useReducedMotion, type Variants } from "motion
 import { ChevronDown } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { PrefetchLink } from "./prefetch-link";
-import { sidebarSections } from "@/lib/nav-data";
+import { findSectionForPath, flattenSectionItems, sidebarSections, type NavSection } from "@/lib/nav-data";
 import { activePillSpring, reducedMotionTransition } from "@/lib/motion";
 
 const STORAGE_KEY = "aniui-docs-sidebar-closed-sections";
@@ -26,9 +26,6 @@ const linkItem: Variants = {
   show: { opacity: 1, x: 0, transition: { type: "spring", stiffness: 240, damping: 24 } },
 };
 
-// Same variants with motion dropped, for prefers-reduced-motion — the sidebar
-// used to guard only the active-pill transition, leaving the entrance stagger
-// sliding in regardless of the setting.
 const sectionItemReduced: Variants = {
   hidden: { opacity: 0 },
   show: { opacity: 1, transition: reducedMotionTransition },
@@ -38,16 +35,67 @@ const linkItemReduced: Variants = {
   show: { opacity: 1, transition: reducedMotionTransition },
 };
 
-function findSectionForPath(pathname: string | null) {
-  return sidebarSections.find((s) => s.items.some((i) => i.href === pathname))?.title;
+function NavLinks({
+  items,
+  pathname,
+  prefersReducedMotion,
+  indent = false,
+}: {
+  items: { title: string; href: string }[];
+  pathname: string | null;
+  prefersReducedMotion: boolean | null;
+  indent?: boolean;
+}) {
+  return (
+    <motion.ul className={cn("space-y-1", indent && "ml-2 border-l border-border pl-2")} variants={sectionContainer} initial="hidden" animate="show">
+      {items.map((item) => {
+        const isActive = pathname === item.href;
+        return (
+          <motion.li key={item.href} variants={prefersReducedMotion ? linkItemReduced : linkItem} className="relative">
+            {isActive && (
+              <motion.span
+                layoutId="sidebar-active-pill"
+                className="absolute inset-0 rounded-md bg-accent"
+                transition={prefersReducedMotion ? reducedMotionTransition : activePillSpring}
+              />
+            )}
+            <PrefetchLink
+              href={item.href}
+              className={cn(
+                "relative block rounded-md px-3 py-1.5 text-sm transition-colors",
+                indent && "text-[13px]",
+                isActive ? "text-accent-foreground font-medium" : "text-muted-foreground hover:bg-accent/50 hover:text-accent-foreground"
+              )}
+            >
+              {item.title}
+            </PrefetchLink>
+          </motion.li>
+        );
+      })}
+    </motion.ul>
+  );
+}
+
+function SectionContent({ section, pathname, prefersReducedMotion }: { section: NavSection; pathname: string | null; prefersReducedMotion: boolean | null }) {
+  if (section.groups) {
+    return (
+      <div className="space-y-3">
+        {section.groups.map((group) => (
+          <div key={group.title}>
+            <p className="mb-1 px-3 text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">{group.title}</p>
+            <NavLinks items={group.items} pathname={pathname} prefersReducedMotion={prefersReducedMotion} indent />
+          </div>
+        ))}
+      </div>
+    );
+  }
+  return <NavLinks items={section.items ?? []} pathname={pathname} prefersReducedMotion={prefersReducedMotion} />;
 }
 
 export function Sidebar() {
   const pathname = usePathname();
   const prefersReducedMotion = useReducedMotion();
   const asideRef = useRef<HTMLElement>(null);
-  // Sections the user has manually collapsed — every section defaults open,
-  // same as before collapsing existed, so nothing hides on first visit.
   const [closedSections, setClosedSections] = useState<Set<string>>(new Set());
 
   useEffect(() => {
@@ -55,12 +103,10 @@ export function Sidebar() {
       const stored = localStorage.getItem(STORAGE_KEY);
       if (stored) setClosedSections(new Set(JSON.parse(stored)));
     } catch {
-      // ignore — a private window or blocked storage just means nothing persists
+      // ignore
     }
   }, []);
 
-  // If navigation lands on a page whose section the user had collapsed,
-  // auto-reopen it — a collapsed section should never hide the active page.
   useEffect(() => {
     const activeSection = findSectionForPath(pathname);
     if (activeSection) {
@@ -73,18 +119,6 @@ export function Sidebar() {
     }
   }, [pathname]);
 
-  // Scroll the active item into view on route change — a deep link landing
-  // far down the list previously left the nav pane unscrolled to reveal it.
-  // Skipped on first mount: the browser already restores (or starts at) a
-  // reasonable scroll position then, so forcing one more scroll on load
-  // just reads as an unexpected jump.
-  //
-  // Queries the DOM directly for the active link instead of tracking it via
-  // a single ref conditionally assigned across list items — that approach
-  // left the ref pointing at the *previous* active item when navigating,
-  // because motion.li merges a conditionally-assigned ref through its own
-  // internal ref-forwarding, which doesn't reliably detach/reattach in sync
-  // with the plain React commit. A live query is unambiguous.
   const hasMountedRef = useRef(false);
   useEffect(() => {
     if (!hasMountedRef.current) {
@@ -93,10 +127,7 @@ export function Sidebar() {
     }
     if (!pathname) return;
     const activeLink = asideRef.current?.querySelector(`a[href="${pathname}"]`);
-    activeLink?.scrollIntoView({
-      block: "nearest",
-      behavior: prefersReducedMotion ? "auto" : "smooth",
-    });
+    activeLink?.scrollIntoView({ block: "nearest", behavior: prefersReducedMotion ? "auto" : "smooth" });
   }, [pathname, prefersReducedMotion]);
 
   const toggleSection = (title: string) => {
@@ -107,7 +138,7 @@ export function Sidebar() {
       try {
         localStorage.setItem(STORAGE_KEY, JSON.stringify([...next]));
       } catch {
-        // ignore — nothing persists, section still toggles for this session
+        // ignore
       }
       return next;
     });
@@ -116,13 +147,7 @@ export function Sidebar() {
   return (
     <aside ref={asideRef} className="fixed top-14 left-0 z-30 hidden h-[calc(100vh-3.5rem)] w-64 shrink-0 overflow-y-auto border-r border-border bg-background md:block scrollbar-hidden">
       <div className="flex min-h-full flex-col">
-        <motion.nav
-          className="space-y-6 p-6 pb-4"
-          style={{ marginBottom: "80px" }}
-          variants={sectionContainer}
-          initial="hidden"
-          animate="show"
-        >
+        <motion.nav className="space-y-6 p-6 pb-4" style={{ marginBottom: "80px" }} variants={sectionContainer} initial="hidden" animate="show">
           {sidebarSections.map((section) => {
             const isOpen = !closedSections.has(section.title);
             return (
@@ -135,10 +160,7 @@ export function Sidebar() {
                     aria-expanded={isOpen}
                   >
                     {section.title}
-                    <motion.span
-                      animate={{ rotate: isOpen ? 0 : -90 }}
-                      transition={prefersReducedMotion ? reducedMotionTransition : { type: "spring", stiffness: 300, damping: 26 }}
-                    >
+                    <motion.span animate={{ rotate: isOpen ? 0 : -90 }} transition={prefersReducedMotion ? reducedMotionTransition : { type: "spring", stiffness: 300, damping: 26 }}>
                       <ChevronDown size={14} className="text-muted-foreground" />
                     </motion.span>
                   </button>
@@ -147,15 +169,6 @@ export function Sidebar() {
                 )}
                 <AnimatePresence initial={false}>
                   {isOpen && (
-                    // Height/opacity collapse animation lives on this outer div, kept
-                    // separate from the <ul> below — a motion component's `animate`
-                    // prop only propagates variant *labels* ("show"/"hidden") to
-                    // children, not literal style objects. Putting both the collapse
-                    // animation and the stagger variants on the same element broke
-                    // the stagger: children never received a "show" signal, so they
-                    // stayed at their hidden (opacity: 0) state while the <ul> still
-                    // measured full height — items invisible, but still taking up
-                    // (and inflating) space.
                     <motion.div
                       className="overflow-hidden"
                       initial={section.collapsible ? { height: 0, opacity: 0 } : false}
@@ -163,42 +176,7 @@ export function Sidebar() {
                       exit={{ height: 0, opacity: 0 }}
                       transition={prefersReducedMotion ? reducedMotionTransition : { duration: 0.18, ease: "easeOut" }}
                     >
-                      <motion.ul
-                        className="space-y-1"
-                        variants={sectionContainer}
-                        initial="hidden"
-                        animate="show"
-                      >
-                        {section.items.map((item) => {
-                          const isActive = pathname === item.href;
-                          return (
-                            <motion.li
-                              key={item.href}
-                              variants={prefersReducedMotion ? linkItemReduced : linkItem}
-                              className="relative"
-                            >
-                              {isActive && (
-                                <motion.span
-                                  layoutId="sidebar-active-pill"
-                                  className="absolute inset-0 rounded-md bg-accent"
-                                  transition={prefersReducedMotion ? reducedMotionTransition : activePillSpring}
-                                />
-                              )}
-                              <PrefetchLink
-                                href={item.href}
-                                className={cn(
-                                  "relative block rounded-md px-3 py-1.5 text-sm transition-colors",
-                                  isActive
-                                    ? "text-accent-foreground font-medium"
-                                    : "text-muted-foreground hover:bg-accent/50 hover:text-accent-foreground"
-                                )}
-                              >
-                                {item.title}
-                              </PrefetchLink>
-                            </motion.li>
-                          );
-                        })}
-                      </motion.ul>
+                      <SectionContent section={section} pathname={pathname} prefersReducedMotion={prefersReducedMotion} />
                     </motion.div>
                   )}
                 </AnimatePresence>

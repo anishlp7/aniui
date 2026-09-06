@@ -1,0 +1,26 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "verified-shine",
+  "type": "registry:ui",
+  "title": "VerifiedShine",
+  "description": "Verified badge with a shine sweep masked to the icon's own silhouette",
+  "dependencies": [
+    "@shopify/react-native-skia",
+    "react-native-reanimated",
+    "lucide-react-native",
+    "react-native-svg",
+    "clsx",
+    "tailwind-merge"
+  ],
+  "registryDependencies": [
+    "https://aniui.dev/r/utils.json"
+  ],
+  "files": [
+    {
+      "path": "components/ui/verified-shine.tsx",
+      "type": "registry:ui",
+      "content": "import React from \"react\";\nimport { View, Text } from \"react-native\";\nimport {\n  Canvas,\n  Group,\n  Mask,\n  Path,\n  Rect,\n  LinearGradient,\n  vec,\n  useClock,\n} from \"@shopify/react-native-skia\";\nimport { useDerivedValue } from \"react-native-reanimated\";\nimport { BadgeCheck } from \"lucide-react-native\";\nimport { cn } from \"@/lib/utils\";\n\n// lucide-react-native's BadgeCheck outer-shield outline (24x24 viewBox),\n// reused only to build a Skia alpha mask that lines up with the icon lucide\n// already renders on screen — so the shine sweep is confined to the badge's\n// own silhouette instead of sweeping across the whole pill. This is\n// lucide's own public glyph data (already an AniUI dependency here), not\n// reacticx's path — theirs is a differently-shaped 22x22 shield/star glyph\n// and is never copied.\nconst BADGE_MASK_PATH =\n  \"M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z\";\n\nconst ICON_VIEWBOX = 24;\nconst SHINE_COLORS = [\"transparent\", \"rgba(255,255,255,0.85)\", \"transparent\"] as const;\n\nexport interface VerifiedShineProps extends React.ComponentPropsWithoutRef<typeof View> {\n  className?: string;\n  /**\n   * Visually rendered pill text (AniUI extension — reacticx's `label` is\n   * accessibility-only and renders no text). Pass \"\" for an icon-only badge.\n   */\n  label?: string;\n  /** Size of the badge glyph itself, in dp. */\n  iconSize?: number;\n  /** Sweep tilt in degrees. Defaults to reacticx's own shine angle. */\n  shineAngle?: number;\n  /** Sweep-band width as a fraction of `iconSize`. */\n  shineWidth?: number;\n  /** How long one sweep takes, in ms. */\n  duration?: number;\n  /** Pause between sweeps, in ms — reproduces reacticx's flash-then-rest cadence. */\n  delay?: number;\n  width?: number;\n  height?: number;\n}\n\nexport function VerifiedShine({\n  className,\n  label = \"Verified\",\n  iconSize = 16,\n  shineAngle = 18,\n  shineWidth = 0.4,\n  duration = 1200,\n  delay = 900,\n  width = 140,\n  height = 36,\n  ...props\n}: VerifiedShineProps) {\n  const clock = useClock();\n  const scale = iconSize / ICON_VIEWBOX;\n  const waveWidth = iconSize * shineWidth;\n\n  const shineX = useDerivedValue(() => {\n    \"worklet\";\n    const cycle = duration + delay;\n    const t = clock.value % cycle;\n    if (t > duration) return -waveWidth * 2; // parked off-canvas during the pause\n    return -waveWidth + (t / duration) * (iconSize + waveWidth * 2);\n  }, [clock, duration, delay, iconSize, waveWidth]);\n\n  return (\n    <View\n      className={cn(\"relative flex-row items-center gap-1.5 overflow-hidden rounded-full bg-primary/10 px-3\", className)}\n      style={{ width, height }}\n      accessibilityRole=\"text\"\n      accessibilityLabel={label || \"Verified\"}\n      {...props}\n    >\n      <View style={{ width: iconSize, height: iconSize }}>\n        <BadgeCheck size={iconSize} color=\"#2563eb\" fill=\"#2563eb\" strokeWidth={2} />\n        <Canvas\n          style={{ position: \"absolute\", top: 0, left: 0, width: iconSize, height: iconSize }}\n          pointerEvents=\"none\"\n        >\n          <Mask\n            mask={\n              <Group transform={[{ scale }]}>\n                <Path path={BADGE_MASK_PATH} color=\"white\" />\n              </Group>\n            }\n          >\n            <Group\n              transform={[{ translateX: shineX }, { rotate: (shineAngle * Math.PI) / 180 }]}\n              origin={vec(waveWidth / 2, iconSize / 2)}\n            >\n              <Rect x={0} y={-iconSize} width={waveWidth} height={iconSize * 3}>\n                <LinearGradient start={vec(0, 0)} end={vec(waveWidth, 0)} colors={SHINE_COLORS} />\n              </Rect>\n            </Group>\n          </Mask>\n        </Canvas>\n      </View>\n      {!!label && <Text className=\"text-sm font-semibold text-primary\">{label}</Text>}\n    </View>\n  );\n}\n"
+    }
+  ],
+  "docs": "AniUI is React Native. On an existing RNR/NativeWind project, add and use directly — the tokens and aliases already match, no setup needed. On a fresh project, run `npx @aniui/cli init` first to configure NativeWind/Uniwind, theme tokens, and Metro/Babel."
+}

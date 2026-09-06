@@ -1,0 +1,25 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "flip-card",
+  "type": "registry:ui",
+  "title": "FlipCard",
+  "description": "Tap-to-flip card with horizontal/vertical/depth 3D rotation, mid-flip glass blur, and haptic feedback",
+  "dependencies": [
+    "react-native-reanimated",
+    "expo-blur",
+    "expo-haptics",
+    "clsx",
+    "tailwind-merge"
+  ],
+  "registryDependencies": [
+    "https://aniui.dev/r/utils.json"
+  ],
+  "files": [
+    {
+      "path": "components/ui/flip-card.tsx",
+      "type": "registry:ui",
+      "content": "import React, { useEffect, useState } from \"react\";\nimport { Platform, Pressable, View } from \"react-native\";\nimport Animated, {\n  Extrapolation,\n  interpolate,\n  useAnimatedStyle,\n  useSharedValue,\n  withSpring,\n} from \"react-native-reanimated\";\nimport { BlurView, type BlurViewProps } from \"expo-blur\";\nimport * as Haptics from \"expo-haptics\";\nimport { cn } from \"@/lib/utils\";\n\nconst AnimatedBlurView = Animated.createAnimatedComponent<BlurViewProps>(BlurView);\n\nconst FLIP_SPRING = { dampingRatio: 0.72, duration: 600 } as const;\nconst PRESS_SPRING = { damping: 18, stiffness: 320, mass: 0.5 } as const;\n\nexport type FlipCardAnimation = \"horizontal\" | \"vertical\" | \"depth\";\n\n/** Per-face 3D transform for a given flip mode. `offsetDeg` is 0 for the front face, 180 for the back. */\nfunction faceTransform(mode: FlipCardAnimation, progressValue: number, offsetDeg: 0 | 180, scaleValue: number) {\n  \"worklet\";\n  const angle = offsetDeg + progressValue * 180;\n  const midFlipBulge = Math.sin(Math.PI * progressValue);\n\n  if (mode === \"vertical\") {\n    return [{ perspective: 1000 }, { rotateX: `${angle}deg` }, { scale: scaleValue }];\n  }\n  if (mode === \"depth\") {\n    return [\n      { perspective: 850 },\n      { translateY: -24 * midFlipBulge },\n      { rotateY: `${angle}deg` },\n      { scale: scaleValue * (1 - 0.15 * midFlipBulge) },\n    ];\n  }\n  return [{ perspective: 1000 }, { rotateY: `${angle}deg` }, { scale: scaleValue }];\n}\n\nexport interface FlipCardProps extends React.ComponentPropsWithoutRef<typeof View> {\n  className?: string;\n  front: React.ReactNode;\n  back: React.ReactNode;\n  flipped?: boolean;\n  onFlip?: (flipped: boolean) => void;\n  /** 3D rotation axis used for the flip. Defaults to the classic horizontal card flip. */\n  animation?: FlipCardAnimation;\n}\n\nexport function FlipCard({ className, front, back, flipped, onFlip, animation = \"horizontal\", ...props }: FlipCardProps) {\n  const [internal, setInternal] = useState(false);\n  const isFlipped = flipped ?? internal;\n  const progress = useSharedValue(0);\n  const scale = useSharedValue(1);\n\n  useEffect(() => {\n    progress.value = withSpring(isFlipped ? 1 : 0, FLIP_SPRING);\n  }, [isFlipped, progress]);\n\n  const frontStyle = useAnimatedStyle(() => ({\n    transform: faceTransform(animation, progress.value, 0, scale.value),\n    opacity: progress.value < 0.5 ? 1 : 0,\n  }));\n  const backStyle = useAnimatedStyle(() => ({\n    transform: faceTransform(animation, progress.value, 180, scale.value),\n    opacity: progress.value >= 0.5 ? 1 : 0,\n  }));\n  const edgeBlurStyle = useAnimatedStyle(() => ({\n    opacity: interpolate(progress.value, [0, 0.5, 1], [0, 1, 0], Extrapolation.CLAMP),\n  }));\n\n  const toggle = () => {\n    const next = !isFlipped;\n    if (flipped === undefined) setInternal(next);\n    onFlip?.(next);\n    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);\n  };\n\n  const onPressIn = () => {\n    scale.value = withSpring(0.96, PRESS_SPRING);\n  };\n  const onPressOut = () => {\n    scale.value = withSpring(1, PRESS_SPRING);\n  };\n\n  return (\n    <Pressable\n      onPress={toggle}\n      onPressIn={onPressIn}\n      onPressOut={onPressOut}\n      accessible={true}\n      accessibilityRole=\"button\"\n      accessibilityState={{ expanded: isFlipped }}\n      className={cn(\"min-h-12 min-w-12\", className)}\n      {...props}\n    >\n      <View style={{ transform: [{ perspective: 1000 }] }}>\n        <Animated.View style={[{ backfaceVisibility: \"hidden\" }, frontStyle]}>\n          {front}\n          {Platform.OS === \"ios\" && (\n            <AnimatedBlurView tint=\"light\" intensity={90} pointerEvents=\"none\" style={[{ position: \"absolute\", inset: 0 }, edgeBlurStyle]} />\n          )}\n        </Animated.View>\n        <Animated.View style={[{ position: \"absolute\", inset: 0, backfaceVisibility: \"hidden\" }, backStyle]}>\n          {back}\n          {Platform.OS === \"ios\" && (\n            <AnimatedBlurView tint=\"light\" intensity={90} pointerEvents=\"none\" style={[{ position: \"absolute\", inset: 0 }, edgeBlurStyle]} />\n          )}\n        </Animated.View>\n      </View>\n    </Pressable>\n  );\n}\n"
+    }
+  ],
+  "docs": "AniUI is React Native. On an existing RNR/NativeWind project, add and use directly — the tokens and aliases already match, no setup needed. On a fresh project, run `npx @aniui/cli init` first to configure NativeWind/Uniwind, theme tokens, and Metro/Babel."
+}
