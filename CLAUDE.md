@@ -104,7 +104,17 @@ aniui/
 │           └── logger.ts
 │
 ├── components/                # Source files — copied by CLI into user's project
-│   └── ui/
+│   └── ui/                    # NOTE: this tree is illustrative, not exhaustive — 153
+│                               # components exist under components/ui/ today; cli/src/registry.ts
+│                               # is the authoritative list. New from the reacticx-fidelity
+│                               # effort (see THIRD-PARTY.md): tray.tsx, unfold-menu.tsx,
+│                               # action-rail.tsx, split-view.tsx, expandable-view.tsx,
+│                               # matched-geometry.tsx, arc-list.tsx, flexi-button.tsx,
+│                               # save-button.tsx, spin-button.tsx, stacked-chips.tsx,
+│                               # filling-stack.tsx, hamburger.tsx, theme-switch.tsx,
+│                               # animated-header-scrollview.tsx, animated-input-bar.tsx,
+│                               # squircle-view.tsx, morph-fab.tsx, gooey-popover.tsx,
+│                               # gooey-search-tabs.tsx
 │       ├── button.tsx
 │       ├── text.tsx
 │       ├── input.tsx
@@ -284,7 +294,7 @@ All component-internal icons come from **`lucide-react-native`** (peer: `react-n
 
 ## Component Tiers — What Gets Built When
 
-> **Source of truth:** `cli/src/registry.ts` is authoritative for every component's tier, npm deps, and registry deps — the table below is a human-readable overview that may lag. The `tier` type is `1 | 2 | 3` (SVG charts are tier 3, not "tier 4"). Components present in the registry but not (yet) in the table below: `calendar`, `stepper`, `field`, `input-group`, `kbd`, `hover-card`, `direction-provider`, `animate`, `data-table`, `command-menu`, `aspect-ratio`, `breadcrumb`, `menubar`, `sidebar`. When the table and registry disagree on tier/deps, trust the registry.
+> **Source of truth:** `cli/src/registry.ts` is authoritative for every component's tier, npm deps, and registry deps — the table below is a human-readable overview that may lag. The `tier` type is `1 | 2 | 3 | 4` — Tier 4 is Skia-based components (charts and other Skia effects), not just charts. Components present in the registry but not (yet) in the table below: `calendar`, `stepper`, `field`, `input-group`, `kbd`, `hover-card`, `direction-provider`, `animate`, `data-table`, `command-menu`, `aspect-ratio`, `breadcrumb`, `menubar`, `sidebar`. When the table and registry disagree on tier/deps, trust the registry.
 
 ### Tier 1: Zero extra dependencies (use RN core + NativeWind + cva only)
 
@@ -339,6 +349,12 @@ All component-internal icons come from **`lucide-react-native`** (peer: `react-n
 | 47 | carousel | FlatList | Paged horizontal carousel via native FlatList — no reanimated |
 | 48 | toggle | Pressable | Two-state toggle button — no reanimated |
 | 49 | toggle-group | View+Context | Group of exclusive toggle buttons — no reanimated |
+| 83 | coupon | View+Text | Two-section promo coupon with tear-line, ticket icon, orientation prop |
+| 84 | event-ticket | View+Svg | Notched ticket silhouette with stub barcode |
+| 85 | receipt-card | View+Svg | Tilted, torn-edge receipt with dotted item leaders and barcode |
+| 86 | book-page | View+Svg | Book cover with spine gradient and page-edge texture (openAngle is a static, consumer-driven prop — no reanimated) |
+| 87 | barcode-badge | View+Text | Width-encoded barcode strip, compound Root/Bars/Label API |
+| 88 | verified-badge | View+Text | Name/Handle verified badge with palette overrides |
 
 ### Tier 2: Needs react-native-reanimated v3
 
@@ -352,6 +368,26 @@ All component-internal icons come from **`lucide-react-native`** (peer: `react-n
 | 55 | rating | Star/icon rating |
 | 56 | connection-banner | Slide-in online/offline banner |
 | 57 | typing-indicator | Animated typing dots for chat |
+| 89 | loader | Bouncing dots or a segmented comet-tail ring (react-native-svg) |
+| 90 | shimmer | Content-aware skeleton — sweep/pulse variants, isLoading reveal |
+| 91 | carousel-parallax | Real inner-layer parallax translation (expo-haptics tick on release) |
+| 92 | carousel-scale | Neighbors zoom up + rotate out (expo-haptics tick on release) |
+| 93 | carousel-tilt | Z-axis fan carousel, bottom pivot (optional expo-blur overlay) |
+| 94 | photo-stack | Press-lift-and-straighten spring per photo |
+| 95 | polaroid | Press-lift-and-straighten spring, optional washi-tape decoration |
+| 96 | profile-card | Cover image, overlapping avatar, press-scale action button |
+| 97 | social-button | Default brand SVG marks, outline/filled/ghost, press-scale |
+| 98 | marquee | Generic-children ticker — reverse, pause-on-press, hold-to-speed-up |
+| 99 | morphing-tabbar | Per-tab corner-radius morph (expo-haptics tick on tab change) |
+| 100 | expandable-view | Generic width/height/radius morph container with slot API |
+| 101 | matched-geometry | Shared-element layout transition primitive (Provider + hook) |
+| 102 | arc-list | Items on a curved arc, snap-to-focus (expo-haptics tick on snap) |
+| 103 | flexi-button | Adaptive-width pill button, dimension-change callback |
+| 104 | save-button | Idle → loading → success → done state-machine button |
+| 105 | spin-button | SVG arc spinner + crossfading label |
+| 106 | stacked-chips | Nested, depth-aware expandable chip menu |
+| 107 | hamburger | Hamburger ⇄ close icon morph |
+| 108 | theme-switch | Sun/moon icon morph, optional full-screen circular wipe |
 
 ### Tier 3: Needs rn-primitives or external packages
 
@@ -375,18 +411,43 @@ All component-internal icons come from **`lucide-react-native`** (peer: `react-n
 | 73 | bottom-sheet | @gorhom/bottom-sheet |
 | 74 | action-sheet | @gorhom/bottom-sheet |
 | 75 | swipeable-list-item | react-native-gesture-handler |
+| 109 | carousel-3d | react-native-gesture-handler (real perspective-matrix projected faces) |
+| 110 | carousel-circular | expo-blur (scroll-driven coverflow, blur fade on non-centered items) |
+| 111 | curved-bottom-tabs | react-native-svg + react-native-reanimated (curve/floating button slide to active tab) |
+| 112 | flip-card | expo-blur + expo-haptics (horizontal/vertical/depth modes, mid-flip glass blur) |
+| 113 | disclosure-group | expo-blur (measured-height reveal, optional frosted blur) |
+| 114 | fan-menu | expo-blur (staggered labeled pills, dismissible backdrop) |
+| 115 | mobile-dock | react-native-gesture-handler (finger-tracked fisheye, `Gesture.Manual()`) |
+| 116 | qr-code | react-native-qrcode-svg (real scannable code behind expand/collapse reveal) |
+| 117 | rolling-counter | expo-blur (motion-blur, squash/stretch, staggered digits, wrap-around fix) |
+| 118 | tray | react-native-gesture-handler + react-native-safe-area-context (compound push/back tray, detents, scroll hand-off) |
+| 119 | unfold-menu | react-native-safe-area-context (trigger unfolds into a panel, label morph) |
+| 120 | action-rail | Expandable icon toolbar with its own palette system |
+| 121 | split-view | react-native-gesture-handler (draggable top/bottom split pane, snap points) |
+| 122 | filling-stack | react-native-gesture-handler + expo-blur (vertical fling-browsable card stack) |
+| 123 | animated-header-scrollview | expo-blur + react-native-safe-area-context (collapsing large-title header) |
+| 124 | animated-input-bar | expo-blur (per-character animated placeholder cycling) |
 
-### Tier 4: Chart components (needs react-native-svg)
+### Tier 4: Skia-based components (needs @shopify/react-native-skia)
 
 | # | Component | Description |
 |---|-----------|-------------|
-| 76 | area-chart | SVG area chart with fill |
-| 77 | bar-chart | SVG bar chart with grouping |
-| 78 | line-chart | SVG line chart with series |
-| 79 | pie-chart | SVG pie/donut chart |
-| 80 | radar-chart | SVG radar/spider chart |
-| 81 | radial-chart | SVG radial progress rings |
-| 82 | chart-tooltip | Tooltip overlay for chart data |
+| 76 | area-chart | Skia area chart — entrance draw-on, data morphing, drag-to-scrub tooltip |
+| 77 | bar-chart | Skia bar chart — staggered grow-in, data morphing, drag-to-scrub tooltip |
+| 78 | line-chart | Skia line chart — draw-on entrance, morph-on-data-change, scrub crosshair |
+| 79 | pie-chart | Skia pie/donut chart — grow-in sweep, morphing, drag-to-select push-out |
+| 80 | radar-chart | Skia radar/spider chart — staggered grow-in, morphing, drag-to-select |
+| 81 | radial-chart | Skia concentric radial rings — grow-in, morphing, drag-to-select |
+| 82 | chart-tooltip | Tooltip overlay for chart data (Tier 1 — no Skia, plain View/Text) |
+| 125 | border-beam | Sweeping multi-hue beam arc with ambient glow around a rounded border |
+| 126 | gooey-switch | Blur+ColorMatrix metaball toggle (anchors + bridge fuse), tap or drag |
+| 127 | morph-loader | Morphs through 6 Material-style silhouettes with independent rotation |
+| 128 | verified-shine | Shine sweep masked to the badge icon's own silhouette |
+| 129 | radiant-button | Traveling border glow, diagonal shimmer, pulsing radial ambient glow |
+| 130 | morph-fab | Gooey radial/directional FAB menu, staggered blob-merge spring |
+| 131 | gooey-popover | Popover that morphs its trigger into the content panel (Blur+ColorMatrix, not a shader) |
+| 132 | gooey-search-tabs | Pill that morphs between a search bar and a tab switcher (Blur+ColorMatrix, not a shader) |
+| 133 | squircle-view | True superellipse container with animatable corner-smoothing |
 
 ## Theme System
 
