@@ -10,7 +10,7 @@ export function PreviewSquircleView({ className }: { className?: string }) {
     <div className={cn("flex flex-col items-center gap-4", className)}>
       <div
         className="flex h-24 w-24 items-center justify-center bg-primary text-xs font-semibold text-primary-foreground transition-[border-radius] duration-200"
-        style={{ borderRadius: `${30 + smoothing * 20}% / ${30 + smoothing * 30}%` }}
+        style={{ borderRadius: `${18 + smoothing * 24}%` }}
       >
         Squircle
       </div>
