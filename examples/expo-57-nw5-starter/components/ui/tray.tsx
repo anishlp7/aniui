@@ -334,6 +334,14 @@ export function Tray({
 
   const measured = useRef(0);
   const presented = useRef(false);
+  // Tracks the latest desired open state so a closing spring's completion
+  // callback — which can still be in flight when the tray is reopened before
+  // it settles — can tell it's now stale and skip resetting the fresh open.
+  // Without this, a quick reopen right after closing would get silently
+  // yanked back to a mounted-but-reset, invisible state once the old spring
+  // finally finished.
+  const openRef = useRef(open);
+  openRef.current = open;
 
   const setOpen = useCallback(
     (next: boolean) => {
@@ -357,6 +365,7 @@ export function Tray({
   }, [sheetHeight, travel, offset, startOffset, scrollY, owns, origin, present]);
 
   const finishClose = useCallback(() => {
+    if (openRef.current) return;
     setMounted(false);
     reset();
   }, [reset]);

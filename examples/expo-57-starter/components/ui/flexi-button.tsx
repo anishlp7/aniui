@@ -47,7 +47,7 @@ export function FlexiButton({
     (e: GestureResponderEvent) => {
       const next = !expanded;
       setExpanded(next);
-      progress.value = withSpring(next ? 1 : 0, { damping: 16, stiffness: 180 });
+      progress.value = withSpring(next ? 1 : 0, { damping: 16, stiffness: 180, overshootClamping: true });
       onExpandedChange?.(next);
       onPress?.(e);
     },

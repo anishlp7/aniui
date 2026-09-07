@@ -58,16 +58,20 @@ function iconSize(
   outputRange: number[]
 ) {
   "worklet";
+  // activeAmount is always blended from a fixed [0, 1] range, so the blend is
+  // plain arithmetic (interpolate(t, [0,1], [a,b]) === a + t * (b - a)) rather
+  // than a call to interpolate() with a freshly-built array literal each loop
+  // iteration — that pattern was crashing on Android inside a worklet.
   const n = Math.max(count, 1);
   let totalExtra = 0;
   for (let j = 0; j < n; j++) {
     const distance = Math.abs(activeIndex - j);
     const grown = interpolate(distance, inputRange, outputRange, Extrapolation.CLAMP);
-    totalExtra += interpolate(activeAmount, ISACTIVE_INPUT, [0, grown - restSize]);
+    totalExtra += activeAmount * (grown - restSize);
   }
   const myDistance = Math.abs(activeIndex - index);
   const myGrown = interpolate(myDistance, inputRange, outputRange, Extrapolation.CLAMP);
-  const mine = interpolate(activeAmount, ISACTIVE_INPUT, [restSize, myGrown]);
+  const mine = restSize + activeAmount * (myGrown - restSize);
   return mine - totalExtra / n;
 }
 
@@ -93,6 +97,12 @@ export function MobileDock({
   const activeIndex = useSharedValue(-1);
   const isActive = useSharedValue(0);
   const dockWidth = useSharedValue(0);
+  // Touch coordinates are relative to the gesture-attached (outer, padded)
+  // view, but the icons only occupy the inner row inside that padding —
+  // without this offset, touchToIndex mapped the raw touch x against the
+  // full padded width, which under-registered touches near the edges (most
+  // noticeably: holding the last icon could resolve to the previous one).
+  const rowOffsetX = useSharedValue(0);
   const count = items.length;
 
   // spread=1 (default) -> inputRange [0, 1], outputRange [peakSize, itemSize]:
@@ -123,16 +133,16 @@ export function MobileDock({
       Gesture.Manual()
         .onTouchesDown((e, manager) => {
           if (e.allTouches.length === 0) return;
-          activeIndex.value = touchToIndex(e.allTouches[0].x, dockWidth.value, count);
+          activeIndex.value = touchToIndex(e.allTouches[0].x - rowOffsetX.value, dockWidth.value, count);
           isActive.value = withSpring(1, ACTIVATE_SPRING);
           manager.activate();
         })
         .onTouchesMove((e) => {
           if (e.allTouches.length === 0) return;
-          activeIndex.value = touchToIndex(e.allTouches[0].x, dockWidth.value, count);
+          activeIndex.value = touchToIndex(e.allTouches[0].x - rowOffsetX.value, dockWidth.value, count);
         })
         .onTouchesUp((e) => {
-          const idx = e.allTouches.length > 0 ? touchToIndex(e.allTouches[0].x, dockWidth.value, count) : activeIndex.value;
+          const idx = e.allTouches.length > 0 ? touchToIndex(e.allTouches[0].x - rowOffsetX.value, dockWidth.value, count) : activeIndex.value;
           if (idx >= -0.5) runOnJS(fireTap)(idx);
           isActive.value = withSpring(0, SETTLE_SPRING);
         })
@@ -141,37 +151,39 @@ export function MobileDock({
           manager.end();
         })
         .shouldCancelWhenOutside(false),
-    [activeIndex, isActive, dockWidth, count, fireTap]
+    [activeIndex, isActive, dockWidth, rowOffsetX, count, fireTap]
   );
 
-  const handleLayout = (e: LayoutChangeEvent) => {
+  const handleRowLayout = (e: LayoutChangeEvent) => {
     dockWidth.value = e.nativeEvent.layout.width;
-    onLayout?.(e);
+    rowOffsetX.value = e.nativeEvent.layout.x;
   };
 
   return (
     <GestureDetector gesture={gesture}>
       <Animated.View
         className={cn("flex-row items-end rounded-2xl border border-border bg-card/90 px-3 pb-2 pt-1", className)}
-        onLayout={handleLayout}
+        onLayout={onLayout}
         accessibilityRole="toolbar"
         {...props}
       >
-        {items.map((item, index) => (
-          <DockIcon
-            key={item.key}
-            item={item}
-            index={index}
-            count={count}
-            activeIndex={activeIndex}
-            isActive={isActive}
-            itemSize={itemSize}
-            gap={gap}
-            inputRange={inputRange}
-            outputRange={outputRange}
-            showLabel={showLabels && !!item.label}
-          />
-        ))}
+        <View className="flex-1 flex-row items-end" onLayout={handleRowLayout}>
+          {items.map((item, index) => (
+            <DockIcon
+              key={item.key}
+              item={item}
+              index={index}
+              count={count}
+              activeIndex={activeIndex}
+              isActive={isActive}
+              itemSize={itemSize}
+              gap={gap}
+              inputRange={inputRange}
+              outputRange={outputRange}
+              showLabel={showLabels && !!item.label}
+            />
+          ))}
+        </View>
       </Animated.View>
     </GestureDetector>
   );

@@ -41,7 +41,7 @@ const PRESS_IN_SPRING: WithSpringConfig = { stiffness: 150, damping: 14, mass: 0
 const PRESS_OUT_SPRING: WithSpringConfig = { stiffness: 260, damping: 16, mass: 0.5 };
 // Alpha-threshold ColorMatrix: sharpens a blurred layer's alpha channel so
 // nearby blurred shapes visually fuse into one blob instead of overlapping
-// translucently — the same metaball technique used by GooeySwitch.
+// translucently — the same metaball technique used elsewhere in this family.
 const GOO_MATRIX = [1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 22, -11];
 const LAYER_PADDING = 36;
 

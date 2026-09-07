@@ -118,7 +118,7 @@ Already on RNR / NativeWind / Uniwind? Components drop in with **zero extra setu
 
 ## Components
 
-**153 components** — all listed alphabetically. Each component's docs page tells you if it needs extra dependencies. Component icons come from [lucide-react-native](https://lucide.dev) (installed automatically by `aniui init`/`add`); icon props (`icon`, `leadingIcon`, …) accept any ReactNode, so you can bring your own.
+**149 components** — all listed alphabetically. Each component's docs page tells you if it needs extra dependencies. Component icons come from [lucide-react-native](https://lucide.dev) (installed automatically by `aniui init`/`add`); icon props (`icon`, `leadingIcon`, …) accept any ReactNode, so you can bring your own.
 
 Building an AI app? Pair [Prompt Input](https://aniui.dev/docs/prompt-input) (ChatGPT/Claude-style composer with toolbar slots), [Streaming Text](https://aniui.dev/docs/streaming-text), [Chat Bubble](https://aniui.dev/docs/chat-bubble), [Typing Indicator](https://aniui.dev/docs/typing-indicator), and [Waveform](https://aniui.dev/docs/waveform) (voice recording) for a complete chat UI.
 
@@ -142,7 +142,6 @@ Building an AI app? Pair [Prompt Input](https://aniui.dev/docs/prompt-input) (Ch
 | [Bar Chart](https://aniui.dev/docs/bar-chart) | Skia bar chart with staggered grow-in and drag-to-scrub tooltip |
 | [Barcode Badge](https://aniui.dev/docs/barcode-badge) | Width-encoded barcode strip with a compound Root/Bars/Label API |
 | [Book Page](https://aniui.dev/docs/book-page) | Book cover with a spine gradient and an openAngle hinge |
-| [Border Beam](https://aniui.dev/docs/border-beam) | Sweeping multi-hue beam arc with ambient glow around a border |
 | [Bottom Sheet](https://aniui.dev/docs/bottom-sheet) | Bottom sheet overlay |
 | [Breadcrumb](https://aniui.dev/docs/breadcrumb) | Navigation trail for the current page's location |
 | [Button](https://aniui.dev/docs/button) | Pressable with 5 variants and 3 sizes |
@@ -167,7 +166,6 @@ Building an AI app? Pair [Prompt Input](https://aniui.dev/docs/prompt-input) (Ch
 | [Date Picker](https://aniui.dev/docs/date-picker) | Calendar popup picker with range support |
 | [Dialog](https://aniui.dev/docs/dialog) | Modal with fade + scale overlay |
 | [Direction Provider](https://aniui.dev/docs/direction-provider) | RTL/LTR direction context with I18nManager |
-| [Disclosure Group](https://aniui.dev/docs/disclosure-group) | Grouped disclosure sections with measured-height reveal |
 | [Drawer](https://aniui.dev/docs/drawer) | Slide-in side navigation panel |
 | [Dropdown Menu](https://aniui.dev/docs/dropdown-menu) | Context menu with fade animation |
 | [Empty State](https://aniui.dev/docs/empty-state) | Placeholder for empty lists and error states |
@@ -183,7 +181,6 @@ Building an AI app? Pair [Prompt Input](https://aniui.dev/docs/prompt-input) (Ch
 | [Form](https://aniui.dev/docs/form) | Form context with validation, error messages, compound components |
 | [Gooey Popover](https://aniui.dev/docs/gooey-popover) | Popover that morphs its trigger into the content panel |
 | [Gooey Search Tabs](https://aniui.dev/docs/gooey-search-tabs) | Pill that morphs between a search bar and a tab switcher |
-| [Gooey Switch](https://aniui.dev/docs/gooey-switch) | Metaball toggle whose blurred shapes fuse via alpha threshold |
 | [Gradient](https://aniui.dev/docs/gradient) | Linear gradient view with configurable colors and direction |
 | [Grid](https://aniui.dev/docs/grid) | FlatList-based grid layout with configurable columns |
 | [Hamburger](https://aniui.dev/docs/hamburger) | Animated hamburger ⇄ close icon morph |
@@ -208,7 +205,6 @@ Building an AI app? Pair [Prompt Input](https://aniui.dev/docs/prompt-input) (Ch
 | [Menubar](https://aniui.dev/docs/menubar) | Horizontal bar of menus with dropdown items |
 | [Mobile Dock](https://aniui.dev/docs/mobile-dock) | Finger-tracked fisheye dock that magnifies the icon under your touch |
 | [Morph Fab](https://aniui.dev/docs/morph-fab) | Gooey radial/directional FAB menu with staggered blob-merge |
-| [Morph Loader](https://aniui.dev/docs/morph-loader) | Loader that morphs through Material-style silhouettes |
 | [Morphing Tab Bar](https://aniui.dev/docs/morphing-tabbar) | Tab bar where each tab's corner radii morph to split off a pill |
 | [Number Input](https://aniui.dev/docs/number-input) | Numeric input with +/- buttons and min/max |
 | [Pagination](https://aniui.dev/docs/pagination) | Page navigation with numbered buttons and prev/next |
@@ -226,7 +222,6 @@ Building an AI app? Pair [Prompt Input](https://aniui.dev/docs/prompt-input) (Ch
 | [QR Code](https://aniui.dev/docs/qr-code) | Real, scannable QR code behind an expand/collapse reveal |
 | [Radar Chart](https://aniui.dev/docs/radar-chart) | Skia radar/spider chart with staggered grow-in and morphing |
 | [Radial Chart](https://aniui.dev/docs/radial-chart) | Skia concentric radial progress rings with drag-to-select |
-| [Radiant Button](https://aniui.dev/docs/radiant-button) | CTA button with a traveling border glow and diagonal shimmer |
 | [Radio Group](https://aniui.dev/docs/radio-group) | Radio button group with context |
 | [Rating](https://aniui.dev/docs/rating) | Star rating with interactive and read-only modes |
 | [Receipt Card](https://aniui.dev/docs/receipt-card) | Tilted, torn-edge receipt with dotted item leaders |
@@ -272,7 +267,8 @@ Building an AI app? Pair [Prompt Input](https://aniui.dev/docs/prompt-input) (Ch
 | [Typing Indicator](https://aniui.dev/docs/typing-indicator) | Animated typing dots for chat interfaces |
 | [Unfold Menu](https://aniui.dev/docs/unfold-menu) | Menu whose trigger unfolds into a full panel |
 | [Verified Badge](https://aniui.dev/docs/verified-badge) | Verified check badge with a Name/Handle layout |
-| [Verified Shine](https://aniui.dev/docs/verified-shine) | Verified badge with a shine sweep masked to the icon shape |
+| [Vertical Flow Carousel](https://aniui.dev/docs/vertical-flow-carousel) | Vertical coverflow — cards scale, tilt, and blur as they scroll from center |
+| [Vertical Page Carousel](https://aniui.dev/docs/vertical-page-carousel) | Full-bleed vertical pager, one card per screen, with a haptic tick on release |
 | [Waveform](https://aniui.dev/docs/waveform) | Animated audio waveform bars for voice recording |
 
 ## Prerequisites
@@ -299,7 +295,7 @@ npx expo install @shopify/react-native-skia
 
 | Area | Status |
 |------|--------|
-| 153 components | ✅ |
+| 149 components | ✅ |
 | Component & CLI tests (Jest) | ✅ |
 | Accessibility audit | ✅ |
 | Performance benchmarks | ✅ |

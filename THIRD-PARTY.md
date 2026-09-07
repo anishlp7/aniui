@@ -23,17 +23,18 @@ When adapting ideas from MIT-licensed projects, we maintain this file for transp
   one) and were rewritten to close that gap.
 - **AniUI originals — Wave 1–3** (carousels, navigation chrome, UI pieces, general motion):
   `carousel-3d`, `carousel-circular`, `carousel-parallax`, `carousel-scale`, `carousel-tilt`,
-  `curved-bottom-tabs`, `mobile-dock`, `morphing-tabbar`, `fan-menu`, `disclosure-group`,
+  `vertical-flow-carousel`, `vertical-page-carousel`,
+  `curved-bottom-tabs`, `mobile-dock`, `morphing-tabbar`, `fan-menu`,
   `flip-card`, `marquee`, `loader`, `shimmer`, `photo-stack`, `polaroid`, `profile-card`,
   `book-page`, `barcode-badge`, `coupon`, `event-ticket`, `receipt-card`, `social-button`,
   `verified-badge`, `qr-code`, `rolling-counter`.
 - **AniUI originals — Wave 4** (Skia-based effects; charts also moved onto Skia for real
   entrance/morph/scrub animation instead of static SVG): `area-chart`, `bar-chart`,
-  `line-chart`, `pie-chart`, `radar-chart`, `radial-chart`, `gooey-switch`, `border-beam`,
-  `radiant-button`, `morph-loader`, `morph-fab`, `gooey-popover`, `gooey-search-tabs`,
-  `squircle-view`. Note: `gooey-search-tabs` reproduces reacticx's shader-driven blend visually
-  using a non-shader Skia `Blur`+`ColorMatrix` technique instead — AniUI is intentionally not
-  adopting Skia `RuntimeEffect`/SkSL shaders in this wave (see below).
+  `line-chart`, `pie-chart`, `radar-chart`, `radial-chart`, `morph-fab`, `gooey-popover`,
+  `gooey-search-tabs`, `squircle-view`. Note: `gooey-popover` and `gooey-search-tabs` reproduce
+  reacticx's shader-driven blends visually using a non-shader Skia `Blur`+`ColorMatrix` technique
+  instead — AniUI is intentionally not adopting Skia `RuntimeEffect`/SkSL shaders in this wave
+  (see below).
 - **AniUI originals — layout/overlay primitives and micro-interactions** (no reacticx
   equivalent existed in AniUI before; same "inspired by, rewritten independently" relationship):
   `tray`, `unfold-menu`, `action-rail`, `split-view`, `expandable-view`, `matched-geometry`,
@@ -41,7 +42,12 @@ When adapting ideas from MIT-licensed projects, we maintain this file for transp
   `hamburger`, `theme-switch`, `animated-header-scrollview`, `animated-input-bar`.
 - **Explicitly out of scope / not adapted from reacticx:** its Animated Text family (shimmer-wave
   text, gradient-wave text, etc.) and its Skia `RuntimeEffect`/SkSL shader effects (aurora,
-  mesh-gradient, siri-ios-27, apple-intelligence, and reacticx's own `border-beam`/
-  `radiant-button` shaders) — AniUI's `border-beam`/`radiant-button`/`gooey-*` components
-  reproduce a similar *visual* using ordinary Skia primitives (`Blur`, `ColorMatrix`,
-  `SweepGradient`) instead of a custom shader.
+  mesh-gradient, siri-ios-27, apple-intelligence, its own gooey-toggle/border-glow/loader-morph
+  shaders, etc.) — AniUI's `gooey-*` components reproduce a similar *visual* using ordinary Skia
+  primitives (`Blur`, `ColorMatrix`) instead of a custom shader. (AniUI previously also carried
+  non-shader `border-beam`, `radiant-button`, `gooey-switch`, `morph-loader`, and `verified-shine`
+  components built on this same substitution; they were removed by product decision, not because
+  the technique failed.)
+- **Removed:** `disclosure-group` was removed as a duplicate of the pre-existing `accordion`
+  component (same grouped expand/collapse purpose, different engine) — see `accordion`'s own
+  docs for the surviving version.

@@ -49,6 +49,7 @@ export function CarouselCircular({
       <AnimatedFlatList
         data={data}
         horizontal
+        pagingEnabled
         showsHorizontalScrollIndicator={false}
         snapToInterval={snap}
         decelerationRate="fast"
@@ -59,9 +60,10 @@ export function CarouselCircular({
           setActive(idx);
           onIndexChange?.(idx);
         }}
-        contentContainerStyle={{ paddingHorizontal: sideSpacing - spacing / 2, paddingVertical: 24 }}
+        style={{ flexGrow: 0 }}
+        contentContainerStyle={{ paddingHorizontal: sideSpacing - spacing / 2, marginTop: 40, marginBottom: 20 }}
         renderItem={({ item, index }) => (
-          <CircularItem index={index} scrollX={scrollX} itemWidth={itemWidth} spacing={spacing}>
+          <CircularItem index={index} count={data.length} scrollX={scrollX} itemWidth={itemWidth} spacing={spacing} sideSpacing={sideSpacing}>
             {item}
           </CircularItem>
         )}
@@ -73,15 +75,19 @@ export function CarouselCircular({
 
 function CircularItem({
   index,
+  count,
   scrollX,
   itemWidth,
   spacing,
+  sideSpacing,
   children,
 }: {
   index: number;
+  count: number;
   scrollX: SharedValue<number>;
   itemWidth: number;
   spacing: number;
+  sideSpacing: number;
   children: React.ReactNode;
 }) {
   const snap = itemWidth + spacing;
@@ -95,13 +101,33 @@ function CircularItem({
     return { opacity, transform: [{ translateY }, { scale }, { rotateZ: `${rotateZ}deg` }] };
   });
 
+  // Android has no BlurView-behind-content pass, so it gets its own depth cue:
+  // a CSS-filter blur on the whole item, same falloff curve as the iOS
+  // BlurView overlay below.
+  const androidBlurStyle = useAnimatedStyle(() => {
+    const blur = interpolate(scrollX.value, inputRange, [4, 8, 0, 8, 4], Extrapolation.CLAMP);
+    return { filter: [{ blur }] } as Record<string, unknown>;
+  });
+
   const blurProps = useAnimatedProps(() => ({
     intensity: interpolate(scrollX.value, inputRange, [80, 40, 0, 40, 80], Extrapolation.CLAMP),
   }));
 
   return (
-    <Animated.View style={[{ width: itemWidth, marginHorizontal: spacing / 2 }, style]} className="items-center justify-center">
-      <View className="w-full overflow-hidden rounded-2xl bg-card">
+    <Animated.View
+      style={[
+        { width: itemWidth, marginHorizontal: spacing / 2 },
+        style,
+        Platform.OS === "android" ? androidBlurStyle : null,
+        { marginRight: index === count - 1 ? sideSpacing - spacing / 2 : undefined },
+      ]}
+      className="items-center justify-center"
+    >
+      {/* Shadow lives on the same opaque, rounded, clipped view as the content
+          (matching reacticx) — casting it from a separate transparent parent
+          made iOS fall back to a plain rectangular shadow silhouette instead
+          of a rounded one. */}
+      <View className="w-full overflow-hidden rounded-2xl bg-card shadow-lg" style={{ elevation: 6 }}>
         {children}
         {Platform.OS === "ios" && (
           <AnimatedBlurView animatedProps={blurProps} tint="prominent" pointerEvents="none" className="absolute inset-0 rounded-2xl" />

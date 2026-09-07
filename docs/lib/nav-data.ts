@@ -140,9 +140,11 @@ export const motionGroups: NavGroup[] = [
       { title: "Carousel", href: "/docs/carousel" },
       { title: "3D Carousel", href: "/docs/carousel-3d" },
       { title: "Parallax Carousel", href: "/docs/carousel-parallax" },
-      { title: "Orbit Carousel", href: "/docs/carousel-circular" },
+      { title: "Circular Carousel", href: "/docs/carousel-circular" },
       { title: "Carousel Scale", href: "/docs/carousel-scale" },
       { title: "Carousel Tilt", href: "/docs/carousel-tilt" },
+      { title: "Vertical Flow Carousel", href: "/docs/vertical-flow-carousel" },
+      { title: "Vertical Page Carousel", href: "/docs/vertical-page-carousel" },
     ],
   },
   {
@@ -157,7 +159,6 @@ export const motionGroups: NavGroup[] = [
     items: [
       { title: "Flip Card", href: "/docs/flip-card" },
       { title: "Marquee", href: "/docs/marquee" },
-      { title: "Disclosure Group", href: "/docs/disclosure-group" },
       { title: "Flexi Button", href: "/docs/flexi-button" },
       { title: "Save Button", href: "/docs/save-button" },
       { title: "Spin Button", href: "/docs/spin-button" },
@@ -181,11 +182,6 @@ export const motionGroups: NavGroup[] = [
   {
     title: "Skia Effects",
     items: [
-      { title: "Border Beam", href: "/docs/border-beam" },
-      { title: "Blob Switch", href: "/docs/gooey-switch" },
-      { title: "Morph Loader", href: "/docs/morph-loader" },
-      { title: "Verified Shine", href: "/docs/verified-shine" },
-      { title: "Glow Button", href: "/docs/radiant-button" },
       { title: "Morph Fab", href: "/docs/morph-fab" },
       { title: "Gooey Popover", href: "/docs/gooey-popover" },
       { title: "Gooey Search Tabs", href: "/docs/gooey-search-tabs" },

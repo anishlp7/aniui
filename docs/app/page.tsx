@@ -209,7 +209,7 @@ export default function HomePage() {
               animate={prefersReducedMotion ? undefined : { scale: [1, 1.4, 1], opacity: [1, 0.7, 1] }}
               transition={{ duration: 1.8, ease: "easeInOut", repeat: Infinity }}
             />
-            <span className="text-xs font-medium text-muted-foreground"><span className="font-semibold text-foreground">133 components</span> and counting</span>
+            <span className="text-xs font-medium text-muted-foreground"><span className="font-semibold text-foreground">149 components</span> and counting</span>
           </motion.div>
 
           <motion.h1
@@ -387,7 +387,7 @@ export default function HomePage() {
         <div className="text-center sm:text-left">
           <p className="text-base font-semibold text-foreground">Preview on your device</p>
           <p className="text-sm text-muted-foreground mt-1 max-w-sm">
-            Scan with Expo Go to try all 133 components live on a real device.
+            Scan with Expo Go to try all 149 components live on a real device.
           </p>
         </div>
       </motion.div>

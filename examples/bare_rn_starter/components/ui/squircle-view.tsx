@@ -115,12 +115,19 @@ export function SquircleView({
       {hasSize && (
         <Canvas style={{ position: "absolute", top: 0, left: 0, right: 0, bottom: 0 }} pointerEvents="none">
           <Path path={path} color={backgroundColor} />
-          {borderWidth > 0 && <Path path={path} color={borderColor} style="stroke" strokeWidth={borderWidth * 2} />}
         </Canvas>
       )}
       <Animated.View className="overflow-hidden" style={clipStyle}>
         {children}
       </Animated.View>
+      {/* Stroke is a separate, later Canvas so it draws on top of children
+          instead of being covered by them — matching reacticx's fill-then-
+          content-then-stroke order. */}
+      {hasSize && borderWidth > 0 && (
+        <Canvas style={{ position: "absolute", top: 0, left: 0, right: 0, bottom: 0 }} pointerEvents="none">
+          <Path path={path} color={borderColor} style="stroke" strokeWidth={borderWidth * 2} />
+        </Canvas>
+      )}
     </View>
   );
 }

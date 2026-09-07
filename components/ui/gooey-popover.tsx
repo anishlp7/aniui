@@ -28,7 +28,7 @@ const OPEN_SPRING: WithSpringConfig = { stiffness: 115, damping: 18, mass: 0.4 }
 const CLOSE_SPRING: WithSpringConfig = { stiffness: 115, damping: 18, mass: 0.4 };
 const PRESS_IN_SPRING: WithSpringConfig = { stiffness: 400, damping: 26, mass: 0.5 };
 const PRESS_OUT_SPRING: WithSpringConfig = { stiffness: 260, damping: 16, mass: 0.5 };
-// Same alpha-threshold trick as GooeySwitch/MorphFab: blur two shapes, then
+// Same alpha-threshold trick used elsewhere in this family: blur two shapes, then
 // sharpen alpha so they fuse into a single blob while they overlap.
 const GOO_MATRIX = [1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 22, -11];
 

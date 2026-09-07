@@ -104,7 +104,7 @@ aniui/
 │           └── logger.ts
 │
 ├── components/                # Source files — copied by CLI into user's project
-│   └── ui/                    # NOTE: this tree is illustrative, not exhaustive — 153
+│   └── ui/                    # NOTE: this tree is illustrative, not exhaustive — 149
 │                               # components exist under components/ui/ today; cli/src/registry.ts
 │                               # is the authoritative list. New from the reacticx-fidelity
 │                               # effort (see THIRD-PARTY.md): tray.tsx, unfold-menu.tsx,
@@ -114,7 +114,8 @@ aniui/
 │                               # filling-stack.tsx, hamburger.tsx, theme-switch.tsx,
 │                               # animated-header-scrollview.tsx, animated-input-bar.tsx,
 │                               # squircle-view.tsx, morph-fab.tsx, gooey-popover.tsx,
-│                               # gooey-search-tabs.tsx
+│                               # gooey-search-tabs.tsx, vertical-flow-carousel.tsx,
+│                               # vertical-page-carousel.tsx
 │       ├── button.tsx
 │       ├── text.tsx
 │       ├── input.tsx
@@ -373,6 +374,7 @@ All component-internal icons come from **`lucide-react-native`** (peer: `react-n
 | 91 | carousel-parallax | Real inner-layer parallax translation (expo-haptics tick on release) |
 | 92 | carousel-scale | Neighbors zoom up + rotate out (expo-haptics tick on release) |
 | 93 | carousel-tilt | Z-axis fan carousel, bottom pivot (optional expo-blur overlay) |
+| 134 | vertical-page-carousel | Full-bleed vertical pager, one card per screen (expo-haptics tick on release) |
 | 94 | photo-stack | Press-lift-and-straighten spring per photo |
 | 95 | polaroid | Press-lift-and-straighten spring, optional washi-tape decoration |
 | 96 | profile-card | Cover image, overlapping avatar, press-scale action button |
@@ -413,9 +415,9 @@ All component-internal icons come from **`lucide-react-native`** (peer: `react-n
 | 75 | swipeable-list-item | react-native-gesture-handler |
 | 109 | carousel-3d | react-native-gesture-handler (real perspective-matrix projected faces) |
 | 110 | carousel-circular | expo-blur (scroll-driven coverflow, blur fade on non-centered items) |
+| 135 | vertical-flow-carousel | expo-blur (vertical coverflow, blur fade on non-centered cards) |
 | 111 | curved-bottom-tabs | react-native-svg + react-native-reanimated (curve/floating button slide to active tab) |
 | 112 | flip-card | expo-blur + expo-haptics (horizontal/vertical/depth modes, mid-flip glass blur) |
-| 113 | disclosure-group | expo-blur (measured-height reveal, optional frosted blur) |
 | 114 | fan-menu | expo-blur (staggered labeled pills, dismissible backdrop) |
 | 115 | mobile-dock | react-native-gesture-handler (finger-tracked fisheye, `Gesture.Manual()`) |
 | 116 | qr-code | react-native-qrcode-svg (real scannable code behind expand/collapse reveal) |
@@ -439,11 +441,6 @@ All component-internal icons come from **`lucide-react-native`** (peer: `react-n
 | 80 | radar-chart | Skia radar/spider chart — staggered grow-in, morphing, drag-to-select |
 | 81 | radial-chart | Skia concentric radial rings — grow-in, morphing, drag-to-select |
 | 82 | chart-tooltip | Tooltip overlay for chart data (Tier 1 — no Skia, plain View/Text) |
-| 125 | border-beam | Sweeping multi-hue beam arc with ambient glow around a rounded border |
-| 126 | gooey-switch | Blur+ColorMatrix metaball toggle (anchors + bridge fuse), tap or drag |
-| 127 | morph-loader | Morphs through 6 Material-style silhouettes with independent rotation |
-| 128 | verified-shine | Shine sweep masked to the badge icon's own silhouette |
-| 129 | radiant-button | Traveling border glow, diagonal shimmer, pulsing radial ambient glow |
 | 130 | morph-fab | Gooey radial/directional FAB menu, staggered blob-merge spring |
 | 131 | gooey-popover | Popover that morphs its trigger into the content panel (Blur+ColorMatrix, not a shader) |
 | 132 | gooey-search-tabs | Pill that morphs between a search bar and a tab switcher (Blur+ColorMatrix, not a shader) |

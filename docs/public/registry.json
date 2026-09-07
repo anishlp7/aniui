@@ -118,12 +118,6 @@
       "description": "Book cover with spine gradient, page-edge texture, and an openAngle-driven hinge"
     },
     {
-      "name": "border-beam",
-      "type": "registry:ui",
-      "title": "BorderBeam",
-      "description": "Sweeping multi-hue beam arc with ambient glow, traced around a rounded border"
-    },
-    {
       "name": "bottom-sheet",
       "type": "registry:ui",
       "title": "BottomSheet",
@@ -292,12 +286,6 @@
       "description": "RTL/LTR direction context with I18nManager integration"
     },
     {
-      "name": "disclosure-group",
-      "type": "registry:ui",
-      "title": "DisclosureGroup",
-      "description": "Animated grouped disclosure sections with measured-height reveal, spring press feedback, and an optional frosted-blur reveal"
-    },
-    {
       "name": "drawer",
       "type": "registry:ui",
       "title": "Drawer",
@@ -398,12 +386,6 @@
       "type": "registry:ui",
       "title": "GooeySearchTabs",
       "description": "Skia gooey pill that morphs between a search bar and a tab switcher"
-    },
-    {
-      "name": "gooey-switch",
-      "type": "registry:ui",
-      "title": "GooeySwitch",
-      "description": "Skia metaball goo switch — blurred anchor blobs and bridge fuse via an alpha-threshold ColorMatrix, with tap or velocity-aware drag toggle"
     },
     {
       "name": "gradient",
@@ -562,12 +544,6 @@
       "description": "Skia gooey radial/directional FAB menu with staggered blob-merge spring animation"
     },
     {
-      "name": "morph-loader",
-      "type": "registry:ui",
-      "title": "MorphLoader",
-      "description": "Skia-drawn loader that morphs through 6 Material-style silhouettes with independent continuous rotation"
-    },
-    {
       "name": "morphing-tabbar",
       "type": "registry:ui",
       "title": "MorphingTabBar",
@@ -704,12 +680,6 @@
       "type": "registry:ui",
       "title": "RadialChart",
       "description": "Skia concentric radial progress rings with grow-in, data morphing, and a drag-to-select tooltip"
-    },
-    {
-      "name": "radiant-button",
-      "type": "registry:ui",
-      "title": "RadiantButton",
-      "description": "CTA button with a traveling border glow, diagonal shimmer, and pulsing radial ambient glow"
     },
     {
       "name": "radio-group",
@@ -1012,10 +982,16 @@
       "description": "Verified check badge with Name/Handle layout and palette overrides"
     },
     {
-      "name": "verified-shine",
+      "name": "vertical-flow-carousel",
       "type": "registry:ui",
-      "title": "VerifiedShine",
-      "description": "Verified badge with a shine sweep masked to the icon's own silhouette"
+      "title": "VerticalFlowCarousel",
+      "description": "Vertical coverflow — cards scale, tilt, and fade as they scroll away from center, with a blur overlay on unfocused cards"
+    },
+    {
+      "name": "vertical-page-carousel",
+      "type": "registry:ui",
+      "title": "VerticalPageCarousel",
+      "description": "Full-bleed vertical pager — one card fills the screen at a time, neighbors scale/fade out, with a haptic tick on release"
     },
     {
       "name": "waveform",

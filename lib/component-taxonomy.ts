@@ -20,6 +20,8 @@ export const motionTaxonomy: TaxonomySection = {
         { slug: "carousel-circular", title: "Carousel Circular", status: "stable" },
         { slug: "carousel-scale", title: "Carousel Scale", status: "stable" },
         { slug: "carousel-tilt", title: "Carousel Tilt", status: "stable" },
+        { slug: "vertical-flow-carousel", title: "Vertical Flow Carousel", status: "stable" },
+        { slug: "vertical-page-carousel", title: "Vertical Page Carousel", status: "stable" },
       ],
     },
     {
@@ -37,17 +39,6 @@ export const motionTaxonomy: TaxonomySection = {
         { slug: "flip-card", title: "Flip Card", status: "stable" },
         { slug: "marquee", title: "Marquee", status: "stable" },
         { slug: "expandable-view", title: "Expandable View", status: "planned" },
-        { slug: "disclosure-group", title: "Disclosure Group", status: "stable" },
-      ],
-    },
-    {
-      title: "Skia Effects",
-      items: [
-        { slug: "border-beam", title: "Border Beam", status: "stable" },
-        { slug: "gooey-switch", title: "Gooey Switch", status: "stable" },
-        { slug: "morph-loader", title: "Morph Loader", status: "stable" },
-        { slug: "verified-shine", title: "Verified Shine", status: "stable" },
-        { slug: "radiant-button", title: "Radiant Button", status: "stable" },
       ],
     },
     {

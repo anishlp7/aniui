@@ -33,11 +33,12 @@ describe("component source files", () => {
     // reacticx-fidelity rewrites/ports (Reanimated/Skia gesture+animation math genuinely needs the room; see CLAUDE.md's
     // relaxed line-count note for this effort) and brand-new reacticx-inspired components:
     "carousel-3d", "carousel-parallax", "carousel-circular", "carousel-tilt", "curved-bottom-tabs",
+    "vertical-flow-carousel", "vertical-page-carousel",
     "area-chart", "bar-chart", "line-chart", "pie-chart", "radar-chart", "radial-chart",
-    "action-rail", "animated-input-bar", "arc-list", "barcode-badge", "book-page", "border-beam", "coupon",
-    "disclosure-group", "event-ticket", "expandable-view", "fan-menu", "gooey-popover", "gooey-search-tabs",
-    "gooey-switch", "loader", "marquee", "matched-geometry", "mobile-dock", "morph-fab", "morph-loader",
-    "morphing-tabbar", "profile-card", "qr-code", "radiant-button", "receipt-card", "rolling-counter",
+    "action-rail", "animated-input-bar", "arc-list", "barcode-badge", "book-page", "coupon",
+    "event-ticket", "expandable-view", "fan-menu", "gooey-popover", "gooey-search-tabs",
+    "loader", "marquee", "matched-geometry", "mobile-dock", "morph-fab",
+    "morphing-tabbar", "profile-card", "qr-code", "receipt-card", "rolling-counter",
     "save-button", "shimmer", "social-button", "split-view", "squircle-view", "verified-badge",
   ]);
   // Full compound multi-view systems (push/back navigation stacks, detent-driven bottom sheets) — a step

@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { View, Pressable, Text, Keyboard, useWindowDimensions, useColorScheme } from "react-native";
+import { View, Pressable, Text, Keyboard, useWindowDimensions, useColorScheme, type LayoutChangeEvent } from "react-native";
 import Animated, { useSharedValue, useAnimatedStyle, withSpring, type SharedValue } from "react-native-reanimated";
 import Svg, { Path, Circle, Defs, LinearGradient, Stop } from "react-native-svg";
 import { cn } from "@/lib/utils";
@@ -41,11 +41,25 @@ export function CurvedBottomTabs({
   onTabPress,
   hideOnKeyboard = false,
   gradientColors,
+  onLayout,
   ...props
 }: CurvedBottomTabsProps) {
-  const { width } = useWindowDimensions();
+  const { width: windowWidth } = useWindowDimensions();
   const dark = useColorScheme() === "dark";
   const [keyboardVisible, setKeyboardVisible] = useState(false);
+  // The bar's math needs its own actual rendered width, not the device's —
+  // a consumer rendering this inside a padded container (as our own example
+  // app's screen does) made every calculation assume a wider bar than what
+  // was really on screen, so the notch drifted further off-target with each
+  // tab index. Falls back to the window width only until the first layout.
+  const [measuredWidth, setMeasuredWidth] = useState(0);
+  const width = measuredWidth || windowWidth;
+
+  const handleLayout = (e: LayoutChangeEvent) => {
+    const w = e.nativeEvent.layout.width;
+    if (w > 0 && w !== measuredWidth) setMeasuredWidth(w);
+    onLayout?.(e);
+  };
 
   const tabWidth = width / tabs.length;
   // The bar is rendered 3x screen-width with a single fixed notch at its own
@@ -55,7 +69,17 @@ export function CurvedBottomTabs({
   // math and NativeWind layout instead of its cubic-bezier/StyleSheet version).
   const patternWidth = width * 3;
   const patternMid = patternWidth / 2;
-  const targetFor = (index: number) => index * tabWidth + tabWidth / 2 - patternMid;
+  // The notch's own curve is NOTCH_HALF wide on each side of its center — for
+  // the first/last tab that center can sit closer to the screen edge than
+  // that, which clips off one side of the dip against the bar's
+  // overflow-hidden. Clamping keeps the whole symmetric notch on-screen,
+  // trading a little centering under the very first/last tab for a shape
+  // that never gets cut off.
+  const targetFor = (index: number) => {
+    const idealCenter = index * tabWidth + tabWidth / 2;
+    const clampedCenter = Math.min(Math.max(idealCenter, NOTCH_HALF), width - NOTCH_HALF);
+    return clampedCenter - patternMid;
+  };
 
   const curveX = useSharedValue(targetFor(activeIndex));
   // One shared value per tab so the outgoing tab can ease back down while the
@@ -97,7 +121,7 @@ export function CurvedBottomTabs({
   const strokeColor = dark ? "#3f3f46" : "#e4e4e7";
 
   return (
-    <View className={cn("relative", className)} style={{ height: BAR_HEIGHT }} accessibilityRole="tablist" {...props}>
+    <View className={cn("relative", className)} style={{ height: BAR_HEIGHT }} onLayout={handleLayout} accessibilityRole="tablist" {...props}>
       <View className="absolute bottom-0 left-0 overflow-hidden shadow-lg" style={{ width, height: BAR_HEIGHT }}>
         <Animated.View style={[{ width: patternWidth, height: BAR_HEIGHT }, curveStyle]}>
           <Svg width={patternWidth} height={BAR_HEIGHT}>

@@ -19,7 +19,7 @@ const PAD_V = 8;
 const CLOSE_W = HEIGHT;
 const ICON_SIZE = 18;
 const DEFAULT_SPRING: WithSpringConfig = { damping: 18, stiffness: 200, mass: 0.9 };
-// Same alpha-threshold metaball trick as GooeySwitch/MorphFab/GooeyPopover —
+// Same alpha-threshold metaball trick used elsewhere in this family —
 // blur two capsules then sharpen alpha so they read as one continuous pill
 // while they overlap, instead of reacticx's SkSL smin() shader.
 const GOO_MATRIX = [1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 22, -11];

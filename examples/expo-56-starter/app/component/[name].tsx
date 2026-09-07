@@ -7,7 +7,7 @@ import {
   List as ListIcon, LayoutGrid, Upload, Search, Inbox, AlertTriangle, Download, Play, Pause,
   MoreVertical, Home, User, LayoutDashboard, BarChart3, FolderKanban, Users, Settings,
   Eye, Lock, Shield, ChevronRight, DollarSign, ShoppingCart, Info, HelpCircle,
-  Camera, Image as ImageIcon, Share2, Star, Heart, Bookmark,
+  Camera, Image as ImageIcon, Share2, Star, Heart, Bookmark, MapPin,
 } from "lucide-react-native";
 import { Text } from "@/components/ui/text";
 
@@ -118,16 +118,10 @@ import { Shimmer } from "@/components/ui/shimmer";
 import { Loader } from "@/components/ui/loader";
 import { FlipCard } from "@/components/ui/flip-card";
 import { Marquee } from "@/components/ui/marquee";
-import { DisclosureGroup, DisclosureItem } from "@/components/ui/disclosure-group";
 import { EventTicket } from "@/components/ui/event-ticket";
 import { ReceiptCard } from "@/components/ui/receipt-card";
 import { Coupon } from "@/components/ui/coupon";
 import { Polaroid } from "@/components/ui/polaroid";
-import { RadiantButton } from "@/components/ui/radiant-button";
-import { VerifiedShine } from "@/components/ui/verified-shine";
-import { MorphLoader } from "@/components/ui/morph-loader";
-import { GooeySwitch } from "@/components/ui/gooey-switch";
-import { BorderBeam } from "@/components/ui/border-beam";
 import { RollingCounter } from "@/components/ui/rolling-counter";
 import { QrCode } from "@/components/ui/qr-code";
 import { VerifiedBadge, VerifiedBadgeCheck, VerifiedBadgeContent, VerifiedBadgeName, VerifiedBadgeHandle } from "@/components/ui/verified-badge";
@@ -141,6 +135,8 @@ import { MobileDock } from "@/components/ui/mobile-dock";
 import { MorphingTabBar } from "@/components/ui/morphing-tabbar";
 import { CurvedBottomTabs } from "@/components/ui/curved-bottom-tabs";
 import { CarouselTilt } from "@/components/ui/carousel-tilt";
+import { VerticalFlowCarousel } from "@/components/ui/vertical-flow-carousel";
+import { VerticalPageCarousel } from "@/components/ui/vertical-page-carousel";
 import { CarouselScale } from "@/components/ui/carousel-scale";
 import { CarouselCircular } from "@/components/ui/carousel-circular";
 import { Pagination } from "@/components/ui/pagination";
@@ -157,7 +153,7 @@ import { ContextMenu, ContextMenuTrigger, ContextMenuContent, ContextMenuItem, C
 import { MorphFab, MorphFabTrigger, MorphFabItem, MorphFabItemIcon, MorphFabItemLabel } from "@/components/ui/morph-fab";
 import { GooeyPopover, GooeyPopoverTrigger, GooeyPopoverContent } from "@/components/ui/gooey-popover";
 import { GooeySearchTabs, GooeySearchTabsTrigger, GooeySearchTabsTabs, GooeySearchTabsTab, GooeySearchTabsTabIcon, GooeySearchTabsTabLabel } from "@/components/ui/gooey-search-tabs";
-import { Tray, TrayTrigger, TrayContent, TrayHeader, TrayTitle, TrayClose, TrayBody } from "@/components/ui/tray";
+import { Tray, TrayTrigger, TrayContent, TrayHeader, TrayTitle, TrayClose, TrayBody, TrayFooter } from "@/components/ui/tray";
 import { UnfoldMenu, UnfoldMenuTrigger, UnfoldMenuIcon, UnfoldMenuLabel, UnfoldMenuContent, UnfoldMenuHeader, UnfoldMenuTitle, UnfoldMenuClose, UnfoldMenuGrid, UnfoldMenuItem } from "@/components/ui/unfold-menu";
 import { ActionRail, ActionRailGroup, ActionRailAction, ActionRailIcon, ActionRailLabel, ActionRailOverflow, ActionRailTrigger } from "@/components/ui/action-rail";
 import { SplitView, SplitViewTop, SplitViewTitle, SplitViewHandle, SplitViewBottom } from "@/components/ui/split-view";
@@ -3301,13 +3297,6 @@ const demos: Record<string, () => React.ReactElement> = {
 
   marquee: () => <Marquee>AniUI — Beautiful React Native components. Copy. Paste. Ship.</Marquee>,
 
-  "disclosure-group": () => (
-    <DisclosureGroup>
-      <DisclosureItem value="shipping" title="Shipping"><Text className="text-sm text-muted-foreground">Free shipping on orders over $50.</Text></DisclosureItem>
-      <DisclosureItem value="returns" title="Returns"><Text className="text-sm text-muted-foreground">30-day hassle-free returns.</Text></DisclosureItem>
-    </DisclosureGroup>
-  ),
-
   "event-ticket": () => (
     <EventTicket title="AniUI Live" date="Sep 6, 2026 · 7:00 PM" venue="Mumbai, IN" seat="A-12" code="AX7K2" />
   ),
@@ -3346,10 +3335,11 @@ const demos: Record<string, () => React.ReactElement> = {
 
   "carousel-circular": () => (
     <View className="gap-4">
-      <Text className="text-sm text-muted-foreground">Pan to rotate avatars around a ring — nice for team/story pickers.</Text>
+      <Text className="text-sm text-muted-foreground">Swipe through the photo deck — the centered card lifts forward, its neighbors fall back.</Text>
       <CarouselCircular
+        itemWidth={180}
         data={["1", "2", "3", "4", "5"].map((seed) => (
-          <Image key={seed} source={{ uri: `https://picsum.photos/seed/aniui-circ-${seed}/140/140` }} className="h-full w-full rounded-full" resizeMode="cover" />
+          <Image key={seed} source={{ uri: `https://picsum.photos/seed/aniui-circ-${seed}/180/180` }} className="w-full" style={{ height: 180 }} resizeMode="cover" />
         ))}
       />
     </View>
@@ -3365,10 +3355,39 @@ const demos: Record<string, () => React.ReactElement> = {
 
   "carousel-tilt": () => (
     <CarouselTilt
+      itemHeight={200}
       data={["1", "2", "3", "4"].map((seed) => (
-        <Image key={seed} source={{ uri: `https://picsum.photos/seed/aniui-tilt-${seed}/260/320` }} className="h-40 w-full rounded-xl" resizeMode="cover" />
+        <Image key={seed} source={{ uri: `https://picsum.photos/seed/aniui-tilt-${seed}/260/200` }} className="h-full w-full rounded-xl" resizeMode="cover" />
       ))}
     />
+  ),
+
+  "vertical-flow-carousel": () => (
+    <View className="gap-3">
+      <Text className="text-sm text-muted-foreground">Scroll vertically — the centered card sharpens, the rest tilt and blur away.</Text>
+      <View style={{ height: 340 }}>
+        <VerticalFlowCarousel
+          itemHeight={140}
+          data={["1", "2", "3", "4", "5"].map((seed) => (
+            <Image key={seed} source={{ uri: `https://picsum.photos/seed/aniui-vflow-${seed}/500/140` }} className="w-full rounded-2xl" style={{ height: 140 }} resizeMode="cover" />
+          ))}
+        />
+      </View>
+    </View>
+  ),
+
+  "vertical-page-carousel": () => (
+    <View className="gap-3">
+      <Text className="text-sm text-muted-foreground">Page vertically through full-bleed cards, one screen at a time.</Text>
+      <View style={{ height: 420 }}>
+        <VerticalPageCarousel
+          itemHeight={340}
+          data={["1", "2", "3"].map((seed) => (
+            <Image key={seed} source={{ uri: `https://picsum.photos/seed/aniui-vpage-${seed}/500/700` }} className="h-full w-full" resizeMode="cover" />
+          ))}
+        />
+      </View>
+    </View>
   ),
 
   "curved-bottom-tabs": () => {
@@ -3502,34 +3521,6 @@ const demos: Record<string, () => React.ReactElement> = {
     );
   },
 
-  "border-beam": () => (
-    <BorderBeam className="rounded-xl border border-border bg-card">
-      <Text className="text-base font-semibold text-foreground">Pro Plan</Text>
-      <Text className="text-sm text-muted-foreground mt-1">Skia beam traces the card edge.</Text>
-    </BorderBeam>
-  ),
-
-  "gooey-switch": () => {
-    const [on, setOn] = useState(true);
-    return (
-      <View className="gap-3 items-center">
-        <GooeySwitch value={on} onValueChange={setOn} />
-        <Text className="text-sm text-muted-foreground">{on ? "On" : "Off"}</Text>
-      </View>
-    );
-  },
-
-  "morph-loader": () => (
-    <View className="items-center gap-2">
-      <MorphLoader size="lg" />
-      <Text className="text-xs text-muted-foreground uppercase">Loading</Text>
-    </View>
-  ),
-
-  "verified-shine": () => <VerifiedShine label="Verified Pro" />,
-
-  "radiant-button": () => <RadiantButton label="Upgrade Now" onPress={() => {}} />,
-
   "morph-fab": () => (
     <View className="h-64 items-end justify-end">
       <MorphFab direction="up">
@@ -3580,23 +3571,36 @@ const demos: Record<string, () => React.ReactElement> = {
   ),
 
   tray: () => (
-    <Tray detents={["50%", "90%"]}>
-      <TrayTrigger>
-        <Text className="text-sm font-medium text-foreground">Open Tray</Text>
-      </TrayTrigger>
-      <TrayContent>
-        <TrayHeader>
-          <TrayTitle>Settings</TrayTitle>
-          <TrayClose />
-        </TrayHeader>
-        <TrayBody>
-          <Text className="text-sm text-muted-foreground">Tray content goes here.</Text>
-        </TrayBody>
-      </TrayContent>
-    </Tray>
+    <View className="gap-3">
+      <Text className="text-sm text-muted-foreground">Drag the sheet down to dismiss, or between its two detents.</Text>
+      <Tray detents={["50%", "90%"]}>
+        <TrayTrigger className="flex-row items-center gap-2 self-start rounded-full bg-primary px-4">
+          <Settings size={16} color="#fafafa" />
+          <Text className="text-sm font-medium text-primary-foreground">Open Settings</Text>
+        </TrayTrigger>
+        <TrayContent>
+          <TrayHeader>
+            <TrayTitle>Settings</TrayTitle>
+            <TrayClose />
+          </TrayHeader>
+          <TrayBody className="flex-row items-center gap-3">
+            <Image source={{ uri: "https://picsum.photos/seed/aniui-tray-avatar/96/96" }} className="h-12 w-12 rounded-full" />
+            <View className="flex-1">
+              <Text className="text-sm font-semibold text-foreground">Anish</Text>
+              <Text className="text-xs text-muted-foreground">anish@aniui.dev · Free plan</Text>
+            </View>
+          </TrayBody>
+          <TrayFooter>
+            <Button onPress={() => {}}>Manage account</Button>
+          </TrayFooter>
+        </TrayContent>
+      </Tray>
+    </View>
   ),
 
   "unfold-menu": () => (
+    <View className="gap-3">
+      <Text className="text-sm text-muted-foreground">Tap "Share" — the pill unfolds into the full panel, its label morphing into the panel title.</Text>
     <UnfoldMenu onSelect={() => {}}>
       <UnfoldMenuTrigger>
         <UnfoldMenuIcon><Share2 size={20} color="#111111" /></UnfoldMenuIcon>
@@ -3620,6 +3624,7 @@ const demos: Record<string, () => React.ReactElement> = {
         </UnfoldMenuGrid>
       </UnfoldMenuContent>
     </UnfoldMenu>
+    </View>
   ),
 
   "action-rail": () => (
@@ -3645,15 +3650,24 @@ const demos: Record<string, () => React.ReactElement> = {
   ),
 
   "split-view": () => (
-    <SplitView initialTopHeight={180}>
-      <SplitViewTop>
-        <SplitViewTitle>Map</SplitViewTitle>
-      </SplitViewTop>
-      <SplitViewHandle />
-      <SplitViewBottom>
-        <Text className="p-4 text-sm text-muted-foreground">Results list goes here.</Text>
-      </SplitViewBottom>
-    </SplitView>
+    <View style={{ height: 360 }} className="gap-3">
+      <Text className="text-sm text-muted-foreground">Drag the handle to resize the two panes.</Text>
+      <SplitView initialTopHeight={180} className="overflow-hidden rounded-2xl border border-border">
+        <SplitViewTop>
+          <Image source={{ uri: "https://picsum.photos/seed/aniui-splitview-map/600/300" }} className="h-full w-full" resizeMode="cover" />
+        </SplitViewTop>
+        <SplitViewHandle />
+        <SplitViewBottom>
+          <SplitViewTitle>Nearby results</SplitViewTitle>
+          {["Blue Bottle Coffee", "Golden Gate Park", "Ferry Building"].map((place) => (
+            <View key={place} className="flex-row items-center gap-2 border-b border-border px-4 py-3">
+              <MapPin size={16} color="#71717a" />
+              <Text className="text-sm text-foreground">{place}</Text>
+            </View>
+          ))}
+        </SplitViewBottom>
+      </SplitView>
+    </View>
   ),
 
   "expandable-view": () => (
@@ -3671,32 +3685,43 @@ const demos: Record<string, () => React.ReactElement> = {
   "matched-geometry": () => {
     const [expanded, setExpanded] = useState(false);
     return (
-      <MatchedGeometryProvider>
-        <Pressable onPress={() => setExpanded((v) => !v)} accessibilityRole="button" accessible={true}>
-          {expanded ? (
-            <MatchedGeometryView id="card" className="h-40 w-full rounded-2xl bg-primary" />
-          ) : (
-            <MatchedGeometryView id="card" className="h-16 w-16 rounded-full bg-primary" />
-          )}
-        </Pressable>
-      </MatchedGeometryProvider>
+      <View className="gap-3">
+        <Text className="text-sm text-muted-foreground">Tap the shape — it morphs into the new size/position instead of snapping.</Text>
+        <MatchedGeometryProvider>
+          <Pressable onPress={() => setExpanded((v) => !v)} accessibilityRole="button" accessible={true}>
+            {expanded ? (
+              <MatchedGeometryView key="expanded" id="card" className="h-40 w-full rounded-2xl bg-primary" />
+            ) : (
+              <MatchedGeometryView key="collapsed" id="card" className="h-16 w-16 rounded-full bg-primary" />
+            )}
+          </Pressable>
+        </MatchedGeometryProvider>
+      </View>
     );
   },
 
   "arc-list": () => {
     const days = ["Mon", "Tue", "Wed", "Thu", "Fri"];
     return (
-      <ArcList itemHeight={56} height={280} onValueChange={() => {}}>
-        {days.map((day) => (
-          <ArcListItem key={day}>
-            <ArcListLabel>{day}</ArcListLabel>
-          </ArcListItem>
-        ))}
-      </ArcList>
+      <View className="gap-3">
+        <Text className="text-sm text-muted-foreground">Swipe up/down through the days — the item nearest center snaps into focus with a haptic tick.</Text>
+        <ArcList itemHeight={56} height={280} onValueChange={() => {}}>
+          {days.map((day) => (
+            <ArcListItem key={day}>
+              <ArcListLabel>{day}</ArcListLabel>
+            </ArcListItem>
+          ))}
+        </ArcList>
+      </View>
     );
   },
 
-  "flexi-button": () => <FlexiButton label="Clear all" onExpandedChange={() => {}} />,
+  "flexi-button": () => (
+    <View className="gap-3">
+      <Text className="text-sm text-muted-foreground">Tap the icon to spring open into a labeled pill, tap again to collapse.</Text>
+      <FlexiButton label="Clear all" onExpandedChange={() => {}} />
+    </View>
+  ),
 
   "save-button": () => (
     <SaveButton
@@ -3712,18 +3737,21 @@ const demos: Record<string, () => React.ReactElement> = {
   },
 
   "stacked-chips": () => (
-    <StackedChips>
-      <StackedChipsTrigger>Filters</StackedChipsTrigger>
-      <StackedChipsContent>
-        <StackedChips>
-          <StackedChipsTrigger>Color</StackedChipsTrigger>
-          <StackedChipsContent>
-            <Text className="text-sm text-foreground">Red</Text>
-            <Text className="text-sm text-foreground">Blue</Text>
-          </StackedChipsContent>
-        </StackedChips>
-      </StackedChipsContent>
-    </StackedChips>
+    <View className="gap-3">
+      <Text className="text-sm text-muted-foreground">Tap "Filters" to reveal "Color" beside it, then tap "Color" to go one level deeper.</Text>
+      <StackedChips>
+        <StackedChipsTrigger>Filters</StackedChipsTrigger>
+        <StackedChipsContent>
+          <StackedChips>
+            <StackedChipsTrigger>Color</StackedChipsTrigger>
+            <StackedChipsContent>
+              <Text className="text-sm text-foreground">Red</Text>
+              <Text className="text-sm text-foreground">Blue</Text>
+            </StackedChipsContent>
+          </StackedChips>
+        </StackedChipsContent>
+      </StackedChips>
+    </View>
   ),
 
   "filling-stack": () => {
@@ -3734,18 +3762,21 @@ const demos: Record<string, () => React.ReactElement> = {
       { seed: "aniui-fill-4", title: "Desert" },
     ];
     return (
-      <FillingStack
-        data={cards}
-        onIndexChange={() => {}}
-        renderItem={(card) => (
-          <View className="flex-1">
-            <Image source={{ uri: `https://picsum.photos/seed/${card.seed}/500/500` }} className="h-full w-full" resizeMode="cover" />
-            <View className="absolute inset-x-0 bottom-0 bg-black/40 px-4 py-3">
-              <Text className="text-base font-semibold text-white">{card.title}</Text>
+      <View className="gap-3">
+        <Text className="text-sm text-muted-foreground">Fling the stack up to browse forward, down to go back.</Text>
+        <FillingStack
+          data={cards}
+          onIndexChange={() => {}}
+          renderItem={(card) => (
+            <View className="flex-1">
+              <Image source={{ uri: `https://picsum.photos/seed/${card.seed}/500/500` }} className="h-full w-full" resizeMode="cover" />
+              <View className="absolute inset-x-0 bottom-0 bg-black/40 px-4 py-3">
+                <Text className="text-base font-semibold text-white">{card.title}</Text>
+              </View>
             </View>
-          </View>
-        )}
-      />
+          )}
+        />
+      </View>
     );
   },
 
@@ -3783,7 +3814,7 @@ const demos: Record<string, () => React.ReactElement> = {
   },
 
   "squircle-view": () => (
-    <SquircleView width={120} height={120} cornerRadius={28} cornerSmoothing={0.8} backgroundColor="#6366f1">
+    <SquircleView width={120} height={120} cornerRadius={28} cornerSmoothing={0.8} backgroundColor="#6366f1" className="items-center justify-center">
       <Text className="text-sm font-semibold text-white">Squircle</Text>
     </SquircleView>
   ),

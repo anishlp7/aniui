@@ -21,7 +21,6 @@ import { PreviewBanner } from "@/components/preview/banner";
 import { PreviewBarChartDefault } from "@/components/preview/bar-chart";
 import { PreviewBarcodeBadge } from "@/components/preview/barcode-badge";
 import { PreviewBookPage } from "@/components/preview/book-page";
-import { PreviewBorderBeam } from "@/components/preview/border-beam";
 import { PreviewBottomSheet } from "@/components/preview/bottom-sheet";
 import { PreviewBreadcrumb } from "@/components/preview/breadcrumb";
 import { PreviewButton } from "@/components/preview/button";
@@ -48,7 +47,6 @@ import { PreviewDataTableDemo } from "@/components/preview/data-table";
 import { PreviewDatePickerDemo } from "@/components/preview/date-picker";
 import { PreviewDialogDemo } from "@/components/preview/dialog";
 import { PreviewDirectionProviderDemo } from "@/components/preview/direction-provider";
-import { PreviewDisclosureGroup } from "@/components/preview/disclosure-group";
 import { PreviewDrawer } from "@/components/preview/drawer";
 import { PreviewDropdownMenu } from "@/components/preview/dropdown-menu";
 import { PreviewEmptyState } from "@/components/preview/empty-state";
@@ -64,7 +62,6 @@ import { PreviewFlipCard } from "@/components/preview/flip-card";
 import { PreviewFormDemo } from "@/components/preview/form";
 import { PreviewGooeyPopover } from "@/components/preview/gooey-popover";
 import { PreviewGooeySearchTabs } from "@/components/preview/gooey-search-tabs";
-import { PreviewGooeySwitch } from "@/components/preview/gooey-switch";
 import { PreviewGradient } from "@/components/preview/gradient";
 import { PreviewGridDemo } from "@/components/preview/grid";
 import { PreviewHamburger } from "@/components/preview/hamburger";
@@ -89,7 +86,6 @@ import { PreviewMatchedGeometry } from "@/components/preview/matched-geometry";
 import { PreviewMenubar } from "@/components/preview/menubar";
 import { PreviewMobileDock } from "@/components/preview/mobile-dock";
 import { PreviewMorphFab } from "@/components/preview/morph-fab";
-import { PreviewMorphLoader } from "@/components/preview/morph-loader";
 import { PreviewMorphingTabbar } from "@/components/preview/morphing-tabbar";
 import { PreviewNumberInputDemo } from "@/components/preview/number-input";
 import { PreviewPaginationDemo } from "@/components/preview/pagination";
@@ -107,7 +103,6 @@ import { PreviewPromptInput } from "@/components/preview/prompt-input";
 import { PreviewQrCode } from "@/components/preview/qr-code";
 import { PreviewRadarChartDefault } from "@/components/preview/radar-chart";
 import { PreviewRadialChartDefault } from "@/components/preview/radial-chart";
-import { PreviewRadiantButton } from "@/components/preview/radiant-button";
 import { PreviewRadioGroup } from "@/components/preview/radio-group";
 import { PreviewRating } from "@/components/preview/rating";
 import { PreviewReceiptCard } from "@/components/preview/receipt-card";
@@ -153,7 +148,8 @@ import { PreviewTray } from "@/components/preview/tray";
 import { PreviewTypingIndicatorDemo } from "@/components/preview/typing-indicator";
 import { PreviewUnfoldMenu } from "@/components/preview/unfold-menu";
 import { PreviewVerifiedBadge } from "@/components/preview/verified-badge";
-import { PreviewVerifiedShine } from "@/components/preview/verified-shine";
+import { PreviewVerticalFlowCarousel } from "@/components/preview/vertical-flow-carousel";
+import { PreviewVerticalPageCarousel } from "@/components/preview/vertical-page-carousel";
 import { PreviewWaveform } from "@/components/preview/waveform";
 
 const previewMap = {
@@ -176,7 +172,6 @@ const previewMap = {
   "bar-chart": PreviewBarChartDefault,
   "barcode-badge": PreviewBarcodeBadge,
   "book-page": PreviewBookPage,
-  "border-beam": PreviewBorderBeam,
   "bottom-sheet": PreviewBottomSheet,
   breadcrumb: PreviewBreadcrumb,
   button: PreviewButton,
@@ -203,7 +198,6 @@ const previewMap = {
   "date-picker": PreviewDatePickerDemo,
   dialog: PreviewDialogDemo,
   "direction-provider": PreviewDirectionProviderDemo,
-  "disclosure-group": PreviewDisclosureGroup,
   drawer: PreviewDrawer,
   "dropdown-menu": PreviewDropdownMenu,
   "empty-state": PreviewEmptyState,
@@ -219,7 +213,6 @@ const previewMap = {
   form: PreviewFormDemo,
   "gooey-popover": PreviewGooeyPopover,
   "gooey-search-tabs": PreviewGooeySearchTabs,
-  "gooey-switch": PreviewGooeySwitch,
   gradient: PreviewGradient,
   grid: PreviewGridDemo,
   hamburger: PreviewHamburger,
@@ -244,7 +237,6 @@ const previewMap = {
   menubar: PreviewMenubar,
   "mobile-dock": PreviewMobileDock,
   "morph-fab": PreviewMorphFab,
-  "morph-loader": PreviewMorphLoader,
   "morphing-tabbar": PreviewMorphingTabbar,
   "number-input": PreviewNumberInputDemo,
   pagination: PreviewPaginationDemo,
@@ -262,7 +254,6 @@ const previewMap = {
   "qr-code": PreviewQrCode,
   "radar-chart": PreviewRadarChartDefault,
   "radial-chart": PreviewRadialChartDefault,
-  "radiant-button": PreviewRadiantButton,
   "radio-group": PreviewRadioGroup,
   rating: PreviewRating,
   "receipt-card": PreviewReceiptCard,
@@ -308,7 +299,8 @@ const previewMap = {
   "typing-indicator": PreviewTypingIndicatorDemo,
   "unfold-menu": PreviewUnfoldMenu,
   "verified-badge": PreviewVerifiedBadge,
-  "verified-shine": PreviewVerifiedShine,
+  "vertical-flow-carousel": PreviewVerticalFlowCarousel,
+  "vertical-page-carousel": PreviewVerticalPageCarousel,
   waveform: PreviewWaveform,
 } as unknown as Record<string, React.ComponentType<{ className?: string }>>;
 

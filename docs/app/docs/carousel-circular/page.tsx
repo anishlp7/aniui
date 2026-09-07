@@ -10,7 +10,7 @@ const sourceCode = getComponentSource("carousel-circular");
 export default function Page() {
   return (
     <div className="space-y-12">
-      <div><h1 className="text-3xl font-bold mb-2">Carousel Circular</h1><p className="text-muted-foreground text-lg">Circular orbit carousel — pan to rotate items around a ring.</p></div>
+      <div><h1 className="text-3xl font-bold mb-2">Carousel Circular</h1><p className="text-muted-foreground text-lg">Scroll-driven coverflow — the centered card lifts forward and sharpens while its neighbors tilt, shrink, and blur away.</p></div>
       <ShowcaseDocPlayground slug="carousel-circular" code={usageCode} />
       <div><Heading as="h2" className="text-xl font-semibold mb-3">Installation</Heading><AddComponentTabs names="carousel-circular" /></div>
       <div><Heading as="h2" className="text-xl font-semibold mb-3">Usage</Heading><ComponentPlayground code={usageCode} /></div>

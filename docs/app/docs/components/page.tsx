@@ -38,7 +38,7 @@ export default function ComponentsIndexPage() {
       <div>
         <h1 className="text-3xl font-bold tracking-tight text-foreground">Components</h1>
         <p className="mt-2 text-lg text-muted-foreground">
-          133 AniUI components with nested categories — carousels, loaders, UI pieces, Skia effects, and more. Pick a category below, or use the sidebar.
+          155 AniUI components with nested categories — carousels, loaders, UI pieces, Skia effects, and more. Pick a category below, or use the sidebar.
         </p>
       </div>
       {[...componentCategories, { title: "Charts", items: chartItems }].map((category) => (

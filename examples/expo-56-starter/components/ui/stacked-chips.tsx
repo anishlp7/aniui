@@ -90,14 +90,15 @@ export function StackedChipsContent({ children, className }: StackedChipsContent
   const style = useAnimatedStyle(() => ({
     opacity: withSpring(open ? 1 : 0),
     transform: [{ translateX: withSpring(open ? 0 : -contentWidth + 60) }],
+    marginLeft: withSpring(open ? -16 : 0),
   }));
 
   return (
     <Animated.View
       onLayout={(e) => setContentWidth(e.nativeEvent.layout.width)}
       pointerEvents={open ? "auto" : "none"}
-      style={[{ position: "absolute", left: triggerWidth, zIndex: 99 - depth }, style]}
-      className={cn("flex-row items-center gap-2 rounded-full bg-secondary/95 py-1 pl-3 pr-2", className)}
+      style={[{ position: "absolute", left: triggerWidth, top: 0, zIndex: 99 - depth }, style]}
+      className={cn("min-h-12 flex-row items-center justify-center gap-2 rounded-full bg-secondary/95 py-1 pl-3 pr-2", className)}
     >
       {children}
     </Animated.View>
