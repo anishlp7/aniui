@@ -89,10 +89,16 @@ export function CurvedBottomTabs({
   const floatGradient = dark ? (["#fafafa", "#d4d4d8"] as const) : (["#18181b", "#3f3f46"] as const);
 
   const notchPath = `M0,0 L${patternMid - NOTCH_HALF},0 Q${patternMid - 14},0 ${patternMid},32 Q${patternMid + 14},0 ${patternMid + NOTCH_HALF},0 L${patternWidth},0 L${patternWidth},${BAR_HEIGHT} L0,${BAR_HEIGHT} Z`;
+  // The bar's fill is intentionally close to the page background (it's meant
+  // to read as part of the screen, not a separate card) — which also means
+  // the curve is invisible with nothing to set its top edge apart. A stroke
+  // along the path plus a shadow on the whole bar keeps the notch visible
+  // regardless of how close the two colors are.
+  const strokeColor = dark ? "#3f3f46" : "#e4e4e7";
 
   return (
     <View className={cn("relative", className)} style={{ height: BAR_HEIGHT }} accessibilityRole="tablist" {...props}>
-      <View className="absolute bottom-0 left-0 overflow-hidden" style={{ width, height: BAR_HEIGHT }}>
+      <View className="absolute bottom-0 left-0 overflow-hidden shadow-lg" style={{ width, height: BAR_HEIGHT }}>
         <Animated.View style={[{ width: patternWidth, height: BAR_HEIGHT }, curveStyle]}>
           <Svg width={patternWidth} height={BAR_HEIGHT}>
             <Defs>
@@ -101,7 +107,7 @@ export function CurvedBottomTabs({
                 <Stop offset="1" stopColor={barGradient[1]} />
               </LinearGradient>
             </Defs>
-            <Path d={notchPath} fill="url(#curvedTabsBarFill)" />
+            <Path d={notchPath} fill="url(#curvedTabsBarFill)" stroke={strokeColor} strokeWidth={1.5} />
           </Svg>
         </Animated.View>
       </View>
