@@ -9,6 +9,14 @@ function toSlug(name: string) {
   return name.toLowerCase().replace(/ /g, "-");
 }
 
+// A handful of display names don't collapse to their real component-file
+// slug via the plain lowercase-and-hyphenate rule above (e.g. "Tab Bar" as
+// two words vs. the actual "tabbar" filename) — override those specifically
+// rather than making every display name match its slug exactly.
+const slugOverrides: Record<string, string> = {
+  "Morphing Tab Bar": "morphing-tabbar",
+};
+
 const components = [
   // Foundation
   { name: "Button", section: "Foundation" },
@@ -100,7 +108,58 @@ const components = [
   { name: "Price", section: "Data Display & Media" },
   { name: "Avatar Group", section: "Data Display & Media" },
   { name: "Image Gallery", section: "Data Display & Media" },
-  { name: "Carousel", section: "Data Display & Media" },
+  { name: "Carousel", section: "Motion & Effects" },
+  { name: "Carousel 3D", section: "Motion & Effects" },
+  { name: "Carousel Parallax", section: "Motion & Effects" },
+  { name: "Carousel Circular", section: "Motion & Effects" },
+  { name: "Carousel Scale", section: "Motion & Effects" },
+  { name: "Carousel Tilt", section: "Motion & Effects" },
+  { name: "Curved Bottom Tabs", section: "Motion & Effects" },
+  { name: "Morphing Tab Bar", section: "Motion & Effects" },
+  { name: "Mobile Dock", section: "Motion & Effects" },
+  { name: "Fan Menu", section: "Motion & Effects" },
+  { name: "Shimmer", section: "Motion & Effects" },
+  { name: "Loader", section: "Motion & Effects" },
+  { name: "Flip Card", section: "Motion & Effects" },
+  { name: "Marquee", section: "Motion & Effects" },
+  { name: "Disclosure Group", section: "Motion & Effects" },
+  { name: "Event Ticket", section: "UI Pieces" },
+  { name: "Receipt Card", section: "UI Pieces" },
+  { name: "Coupon", section: "UI Pieces" },
+  { name: "Polaroid", section: "UI Pieces" },
+  { name: "Profile Card", section: "UI Pieces" },
+  { name: "Photo Stack", section: "UI Pieces" },
+  { name: "Book Page", section: "UI Pieces" },
+  { name: "Barcode Badge", section: "UI Pieces" },
+  { name: "Social Button", section: "UI Pieces" },
+  { name: "Verified Badge", section: "UI Pieces" },
+  { name: "QR Code", section: "UI Pieces" },
+  { name: "Rolling Counter", section: "UI Pieces" },
+  { name: "Border Beam", section: "Motion & Effects" },
+  { name: "Gooey Switch", section: "Motion & Effects" },
+  { name: "Morph Loader", section: "Motion & Effects" },
+  { name: "Verified Shine", section: "Motion & Effects" },
+  { name: "Radiant Button", section: "Motion & Effects" },
+  { name: "Morph Fab", section: "Motion & Effects" },
+  { name: "Gooey Popover", section: "Motion & Effects" },
+  { name: "Gooey Search Tabs", section: "Motion & Effects" },
+  { name: "Tray", section: "Motion & Effects" },
+  { name: "Unfold Menu", section: "Motion & Effects" },
+  { name: "Action Rail", section: "Motion & Effects" },
+  { name: "Split View", section: "Motion & Effects" },
+  { name: "Expandable View", section: "Motion & Effects" },
+  { name: "Matched Geometry", section: "Motion & Effects" },
+  { name: "Arc List", section: "Motion & Effects" },
+  { name: "Flexi Button", section: "Motion & Effects" },
+  { name: "Save Button", section: "Motion & Effects" },
+  { name: "Spin Button", section: "Motion & Effects" },
+  { name: "Stacked Chips", section: "Motion & Effects" },
+  { name: "Filling Stack", section: "Motion & Effects" },
+  { name: "Hamburger", section: "Motion & Effects" },
+  { name: "Theme Switch", section: "Motion & Effects" },
+  { name: "Animated Header Scrollview", section: "Motion & Effects" },
+  { name: "Animated Input Bar", section: "Motion & Effects" },
+  { name: "Squircle View", section: "Motion & Effects" },
   { name: "Infinite List", section: "Data Display & Media" },
   { name: "Refresh Control", section: "Data Display & Media" },
   // Chat & AI
@@ -123,13 +182,16 @@ const components = [
   { name: "Chart Tooltip", section: "Charts" },
 ];
 
-const sectionOrder = ["Foundation", "Forms & Inputs", "Feedback & Status", "Overlays & Menus", "Navigation & Structure", "Data Display & Media", "Chat & AI", "Gestures & Actions", "Charts"];
+const sectionOrder = ["Foundation", "Forms & Inputs", "Feedback & Status", "Overlays & Menus", "Navigation & Structure", "Data Display & Media", "Motion & Effects", "UI Pieces", "Chat & AI", "Gestures & Actions", "Charts"];
 
 export default function HomeScreen() {
   const router = useRouter();
   const { theme, toggle } = useAppTheme();
   const [search, setSearch] = useState("");
   const isDark = theme === "dark";
+  const colors = isDark
+    ? { bg: "#09090b", fg: "#fafafa", muted: "#27272a", mutedFg: "#a1a1aa", border: "#27272a", primary: "#fafafa", secondary: "#27272a" }
+    : { bg: "#ffffff", fg: "#09090b", muted: "#f4f4f5", mutedFg: "#71717a", border: "#e4e4e7", primary: "#18181b", secondary: "#f4f4f5" };
 
   const filtered = search
     ? components.filter((c) => c.name.toLowerCase().includes(search.toLowerCase()))
@@ -140,45 +202,45 @@ export default function HomeScreen() {
     .filter((s) => s.items.length > 0);
 
   return (
-    <SafeAreaView className="flex-1 bg-background">
-      <ScrollView className="flex-1" contentContainerStyle={{ paddingBottom: 40 }}>
+    <SafeAreaView style={{ flex: 1, backgroundColor: colors.bg }}>
+      <ScrollView style={{ flex: 1 }} contentContainerStyle={{ paddingBottom: 40 }}>
         {/* Header */}
-        <View className="px-5 pt-6 pb-4">
-          <View className="flex-row items-center justify-between">
-            <View className="flex-row items-center gap-3">
+        <View style={{ paddingHorizontal: 20, paddingTop: 24, paddingBottom: 16 }}>
+          <View style={{ flexDirection: "row", alignItems: "center", justifyContent: "space-between" }}>
+            <View style={{ flexDirection: "row", alignItems: "center", gap: 12 }}>
               <Image
                 source={isDark ? require("@/assets/images/logo-dark.png") : require("@/assets/images/logo-light.png")}
                 style={{ width: 44, height: 44 }}
                 resizeMode="contain"
               />
               <View>
-                <Text variant="h3" className="text-foreground">AniUI</Text>
-                <Text variant="small" className="text-muted-foreground">{components.length} components</Text>
+                <Text style={{ fontSize: 20, fontWeight: "700", color: colors.fg }}>AniUI</Text>
+                <Text style={{ fontSize: 12, color: colors.mutedFg }}>{components.length} components</Text>
               </View>
             </View>
             <Pressable
               onPress={toggle}
-              className="h-10 w-10 items-center justify-center rounded-full bg-secondary"
+              style={{ height: 40, width: 40, alignItems: "center", justifyContent: "center", borderRadius: 20, backgroundColor: colors.secondary }}
               accessibilityRole="button"
               accessibilityLabel={isDark ? "Switch to light mode" : "Switch to dark mode"}
             >
-              <Text className="text-base">{isDark ? "☀️" : "🌙"}</Text>
+              <Text style={{ fontSize: 16 }}>{isDark ? "☀️" : "🌙"}</Text>
             </Pressable>
           </View>
 
           {/* Search */}
-          <View className="mt-4 flex-row items-center rounded-lg border border-input bg-background px-3 h-11">
-            <Text className="text-muted-foreground mr-2">🔍</Text>
+          <View style={{ marginTop: 16, flexDirection: "row", alignItems: "center", borderRadius: 8, borderWidth: 1, borderColor: colors.border, backgroundColor: colors.bg, paddingHorizontal: 12, height: 44 }}>
+            <Text style={{ color: colors.mutedFg, marginRight: 8 }}>🔍</Text>
             <TextInput
-              className="flex-1 text-foreground text-sm"
+              style={{ flex: 1, color: colors.fg, fontSize: 14 }}
               placeholder="Search components..."
-              placeholderTextColor={isDark ? "#a1a1aa" : "#71717a"}
+              placeholderTextColor={colors.mutedFg}
               value={search}
               onChangeText={setSearch}
             />
             {search.length > 0 && (
               <Pressable onPress={() => setSearch("")} accessibilityRole="button" accessibilityLabel="Clear search">
-                <Text className="text-muted-foreground">✕</Text>
+                <Text style={{ color: colors.mutedFg }}>✕</Text>
               </Pressable>
             )}
           </View>
@@ -186,39 +248,39 @@ export default function HomeScreen() {
 
         {/* Component List */}
         {grouped.map((section) => (
-          <View key={section.title} className="mt-2">
-            <View className="px-5 py-2">
-              <Text variant="small" className="text-muted-foreground font-semibold uppercase tracking-wider">
+          <View key={section.title} style={{ marginTop: 8 }}>
+            <View style={{ paddingHorizontal: 20, paddingVertical: 8 }}>
+              <Text style={{ fontSize: 11, fontWeight: "600", color: colors.mutedFg, textTransform: "uppercase", letterSpacing: 1 }}>
                 {section.title} ({section.items.length})
               </Text>
             </View>
             {section.items.map((comp) => (
               <Pressable
                 key={comp.name}
-                onPress={() => router.push(`/component/${toSlug(comp.name)}` as never)}
-                className="flex-row items-center justify-between px-5 py-3 active:bg-accent"
+                onPress={() => router.push(`/component/${slugOverrides[comp.name] ?? toSlug(comp.name)}` as never)}
+                style={{ flexDirection: "row", alignItems: "center", justifyContent: "space-between", paddingHorizontal: 20, paddingVertical: 12 }}
                 accessibilityRole="button"
               >
-                <View className="flex-row items-center gap-3">
-                  <View className="h-8 w-8 items-center justify-center rounded-lg bg-primary/10">
-                    <Text className="text-primary text-xs font-bold">{comp.name.charAt(0)}</Text>
+                <View style={{ flexDirection: "row", alignItems: "center", gap: 12 }}>
+                  <View style={{ height: 32, width: 32, alignItems: "center", justifyContent: "center", borderRadius: 8, backgroundColor: colors.primary + "15" }}>
+                    <Text style={{ color: colors.primary, fontSize: 12, fontWeight: "700" }}>{comp.name.charAt(0)}</Text>
                   </View>
-                  <Text className="text-foreground text-sm font-medium">{comp.name}</Text>
+                  <Text style={{ color: colors.fg, fontSize: 14, fontWeight: "500" }}>{comp.name}</Text>
                 </View>
-                <Text className="text-muted-foreground text-xs">→</Text>
+                <Text style={{ color: colors.mutedFg, fontSize: 12 }}>→</Text>
               </Pressable>
             ))}
           </View>
         ))}
 
         {filtered.length === 0 && (
-          <View className="items-center py-12">
-            <Text className="text-muted-foreground">No components match &quot;{search}&quot;</Text>
+          <View style={{ alignItems: "center", paddingVertical: 48 }}>
+            <Text style={{ color: colors.mutedFg }}>No components match &quot;{search}&quot;</Text>
           </View>
         )}
 
-        <View className="items-center mt-8">
-          <Text variant="small" className="text-muted-foreground">Built with AniUI</Text>
+        <View style={{ alignItems: "center", marginTop: 32 }}>
+          <Text style={{ fontSize: 12, color: colors.mutedFg }}>Built with AniUI</Text>
         </View>
       </ScrollView>
     </SafeAreaView>

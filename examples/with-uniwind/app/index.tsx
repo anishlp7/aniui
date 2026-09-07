@@ -9,6 +9,14 @@ function toSlug(name: string) {
   return name.toLowerCase().replace(/ /g, "-");
 }
 
+// A handful of display names don't collapse to their real component-file
+// slug via the plain lowercase-and-hyphenate rule above (e.g. "Tab Bar" as
+// two words vs. the actual "tabbar" filename) — override those specifically
+// rather than making every display name match its slug exactly.
+const slugOverrides: Record<string, string> = {
+  "Morphing Tab Bar": "morphing-tabbar",
+};
+
 const components = [
   // Foundation
   { name: "Button", section: "Foundation" },
@@ -100,7 +108,58 @@ const components = [
   { name: "Price", section: "Data Display & Media" },
   { name: "Avatar Group", section: "Data Display & Media" },
   { name: "Image Gallery", section: "Data Display & Media" },
-  { name: "Carousel", section: "Data Display & Media" },
+  { name: "Carousel", section: "Motion & Effects" },
+  { name: "Carousel 3D", section: "Motion & Effects" },
+  { name: "Carousel Parallax", section: "Motion & Effects" },
+  { name: "Carousel Circular", section: "Motion & Effects" },
+  { name: "Carousel Scale", section: "Motion & Effects" },
+  { name: "Carousel Tilt", section: "Motion & Effects" },
+  { name: "Curved Bottom Tabs", section: "Motion & Effects" },
+  { name: "Morphing Tab Bar", section: "Motion & Effects" },
+  { name: "Mobile Dock", section: "Motion & Effects" },
+  { name: "Fan Menu", section: "Motion & Effects" },
+  { name: "Shimmer", section: "Motion & Effects" },
+  { name: "Loader", section: "Motion & Effects" },
+  { name: "Flip Card", section: "Motion & Effects" },
+  { name: "Marquee", section: "Motion & Effects" },
+  { name: "Disclosure Group", section: "Motion & Effects" },
+  { name: "Event Ticket", section: "UI Pieces" },
+  { name: "Receipt Card", section: "UI Pieces" },
+  { name: "Coupon", section: "UI Pieces" },
+  { name: "Polaroid", section: "UI Pieces" },
+  { name: "Profile Card", section: "UI Pieces" },
+  { name: "Photo Stack", section: "UI Pieces" },
+  { name: "Book Page", section: "UI Pieces" },
+  { name: "Barcode Badge", section: "UI Pieces" },
+  { name: "Social Button", section: "UI Pieces" },
+  { name: "Verified Badge", section: "UI Pieces" },
+  { name: "QR Code", section: "UI Pieces" },
+  { name: "Rolling Counter", section: "UI Pieces" },
+  { name: "Border Beam", section: "Motion & Effects" },
+  { name: "Gooey Switch", section: "Motion & Effects" },
+  { name: "Morph Loader", section: "Motion & Effects" },
+  { name: "Verified Shine", section: "Motion & Effects" },
+  { name: "Radiant Button", section: "Motion & Effects" },
+  { name: "Morph Fab", section: "Motion & Effects" },
+  { name: "Gooey Popover", section: "Motion & Effects" },
+  { name: "Gooey Search Tabs", section: "Motion & Effects" },
+  { name: "Tray", section: "Motion & Effects" },
+  { name: "Unfold Menu", section: "Motion & Effects" },
+  { name: "Action Rail", section: "Motion & Effects" },
+  { name: "Split View", section: "Motion & Effects" },
+  { name: "Expandable View", section: "Motion & Effects" },
+  { name: "Matched Geometry", section: "Motion & Effects" },
+  { name: "Arc List", section: "Motion & Effects" },
+  { name: "Flexi Button", section: "Motion & Effects" },
+  { name: "Save Button", section: "Motion & Effects" },
+  { name: "Spin Button", section: "Motion & Effects" },
+  { name: "Stacked Chips", section: "Motion & Effects" },
+  { name: "Filling Stack", section: "Motion & Effects" },
+  { name: "Hamburger", section: "Motion & Effects" },
+  { name: "Theme Switch", section: "Motion & Effects" },
+  { name: "Animated Header Scrollview", section: "Motion & Effects" },
+  { name: "Animated Input Bar", section: "Motion & Effects" },
+  { name: "Squircle View", section: "Motion & Effects" },
   { name: "Infinite List", section: "Data Display & Media" },
   { name: "Refresh Control", section: "Data Display & Media" },
   // Chat & AI
@@ -123,7 +182,7 @@ const components = [
   { name: "Chart Tooltip", section: "Charts" },
 ];
 
-const sectionOrder = ["Foundation", "Forms & Inputs", "Feedback & Status", "Overlays & Menus", "Navigation & Structure", "Data Display & Media", "Chat & AI", "Gestures & Actions", "Charts"];
+const sectionOrder = ["Foundation", "Forms & Inputs", "Feedback & Status", "Overlays & Menus", "Navigation & Structure", "Data Display & Media", "Motion & Effects", "UI Pieces", "Chat & AI", "Gestures & Actions", "Charts"];
 
 export default function HomeScreen() {
   const router = useRouter();
@@ -198,7 +257,7 @@ export default function HomeScreen() {
             {section.items.map((comp) => (
               <Pressable
                 key={comp.name}
-                onPress={() => router.push(`/component/${toSlug(comp.name)}` as never)}
+                onPress={() => router.push(`/component/${slugOverrides[comp.name] ?? toSlug(comp.name)}` as never)}
                 style={{ flexDirection: "row", alignItems: "center", justifyContent: "space-between", paddingHorizontal: 20, paddingVertical: 12 }}
                 accessibilityRole="button"
               >

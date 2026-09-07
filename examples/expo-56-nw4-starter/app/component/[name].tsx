@@ -1,5 +1,5 @@
 import React, { useState, useRef } from "react";
-import { ScrollView, View, Pressable, Modal, Image } from "react-native";
+import { ScrollView, View, Pressable, Modal, Image, useColorScheme } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useLocalSearchParams, Stack } from "expo-router";
 import {
@@ -3254,9 +3254,10 @@ const demos: Record<string, () => React.ReactElement> = {
       <Text className="text-sm text-muted-foreground">Pan a 3D cylindrical carousel — great for product galleries and featured collections.</Text>
       <Carousel3D
         data={[
-          <View className="h-full w-full items-center justify-center bg-primary"><Text className="text-primary-foreground font-semibold">Slide 1</Text></View>,
-          <View className="h-full w-full items-center justify-center bg-secondary"><Text className="text-secondary-foreground font-semibold">Slide 2</Text></View>,
-          <View className="h-full w-full items-center justify-center bg-accent"><Text className="text-accent-foreground font-semibold">Slide 3</Text></View>,
+          <Image key="1" source={{ uri: "https://picsum.photos/seed/aniui-3d-1/300/380" }} className="h-full w-full" resizeMode="cover" />,
+          <Image key="2" source={{ uri: "https://picsum.photos/seed/aniui-3d-2/300/380" }} className="h-full w-full" resizeMode="cover" />,
+          <Image key="3" source={{ uri: "https://picsum.photos/seed/aniui-3d-3/300/380" }} className="h-full w-full" resizeMode="cover" />,
+          <Image key="4" source={{ uri: "https://picsum.photos/seed/aniui-3d-4/300/380" }} className="h-full w-full" resizeMode="cover" />,
         ]}
       />
     </View>
@@ -3344,44 +3345,49 @@ const demos: Record<string, () => React.ReactElement> = {
   ),
 
   "carousel-circular": () => (
-    <CarouselCircular
-      data={["🎵", "📷", "✈️", "⭐", "🎨"].map((emoji) => (
-        <Text key={emoji} className="text-2xl">{emoji}</Text>
-      ))}
-    />
+    <View className="gap-4">
+      <Text className="text-sm text-muted-foreground">Pan to rotate avatars around a ring — nice for team/story pickers.</Text>
+      <CarouselCircular
+        data={["1", "2", "3", "4", "5"].map((seed) => (
+          <Image key={seed} source={{ uri: `https://picsum.photos/seed/aniui-circ-${seed}/140/140` }} className="h-full w-full rounded-full" resizeMode="cover" />
+        ))}
+      />
+    </View>
   ),
 
   "carousel-scale": () => (
     <CarouselScale
-      data={[
-        <View key="1" className="h-44 rounded-2xl bg-primary items-center justify-center"><Text className="text-primary-foreground font-bold">Pro</Text></View>,
-        <View key="2" className="h-44 rounded-2xl bg-secondary items-center justify-center"><Text className="text-secondary-foreground font-bold">Team</Text></View>,
-        <View key="3" className="h-44 rounded-2xl bg-accent items-center justify-center"><Text className="text-accent-foreground font-bold">Free</Text></View>,
-      ]}
+      data={["1", "2", "3", "4"].map((seed) => (
+        <Image key={seed} source={{ uri: `https://picsum.photos/seed/aniui-scale-${seed}/300/380` }} className="h-44 w-full rounded-2xl" resizeMode="cover" />
+      ))}
     />
   ),
 
   "carousel-tilt": () => (
     <CarouselTilt
-      data={[
-        <View key="1" className="h-40 rounded-xl bg-card border border-border items-center justify-center"><Text className="font-semibold">Design</Text></View>,
-        <View key="2" className="h-40 rounded-xl bg-card border border-border items-center justify-center"><Text className="font-semibold">Build</Text></View>,
-        <View key="3" className="h-40 rounded-xl bg-card border border-border items-center justify-center"><Text className="font-semibold">Ship</Text></View>,
-      ]}
+      data={["1", "2", "3", "4"].map((seed) => (
+        <Image key={seed} source={{ uri: `https://picsum.photos/seed/aniui-tilt-${seed}/260/320` }} className="h-40 w-full rounded-xl" resizeMode="cover" />
+      ))}
     />
   ),
 
   "curved-bottom-tabs": () => {
     const [index, setIndex] = useState(0);
+    const dark = useColorScheme() === "dark";
+    // The active tab's icon sits inside the floating circle, whose own
+    // gradient flips per theme (light circle in dark mode, dark circle in
+    // light mode) — the icon needs the opposite color to stay visible.
+    const activeIconColor = dark ? "#18181b" : "#fafafa";
+    const inactiveIconColor = "#71717a";
     return (
       <View className="gap-4">
         <Text className="text-sm text-muted-foreground">Curved notch tab bar — any tab can become the raised floating action.</Text>
         <CurvedBottomTabs
           tabs={[
-            { key: "home", label: "Home", icon: <Home size={18} color={index === 0 ? "#fafafa" : "#71717a"} /> },
-            { key: "search", label: "Search", icon: <Search size={18} color={index === 1 ? "#fafafa" : "#71717a"} /> },
-            { key: "add", label: "Add", icon: <Plus size={18} color={index === 2 ? "#fafafa" : "#71717a"} /> },
-            { key: "profile", label: "Profile", icon: <User size={18} color={index === 3 ? "#fafafa" : "#71717a"} /> },
+            { key: "home", label: "Home", icon: <Home size={18} color={index === 0 ? activeIconColor : inactiveIconColor} /> },
+            { key: "search", label: "Search", icon: <Search size={18} color={index === 1 ? activeIconColor : inactiveIconColor} /> },
+            { key: "add", label: "Add", icon: <Plus size={18} color={index === 2 ? activeIconColor : inactiveIconColor} /> },
+            { key: "profile", label: "Profile", icon: <User size={18} color={index === 3 ? activeIconColor : inactiveIconColor} /> },
           ]}
           activeIndex={index}
           onTabPress={setIndex}
@@ -3405,20 +3411,24 @@ const demos: Record<string, () => React.ReactElement> = {
     );
   },
 
-  "mobile-dock": () => (
-    <View className="gap-4">
-      <Text className="text-sm text-muted-foreground">A touch-tracked fisheye dock — drag your finger across the icons.</Text>
-      <MobileDock
-        items={[
-          { key: "mail", label: "Mail", icon: <Mail size={22} color="#18181b" />, onPress: () => {} },
-          { key: "chart", label: "Stats", icon: <BarChart3 size={22} color="#18181b" />, onPress: () => {} },
-          { key: "folder", label: "Projects", icon: <FolderKanban size={22} color="#18181b" />, onPress: () => {} },
-          { key: "users", label: "Team", icon: <Users size={22} color="#18181b" />, onPress: () => {} },
-          { key: "settings", label: "Settings", icon: <Settings size={22} color="#18181b" />, onPress: () => {} },
-        ]}
-      />
-    </View>
-  ),
+  "mobile-dock": () => {
+    const dark = useColorScheme() === "dark";
+    const iconColor = dark ? "#fafafa" : "#18181b";
+    return (
+      <View className="gap-4">
+        <Text className="text-sm text-muted-foreground">A touch-tracked fisheye dock — drag your finger across the icons.</Text>
+        <MobileDock
+          items={[
+            { key: "mail", label: "Mail", icon: <Mail size={22} color={iconColor} />, onPress: () => {} },
+            { key: "chart", label: "Stats", icon: <BarChart3 size={22} color={iconColor} />, onPress: () => {} },
+            { key: "folder", label: "Projects", icon: <FolderKanban size={22} color={iconColor} />, onPress: () => {} },
+            { key: "users", label: "Team", icon: <Users size={22} color={iconColor} />, onPress: () => {} },
+            { key: "settings", label: "Settings", icon: <Settings size={22} color={iconColor} />, onPress: () => {} },
+          ]}
+        />
+      </View>
+    );
+  },
 
   "fan-menu": () => (
     <FanMenu
