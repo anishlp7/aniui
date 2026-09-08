@@ -269,7 +269,7 @@ export default function HomePage() {
           <motion.div variants={heroItem} className="flex flex-col sm:flex-row items-center gap-3 mt-8">
             <motion.div whileHover={prefersReducedMotion ? undefined : { scale: 1.03 }} whileTap={{ scale: 0.97 }} transition={{ type: "spring", stiffness: 320, damping: 20 }}>
               <Link
-                href="/docs/accordion"
+                href="/docs/components"
                 className="h-12 px-8 rounded-lg bg-primary text-primary-foreground text-sm font-semibold flex items-center hover:opacity-90 transition-opacity"
               >
                 View Components &rarr;
