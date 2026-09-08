@@ -88,7 +88,7 @@ const jsonLd = {
   name: "AniUI",
   applicationCategory: "DeveloperApplication",
   operatingSystem: "iOS, Android",
-  description: "shadcn/ui for React Native. 133 accessible components built with Uniwind or NativeWind and TypeScript. Now supports Expo SDK 57.",
+  description: "shadcn/ui for React Native. 148 accessible components built with Uniwind or NativeWind and TypeScript. Now supports Expo SDK 57.",
   url: "https://aniui.dev",
   author: { "@type": "Person", name: "Anish" },
   offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },

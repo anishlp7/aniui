@@ -83,7 +83,7 @@ export function PreviewToggle({ children, qrCodeUrl, snackId }: PreviewTogglePro
                 <div className="text-center max-w-sm">
                   <p className="text-base font-semibold text-foreground">Preview on your device</p>
                   <p className="text-sm text-muted-foreground mt-1.5">
-                    Scan this QR code with <strong>Expo Go</strong> to try all 89 AniUI components on a real iOS or Android device.
+                    Scan this QR code with <strong>Expo Go</strong> to try all 148 AniUI components on a real iOS or Android device.
                   </p>
                 </div>
                 <div className="flex flex-wrap gap-3 mt-1">

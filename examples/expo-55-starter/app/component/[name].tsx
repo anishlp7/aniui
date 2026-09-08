@@ -3112,7 +3112,7 @@ const demos: Record<string, () => React.ReactElement> = {
   "streaming-text": () => {
     const questions = ["What is AniUI?", "What's the default styling engine?"];
     const responses = [
-      "AniUI ships 102 components you copy into your own project — no npm dependency, no black box.",
+      "AniUI ships 148 components you copy into your own project — no npm dependency, no black box.",
       "Uniwind is the default styling engine on New Architecture — 2-3x faster than NativeWind.",
     ];
     const [index, setIndex] = useState(0);

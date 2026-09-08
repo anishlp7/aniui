@@ -39,7 +39,7 @@ export default function MCPPage() {
         <div className="rounded-lg border border-border bg-card p-4">
           <p className="text-sm font-medium text-foreground mb-2">What your AI gets access to:</p>
           <ul className="text-sm text-muted-foreground space-y-1">
-            <li>&bull; <strong className="text-foreground">101 component source files</strong> — real code, not summaries</li>
+            <li>&bull; <strong className="text-foreground">148 component source files</strong> — real code, not summaries</li>
             <li>&bull; <strong className="text-foreground">Theme tokens</strong> — CSS variables and Tailwind mappings</li>
             <li>&bull; <strong className="text-foreground">Usage info</strong> — imports, variants, and props for each component</li>
             <li>&bull; <strong className="text-foreground">Component pattern</strong> — how to build new AniUI-style components</li>

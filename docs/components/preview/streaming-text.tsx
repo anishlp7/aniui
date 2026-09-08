@@ -54,7 +54,7 @@ export function PreviewStreamingText({
 }
 
 const RESPONSE =
-  "AniUI ships 102 components you copy into your own project — no npm dependency, no black box.";
+  "AniUI ships 148 components you copy into your own project — no npm dependency, no black box.";
 
 export function PreviewStreamingTextDemo() {
   const [run, setRun] = useState(0);
