@@ -253,7 +253,7 @@ export default function HomePage() {
           {/* Stat strip */}
           <motion.div variants={heroItem} className="flex flex-wrap items-center justify-center gap-x-8 gap-y-2 mt-8">
             {[
-              { value: "133", label: "Components" },
+              { value: "148", label: "Components" },
               { value: "15", label: "Screen Blocks" },
               { value: "4", label: "Expo SDKs" },
               { value: "MIT", label: "Licensed" },
@@ -363,7 +363,7 @@ export default function HomePage() {
                 Live web previews for carousels, motion, UI pieces, and Skia effects. CLI slugs stay stable — friendly names in docs only.
               </p>
             </div>
-            <Link href="/docs/components" className="text-sm font-medium text-primary hover:underline">Browse all 133 →</Link>
+            <Link href="/docs/components" className="text-sm font-medium text-primary hover:underline">Browse all 148 →</Link>
           </div>
           <FeaturedShowcase />
         </div>
