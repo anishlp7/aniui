@@ -2,7 +2,7 @@ import path from "path";
 import fs from "fs-extra";
 import { registry, resolveRegistryDeps, getComponentNames } from "../registry";
 import { copyComponent } from "../utils/file-ops";
-import { detectPackageManager, getInstallCommand, getDlxCommand } from "../utils/detect-project";
+import { detectProject, getNativeInstallCommand, getDlxCommand } from "../utils/detect-project";
 import { findLayoutFile, injectImport, injectJsxBeforeClose } from "../utils/inject-layout";
 import { hashFile } from "../utils/hash";
 import { logger } from "../utils/logger";
@@ -37,9 +37,9 @@ export async function addCommand(names: string[]): Promise<void> {
   const cwd = process.cwd();
 
   if (names.length === 0) {
-    const pmHint = await detectPackageManager(cwd);
+    const projectHint = await detectProject(cwd);
     logger.error("No component names provided.");
-    logger.info(`Usage: ${getDlxCommand(pmHint, "aniui add button card text")}`);
+    logger.info(`Usage: ${getDlxCommand(projectHint.packageManager, "aniui add button card text")}`);
     logger.break();
     logger.info("Available components:");
     const allNames = getComponentNames();
@@ -50,7 +50,9 @@ export async function addCommand(names: string[]): Promise<void> {
     process.exit(1);
   }
 
-  const pm = await detectPackageManager(cwd);
+  const project = await detectProject(cwd);
+  const pm = project.packageManager;
+  const isExpo = project.type === "expo";
 
   // Validate component names
   const invalid = names.filter((n) => !registry[n]);
@@ -156,7 +158,7 @@ export async function addCommand(names: string[]): Promise<void> {
   if (missingDeps.length > 0) {
     logger.break();
     logger.title("Install required dependencies:");
-    logger.info(`  ${getInstallCommand(pm, missingDeps)}`);
+    logger.info(`  ${getNativeInstallCommand(pm, isExpo, missingDeps)}`);
   }
 
   // Show tier warnings
@@ -166,7 +168,7 @@ export async function addCommand(names: string[]): Promise<void> {
   if (tier2Components.length > 0 && !allDeps["react-native-reanimated"]) {
     logger.break();
     logger.warn("Tier 2 components require react-native-reanimated:");
-    logger.info(`  ${getInstallCommand(pm, ["react-native-reanimated"])}`);
+    logger.info(`  ${getNativeInstallCommand(pm, isExpo, ["react-native-reanimated"])}`);
   }
 
   if (tier3Components.length > 0) {
@@ -175,7 +177,7 @@ export async function addCommand(names: string[]): Promise<void> {
     );
 
     if (needsGorhom && !allDeps["@gorhom/bottom-sheet"]) {
-      logger.info(`  ${getInstallCommand(pm, ["@gorhom/bottom-sheet", "react-native-gesture-handler"])}`);
+      logger.info(`  ${getNativeInstallCommand(pm, isExpo, ["@gorhom/bottom-sheet", "react-native-gesture-handler"])}`);
     }
     if (needsGorhom) {
       logger.break();
@@ -234,7 +236,7 @@ export async function addCommand(names: string[]): Promise<void> {
   if (tier4Components.length > 0 && !allDeps["@shopify/react-native-skia"]) {
     logger.break();
     logger.warn("Tier 4 components require @shopify/react-native-skia (GPU effects):");
-    logger.info(`  ${getInstallCommand(pm, ["@shopify/react-native-skia"])}`);
+    logger.info(`  ${getNativeInstallCommand(pm, isExpo, ["@shopify/react-native-skia"])}`);
     logger.info("  Expo: npx expo install @shopify/react-native-skia");
   }
 

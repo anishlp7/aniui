@@ -3,7 +3,7 @@ import fs from "fs-extra";
 import { blockRegistry, getBlockNames } from "../block-registry";
 import { registry, resolveRegistryDeps } from "../registry";
 import { copyComponent, getPackageRoot } from "../utils/file-ops";
-import { detectPackageManager, getInstallCommand, getDlxCommand } from "../utils/detect-project";
+import { detectProject, getNativeInstallCommand, getDlxCommand } from "../utils/detect-project";
 import { logger } from "../utils/logger";
 
 interface AniUIConfig {
@@ -24,9 +24,9 @@ export async function addBlockCommand(names: string[]): Promise<void> {
   const cwd = process.cwd();
 
   if (names.length === 0) {
-    const pmHint = await detectPackageManager(cwd);
+    const projectHint = await detectProject(cwd);
     logger.error("No block names provided.");
-    logger.info(`Usage: ${getDlxCommand(pmHint, "aniui add-block login")}`);
+    logger.info(`Usage: ${getDlxCommand(projectHint.packageManager, "aniui add-block login")}`);
     logger.break();
     logger.info("Available blocks:");
     const allNames = getBlockNames();
@@ -37,7 +37,9 @@ export async function addBlockCommand(names: string[]): Promise<void> {
     process.exit(1);
   }
 
-  const pm = await detectPackageManager(cwd);
+  const project = await detectProject(cwd);
+  const pm = project.packageManager;
+  const isExpo = project.type === "expo";
 
   // Validate block names
   const invalid = names.filter((n) => !blockRegistry[n]);
@@ -171,7 +173,6 @@ export async function addBlockCommand(names: string[]): Promise<void> {
     }
 
     // Check which npm deps are missing
-    const pm = await detectPackageManager(cwd);
     const pkgPath = path.join(cwd, "package.json");
     const pkg = await fs.pathExists(pkgPath)
       ? await fs.readJson(pkgPath)
@@ -182,7 +183,7 @@ export async function addBlockCommand(names: string[]): Promise<void> {
     if (missingNpmDeps.length > 0) {
       logger.break();
       logger.title("Install required dependencies:");
-      logger.info(`  ${getInstallCommand(pm, missingNpmDeps)}`);
+      logger.info(`  ${getNativeInstallCommand(pm, isExpo, missingNpmDeps)}`);
     }
   }
 

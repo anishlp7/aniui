@@ -1,7 +1,7 @@
 import path from "path";
 import fs from "fs-extra";
 import prompts from "prompts";
-import { detectProject, getInstallCommand, getDlxCommand, type StyleEngine } from "../utils/detect-project";
+import { detectProject, getInstallCommand, getNativeInstallCommand, getDlxCommand, type StyleEngine } from "../utils/detect-project";
 import { copyTemplate, copyUtilFile, getPackageRoot } from "../utils/file-ops";
 import { logger } from "../utils/logger";
 
@@ -265,7 +265,7 @@ export async function initCommand(opts?: { style?: string; nw?: string; yes?: bo
 
     logger.break();
     logger.info("Missing dependencies detected. Installing...");
-    logger.info(`  ${getInstallCommand(pm, missing)}`);
+    logger.info(`  ${getNativeInstallCommand(pm, project.type === "expo", missing)}`);
     logger.break();
 
     let confirm = true;
@@ -299,7 +299,7 @@ export async function initCommand(opts?: { style?: string; nw?: string; yes?: bo
         logger.success("Dependencies installed!");
       } catch {
         logger.error("Failed to install dependencies. Install them manually:");
-        logger.info(`  ${getInstallCommand(pm, missing)}`);
+        logger.info(`  ${getNativeInstallCommand(pm, project.type === "expo", missing)}`);
         process.exit(1);
       }
     } else {

@@ -1,6 +1,6 @@
 import path from "path";
 import fs from "fs-extra";
-import { detectProject, getDlxCommand, getInstallCommand, type StyleEngine } from "../utils/detect-project";
+import { detectProject, getDlxCommand, getNativeInstallCommand, type StyleEngine } from "../utils/detect-project";
 import { logger } from "../utils/logger";
 
 interface Check {
@@ -17,6 +17,7 @@ export async function doctorCommand(): Promise<void> {
 
   const project = await detectProject(cwd);
   const pm = project.packageManager;
+  const isExpo = project.type === "expo";
 
   // Prefer the user's persisted choice from .aniui.json (init may have applied a --nw
   // override that the detector can't reconstruct from package.json alone).
@@ -82,7 +83,7 @@ export async function doctorCommand(): Promise<void> {
     checks.push({
       label: `${dep.name} ${ver ? `(${ver})` : ""}`,
       pass: !!ver,
-      fix: `Install: ${getInstallCommand(pm, [dep.name])}`,
+      fix: `Install: ${getNativeInstallCommand(pm, isExpo, [dep.name])}`,
     });
   }
 
@@ -117,7 +118,7 @@ export async function doctorCommand(): Promise<void> {
       label: "@rn-primitives/portal",
       pass: hasPortal,
       detail: "Required for Dialog, Popover, Select, DropdownMenu, etc.",
-      fix: `Install: ${getInstallCommand(pm, ["@rn-primitives/portal"])}`,
+      fix: `Install: ${getNativeInstallCommand(pm, isExpo, ["@rn-primitives/portal"])}`,
     });
   }
 

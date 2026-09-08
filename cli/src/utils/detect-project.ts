@@ -91,6 +91,24 @@ export function getInstallCommand(pm: PackageManager, packages: string[]): strin
   }
 }
 
+/**
+ * Install command for packages that may need native linking (Reanimated,
+ * Skia, expo-blur, expo-haptics, gesture-handler, qrcode-svg, etc.). On Expo
+ * projects this routes through `expo install`, which resolves the version
+ * compatible with the project's installed SDK instead of whatever a plain
+ * `npm install` would pull from the registry's "latest" tag — the same
+ * distinction `init.ts` already draws for its own setup dependencies. Safe to
+ * use even for packages Expo's compatibility list doesn't track: `expo
+ * install` falls back to a normal install for anything it doesn't recognize,
+ * so this is never worse than `getInstallCommand`, only sometimes better.
+ */
+export function getNativeInstallCommand(pm: PackageManager, isExpo: boolean, packages: string[]): string {
+  if (isExpo) {
+    return getDlxCommand(pm, `expo install ${packages.join(" ")}`);
+  }
+  return getInstallCommand(pm, packages);
+}
+
 export function getRunCommand(pm: PackageManager, script: string): string {
   switch (pm) {
     case "pnpm":

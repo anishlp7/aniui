@@ -36,6 +36,14 @@ export interface VersionSet {
   lucideReactNative: string;
   classVarianceAuthority: string;
   clsx: string;
+  /** Tier 4 (Skia-based charts + the gooey/morph effects family). */
+  skia: string;
+  /** BlurView — carousels, flip-card, disclosure-group, fan-menu, rolling-counter, etc. */
+  expoBlur: string;
+  /** Haptic ticks — carousels, flip-card, morphing-tabbar, arc-list, etc. */
+  expoHaptics: string;
+  /** Real scannable QR encoding for qr-code.tsx. */
+  qrcodeSvg: string;
 }
 
 export const DEP_VERSIONS: Record<SdkBucket, VersionSet> = {
@@ -52,6 +60,10 @@ export const DEP_VERSIONS: Record<SdkBucket, VersionSet> = {
     lucideReactNative: "^1.24.0",
     classVarianceAuthority: "^0.7.1",
     clsx: "^2.1.1",
+    skia: "2.2.12",
+    expoBlur: "~15.0.8",
+    expoHaptics: "~15.0.8",
+    qrcodeSvg: "^6.3.22",
   },
   sdk55: {
     reanimated: "4.2.1",
@@ -66,6 +78,10 @@ export const DEP_VERSIONS: Record<SdkBucket, VersionSet> = {
     lucideReactNative: "^1.24.0",
     classVarianceAuthority: "^0.7.1",
     clsx: "^2.1.1",
+    skia: "2.4.18",
+    expoBlur: "~55.0.18",
+    expoHaptics: "~55.0.18",
+    qrcodeSvg: "^6.3.22",
   },
   sdk56: {
     reanimated: "~4.3.1",
@@ -82,6 +98,10 @@ export const DEP_VERSIONS: Record<SdkBucket, VersionSet> = {
     lucideReactNative: "^1.24.0",
     classVarianceAuthority: "^0.7.1",
     clsx: "^2.1.1",
+    skia: "2.6.2",
+    expoBlur: "~56.0.4",
+    expoHaptics: "~56.0.3",
+    qrcodeSvg: "^6.3.22",
   },
   sdk57: {
     reanimated: "~4.5.0",
@@ -97,6 +117,10 @@ export const DEP_VERSIONS: Record<SdkBucket, VersionSet> = {
     lucideReactNative: "^1.24.0",
     classVarianceAuthority: "^0.7.1",
     clsx: "^2.1.1",
+    skia: "2.6.2",
+    expoBlur: "~57.0.2",
+    expoHaptics: "~57.0.2",
+    qrcodeSvg: "^6.3.22",
   },
   bare: {
     reanimated: "^4.3.0",
@@ -111,5 +135,9 @@ export const DEP_VERSIONS: Record<SdkBucket, VersionSet> = {
     lucideReactNative: "^1.24.0",
     classVarianceAuthority: "^0.7.1",
     clsx: "^2.1.1",
+    skia: "^2.11.2",
+    expoBlur: "^57.0.2",
+    expoHaptics: "^57.0.2",
+    qrcodeSvg: "^6.3.22",
   },
 };

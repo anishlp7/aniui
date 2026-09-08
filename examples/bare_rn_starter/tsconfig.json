@@ -4,7 +4,11 @@
     "types": [
       "jest"
     ],
-    "jsxImportSource": "nativewind"
+    "jsxImportSource": "nativewind",
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./*"]
+    }
   },
   "include": [
     "**/*.ts",
