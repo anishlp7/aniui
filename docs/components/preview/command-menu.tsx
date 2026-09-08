@@ -12,12 +12,9 @@ interface CommandItem {
 }
 
 const sampleItems: CommandItem[] = [
-  { label: "New File", value: "new-file", shortcut: "Cmd+N", group: "Actions" },
-  { label: "Save", value: "save", shortcut: "Cmd+S", group: "Actions" },
-  { label: "Export", value: "export", shortcut: "Cmd+E", group: "Actions" },
-  { label: "Home", value: "home", group: "Navigation" },
-  { label: "Settings", value: "settings", shortcut: "Cmd+,", group: "Navigation" },
-  { label: "Profile", value: "profile", group: "Navigation" },
+  { label: "Toggle Theme", value: "toggle-theme", shortcut: "Cmd+J", group: "Actions" },
+  { label: "Go to Profile", value: "profile", group: "Navigation" },
+  { label: "Sign Out", value: "signout", group: "Account" },
 ];
 
 export function PreviewCommandMenuDemo() {

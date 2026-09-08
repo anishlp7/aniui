@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import { cn } from "@/lib/utils";
 
-const days = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+const days = ["Mon", "Tue", "Wed", "Thu", "Fri"];
 
 export function PreviewArcList({ className }: { className?: string }) {
   const [active, setActive] = useState(2);

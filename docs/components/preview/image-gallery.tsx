@@ -2,17 +2,21 @@
 
 import React from "react";
 
-const seeds = ["aniui-gallery-1", "aniui-gallery-2", "aniui-gallery-3"];
+const images = [
+  { seed: "gallery-front", alt: "Front view" },
+  { seed: "gallery-side", alt: "Side view" },
+  { seed: "gallery-detail", alt: "Stitching detail" },
+];
 
 export function PreviewImageGalleryDemo() {
   return (
     <div className="w-full max-w-sm">
       <div className="flex gap-2">
-        {seeds.map((seed, i) => (
+        {images.map((img, i) => (
           <img
             key={i}
-            src={`https://picsum.photos/seed/${seed}/400/300`}
-            alt=""
+            src={`https://picsum.photos/seed/${img.seed}/400/300`}
+            alt={img.alt}
             className="flex-1 aspect-[4/3] rounded-lg object-cover"
           />
         ))}

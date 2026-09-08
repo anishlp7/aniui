@@ -57,7 +57,7 @@ export interface PreviewPromptInputProps {
   onAttach?: () => void;
 }
 
-const ATTACH_OPTIONS = ["Add files or photos", "Take a screenshot", "Web search"];
+const ATTACH_OPTIONS = ["Add photos", "Take a screenshot", "Files"];
 const MODEL_OPTIONS = ["Opus 4.8", "Sonnet 4.9", "Haiku 4.5"];
 
 function ToolbarDropdown({ align = "left", items, onSelect }: {

@@ -42,9 +42,9 @@ export function VerticalPageCarousel({
 }: VerticalPageCarouselProps) {
   const { height: windowHeight } = useWindowDimensions();
   // The centering padding below needs the carousel's own rendered height, not
-  // the device's — assuming the full window (as reacticx's own full-screen
-  // design does) breaks the moment this is embedded in a smaller container,
-  // over-padding the content and leaving every card badly off-center.
+  // the device's — assuming the full window (a natural assumption for a
+  // full-screen pager) breaks the moment this is embedded in a smaller
+  // container, over-padding the content and leaving every card off-center.
   const [measuredHeight, setMeasuredHeight] = useState(0);
   const height = measuredHeight || windowHeight;
   const itemHeight = itemHeightProp ?? height * 0.7;

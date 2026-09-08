@@ -11,27 +11,31 @@ const usageCode = `import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/c
 
 export function MyScreen() {
   return (
-    <Tabs defaultValue="account">
+    <Tabs defaultValue="overview" size="sm">
       <TabsList>
-        <TabsTrigger value="account">Account</TabsTrigger>
-        <TabsTrigger value="password">Password</TabsTrigger>
+        <TabsTrigger value="overview">Overview</TabsTrigger>
+        <TabsTrigger value="reviews">Reviews</TabsTrigger>
+        <TabsTrigger value="specs">Specs</TabsTrigger>
       </TabsList>
-      <TabsContent value="account">
-        <Text>Account settings here.</Text>
+      <TabsContent value="overview">
+        <Text>Noise-cancelling over-ear headphones with 30-hour battery life.</Text>
       </TabsContent>
-      <TabsContent value="password">
-        <Text>Password settings here.</Text>
+      <TabsContent value="reviews">
+        <Text>4.0 average from 128 reviews</Text>
+      </TabsContent>
+      <TabsContent value="specs">
+        <Text>Weight: 250g · Battery: 30 hours · Bluetooth: 5.3</Text>
       </TabsContent>
     </Tabs>
   );
 }`;
-const lineCode = `<Tabs defaultValue="overview" variant="line">
+const lineCode = `<Tabs defaultValue="posts" variant="line">
   <TabsList>
-    <TabsTrigger value="overview">Overview</TabsTrigger>
-    <TabsTrigger value="analytics">Analytics</TabsTrigger>
-    <TabsTrigger value="reports">Reports</TabsTrigger>
+    <TabsTrigger value="posts">Posts</TabsTrigger>
+    <TabsTrigger value="about">About</TabsTrigger>
+    <TabsTrigger value="photos">Photos</TabsTrigger>
   </TabsList>
-  <TabsContent value="overview">...</TabsContent>
+  <TabsContent value="posts">...</TabsContent>
 </Tabs>`;
 const verticalCode = `<Tabs defaultValue="general" orientation="vertical" variant="line">
   <TabsList>

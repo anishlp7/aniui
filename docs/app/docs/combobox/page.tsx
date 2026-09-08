@@ -10,11 +10,11 @@ import { ComboboxDemo } from "./_demos";
 const usageCode = `import { useState } from "react";
 import { Combobox } from "@/components/ui/combobox";
 
-const frameworks = [
-  { label: "React Native", value: "rn" },
-  { label: "Flutter", value: "flutter" },
-  { label: "SwiftUI", value: "swiftui" },
-  { label: "Jetpack Compose", value: "compose" },
+const teammates = [
+  { label: "Ava Chen", value: "ava" },
+  { label: "Liam Brooks", value: "liam" },
+  { label: "Sofia Reyes", value: "sofia" },
+  { label: "Noah Patel", value: "noah" },
 ];
 
 export function MyScreen() {
@@ -22,11 +22,11 @@ export function MyScreen() {
 
   return (
     <Combobox
-      options={frameworks}
+      options={teammates}
       value={value}
       onValueChange={setValue}
-      placeholder="Select framework..."
-      searchPlaceholder="Search frameworks..."
+      placeholder="Select teammate..."
+      searchPlaceholder="Search teammates..."
     />
   );
 }`;

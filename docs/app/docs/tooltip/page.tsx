@@ -43,9 +43,10 @@ export default function TooltipPage() {
       {/* Preview */}
       <ComponentPlayground code={usageCode}>
         <div className="flex flex-wrap items-center gap-4 py-6">
-          <PreviewTooltip content="This is a tooltip">
+          <span className="text-sm text-foreground">Sync status</span>
+          <PreviewTooltip content="Changes sync automatically every 30 seconds while you're online.">
             <button type="button" className="inline-flex items-center gap-2 rounded-md border border-input bg-background px-4 py-2 text-sm font-medium text-foreground hover:bg-accent cursor-pointer">
-              Hover me
+              ?
             </button>
           </PreviewTooltip>
         </div>

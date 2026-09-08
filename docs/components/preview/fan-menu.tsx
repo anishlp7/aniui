@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import { cn } from "@/lib/utils";
 
-const actions = ["Share", "Save", "Edit", "Delete"];
+const actions = ["Mail", "Camera", "Chat"];
 
 export function PreviewFanMenu({ className }: { className?: string }) {
   const [open, setOpen] = useState(false);

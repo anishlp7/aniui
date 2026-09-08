@@ -24,10 +24,13 @@ export function PreviewAnimatedHeaderScrollView({ className }: { className?: str
       </div>
       <div ref={ref} onScroll={onScroll} className="h-full overflow-y-auto px-4 pb-4 pt-3">
         <h2
-          className={cn("mb-3 font-extrabold text-foreground transition-all duration-200", scrolled ? "text-lg opacity-0" : "text-2xl opacity-100")}
+          className={cn("font-extrabold text-foreground transition-all duration-200", scrolled ? "text-lg opacity-0" : "text-2xl opacity-100")}
         >
           Settings
         </h2>
+        <p className={cn("mb-3 text-sm text-muted-foreground transition-all duration-200", scrolled ? "opacity-0" : "opacity-100")}>
+          Manage your account
+        </p>
         {["Profile", "Notifications", "Privacy", "Appearance", "About"].map((row) => (
           <div key={row} className="mb-2 rounded-lg bg-secondary/60 px-3 py-2 text-xs text-secondary-foreground">
             {row}

@@ -13,9 +13,9 @@ import QRCode from "react-native-qrcode-svg";
 import { Copy, QrCodeIcon, X } from "lucide-react-native";
 import { cn } from "@/lib/utils";
 
-// Spring configs and interpolation ranges below mirror the reveal technique used by
-// reacticx's QRCode (stiffness/damping/mass + width/height/radius/color progress ranges);
-// the QR encoding itself comes from react-native-qrcode-svg, not reacticx's code.
+// Spring configs and interpolation ranges below drive the expand/collapse
+// reveal (stiffness/damping/mass + width/height/radius/color progress ranges);
+// the QR encoding itself comes from react-native-qrcode-svg.
 const SPRING_CONFIG: WithSpringConfig = { stiffness: 135, damping: 12.5, mass: 0.5, reduceMotion: ReduceMotion.System };
 const PRESS_SPRING_CONFIG: WithSpringConfig = { stiffness: 250, damping: 30, mass: 0.5, reduceMotion: ReduceMotion.System };
 const COLLAPSED_W = 200;

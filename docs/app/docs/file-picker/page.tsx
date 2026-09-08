@@ -26,7 +26,7 @@ export function MyScreen() {
       file={file}
       onPress={pickFile}
       onRemove={() => setFile(undefined)}
-      label="Tap to upload a document"
+      label="Tap to attach a photo or PDF"
     />
   );
 }`;

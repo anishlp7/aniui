@@ -8,7 +8,6 @@ const slides = [
   { label: "Harbor", seed: "aniui-3d-2" },
   { label: "Skyline", seed: "aniui-3d-3" },
   { label: "Desert", seed: "aniui-3d-4" },
-  { label: "Forest", seed: "aniui-3d-5" },
 ];
 
 export function PreviewCarousel3D({ className }: { className?: string }) {

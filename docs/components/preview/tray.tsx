@@ -14,7 +14,7 @@ export function PreviewTray({ className }: { className?: string }) {
         className="absolute bottom-3 rounded-full bg-primary px-4 py-2 text-xs font-medium text-primary-foreground shadow-sm cursor-pointer"
         style={{ opacity: open ? 0 : 1 }}
       >
-        Open Tray
+        Open Settings
       </button>
 
       <div
@@ -36,7 +36,22 @@ export function PreviewTray({ className }: { className?: string }) {
             ✕
           </button>
         </div>
-        <p className="px-4 pb-4 text-xs text-muted-foreground">Tray content goes here.</p>
+        <div className="flex items-center gap-3 px-4 pb-3">
+          <img
+            src="https://picsum.photos/seed/aniui-tray-avatar/96/96"
+            alt=""
+            className="h-10 w-10 rounded-full object-cover"
+          />
+          <div className="min-w-0 flex-1">
+            <p className="text-sm font-semibold text-foreground">Anish</p>
+            <p className="truncate text-xs text-muted-foreground">anish@aniui.dev · Free plan</p>
+          </div>
+        </div>
+        <div className="px-4 pb-4">
+          <button type="button" className="w-full rounded-md bg-primary py-2 text-xs font-medium text-primary-foreground cursor-pointer">
+            Manage account
+          </button>
+        </div>
       </div>
     </div>
   );

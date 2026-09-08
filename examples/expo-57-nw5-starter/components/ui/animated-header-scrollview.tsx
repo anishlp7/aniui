@@ -28,6 +28,11 @@ export interface AnimatedHeaderScrollViewProps
   collapseDistance?: number;
   /** Max BlurView intensity once fully scrolled. iOS only — Android falls back to a plain translucent backdrop. */
   blurIntensity?: number;
+  /** Space reserved above the header for the status bar/notch. Defaults to the
+   * device's real safe-area inset — override (e.g. to 0) when this isn't
+   * mounted at the actual top of the screen, such as inside a card or modal,
+   * where the real inset would just add dead space. */
+  topInset?: number;
 }
 
 /** iOS-style collapsing large-title ScrollView: a big inline title fades/slides
@@ -41,14 +46,16 @@ export function AnimatedHeaderScrollView({
   largeTitleClassName,
   collapseDistance = 80,
   blurIntensity = 40,
+  topInset: topInsetProp,
   children,
   contentContainerStyle,
   ...props
 }: AnimatedHeaderScrollViewProps) {
   const insets = useSafeAreaInsets();
+  const topInset = topInsetProp ?? insets.top;
   const dark = useColorScheme() === "dark";
   const scrollY = useSharedValue(0);
-  const headerHeight = COMPACT_HEADER_HEIGHT + insets.top;
+  const headerHeight = COMPACT_HEADER_HEIGHT + topInset;
 
   const onScroll = useAnimatedScrollHandler({
     onScroll: (event) => {
@@ -85,7 +92,7 @@ export function AnimatedHeaderScrollView({
       <View
         pointerEvents="box-none"
         className="absolute left-0 right-0 top-0 z-20 flex-row items-end justify-between gap-3 px-4 pb-2"
-        style={{ height: headerHeight, paddingTop: insets.top }}
+        style={{ height: headerHeight, paddingTop: topInset }}
       >
         <Animated.Text
           numberOfLines={1}

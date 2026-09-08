@@ -106,14 +106,14 @@ aniui/
 ├── components/                # Source files — copied by CLI into user's project
 │   └── ui/                    # NOTE: this tree is illustrative, not exhaustive — 149
 │                               # components exist under components/ui/ today; cli/src/registry.ts
-│                               # is the authoritative list. New from the reacticx-fidelity
-│                               # effort (see THIRD-PARTY.md): tray.tsx, unfold-menu.tsx,
+│                               # is the authoritative list. Newer additions not yet folded
+│                               # into the tree below: tray.tsx, unfold-menu.tsx,
 │                               # action-rail.tsx, split-view.tsx, expandable-view.tsx,
 │                               # matched-geometry.tsx, arc-list.tsx, flexi-button.tsx,
 │                               # save-button.tsx, spin-button.tsx, stacked-chips.tsx,
 │                               # filling-stack.tsx, hamburger.tsx, theme-switch.tsx,
 │                               # animated-header-scrollview.tsx, animated-input-bar.tsx,
-│                               # squircle-view.tsx, morph-fab.tsx, gooey-popover.tsx,
+│                               # morph-fab.tsx, gooey-popover.tsx,
 │                               # gooey-search-tabs.tsx, vertical-flow-carousel.tsx,
 │                               # vertical-page-carousel.tsx
 │       ├── button.tsx
@@ -444,7 +444,6 @@ All component-internal icons come from **`lucide-react-native`** (peer: `react-n
 | 130 | morph-fab | Gooey radial/directional FAB menu, staggered blob-merge spring |
 | 131 | gooey-popover | Popover that morphs its trigger into the content panel (Blur+ColorMatrix, not a shader) |
 | 132 | gooey-search-tabs | Pill that morphs between a search bar and a tab switcher (Blur+ColorMatrix, not a shader) |
-| 133 | squircle-view | True superellipse container with animatable corner-smoothing |
 
 ## Theme System
 

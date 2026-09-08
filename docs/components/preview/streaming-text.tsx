@@ -54,7 +54,7 @@ export function PreviewStreamingText({
 }
 
 const RESPONSE =
-  "AniUI is a copy-paste component library for React Native. Components are source files you own — no npm lock-in, no runtime overhead, and every line is yours to change.";
+  "AniUI ships 102 components you copy into your own project — no npm dependency, no black box.";
 
 export function PreviewStreamingTextDemo() {
   const [run, setRun] = useState(0);

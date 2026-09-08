@@ -7,9 +7,12 @@ import { cn } from "@/lib/utils";
 const TICKET_RADIUS = 16;
 const NOTCH_RADIUS = 9;
 const STUB_WIDTH = 96;
-const BAR_COUNT = 14;
-const BAR_MIN_HEIGHT = 4;
-const BAR_MAX_HEIGHT = 22;
+const BAR_COUNT = 18;
+// Kept deliberately thin (1-3px): at a 64px-tall barcode box, taller bars
+// (this used 4-22px before) don't fit 18 of them stacked and overflow the
+// box, which is why the barcode wasn't rendering as anything recognizable.
+const BAR_MIN_HEIGHT = 1;
+const BAR_MAX_HEIGHT = 3;
 
 export type EventTicketStubSide = "left" | "right";
 export type EventTicketPerforation = "dashed" | "solid" | "none";
@@ -129,7 +132,13 @@ export function EventTicket({
               <View key={i} className="w-full bg-foreground" style={{ height }} />
             ))}
           </View>
-          <Text className="rotate-90 text-[10px] font-mono text-muted-foreground">{code}</Text>
+          {/* Fixed-height box, not just the rotated Text alone: a rotate
+              transform doesn't reflow surrounding layout to match its visual
+              footprint, so an unwrapped rotated text keeps its pre-rotation
+              (wide, short) footprint and can overlap the barcode above it. */}
+          <View className="h-20 items-center justify-center">
+            <Text className="rotate-90 text-[10px] font-mono text-muted-foreground">{code}</Text>
+          </View>
         </>
       ) : null}
     </View>

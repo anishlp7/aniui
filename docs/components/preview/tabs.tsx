@@ -81,21 +81,22 @@ export { Tabs as PreviewTabs, List as PreviewTabsList, Trigger as PreviewTabsTri
 
 export function PreviewTabsDemo() {
   return (
-    <Tabs defaultValue="account">
-      <List><Trigger value="account">Account</Trigger><Trigger value="password">Password</Trigger></List>
-      <Content value="account"><Panel text="Manage your account settings and preferences." /></Content>
-      <Content value="password"><Panel text="Change your password and security settings." /></Content>
+    <Tabs defaultValue="overview">
+      <List><Trigger value="overview">Overview</Trigger><Trigger value="reviews">Reviews</Trigger><Trigger value="specs">Specs</Trigger></List>
+      <Content value="overview"><Panel text="Noise-cancelling over-ear headphones with 30-hour battery life." /></Content>
+      <Content value="reviews"><Panel text="4.0 average from 128 reviews" /></Content>
+      <Content value="specs"><Panel text="Weight: 250g · Battery: 30 hours · Bluetooth: 5.3" /></Content>
     </Tabs>
   );
 }
 
 export function PreviewTabsLine() {
   return (
-    <Tabs defaultValue="overview" variant="line">
-      <List><Trigger value="overview">Overview</Trigger><Trigger value="analytics">Analytics</Trigger><Trigger value="reports">Reports</Trigger></List>
-      <Content value="overview"><Panel text="Project overview and summary." /></Content>
-      <Content value="analytics"><Panel text="View detailed analytics data." /></Content>
-      <Content value="reports"><Panel text="Generate and download reports." /></Content>
+    <Tabs defaultValue="posts" variant="line">
+      <List><Trigger value="posts">Posts</Trigger><Trigger value="about">About</Trigger><Trigger value="photos">Photos</Trigger></List>
+      <Content value="posts"><Panel text="Just shipped v0.3 of AniUI 🚀" /></Content>
+      <Content value="about"><Panel text="Building open-source tools for React Native. Based in Bengaluru." /></Content>
+      <Content value="photos"><Panel text="A row of photo thumbnails." /></Content>
     </Tabs>
   );
 }

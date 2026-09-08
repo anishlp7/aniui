@@ -12,15 +12,18 @@ const usageCode = `import { Accordion, AccordionItem } from "@/components/ui/acc
 
 export function MyScreen() {
   return (
-    <Accordion defaultValue="item-1">
-      <AccordionItem value="item-1" trigger="Is it accessible?">
-        <Text>Yes. It uses accessibilityRole and accessibilityState.</Text>
+    <Accordion defaultValue="shipping-time">
+      <AccordionItem value="shipping-time" trigger="How long does shipping take?">
+        <Text>Standard orders arrive in 3-5 business days. Express orders arrive in 1-2 business days.</Text>
       </AccordionItem>
-      <AccordionItem value="item-2" trigger="Is it animated?">
-        <Text>Yes. It uses react-native-reanimated for smooth animations.</Text>
+      <AccordionItem value="returns" trigger="Can I return an item?">
+        <Text>Yes — unused items can be returned within 30 days of delivery for a full refund.</Text>
       </AccordionItem>
-      <AccordionItem value="item-3" trigger="Can I customize it?">
-        <Text>Yes. Use className to override any styles.</Text>
+      <AccordionItem value="international" trigger="Do you ship internationally?">
+        <Text>We ship to over 40 countries. International orders may be subject to customs fees.</Text>
+      </AccordionItem>
+      <AccordionItem value="tracking" trigger="How do I track my order?">
+        <Text>You'll get a tracking link by email as soon as your order ships.</Text>
       </AccordionItem>
     </Accordion>
   );
@@ -40,15 +43,18 @@ export default function AccordionPage() {
       <PreviewToggle>
         <ComponentPlayground code={usageCode}>
           <div className="w-full max-w-sm">
-            <PreviewAccordion defaultValue="item-1">
-              <PreviewAccordionItem value="item-1" trigger="Is it accessible?">
-                <p className="text-sm text-muted-foreground">Yes. It uses accessibilityRole and accessibilityState.</p>
+            <PreviewAccordion defaultValue="shipping-time">
+              <PreviewAccordionItem value="shipping-time" trigger="How long does shipping take?">
+                <p className="text-sm text-muted-foreground">Standard orders arrive in 3-5 business days. Express orders arrive in 1-2 business days.</p>
               </PreviewAccordionItem>
-              <PreviewAccordionItem value="item-2" trigger="Is it animated?">
-                <p className="text-sm text-muted-foreground">Yes. It uses react-native-reanimated for smooth animations.</p>
+              <PreviewAccordionItem value="returns" trigger="Can I return an item?">
+                <p className="text-sm text-muted-foreground">Yes — unused items can be returned within 30 days of delivery for a full refund.</p>
               </PreviewAccordionItem>
-              <PreviewAccordionItem value="item-3" trigger="Can I customize it?">
-                <p className="text-sm text-muted-foreground">Yes. Use className to override any styles.</p>
+              <PreviewAccordionItem value="international" trigger="Do you ship internationally?">
+                <p className="text-sm text-muted-foreground">We ship to over 40 countries. International orders may be subject to customs fees.</p>
+              </PreviewAccordionItem>
+              <PreviewAccordionItem value="tracking" trigger="How do I track my order?">
+                <p className="text-sm text-muted-foreground">You'll get a tracking link by email as soon as your order ships.</p>
               </PreviewAccordionItem>
             </PreviewAccordion>
           </div>

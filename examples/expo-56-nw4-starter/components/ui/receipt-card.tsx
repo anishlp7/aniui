@@ -120,7 +120,14 @@ export function ReceiptCard({
         <Path d={topEdge} fill={p.paper} />
       </Svg>
 
-      <View className="gap-3 px-5 py-4" style={{ backgroundColor: p.paper }}>
+      {/* A real drop shadow (shadowOpacity 0.12, radius 12, offset {0,6},
+          elevation 4) — without it the card reads as flat, and the
+          torn-paper edges above/below have nothing to visually separate
+          them from the page. */}
+      <View
+        className="gap-3 px-5 py-4 shadow-lg"
+        style={{ backgroundColor: p.paper, shadowColor: "#000", shadowOpacity: 0.12, shadowRadius: 12, shadowOffset: { width: 0, height: 6 }, elevation: 4 }}
+      >
         <View className="items-center gap-1 border-b border-dashed pb-3" style={{ borderBottomColor: p.rule }}>
           <Text className="text-base font-bold uppercase tracking-wide" style={{ color: p.accent, fontFamily: MONO_FONT }}>
             {merchant}

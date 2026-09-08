@@ -230,17 +230,17 @@ export function BookPageCover({
       ) : null}
       {scrim ? (
         <>
-          {/* Fidelity note: reacticx uses a top-to-bottom expo-linear-gradient
-              scrim (transparent -> 10% -> 70% black) so cover text stays
-              legible over any image. AniUI avoids adding expo-linear-gradient
-              for a single consumer, so this is approximated with two flat
-              translucent layers instead of a true fade. */}
+          {/* A top-to-bottom gradient scrim (transparent -> 10% -> 70% black)
+              would keep cover text legible over any image, but that needs
+              expo-linear-gradient for a single consumer, so this is
+              approximated with two flat translucent layers instead of a true
+              fade. */}
           <View className="absolute inset-0 bg-black/10" />
           <View className="absolute inset-x-0 bottom-0 h-1/2 bg-black/40" />
         </>
       ) : null}
-      {/* Spine shadow: reacticx fades this left-to-right with a gradient; here
-          it's a single flat translucent strip along the spine edge. */}
+      {/* Spine shadow: a single flat translucent strip along the spine edge,
+          kept flat rather than gradient-faded for the same reason as above. */}
       <View
         className="absolute inset-y-0 left-0"
         style={{ width: spineWidth, backgroundColor: palette.spine }}

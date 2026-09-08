@@ -159,7 +159,6 @@ export const registry: Record<string, ComponentEntry> = {
   "theme-switch": { name: "ThemeSwitch", file: "components/ui/theme-switch.tsx", description: "Sun/moon icon-morph theme toggle with an optional full-screen circular wipe transition", dependencies: ["lucide-react-native", "react-native-svg", "react-native-reanimated", "clsx", "tailwind-merge"], registryDependencies: [], tier: 2 },
   "animated-header-scrollview": { name: "AnimatedHeaderScrollView", file: "components/ui/animated-header-scrollview.tsx", description: "iOS-style collapsing large-title header ScrollView with blur backdrop on scroll", dependencies: ["react-native-reanimated", "expo-blur", "react-native-safe-area-context", "clsx", "tailwind-merge"], registryDependencies: [], tier: 3 },
   "animated-input-bar": { name: "AnimatedInputBar", file: "components/ui/animated-input-bar.tsx", description: "Text input with a per-character animated placeholder that cycles through multiple strings", dependencies: ["react-native-reanimated", "expo-blur", "class-variance-authority", "clsx", "tailwind-merge"], registryDependencies: [], tier: 3 },
-  "squircle-view": { name: "SquircleView", file: "components/ui/squircle-view.tsx", description: "True superellipse squircle container with an animatable corner-smoothing parameter", dependencies: ["react-native-reanimated", "@shopify/react-native-skia", "clsx", "tailwind-merge"], registryDependencies: [], tier: 4 },
 };
 
 export function getComponentNames(): string[] {

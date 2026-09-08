@@ -358,15 +358,21 @@ export function UnfoldMenu({
       anchorRect, panelOrigin, labelOrigin, titleOrigin, registerLabelOrigin, registerTitleOrigin, palette, iconSize, reduceMotion]
   );
 
+  // CLAMPed rather than left to extend: MORPH_SPRING is underdamped by design
+  // (it's meant to feel springy), so progress overshoots past 1 before
+  // settling. `target`/`panelWidth`/`panelHeightResolved` are already the
+  // screen-safe end state — extending past them during that overshoot is
+  // exactly what pushed the panel out of bounds on expand. Clamping closes
+  // that gap without changing the feel at rest.
   const morphStyle = useAnimatedStyle(() => {
     const p = progress.value;
     return {
       transform: [
-        { translateX: interpolate(p, [0, 1], [anchorRect.x, target.left]) },
-        { translateY: interpolate(p, [0, 1], [anchorRect.y, target.top]) },
+        { translateX: interpolate(p, [0, 1], [anchorRect.x, target.left], Extrapolation.CLAMP) },
+        { translateY: interpolate(p, [0, 1], [anchorRect.y, target.top], Extrapolation.CLAMP) },
       ],
-      width: interpolate(p, [0, 1], [anchorRect.w, panelWidth]),
-      height: interpolate(p, [0, 1], [anchorRect.h, panelHeightResolved]),
+      width: interpolate(p, [0, 1], [anchorRect.w, panelWidth], Extrapolation.CLAMP),
+      height: interpolate(p, [0, 1], [anchorRect.h, panelHeightResolved], Extrapolation.CLAMP),
     };
   });
 
@@ -434,15 +440,32 @@ export function UnfoldMenuTrigger({ children, className }: UnfoldMenuTriggerProp
     const toY = panelOrigin.y + titleOrigin.value.y - labelOrigin.value.y;
     return {
       transform: [
-        { translateX: interpolate(p, [0, 1], [anchorRect.x, toX]) },
-        { translateY: interpolate(p, [0, 1], [anchorRect.y, toY]) },
+        { translateX: interpolate(p, [0, 1], [anchorRect.x, toX], Extrapolation.CLAMP) },
+        { translateY: interpolate(p, [0, 1], [anchorRect.y, toY], Extrapolation.CLAMP) },
       ],
     };
   });
 
-  const morphIconStyle = useAnimatedStyle(() => ({
-    opacity: interpolate(progress.value, [0, TRIGGER_ICON_FADE_END], [1, 0], Extrapolation.CLAMP),
-  }));
+  // The icon fades out almost immediately (by TRIGGER_ICON_FADE_END) — it was
+  // never meant to travel, only the label is. But it's a child of the same
+  // traveling container, so without a counter-transform it inherits the full
+  // journey toward the panel's title, which sits with far less padding before
+  // it than the icon+gap the trigger pill has before the label — dragging the
+  // icon well outside the panel (visible as a stray icon detached to one
+  // side, if the fade hasn't fully hidden it yet). Canceling the parent's
+  // translateX/Y here keeps the icon visually anchored in place while it
+  // fades, regardless of how far the label travels.
+  const morphIconStyle = useAnimatedStyle(() => {
+    const p = progress.value;
+    const toX = panelOrigin.x + titleOrigin.value.x - labelOrigin.value.x;
+    const toY = panelOrigin.y + titleOrigin.value.y - labelOrigin.value.y;
+    const travelX = interpolate(p, [0, 1], [anchorRect.x, toX], Extrapolation.CLAMP);
+    const travelY = interpolate(p, [0, 1], [anchorRect.y, toY], Extrapolation.CLAMP);
+    return {
+      opacity: interpolate(p, [0, TRIGGER_ICON_FADE_END], [1, 0], Extrapolation.CLAMP),
+      transform: [{ translateX: anchorRect.x - travelX }, { translateY: anchorRect.y - travelY }],
+    };
+  });
 
   const morphLabelStyle = useAnimatedStyle(() => {
     const h = handoff.value;
@@ -472,7 +495,11 @@ export function UnfoldMenuTrigger({ children, className }: UnfoldMenuTriggerProp
 
   if (slot === "float") {
     return (
-      <Animated.View pointerEvents="none" className={cn("absolute left-0 top-0", triggerBase, className)} style={travelStyle}>
+      <Animated.View
+        pointerEvents="none"
+        className={cn("absolute left-0 top-0 border-transparent bg-transparent", triggerBase, className)}
+        style={travelStyle}
+      >
         <UnfoldMenuMorphContext.Provider value={morph}>
           <UnfoldMenuTintContext.Provider value={palette.text}>{children}</UnfoldMenuTintContext.Provider>
         </UnfoldMenuMorphContext.Provider>

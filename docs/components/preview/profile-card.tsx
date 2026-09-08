@@ -21,11 +21,11 @@ export function PreviewProfileCard({ className }: { className?: string }) {
         </div>
         <div className="flex flex-col gap-1.5 p-4">
           <div className="flex items-baseline gap-1.5">
-            <p className="text-sm font-bold text-foreground">Anish Lawrence</p>
-            <p className="text-[10px] text-muted-foreground">@anishlp</p>
+            <p className="text-sm font-bold text-foreground">Anish</p>
+            <p className="text-[10px] text-muted-foreground">@aniui</p>
           </div>
-          <p className="text-xs text-muted-foreground">Building AniUI.</p>
-          <p className="text-[10px] text-muted-foreground">San Francisco, CA</p>
+          <p className="text-xs text-muted-foreground">Building beautiful React Native components, one file at a time.</p>
+          <p className="text-[10px] text-muted-foreground">Mumbai, IN</p>
           <span className="mt-1 self-start rounded-xl bg-secondary px-3 py-1.5 text-[10px] font-semibold text-secondary-foreground">Follow</span>
         </div>
       </div>

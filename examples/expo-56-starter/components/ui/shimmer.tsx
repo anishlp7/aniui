@@ -16,11 +16,10 @@ export type ShimmerDirection = "leftToRight" | "rightToLeft" | "topToBottom" | "
 export type ShimmerPreset = "default" | "neutral" | "inverted" | "brand" | "subtle";
 
 // "container" = the placeholder's resting background; "highlight" = the
-// moving (shimmer) or breathing (pulse) overlay drawn on top of it. AniUI's
-// own palette, not reacticx's raw hex values — "default"/"brand" ride the
-// theme's CSS vars so they stay correct in dark mode automatically; the rest
-// are fixed tones for a caller that wants a specific loading surface
-// regardless of the app's color scheme.
+// moving (shimmer) or breathing (pulse) overlay drawn on top of it.
+// "default"/"brand" ride the theme's CSS vars so they stay correct in dark
+// mode automatically; the rest are fixed tones for a caller that wants a
+// specific loading surface regardless of the app's color scheme.
 const SHIMMER_PRESETS: Record<ShimmerPreset, { container: string; highlight: string }> = {
   default: { container: "bg-muted", highlight: "bg-foreground/20" },
   neutral: { container: "bg-zinc-200", highlight: "bg-white/70" },

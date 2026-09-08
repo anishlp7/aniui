@@ -169,7 +169,6 @@ import { Hamburger } from "@/components/ui/hamburger";
 import { ThemeSwitch } from "@/components/ui/theme-switch";
 import { AnimatedHeaderScrollView } from "@/components/ui/animated-header-scrollview";
 import { AnimatedInputBar } from "@/components/ui/animated-input-bar";
-import { SquircleView } from "@/components/ui/squircle-view";
 
 // Providers
 import { ThemeProvider, useTheme as useAniTheme } from "@/components/ui/theme-provider";
@@ -3302,16 +3301,18 @@ const demos: Record<string, () => React.ReactElement> = {
   ),
 
   "receipt-card": () => (
-    <ReceiptCard
-      merchant="Blue Bottle Coffee"
-      date="Sep 6, 2026"
-      lines={[
-        { label: "Flat White", value: "$5.50" },
-        { label: "Croissant", value: "$4.00" },
-        { label: "Tax", value: "$0.86" },
-      ]}
-      total="$10.36"
-    />
+    <View className="items-center rounded-2xl bg-[#0a0a0a] py-8">
+      <ReceiptCard
+        merchant="Blue Bottle Coffee"
+        date="Sep 6, 2026"
+        lines={[
+          { label: "Flat White", value: "$5.50" },
+          { label: "Croissant", value: "$4.00" },
+          { label: "Tax", value: "$0.86" },
+        ]}
+        total="$10.36"
+      />
+    </View>
   ),
 
   coupon: () => <Coupon code="ANIUI20" discount="20% OFF" description="First order discount" expires="Dec 31, 2026" />,
@@ -3541,18 +3542,22 @@ const demos: Record<string, () => React.ReactElement> = {
     </View>
   ),
 
-  "gooey-popover": () => (
-    <View className="h-40 items-center justify-center">
-      <GooeyPopover side="bottom" align="center">
-        <GooeyPopoverTrigger>
-          <Text className="text-sm font-medium text-primary-foreground">Options</Text>
-        </GooeyPopoverTrigger>
-        <GooeyPopoverContent>
-          <Text className="text-sm text-foreground">Popover content goes here.</Text>
-        </GooeyPopoverContent>
-      </GooeyPopover>
-    </View>
-  ),
+  "gooey-popover": () => {
+    const dark = useColorScheme() === "dark";
+    return (
+      <View className="h-40 items-center justify-center">
+        <Text className="mb-3 text-sm text-muted-foreground">Tap "Options" — the trigger blobs into the panel via a Skia goo blend.</Text>
+        <GooeyPopover side="bottom" align="center" color={dark ? "#27272a" : "#f4f1ea"}>
+          <GooeyPopoverTrigger>
+            <Text className="text-sm font-medium text-primary-foreground">Options</Text>
+          </GooeyPopoverTrigger>
+          <GooeyPopoverContent>
+            <Text className="text-sm" style={{ color: dark ? "#fafafa" : "#18181b" }}>Popover content goes here.</Text>
+          </GooeyPopoverContent>
+        </GooeyPopover>
+      </View>
+    );
+  },
 
   "gooey-search-tabs": () => (
     <GooeySearchTabs onSearch={() => {}}>
@@ -3601,6 +3606,7 @@ const demos: Record<string, () => React.ReactElement> = {
   "unfold-menu": () => (
     <View className="gap-3">
       <Text className="text-sm text-muted-foreground">Tap "Share" — the pill unfolds into the full panel, its label morphing into the panel title.</Text>
+      <View className="items-center">
     <UnfoldMenu onSelect={() => {}}>
       <UnfoldMenuTrigger>
         <UnfoldMenuIcon><Share2 size={20} color="#111111" /></UnfoldMenuIcon>
@@ -3624,6 +3630,7 @@ const demos: Record<string, () => React.ReactElement> = {
         </UnfoldMenuGrid>
       </UnfoldMenuContent>
     </UnfoldMenu>
+      </View>
     </View>
   ),
 
@@ -3745,8 +3752,12 @@ const demos: Record<string, () => React.ReactElement> = {
           <StackedChips>
             <StackedChipsTrigger>Color</StackedChipsTrigger>
             <StackedChipsContent>
-              <Text className="text-sm text-foreground">Red</Text>
-              <Text className="text-sm text-foreground">Blue</Text>
+              <Pressable className="min-h-8 items-center justify-center rounded-full bg-background px-3 py-1" onPress={() => {}}>
+                <Text className="text-sm font-medium text-foreground">Red</Text>
+              </Pressable>
+              <Pressable className="min-h-8 items-center justify-center rounded-full bg-background px-3 py-1" onPress={() => {}}>
+                <Text className="text-sm font-medium text-foreground">Blue</Text>
+              </Pressable>
             </StackedChipsContent>
           </StackedChips>
         </StackedChipsContent>
@@ -3792,7 +3803,7 @@ const demos: Record<string, () => React.ReactElement> = {
 
   "animated-header-scrollview": () => (
     <View className="h-96 overflow-hidden rounded-xl border border-border">
-      <AnimatedHeaderScrollView title="Settings" subtitle="Manage your account">
+      <AnimatedHeaderScrollView title="Settings" subtitle="Manage your account" topInset={0}>
         {Array.from({ length: 12 }).map((_, i) => (
           <View key={i} className="border-b border-border px-4 py-4">
             <Text className="text-sm text-foreground">Setting row {i + 1}</Text>
@@ -3812,12 +3823,6 @@ const demos: Record<string, () => React.ReactElement> = {
       />
     );
   },
-
-  "squircle-view": () => (
-    <SquircleView width={120} height={120} cornerRadius={28} cornerSmoothing={0.8} backgroundColor="#6366f1" className="items-center justify-center">
-      <Text className="text-sm font-semibold text-white">Squircle</Text>
-    </SquircleView>
-  ),
 
 };
 

@@ -22,7 +22,7 @@ export function PreviewHoverCardDemo() {
             </div>
             <div>
               <p className="text-sm font-semibold text-foreground">AniUI</p>
-              <p className="text-xs text-muted-foreground">@aniui</p>
+              <p className="text-xs text-muted-foreground">@aniui · 12.4k followers</p>
             </div>
           </div>
           <p className="mt-3 text-xs text-muted-foreground">

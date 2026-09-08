@@ -5,16 +5,13 @@ import { cn } from "@/lib/utils";
 
 export function PreviewBarcodeBadge({ className }: { className?: string }) {
   return (
-    <div className={cn("flex items-center gap-3 rounded-xl border border-border bg-card px-3 py-2", className)}>
-      <div className="flex h-10 gap-0.5">
-        {[3, 1, 2, 1, 4, 2, 1, 3, 1, 2, 4, 1].map((w, i) => (
+    <div className={cn("flex flex-col items-center gap-1.5 rounded-md border border-border bg-card p-3", className)}>
+      <div className="flex h-8 items-stretch gap-px">
+        {[3, 1, 2, 1, 4, 2, 1, 3, 1, 2, 4, 1, 2, 3, 1, 4, 2, 1].map((w, i) => (
           <span key={i} className="bg-foreground" style={{ width: w, height: "100%" }} />
         ))}
       </div>
-      <div>
-        <p className="text-xs font-semibold text-foreground">Order #4821</p>
-        <p className="text-[10px] text-muted-foreground">Scan at pickup</p>
-      </div>
+      <p className="text-xs font-mono uppercase tracking-widest text-foreground">ANIUI-2026</p>
     </div>
   );
 }

@@ -124,8 +124,8 @@ function buildCurvePath(points: PixelPoint[], tangents: number[], curved: boolea
   return d;
 }
 
-// Line path + close down to the baseline — the same "append L/L/Z" technique
-// reacticx's line-chart uses for its own Area companion piece.
+// Line path + close down to the baseline — the standard "append L/L/Z"
+// technique for turning a line path into a filled area beneath it.
 function buildFillPath(points: PixelPoint[], tangents: number[], curved: boolean, baselineY: number): string {
   "worklet";
   if (points.length < 2) return "M 0 0";

@@ -12,12 +12,12 @@ const usageCode = `import { RadioGroup, RadioGroupItem } from "@/components/ui/r
 import { useState } from "react";
 
 export function MyScreen() {
-  const [value, setValue] = useState("option-1");
+  const [value, setValue] = useState("pro");
   return (
     <RadioGroup value={value} onValueChange={setValue}>
-      <RadioGroupItem value="option-1" label="Option 1" />
-      <RadioGroupItem value="option-2" label="Option 2" />
-      <RadioGroupItem value="option-3" label="Option 3" />
+      <RadioGroupItem value="free" label="Free — $0/mo" />
+      <RadioGroupItem value="pro" label="Pro — $12/mo" />
+      <RadioGroupItem value="team" label="Team — $29/mo per seat" />
     </RadioGroup>
   );
 }`;

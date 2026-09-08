@@ -3,9 +3,9 @@
 import React, { useState } from "react";
 
 const stats = [
-  { label: "Revenue", value: "$12,345", change: "+12.5%", up: true },
-  { label: "Users", value: "1,234", change: "+8.2%", up: true },
-  { label: "Bounce Rate", value: "24.5%", change: "-3.1%", up: false },
+  { label: "Total Revenue", value: "$12,400", change: "+12.4%", up: true },
+  { label: "Active Users", value: "3,204", change: "+4.1%", up: true },
+  { label: "Orders", value: "182", change: "-2.6%", up: false },
 ];
 
 export function PreviewStatCardDemo() {

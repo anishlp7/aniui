@@ -118,7 +118,7 @@ Already on RNR / NativeWind / Uniwind? Components drop in with **zero extra setu
 
 ## Components
 
-**149 components** — all listed alphabetically. Each component's docs page tells you if it needs extra dependencies. Component icons come from [lucide-react-native](https://lucide.dev) (installed automatically by `aniui init`/`add`); icon props (`icon`, `leadingIcon`, …) accept any ReactNode, so you can bring your own.
+**148 components** — all listed alphabetically. Each component's docs page tells you if it needs extra dependencies. Component icons come from [lucide-react-native](https://lucide.dev) (installed automatically by `aniui init`/`add`); icon props (`icon`, `leadingIcon`, …) accept any ReactNode, so you can bring your own.
 
 Building an AI app? Pair [Prompt Input](https://aniui.dev/docs/prompt-input) (ChatGPT/Claude-style composer with toolbar slots), [Streaming Text](https://aniui.dev/docs/streaming-text), [Chat Bubble](https://aniui.dev/docs/chat-bubble), [Typing Indicator](https://aniui.dev/docs/typing-indicator), and [Waveform](https://aniui.dev/docs/waveform) (voice recording) for a complete chat UI.
 
@@ -242,7 +242,6 @@ Building an AI app? Pair [Prompt Input](https://aniui.dev/docs/prompt-input) (Ch
 | [Spin Button](https://aniui.dev/docs/spin-button) | Toggle button with a custom SVG arc spinner |
 | [Spinner](https://aniui.dev/docs/spinner) | Loading spinner with 3 sizes |
 | [Split View](https://aniui.dev/docs/split-view) | Draggable, resizable top/bottom split pane with snap points |
-| [Squircle View](https://aniui.dev/docs/squircle-view) | True superellipse container with animatable corner smoothing |
 | [Stacked Chips](https://aniui.dev/docs/stacked-chips) | Nested, depth-aware expandable chip menu |
 | [Stat Card](https://aniui.dev/docs/stat-card) | KPI display with value, trend, and change percentage |
 | [Status Indicator](https://aniui.dev/docs/status-indicator) | Online/offline/away/busy status dot |
@@ -295,7 +294,7 @@ npx expo install @shopify/react-native-skia
 
 | Area | Status |
 |------|--------|
-| 149 components | ✅ |
+| 148 components | ✅ |
 | Component & CLI tests (Jest) | ✅ |
 | Accessibility audit | ✅ |
 | Performance benchmarks | ✅ |

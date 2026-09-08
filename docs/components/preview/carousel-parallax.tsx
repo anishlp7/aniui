@@ -4,9 +4,9 @@ import React, { useState } from "react";
 import { cn } from "@/lib/utils";
 
 const slides = [
-  { label: "Featured", seed: "aniui-carousel-1" },
-  { label: "New", seed: "aniui-carousel-2" },
-  { label: "Popular", seed: "aniui-carousel-3" },
+  { label: "Featured", seed: "aniui-parallax-1" },
+  { label: "New", seed: "aniui-parallax-2" },
+  { label: "Popular", seed: "aniui-parallax-3" },
 ];
 
 export function PreviewCarouselParallax({ className }: { className?: string }) {

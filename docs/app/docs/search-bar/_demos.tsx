@@ -8,6 +8,6 @@ export function SearchBarDemo() {
 }
 
 export function CancelDemo() {
-  const [query, setQuery] = useState("react native");
+  const [query, setQuery] = useState("Avocado Toast");
   return <PreviewSearchBar value={query} onChange={(e) => setQuery(e.target.value)} onClear={() => setQuery("")} showCancel onCancel={() => setQuery("")} />;
 }

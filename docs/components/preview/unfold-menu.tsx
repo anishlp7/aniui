@@ -30,8 +30,8 @@ export function PreviewUnfoldMenu({ className }: { className?: string }) {
             </div>
             <div className="grid flex-1 grid-cols-3 place-items-center gap-1 p-2 text-lg">
               <span>⭐</span>
-              <span>💬</span>
-              <span>📤</span>
+              <span>✉️</span>
+              <span>🔖</span>
             </div>
           </div>
         )}

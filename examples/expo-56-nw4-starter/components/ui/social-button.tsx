@@ -22,7 +22,7 @@ export interface SocialMarkProps {
 
 // Confidence: HIGH — this is Google's own widely-published 4-color "G"
 // lockup (the same geometry used in Google's official Sign-in button
-// assets), reproduced independently from public knowledge, not from reacticx's file.
+// assets), reproduced independently from public knowledge of the mark.
 function GoogleMark({ size = 20, color }: SocialMarkProps) {
   return (
     <Svg width={size} height={size} viewBox="0 0 18 18">
@@ -49,7 +49,7 @@ function GitHubMark({ size = 20, color }: SocialMarkProps) {
 
 // Confidence: HIGH — the bold crossing-strokes "X" glyph (post-rebrand
 // Twitter/X wordmark), a simple geometric mark reproduced from public
-// knowledge of the shape, not transcribed from reacticx's file.
+// knowledge of the shape.
 function XMark({ size = 20, color }: SocialMarkProps) {
   return (
     <Svg width={size} height={size} viewBox="0 0 24 24">

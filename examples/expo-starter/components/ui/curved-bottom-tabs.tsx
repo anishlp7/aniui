@@ -27,8 +27,8 @@ const FLOAT_LIFT = 26;
 const CURVE_SPRING = { damping: 12, stiffness: 120, mass: 0.5 };
 const LIFT_SPRING = { damping: 10, stiffness: 100, mass: 0.5 };
 
-// Renders the badge count the same way reacticx's curved-bottom-tabs does:
-// hidden for 0/undefined, capped display at "99+" once the value exceeds 99.
+// Badge count: hidden for 0/undefined, capped display at "99+" once the
+// value exceeds 99 (the usual convention for notification-style badges).
 function formatBadge(badge?: number): string | null {
   if (badge === undefined || badge <= 0) return null;
   return badge > 99 ? "99+" : String(badge);
@@ -64,9 +64,8 @@ export function CurvedBottomTabs({
   const tabWidth = width / tabs.length;
   // The bar is rendered 3x screen-width with a single fixed notch at its own
   // midpoint, then clipped to `width` and slid horizontally via translateX so
-  // the notch appears to travel to whichever tab is active (reacticx's
-  // "wide strip + overflow:hidden" technique, rewritten here in our own path
-  // math and NativeWind layout instead of its cubic-bezier/StyleSheet version).
+  // the notch appears to travel to whichever tab is active — a wide strip
+  // plus overflow:hidden, rather than redrawing the notch's path per tab.
   const patternWidth = width * 3;
   const patternMid = patternWidth / 2;
   // The notch's own curve is NOTCH_HALF wide on each side of its center — for
@@ -83,8 +82,7 @@ export function CurvedBottomTabs({
 
   const curveX = useSharedValue(targetFor(activeIndex));
   // One shared value per tab so the outgoing tab can ease back down while the
-  // incoming one rises, mirroring reacticx's per-tab floatingAnimations array.
-  // Relies on `tabs.length` staying stable across renders (as reacticx's does).
+  // incoming one rises. Relies on `tabs.length` staying stable across renders.
   const lifts = useRef(tabs.map((_, i) => useSharedValue(i === activeIndex ? -FLOAT_LIFT : 0))).current;
 
   useEffect(() => {

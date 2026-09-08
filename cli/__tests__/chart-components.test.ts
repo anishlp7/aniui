@@ -18,7 +18,7 @@ const allChartNames = [...chartNames, "chart-tooltip"];
 
 describe("chart components", () => {
   // Charts were rewritten onto @shopify/react-native-skia for real entrance/morph/scrub
-  // animation (see the reacticx-fidelity plan) — they no longer render react-native-svg.
+  // animation — they no longer render react-native-svg.
   it.each(chartNames)("%s imports from @shopify/react-native-skia", (name) => {
     const filePath = path.join(repoRoot, registry[name].file);
     const content = fs.readFileSync(filePath, "utf-8");

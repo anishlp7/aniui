@@ -11,13 +11,16 @@ const installCode = `npx @aniui/cli add collapsible`;
 const usageCode = `import { Collapsible, CollapsibleTrigger, CollapsibleContent } from "@/components/ui/collapsible";
 
 export function MyScreen() {
+  const [open, setOpen] = useState(false);
   return (
-    <Collapsible>
+    <Collapsible open={open} onOpenChange={setOpen}>
       <CollapsibleTrigger>
-        <Text>Toggle content</Text>
+        <Text>{open ? "Hide" : "Show"} price breakdown</Text>
       </CollapsibleTrigger>
       <CollapsibleContent>
-        <Text>This content can be shown or hidden.</Text>
+        <Text>Subtotal: $76.00</Text>
+        <Text>Shipping: $4.50</Text>
+        <Text>Tax: $4.00</Text>
       </CollapsibleContent>
     </Collapsible>
   );
@@ -48,10 +51,14 @@ export default function CollapsiblePage() {
           <div className="w-full max-w-sm">
             <PreviewCollapsible>
               <PreviewCollapsibleTrigger>
-                <span className="text-sm font-medium text-foreground">Toggle content</span>
+                <span className="text-sm font-medium text-foreground">Show price breakdown</span>
               </PreviewCollapsibleTrigger>
               <PreviewCollapsibleContent>
-                <p className="text-sm text-muted-foreground pt-2">This content can be shown or hidden.</p>
+                <div className="space-y-1 pt-2">
+                  <p className="flex justify-between text-sm text-muted-foreground"><span>Subtotal</span><span>$76.00</span></p>
+                  <p className="flex justify-between text-sm text-muted-foreground"><span>Shipping</span><span>$4.50</span></p>
+                  <p className="flex justify-between text-sm text-muted-foreground"><span>Tax</span><span>$4.00</span></p>
+                </div>
               </PreviewCollapsibleContent>
             </PreviewCollapsible>
           </div>

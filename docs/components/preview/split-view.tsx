@@ -6,6 +6,8 @@ import { cn } from "@/lib/utils";
 const MIN = 60;
 const MAX = 220;
 
+const PLACES = ["Blue Bottle Coffee", "Golden Gate Park", "Ferry Building"];
+
 export function PreviewSplitView({ className }: { className?: string }) {
   const [topHeight, setTopHeight] = useState(130);
   const dragging = useRef(false);
@@ -35,8 +37,13 @@ export function PreviewSplitView({ className }: { className?: string }) {
       >
         <div className="h-1 w-10 rounded-full bg-foreground/25" />
       </div>
-      <div className="flex flex-1 items-center justify-center rounded-t-2xl bg-muted/40">
-        <p className="text-xs text-muted-foreground">Results list</p>
+      <div className="flex flex-1 flex-col overflow-hidden rounded-t-2xl bg-muted/40">
+        <p className="px-4 pt-3 pb-1 text-xs font-semibold text-foreground">Nearby results</p>
+        {PLACES.map((place) => (
+          <div key={place} className="border-t border-border/60 px-4 py-2 text-xs text-muted-foreground">
+            {place}
+          </div>
+        ))}
       </div>
     </div>
   );

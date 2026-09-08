@@ -11,19 +11,17 @@ const installCode = `npx @aniui/cli add toggle-group`;
 const usageCode = `import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 
 export function MyScreen() {
-  const [value, setValue] = React.useState("center");
+  const [view, setView] = React.useState("grid");
   return (
-    <ToggleGroup value={value} onValueChange={setValue}>
-      <ToggleGroupItem value="left">Left</ToggleGroupItem>
-      <ToggleGroupItem value="center">Center</ToggleGroupItem>
-      <ToggleGroupItem value="right">Right</ToggleGroupItem>
+    <ToggleGroup value={view} onValueChange={setView}>
+      <ToggleGroupItem value="list">List</ToggleGroupItem>
+      <ToggleGroupItem value="grid">Grid</ToggleGroupItem>
     </ToggleGroup>
   );
 }`;
-const exampleCode = `<ToggleGroup value={value} onValueChange={setValue}>
-  <ToggleGroupItem value="left">Left</ToggleGroupItem>
-  <ToggleGroupItem value="center">Center</ToggleGroupItem>
-  <ToggleGroupItem value="right">Right</ToggleGroupItem>
+const exampleCode = `<ToggleGroup value={view} onValueChange={setView}>
+  <ToggleGroupItem value="list">List</ToggleGroupItem>
+  <ToggleGroupItem value="grid">Grid</ToggleGroupItem>
 </ToggleGroup>`;
 const sourceCode = getComponentSource("toggle-group");
 export default function ToggleGroupPage() {
@@ -33,7 +31,7 @@ export default function ToggleGroupPage() {
       <div>
         <h1 className="text-3xl font-bold tracking-tight text-foreground">Toggle Group</h1>
         <p className="mt-2 text-lg text-muted-foreground">
-          A group of toggle items where only one can be active at a time, perfect for selection controls like text alignment.
+          A group of toggle items where only one can be active at a time, perfect for selection controls like a list/grid view switcher.
         </p>
       </div>
       {/* Preview */}
@@ -55,10 +53,9 @@ export default function ToggleGroupPage() {
         <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Examples</Heading>
         <ComponentPlayground code={exampleCode}>
           <div className="flex flex-wrap items-center gap-3">
-            <PreviewToggleGroup value="center">
-              <PreviewToggleGroupItem value="left">Left</PreviewToggleGroupItem>
-              <PreviewToggleGroupItem value="center">Center</PreviewToggleGroupItem>
-              <PreviewToggleGroupItem value="right">Right</PreviewToggleGroupItem>
+            <PreviewToggleGroup value="grid">
+              <PreviewToggleGroupItem value="list">List</PreviewToggleGroupItem>
+              <PreviewToggleGroupItem value="grid">Grid</PreviewToggleGroupItem>
             </PreviewToggleGroup>
           </div>
         </ComponentPlayground>

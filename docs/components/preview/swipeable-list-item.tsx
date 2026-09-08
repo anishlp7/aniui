@@ -7,9 +7,10 @@ export function PreviewSwipeableListItem({ className }: { className?: string }) 
   const [swiped, setSwiped] = useState<string | null>(null);
 
   const items = [
-    { id: "1", title: "Design Review", desc: "Review the new onboarding flow mockups" },
-    { id: "2", title: "Team Standup", desc: "Daily sync at 10:00 AM" },
-    { id: "3", title: "Deploy v2.1", desc: "Push release to production" },
+    { id: "1", title: "Design Review", desc: "Review the new dashboard mockups" },
+    { id: "2", title: "Team Standup", desc: "Daily sync with the engineering team" },
+    { id: "3", title: "Bug Report #142", desc: "Fix navigation crash on Android" },
+    { id: "4", title: "Release Notes", desc: "Draft v2.0 changelog for review" },
   ];
 
   return (
@@ -53,10 +54,10 @@ function SwipeableRow({
       <div className="absolute right-0 top-0 bottom-0 flex flex-row">
         <button
           type="button"
-          className="w-20 flex items-center justify-center bg-amber-500 text-white text-xs font-medium cursor-pointer"
-          onClick={() => { onAction("Archive"); setOffsetX(0); }}
+          className="w-20 flex items-center justify-center bg-blue-500 text-white text-xs font-medium cursor-pointer"
+          onClick={() => { onAction("Edit"); setOffsetX(0); }}
         >
-          Archive
+          Edit
         </button>
         <button
           type="button"
@@ -70,10 +71,17 @@ function SwipeableRow({
       <div className="absolute left-0 top-0 bottom-0 flex flex-row">
         <button
           type="button"
-          className="w-20 flex items-center justify-center bg-green-600 text-white text-xs font-medium cursor-pointer"
+          className="w-20 flex items-center justify-center bg-amber-500 text-white text-xs font-medium cursor-pointer"
           onClick={() => { onAction("Pin"); setOffsetX(0); }}
         >
           Pin
+        </button>
+        <button
+          type="button"
+          className="w-20 flex items-center justify-center bg-green-600 text-white text-xs font-medium cursor-pointer"
+          onClick={() => { onAction("Archive"); setOffsetX(0); }}
+        >
+          Archive
         </button>
       </div>
       {/* Content */}
@@ -93,13 +101,13 @@ function SwipeableRow({
           const onMove = (ev: PointerEvent) => {
             const dx = ev.clientX - startX;
             const next = startOffset + dx;
-            setOffsetX(Math.max(-actionWidth * 2, Math.min(actionWidth, next)));
+            setOffsetX(Math.max(-actionWidth * 2, Math.min(actionWidth * 2, next)));
           };
           const onUp = () => {
             setDragging(false);
             setOffsetX((prev) => {
               if (prev < -actionWidth) return -actionWidth * 2;
-              if (prev > actionWidth * 0.5) return actionWidth;
+              if (prev > actionWidth) return actionWidth * 2;
               return 0;
             });
             window.removeEventListener("pointermove", onMove);

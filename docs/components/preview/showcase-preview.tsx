@@ -123,7 +123,6 @@ import { PreviewSocialButton } from "@/components/preview/social-button";
 import { PreviewSpinButton } from "@/components/preview/spin-button";
 import { PreviewSpinner } from "@/components/preview/spinner";
 import { PreviewSplitView } from "@/components/preview/split-view";
-import { PreviewSquircleView } from "@/components/preview/squircle-view";
 import { PreviewStackedChips } from "@/components/preview/stacked-chips";
 import { PreviewStatCardDemo } from "@/components/preview/stat-card";
 import { PreviewStatusIndicatorDemo } from "@/components/preview/status-indicator";
@@ -274,7 +273,6 @@ const previewMap = {
   "spin-button": PreviewSpinButton,
   spinner: PreviewSpinner,
   "split-view": PreviewSplitView,
-  "squircle-view": PreviewSquircleView,
   "stacked-chips": PreviewStackedChips,
   "stat-card": PreviewStatCardDemo,
   "status-indicator": PreviewStatusIndicatorDemo,

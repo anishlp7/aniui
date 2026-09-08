@@ -30,16 +30,16 @@ describe("component source files", () => {
   // Complex components with many features (multi-select, groups, search-with-positioning, compound composers, etc.) justifiably exceed 120 lines
   const largeComponents = new Set([
     "combobox", "input-group", "command-menu", "data-table", "tabs", "select", "phone-input", "prompt-input", "autocomplete",
-    // reacticx-fidelity rewrites/ports (Reanimated/Skia gesture+animation math genuinely needs the room; see CLAUDE.md's
-    // relaxed line-count note for this effort) and brand-new reacticx-inspired components:
+    // Reanimated/Skia gesture+animation math genuinely needs the room (see CLAUDE.md's
+    // relaxed line-count note) and several newer, more elaborate components:
     "carousel-3d", "carousel-parallax", "carousel-circular", "carousel-tilt", "curved-bottom-tabs",
     "vertical-flow-carousel", "vertical-page-carousel",
     "area-chart", "bar-chart", "line-chart", "pie-chart", "radar-chart", "radial-chart",
-    "action-rail", "animated-input-bar", "arc-list", "barcode-badge", "book-page", "coupon",
+    "action-rail", "animated-header-scrollview", "animated-input-bar", "arc-list", "barcode-badge", "book-page", "coupon",
     "event-ticket", "expandable-view", "fan-menu", "gooey-popover", "gooey-search-tabs",
     "loader", "marquee", "matched-geometry", "mobile-dock", "morph-fab",
     "morphing-tabbar", "profile-card", "qr-code", "receipt-card", "rolling-counter",
-    "save-button", "shimmer", "social-button", "split-view", "squircle-view", "verified-badge",
+    "save-button", "shimmer", "social-button", "split-view", "verified-badge",
   ]);
   // Full compound multi-view systems (push/back navigation stacks, detent-driven bottom sheets) — a step
   // above the 320-line "large" tier, still single-file per CLAUDE.md, just genuinely bigger surface area.

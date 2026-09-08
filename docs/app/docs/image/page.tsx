@@ -10,7 +10,7 @@ import { PreviewToggle } from "@/components/preview-toggle";
 
 const installCode = `npx @aniui/cli add image`;
 const usageCode = `import { Image } from "@/components/ui/image";
-<Image src="https://picsum.photos/400/300" alt="Sample" width={200} height={150} />`;
+<Image src="https://picsum.photos/seed/product-photo/400/300" alt="Wool scarf, folded on a table" width={200} height={150} />`;
 const roundedCode = `<Image src="https://picsum.photos/200/200" rounded="none" width={100} height={100} />
 <Image src="https://picsum.photos/200/200" rounded="md" width={100} height={100} />
 <Image src="https://picsum.photos/200/200" rounded="xl" width={100} height={100} />
@@ -31,7 +31,7 @@ export default function ImagePage() {
       </div>
       <PreviewToggle>
         <ComponentPlayground code={usageCode}>
-          <PreviewImage src="https://picsum.photos/400/300" alt="Sample" width={200} height={150} />
+          <PreviewImage src="https://picsum.photos/seed/product-photo/400/300" alt="Wool scarf, folded on a table" width={200} height={150} />
         </ComponentPlayground>
       </PreviewToggle>
       <div>

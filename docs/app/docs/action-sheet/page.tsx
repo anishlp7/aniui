@@ -48,11 +48,10 @@ export default function ActionSheetPage() {
       <PreviewToggle>
         <ComponentPlayground code={usageCode}>
           <PreviewActionSheet
-            title="Choose an action"
+            title="Add a photo"
             actions={[
-              { label: "Edit" },
-              { label: "Share" },
-              { label: "Delete", destructive: true },
+              { label: "Take Photo" },
+              { label: "Choose from Library" },
             ]}
           />
         </ComponentPlayground>

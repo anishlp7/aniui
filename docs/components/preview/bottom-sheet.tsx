@@ -19,7 +19,7 @@ export function PreviewBottomSheet({ className, children, ...props }: PreviewBot
           className="inline-flex h-10 items-center justify-center rounded-md bg-primary px-4 text-sm font-medium text-primary-foreground hover:bg-primary/90 cursor-pointer"
           onClick={() => setOpen(true)}
         >
-          Open Sheet
+          Share Post
         </button>
       </div>
 
@@ -34,17 +34,31 @@ export function PreviewBottomSheet({ className, children, ...props }: PreviewBot
             <div className="p-4">
               {children ?? (
                 <div className="space-y-3 pb-4">
-                  <p className="text-sm font-semibold text-foreground">Sheet Content</p>
-                  <p className="text-sm text-muted-foreground">
-                    This is a native bottom sheet powered by @gorhom/bottom-sheet. Drag the handle to resize or dismiss.
-                  </p>
-                  <button
-                    type="button"
-                    className="w-full rounded-md bg-primary py-2.5 text-sm font-medium text-primary-foreground hover:bg-primary/90 cursor-pointer"
-                    onClick={() => setOpen(false)}
-                  >
-                    Got it
-                  </button>
+                  <p className="text-sm font-semibold text-foreground">Share this post</p>
+                  <p className="text-sm text-muted-foreground">Choose where to send it.</p>
+                  <div className="space-y-2 pt-1">
+                    <button
+                      type="button"
+                      className="w-full rounded-md border border-input bg-background py-2.5 text-sm font-medium text-foreground hover:bg-accent cursor-pointer"
+                      onClick={() => setOpen(false)}
+                    >
+                      Messages
+                    </button>
+                    <button
+                      type="button"
+                      className="w-full rounded-md border border-input bg-background py-2.5 text-sm font-medium text-foreground hover:bg-accent cursor-pointer"
+                      onClick={() => setOpen(false)}
+                    >
+                      Twitter / X
+                    </button>
+                    <button
+                      type="button"
+                      className="w-full rounded-md border border-input bg-background py-2.5 text-sm font-medium text-foreground hover:bg-accent cursor-pointer"
+                      onClick={() => setOpen(false)}
+                    >
+                      Copy Link
+                    </button>
+                  </div>
                 </div>
               )}
             </div>

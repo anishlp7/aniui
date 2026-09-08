@@ -23,7 +23,7 @@ export interface PreviewAutoCompleteProps {
 // renders below the input as a normal sibling — same layout approach as the
 // real RN component, which has no viewport-relative overlay without a portal.
 export function PreviewAutoComplete({
-  className, placeholder = "Search fruit…", options, minCharsToTrigger = 1,
+  className, placeholder = "Start typing a city...", options, minCharsToTrigger = 1,
   loading, emptyText = "No results", maxVisibleOptions = 5,
 }: PreviewAutoCompleteProps) {
   const [text, setText] = useState("");

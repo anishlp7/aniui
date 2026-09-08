@@ -24,13 +24,14 @@ export function PreviewContextMenu({ className }: { className?: string }) {
           setOpen(true);
         }}
         onClick={() => setOpen((v) => !v)}
-        className="flex h-28 w-full items-center justify-center rounded-xl border-2 border-dashed border-border text-sm text-muted-foreground cursor-pointer hover:bg-accent/30"
+        className="flex h-28 w-full flex-col items-start justify-center gap-1 rounded-xl border border-border bg-card px-4 text-left cursor-pointer hover:bg-accent/30"
       >
-        Right-click or tap
+        <span className="text-sm font-medium text-foreground">Product Mockup.fig</span>
+        <span className="text-xs text-muted-foreground">2.4 MB · Edited 3h ago</span>
       </button>
       {open && (
         <div className="absolute left-1/2 top-1/2 z-50 min-w-[160px] -translate-x-1/2 translate-y-2 rounded-xl border border-border bg-card p-1 shadow-lg">
-          {["Edit", "Duplicate", "Share"].map((item) => (
+          {["Copy", "Share"].map((item) => (
             <button
               key={item}
               type="button"

@@ -24,9 +24,9 @@ const autoPlayCode = `<Carousel
 const sourceCode = getComponentSource("carousel");
 
 const slides = [
-  <div key="1" className="h-48 bg-primary rounded-lg flex items-center justify-center"><span className="text-primary-foreground text-lg font-medium">Slide 1</span></div>,
-  <div key="2" className="h-48 bg-secondary rounded-lg flex items-center justify-center"><span className="text-secondary-foreground text-lg font-medium">Slide 2</span></div>,
-  <div key="3" className="h-48 bg-accent rounded-lg flex items-center justify-center"><span className="text-accent-foreground text-lg font-medium">Slide 3</span></div>,
+  <div key="1" className="h-48 bg-primary/10 rounded-lg flex items-center justify-center px-6"><span className="text-foreground text-lg font-semibold text-center">Track every habit in one place</span></div>,
+  <div key="2" className="h-48 bg-primary/20 rounded-lg flex items-center justify-center px-6"><span className="text-foreground text-lg font-semibold text-center">Get a nudge right when you need it</span></div>,
+  <div key="3" className="h-48 bg-primary/30 rounded-lg flex items-center justify-center px-6"><span className="text-foreground text-lg font-semibold text-center">Celebrate every streak you build</span></div>,
 ];
 
 export default function CarouselPage() {

@@ -3,7 +3,7 @@
 import React from "react";
 import { cn } from "@/lib/utils";
 
-const seeds = ["aniui-photostack-1", "aniui-photostack-2", "aniui-photostack-3"];
+const seeds = ["a", "b", "c"];
 
 export function PreviewPhotoStack({ className }: { className?: string }) {
   const offsets = [

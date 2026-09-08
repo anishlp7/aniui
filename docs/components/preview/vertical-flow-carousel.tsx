@@ -8,6 +8,7 @@ const slides = [
   { label: "Cliff", seed: "aniui-vflow-2" },
   { label: "Dusk", seed: "aniui-vflow-3" },
   { label: "Tide", seed: "aniui-vflow-4" },
+  { label: "Bay", seed: "aniui-vflow-5" },
 ];
 
 export function PreviewVerticalFlowCarousel({ className }: { className?: string }) {

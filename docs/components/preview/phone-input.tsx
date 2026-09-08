@@ -18,7 +18,7 @@ export function PreviewPhoneInputDemo() {
         </button>
         <input
           className="flex-1 bg-transparent text-foreground text-base outline-none"
-          placeholder="Phone number"
+          placeholder="5551234567"
           value={phone}
           onChange={(e) => setPhone(e.target.value.replace(/[^\d\s()-]/g, ""))}
         />

@@ -1290,16 +1290,6 @@ export const registry: Record<string, ComponentEntry> = {
     category: "Motion & Effects",
     group: "Micro-interactions",
   },
-  "squircle-view": {
-    name: "SquircleView",
-    file: "components/ui/squircle-view.tsx",
-    description: "True superellipse squircle container with an animatable corner-smoothing parameter",
-    dependencies: ["react-native-reanimated", "@shopify/react-native-skia", "clsx", "tailwind-merge"],
-    registryDependencies: [],
-    tier: 4,
-    category: "UI Pieces",
-    group: "Shapes & Containers",
-  },
 };
 
 export function getComponentNames(): string[] {

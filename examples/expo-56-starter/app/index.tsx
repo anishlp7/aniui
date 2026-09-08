@@ -155,7 +155,6 @@ const components = [
   { name: "Theme Switch", section: "Motion & Effects" },
   { name: "Animated Header Scrollview", section: "Motion & Effects" },
   { name: "Animated Input Bar", section: "Motion & Effects" },
-  { name: "Squircle View", section: "Motion & Effects" },
   { name: "Infinite List", section: "Data Display & Media" },
   { name: "Refresh Control", section: "Data Display & Media" },
   // Chat & AI

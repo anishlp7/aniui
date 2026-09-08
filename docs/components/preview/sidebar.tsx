@@ -22,7 +22,9 @@ export function PreviewSidebar({ className, ...props }: PreviewSidebarProps) {
       >
         <div className="flex flex-col gap-1">
           <div className="rounded-sm bg-card px-2 py-2 text-sm font-medium text-foreground">Dashboard</div>
+          <div className="rounded-sm px-2 py-2 text-sm text-muted-foreground">Analytics</div>
           <div className="rounded-sm px-2 py-2 text-sm text-muted-foreground">Projects</div>
+          <div className="rounded-sm px-2 py-2 text-sm text-muted-foreground">Team</div>
           <div className="rounded-sm px-2 py-2 text-sm text-muted-foreground">Settings</div>
         </div>
       </div>
@@ -35,7 +37,7 @@ export function PreviewSidebar({ className, ...props }: PreviewSidebarProps) {
         >
           ☰
         </button>
-        <p className="text-sm text-muted-foreground">Content area</p>
+        <p className="text-sm text-muted-foreground">Content for the Dashboard section.</p>
       </div>
     </div>
   );

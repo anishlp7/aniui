@@ -28,9 +28,8 @@ const loaderVariants = cva("items-center justify-center", {
 const sizes = { sm: 20, md: 32, lg: 44 } as const;
 const strokeWidths = { sm: 2, md: 2.5, lg: 3 } as const;
 
-// Segmented "comet tail" ring, ported from reacticx's circular-loader
-// (strokeDasharray/strokeDashoffset per segment + exponential opacity falloff)
-// rather than a plain spinning border.
+// Segmented "comet tail" ring — strokeDasharray/strokeDashoffset per segment
+// plus exponential opacity falloff, rather than a plain spinning border.
 const SEGMENTS = 16;
 const ACTIVE_PCT = 0.75;
 const GRADIENT_PCT = 0.25;
@@ -119,8 +118,8 @@ export function Loader({ variant = "circle", size = "md", className, ...props }:
 }
 
 function Dot({ index, size, reducedMotion }: { index: number; size: number; reducedMotion: boolean }) {
-  // Vertical bounce (translateY), staggered per dot — matches reacticx's
-  // circle-loader (cy jump of dotRadius * 0.85, staggered by duration / 3).
+  // Vertical bounce (translateY), staggered per dot — a cy jump of
+  // dotRadius * 0.85, staggered by duration / 3 across the dots.
   const progress = useSharedValue(0);
   const jump = size * 0.85;
 

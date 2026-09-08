@@ -4,14 +4,14 @@ import { PreviewSelect } from "@/components/preview/select";
 export function SelectDemo() {
   return (
     <PreviewSelect
-      label="Fruit"
+      label="Sort Results"
       options={[
-        { label: "Apple", value: "apple" },
-        { label: "Banana", value: "banana" },
-        { label: "Cherry", value: "cherry" },
-        { label: "Grape", value: "grape" },
+        { label: "Most Popular", value: "popular" },
+        { label: "Price: Low to High", value: "price_asc" },
+        { label: "Price: High to Low", value: "price_desc" },
+        { label: "Newest", value: "newest" },
       ]}
-      placeholder="Pick a fruit..."
+      placeholder="Sort by..."
     />
   );
 }

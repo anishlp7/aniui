@@ -241,8 +241,8 @@ export function ProfileCardBody({ className, children, ...props }: ProfileCardBo
   );
 }
 
-// Header — name + handle on a baseline-aligned row (merges reacticx's
-// separate Header/Name/Handle pieces into one export).
+// Header — name + handle on a baseline-aligned row, combined into one export
+// rather than three separate Header/Name/Handle pieces.
 export interface ProfileCardHeaderProps extends React.ComponentPropsWithoutRef<typeof View> {
   className?: string;
   name: string;
@@ -282,7 +282,7 @@ export function ProfileCardBio({ className, children, ...props }: ProfileCardBio
 }
 
 // Location — icon + text row; defaults to lucide's MapPin but accepts any
-// override via `icon`, mirroring reacticx's icon-override slot.
+// override via `icon` for a caller that wants a different glyph.
 export interface ProfileCardLocationProps extends React.ComponentPropsWithoutRef<typeof View> {
   className?: string;
   label: string;

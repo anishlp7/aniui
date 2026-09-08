@@ -342,6 +342,13 @@ export function Tray({
   // finally finished.
   const openRef = useRef(open);
   openRef.current = open;
+  // Set while dismiss() (drag-to-dismiss) owns the closing animation, so the
+  // effect below doesn't also assign its own withSpring to the same shared
+  // value for the same close — two competing springs on `present` meant the
+  // drag's velocity-aware one got interrupted (and its callback skipped) the
+  // moment the effect's ran, which is a redundant, fragile way to end up at
+  // exactly one finishClose() call rather than a guaranteed one.
+  const isClosing = useRef(false);
 
   const setOpen = useCallback(
     (next: boolean) => {
@@ -351,24 +358,31 @@ export function Tray({
     [isControlled, onOpenChange]
   );
 
+  // Deliberately does NOT reset measured.current/sheetHeight/travel: the
+  // Modal (and its content) now stay mounted permanently — see the render
+  // below — so those describe the content's real, still-accurate size and
+  // should survive a close instead of forcing a re-measure (and a "grow from
+  // 0" flash) on every reopen. Only the transient, position-related values
+  // reset, since a fresh open should start from a clean drag/scroll state.
   const reset = useCallback(() => {
-    presented.current = false;
-    measured.current = 0;
-    sheetHeight.value = 0;
-    travel.value = 0;
     offset.value = 0;
     startOffset.value = 0;
     scrollY.value = 0;
     owns.value = false;
     origin.value = 0;
     present.value = 0;
-  }, [sheetHeight, travel, offset, startOffset, scrollY, owns, origin, present]);
+  }, [offset, startOffset, scrollY, owns, origin, present]);
 
   const finishClose = useCallback(() => {
+    isClosing.current = false;
     if (openRef.current) return;
     setMounted(false);
     reset();
   }, [reset]);
+
+  const clearClosing = useCallback(() => {
+    isClosing.current = false;
+  }, []);
 
   const close = useCallback(() => setOpen(false), [setOpen]);
 
@@ -379,6 +393,18 @@ export function Tray({
     },
     [navigation, defaultView, setOpen]
   );
+
+  // Springs the sheet in from below. Called either by onContentLayout (the
+  // very first time content is ever measured) or directly by the open effect
+  // below (every time after that, since content no longer unmounts between
+  // opens and so won't re-fire onLayout on its own).
+  const presentEntrance = useCallback(() => {
+    presented.current = true;
+    const start = offsets[Math.min(initialDetent, offsets.length - 1)] ?? 0;
+    offset.value = start;
+    detentIndex.value = Math.min(initialDetent, offsets.length - 1);
+    present.value = reduceMotion ? 1 : withSpring(1, motion.presentSpring);
+  }, [offsets, initialDetent, offset, detentIndex, present, reduceMotion, motion]);
 
   const onContentLayout = useCallback(
     (event: LayoutChangeEvent) => {
@@ -392,19 +418,14 @@ export function Tray({
       if (first || reduceMotion) sheetHeight.value = next;
       else sheetHeight.value = withSpring(next, motion.heightSpring);
 
-      if (presented.current) return;
-      presented.current = true;
-
-      const start = offsets[Math.min(initialDetent, offsets.length - 1)] ?? 0;
-      offset.value = start;
-      detentIndex.value = Math.min(initialDetent, offsets.length - 1);
-      present.value = reduceMotion ? 1 : withSpring(1, motion.presentSpring);
+      if (openRef.current && !presented.current) presentEntrance();
     },
-    [detentHeight, insets.bottom, reduceMotion, motion, sheetHeight, travel, present, offsets, initialDetent, offset, detentIndex]
+    [detentHeight, insets.bottom, reduceMotion, motion, sheetHeight, travel, presentEntrance]
   );
 
   const dismiss = useCallback(
     (velocity: number) => {
+      isClosing.current = true;
       setOpen(false);
       if (reduceMotion) {
         present.value = 0;
@@ -417,18 +438,28 @@ export function Tray({
         (finished) => {
           "worklet";
           if (finished) runOnJS(finishClose)();
+          else runOnJS(clearClosing)();
         }
       );
     },
-    [reduceMotion, motion, present, travel, finishClose, setOpen]
+    [reduceMotion, motion, present, travel, finishClose, clearClosing, setOpen]
   );
 
   useEffect(() => {
     if (open) {
       setMounted(true);
+      presented.current = false;
+      // If content was already measured on a previous open, it won't
+      // re-layout just because we're reopening (it never unmounted) — so
+      // nothing will call presentEntrance() for us. Do it directly. If this
+      // is the very first-ever open, measured.current is still 0 and
+      // onContentLayout (about to fire once the Modal is actually visible)
+      // handles it instead.
+      if (measured.current > 0) presentEntrance();
       return;
     }
     if (!presented.current) return;
+    if (isClosing.current) return;
     if (reduceMotion) {
       present.value = 0;
       finishClose();
@@ -438,7 +469,7 @@ export function Tray({
       "worklet";
       if (finished) runOnJS(finishClose)();
     });
-  }, [open, reduceMotion, motion, present, finishClose]);
+  }, [open, reduceMotion, motion, present, finishClose, presentEntrance]);
 
   const settleTo = useCallback((index: number) => onDetentChange?.(index), [onDetentChange]);
 
@@ -576,10 +607,15 @@ export function TrayContent({ children, className }: TrayContentProps) {
     opacity: present.value * interpolate(offset.value, [0, Math.max(travel.value, 1)], [1, motion.backdropFalloff], Extrapolation.CLAMP),
   }));
 
-  if (!visible) return null;
-
+  // The Modal element itself stays mounted permanently and its own `visible`
+  // prop toggles native show/hide, rather than this component conditionally
+  // returning null (which would unmount/remount the underlying native Modal
+  // window on every open/close). On Android in particular, tearing down and
+  // recreating that native window is asynchronous — opening again before the
+  // previous one has actually finished closing can silently fail to show,
+  // which matches "works once, then won't reopen."
   return (
-    <Modal transparent statusBarTranslucent visible animationType="none" onRequestClose={close}>
+    <Modal transparent statusBarTranslucent visible={visible} animationType="none" onRequestClose={close}>
       <View className="flex-1 justify-end" pointerEvents="box-none">
         <AnimatedPressable
           className="absolute inset-0"

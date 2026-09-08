@@ -123,10 +123,10 @@ function CircularItem({
       ]}
       className="items-center justify-center"
     >
-      {/* Shadow lives on the same opaque, rounded, clipped view as the content
-          (matching reacticx) — casting it from a separate transparent parent
-          made iOS fall back to a plain rectangular shadow silhouette instead
-          of a rounded one. */}
+      {/* Shadow lives on the same opaque, rounded, clipped view as the
+          content — casting it from a separate transparent parent made iOS
+          fall back to a plain rectangular shadow silhouette instead of a
+          rounded one. */}
       <View className="w-full overflow-hidden rounded-2xl bg-card shadow-lg" style={{ elevation: 6 }}>
         {children}
         {Platform.OS === "ios" && (

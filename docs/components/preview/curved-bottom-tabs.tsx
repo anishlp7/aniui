@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import { cn } from "@/lib/utils";
 
-const tabs = ["Home", "Search", "Profile"];
+const tabs = ["Home", "Search", "Add", "Profile"];
 
 export function PreviewCurvedBottomTabs({ className }: { className?: string }) {
   const [active, setActive] = useState(0);

@@ -13,9 +13,9 @@ function KbdPreview({ children }: { children: string }) {
 export function PreviewKbdDemo() {
   return (
     <div className="flex flex-wrap items-center gap-3">
-      <KbdPreview>Ctrl</KbdPreview>
+      <KbdPreview>Cmd</KbdPreview>
+      <KbdPreview>K</KbdPreview>
       <KbdPreview>Shift</KbdPreview>
-      <KbdPreview>Enter</KbdPreview>
       <KbdPreview>Esc</KbdPreview>
     </div>
   );
@@ -27,14 +27,16 @@ export function PreviewKbdGroupDemo() {
       <div className="flex items-center gap-1">
         <KbdPreview>Cmd</KbdPreview>
         <span className="text-xs text-muted-foreground">+</span>
-        <KbdPreview>C</KbdPreview>
+        <KbdPreview>K</KbdPreview>
+        <span className="ml-2 text-xs text-muted-foreground">Open command palette</span>
       </div>
       <div className="flex items-center gap-1">
         <KbdPreview>Cmd</KbdPreview>
         <span className="text-xs text-muted-foreground">+</span>
         <KbdPreview>Shift</KbdPreview>
         <span className="text-xs text-muted-foreground">+</span>
-        <KbdPreview>P</KbdPreview>
+        <KbdPreview>F</KbdPreview>
+        <span className="ml-2 text-xs text-muted-foreground">Search everywhere</span>
       </div>
     </div>
   );

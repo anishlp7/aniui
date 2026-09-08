@@ -2,24 +2,25 @@
 import { useState } from "react";
 import { PreviewAutoComplete } from "@/components/preview/autocomplete";
 
-const FRUITS = [
-  { label: "Apple", value: "apple" },
-  { label: "Apricot", value: "apricot" },
-  { label: "Banana", value: "banana" },
-  { label: "Blueberry", value: "blueberry" },
-  { label: "Cherry", value: "cherry" },
-  { label: "Grape", value: "grape", disabled: true },
+const CITIES = [
+  { label: "New York, NY", value: "nyc" },
+  { label: "Los Angeles, CA", value: "la" },
+  { label: "Chicago, IL", value: "chi" },
+  { label: "Houston, TX", value: "hou", disabled: true },
+  { label: "Phoenix, AZ", value: "phx" },
+  { label: "San Francisco, CA", value: "sf" },
+  { label: "Seattle, WA", value: "sea" },
 ];
 
 export function AutoCompleteDemo() {
-  return <PreviewAutoComplete options={FRUITS} />;
+  return <PreviewAutoComplete options={CITIES} />;
 }
 
 export function AsyncDemo() {
   const [loading, setLoading] = useState(false);
   return (
     <div className="w-full max-w-xs space-y-2">
-      <PreviewAutoComplete options={FRUITS} loading={loading} />
+      <PreviewAutoComplete options={CITIES} loading={loading} />
       <button
         onClick={() => { setLoading(true); setTimeout(() => setLoading(false), 1200); }}
         className="text-xs text-primary hover:underline cursor-pointer"

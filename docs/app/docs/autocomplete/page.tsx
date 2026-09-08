@@ -11,17 +11,17 @@ import { PreviewToggle } from "@/components/preview-toggle";
 const installCode = `npx @aniui/cli add autocomplete`;
 const usageCode = `import { AutoComplete } from "@/components/ui/autocomplete";
 
-const FRUITS = [
-  { label: "Apple", value: "apple" },
-  { label: "Banana", value: "banana" },
-  { label: "Cherry", value: "cherry" },
+const CITIES = [
+  { label: "New York, NY", value: "nyc" },
+  { label: "Los Angeles, CA", value: "la" },
+  { label: "Chicago, IL", value: "chi" },
 ];
 
 export function MyScreen() {
   return (
     <AutoComplete
-      options={FRUITS}
-      placeholder="Search fruit..."
+      options={CITIES}
+      placeholder="Start typing a city..."
       onSelect={(option) => console.log(option.value)}
     />
   );

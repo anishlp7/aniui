@@ -11,19 +11,19 @@ const usageCode = `import { Select } from "@/components/ui/select";
 import { useState } from "react";
 
 export function MyScreen() {
-  const [value, setValue] = useState("");
+  const [sort, setSort] = useState("popular");
   return (
     <Select
-      label="Fruit"
-      placeholder="Select a fruit..."
+      label="Sort Results"
+      placeholder="Sort by..."
       options={[
-        { label: "Apple", value: "apple" },
-        { label: "Banana", value: "banana" },
-        { label: "Cherry", value: "cherry" },
-        { label: "Grape", value: "grape" },
+        { label: "Most Popular", value: "popular" },
+        { label: "Price: Low to High", value: "price_asc" },
+        { label: "Price: High to Low", value: "price_desc" },
+        { label: "Newest", value: "newest" },
       ]}
-      value={value}
-      onValueChange={setValue}
+      value={sort}
+      onValueChange={setSort}
     />
   );
 }`;

@@ -820,12 +820,6 @@
       "description": "Draggable, resizable top/bottom split pane with snap points and spring physics"
     },
     {
-      "name": "squircle-view",
-      "type": "registry:ui",
-      "title": "SquircleView",
-      "description": "True superellipse squircle container with an animatable corner-smoothing parameter"
-    },
-    {
       "name": "stacked-chips",
       "type": "registry:ui",
       "title": "StackedChips",

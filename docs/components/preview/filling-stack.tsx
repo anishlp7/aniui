@@ -4,9 +4,10 @@ import React, { useState } from "react";
 import { cn } from "@/lib/utils";
 
 const cards = [
-  { label: "Card 1", className: "bg-primary text-primary-foreground" },
-  { label: "Card 2", className: "bg-secondary text-secondary-foreground" },
-  { label: "Card 3", className: "bg-accent text-accent-foreground" },
+  { label: "Mountains", className: "bg-primary text-primary-foreground" },
+  { label: "Coastline", className: "bg-secondary text-secondary-foreground" },
+  { label: "Forest", className: "bg-accent text-accent-foreground" },
+  { label: "Desert", className: "bg-muted text-muted-foreground" },
 ];
 
 export function PreviewFillingStack({ className }: { className?: string }) {
@@ -47,6 +48,7 @@ export function PreviewFillingStack({ className }: { className?: string }) {
           Down
         </button>
       </div>
+      <p className="text-[10px] text-muted-foreground">Fling the stack up to browse forward, down to go back</p>
     </div>
   );
 }

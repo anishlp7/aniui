@@ -3,7 +3,7 @@
 import React, { useRef, useState } from "react";
 import { cn } from "@/lib/utils";
 
-const apps = ["Home", "Search", "Music", "Mail", "Notes"];
+const apps = ["Mail", "Stats", "Projects", "Team", "Settings"];
 
 /** Illustrates the fisheye magnifier: icon scale falls off with distance
  *  (in index units) from whichever icon the pointer is currently tracking,

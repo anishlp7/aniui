@@ -10,8 +10,8 @@ import { SegmentedControlDemo, SizesDemo } from "./_demos";
 const installCode = `npx @aniui/cli add segmented-control`;
 const usageCode = `import { SegmentedControl } from "@/components/ui/segmented-control";
 
-const [view, setView] = useState("List");
-<SegmentedControl options={["List", "Grid", "Map"]} value={view} onValueChange={setView} />`;
+const [range, setRange] = useState("Week");
+<SegmentedControl options={["Day", "Week", "Month"]} value={range} onValueChange={setRange} />`;
 const sizesCode = `<SegmentedControl size="sm" options={["S", "M", "L"]} value={size} onValueChange={setSize} />
 <SegmentedControl size="md" options={["S", "M", "L"]} value={size} onValueChange={setSize} />
 <SegmentedControl size="lg" options={["S", "M", "L"]} value={size} onValueChange={setSize} />`;
