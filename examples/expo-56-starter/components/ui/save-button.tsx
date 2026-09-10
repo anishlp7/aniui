@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
-import { Pressable, Text, useColorScheme } from "react-native";
+import { Pressable, Text } from "react-native";
 import Animated, {
   cancelAnimation,
   Easing,
@@ -14,6 +14,7 @@ import Animated, {
 } from "react-native-reanimated";
 import { Check } from "lucide-react-native";
 import { cn } from "@/lib/utils";
+import { useThemeColors } from "@/components/ui/theme-provider";
 
 export type SaveButtonPhase = "idle" | "loading" | "success" | "done";
 
@@ -40,10 +41,10 @@ export function SaveButton({
   className, label = "Save", savedLabel = "Saved", onSave, onSaved,
   minLoading = 1100, successPause = 600, resetAfter, disabled = false, ...props
 }: SaveButtonProps) {
-  const dark = useColorScheme() === "dark";
-  const idleBg = dark ? "#27272a" : "#f4f4f5";
-  const activeBg = dark ? "#fafafa" : "#18181b";
-  const idleText = dark ? "#fafafa" : "#18181b";
+  const colors = useThemeColors();
+  const idleBg = colors.secondary;
+  const activeBg = colors.primary;
+  const idleText = colors.foreground;
 
   const [phase, setPhase] = useState<SaveButtonPhase>("idle");
   const phaseRef = useRef<SaveButtonPhase>("idle");
@@ -154,7 +155,7 @@ export function SaveButton({
         </Animated.View>
         <Animated.View className="absolute h-6 w-6 rounded-full border-2 border-white/25" style={[spinnerStyle, { borderTopColor: "#fff" }]} />
         <Animated.View className="absolute" style={checkStyle}>
-          <Check size={18} color={dark ? "#18181b" : "#fafafa"} />
+          <Check size={18} color={colors.primaryForeground} />
         </Animated.View>
         <Animated.View className="absolute" style={savedStyle}>
           <Text numberOfLines={1} className="text-base font-medium" style={{ color: idleText }}>

@@ -12,6 +12,7 @@ import Animated, {
   withTiming,
 } from "react-native-reanimated";
 import { BlurView } from "expo-blur";
+import { useThemeColors } from "@/components/ui/theme-provider";
 import { cn } from "@/lib/utils";
 
 const AnimatedBlurView = Animated.createAnimatedComponent(BlurView);
@@ -58,7 +59,8 @@ export const AnimatedInputBar = React.forwardRef<React.ElementRef<typeof TextInp
     ref,
   ) {
     const dark = useColorScheme() === "dark";
-    const caret = dark ? "#fafafa" : "#18181b";
+    const colors = useThemeColors();
+    const caret = colors.foreground;
     const resolvedSize = size ?? "md";
 
     const [focused, setFocused] = useState(false);

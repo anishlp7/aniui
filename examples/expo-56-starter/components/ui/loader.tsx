@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { View, useColorScheme } from "react-native";
+import { View } from "react-native";
 import { cva, type VariantProps } from "class-variance-authority";
 import Svg, { Circle } from "react-native-svg";
 import Animated, {
@@ -13,6 +13,7 @@ import Animated, {
 } from "react-native-reanimated";
 import { useReducedMotion } from "@/components/ui/animate";
 import { cn } from "@/lib/utils";
+import { useThemeColors } from "@/components/ui/theme-provider";
 
 const loaderVariants = cva("items-center justify-center", {
   variants: {
@@ -44,8 +45,8 @@ export function Loader({ variant = "circle", size = "md", className, ...props }:
   const reducedMotion = useReducedMotion();
   const spin = useSharedValue(0);
   const s = sizes[size ?? "md"];
-  const dark = useColorScheme() === "dark";
-  const color = dark ? "#fafafa" : "#18181b";
+  const colors = useThemeColors();
+  const color = colors.foreground;
 
   useEffect(() => {
     if (reducedMotion) return;

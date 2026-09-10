@@ -1,8 +1,9 @@
 import React, { useEffect } from "react";
-import { View, useColorScheme } from "react-native";
+import { View } from "react-native";
 import Animated, { useSharedValue, useAnimatedStyle, withRepeat, withSequence, withTiming, cancelAnimation } from "react-native-reanimated";
 import { useReducedMotion } from "@/components/ui/animate";
 import { cn } from "@/lib/utils";
+import { useThemeColors } from "@/components/ui/theme-provider";
 
 const sizes = { sm: 12, md: 20, lg: 28 } as const;
 
@@ -66,8 +67,8 @@ export interface WaveformProps extends React.ComponentPropsWithoutRef<typeof Vie
 }
 
 export function Waveform({ className, bars = 28, levels, active = true, progress, size = "md", color, style, ...props }: WaveformProps) {
-  const dark = useColorScheme() === "dark";
-  const barColor = color ?? (dark ? "#fafafa" : "#18181b");
+  const colors = useThemeColors();
+  const barColor = color ?? colors.foreground;
   const window = levels?.slice(-bars);
   const pad = window ? bars - window.length : 0;
   // Continuous playhead in bar units — the boundary bar gets an interpolated

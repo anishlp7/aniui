@@ -1,9 +1,10 @@
 import React from "react";
-import { View, Pressable, Text, useColorScheme } from "react-native";
+import { View, Pressable, Text } from "react-native";
 import * as AccordionPrimitive from "@rn-primitives/accordion";
 import Animated from "react-native-reanimated";
 import { ChevronDown } from "lucide-react-native";
 import { entering, exiting } from "@/components/ui/animate";
+import { useThemeColors } from "@/components/ui/theme-provider";
 import { cn } from "@/lib/utils";
 
 export interface AccordionProps extends React.ComponentPropsWithoutRef<typeof View> {
@@ -35,7 +36,7 @@ export interface AccordionItemProps extends React.ComponentPropsWithoutRef<typeo
 // Rendered inside the Item so useItemContext can read the open state.
 function AccordionTrigger({ label }: { label: string }) {
   const { isExpanded } = AccordionPrimitive.useItemContext();
-  const dark = useColorScheme() === "dark";
+  const colors = useThemeColors();
   return (
     <AccordionPrimitive.Trigger asChild>
       <Pressable
@@ -47,7 +48,7 @@ function AccordionTrigger({ label }: { label: string }) {
         <Text className="text-base font-medium text-foreground flex-1">{label}</Text>
         <ChevronDown
           size={16}
-          color={dark ? "#a1a1aa" : "#71717a"}
+          color={colors.mutedForeground}
           strokeWidth={2}
           style={{ transform: [{ rotate: isExpanded ? "180deg" : "0deg" }] }}
         />

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { View, TextInput, Pressable, Text, useColorScheme } from "react-native";
 import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
+import { useThemeColors } from "@/components/ui/theme-provider";
 import { Eye, EyeOff } from "lucide-react-native";
 
 const passwordVariants = cva(
@@ -58,7 +59,8 @@ export const PasswordInput = React.forwardRef<
   const [value, setValue] = useState("");
   const strength = getStrength(value);
   const dark = useColorScheme() === "dark";
-  const caret = dark ? "#fafafa" : "#18181b";
+  const colors = useThemeColors();
+  const caret = colors.foreground;
 
   return (
     <View className="gap-2">
@@ -66,7 +68,7 @@ export const PasswordInput = React.forwardRef<
         <TextInput
           ref={ref}
           className="flex-1 text-foreground p-0 text-base"
-          placeholderTextColor={dark ? "#a1a1aa" : "#71717a"}
+          placeholderTextColor={colors.mutedForeground}
           keyboardAppearance={dark ? "dark" : "light"}
           selectionColor={caret}
           cursorColor={caret}
@@ -79,7 +81,7 @@ export const PasswordInput = React.forwardRef<
           {...props}
         />
         <Pressable onPress={() => setVisible(!visible)} accessible={true} accessibilityRole="button" accessibilityLabel={visible ? "Hide password" : "Show password"} className="ms-2 min-h-8 min-w-8 items-center justify-center" hitSlop={{ top: 8, bottom: 8, left: 8, right: 8 }}>
-          {visible ? <Eye size={20} color="#71717a" /> : <EyeOff size={20} color="#71717a" />}
+          {visible ? <Eye size={20} color={colors.mutedForeground} /> : <EyeOff size={20} color={colors.mutedForeground} />}
         </Pressable>
       </View>
       {showStrength && value.length > 0 && (

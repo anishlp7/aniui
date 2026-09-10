@@ -2,6 +2,7 @@ import React from "react";
 import { View, TextInput, useColorScheme } from "react-native";
 import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
+import { useThemeColors } from "@/components/ui/theme-provider";
 
 // Padding lives on the wrapping View, never on the raw TextInput — a TextInput
 // doesn't honor `px-*` reliably, so keeping padding on the View gives a
@@ -45,7 +46,8 @@ export const Input = React.forwardRef<
   ref
 ) {
   const dark = useColorScheme() === "dark";
-  const caret = dark ? "#fafafa" : "#18181b";
+  const colors = useThemeColors();
+  const caret = colors.foreground;
   const resolvedSize = size ?? "md";
 
   return (
@@ -60,7 +62,7 @@ export const Input = React.forwardRef<
         className="flex-1 self-stretch p-0 text-foreground placeholder:text-muted-foreground"
         style={[{ fontSize: fontSizes[resolvedSize] }, style]}
         textAlignVertical="center"
-        placeholderTextColor={dark ? "#a1a1aa" : "#71717a"}
+        placeholderTextColor={colors.mutedForeground}
         keyboardAppearance={dark ? "dark" : "light"}
         selectionColor={caret}
         cursorColor={caret}

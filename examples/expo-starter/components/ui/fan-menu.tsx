@@ -12,6 +12,7 @@ import Animated, {
 import { BlurView } from "expo-blur";
 import { Plus } from "lucide-react-native";
 import { cn } from "@/lib/utils";
+import { useThemeColors } from "@/components/ui/theme-provider";
 
 const AnimatedBlurView = Animated.createAnimatedComponent(BlurView);
 const AnimatedPressable = Animated.createAnimatedComponent(Pressable);
@@ -37,6 +38,7 @@ export interface FanMenuProps extends React.ComponentPropsWithoutRef<typeof View
 
 export function FanMenu({ className, items, radius = 96, triggerIcon, ...props }: FanMenuProps) {
   const [open, setOpen] = useState(false);
+  const colors = useThemeColors();
   const { width: screenW, height: screenH } = useWindowDimensions();
   const progress = useSharedValue(0);
   const pressed = useSharedValue(0);
@@ -96,7 +98,7 @@ export function FanMenu({ className, items, radius = 96, triggerIcon, ...props }
         className="h-14 w-14 items-center justify-center rounded-full bg-primary shadow-lg min-h-12 min-w-12"
       >
         <Animated.View style={triggerStyle}>
-          {triggerIcon ?? <Plus size={22} color="#fafafa" strokeWidth={2} />}
+          {triggerIcon ?? <Plus size={22} color={colors.primaryForeground} strokeWidth={2} />}
         </Animated.View>
       </Pressable>
     </View>

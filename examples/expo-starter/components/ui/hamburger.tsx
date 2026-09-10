@@ -1,7 +1,8 @@
 import React, { useEffect } from "react";
-import { Pressable, useColorScheme } from "react-native";
+import { Pressable } from "react-native";
 import Animated, { Easing, interpolate, useAnimatedStyle, useSharedValue, withTiming } from "react-native-reanimated";
 import { cn } from "@/lib/utils";
+import { useThemeColors } from "@/components/ui/theme-provider";
 
 export interface HamburgerProps extends Omit<React.ComponentPropsWithoutRef<typeof Pressable>, "onPress"> {
   className?: string;
@@ -14,8 +15,8 @@ export interface HamburgerProps extends Omit<React.ComponentPropsWithoutRef<type
 
 /** Animated hamburger <-> close icon morph — three bars rearranging into an X. */
 export function Hamburger({ className, open = false, onOpenChange, size = 28, color, ...props }: HamburgerProps) {
-  const dark = useColorScheme() === "dark";
-  const tint = color ?? (dark ? "#fafafa" : "#18181b");
+  const colors = useThemeColors();
+  const tint = color ?? colors.foreground;
   const progress = useSharedValue(open ? 1 : 0);
 
   useEffect(() => {

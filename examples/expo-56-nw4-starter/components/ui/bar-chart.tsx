@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { View, Text, LayoutChangeEvent, useColorScheme } from "react-native";
+import { View, Text, LayoutChangeEvent } from "react-native";
 import { Gesture, GestureDetector } from "react-native-gesture-handler";
 import Animated, {
   Easing,
@@ -15,6 +15,7 @@ import Animated, {
 import { Canvas, Path } from "@shopify/react-native-skia";
 import { cn } from "@/lib/utils";
 import { ChartTooltip } from "@/components/ui/chart-tooltip";
+import { useThemeColors } from "@/components/ui/theme-provider";
 
 const GROW_DURATION = 900;
 const MORPH_DURATION = 550;
@@ -121,7 +122,7 @@ export function BarChart({
   className,
   data,
   height = 200,
-  color = "#2563eb",
+  color,
   horizontal = false,
   showGrid = true,
   showLabels = false,
@@ -133,9 +134,10 @@ export function BarChart({
 }: BarChartProps) {
   const [width, setWidth] = useState(0);
   const [selectedKey, setSelectedKey] = useState(-1);
-  const dark = useColorScheme() === "dark";
-  const gridColor = dark ? "#27272a" : "#e5e7eb";
-  const labelColor = dark ? "#a1a1aa" : "#6b7280";
+  const colors = useThemeColors();
+  const resolvedColor = color ?? colors.primary;
+  const gridColor = colors.border;
+  const labelColor = colors.mutedForeground;
   const onLayout = useCallback((e: LayoutChangeEvent) => setWidth(e.nativeEvent.layout.width), []);
   const isMeasured = width > 0;
 
@@ -200,11 +202,11 @@ export function BarChart({
   const barMeta = useMemo(() => {
     if (isGrouped && groupedData && grouped) {
       return groupedData.flatMap((_, gi) =>
-        grouped.map((g) => ({ color: g.color ?? color, highlightKey: gi }))
+        grouped.map((g) => ({ color: g.color ?? resolvedColor, highlightKey: gi }))
       );
     }
-    return data.map((d, i) => ({ color: d.color ?? color, highlightKey: i }));
-  }, [isGrouped, groupedData, grouped, data, color]);
+    return data.map((d, i) => ({ color: d.color ?? resolvedColor, highlightKey: i }));
+  }, [isGrouped, groupedData, grouped, data, resolvedColor]);
 
   const originValues = useSharedValue<number[]>([]);
   const targetValues = useSharedValue<number[]>([]);

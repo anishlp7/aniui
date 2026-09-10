@@ -11,7 +11,6 @@ import {
   Pressable,
   Text,
   View,
-  useColorScheme,
   type LayoutChangeEvent,
 } from "react-native";
 import * as Haptics from "expo-haptics";
@@ -28,6 +27,7 @@ import Animated, {
   useSharedValue,
   type SharedValue,
 } from "react-native-reanimated";
+import { useThemeColors } from "@/components/ui/theme-provider";
 import { cn } from "@/lib/utils";
 
 /**
@@ -52,10 +52,6 @@ const PROXIMITY_SPAN = 1;
 const CENTER_Z = 1000;
 const Z_BAND_LIMIT = 3;
 const UNKNOWN_INDEX = -1;
-const LABEL_COLOR = "#71717a";
-const LABEL_COLOR_DARK = "#a1a1aa";
-const ACTIVE_LABEL_COLOR = "#18181b";
-const ACTIVE_LABEL_COLOR_DARK = "#fafafa";
 
 function radiusFromSweep(halfHeight: number, sweepDeg: number): number {
   "worklet";
@@ -419,11 +415,9 @@ export function ArcListLabel({
   if (!itemCtx) {
     throw new Error("ArcListLabel must be rendered inside an ArcListItem");
   }
-  const scheme = useColorScheme();
-  const color = scheme === "dark" ? LABEL_COLOR_DARK : LABEL_COLOR;
-  const tint =
-    activeColor ??
-    (scheme === "dark" ? ACTIVE_LABEL_COLOR_DARK : ACTIVE_LABEL_COLOR);
+  const colors = useThemeColors();
+  const color = colors.mutedForeground;
+  const tint = activeColor ?? colors.foreground;
 
   const rLabel = useAnimatedStyle(
     () => ({

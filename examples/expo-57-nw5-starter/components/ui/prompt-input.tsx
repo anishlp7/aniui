@@ -2,6 +2,7 @@ import React, { createContext, useContext, useState } from "react";
 import { View, TextInput, Pressable, useColorScheme } from "react-native";
 import { ArrowUp, Square } from "lucide-react-native";
 import { cn } from "@/lib/utils";
+import { useThemeColors } from "@/components/ui/theme-provider";
 
 // Compound composer (ChatGPT/Claude-style): textarea on top, toolbar below.
 // <PromptInput onSend={…}><PromptInputTextarea /><PromptInputToolbar>…</PromptInputToolbar></PromptInput>
@@ -12,6 +13,7 @@ type PromptInputCtx = {
   send: () => void;
   streaming?: boolean;
   dark: boolean;
+  colors: ReturnType<typeof useThemeColors>;
 };
 const Ctx = createContext<PromptInputCtx | null>(null);
 
@@ -37,6 +39,7 @@ export function PromptInput({
 }: PromptInputProps) {
   const [internal, setInternal] = useState("");
   const dark = useColorScheme() === "dark";
+  const colors = useThemeColors();
   const text = value ?? internal;
 
   const setText = (t: string) => {
@@ -52,7 +55,7 @@ export function PromptInput({
   };
 
   return (
-    <Ctx.Provider value={{ text, setText, send, streaming, dark }}>
+    <Ctx.Provider value={{ text, setText, send, streaming, dark, colors }}>
       <View className={cn("rounded-3xl border border-input bg-background px-3 pt-3 pb-2", className)} {...props}>
         {children}
       </View>
@@ -71,7 +74,7 @@ export const PromptInputTextarea = React.forwardRef<
   React.ElementRef<typeof TextInput>,
   PromptInputTextareaProps
 >(function PromptInputTextarea({ className, maxHeight = 120, style, ...props }, ref) {
-  const { text, setText, dark } = usePromptInput();
+  const { text, setText, dark, colors } = usePromptInput();
   const [height, setHeight] = useState(0);
   return (
     <TextInput
@@ -85,10 +88,10 @@ export const PromptInputTextarea = React.forwardRef<
       style={[{ fontSize: 16, maxHeight, height: Math.min(Math.max(24, height), maxHeight) }, style]}
       className={cn("p-0 text-foreground placeholder:text-muted-foreground", className)}
       placeholder="How can I help you today?"
-      placeholderTextColor={dark ? "#a1a1aa" : "#71717a"}
+      placeholderTextColor={colors.mutedForeground}
       keyboardAppearance={dark ? "dark" : "light"}
-      selectionColor={dark ? "#fafafa" : "#18181b"}
-      cursorColor={dark ? "#fafafa" : "#18181b"}
+      selectionColor={colors.foreground}
+      cursorColor={colors.foreground}
       // keep in sync with textarea.tsx's caret/placeholder colors
       textAlignVertical="top"
       {...props}
@@ -132,9 +135,9 @@ export interface PromptInputSendProps extends React.ComponentPropsWithoutRef<typ
 }
 
 export function PromptInputSend({ className, emptyFallback, ...props }: PromptInputSendProps) {
-  const { text, send, streaming, dark } = usePromptInput();
+  const { text, send, streaming, colors } = usePromptInput();
   const canSend = text.trim().length > 0;
-  const fg = dark ? "#18181b" : "#fafafa";
+  const fg = colors.primaryForeground;
   if (!canSend && !streaming && emptyFallback) return <>{emptyFallback}</>;
   return (
     <Pressable

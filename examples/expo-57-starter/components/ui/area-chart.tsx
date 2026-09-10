@@ -14,6 +14,7 @@ import Animated, {
 import { Gesture, GestureDetector } from "react-native-gesture-handler";
 import { cn } from "@/lib/utils";
 import { ChartTooltip } from "@/components/ui/chart-tooltip";
+import { useThemeColors } from "@/components/ui/theme-provider";
 
 export interface AreaChartDataPoint {
   label: string;
@@ -386,7 +387,7 @@ export function AreaChart({
   className,
   data,
   height = 200,
-  color = "#2563eb",
+  color,
   fillOpacity = 0.3,
   showGrid = true,
   showLabels = false,
@@ -397,8 +398,10 @@ export function AreaChart({
 }: AreaChartProps) {
   const [width, setWidth] = useState(0);
   const dark = useColorScheme() === "dark";
-  const gridColor = dark ? "#27272a" : "#e5e7eb";
-  const labelColor = dark ? "#a1a1aa" : "#6b7280";
+  const colors = useThemeColors();
+  const resolvedColor = color ?? colors.primary;
+  const gridColor = colors.border;
+  const labelColor = colors.mutedForeground;
   const onLayout = useCallback((e: LayoutChangeEvent) => setWidth(e.nativeEvent.layout.width), []);
 
   const pad = useMemo<Padding>(
@@ -410,7 +413,7 @@ export function AreaChart({
   const baselineY = pad.top + plotHeight;
   const isMeasured = width > 0 && height > 0;
 
-  const allSeries = useMemo(() => series ?? [{ data, color }], [series, data, color]);
+  const allSeries = useMemo(() => series ?? [{ data, color: resolvedColor }], [series, data, resolvedColor]);
   const maxVal = useMemo(() => Math.max(...allSeries.flatMap((s) => s.data.map((d) => d.value)), 1), [allSeries]);
   const primary = allSeries[0]!;
   const restSeries = allSeries.slice(1);
@@ -535,7 +538,7 @@ export function AreaChart({
           </Path>
           <Path path={primaryLinePath} color={primary.color} style="stroke" strokeWidth={2} strokeCap="round" strokeJoin="round" />
           <Path path={crosshairPath} color={dark ? "rgba(255,255,255,0.25)" : "rgba(0,0,0,0.2)"} style="stroke" strokeWidth={1} opacity={isActive} />
-          <Circle cx={cursorX} cy={cursorY} r={dotBorderRadius} opacity={isActive} color={dark ? "#18181b" : "#ffffff"} />
+          <Circle cx={cursorX} cy={cursorY} r={dotBorderRadius} opacity={isActive} color={colors.background} />
           <Circle cx={cursorX} cy={cursorY} r={dotRadius} opacity={isActive} color={primary.color} />
         </Canvas>
       </GestureDetector>

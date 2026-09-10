@@ -2,6 +2,7 @@ import React, { useState, useCallback } from "react";
 import { View, TextInput, Pressable, Text, ScrollView, Modal, useColorScheme } from "react-native";
 import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
+import { useThemeColors } from "@/components/ui/theme-provider";
 import { ChevronDown } from "lucide-react-native";
 
 const phoneVariants = cva("flex-row items-center rounded-md border", {
@@ -54,7 +55,8 @@ export const PhoneInput = React.forwardRef<
   const [open, setOpen] = useState(false);
   const [internal, setInternal] = useState("");
   const dark = useColorScheme() === "dark";
-  const caret = dark ? "#fafafa" : "#18181b";
+  const colors = useThemeColors();
+  const caret = colors.foreground;
 
   // Internal state is the fallback when no `value` prop is wired (uncontrolled usage)
   const fullPhone = value ?? internal;
@@ -81,12 +83,12 @@ export const PhoneInput = React.forwardRef<
         className="flex-row items-center me-2 pe-2 border-e border-border min-h-8"
       >
         <Text className="text-foreground text-base">{country.dial}</Text>
-        <ChevronDown size={14} color="#71717a" />
+        <ChevronDown size={14} color={colors.mutedForeground} />
       </Pressable>
       <TextInput
         ref={ref}
         className="flex-1 text-foreground p-0 text-base"
-        placeholderTextColor={dark ? "#a1a1aa" : "#71717a"}
+        placeholderTextColor={colors.mutedForeground}
         keyboardAppearance={dark ? "dark" : "light"}
         selectionColor={caret}
         cursorColor={caret}

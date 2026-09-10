@@ -288,10 +288,11 @@ All component-internal icons come from **`lucide-react-native`** (peer: `react-n
 
 - Named imports only: `import { X, Check, ChevronDown } from "lucide-react-native"`.
 - Icons take `size` / `color` / `strokeWidth` props. **Never pass `className` to an icon** — it isn't interop-registered, and components must behave identically under NativeWind and Uniwind.
-- Colors are hex, matching the existing caret/placeholder convention: muted icons `#71717a`; dark-aware pairs via `useColorScheme()` (foreground `dark ? "#fafafa" : "#18181b"`, primary-foreground inverted, muted-foreground `dark ? "#a1a1aa" : "#71717a"`).
+- Colors come from `useThemeColors()` (exported by `components/ui/theme-provider.tsx`) — **never** hardcode a hex pair for an icon color. Call `const colors = useThemeColors();` and use `colors.foreground` / `colors.mutedForeground` / `colors.primaryForeground` / etc. This is the single source of truth every native prop that can't read a className token (icon `color`, `TextInput` caret/placeholder, `Switch` track/thumb, Skia canvas fills, ...) reads from — the CLI keeps its hex values in sync with whichever theme preset the project has chosen (`aniui init` / `aniui theme`), so components never need their own `useColorScheme()`-driven approximation. A component using `useThemeColors()` needs `theme-provider` in its registry entry's `registryDependencies`.
 - Never render an icon inside `<Text>` — icons are Views; lay them out as flex-row siblings.
 - Components exposing icon props (`icon`, `leadingIcon`, `trailingIcon`) keep them as `React.ReactNode` — bring-your-own-icon stays supported.
 - Registry entries for components importing lucide must declare `"lucide-react-native", "react-native-svg"` in `dependencies` (in BOTH `cli/src/registry.ts` and `mcp/src/registry-data.ts`). `aniui init` always installs both.
+- A small number of components intentionally keep their own fixed palette instead of `useThemeColors()`, because they represent a real-world object or brand identity that shouldn't shift with the app's theme: `coupon`, `event-ticket`, `receipt-card`, `book-page`, `verified-badge`, `social-button` (brand marks), `profile-card`, `stat-card`, `barcode-badge`, `tray`, `unfold-menu`, `action-rail`. Don't "fix" these to read theme tokens — it's a deliberate design choice, not an oversight.
 
 ## Component Tiers — What Gets Built When
 

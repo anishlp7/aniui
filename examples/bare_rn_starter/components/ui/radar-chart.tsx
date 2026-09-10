@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { View, Text, useColorScheme, type LayoutChangeEvent } from "react-native";
+import { View, Text, type LayoutChangeEvent } from "react-native";
 import { Canvas, Path, Circle } from "@shopify/react-native-skia";
 import Animated, {
   Easing,
@@ -16,6 +16,7 @@ import Animated, {
 } from "react-native-reanimated";
 import { Gesture, GestureDetector } from "react-native-gesture-handler";
 import { cn } from "@/lib/utils";
+import { useThemeColors } from "@/components/ui/theme-provider";
 
 export interface RadarChartDataPoint {
   label: string;
@@ -255,7 +256,7 @@ export function RadarChart({
   className,
   data,
   height = 200,
-  color = "#2563eb",
+  color,
   fillOpacity = 0.2,
   showGrid = true,
   showDots = false,
@@ -266,8 +267,9 @@ export function RadarChart({
   ...props
 }: RadarChartProps) {
   const [width, setWidth] = useState(0);
-  const dark = useColorScheme() === "dark";
-  const gridColor = dark ? "#27272a" : "#e5e7eb";
+  const colors = useThemeColors();
+  const gridColor = colors.border;
+  const resolvedColor = color ?? colors.primary;
   const onLayout = (e: LayoutChangeEvent) => setWidth(e.nativeEvent.layout.width);
 
   const [selectedAxis, setSelectedAxis] = useState(-1);
@@ -286,7 +288,7 @@ export function RadarChart({
   const centerX = width / 2;
   const centerY = height / 2;
   const radius = size / 2 - (showLabels ? 30 : 10);
-  const allSeries: RadarChartSeries[] = series ?? [{ data: data ?? [], color, fillOpacity }];
+  const allSeries: RadarChartSeries[] = series ?? [{ data: data ?? [], color: resolvedColor, fillOpacity }];
   const labels = allSeries[0]?.data ?? [];
   const n = labels.length;
   const maxVal = Math.max(...allSeries.flatMap((s) => s.data.map((d) => d.value)), 1);

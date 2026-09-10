@@ -18,6 +18,7 @@ import Animated, {
 } from "react-native-reanimated";
 import { X } from "lucide-react-native";
 import { cn } from "@/lib/utils";
+import { useThemeColors } from "@/components/ui/theme-provider";
 
 const AnimatedPressable = Animated.createAnimatedComponent(Pressable);
 
@@ -190,6 +191,7 @@ export interface ExpandableViewCloseProps {
 /** Fades in once the panel is mostly expanded; collapses the view on press. */
 export function ExpandableViewClose({ children, className }: ExpandableViewCloseProps) {
   const { progress, collapse } = useExpandableView("ExpandableViewClose");
+  const colors = useThemeColors();
 
   const style = useAnimatedStyle(() => ({
     opacity: interpolate(progress.value, [0.6, 1], [0, 1]),
@@ -208,7 +210,7 @@ export function ExpandableViewClose({ children, className }: ExpandableViewClose
         accessibilityRole="button"
         accessibilityLabel="Collapse"
       >
-        {children ?? <X size={18} color="#18181b" strokeWidth={2.5} />}
+        {children ?? <X size={18} color={colors.foreground} strokeWidth={2.5} />}
       </Pressable>
     </Animated.View>
   );

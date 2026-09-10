@@ -1,5 +1,5 @@
 import React, { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState } from "react";
-import { Dimensions, Pressable, Text, View, useColorScheme, useWindowDimensions, type LayoutChangeEvent, type View as RNView } from "react-native";
+import { Dimensions, Pressable, Text, View, useWindowDimensions, type LayoutChangeEvent, type View as RNView } from "react-native";
 import { Blur, Canvas, ColorMatrix, Group, Paint, RoundedRect } from "@shopify/react-native-skia";
 import Animated, {
   interpolate,
@@ -11,6 +11,7 @@ import Animated, {
   type WithSpringConfig,
 } from "react-native-reanimated";
 import { cn } from "@/lib/utils";
+import { useThemeColors } from "@/components/ui/theme-provider";
 
 type GooeyPopoverSide = "top" | "bottom";
 type GooeyPopoverAlign = "start" | "center" | "end";
@@ -123,9 +124,8 @@ export interface GooeyPopoverProps {
   panelRadius?: number;
   gooStrength?: number;
   /** Goo layer fill — the Skia canvas can't read className tokens, so this
-   * defaults to the theme's card color (light `#ffffff` / dark `#18181b`,
-   * matching the hex pair already used for canvas fills elsewhere, e.g.
-   * area-chart's cursor dot) and only needs overriding for a non-card surface. */
+   * defaults to the theme's resolved card color (via useThemeColors(), light
+   * `#ffffff` / dark `#09090b`) and only needs overriding for a non-card surface. */
   color?: string;
   dismissOnOutsidePress?: boolean;
 }
@@ -146,8 +146,8 @@ export function GooeyPopover({
   color,
   dismissOnOutsidePress = true,
 }: GooeyPopoverProps) {
-  const scheme = useColorScheme();
-  const resolvedColor = color ?? (scheme === "dark" ? "#18181b" : "#ffffff");
+  const colors = useThemeColors();
+  const resolvedColor = color ?? colors.card;
   const isControlled = controlledOpen !== undefined;
   const [uncontrolled, setUncontrolled] = useState(defaultOpen);
   const open = isControlled ? controlledOpen : uncontrolled;

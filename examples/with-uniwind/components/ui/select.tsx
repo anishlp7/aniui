@@ -1,6 +1,7 @@
 import React, { useState, useRef } from "react";
 import { View, Text, Pressable, TextInput, Modal, ScrollView, Dimensions, LayoutChangeEvent, useColorScheme } from "react-native";
 import { cn } from "@/lib/utils";
+import { useThemeColors } from "@/components/ui/theme-provider";
 import { Check, ChevronDown } from "lucide-react-native";
 
 export interface SelectOption { label: string; value: string }
@@ -24,7 +25,8 @@ export function Select({
   const [search, setSearch] = useState("");
   const triggerRef = useRef<View>(null);
   const dark = useColorScheme() === "dark";
-  const caret = dark ? "#fafafa" : "#18181b";
+  const colors = useThemeColors();
+  const caret = colors.foreground;
   const [pos, setPos] = useState({ x: 0, y: 0, w: 0, h: 0 });
   const selected = options.find((o) => o.value === value);
   const filtered = searchable && search
@@ -61,7 +63,7 @@ export function Select({
         <Text className={cn("text-base flex-1", selected ? "text-foreground" : "text-muted-foreground")} numberOfLines={1}>
           {selected?.label ?? placeholder}
         </Text>
-        <ChevronDown size={16} color="#71717a" />
+        <ChevronDown size={16} color={colors.mutedForeground} />
       </Pressable>
 
       <Modal visible={open} transparent animationType="none" onRequestClose={close} statusBarTranslucent>
@@ -85,7 +87,7 @@ export function Select({
               <TextInput
                 className="h-12 px-4 rounded-lg border border-input bg-background text-foreground text-base"
                 placeholder={searchPlaceholder}
-                placeholderTextColor={dark ? "#a1a1aa" : "#71717a"}
+                placeholderTextColor={colors.mutedForeground}
                 keyboardAppearance={dark ? "dark" : "light"}
                 selectionColor={caret}
                 cursorColor={caret}

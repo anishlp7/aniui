@@ -20,6 +20,7 @@ import Animated, {
 } from "react-native-reanimated";
 import { Gesture, GestureDetector } from "react-native-gesture-handler";
 import { cn } from "@/lib/utils";
+import { useThemeColors } from "@/components/ui/theme-provider";
 import { ChartTooltip } from "@/components/ui/chart-tooltip";
 
 export interface LineChartDataPoint {
@@ -366,7 +367,7 @@ export function LineChart({
   className,
   data,
   height = 200,
-  color = "#2563eb",
+  color,
   showDots = true,
   showGrid = true,
   showLabels = false,
@@ -378,12 +379,17 @@ export function LineChart({
   const [width, setWidth] = useState(0);
   const [tooltipIndex, setTooltipIndex] = useState(-1);
   const dark = useColorScheme() === "dark";
-  const gridColor = dark ? "#27272a" : "#e5e7eb";
-  const labelColor = dark ? "#a1a1aa" : "#6b7280";
+  const colors = useThemeColors();
+  const seriesColor = color ?? colors.primary;
+  const gridColor = colors.border;
+  const labelColor = colors.mutedForeground;
+  // Punch-through ring behind the trailing indicator dot — light side is "#ffffff",
+  // not "#fafafa", so it doesn't cleanly match the primaryForeground pair; left
+  // as-is rather than forcing a mapping (see report).
   const ringColor = dark ? "#18181b" : "#ffffff";
   const onLayout = (e: LayoutChangeEvent) => setWidth(e.nativeEvent.layout.width);
 
-  const allSeries: LineChartSeries[] = useMemo(() => series ?? [{ data: data ?? [], color }], [series, data, color]);
+  const allSeries: LineChartSeries[] = useMemo(() => series ?? [{ data: data ?? [], color: seriesColor }], [series, data, seriesColor]);
   const maxVal = useMemo(() => Math.max(...allSeries.flatMap((s) => s.data.map((d) => d.value)), 1), [allSeries]);
   const pad = showLabels ? { top: 10, right: 10, bottom: 24, left: 36 } : { top: 10, right: 10, bottom: 10, left: 10 };
   const cw = width - pad.left - pad.right;
@@ -399,7 +405,7 @@ export function LineChart({
   );
   const primaryPoints = pixelSeries[0] ?? [];
   const labels = allSeries[0]?.data ?? [];
-  const primaryColor = allSeries[0]?.color ?? color;
+  const primaryColor = allSeries[0]?.color ?? seriesColor;
 
   const draw = useSharedValue(0);
   const isActive = useSharedValue(0);

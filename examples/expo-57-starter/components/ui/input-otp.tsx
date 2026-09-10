@@ -1,6 +1,7 @@
 import React, { useRef, useState } from "react";
 import { View, TextInput, useColorScheme } from "react-native";
 import { cn } from "@/lib/utils";
+import { useThemeColors } from "@/components/ui/theme-provider";
 
 export interface InputOTPProps extends React.ComponentPropsWithoutRef<typeof View> {
   className?: string;
@@ -13,6 +14,7 @@ export function InputOTP({ length = 6, value = "", onValueChange, className, ...
   const refs = useRef<(TextInput | null)[]>([]);
   const [focused, setFocused] = useState(-1);
   const dark = useColorScheme() === "dark";
+  const colors = useThemeColors();
   const digits = Array.from({ length }, (_, i) => value[i] ?? "");
 
   const handleChange = (text: string, index: number) => {
@@ -33,8 +35,8 @@ export function InputOTP({ length = 6, value = "", onValueChange, className, ...
 
   const bg = dark ? "#27272a" : "#ffffff";
   const borderDefault = dark ? "#3f3f46" : "#e4e4e7";
-  const borderFocused = dark ? "#fafafa" : "#18181b";
-  const textColor = dark ? "#fafafa" : "#09090b";
+  const borderFocused = colors.foreground;
+  const textColor = colors.foreground;
 
   return (
     <View className={cn("flex-row gap-2", className)} accessibilityRole="none" {...props}>

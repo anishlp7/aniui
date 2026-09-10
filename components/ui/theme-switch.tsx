@@ -1,8 +1,9 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Modal, Pressable, View, useColorScheme, useWindowDimensions } from "react-native";
+import { Modal, Pressable, View, useWindowDimensions } from "react-native";
 import Animated, { Easing, Extrapolation, interpolate, runOnJS, useAnimatedStyle, useSharedValue, withTiming } from "react-native-reanimated";
 import { Moon, Sun } from "lucide-react-native";
 import { cn } from "@/lib/utils";
+import { useThemeColors } from "@/components/ui/theme-provider";
 
 export interface ThemeSwitchProps extends Omit<React.ComponentPropsWithoutRef<typeof Pressable>, "onPress"> {
   className?: string;
@@ -21,8 +22,8 @@ export function ThemeSwitch({
   className, isDark, onToggle, size = 24, duration = 450,
   wipe = false, wipeLightColor = "#fafafa", wipeDarkColor = "#09090b", ...props
 }: ThemeSwitchProps) {
-  const dark = useColorScheme() === "dark";
-  const tint = dark ? "#fafafa" : "#18181b";
+  const colors = useThemeColors();
+  const tint = colors.foreground;
   const { width, height } = useWindowDimensions();
   const triggerRef = useRef<View>(null);
   const [origin, setOrigin] = useState<{ x: number; y: number } | null>(null);

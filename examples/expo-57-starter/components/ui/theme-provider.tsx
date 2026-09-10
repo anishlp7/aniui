@@ -86,3 +86,25 @@ export function ThemeProvider({
     </ThemeContext.Provider>
   );
 }
+
+// ─── AUTO-GENERATED THEME COLORS (written by `aniui init` / `aniui theme`) ───
+// Do not hand-edit values below — regenerated whenever the theme preset changes.
+export const THEME_COLORS = {
+  light: { background: "#ffffff", foreground: "#09090b", card: "#ffffff", cardForeground: "#09090b", primary: "#18181b", primaryForeground: "#fafafa", secondary: "#f4f4f5", secondaryForeground: "#18181b", muted: "#f4f4f5", mutedForeground: "#71717a", accent: "#f4f4f5", accentForeground: "#18181b", destructive: "#ef4444", destructiveForeground: "#fafafa", border: "#e4e4e7", input: "#e4e4e7", ring: "#18181b" },
+  dark: { background: "#09090b", foreground: "#fafafa", card: "#09090b", cardForeground: "#fafafa", primary: "#fafafa", primaryForeground: "#18181b", secondary: "#27272a", secondaryForeground: "#fafafa", muted: "#27272a", mutedForeground: "#a1a1aa", accent: "#27272a", accentForeground: "#fafafa", destructive: "#7f1d1d", destructiveForeground: "#fafafa", border: "#27272a", input: "#27272a", ring: "#d4d4d8" },
+} as const;
+
+/**
+ * The one place every component reads colors from when a native prop (a
+ * toggle control's track/thumb, TextInput caret, Skia canvas fills, lucide
+ * icon `color`, etc.) can't take a className token. Deliberately reads
+ * useColorScheme() directly rather than useTheme().resolvedTheme — the
+ * latter's context default doesn't track system appearance without a
+ * <ThemeProvider> ancestor, and this needs to stay reactive even in apps
+ * that never mount one.
+ */
+export function useThemeColors() {
+  const scheme = useNativeColorScheme();
+  return scheme === "dark" ? THEME_COLORS.dark : THEME_COLORS.light;
+}
+// ─── END AUTO-GENERATED THEME COLORS ───

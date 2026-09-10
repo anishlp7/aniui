@@ -1,5 +1,5 @@
 import React, { memo, useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { View, Text, LayoutChangeEvent, useColorScheme } from "react-native";
+import { View, Text, LayoutChangeEvent } from "react-native";
 import { Canvas, Path } from "@shopify/react-native-skia";
 import Animated, {
   Easing,
@@ -16,6 +16,7 @@ import Animated, {
 } from "react-native-reanimated";
 import { Gesture, GestureDetector } from "react-native-gesture-handler";
 import { cn } from "@/lib/utils";
+import { useThemeColors } from "@/components/ui/theme-provider";
 import { ChartTooltip } from "@/components/ui/chart-tooltip";
 
 export interface RadialChartSegment {
@@ -180,10 +181,10 @@ export function RadialChart({
   ...props
 }: RadialChartProps) {
   const [width, setWidth] = useState(0);
-  const dark = useColorScheme() === "dark";
-  const gridColor = dark ? "#27272a" : "#e5e7eb";
-  const labelColor = dark ? "#a1a1aa" : "#6b7280";
-  const centerColor = dark ? "#fafafa" : "#18181b";
+  const colors = useThemeColors();
+  const gridColor = colors.border;
+  const labelColor = colors.mutedForeground;
+  const centerColor = colors.foreground;
   const onLayout = useCallback((e: LayoutChangeEvent) => setWidth(e.nativeEvent.layout.width), []);
 
   const size = Math.min(width, height);

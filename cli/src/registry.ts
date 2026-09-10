@@ -33,7 +33,7 @@ export const registry: Record<string, ComponentEntry> = {
     file: "components/ui/input.tsx",
     description: "Text input with variants and states",
     dependencies: ["class-variance-authority", "clsx", "tailwind-merge"],
-    registryDependencies: [],
+    registryDependencies: ["theme-provider"],
     tier: 1,
   },
   autocomplete: {
@@ -41,7 +41,7 @@ export const registry: Record<string, ComponentEntry> = {
     file: "components/ui/autocomplete.tsx",
     description: "Free-text input with inline filtered suggestions, keyboard-safe dropdown, and async loading state",
     dependencies: ["lucide-react-native", "react-native-svg", "class-variance-authority", "clsx", "tailwind-merge"],
-    registryDependencies: [],
+    registryDependencies: ["theme-provider"],
     tier: 1,
   },
   textarea: {
@@ -49,7 +49,7 @@ export const registry: Record<string, ComponentEntry> = {
     file: "components/ui/textarea.tsx",
     description: "Multi-line text input",
     dependencies: ["class-variance-authority", "clsx", "tailwind-merge"],
-    registryDependencies: [],
+    registryDependencies: ["theme-provider"],
     tier: 1,
   },
   card: {
@@ -105,7 +105,7 @@ export const registry: Record<string, ComponentEntry> = {
     file: "components/ui/sidebar.tsx",
     description: "Collapsible animated side navigation panel: SidebarProvider, Sidebar, SidebarTrigger, useSidebar",
     dependencies: ["lucide-react-native", "react-native-svg", "react-native-reanimated", "clsx", "tailwind-merge"],
-    registryDependencies: ["animate"],
+    registryDependencies: ["animate", "theme-provider"],
     tier: 2,
   },
   avatar: {
@@ -145,7 +145,7 @@ export const registry: Record<string, ComponentEntry> = {
     file: "components/ui/switch.tsx",
     description: "Toggle switch",
     dependencies: ["clsx", "tailwind-merge"],
-    registryDependencies: [],
+    registryDependencies: ["theme-provider"],
     tier: 1,
   },
   checkbox: {
@@ -153,7 +153,7 @@ export const registry: Record<string, ComponentEntry> = {
     file: "components/ui/checkbox.tsx",
     description: "Checkbox with checked state",
     dependencies: ["lucide-react-native", "react-native-svg", "@rn-primitives/checkbox", "clsx", "tailwind-merge"],
-    registryDependencies: [],
+    registryDependencies: ["theme-provider"],
     tier: 3,
   },
   "radio-group": {
@@ -177,7 +177,7 @@ export const registry: Record<string, ComponentEntry> = {
     file: "components/ui/spinner.tsx",
     description: "Loading spinner with sizes",
     dependencies: ["clsx", "tailwind-merge"],
-    registryDependencies: [],
+    registryDependencies: ["theme-provider"],
     tier: 1,
   },
   list: {
@@ -193,7 +193,7 @@ export const registry: Record<string, ComponentEntry> = {
     file: "components/ui/accordion.tsx",
     description: "Expandable content sections",
     dependencies: ["lucide-react-native", "react-native-svg", "@rn-primitives/accordion", "react-native-reanimated", "clsx", "tailwind-merge"],
-    registryDependencies: ["animate"],
+    registryDependencies: ["animate", "theme-provider"],
     tier: 3,
   },
   tabs: {
@@ -273,7 +273,7 @@ export const registry: Record<string, ComponentEntry> = {
     file: "components/ui/select.tsx",
     description: "Dropdown select with search support",
     dependencies: ["lucide-react-native", "react-native-svg", "clsx", "tailwind-merge"],
-    registryDependencies: [],
+    registryDependencies: ["theme-provider"],
     tier: 1,
   },
   calendar: {
@@ -289,7 +289,7 @@ export const registry: Record<string, ComponentEntry> = {
     file: "components/ui/date-picker.tsx",
     description: "Date picker with calendar popup and range support",
     dependencies: ["lucide-react-native", "react-native-svg", "clsx", "tailwind-merge"],
-    registryDependencies: ["calendar"],
+    registryDependencies: ["calendar", "theme-provider"],
     tier: 1,
   },
   slider: {
@@ -297,7 +297,7 @@ export const registry: Record<string, ComponentEntry> = {
     file: "components/ui/slider.tsx",
     description: "Draggable slider for numeric values",
     dependencies: ["react-native-gesture-handler", "react-native-reanimated", "class-variance-authority", "clsx", "tailwind-merge"],
-    registryDependencies: [],
+    registryDependencies: ["theme-provider"],
     tier: 2,
   },
   toggle: {
@@ -329,7 +329,7 @@ export const registry: Record<string, ComponentEntry> = {
     file: "components/ui/input-otp.tsx",
     description: "One-time password input with individual cells",
     dependencies: ["clsx", "tailwind-merge"],
-    registryDependencies: [],
+    registryDependencies: ["theme-provider"],
     tier: 1,
   },
   table: {
@@ -345,7 +345,7 @@ export const registry: Record<string, ComponentEntry> = {
     file: "components/ui/search-bar.tsx",
     description: "Search input with icon, clear button, and cancel",
     dependencies: ["lucide-react-native", "react-native-svg", "class-variance-authority", "clsx", "tailwind-merge"],
-    registryDependencies: [],
+    registryDependencies: ["theme-provider"],
     tier: 1,
   },
   chip: {
@@ -353,7 +353,7 @@ export const registry: Record<string, ComponentEntry> = {
     file: "components/ui/chip.tsx",
     description: "Interactive tag for filters and multi-select",
     dependencies: ["lucide-react-native", "react-native-svg", "class-variance-authority", "clsx", "tailwind-merge"],
-    registryDependencies: [],
+    registryDependencies: ["theme-provider"],
     tier: 1,
   },
   fab: {
@@ -401,7 +401,7 @@ export const registry: Record<string, ComponentEntry> = {
     file: "components/ui/segmented-control.tsx",
     description: "iOS-style segmented control for view switching",
     dependencies: [],
-    registryDependencies: [],
+    registryDependencies: ["theme-provider"],
     tier: 1,
   },
   carousel: {
@@ -427,7 +427,7 @@ export const registry: Record<string, ComponentEntry> = {
     file: "components/ui/stepper.tsx",
     description: "Numeric increment/decrement control with min/max/step",
     dependencies: ["lucide-react-native", "react-native-svg", "class-variance-authority", "clsx", "tailwind-merge"],
-    registryDependencies: [],
+    registryDependencies: ["theme-provider"],
     tier: 1,
   },
   banner: {
@@ -443,7 +443,7 @@ export const registry: Record<string, ComponentEntry> = {
     file: "components/ui/chart-tooltip.tsx",
     description: "Tooltip overlay for chart data points",
     dependencies: ["clsx", "tailwind-merge"],
-    registryDependencies: [],
+    registryDependencies: ["theme-provider"],
     tier: 1,
   },
   "area-chart": {
@@ -451,7 +451,7 @@ export const registry: Record<string, ComponentEntry> = {
     file: "components/ui/area-chart.tsx",
     description: "Skia area chart with entrance draw-on, data morphing, and a drag-to-scrub tooltip",
     dependencies: ["@shopify/react-native-skia", "react-native-reanimated", "react-native-gesture-handler", "clsx", "tailwind-merge"],
-    registryDependencies: ["chart-tooltip"],
+    registryDependencies: ["chart-tooltip", "theme-provider"],
     tier: 3,
   },
   "bar-chart": {
@@ -459,7 +459,7 @@ export const registry: Record<string, ComponentEntry> = {
     file: "components/ui/bar-chart.tsx",
     description: "Skia bar chart with staggered grow-in, data morphing, and a drag-to-scrub tooltip",
     dependencies: ["@shopify/react-native-skia", "react-native-reanimated", "react-native-gesture-handler", "clsx", "tailwind-merge"],
-    registryDependencies: ["chart-tooltip"],
+    registryDependencies: ["chart-tooltip", "theme-provider"],
     tier: 3,
   },
   "line-chart": {
@@ -467,7 +467,7 @@ export const registry: Record<string, ComponentEntry> = {
     file: "components/ui/line-chart.tsx",
     description: "Skia line chart with draw-on entrance, morph-on-data-change, and a scrubbing crosshair tooltip",
     dependencies: ["@shopify/react-native-skia", "react-native-reanimated", "react-native-gesture-handler", "clsx", "tailwind-merge"],
-    registryDependencies: ["chart-tooltip"],
+    registryDependencies: ["chart-tooltip", "theme-provider"],
     tier: 3,
   },
   "pie-chart": {
@@ -483,7 +483,7 @@ export const registry: Record<string, ComponentEntry> = {
     file: "components/ui/radar-chart.tsx",
     description: "Skia radar/spider chart with staggered grow-in, data morphing, and a drag-to-select axis tooltip",
     dependencies: ["@shopify/react-native-skia", "react-native-reanimated", "react-native-gesture-handler", "clsx", "tailwind-merge"],
-    registryDependencies: ["chart-tooltip"],
+    registryDependencies: ["chart-tooltip", "theme-provider"],
     tier: 3,
   },
   "radial-chart": {
@@ -491,7 +491,7 @@ export const registry: Record<string, ComponentEntry> = {
     file: "components/ui/radial-chart.tsx",
     description: "Skia concentric radial progress rings with grow-in, data morphing, and a drag-to-select tooltip",
     dependencies: ["@shopify/react-native-skia", "react-native-reanimated", "react-native-gesture-handler", "clsx", "tailwind-merge"],
-    registryDependencies: ["chart-tooltip"],
+    registryDependencies: ["chart-tooltip", "theme-provider"],
     tier: 3,
   },
   "swipeable-list-item": {
@@ -515,7 +515,7 @@ export const registry: Record<string, ComponentEntry> = {
     file: "components/ui/password-input.tsx",
     description: "Password input with show/hide toggle and strength indicator",
     dependencies: ["lucide-react-native", "react-native-svg", "class-variance-authority", "clsx", "tailwind-merge"],
-    registryDependencies: ["input"],
+    registryDependencies: ["input", "theme-provider"],
     tier: 1,
   },
   "theme-provider": {
@@ -539,7 +539,7 @@ export const registry: Record<string, ComponentEntry> = {
     file: "components/ui/header.tsx",
     description: "Navigation header with back button, title, and right actions",
     dependencies: ["lucide-react-native", "react-native-svg", "class-variance-authority", "clsx", "tailwind-merge"],
-    registryDependencies: [],
+    registryDependencies: ["theme-provider"],
     tier: 1,
   },
   "tab-bar": {
@@ -571,7 +571,7 @@ export const registry: Record<string, ComponentEntry> = {
     file: "components/ui/masked-input.tsx",
     description: "Text input with mask formatting for credit cards, phones, dates",
     dependencies: ["class-variance-authority", "clsx", "tailwind-merge"],
-    registryDependencies: ["input"],
+    registryDependencies: ["input", "theme-provider"],
     tier: 1,
   },
   "phone-input": {
@@ -579,7 +579,7 @@ export const registry: Record<string, ComponentEntry> = {
     file: "components/ui/phone-input.tsx",
     description: "Phone number input with country code selector",
     dependencies: ["lucide-react-native", "react-native-svg", "class-variance-authority", "clsx", "tailwind-merge"],
-    registryDependencies: ["input", "masked-input"],
+    registryDependencies: ["input", "masked-input", "theme-provider"],
     tier: 1,
   },
   "number-input": {
@@ -587,7 +587,7 @@ export const registry: Record<string, ComponentEntry> = {
     file: "components/ui/number-input.tsx",
     description: "Numeric input with increment/decrement buttons and min/max",
     dependencies: ["lucide-react-native", "react-native-svg", "class-variance-authority", "clsx", "tailwind-merge"],
-    registryDependencies: [],
+    registryDependencies: ["theme-provider"],
     tier: 1,
   },
   combobox: {
@@ -595,7 +595,7 @@ export const registry: Record<string, ComponentEntry> = {
     file: "components/ui/combobox.tsx",
     description: "Searchable select with multi-select, groups, clear, and custom rendering",
     dependencies: ["lucide-react-native", "react-native-svg", "clsx", "tailwind-merge"],
-    registryDependencies: [],
+    registryDependencies: ["theme-provider"],
     tier: 1,
   },
   "progress-steps": {
@@ -603,7 +603,7 @@ export const registry: Record<string, ComponentEntry> = {
     file: "components/ui/progress-steps.tsx",
     description: "Multi-step progress indicator for wizards and onboarding",
     dependencies: ["lucide-react-native", "react-native-svg", "clsx", "tailwind-merge"],
-    registryDependencies: [],
+    registryDependencies: ["theme-provider"],
     tier: 1,
   },
   timeline: {
@@ -619,7 +619,7 @@ export const registry: Record<string, ComponentEntry> = {
     file: "components/ui/chat-bubble.tsx",
     description: "Message bubble for chat with sent/received variants and status",
     dependencies: ["lucide-react-native", "react-native-svg", "class-variance-authority", "clsx", "tailwind-merge"],
-    registryDependencies: [],
+    registryDependencies: ["theme-provider"],
     tier: 1,
   },
   "stat-card": {
@@ -651,7 +651,7 @@ export const registry: Record<string, ComponentEntry> = {
     file: "components/ui/refresh-control.tsx",
     description: "Themed pull-to-refresh control for ScrollView and FlatList",
     dependencies: [],
-    registryDependencies: [],
+    registryDependencies: ["theme-provider"],
     tier: 1,
   },
   "infinite-list": {
@@ -659,7 +659,7 @@ export const registry: Record<string, ComponentEntry> = {
     file: "components/ui/infinite-list.tsx",
     description: "FlatList with auto-loading more items on scroll",
     dependencies: ["clsx", "tailwind-merge"],
-    registryDependencies: ["spinner"],
+    registryDependencies: ["spinner", "theme-provider"],
     tier: 1,
   },
   pagination: {
@@ -675,7 +675,7 @@ export const registry: Record<string, ComponentEntry> = {
     file: "components/ui/file-picker.tsx",
     description: "File upload UI with dashed border, preview, and remove button",
     dependencies: ["lucide-react-native", "react-native-svg", "clsx", "tailwind-merge"],
-    registryDependencies: [],
+    registryDependencies: ["theme-provider"],
     tier: 1,
   },
   "connection-banner": {
@@ -715,7 +715,7 @@ export const registry: Record<string, ComponentEntry> = {
     file: "components/ui/input-group.tsx",
     description: "Compose inputs with addons, buttons, text, and focus-aware container",
     dependencies: ["class-variance-authority", "clsx", "tailwind-merge"],
-    registryDependencies: [],
+    registryDependencies: ["theme-provider"],
     tier: 1,
   },
   kbd: {
@@ -755,7 +755,7 @@ export const registry: Record<string, ComponentEntry> = {
     file: "components/ui/data-table.tsx",
     description: "Sortable, filterable data table with pagination and custom cell rendering",
     dependencies: ["lucide-react-native", "react-native-svg", "clsx", "tailwind-merge"],
-    registryDependencies: [],
+    registryDependencies: ["theme-provider"],
     tier: 1,
   },
   "command-menu": {
@@ -763,7 +763,7 @@ export const registry: Record<string, ComponentEntry> = {
     file: "components/ui/command-menu.tsx",
     description: "Spotlight/kbar-style command palette — portal-based overlay with rigorous Android keyboard handling, groups, and shortcuts",
     dependencies: ["lucide-react-native", "react-native-svg", "@rn-primitives/dialog", "@rn-primitives/portal", "react-native-reanimated", "clsx", "tailwind-merge"],
-    registryDependencies: ["animate"],
+    registryDependencies: ["animate", "theme-provider"],
     tier: 3,
   },
   "avatar-group": {
@@ -795,7 +795,7 @@ export const registry: Record<string, ComponentEntry> = {
     file: "components/ui/prompt-input.tsx",
     description: "ChatGPT/Claude-style AI composer — compound: PromptInput, Textarea, Toolbar, Button, Send (stop while streaming)",
     dependencies: ["lucide-react-native", "react-native-svg", "clsx", "tailwind-merge"],
-    registryDependencies: [],
+    registryDependencies: ["theme-provider"],
     tier: 1,
   },
   waveform: {
@@ -803,7 +803,7 @@ export const registry: Record<string, ComponentEntry> = {
     file: "components/ui/waveform.tsx",
     description: "Audio waveform bars — driven by real amplitude levels, with an ambient recording fallback",
     dependencies: ["react-native-reanimated", "clsx", "tailwind-merge"],
-    registryDependencies: ["animate"],
+    registryDependencies: ["animate", "theme-provider"],
     tier: 2,
   },
   "streaming-text": {
@@ -827,7 +827,7 @@ export const registry: Record<string, ComponentEntry> = {
     file: "components/ui/slide-to-confirm.tsx",
     description: "Slide-to-pay/confirm control with spring-back and confirmed state",
     dependencies: ["lucide-react-native", "react-native-svg", "react-native-gesture-handler", "react-native-reanimated", "clsx", "tailwind-merge"],
-    registryDependencies: [],
+    registryDependencies: ["theme-provider"],
     tier: 3,
   },
   shimmer: {
@@ -845,7 +845,7 @@ export const registry: Record<string, ComponentEntry> = {
     file: "components/ui/loader.tsx",
     description: "Animated loading indicator — segmented comet-tail ring or bouncing dots",
     dependencies: ["class-variance-authority", "react-native-reanimated", "react-native-svg", "clsx", "tailwind-merge"],
-    registryDependencies: ["animate"],
+    registryDependencies: ["animate", "theme-provider"],
     tier: 2,
     category: "Motion & Effects",
     group: "Loaders",
@@ -1025,7 +1025,7 @@ export const registry: Record<string, ComponentEntry> = {
     file: "components/ui/fan-menu.tsx",
     description: "Radial fan menu that staggers labeled pill actions out from a FAB trigger, with tap-outside-to-dismiss backdrop and per-item blur",
     dependencies: ["lucide-react-native", "react-native-svg", "react-native-reanimated", "expo-blur", "clsx", "tailwind-merge"],
-    registryDependencies: [],
+    registryDependencies: ["theme-provider"],
     tier: 3,
     category: "Motion & Effects",
     group: "Navigation Chrome",
@@ -1115,7 +1115,7 @@ export const registry: Record<string, ComponentEntry> = {
     file: "components/ui/gooey-popover.tsx",
     description: "Skia gooey popover that morphs its trigger into the content panel",
     dependencies: ["@shopify/react-native-skia", "react-native-reanimated", "clsx", "tailwind-merge"],
-    registryDependencies: [],
+    registryDependencies: ["theme-provider"],
     tier: 4,
     category: "Motion & Effects",
     group: "Skia Effects",
@@ -1175,7 +1175,7 @@ export const registry: Record<string, ComponentEntry> = {
     file: "components/ui/expandable-view.tsx",
     description: "Generic expand/collapse container with spring-driven width/height/corner-radius morphing and a slot API",
     dependencies: ["react-native-reanimated", "lucide-react-native", "react-native-svg", "clsx", "tailwind-merge"],
-    registryDependencies: [],
+    registryDependencies: ["theme-provider"],
     tier: 2,
     category: "Navigation & Overlays",
     group: "Compound Overlays",
@@ -1195,7 +1195,7 @@ export const registry: Record<string, ComponentEntry> = {
     file: "components/ui/arc-list.tsx",
     description: "Items laid out along a curved arc with proximity scale/opacity, snap-to-focus, and a haptic tick on snap",
     dependencies: ["react-native-reanimated", "expo-haptics", "clsx", "tailwind-merge"],
-    registryDependencies: [],
+    registryDependencies: ["theme-provider"],
     tier: 2,
     category: "Motion & Effects",
     group: "Layout Primitives",
@@ -1215,7 +1215,7 @@ export const registry: Record<string, ComponentEntry> = {
     file: "components/ui/save-button.tsx",
     description: "Idle → loading → success → done state-machine save button with animated phase transitions",
     dependencies: ["lucide-react-native", "react-native-svg", "react-native-reanimated", "clsx", "tailwind-merge"],
-    registryDependencies: [],
+    registryDependencies: ["theme-provider"],
     tier: 2,
     category: "Motion & Effects",
     group: "Micro-interactions",
@@ -1255,7 +1255,7 @@ export const registry: Record<string, ComponentEntry> = {
     file: "components/ui/hamburger.tsx",
     description: "Animated hamburger ⇄ close icon morph driven by a single progress value",
     dependencies: ["react-native-reanimated", "clsx", "tailwind-merge"],
-    registryDependencies: [],
+    registryDependencies: ["theme-provider"],
     tier: 2,
     category: "Motion & Effects",
     group: "Micro-interactions",
@@ -1265,7 +1265,7 @@ export const registry: Record<string, ComponentEntry> = {
     file: "components/ui/theme-switch.tsx",
     description: "Sun/moon icon-morph theme toggle with an optional full-screen circular wipe transition",
     dependencies: ["lucide-react-native", "react-native-svg", "react-native-reanimated", "clsx", "tailwind-merge"],
-    registryDependencies: [],
+    registryDependencies: ["theme-provider"],
     tier: 2,
     category: "Motion & Effects",
     group: "Micro-interactions",
@@ -1285,7 +1285,7 @@ export const registry: Record<string, ComponentEntry> = {
     file: "components/ui/animated-input-bar.tsx",
     description: "Text input with a per-character animated placeholder that cycles through multiple strings",
     dependencies: ["react-native-reanimated", "expo-blur", "class-variance-authority", "clsx", "tailwind-merge"],
-    registryDependencies: [],
+    registryDependencies: ["theme-provider"],
     tier: 3,
     category: "Motion & Effects",
     group: "Micro-interactions",

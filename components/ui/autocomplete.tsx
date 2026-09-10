@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { View, TextInput, Pressable, Text, ScrollView, Keyboard, useColorScheme } from "react-native";
 import { cva, type VariantProps } from "class-variance-authority";
 import { X } from "lucide-react-native";
+import { useThemeColors } from "@/components/ui/theme-provider";
 import { cn } from "@/lib/utils";
 
 // Matches input.tsx's size scale so Input, SearchBar, and AutoComplete read as one family.
@@ -57,7 +58,8 @@ export function AutoComplete({
   const [internal, setInternal] = useState("");
   const [open, setOpen] = useState(false);
   const dark = useColorScheme() === "dark";
-  const caret = dark ? "#fafafa" : "#18181b";
+  const colors = useThemeColors();
+  const caret = colors.foreground;
   const resolvedSize = size ?? "md";
   const text = value ?? internal;
 
@@ -88,7 +90,7 @@ export function AutoComplete({
           className="flex-1 self-stretch p-0 text-foreground placeholder:text-muted-foreground"
           style={[{ fontSize: fontSizes[resolvedSize] }, style]}
           textAlignVertical="center"
-          placeholderTextColor={dark ? "#a1a1aa" : "#71717a"}
+          placeholderTextColor={colors.mutedForeground}
           keyboardAppearance={dark ? "dark" : "light"}
           selectionColor={caret}
           cursorColor={caret}
@@ -103,7 +105,7 @@ export function AutoComplete({
             accessibilityRole="button"
             accessibilityLabel="Clear"
           >
-            <X size={16} color="#71717a" />
+            <X size={16} color={colors.mutedForeground} />
           </Pressable>
         )}
       </View>

@@ -7,6 +7,8 @@ import { findLayoutFile, injectImport, injectJsxBeforeClose } from "../utils/inj
 import { hashFile } from "../utils/hash";
 import { logger } from "../utils/logger";
 import { getCliPackage } from "../utils/pkg";
+import { patchThemeColorsBlock } from "../utils/theme-colors-block";
+import type { PresetName } from "../theme-presets";
 
 const pkg = getCliPackage();
 
@@ -98,6 +100,21 @@ export async function addCommand(names: string[]): Promise<void> {
       logger.error(`Failed to copy ${name}: ${err instanceof Error ? err.message : String(err)}`);
       continue;
     }
+
+    if (name === "theme-provider") {
+      // theme-provider.tsx ships with the "default" preset's THEME_COLORS baked
+      // in — if this project already picked a different preset (recorded by
+      // `aniui theme`/`aniui init`), sync it here too, whether the user asked
+      // for theme-provider directly or it just came along as another
+      // component's registryDependency.
+      const presetName = ((config?.theme as PresetName) || "default");
+      const content = await fs.readFile(destFile, "utf-8");
+      const patched = patchThemeColorsBlock(content, presetName);
+      if (patched !== content) {
+        await fs.writeFile(destFile, patched, "utf-8");
+      }
+    }
+
     created.push(name);
 
     for (const dep of entry.dependencies) {

@@ -1,8 +1,9 @@
 import React from "react";
-import { View, Text, Pressable, useColorScheme } from "react-native";
+import { View, Text, Pressable } from "react-native";
 import { cva, type VariantProps } from "class-variance-authority";
 import { Minus, Plus } from "lucide-react-native";
 import { cn } from "@/lib/utils";
+import { useThemeColors } from "@/components/ui/theme-provider";
 
 const stepperVariants = cva("flex-row items-center self-start rounded-lg border border-border", {
   variants: {
@@ -38,8 +39,8 @@ export interface StepperProps
 }
 
 export function Stepper({ size, className, value, onChange, min = 0, max = 99, step = 1, ...props }: StepperProps) {
-  const dark = useColorScheme() === "dark";
-  const fg = dark ? "#fafafa" : "#18181b";
+  const colors = useThemeColors();
+  const fg = colors.foreground;
   const canDec = value - step >= min;
   const canInc = value + step <= max;
 
