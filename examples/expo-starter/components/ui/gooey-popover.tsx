@@ -276,7 +276,11 @@ export function GooeyPopoverContent({ children, className }: GooeyPopoverContent
       {ready ? (
         <Canvas
           pointerEvents="none"
-          style={{ position: "absolute", zIndex: 0, left: geo.left, top: geo.top, width: geo.layerW, height: geo.layerH }}
+          // Must stay behind GooeyPopoverTrigger, which has no zIndex of its own
+          // (defaults to 0) — a tied zIndex falls back to sibling order, and this
+          // canvas is a later sibling, so 0 here would let its goo blob paint over
+          // (and fully hide) the real trigger button once mounted.
+          style={{ position: "absolute", zIndex: -1, left: geo.left, top: geo.top, width: geo.layerW, height: geo.layerH }}
         >
           <Group
             layer={
