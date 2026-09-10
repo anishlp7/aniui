@@ -193,8 +193,13 @@ export function GooeyPopoverTrigger({ children, className, pressScale = 0.94, ..
 
   const pressStyle = useAnimatedStyle(() => ({ transform: [{ scale: triggerScale.value }] }));
 
+  // GooeyPopoverContent's backdrop Canvas sits at zIndex 0 and is a later sibling
+  // of this trigger — a tied zIndex falls back to sibling order, which would let
+  // the canvas's goo blob paint over (and fully hide) this real button. zIndex 1
+  // keeps the trigger above the canvas while staying below the open panel's
+  // content overlay (zIndex 10).
   return (
-    <Animated.View style={pressStyle}>
+    <Animated.View style={[{ zIndex: 1 }, pressStyle]}>
       <Pressable
         onLayout={onLayout}
         onPress={toggle}
@@ -276,11 +281,7 @@ export function GooeyPopoverContent({ children, className }: GooeyPopoverContent
       {ready ? (
         <Canvas
           pointerEvents="none"
-          // Must stay behind GooeyPopoverTrigger, which has no zIndex of its own
-          // (defaults to 0) — a tied zIndex falls back to sibling order, and this
-          // canvas is a later sibling, so 0 here would let its goo blob paint over
-          // (and fully hide) the real trigger button once mounted.
-          style={{ position: "absolute", zIndex: -1, left: geo.left, top: geo.top, width: geo.layerW, height: geo.layerH }}
+          style={{ position: "absolute", zIndex: 0, left: geo.left, top: geo.top, width: geo.layerW, height: geo.layerH }}
         >
           <Group
             layer={
