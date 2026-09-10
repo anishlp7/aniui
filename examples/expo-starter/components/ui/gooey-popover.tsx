@@ -1,5 +1,5 @@
-import React, { createContext, useCallback, useContext, useEffect, useMemo, useState } from "react";
-import { Dimensions, Pressable, Text, View, useColorScheme, type LayoutChangeEvent } from "react-native";
+import React, { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState } from "react";
+import { Dimensions, Pressable, Text, View, useColorScheme, useWindowDimensions, type LayoutChangeEvent, type View as RNView } from "react-native";
 import { Blur, Canvas, ColorMatrix, Group, Paint, RoundedRect } from "@shopify/react-native-skia";
 import Animated, {
   interpolate,
@@ -32,6 +32,8 @@ const PRESS_OUT_SPRING: WithSpringConfig = { stiffness: 260, damping: 16, mass: 
 // sharpen alpha so they fuse into a single blob while they overlap.
 const GOO_MATRIX = [1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 22, -11];
 
+type GooeyPopoverClamp = { screenW: number; triggerWinX: number; margin: number };
+
 function buildGeo(
   triggerW: number,
   triggerH: number,
@@ -41,9 +43,22 @@ function buildGeo(
   align: GooeyPopoverAlign,
   gap: number,
   panelRadius: number,
+  clamp: GooeyPopoverClamp | null,
 ): GooeyPopoverGeo {
   const py = side === "bottom" ? triggerH + gap : -(gap + panelH);
-  const px = align === "start" ? 0 : align === "end" ? triggerW - panelW : (triggerW - panelW) / 2;
+  const idealPx = align === "start" ? 0 : align === "end" ? triggerW - panelW : (triggerW - panelW) / 2;
+
+  // A wide (e.g. two-line) panel centered under a narrow trigger can overhang
+  // past the screen edge. Once we know the trigger's actual on-screen X (via
+  // measureInWindow, set once GooeyPopoverTrigger has laid out), slide the
+  // panel back on-screen — same clamp shape as unfold-menu's clampToScreen.
+  let px = idealPx;
+  if (clamp) {
+    const { screenW, triggerWinX, margin } = clamp;
+    const minPx = margin - triggerWinX;
+    const maxPx = screenW - margin - panelW - triggerWinX;
+    px = Math.min(Math.max(idealPx, minPx), Math.max(maxPx, minPx));
+  }
 
   const left = Math.min(0, px);
   const top = Math.min(0, py);
@@ -84,6 +99,8 @@ type GooeyPopoverContextValue = {
   triggerSize: { w: number; h: number };
   setTriggerSize: React.Dispatch<React.SetStateAction<{ w: number; h: number }>>;
   triggerScale: SharedValue<number>;
+  triggerWindowPos: { x: number; y: number } | null;
+  setTriggerWindowPos: React.Dispatch<React.SetStateAction<{ x: number; y: number } | null>>;
 };
 
 const GooeyPopoverContext = createContext<GooeyPopoverContextValue | null>(null);
@@ -138,6 +155,7 @@ export function GooeyPopover({
   const progress = useSharedValue(defaultOpen ? 1 : 0);
   const triggerScale = useSharedValue(1);
   const [triggerSize, setTriggerSize] = useState({ w: 0, h: 0 });
+  const [triggerWindowPos, setTriggerWindowPos] = useState<{ x: number; y: number } | null>(null);
 
   const setOpen = useCallback(
     (next: boolean) => {
@@ -153,8 +171,8 @@ export function GooeyPopover({
   }, [open, progress]);
 
   const ctx = useMemo<GooeyPopoverContextValue>(
-    () => ({ open, setOpen, toggle, progress, side, align, gap: sideOffset, panelRadius, gooStrength, color: resolvedColor, dismissOnOutsidePress, triggerSize, setTriggerSize, triggerScale }),
-    [open, setOpen, toggle, progress, side, align, sideOffset, panelRadius, gooStrength, resolvedColor, dismissOnOutsidePress, triggerSize, triggerScale],
+    () => ({ open, setOpen, toggle, progress, side, align, gap: sideOffset, panelRadius, gooStrength, color: resolvedColor, dismissOnOutsidePress, triggerSize, setTriggerSize, triggerScale, triggerWindowPos, setTriggerWindowPos }),
+    [open, setOpen, toggle, progress, side, align, sideOffset, panelRadius, gooStrength, resolvedColor, dismissOnOutsidePress, triggerSize, triggerScale, triggerWindowPos],
   );
 
   const { width: screenW, height: screenH } = Dimensions.get("window");
@@ -181,14 +199,20 @@ export interface GooeyPopoverTriggerProps extends React.ComponentPropsWithoutRef
 }
 
 export function GooeyPopoverTrigger({ children, className, pressScale = 0.94, ...props }: GooeyPopoverTriggerProps) {
-  const { toggle, open, setTriggerSize, triggerScale } = useGooeyPopoverContext("GooeyPopoverTrigger");
+  const { toggle, open, setTriggerSize, triggerScale, setTriggerWindowPos } = useGooeyPopoverContext("GooeyPopoverTrigger");
+  const triggerRef = useRef<RNView>(null);
 
   const onLayout = useCallback(
     (e: LayoutChangeEvent) => {
       const { width, height } = e.nativeEvent.layout;
       setTriggerSize((prev: { w: number; h: number }) => (prev.w === width && prev.h === height ? prev : { w: width, h: height }));
+      // Needed to clamp a wide (e.g. two-line) panel back on-screen — the local
+      // layout above has no idea where this trigger actually sits on the device.
+      triggerRef.current?.measureInWindow((x, y) => {
+        setTriggerWindowPos((prev) => (prev && prev.x === x && prev.y === y ? prev : { x, y }));
+      });
     },
-    [setTriggerSize],
+    [setTriggerSize, setTriggerWindowPos],
   );
 
   const pressStyle = useAnimatedStyle(() => ({ transform: [{ scale: triggerScale.value }] }));
@@ -201,6 +225,7 @@ export function GooeyPopoverTrigger({ children, className, pressScale = 0.94, ..
   return (
     <Animated.View style={[{ zIndex: 1 }, pressStyle]}>
       <Pressable
+        ref={triggerRef}
         onLayout={onLayout}
         onPress={toggle}
         onPressIn={() => {
@@ -230,8 +255,9 @@ export interface GooeyPopoverContentProps {
  * window (borderRadius + bounds) from the trigger's rect to the panel's rect
  * while a Skia goo layer blends trigger + panel shapes underneath. */
 export function GooeyPopoverContent({ children, className }: GooeyPopoverContentProps) {
-  const { progress, side, align, gap, panelRadius, gooStrength, color, open, triggerSize, triggerScale } =
+  const { progress, side, align, gap, panelRadius, gooStrength, color, open, triggerSize, triggerScale, triggerWindowPos } =
     useGooeyPopoverContext("GooeyPopoverContent");
+  const { width: screenW } = useWindowDimensions();
 
   const [contentSize, setContentSize] = useState({ w: 0, h: 0 });
   const onMeasure = useCallback((e: LayoutChangeEvent) => {
@@ -239,9 +265,14 @@ export function GooeyPopoverContent({ children, className }: GooeyPopoverContent
     setContentSize((prev) => (prev.w === width && prev.h === height ? prev : { w: width, h: height }));
   }, []);
 
+  const clamp = useMemo<GooeyPopoverClamp | null>(
+    () => (triggerWindowPos ? { screenW, triggerWinX: triggerWindowPos.x, margin: 12 } : null),
+    [screenW, triggerWindowPos],
+  );
+
   const geo = useMemo(
-    () => buildGeo(triggerSize.w, triggerSize.h, contentSize.w, contentSize.h, side, align, gap, panelRadius),
-    [triggerSize, contentSize, side, align, gap, panelRadius],
+    () => buildGeo(triggerSize.w, triggerSize.h, contentSize.w, contentSize.h, side, align, gap, panelRadius, clamp),
+    [triggerSize, contentSize, side, align, gap, panelRadius, clamp],
   );
   const ready = geo.layerW > 0 && contentSize.w > 0;
 
@@ -262,12 +293,15 @@ export function GooeyPopoverContent({ children, className }: GooeyPopoverContent
 
   const clipStyle = useAnimatedStyle(() => {
     const m = rectAt(geo, progress.value);
-    return { left: m.x, top: m.y, width: m.w, height: m.h, borderRadius: m.r };
+    // Border fades in with the content below — at progress 0 this exactly
+    // matches the trigger's own rounded-pill shape, and without fading it out
+    // it would sit drawn on top of the trigger even while fully closed.
+    return { left: m.x, top: m.y, width: m.w, height: m.h, borderRadius: m.r, opacity: interpolate(progress.value, [0, 0.45, 1], [0, 0.2, 1]) };
   }, [geo]);
 
   const contentStyle = useAnimatedStyle(() => {
     const m = rectAt(geo, progress.value);
-    return { left: geo.panel.x - m.x, top: geo.panel.y - m.y, opacity: interpolate(progress.value, [0, 0.45, 1], [0, 0.2, 1]) };
+    return { left: geo.panel.x - m.x, top: geo.panel.y - m.y };
   }, [geo]);
 
   return (
@@ -301,7 +335,7 @@ export function GooeyPopoverContent({ children, className }: GooeyPopoverContent
         pointerEvents={open ? "box-none" : "none"}
         style={{ position: "absolute", zIndex: 10, left: geo.left, top: geo.top, width: geo.layerW, height: geo.layerH }}
       >
-        <Animated.View style={[{ position: "absolute", overflow: "hidden" }, clipStyle]}>
+        <Animated.View className="border border-border" style={[{ position: "absolute", overflow: "hidden" }, clipStyle]}>
           <Animated.View className={cn("absolute max-w-[320px] p-4", className)} style={contentStyle}>
             {children}
           </Animated.View>
