@@ -637,6 +637,7 @@ export type ComponentEntry = {
 - [ ] TypeScript strict — no errors, no any
 - [ ] No unnecessary wrapper Views
 - [ ] Import path uses @/lib/utils for cn()
+- [ ] `npm run registry:build` run AFTER this component's truly final edit, and the result committed (see "Before Committing — CI Gates")
 
 ## Build Order — Follow This EXACTLY
 
@@ -671,6 +672,38 @@ export type ComponentEntry = {
 25-27. Build accordion, tabs, collapsible (Tier 2)
 28-29. Build dialog, toast (Tier 2)
 30. Launch on GitHub, Hacker News, r/reactnative, Twitter
+
+## Before Committing — CI Gates
+
+`.github/workflows/ci.yml` runs 6 jobs on every push/PR to `main`. Run their
+exact commands locally before committing anything under `components/ui/`,
+`cli/`, or `docs/` — a failure here blocks merge:
+
+1. **`typecheck`** — `cd cli && npx tsc --noEmit`
+2. **`test-cli`** — `cd cli && npm test` (Vitest)
+3. **`test-components`** — `npx jest --passWithNoTests --ci` (root)
+4. **`docs-build`** — `cd docs && npm run build` — a full production build,
+   not just `tsc --noEmit`. Run the real thing; a clean typecheck does not
+   guarantee a clean build.
+5. **`registry-drift`** — `npm run registry:build` then
+   `git diff --exit-code docs/public/registry.json docs/public/r`.
+   **Gotcha that has actually broken this before:** run this build AFTER
+   your true final edit to any `components/ui/*.tsx` file or
+   `cli/src/registry.ts` — not after your second-to-last edit. Building
+   once mid-session and then editing a component again afterward leaves a
+   stale, committed registry snapshot that CI will reject. When in doubt,
+   run `registry:build` again immediately before `git commit`, not before.
+6. **`lint-components`** — `grep -r "StyleSheet.create" components/ui/`
+   and `grep -r "export default" components/ui/` must both find nothing
+   (these two fail CI). The 80-line-per-file check in the same job is
+   advisory only (WARN, does not fail CI) — most Tier 2+ components in
+   this repo already exceed it; don't treat it as a hard blocker.
+
+After any change to a component's imports (e.g. adding a new
+`registryDependencies` need like `theme-provider`), also run
+`cd cli && npm test` — `__tests__/registry.test.ts` asserts every
+`@/components/ui/*` import a component makes is declared in its own
+`registryDependencies`, and will name the exact files missing it.
 
 ## CLI Pre-Publish Checklist
 
