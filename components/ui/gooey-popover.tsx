@@ -1,5 +1,5 @@
 import React, { createContext, useCallback, useContext, useEffect, useMemo, useState } from "react";
-import { Dimensions, Pressable, Text, View, type LayoutChangeEvent } from "react-native";
+import { Dimensions, Pressable, Text, View, useColorScheme, type LayoutChangeEvent } from "react-native";
 import { Blur, Canvas, ColorMatrix, Group, Paint, RoundedRect } from "@shopify/react-native-skia";
 import Animated, {
   interpolate,
@@ -105,6 +105,10 @@ export interface GooeyPopoverProps {
   sideOffset?: number;
   panelRadius?: number;
   gooStrength?: number;
+  /** Goo layer fill — the Skia canvas can't read className tokens, so this
+   * defaults to the theme's card color (light `#ffffff` / dark `#18181b`,
+   * matching the hex pair already used for canvas fills elsewhere, e.g.
+   * area-chart's cursor dot) and only needs overriding for a non-card surface. */
   color?: string;
   dismissOnOutsidePress?: boolean;
 }
@@ -122,9 +126,11 @@ export function GooeyPopover({
   sideOffset = 14,
   panelRadius = 16,
   gooStrength = 8,
-  color = "#ffffff",
+  color,
   dismissOnOutsidePress = true,
 }: GooeyPopoverProps) {
+  const scheme = useColorScheme();
+  const resolvedColor = color ?? (scheme === "dark" ? "#18181b" : "#ffffff");
   const isControlled = controlledOpen !== undefined;
   const [uncontrolled, setUncontrolled] = useState(defaultOpen);
   const open = isControlled ? controlledOpen : uncontrolled;
@@ -147,8 +153,8 @@ export function GooeyPopover({
   }, [open, progress]);
 
   const ctx = useMemo<GooeyPopoverContextValue>(
-    () => ({ open, setOpen, toggle, progress, side, align, gap: sideOffset, panelRadius, gooStrength, color, dismissOnOutsidePress, triggerSize, setTriggerSize, triggerScale }),
-    [open, setOpen, toggle, progress, side, align, sideOffset, panelRadius, gooStrength, color, dismissOnOutsidePress, triggerSize, triggerScale],
+    () => ({ open, setOpen, toggle, progress, side, align, gap: sideOffset, panelRadius, gooStrength, color: resolvedColor, dismissOnOutsidePress, triggerSize, setTriggerSize, triggerScale }),
+    [open, setOpen, toggle, progress, side, align, sideOffset, panelRadius, gooStrength, resolvedColor, dismissOnOutsidePress, triggerSize, triggerScale],
   );
 
   const { width: screenW, height: screenH } = Dimensions.get("window");

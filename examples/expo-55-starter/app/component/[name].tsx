@@ -3547,7 +3547,7 @@ const demos: Record<string, () => React.ReactElement> = {
     return (
       <View className="h-40 items-center justify-center">
         <Text className="mb-3 text-sm text-muted-foreground">Tap "Options" — the trigger blobs into the panel via a Skia goo blend.</Text>
-        <GooeyPopover side="bottom" align="center" color={dark ? "#27272a" : "#f4f1ea"}>
+        <GooeyPopover side="bottom" align="center">
           <GooeyPopoverTrigger>
             <Text className="text-sm font-medium text-primary-foreground">Options</Text>
           </GooeyPopoverTrigger>
