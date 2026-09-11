@@ -10,13 +10,14 @@
   ],
   "registryDependencies": [
     "https://aniui.dev/r/utils.json",
-    "https://aniui.dev/r/spinner.json"
+    "https://aniui.dev/r/spinner.json",
+    "https://aniui.dev/r/theme-provider.json"
   ],
   "files": [
     {
       "path": "components/ui/infinite-list.tsx",
       "type": "registry:ui",
-      "content": "import React from \"react\";\nimport { FlatList, View, ActivityIndicator, useColorScheme } from \"react-native\";\nimport { cn } from \"@/lib/utils\";\n\nexport interface InfiniteListProps<T> extends React.ComponentPropsWithoutRef<typeof FlatList<T>> {\n  className?: string;\n  data: T[];\n  renderItem: ({ item, index }: { item: T; index: number }) => React.ReactElement;\n  keyExtractor: (item: T, index: number) => string;\n  onLoadMore?: () => void;\n  hasMore?: boolean;\n  loading?: boolean;\n  threshold?: number;\n}\n\nexport function InfiniteList<T>({\n  className,\n  data,\n  renderItem,\n  keyExtractor,\n  onLoadMore,\n  hasMore = false,\n  loading = false,\n  threshold = 0.5,\n  ...props\n}: InfiniteListProps<T>) {\n  const dark = useColorScheme() === \"dark\";\n  return (\n    <FlatList\n      className={cn(\"\", className)}\n      data={data}\n      renderItem={renderItem}\n      keyExtractor={keyExtractor}\n      onEndReached={hasMore && !loading ? onLoadMore : undefined}\n      onEndReachedThreshold={threshold}\n      ListFooterComponent={\n        loading ? (\n          <View className=\"py-4 items-center\">\n            <ActivityIndicator size=\"small\" color={dark ? \"#fafafa\" : \"#18181b\"} accessibilityRole=\"progressbar\" />\n          </View>\n        ) : null\n      }\n      {...props}\n    />\n  );\n}\n"
+      "content": "import React from \"react\";\nimport { FlatList, View, ActivityIndicator } from \"react-native\";\nimport { cn } from \"@/lib/utils\";\nimport { useThemeColors } from \"@/components/ui/theme-provider\";\n\nexport interface InfiniteListProps<T> extends React.ComponentPropsWithoutRef<typeof FlatList<T>> {\n  className?: string;\n  data: T[];\n  renderItem: ({ item, index }: { item: T; index: number }) => React.ReactElement;\n  keyExtractor: (item: T, index: number) => string;\n  onLoadMore?: () => void;\n  hasMore?: boolean;\n  loading?: boolean;\n  threshold?: number;\n}\n\nexport function InfiniteList<T>({\n  className,\n  data,\n  renderItem,\n  keyExtractor,\n  onLoadMore,\n  hasMore = false,\n  loading = false,\n  threshold = 0.5,\n  ...props\n}: InfiniteListProps<T>) {\n  const colors = useThemeColors();\n  return (\n    <FlatList\n      className={cn(\"\", className)}\n      data={data}\n      renderItem={renderItem}\n      keyExtractor={keyExtractor}\n      onEndReached={hasMore && !loading ? onLoadMore : undefined}\n      onEndReachedThreshold={threshold}\n      ListFooterComponent={\n        loading ? (\n          <View className=\"py-4 items-center\">\n            <ActivityIndicator size=\"small\" color={colors.foreground} accessibilityRole=\"progressbar\" />\n          </View>\n        ) : null\n      }\n      {...props}\n    />\n  );\n}\n"
     }
   ],
   "docs": "AniUI is React Native. On an existing RNR/NativeWind project, add and use directly — the tokens and aliases already match, no setup needed. On a fresh project, run `npx @aniui/cli init` first to configure NativeWind/Uniwind, theme tokens, and Metro/Babel."

@@ -1,6 +1,7 @@
 import React from "react";
-import { FlatList, View, ActivityIndicator, useColorScheme } from "react-native";
+import { FlatList, View, ActivityIndicator } from "react-native";
 import { cn } from "@/lib/utils";
+import { useThemeColors } from "@/components/ui/theme-provider";
 
 export interface InfiniteListProps<T> extends React.ComponentPropsWithoutRef<typeof FlatList<T>> {
   className?: string;
@@ -24,7 +25,7 @@ export function InfiniteList<T>({
   threshold = 0.5,
   ...props
 }: InfiniteListProps<T>) {
-  const dark = useColorScheme() === "dark";
+  const colors = useThemeColors();
   return (
     <FlatList
       className={cn("", className)}
@@ -36,7 +37,7 @@ export function InfiniteList<T>({
       ListFooterComponent={
         loading ? (
           <View className="py-4 items-center">
-            <ActivityIndicator size="small" color={dark ? "#fafafa" : "#18181b"} accessibilityRole="progressbar" />
+            <ActivityIndicator size="small" color={colors.foreground} accessibilityRole="progressbar" />
           </View>
         ) : null
       }

@@ -1,6 +1,7 @@
 import React from "react";
 import { Text } from "react-native";
 import { render, fireEvent } from "@testing-library/react-native";
+import { SafeAreaProvider } from "react-native-safe-area-context";
 import {
   DropdownMenu,
   DropdownMenuTrigger,
@@ -8,6 +9,18 @@ import {
   DropdownMenuItem,
   DropdownMenuSeparator,
 } from "../ui/dropdown-menu";
+
+// DropdownMenuContent reads safe-area insets via useSafeAreaInsets(), which
+// throws when no SafeAreaProvider is mounted. Provide one with zeroed
+// initial metrics so the hook returns immediately in jest.
+const initialMetrics = {
+  frame: { x: 0, y: 0, width: 0, height: 0 },
+  insets: { top: 0, left: 0, right: 0, bottom: 0 },
+};
+
+const wrapper = ({ children }: { children: React.ReactNode }) => (
+  <SafeAreaProvider initialMetrics={initialMetrics}>{children}</SafeAreaProvider>
+);
 
 describe("DropdownMenu", () => {
   const renderMenu = () =>
@@ -21,7 +34,8 @@ describe("DropdownMenu", () => {
           <DropdownMenuSeparator />
           <DropdownMenuItem destructive>Delete</DropdownMenuItem>
         </DropdownMenuContent>
-      </DropdownMenu>
+      </DropdownMenu>,
+      { wrapper }
     );
 
   it("renders without crashing", () => {
@@ -57,7 +71,8 @@ describe("DropdownMenu", () => {
         <DropdownMenuContent>
           <DropdownMenuItem onPress={onPress}>Action</DropdownMenuItem>
         </DropdownMenuContent>
-      </DropdownMenu>
+      </DropdownMenu>,
+      { wrapper }
     );
     fireEvent.press(getByRole("button"));
     fireEvent.press(getByText("Action"));

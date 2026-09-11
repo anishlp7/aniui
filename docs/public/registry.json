@@ -10,6 +10,12 @@
       "description": "Expandable content sections"
     },
     {
+      "name": "action-rail",
+      "type": "registry:ui",
+      "title": "ActionRail",
+      "description": "Expandable icon toolbar that reveals labeled actions, with its own light/dark palette system"
+    },
+    {
       "name": "action-sheet",
       "type": "registry:ui",
       "title": "ActionSheet",
@@ -34,16 +40,40 @@
       "description": "Animation presets, spring configs, easing, and hooks for Reanimated 4"
     },
     {
+      "name": "animated-header-scrollview",
+      "type": "registry:ui",
+      "title": "AnimatedHeaderScrollView",
+      "description": "iOS-style collapsing large-title header ScrollView with blur backdrop on scroll"
+    },
+    {
+      "name": "animated-input-bar",
+      "type": "registry:ui",
+      "title": "AnimatedInputBar",
+      "description": "Text input with a per-character animated placeholder that cycles through multiple strings"
+    },
+    {
+      "name": "arc-list",
+      "type": "registry:ui",
+      "title": "ArcList",
+      "description": "Items laid out along a curved arc with proximity scale/opacity, snap-to-focus, and a haptic tick on snap"
+    },
+    {
       "name": "area-chart",
       "type": "registry:ui",
       "title": "AreaChart",
-      "description": "SVG area chart with gradient fill and grid"
+      "description": "Skia area chart with entrance draw-on, data morphing, and a drag-to-scrub tooltip"
     },
     {
       "name": "aspect-ratio",
       "type": "registry:ui",
       "title": "AspectRatio",
       "description": "Constrains children to a fixed width/height ratio"
+    },
+    {
+      "name": "autocomplete",
+      "type": "registry:ui",
+      "title": "AutoComplete",
+      "description": "Free-text input with inline filtered suggestions, keyboard-safe dropdown, and async loading state"
     },
     {
       "name": "avatar",
@@ -73,7 +103,19 @@
       "name": "bar-chart",
       "type": "registry:ui",
       "title": "BarChart",
-      "description": "Vertical and horizontal bar chart"
+      "description": "Skia bar chart with staggered grow-in, data morphing, and a drag-to-scrub tooltip"
+    },
+    {
+      "name": "barcode-badge",
+      "type": "registry:ui",
+      "title": "BarcodeBadge",
+      "description": "Width-encoded barcode strip with compound Root/Bars/Label API and palette overrides"
+    },
+    {
+      "name": "book-page",
+      "type": "registry:ui",
+      "title": "BookPage",
+      "description": "Book cover with spine gradient, page-edge texture, and an openAngle-driven hinge"
     },
     {
       "name": "bottom-sheet",
@@ -116,6 +158,36 @@
       "type": "registry:ui",
       "title": "Carousel",
       "description": "Horizontal scrollable carousel with pagination dots"
+    },
+    {
+      "name": "carousel-3d",
+      "type": "registry:ui",
+      "title": "Carousel3D",
+      "description": "3D cylindrical carousel with real perspective-projected faces, pan gestures, and snap physics"
+    },
+    {
+      "name": "carousel-circular",
+      "type": "registry:ui",
+      "title": "CarouselCircular",
+      "description": "Scroll-driven coverflow carousel with per-item lift, tilt, and a blur fade on non-centered items"
+    },
+    {
+      "name": "carousel-parallax",
+      "type": "registry:ui",
+      "title": "CarouselParallax",
+      "description": "Horizontal carousel with real inner-layer parallax translation and a haptic tick on release"
+    },
+    {
+      "name": "carousel-scale",
+      "type": "registry:ui",
+      "title": "CarouselScale",
+      "description": "Center-focused carousel where neighbors zoom up and rotate out, with a haptic tick on release"
+    },
+    {
+      "name": "carousel-tilt",
+      "type": "registry:ui",
+      "title": "CarouselTilt",
+      "description": "Z-axis fan carousel — slides rotate and lift from a bottom pivot, with an optional blur overlay"
     },
     {
       "name": "chart-tooltip",
@@ -178,6 +250,18 @@
       "description": "Long-press context menu with items and separators"
     },
     {
+      "name": "coupon",
+      "type": "registry:ui",
+      "title": "Coupon",
+      "description": "Two-section promotional coupon with a real tear-line, ticket icon, and orientation prop"
+    },
+    {
+      "name": "curved-bottom-tabs",
+      "type": "registry:ui",
+      "title": "CurvedBottomTabs",
+      "description": "Bottom tab bar whose curved notch and floating gradient button slide to track the active tab, with badge support and keyboard auto-hide"
+    },
+    {
       "name": "data-table",
       "type": "registry:ui",
       "title": "DataTable",
@@ -226,10 +310,28 @@
       "description": "Placeholder for empty screens and error states"
     },
     {
+      "name": "event-ticket",
+      "type": "registry:ui",
+      "title": "EventTicket",
+      "description": "Event ticket card with perforated edge, date, venue, and seat"
+    },
+    {
+      "name": "expandable-view",
+      "type": "registry:ui",
+      "title": "ExpandableView",
+      "description": "Generic expand/collapse container with spring-driven width/height/corner-radius morphing and a slot API"
+    },
+    {
       "name": "fab",
       "type": "registry:ui",
       "title": "FAB",
       "description": "Floating action button for primary screen actions"
+    },
+    {
+      "name": "fan-menu",
+      "type": "registry:ui",
+      "title": "FanMenu",
+      "description": "Radial fan menu that staggers labeled pill actions out from a FAB trigger, with tap-outside-to-dismiss backdrop and per-item blur"
     },
     {
       "name": "field",
@@ -244,6 +346,24 @@
       "description": "File upload UI with dashed border, preview, and remove button"
     },
     {
+      "name": "filling-stack",
+      "type": "registry:ui",
+      "title": "FillingStack",
+      "description": "Vertically browsable card stack with fling gestures and a blur \"filling\" transition between cards"
+    },
+    {
+      "name": "flexi-button",
+      "type": "registry:ui",
+      "title": "FlexiButton",
+      "description": "Adaptive-width pill button that springs open to reveal a label, with a dimension-change callback"
+    },
+    {
+      "name": "flip-card",
+      "type": "registry:ui",
+      "title": "FlipCard",
+      "description": "Tap-to-flip card with horizontal/vertical/depth 3D rotation, mid-flip glass blur, and haptic feedback"
+    },
+    {
       "name": "forgot-password",
       "type": "registry:block",
       "title": "ForgotPasswordScreen",
@@ -256,6 +376,18 @@
       "description": "Form context with validation, error handling, and compound components"
     },
     {
+      "name": "gooey-popover",
+      "type": "registry:ui",
+      "title": "GooeyPopover",
+      "description": "Skia gooey popover that morphs its trigger into the content panel"
+    },
+    {
+      "name": "gooey-search-tabs",
+      "type": "registry:ui",
+      "title": "GooeySearchTabs",
+      "description": "Skia gooey pill that morphs between a search bar and a tab switcher"
+    },
+    {
       "name": "gradient",
       "type": "registry:ui",
       "title": "Gradient",
@@ -266,6 +398,12 @@
       "type": "registry:ui",
       "title": "Grid",
       "description": "FlatList-based grid layout with configurable columns and gap"
+    },
+    {
+      "name": "hamburger",
+      "type": "registry:ui",
+      "title": "Hamburger",
+      "description": "Animated hamburger ⇄ close icon morph driven by a single progress value"
     },
     {
       "name": "header",
@@ -349,7 +487,7 @@
       "name": "line-chart",
       "type": "registry:ui",
       "title": "LineChart",
-      "description": "Multi-series line chart with data points"
+      "description": "Skia line chart with draw-on entrance, morph-on-data-change, and a scrubbing crosshair tooltip"
     },
     {
       "name": "list",
@@ -358,10 +496,22 @@
       "description": "Styled list items"
     },
     {
+      "name": "loader",
+      "type": "registry:ui",
+      "title": "Loader",
+      "description": "Animated loading indicator — segmented comet-tail ring or bouncing dots"
+    },
+    {
       "name": "login",
       "type": "registry:block",
       "title": "LoginScreen",
       "description": "Email/password login with social sign-in"
+    },
+    {
+      "name": "marquee",
+      "type": "registry:ui",
+      "title": "Marquee",
+      "description": "Infinite horizontal ticker for any content — reverse direction, tap-to-pause, and hold-to-speed-up"
     },
     {
       "name": "masked-input",
@@ -370,10 +520,34 @@
       "description": "Text input with mask formatting for credit cards, phones, dates"
     },
     {
+      "name": "matched-geometry",
+      "type": "registry:ui",
+      "title": "MatchedGeometry",
+      "description": "SwiftUI-style shared-element layout transition primitive — morphs one tagged view into another's position and size when they swap"
+    },
+    {
       "name": "menubar",
       "type": "registry:ui",
       "title": "Menubar",
       "description": "Horizontal menu bar with dropdown menus: Menubar, MenubarMenu, MenubarItem"
+    },
+    {
+      "name": "mobile-dock",
+      "type": "registry:ui",
+      "title": "MobileDock",
+      "description": "Finger-tracked fisheye dock — drag across icons to magnify the one under your touch, release to tap the nearest one"
+    },
+    {
+      "name": "morph-fab",
+      "type": "registry:ui",
+      "title": "MorphFab",
+      "description": "Skia gooey radial/directional FAB menu with staggered blob-merge spring animation"
+    },
+    {
+      "name": "morphing-tabbar",
+      "type": "registry:ui",
+      "title": "MorphingTabBar",
+      "description": "Segmented tab bar where each tab's own corner radii and spacing morph to split the active tab into a separated pill"
     },
     {
       "name": "notifications",
@@ -412,10 +586,22 @@
       "description": "Phone number input with country code selector"
     },
     {
+      "name": "photo-stack",
+      "type": "registry:ui",
+      "title": "PhotoStack",
+      "description": "Overlapping stacked photos with a press-lift-and-straighten spring, and optional per-photo onPress"
+    },
+    {
       "name": "pie-chart",
       "type": "registry:ui",
       "title": "PieChart",
-      "description": "Pie and donut chart with segments"
+      "description": "Skia pie/donut chart with grow-in sweep, data morphing, and drag-to-select slice push-out"
+    },
+    {
+      "name": "polaroid",
+      "type": "registry:ui",
+      "title": "Polaroid",
+      "description": "Polaroid-style photo frame with a press-lift-and-straighten spring and optional washi-tape decoration"
     },
     {
       "name": "popover",
@@ -454,6 +640,12 @@
       "description": "User profile with avatar, stats, menu items, and log out"
     },
     {
+      "name": "profile-card",
+      "type": "registry:ui",
+      "title": "ProfileCard",
+      "description": "Profile card with a cover image, overlapping avatar, location row, and a press-scale action button"
+    },
+    {
       "name": "progress",
       "type": "registry:ui",
       "title": "Progress",
@@ -472,16 +664,22 @@
       "description": "ChatGPT/Claude-style AI composer — compound: PromptInput, Textarea, Toolbar, Button, Send (stop while streaming)"
     },
     {
+      "name": "qr-code",
+      "type": "registry:ui",
+      "title": "QrCode",
+      "description": "Real, scannable QR code behind an expand/collapse reveal with copy/close actions"
+    },
+    {
       "name": "radar-chart",
       "type": "registry:ui",
       "title": "RadarChart",
-      "description": "Radar/spider chart with polygon grid"
+      "description": "Skia radar/spider chart with staggered grow-in, data morphing, and a drag-to-select axis tooltip"
     },
     {
       "name": "radial-chart",
       "type": "registry:ui",
       "title": "RadialChart",
-      "description": "Circular radial progress chart"
+      "description": "Skia concentric radial progress rings with grow-in, data morphing, and a drag-to-select tooltip"
     },
     {
       "name": "radio-group",
@@ -496,16 +694,34 @@
       "description": "Star rating with interactive and read-only modes"
     },
     {
+      "name": "receipt-card",
+      "type": "registry:ui",
+      "title": "ReceiptCard",
+      "description": "Tilted, torn-edge receipt card with dotted item leaders and a printed barcode"
+    },
+    {
       "name": "refresh-control",
       "type": "registry:ui",
       "title": "RefreshControl",
       "description": "Themed pull-to-refresh control for ScrollView and FlatList"
     },
     {
+      "name": "rolling-counter",
+      "type": "registry:ui",
+      "title": "RollingCounter",
+      "description": "Animated odometer-style rolling number counter with motion-blur, squash/stretch, staggered digits, and correct wrap-around rollover"
+    },
+    {
       "name": "safe-area",
       "type": "registry:ui",
       "title": "SafeArea",
       "description": "Styled SafeAreaView wrapper with theme variants"
+    },
+    {
+      "name": "save-button",
+      "type": "registry:ui",
+      "title": "SaveButton",
+      "description": "Idle → loading → success → done state-machine save button with animated phase transitions"
     },
     {
       "name": "search",
@@ -544,6 +760,12 @@
       "description": "Settings screen with toggles, navigation rows, and danger zone"
     },
     {
+      "name": "shimmer",
+      "type": "registry:ui",
+      "title": "Shimmer",
+      "description": "Content-aware skeleton with sweep/pulse variants, 4 directions, named color presets, and isLoading reveal"
+    },
+    {
       "name": "sidebar",
       "type": "registry:ui",
       "title": "Sidebar",
@@ -574,10 +796,34 @@
       "description": "Draggable slider for numeric values"
     },
     {
+      "name": "social-button",
+      "type": "registry:ui",
+      "title": "SocialButton",
+      "description": "Branded social sign-in button with default Google/Apple/GitHub/X marks, outline/filled/ghost variants, and a press-scale spring"
+    },
+    {
+      "name": "spin-button",
+      "type": "registry:ui",
+      "title": "SpinButton",
+      "description": "Toggle button with a custom SVG arc spinner and crossfading label on press"
+    },
+    {
       "name": "spinner",
       "type": "registry:ui",
       "title": "Spinner",
       "description": "Loading spinner with sizes"
+    },
+    {
+      "name": "split-view",
+      "type": "registry:ui",
+      "title": "SplitView",
+      "description": "Draggable, resizable top/bottom split pane with snap points and spring physics"
+    },
+    {
+      "name": "stacked-chips",
+      "type": "registry:ui",
+      "title": "StackedChips",
+      "description": "Nested, depth-aware expandable chip menu — a trigger reveals further stacked chips"
     },
     {
       "name": "stat-card",
@@ -664,6 +910,12 @@
       "description": "Theme context provider with light/dark/system mode and toggle"
     },
     {
+      "name": "theme-switch",
+      "type": "registry:ui",
+      "title": "ThemeSwitch",
+      "description": "Sun/moon icon-morph theme toggle with an optional full-screen circular wipe transition"
+    },
+    {
       "name": "timeline",
       "type": "registry:ui",
       "title": "Timeline",
@@ -694,16 +946,46 @@
       "description": "Accessible tooltip with positioning"
     },
     {
+      "name": "tray",
+      "type": "registry:ui",
+      "title": "Tray",
+      "description": "Compound bottom-sheet/navigation-tray system with multi-view push/back navigation, draggable detents, and scroll hand-off"
+    },
+    {
       "name": "typing-indicator",
       "type": "registry:ui",
       "title": "TypingIndicator",
       "description": "Animated typing dots for chat interfaces"
     },
     {
+      "name": "unfold-menu",
+      "type": "registry:ui",
+      "title": "UnfoldMenu",
+      "description": "Menu whose trigger unfolds into a full panel, its label morphing into the panel's title as it expands"
+    },
+    {
       "name": "utils",
       "type": "registry:lib",
       "title": "cn utility",
       "description": "Tailwind class-merge helper (clsx + tailwind-merge)."
+    },
+    {
+      "name": "verified-badge",
+      "type": "registry:ui",
+      "title": "VerifiedBadge",
+      "description": "Verified check badge with Name/Handle layout and palette overrides"
+    },
+    {
+      "name": "vertical-flow-carousel",
+      "type": "registry:ui",
+      "title": "VerticalFlowCarousel",
+      "description": "Vertical coverflow — cards scale, tilt, and fade as they scroll away from center, with a blur overlay on unfocused cards"
+    },
+    {
+      "name": "vertical-page-carousel",
+      "type": "registry:ui",
+      "title": "VerticalPageCarousel",
+      "description": "Full-bleed vertical pager — one card fills the screen at a time, neighbors scale/fade out, with a haptic tick on release"
     },
     {
       "name": "waveform",

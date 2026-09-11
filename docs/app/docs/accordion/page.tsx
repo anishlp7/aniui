@@ -1,3 +1,4 @@
+import { getComponentSource } from "@/lib/registry-source";
 import { Heading } from "@/components/heading";
 import { PreviewAccordion, PreviewAccordionItem } from "@/components/preview/accordion";
 import { ComponentPlayground } from "@/components/highlighted-playground";
@@ -11,70 +12,23 @@ const usageCode = `import { Accordion, AccordionItem } from "@/components/ui/acc
 
 export function MyScreen() {
   return (
-    <Accordion defaultValue="item-1">
-      <AccordionItem value="item-1" trigger="Is it accessible?">
-        <Text>Yes. It uses accessibilityRole and accessibilityState.</Text>
+    <Accordion defaultValue="shipping-time">
+      <AccordionItem value="shipping-time" trigger="How long does shipping take?">
+        <Text>Standard orders arrive in 3-5 business days. Express orders arrive in 1-2 business days.</Text>
       </AccordionItem>
-      <AccordionItem value="item-2" trigger="Is it animated?">
-        <Text>Yes. It uses react-native-reanimated for smooth animations.</Text>
+      <AccordionItem value="returns" trigger="Can I return an item?">
+        <Text>Yes — unused items can be returned within 30 days of delivery for a full refund.</Text>
       </AccordionItem>
-      <AccordionItem value="item-3" trigger="Can I customize it?">
-        <Text>Yes. Use className to override any styles.</Text>
+      <AccordionItem value="international" trigger="Do you ship internationally?">
+        <Text>We ship to over 40 countries. International orders may be subject to customs fees.</Text>
+      </AccordionItem>
+      <AccordionItem value="tracking" trigger="How do I track my order?">
+        <Text>You'll get a tracking link by email as soon as your order ships.</Text>
       </AccordionItem>
     </Accordion>
   );
 }`;
-const sourceCode = `import React from "react";
-import { View, Pressable, Text } from "react-native";
-import * as AccordionPrimitive from "@rn-primitives/accordion";
-import Animated, { FadeIn, FadeOut } from "react-native-reanimated";
-import { cn } from "@/lib/utils";
-
-export interface AccordionProps extends React.ComponentPropsWithoutRef<typeof View> {
-  className?: string;
-  defaultValue?: string;
-  children?: React.ReactNode;
-  type?: "single" | "multiple";
-}
-
-export function Accordion({ className, defaultValue, children, type = "single", ...props }: AccordionProps) {
-  return (
-    <AccordionPrimitive.Root
-      type={type}
-      defaultValue={type === "single" ? defaultValue : defaultValue ? [defaultValue] : undefined}
-      asChild
-    >
-      <View className={cn("", className)} {...props}>{children}</View>
-    </AccordionPrimitive.Root>
-  );
-}
-
-export interface AccordionItemProps extends React.ComponentPropsWithoutRef<typeof View> {
-  className?: string;
-  value: string;
-  trigger: string;
-  children?: React.ReactNode;
-}
-
-export function AccordionItem({ value, trigger, className, children, ...props }: AccordionItemProps) {
-  return (
-    <AccordionPrimitive.Item value={value} asChild>
-      <View className={cn("border-b border-border", className)} {...props}>
-        <AccordionPrimitive.Trigger asChild>
-          <Pressable className="flex-row items-center justify-between px-4 py-4 min-h-12" accessible={true} accessibilityRole="button">
-            <Text className="text-base font-medium text-foreground flex-1">{trigger}</Text>
-            <Text className="text-muted-foreground text-lg">+</Text>
-          </Pressable>
-        </AccordionPrimitive.Trigger>
-        <AccordionPrimitive.Content>
-          <Animated.View entering={FadeIn.duration(200)} exiting={FadeOut.duration(150)}>
-            <View className="px-4 pb-4">{children}</View>
-          </Animated.View>
-        </AccordionPrimitive.Content>
-      </View>
-    </AccordionPrimitive.Item>
-  );
-}`;
+const sourceCode = getComponentSource("accordion");
 export default function AccordionPage() {
   return (
     <div className="space-y-10">
@@ -89,15 +43,18 @@ export default function AccordionPage() {
       <PreviewToggle>
         <ComponentPlayground code={usageCode}>
           <div className="w-full max-w-sm">
-            <PreviewAccordion defaultValue="item-1">
-              <PreviewAccordionItem value="item-1" trigger="Is it accessible?">
-                <p className="text-sm text-muted-foreground">Yes. It uses accessibilityRole and accessibilityState.</p>
+            <PreviewAccordion defaultValue="shipping-time">
+              <PreviewAccordionItem value="shipping-time" trigger="How long does shipping take?">
+                <p className="text-sm text-muted-foreground">Standard orders arrive in 3-5 business days. Express orders arrive in 1-2 business days.</p>
               </PreviewAccordionItem>
-              <PreviewAccordionItem value="item-2" trigger="Is it animated?">
-                <p className="text-sm text-muted-foreground">Yes. It uses react-native-reanimated for smooth animations.</p>
+              <PreviewAccordionItem value="returns" trigger="Can I return an item?">
+                <p className="text-sm text-muted-foreground">Yes — unused items can be returned within 30 days of delivery for a full refund.</p>
               </PreviewAccordionItem>
-              <PreviewAccordionItem value="item-3" trigger="Can I customize it?">
-                <p className="text-sm text-muted-foreground">Yes. Use className to override any styles.</p>
+              <PreviewAccordionItem value="international" trigger="Do you ship internationally?">
+                <p className="text-sm text-muted-foreground">We ship to over 40 countries. International orders may be subject to customs fees.</p>
+              </PreviewAccordionItem>
+              <PreviewAccordionItem value="tracking" trigger="How do I track my order?">
+                <p className="text-sm text-muted-foreground">You'll get a tracking link by email as soon as your order ships.</p>
               </PreviewAccordionItem>
             </PreviewAccordion>
           </div>

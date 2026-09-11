@@ -3,8 +3,7 @@
 import React, { useState } from "react";
 
 const mockFiles = [
-  { name: "photo_2024.jpg", size: "2.4 MB", type: "image" },
-  { name: "contract.pdf", size: "847 KB", type: "doc" },
+  { name: "receipt-oct-14.jpg", size: "822 KB", type: "image" },
 ];
 
 export function PreviewFilePickerDemo() {
@@ -23,7 +22,7 @@ export function PreviewFilePickerDemo() {
         <svg className="h-8 w-8 text-muted-foreground mb-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round">
           <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M17 8l-5-5-5 5M12 3v12" />
         </svg>
-        <span className="text-sm text-muted-foreground">{files.length ? "Tap to add more" : "Tap to upload a document"}</span>
+        <span className="text-sm text-muted-foreground">{files.length ? "Tap to add more" : "Tap to attach a photo or PDF"}</span>
       </button>
 
       {/* File list */}

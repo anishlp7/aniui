@@ -1,8 +1,10 @@
+import { getComponentSource } from "@/lib/registry-source";
 import { Heading } from "@/components/heading";
 import { ComponentPlayground } from "@/components/highlighted-playground";
 import { CodeBlock } from "@/components/code-block-server";
 import { PropsTable, ComponentTable } from "@/components/props-table";
 import { AddComponentTabs } from "@/components/package-manager-tabs";
+import { PreviewToggle } from "@/components/preview-toggle";
 import { DialogDemo } from "./_demos";
 
 const usageCode = `import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter } from "@/components/ui/dialog";
@@ -30,58 +32,7 @@ export function MyScreen() {
     </>
   );
 }`;
-const sourceCode = `import React from "react";
-import { View, Pressable, Text, Modal } from "react-native";
-import { cn } from "@/lib/utils";
-
-export interface DialogProps {
-  open: boolean;
-  onOpenChange: (open: boolean) => void;
-  children: React.ReactNode;
-}
-
-export function Dialog({ open, onOpenChange, children }: DialogProps) {
-  return (
-    <Modal visible={open} transparent animationType="fade" onRequestClose={() => onOpenChange(false)}>
-      <View className="flex-1 items-center justify-center bg-black/50">
-        <Pressable className="absolute inset-0" onPress={() => onOpenChange(false)} />
-        {children}
-      </View>
-    </Modal>
-  );
-}
-
-export function DialogContent({ className, children, ...props }: React.ComponentPropsWithoutRef<typeof View> & { className?: string; children?: React.ReactNode }) {
-  return (
-    <View className={cn("mx-6 w-80 rounded-lg bg-card p-6 shadow-xl", className)} accessibilityRole="alert" accessible={true} {...props}>
-      {children}
-    </View>
-  );
-}
-
-export function DialogHeader({ className, ...props }: React.ComponentPropsWithoutRef<typeof View> & { className?: string }) {
-  return <View className={cn("pb-4", className)} {...props} />;
-}
-
-export function DialogTitle({ className, ...props }: React.ComponentPropsWithoutRef<typeof Text> & { className?: string }) {
-  return <Text className={cn("text-lg font-semibold text-card-foreground", className)} {...props} />;
-}
-
-export function DialogDescription({ className, ...props }: React.ComponentPropsWithoutRef<typeof Text> & { className?: string }) {
-  return <Text className={cn("text-sm text-muted-foreground mt-1", className)} {...props} />;
-}
-
-export function DialogFooter({ className, ...props }: React.ComponentPropsWithoutRef<typeof View> & { className?: string }) {
-  return <View className={cn("flex-row justify-end gap-3 pt-4", className)} {...props} />;
-}
-
-export function DialogTrigger({ children }: { children: React.ReactNode }) {
-  return <>{children}</>;
-}
-
-export function DialogClose({ children }: { children: React.ReactNode }) {
-  return <>{children}</>;
-}`;
+const sourceCode = getComponentSource("dialog");
 export default function DialogPage() {
   return (
     <div className="space-y-10">
@@ -93,9 +44,11 @@ export default function DialogPage() {
         </p>
       </div>
       {/* Preview */}
-      <ComponentPlayground code={usageCode}>
-        <DialogDemo />
-      </ComponentPlayground>
+      <PreviewToggle>
+        <ComponentPlayground code={usageCode}>
+          <DialogDemo />
+        </ComponentPlayground>
+      </PreviewToggle>
       {/* Installation */}
       <div className="space-y-4">
         <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Installation</Heading>

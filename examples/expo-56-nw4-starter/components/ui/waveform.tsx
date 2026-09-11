@@ -1,7 +1,9 @@
 import React, { useEffect } from "react";
-import { View, useColorScheme } from "react-native";
+import { View } from "react-native";
 import Animated, { useSharedValue, useAnimatedStyle, withRepeat, withSequence, withTiming, cancelAnimation } from "react-native-reanimated";
+import { useReducedMotion } from "@/components/ui/animate";
 import { cn } from "@/lib/utils";
+import { useThemeColors } from "@/components/ui/theme-provider";
 
 const sizes = { sm: 12, md: 20, lg: 28 } as const;
 
@@ -14,6 +16,7 @@ function Bar({ index, max, active, color, level, dim = 1 }: {
 }) {
   const height = useSharedValue(3);
   const opacity = useSharedValue(dim);
+  const reducedMotion = useReducedMotion();
 
   useEffect(() => {
     // Follows the playhead smoothly (100ms matches typical status-update ticks).
@@ -25,7 +28,7 @@ function Bar({ index, max, active, color, level, dim = 1 }: {
       // Audio-driven: follow the measured amplitude for this bar.
       cancelAnimation(height);
       height.value = withTiming(Math.max(3, max * Math.min(1, Math.max(0, level))), { duration: 100 });
-    } else if (active) {
+    } else if (active && !reducedMotion) {
       const duration = 260 + (index % 5) * 70;
       height.value = withRepeat(
         withSequence(withTiming(max * ambient(index), { duration }), withTiming(max * 0.2, { duration })),
@@ -33,11 +36,12 @@ function Bar({ index, max, active, color, level, dim = 1 }: {
         true
       );
     } else {
+      // Reduced motion (or inactive): a static ambient height, no looping bounce.
       cancelAnimation(height);
       height.value = withTiming(Math.max(3, max * ambient(index)), { duration: 150 });
     }
     return () => cancelAnimation(height);
-  }, [level, active, index, max, height]);
+  }, [level, active, reducedMotion, index, max, height]);
 
   const style = useAnimatedStyle(() => ({ height: height.value, opacity: opacity.value }));
   return <Animated.View style={[style, { backgroundColor: color }]} className="w-0.5 rounded-full" />;
@@ -63,8 +67,8 @@ export interface WaveformProps extends React.ComponentPropsWithoutRef<typeof Vie
 }
 
 export function Waveform({ className, bars = 28, levels, active = true, progress, size = "md", color, style, ...props }: WaveformProps) {
-  const dark = useColorScheme() === "dark";
-  const barColor = color ?? (dark ? "#fafafa" : "#18181b");
+  const colors = useThemeColors();
+  const barColor = color ?? colors.foreground;
   const window = levels?.slice(-bars);
   const pad = window ? bars - window.length : 0;
   // Continuous playhead in bar units — the boundary bar gets an interpolated

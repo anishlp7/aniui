@@ -11,11 +11,12 @@ interface Person {
 }
 
 const sampleData: Person[] = [
-  { name: "Alice Johnson", email: "alice@example.com", role: "Engineer", status: "Active" },
-  { name: "Bob Smith", email: "bob@example.com", role: "Designer", status: "Active" },
-  { name: "Carol Williams", email: "carol@example.com", role: "Manager", status: "Away" },
-  { name: "David Brown", email: "david@example.com", role: "Engineer", status: "Inactive" },
-  { name: "Eva Martinez", email: "eva@example.com", role: "Designer", status: "Active" },
+  { name: "Alice Johnson", email: "alice@acme.com", role: "Admin", status: "Active" },
+  { name: "Bob Smith", email: "bob@acme.com", role: "Editor", status: "Active" },
+  { name: "Charlie Brown", email: "charlie@acme.com", role: "Viewer", status: "Inactive" },
+  { name: "Diana Prince", email: "diana@acme.com", role: "Admin", status: "Active" },
+  { name: "Eve Wilson", email: "eve@acme.com", role: "Editor", status: "Inactive" },
+  { name: "Frank Miller", email: "frank@acme.com", role: "Viewer", status: "Active" },
 ];
 
 type SortKey = keyof Person;

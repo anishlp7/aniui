@@ -2,13 +2,16 @@
 import { useState } from "react";
 import { PreviewSegmentedControl } from "@/components/preview/segmented-control";
 
+const revenueByRange: Record<string, string> = { Day: "$482", Week: "$3,140", Month: "$12,860" };
+
 export function SegmentedControlDemo() {
-  const [view, setView] = useState("List");
+  const [range, setRange] = useState("Week");
   return (
     <div className="w-full max-w-xs space-y-4">
-      <PreviewSegmentedControl options={["List", "Grid", "Map"]} value={view} onValueChange={setView} />
+      <PreviewSegmentedControl options={["Day", "Week", "Month"]} value={range} onValueChange={setRange} />
       <div className="rounded-lg border border-border bg-muted/30 px-4 py-6 text-center">
-        <p className="text-xs text-muted-foreground">Showing <span className="font-medium text-foreground">{view}</span> view</p>
+        <p className="text-2xl font-semibold text-foreground">{revenueByRange[range]}</p>
+        <p className="text-xs text-muted-foreground mt-1">Total revenue this {range.toLowerCase()}</p>
       </div>
     </div>
   );

@@ -18,7 +18,7 @@ describe("registry", () => {
     expect(entry.name).toBeTruthy();
     expect(entry.file).toMatch(/^components\/ui\/.+\.tsx$/);
     expect(entry.description).toBeTruthy();
-    expect([1, 2, 3]).toContain(entry.tier);
+    expect([1, 2, 3, 4]).toContain(entry.tier);
     expect(Array.isArray(entry.dependencies)).toBe(true);
     expect(Array.isArray(entry.registryDependencies)).toBe(true);
   });
@@ -52,6 +52,13 @@ describe("registry", () => {
         (d) => d !== "clsx" && d !== "tailwind-merge" && d !== "class-variance-authority"
       );
       expect(hasExtraDep).toBe(true);
+    }
+  });
+
+  it("tier 4 components include @shopify/react-native-skia when present", () => {
+    const tier4 = names.filter((n) => registry[n].tier === 4);
+    for (const name of tier4) {
+      expect(registry[name].dependencies).toContain("@shopify/react-native-skia");
     }
   });
 

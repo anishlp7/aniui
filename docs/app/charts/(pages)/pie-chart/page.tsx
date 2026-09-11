@@ -1,6 +1,6 @@
 "use client";
 import { PreviewPieChartDefault, PreviewPieChartDonut, PreviewPieChartLabels, PreviewPieChartHalf, PreviewPieChartInteractive, PreviewPieChartNested } from "@/components/preview/pie-chart";
-import { CodeBlock } from "@/components/code-block";
+import { CodeBlock } from "@/components/code-block-server";
 import { PropsTable } from "@/components/props-table";
 
 const installCode = `npx @aniui/cli add pie-chart`;

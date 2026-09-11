@@ -32,9 +32,9 @@ export function PreviewInputGroupButton() {
   return (
     <div className="w-full max-w-sm">
       <div className="flex flex-row items-center rounded-md border border-input bg-background">
-        <input className="flex-1 min-h-12 px-3 text-sm text-foreground bg-transparent outline-none placeholder:text-muted-foreground" placeholder="Search..." />
+        <input className="flex-1 min-h-12 px-3 text-sm text-foreground bg-transparent outline-none placeholder:text-muted-foreground" placeholder="Search products..." />
         <button className="flex items-center justify-center px-3 min-h-12 text-sm text-muted-foreground hover:text-foreground cursor-pointer">
-          Search
+          Go
         </button>
       </div>
     </div>

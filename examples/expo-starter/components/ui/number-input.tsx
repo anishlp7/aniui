@@ -3,6 +3,7 @@ import { View, TextInput, Pressable, useColorScheme } from "react-native";
 import { cva, type VariantProps } from "class-variance-authority";
 import { Minus, Plus } from "lucide-react-native";
 import { cn } from "@/lib/utils";
+import { useThemeColors } from "@/components/ui/theme-provider";
 
 const numberVariants = cva("flex-row items-center rounded-md border", {
   variants: {
@@ -41,8 +42,11 @@ export const NumberInput = React.forwardRef<
   const [text, setText] = useState<string | null>(null);
   const value = controlledValue ?? internal;
   const dark = useColorScheme() === "dark";
-  const caret = dark ? "#fafafa" : "#18181b";
-  const mutedIcon = dark ? "#27272a" : "#f4f4f5";
+  const colors = useThemeColors();
+  const caret = colors.foreground;
+  // Matches `colors.muted` exactly, but that's a background-fill role, not one of
+  // the four text/border roles this migration maps — left hardcoded (see report).
+  const mutedIcon = colors.muted;
 
   const update = useCallback(
     (next: number) => {

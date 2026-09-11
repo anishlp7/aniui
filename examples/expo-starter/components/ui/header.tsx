@@ -2,6 +2,7 @@ import React from "react";
 import { View, Text, Pressable } from "react-native";
 import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
+import { useThemeColors } from "@/components/ui/theme-provider";
 import { ArrowLeft } from "lucide-react-native";
 
 const headerVariants = cva("flex-row items-center min-h-14 px-4", {
@@ -68,7 +69,8 @@ export interface HeaderBackButtonProps extends React.ComponentPropsWithoutRef<ty
   onPress: () => void;
 }
 
-export function HeaderBackButton({ className, label = <ArrowLeft size={24} color="#71717a" />, onPress, ...props }: HeaderBackButtonProps) {
+export function HeaderBackButton({ className, label, onPress, ...props }: HeaderBackButtonProps) {
+  const colors = useThemeColors();
   return (
     <Pressable
       onPress={onPress}
@@ -78,7 +80,9 @@ export function HeaderBackButton({ className, label = <ArrowLeft size={24} color
       className={cn("min-h-12 min-w-12 flex-row items-center justify-center", className)}
       {...props}
     >
-      {typeof label === "string" || typeof label === "number" ? (
+      {label === undefined ? (
+        <ArrowLeft size={24} color={colors.mutedForeground} />
+      ) : typeof label === "string" || typeof label === "number" ? (
         <Text className="text-primary text-lg">{label}</Text>
       ) : (
         label

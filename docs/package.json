@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "node scripts/generate-showcase-preview.mjs && next build",
+    "generate:previews": "node scripts/generate-showcase-preview.mjs",
     "start": "next start",
     "lint": "eslint"
   },
@@ -25,7 +26,6 @@
     "recharts": "^2.15.0",
     "rehype-pretty-code": "^0.14.3",
     "shiki": "^4.0.2",
-    "sugar-high": "^1.1.0",
     "tailwind-merge": "^3.5.0"
   },
   "devDependencies": {

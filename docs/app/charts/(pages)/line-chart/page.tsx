@@ -1,6 +1,6 @@
 "use client";
 import { PreviewLineChartDefault, PreviewLineChartMultiSeries, PreviewLineChartCurved, PreviewLineChartDotted, PreviewLineChartInteractive, PreviewLineChartLegend } from "@/components/preview/line-chart";
-import { CodeBlock } from "@/components/code-block";
+import { CodeBlock } from "@/components/code-block-server";
 import { PropsTable } from "@/components/props-table";
 
 const installCode = `npx @aniui/cli add line-chart`;

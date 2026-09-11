@@ -1,3 +1,4 @@
+import { getComponentSource } from "@/lib/registry-source";
 import { Heading } from "@/components/heading";
 import { PreviewTabsDemo, PreviewTabsLine, PreviewTabsVertical, PreviewTabsDisabled, PreviewTabsIcons, PreviewTabsSizes, PreviewTabsRTL } from "@/components/preview/tabs";
 import { ComponentPlayground } from "@/components/highlighted-playground";
@@ -10,27 +11,31 @@ const usageCode = `import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/c
 
 export function MyScreen() {
   return (
-    <Tabs defaultValue="account">
+    <Tabs defaultValue="overview" size="sm">
       <TabsList>
-        <TabsTrigger value="account">Account</TabsTrigger>
-        <TabsTrigger value="password">Password</TabsTrigger>
+        <TabsTrigger value="overview">Overview</TabsTrigger>
+        <TabsTrigger value="reviews">Reviews</TabsTrigger>
+        <TabsTrigger value="specs">Specs</TabsTrigger>
       </TabsList>
-      <TabsContent value="account">
-        <Text>Account settings here.</Text>
+      <TabsContent value="overview">
+        <Text>Noise-cancelling over-ear headphones with 30-hour battery life.</Text>
       </TabsContent>
-      <TabsContent value="password">
-        <Text>Password settings here.</Text>
+      <TabsContent value="reviews">
+        <Text>4.0 average from 128 reviews</Text>
+      </TabsContent>
+      <TabsContent value="specs">
+        <Text>Weight: 250g · Battery: 30 hours · Bluetooth: 5.3</Text>
       </TabsContent>
     </Tabs>
   );
 }`;
-const lineCode = `<Tabs defaultValue="overview" variant="line">
+const lineCode = `<Tabs defaultValue="posts" variant="line">
   <TabsList>
-    <TabsTrigger value="overview">Overview</TabsTrigger>
-    <TabsTrigger value="analytics">Analytics</TabsTrigger>
-    <TabsTrigger value="reports">Reports</TabsTrigger>
+    <TabsTrigger value="posts">Posts</TabsTrigger>
+    <TabsTrigger value="about">About</TabsTrigger>
+    <TabsTrigger value="photos">Photos</TabsTrigger>
   </TabsList>
-  <TabsContent value="overview">...</TabsContent>
+  <TabsContent value="posts">...</TabsContent>
 </Tabs>`;
 const verticalCode = `<Tabs defaultValue="general" orientation="vertical" variant="line">
   <TabsList>
@@ -84,36 +89,7 @@ const rtlCode = `import { DirectionProvider } from "@/components/ui/direction-pr
     <TabsContent value="home">...</TabsContent>
   </Tabs>
 </DirectionProvider>`;
-const sourceCode = `import React, { createContext, useContext, useState } from "react";
-import { View, Pressable, Text } from "react-native";
-import { cva } from "class-variance-authority";
-import { cn } from "@/lib/utils";
-
-type TabsVariant = "filled" | "line";
-type TabsSize = "sm" | "md" | "lg";
-type TabsOrientation = "horizontal" | "vertical";
-
-const TabsCtx = createContext<{
-  value: string; onValueChange: (v: string) => void;
-  variant: TabsVariant; size: TabsSize; orientation: TabsOrientation;
-}>({ value: "", onValueChange: () => {}, variant: "filled", size: "md", orientation: "horizontal" });
-
-export interface TabsProps extends React.ComponentPropsWithoutRef<typeof View> {
-  className?: string; defaultValue: string;
-  variant?: TabsVariant; size?: TabsSize; orientation?: TabsOrientation;
-  children?: React.ReactNode;
-}
-
-export function Tabs({ defaultValue, variant = "filled", size = "md", orientation = "horizontal", className, children, ...props }: TabsProps) {
-  const [value, setValue] = useState(defaultValue);
-  return (
-    <TabsCtx.Provider value={{ value, onValueChange: setValue, variant, size, orientation }}>
-      <View className={cn(orientation === "vertical" && "flex-row", className)} {...props}>{children}</View>
-    </TabsCtx.Provider>
-  );
-}
-
-// ... TabsList, TabsTrigger, TabsContent (see source)`;
+const sourceCode = getComponentSource("tabs");
 export default function TabsPage() {
   return (
     <div className="space-y-10">

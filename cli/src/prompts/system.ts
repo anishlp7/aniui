@@ -6,7 +6,7 @@ import { getPackageRoot } from "../utils/file-ops";
 function buildComponentCatalog(): string {
   const lines: string[] = ["## Available AniUI Components\n"];
 
-  const tiers: Record<number, string[]> = { 1: [], 2: [], 3: [] };
+  const tiers: Record<number, string[]> = { 1: [], 2: [], 3: [], 4: [] };
 
   for (const key of getComponentNames()) {
     const entry = registry[key];
@@ -22,6 +22,8 @@ function buildComponentCatalog(): string {
   lines.push(...tiers[2], "");
   lines.push("### Tier 3 (needs extra native packages)");
   lines.push(...tiers[3], "");
+  lines.push("### Tier 4 (needs @shopify/react-native-skia — opt-in GPU effects)");
+  lines.push(...tiers[4], "");
 
   return lines.join("\n");
 }

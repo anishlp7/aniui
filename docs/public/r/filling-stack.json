@@ -1,0 +1,25 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "filling-stack",
+  "type": "registry:ui",
+  "title": "FillingStack",
+  "description": "Vertically browsable card stack with fling gestures and a blur \"filling\" transition between cards",
+  "dependencies": [
+    "react-native-reanimated",
+    "react-native-gesture-handler",
+    "expo-blur",
+    "clsx",
+    "tailwind-merge"
+  ],
+  "registryDependencies": [
+    "https://aniui.dev/r/utils.json"
+  ],
+  "files": [
+    {
+      "path": "components/ui/filling-stack.tsx",
+      "type": "registry:ui",
+      "content": "import React, { useState } from \"react\";\nimport { View, useColorScheme } from \"react-native\";\nimport { Directions, Gesture, GestureDetector } from \"react-native-gesture-handler\";\nimport Animated, {\n  Extrapolation,\n  interpolate,\n  runOnJS,\n  useAnimatedProps,\n  useAnimatedStyle,\n  useSharedValue,\n  withSpring,\n  type SharedValue,\n} from \"react-native-reanimated\";\nimport { BlurView, type BlurViewProps } from \"expo-blur\";\nimport { cn } from \"@/lib/utils\";\n\nexport interface FillingStackProps<T> extends React.ComponentPropsWithoutRef<typeof View> {\n  className?: string;\n  data: T[];\n  renderItem: (item: T, index: number) => React.ReactNode;\n  /** How many cards peek behind the active one. */\n  visibleCount?: number;\n  cardHeight?: number;\n  onIndexChange?: (index: number) => void;\n}\n\nconst SPRING = { damping: 18, stiffness: 140, mass: 0.5 };\nconst STACK_OFFSET = 14;\nconst STACK_SCALE_STEP = 0.04;\nconst AnimatedBlurView = Animated.createAnimatedComponent(BlurView);\n\nfunction FillingCard({\n  position,\n  total,\n  visibleCount,\n  cardHeight,\n  progress,\n  dark,\n  children,\n}: {\n  position: number;\n  total: number;\n  visibleCount: number;\n  cardHeight: number;\n  progress: SharedValue<number>;\n  dark: boolean;\n  children: React.ReactNode;\n}) {\n  const back = Math.max(visibleCount - 1, 2);\n\n  const cardStyle = useAnimatedStyle(() => {\n    const depth = position - progress.value;\n    const translateY = interpolate(depth, [-1, 0, 1, back], [-cardHeight * 1.25, 0, 0, -STACK_OFFSET * (back - 1)], Extrapolation.CLAMP);\n    const scale = interpolate(depth, [-1, 0, 1, back], [1.06, 1, 1, 1 - STACK_SCALE_STEP * (back - 1)], Extrapolation.CLAMP);\n    const opacity = interpolate(depth, [-1, -0.35, 0, back, back + 0.65], [0, 1, 1, 1, 0], Extrapolation.CLAMP);\n    return { transform: [{ translateY }, { scale }], opacity, zIndex: total - position };\n  });\n\n  const blurProps = useAnimatedProps<BlurViewProps>(() => {\n    const depth = position - progress.value;\n    return { intensity: interpolate(depth, [-1, 0, 1], [30, 0, 30], Extrapolation.CLAMP) };\n  });\n\n  return (\n    <Animated.View style={[{ position: \"absolute\", width: \"100%\", height: cardHeight }, cardStyle]}>\n      <View className=\"flex-1 overflow-hidden rounded-2xl\">\n        {children}\n        <AnimatedBlurView pointerEvents=\"none\" style={{ position: \"absolute\", inset: 0 }} tint={dark ? \"dark\" : \"light\"} animatedProps={blurProps} />\n      </View>\n    </Animated.View>\n  );\n}\n\n/** A vertically browsable card stack — fling up/down to cycle, with a blur \"fill\" between depths. */\nexport function FillingStack<T>({\n  className, data, renderItem, visibleCount = 3, cardHeight = 260, onIndexChange, ...props\n}: FillingStackProps<T>) {\n  const dark = useColorScheme() === \"dark\";\n  const progress = useSharedValue(0);\n  const [index, setIndex] = useState(0);\n\n  const go = (dir: 1 | -1) => {\n    setIndex((current) => {\n      const next = current + dir;\n      if (next < 0 || next >= data.length) return current;\n      progress.value = withSpring(next, SPRING);\n      onIndexChange?.(next);\n      return next;\n    });\n  };\n\n  const fling = Gesture.Race(\n    Gesture.Fling().direction(Directions.UP).onStart(() => runOnJS(go)(1)),\n    Gesture.Fling().direction(Directions.DOWN).onStart(() => runOnJS(go)(-1))\n  );\n\n  return (\n    <GestureDetector gesture={fling}>\n      <View\n        className={cn(\"items-center justify-center\", className)}\n        style={{ height: cardHeight }}\n        accessible={true}\n        accessibilityRole=\"adjustable\"\n        accessibilityLabel={`Card ${index + 1} of ${data.length}`}\n        {...props}\n      >\n        {data.map((item, i) => (\n          <FillingCard key={i} position={i} total={data.length} visibleCount={visibleCount} cardHeight={cardHeight} progress={progress} dark={dark}>\n            {renderItem(item, i)}\n          </FillingCard>\n        ))}\n      </View>\n    </GestureDetector>\n  );\n}\n"
+    }
+  ],
+  "docs": "AniUI is React Native. On an existing RNR/NativeWind project, add and use directly — the tokens and aliases already match, no setup needed. On a fresh project, run `npx @aniui/cli init` first to configure NativeWind/Uniwind, theme tokens, and Metro/Babel."
+}

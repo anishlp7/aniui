@@ -2,10 +2,10 @@
 
 import React, { useState } from "react";
 
-const options = ["React Native", "Flutter", "SwiftUI", "Kotlin Multiplatform", "Xamarin"];
+const options = ["Ava Chen", "Liam Brooks", "Sofia Reyes", "Noah Patel"];
 
 export function PreviewComboboxDemo() {
-  const [selected, setSelected] = useState("React Native");
+  const [selected, setSelected] = useState("Ava Chen");
   const [open, setOpen] = useState(false);
   const [search, setSearch] = useState("");
   const filtered = options.filter((o) => o.toLowerCase().includes(search.toLowerCase()));
@@ -19,7 +19,7 @@ export function PreviewComboboxDemo() {
       {open && (
         <div className="rounded-md border border-input bg-card shadow-md overflow-hidden">
           <div className="px-3 py-2 border-b border-border">
-            <input className="w-full text-xs text-foreground bg-transparent outline-none placeholder:text-muted-foreground" placeholder="Search frameworks..." value={search} onChange={(e) => setSearch(e.target.value)} autoFocus />
+            <input className="w-full text-xs text-foreground bg-transparent outline-none placeholder:text-muted-foreground" placeholder="Search teammates..." value={search} onChange={(e) => setSearch(e.target.value)} autoFocus />
           </div>
           {filtered.length === 0 && <div className="px-4 py-2.5 text-sm text-muted-foreground">No results</div>}
           {filtered.map((o) => (

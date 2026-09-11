@@ -7,18 +7,23 @@ import Animated, {
   withSequence,
   withTiming,
   withDelay,
+  cancelAnimation,
 } from "react-native-reanimated";
+import { useReducedMotion } from "@/components/ui/animate";
 import { cn } from "@/lib/utils";
 
 function Dot({ delay }: { delay: number }) {
   const translateY = useSharedValue(0);
+  const reducedMotion = useReducedMotion();
 
   useEffect(() => {
+    if (reducedMotion) return;
     translateY.value = withDelay(
       delay,
       withRepeat(withSequence(withTiming(-4, { duration: 300 }), withTiming(0, { duration: 300 })), -1)
     );
-  }, [delay, translateY]);
+    return () => cancelAnimation(translateY);
+  }, [delay, translateY, reducedMotion]);
 
   const style = useAnimatedStyle(() => ({ transform: [{ translateY: translateY.value }] }));
 

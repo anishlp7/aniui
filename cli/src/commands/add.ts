@@ -2,11 +2,13 @@ import path from "path";
 import fs from "fs-extra";
 import { registry, resolveRegistryDeps, getComponentNames } from "../registry";
 import { copyComponent } from "../utils/file-ops";
-import { detectPackageManager, getInstallCommand, getDlxCommand } from "../utils/detect-project";
+import { detectProject, getNativeInstallCommand, getDlxCommand } from "../utils/detect-project";
 import { findLayoutFile, injectImport, injectJsxBeforeClose } from "../utils/inject-layout";
 import { hashFile } from "../utils/hash";
 import { logger } from "../utils/logger";
 import { getCliPackage } from "../utils/pkg";
+import { patchThemeColorsBlock } from "../utils/theme-colors-block";
+import type { PresetName } from "../theme-presets";
 
 const pkg = getCliPackage();
 
@@ -37,9 +39,9 @@ export async function addCommand(names: string[]): Promise<void> {
   const cwd = process.cwd();
 
   if (names.length === 0) {
-    const pmHint = await detectPackageManager(cwd);
+    const projectHint = await detectProject(cwd);
     logger.error("No component names provided.");
-    logger.info(`Usage: ${getDlxCommand(pmHint, "aniui add button card text")}`);
+    logger.info(`Usage: ${getDlxCommand(projectHint.packageManager, "aniui add button card text")}`);
     logger.break();
     logger.info("Available components:");
     const allNames = getComponentNames();
@@ -50,7 +52,9 @@ export async function addCommand(names: string[]): Promise<void> {
     process.exit(1);
   }
 
-  const pm = await detectPackageManager(cwd);
+  const project = await detectProject(cwd);
+  const pm = project.packageManager;
+  const isExpo = project.type === "expo";
 
   // Validate component names
   const invalid = names.filter((n) => !registry[n]);
@@ -96,6 +100,21 @@ export async function addCommand(names: string[]): Promise<void> {
       logger.error(`Failed to copy ${name}: ${err instanceof Error ? err.message : String(err)}`);
       continue;
     }
+
+    if (name === "theme-provider") {
+      // theme-provider.tsx ships with the "default" preset's THEME_COLORS baked
+      // in — if this project already picked a different preset (recorded by
+      // `aniui theme`/`aniui init`), sync it here too, whether the user asked
+      // for theme-provider directly or it just came along as another
+      // component's registryDependency.
+      const presetName = ((config?.theme as PresetName) || "default");
+      const content = await fs.readFile(destFile, "utf-8");
+      const patched = patchThemeColorsBlock(content, presetName);
+      if (patched !== content) {
+        await fs.writeFile(destFile, patched, "utf-8");
+      }
+    }
+
     created.push(name);
 
     for (const dep of entry.dependencies) {
@@ -156,7 +175,7 @@ export async function addCommand(names: string[]): Promise<void> {
   if (missingDeps.length > 0) {
     logger.break();
     logger.title("Install required dependencies:");
-    logger.info(`  ${getInstallCommand(pm, missingDeps)}`);
+    logger.info(`  ${getNativeInstallCommand(pm, isExpo, missingDeps)}`);
   }
 
   // Show tier warnings
@@ -166,19 +185,16 @@ export async function addCommand(names: string[]): Promise<void> {
   if (tier2Components.length > 0 && !allDeps["react-native-reanimated"]) {
     logger.break();
     logger.warn("Tier 2 components require react-native-reanimated:");
-    logger.info(`  ${getInstallCommand(pm, ["react-native-reanimated"])}`);
+    logger.info(`  ${getNativeInstallCommand(pm, isExpo, ["react-native-reanimated"])}`);
   }
 
   if (tier3Components.length > 0) {
     const needsGorhom = tier3Components.some((n) =>
       registry[n].dependencies.includes("@gorhom/bottom-sheet")
     );
-    const needsDatePicker = tier3Components.some((n) =>
-      registry[n].dependencies.includes("@react-native-community/datetimepicker")
-    );
 
     if (needsGorhom && !allDeps["@gorhom/bottom-sheet"]) {
-      logger.info(`  ${getInstallCommand(pm, ["@gorhom/bottom-sheet", "react-native-gesture-handler"])}`);
+      logger.info(`  ${getNativeInstallCommand(pm, isExpo, ["@gorhom/bottom-sheet", "react-native-gesture-handler"])}`);
     }
     if (needsGorhom) {
       logger.break();
@@ -192,10 +208,6 @@ export async function addCommand(names: string[]): Promise<void> {
       logger.info("    </BottomSheetModalProvider>");
       logger.info("  </GestureHandlerRootView>");
     }
-    if (needsDatePicker && !allDeps["@react-native-community/datetimepicker"]) {
-      logger.info(`  ${getInstallCommand(pm, ["@react-native-community/datetimepicker"])}`);
-    }
-
     // Auto-inject PortalHost for portal-based components
     const needsPortal = tier3Components.some((n) =>
       registry[n].dependencies.includes("@rn-primitives/portal")
@@ -235,6 +247,14 @@ export async function addCommand(names: string[]): Promise<void> {
         logger.info("  }");
       }
     }
+  }
+
+  const tier4Components = allNames.filter((n) => registry[n].tier === 4);
+  if (tier4Components.length > 0 && !allDeps["@shopify/react-native-skia"]) {
+    logger.break();
+    logger.warn("Tier 4 components require @shopify/react-native-skia (GPU effects):");
+    logger.info(`  ${getNativeInstallCommand(pm, isExpo, ["@shopify/react-native-skia"])}`);
+    logger.info("  Expo: npx expo install @shopify/react-native-skia");
   }
 
   // Show import example

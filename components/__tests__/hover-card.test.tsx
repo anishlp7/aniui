@@ -1,7 +1,20 @@
 import React from "react";
 import { Text, View } from "react-native";
 import { render } from "@testing-library/react-native";
+import { SafeAreaProvider } from "react-native-safe-area-context";
 import { HoverCard, HoverCardTrigger, HoverCardContent } from "../ui/hover-card";
+
+// HoverCardContent reads safe-area insets via useSafeAreaInsets(), which
+// throws when no SafeAreaProvider is mounted. Provide one with zeroed
+// initial metrics so the hook returns immediately in jest.
+const initialMetrics = {
+  frame: { x: 0, y: 0, width: 0, height: 0 },
+  insets: { top: 0, left: 0, right: 0, bottom: 0 },
+};
+
+const wrapper = ({ children }: { children: React.ReactNode }) => (
+  <SafeAreaProvider initialMetrics={initialMetrics}>{children}</SafeAreaProvider>
+);
 
 describe("HoverCard", () => {
   it("renders without crashing", () => {
@@ -11,7 +24,8 @@ describe("HoverCard", () => {
           <Text>Hover me</Text>
         </HoverCardTrigger>
         <HoverCardContent>Card content</HoverCardContent>
-      </HoverCard>
+      </HoverCard>,
+      { wrapper }
     );
     expect(toJSON()).toBeTruthy();
   });
@@ -23,7 +37,8 @@ describe("HoverCard", () => {
           <Text>Target</Text>
         </HoverCardTrigger>
         <HoverCardContent>Details</HoverCardContent>
-      </HoverCard>
+      </HoverCard>,
+      { wrapper }
     );
     expect(getByText("Target")).toBeTruthy();
   });
@@ -37,7 +52,8 @@ describe("HoverCard", () => {
         <HoverCardContent>
           <Text>Hover card text</Text>
         </HoverCardContent>
-      </HoverCard>
+      </HoverCard>,
+      { wrapper }
     );
     // With the passthrough mock, content is always in the tree;
     // real primitive controls visibility.
@@ -51,7 +67,8 @@ describe("HoverCard", () => {
           <Text>Target</Text>
         </HoverCardTrigger>
         <HoverCardContent>Details</HoverCardContent>
-      </HoverCard>
+      </HoverCard>,
+      { wrapper }
     );
     expect(getByRole("button")).toBeTruthy();
   });

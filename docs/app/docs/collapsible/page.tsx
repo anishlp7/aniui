@@ -1,3 +1,4 @@
+import { getComponentSource } from "@/lib/registry-source";
 import { Heading } from "@/components/heading";
 import { PreviewCollapsible, PreviewCollapsibleTrigger, PreviewCollapsibleContent } from "@/components/preview/collapsible";
 import { ComponentPlayground } from "@/components/highlighted-playground";
@@ -10,13 +11,16 @@ const installCode = `npx @aniui/cli add collapsible`;
 const usageCode = `import { Collapsible, CollapsibleTrigger, CollapsibleContent } from "@/components/ui/collapsible";
 
 export function MyScreen() {
+  const [open, setOpen] = useState(false);
   return (
-    <Collapsible>
+    <Collapsible open={open} onOpenChange={setOpen}>
       <CollapsibleTrigger>
-        <Text>Toggle content</Text>
+        <Text>{open ? "Hide" : "Show"} price breakdown</Text>
       </CollapsibleTrigger>
       <CollapsibleContent>
-        <Text>This content can be shown or hidden.</Text>
+        <Text>Subtotal: $76.00</Text>
+        <Text>Shipping: $4.50</Text>
+        <Text>Tax: $4.00</Text>
       </CollapsibleContent>
     </Collapsible>
   );
@@ -30,69 +34,7 @@ const controlledCode = `const [open, setOpen] = useState(false);
     <Text>Controlled collapsible content.</Text>
   </CollapsibleContent>
 </Collapsible>`;
-const sourceCode = `import React, { createContext, useContext, useState } from "react";
-import { View, Pressable } from "react-native";
-import Animated, { FadeIn, FadeOut } from "react-native-reanimated";
-import { cn } from "@/lib/utils";
-
-const CollapsibleContext = createContext<{ isOpen: boolean; toggle: () => void }>({
-  isOpen: false,
-  toggle: () => {},
-});
-export interface CollapsibleProps extends React.ComponentPropsWithoutRef<typeof View> {
-  className?: string;
-  open?: boolean;
-  onOpenChange?: (open: boolean) => void;
-  children?: React.ReactNode;
-}
-export function Collapsible({ open: controlledOpen, onOpenChange, className, children, ...props }: CollapsibleProps) {
-  const [uncontrolledOpen, setUncontrolledOpen] = useState(false);
-  const isOpen = controlledOpen ?? uncontrolledOpen;
-  const toggle = () => {
-    const next = !isOpen;
-    setUncontrolledOpen(next);
-    onOpenChange?.(next);
-  };
-  return (
-    <CollapsibleContext.Provider value={{ isOpen, toggle }}>
-      <View className={cn("", className)} {...props}>{children}</View>
-    </CollapsibleContext.Provider>
-  );
-}
-export interface CollapsibleTriggerProps extends React.ComponentPropsWithoutRef<typeof Pressable> {
-  className?: string;
-  children?: React.ReactNode;
-}
-export function CollapsibleTrigger({ className, children, ...props }: CollapsibleTriggerProps) {
-  const { isOpen, toggle } = useContext(CollapsibleContext);
-  return (
-    <Pressable
-      className={cn("min-h-12 min-w-12", className)}
-      onPress={toggle}
-      accessible={true}
-      accessibilityRole="button"
-      accessibilityState={{ expanded: isOpen }}
-      {...props}
-    >
-      <View pointerEvents="none">
-        {children}
-      </View>
-    </Pressable>
-  );
-}
-export interface CollapsibleContentProps extends React.ComponentPropsWithoutRef<typeof View> {
-  className?: string;
-  children?: React.ReactNode;
-}
-export function CollapsibleContent({ className, children, ...props }: CollapsibleContentProps) {
-  const { isOpen } = useContext(CollapsibleContext);
-  if (!isOpen) return null;
-  return (
-    <Animated.View entering={FadeIn.duration(200)} exiting={FadeOut.duration(150)}>
-      <View className={cn("", className)} {...props}>{children}</View>
-    </Animated.View>
-  );
-}`;
+const sourceCode = getComponentSource("collapsible");
 export default function CollapsiblePage() {
   return (
     <div className="space-y-10">
@@ -109,10 +51,14 @@ export default function CollapsiblePage() {
           <div className="w-full max-w-sm">
             <PreviewCollapsible>
               <PreviewCollapsibleTrigger>
-                <span className="text-sm font-medium text-foreground">Toggle content</span>
+                <span className="text-sm font-medium text-foreground">Show price breakdown</span>
               </PreviewCollapsibleTrigger>
               <PreviewCollapsibleContent>
-                <p className="text-sm text-muted-foreground pt-2">This content can be shown or hidden.</p>
+                <div className="space-y-1 pt-2">
+                  <p className="flex justify-between text-sm text-muted-foreground"><span>Subtotal</span><span>$76.00</span></p>
+                  <p className="flex justify-between text-sm text-muted-foreground"><span>Shipping</span><span>$4.50</span></p>
+                  <p className="flex justify-between text-sm text-muted-foreground"><span>Tax</span><span>$4.00</span></p>
+                </div>
               </PreviewCollapsibleContent>
             </PreviewCollapsible>
           </div>

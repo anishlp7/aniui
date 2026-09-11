@@ -1,9 +1,10 @@
 import React, { useCallback, useEffect } from "react";
-import { View, useColorScheme } from "react-native";
+import { View } from "react-native";
 import { Gesture, GestureDetector } from "react-native-gesture-handler";
 import Animated, { useSharedValue, useAnimatedStyle, runOnJS } from "react-native-reanimated";
 import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
+import { useThemeColors } from "@/components/ui/theme-provider";
 
 const sliderVariants = cva("w-full justify-center", {
   variants: {
@@ -38,7 +39,7 @@ export function Slider({
   const pct = useSharedValue(max > min ? ((value - min) / (max - min)) * 100 : 0);
   const isDragging = useSharedValue(false);
   const thumbSize = size === "lg" ? 24 : size === "sm" ? 16 : 20;
-  const dark = useColorScheme() === "dark";
+  const colors = useThemeColors();
 
   useEffect(() => {
     if (!isDragging.value) {
@@ -65,7 +66,13 @@ export function Slider({
     .onFinalize(() => { isDragging.value = false; })
     .minDistance(0);
 
-  const fillStyle = useAnimatedStyle(() => ({ width: `${pct.value}%` }));
+  // transform: scaleX instead of width — the fill's box is always full-width,
+  // only its visual scale changes, so this never triggers a native layout
+  // pass the way animating `width` on every drag frame would.
+  const fillStyle = useAnimatedStyle(() => ({
+    transform: [{ scaleX: pct.value / 100 }],
+    transformOrigin: "left",
+  }));
 
   const thumbStyle = useAnimatedStyle(() => ({
     position: "absolute" as const,
@@ -75,8 +82,8 @@ export function Slider({
     height: thumbSize,
     borderRadius: thumbSize / 2,
     borderWidth: 2,
-    borderColor: dark ? "#fafafa" : "#18181b",
-    backgroundColor: dark ? "#18181b" : "#ffffff",
+    borderColor: colors.foreground,
+    backgroundColor: colors.background,
   }));
 
   return (
@@ -90,7 +97,7 @@ export function Slider({
         {...props}
       >
         <View className="h-1.5 w-full rounded-full bg-secondary overflow-hidden">
-          <Animated.View className="h-full rounded-full bg-primary" style={fillStyle} />
+          <Animated.View className="h-full w-full rounded-full bg-primary" style={fillStyle} />
         </View>
         <Animated.View style={thumbStyle} />
       </View>

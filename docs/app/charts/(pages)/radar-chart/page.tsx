@@ -1,6 +1,6 @@
 "use client";
 import { PreviewRadarChartDefault, PreviewRadarChartMultiple, PreviewRadarChartFilled, PreviewRadarChartDots, PreviewRadarChartGrid, PreviewRadarChartLegend } from "@/components/preview/radar-chart";
-import { CodeBlock } from "@/components/code-block";
+import { CodeBlock } from "@/components/code-block-server";
 import { PropsTable } from "@/components/props-table";
 
 const installCode = `npx @aniui/cli add radar-chart`;

@@ -2,18 +2,23 @@
 
 import React from "react";
 
+const images = [
+  { seed: "gallery-front", alt: "Front view" },
+  { seed: "gallery-side", alt: "Side view" },
+  { seed: "gallery-detail", alt: "Stitching detail" },
+];
+
 export function PreviewImageGalleryDemo() {
   return (
     <div className="w-full max-w-sm">
       <div className="flex gap-2">
-        {[1, 2, 3].map((i) => (
-          <div key={i} className="flex-1 aspect-[4/3] rounded-lg bg-muted flex items-center justify-center">
-            <svg className="h-8 w-8 text-muted-foreground/40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-              <rect x="3" y="3" width="18" height="18" rx="2" />
-              <circle cx="8.5" cy="8.5" r="1.5" />
-              <path d="M21 15l-5-5L5 21" />
-            </svg>
-          </div>
+        {images.map((img, i) => (
+          <img
+            key={i}
+            src={`https://picsum.photos/seed/${img.seed}/400/300`}
+            alt={img.alt}
+            className="flex-1 aspect-[4/3] rounded-lg object-cover"
+          />
         ))}
       </div>
       <div className="flex justify-center gap-1.5 mt-3">

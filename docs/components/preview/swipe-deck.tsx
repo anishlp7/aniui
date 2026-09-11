@@ -6,9 +6,9 @@ import { cn } from "@/lib/utils";
 type Profile = { name: string; age: number; bio: string; tint: string };
 
 const PROFILES: Profile[] = [
-  { name: "Maya", age: 27, bio: "Coffee, climbing, code.", tint: "from-rose-500/25" },
-  { name: "Leo", age: 31, bio: "Street photography and ramen.", tint: "from-sky-500/25" },
-  { name: "Ava", age: 24, bio: "Trail runner. Dog person.", tint: "from-emerald-500/25" },
+  { name: "Aria", age: 27, bio: "Product designer · 3 mi away", tint: "from-rose-500/25" },
+  { name: "Jules", age: 31, bio: "Backend engineer · 5 mi away", tint: "from-sky-500/25" },
+  { name: "Nova", age: 24, bio: "Mobile developer · 1 mi away", tint: "from-emerald-500/25" },
 ];
 
 const CARD_WIDTH = 240;

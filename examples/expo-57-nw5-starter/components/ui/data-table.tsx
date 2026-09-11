@@ -1,6 +1,7 @@
 import React, { useState, useMemo, useCallback } from "react";
-import { View, Text, TextInput, Pressable, ScrollView, useColorScheme, type ViewStyle } from "react-native";
+import { View, Text, TextInput, Pressable, ScrollView, type ViewStyle } from "react-native";
 import { cn } from "@/lib/utils";
+import { useThemeColors } from "@/components/ui/theme-provider";
 import { ChevronDown, ChevronUp } from "lucide-react-native";
 
 export interface DataTableColumn<T> {
@@ -33,10 +34,11 @@ export interface DataTableProps<T> extends React.ComponentPropsWithoutRef<typeof
 }
 
 function SortIcon({ order }: { order?: "asc" | "desc" }) {
+  const colors = useThemeColors();
   return order === "asc" ? (
-    <ChevronUp size={12} color="#71717a" strokeWidth={2.5} />
+    <ChevronUp size={12} color={colors.mutedForeground} strokeWidth={2.5} />
   ) : (
-    <ChevronDown size={12} color="#71717a" strokeWidth={2.5} />
+    <ChevronDown size={12} color={colors.mutedForeground} strokeWidth={2.5} />
   );
 }
 
@@ -114,7 +116,7 @@ export function DataTable<T extends Record<string, unknown>>({
     return { width: defaultColumnWidth, overflow: "hidden" };
   };
 
-  const dark = useColorScheme() === "dark";
+  const colors = useThemeColors();
 
   return (
     <View className={cn("rounded-md border border-border overflow-hidden", className)} {...props}>
@@ -123,7 +125,7 @@ export function DataTable<T extends Record<string, unknown>>({
           <TextInput
             className="min-h-10 px-3 rounded-md border border-input bg-background text-foreground text-sm"
             placeholder={searchPlaceholder}
-            placeholderTextColor={dark ? "#a1a1aa" : "#71717a"}
+            placeholderTextColor={colors.mutedForeground}
             value={search}
             onChangeText={(v) => { setSearch(v); setPage(0); }}
             accessibilityLabel="Search table"

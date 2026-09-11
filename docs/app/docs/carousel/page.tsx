@@ -1,3 +1,4 @@
+import { getComponentSource } from "@/lib/registry-source";
 import { Heading } from "@/components/heading";
 import { PreviewCarousel } from "@/components/preview/carousel";
 import { ComponentPlayground } from "@/components/highlighted-playground";
@@ -20,71 +21,12 @@ const autoPlayCode = `<Carousel
   autoPlay
   interval={3000}
 />`;
-const sourceCode = `import React, { useRef, useState } from "react";
-import { View, FlatList } from "react-native";
-import { cn } from "@/lib/utils";
-
-export interface CarouselProps extends React.ComponentPropsWithoutRef<typeof View> {
-  className?: string;
-  data: React.ReactNode[];
-  itemWidth?: number;
-  showDots?: boolean;
-  autoPlay?: boolean;
-  interval?: number;
-}
-export function Carousel({ className, data, itemWidth, showDots = true, autoPlay, interval = 3000, onLayout, ...props }: CarouselProps) {
-  const [active, setActive] = useState(0);
-  const [measured, setMeasured] = useState(0);
-  // Size each slide to the carousel's OWN width (measured), not the window —
-  // otherwise slides overflow when the carousel sits inside padding.
-  const width = itemWidth ?? measured;
-  const ref = useRef<FlatList>(null);
-  React.useEffect(() => {
-    if (!autoPlay || data.length <= 1 || !width) return;
-    const timer = setInterval(() => {
-      const next = (active + 1) % data.length;
-      ref.current?.scrollToOffset({ offset: next * width, animated: true });
-    }, interval);
-    return () => clearInterval(timer);
-  }, [autoPlay, active, data.length, interval, width]);
-  return (
-    <View
-      className={cn("", className)}
-      onLayout={(e) => {
-        setMeasured(e.nativeEvent.layout.width);
-        onLayout?.(e);
-      }}
-      accessibilityRole="adjustable"
-      accessibilityLabel={\`Carousel, item \${active + 1} of \${data.length}\`}
-      {...props}
-    >
-      {width > 0 ? (
-        <FlatList
-          ref={ref}
-          data={data}
-          horizontal
-          pagingEnabled
-          showsHorizontalScrollIndicator={false}
-          onMomentumScrollEnd={(e) => setActive(Math.round(e.nativeEvent.contentOffset.x / width))}
-          renderItem={({ item }) => <View style={{ width }}>{item}</View>}
-          keyExtractor={(_, i) => String(i)}
-        />
-      ) : null}
-      {showDots && data.length > 1 && (
-        <View className="flex-row items-center justify-center gap-1.5 mt-3" accessibilityRole="tablist">
-          {data.map((_, i) => (
-            <View key={i} className={cn("h-2 rounded-full", i === active ? "w-4 bg-primary" : "w-2 bg-muted-foreground/30")} accessibilityRole="tab" accessibilityState={{ selected: i === active }} accessibilityLabel={\`Page \${i + 1}\`} />
-          ))}
-        </View>
-      )}
-    </View>
-  );
-}`;
+const sourceCode = getComponentSource("carousel");
 
 const slides = [
-  <div key="1" className="h-48 bg-primary rounded-lg flex items-center justify-center"><span className="text-primary-foreground text-lg font-medium">Slide 1</span></div>,
-  <div key="2" className="h-48 bg-secondary rounded-lg flex items-center justify-center"><span className="text-secondary-foreground text-lg font-medium">Slide 2</span></div>,
-  <div key="3" className="h-48 bg-accent rounded-lg flex items-center justify-center"><span className="text-accent-foreground text-lg font-medium">Slide 3</span></div>,
+  <div key="1" className="h-48 bg-primary/10 rounded-lg flex items-center justify-center px-6"><span className="text-foreground text-lg font-semibold text-center">Track every habit in one place</span></div>,
+  <div key="2" className="h-48 bg-primary/20 rounded-lg flex items-center justify-center px-6"><span className="text-foreground text-lg font-semibold text-center">Get a nudge right when you need it</span></div>,
+  <div key="3" className="h-48 bg-primary/30 rounded-lg flex items-center justify-center px-6"><span className="text-foreground text-lg font-semibold text-center">Celebrate every streak you build</span></div>,
 ];
 
 export default function CarouselPage() {

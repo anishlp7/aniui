@@ -50,7 +50,7 @@ export function PreviewSearchBar({ size = "md", className, value, onChange, icon
     <div className="flex items-center gap-2">
       <div className={cn(searchBarVariants({ size }), className)}>
         {icon ?? <SearchIcon size={iconSize} />}
-        <input className="flex-1 bg-transparent text-base text-foreground outline-none placeholder:text-muted-foreground" placeholder="Search..." value={text} onChange={handleChange} {...props} />
+        <input className="flex-1 bg-transparent text-base text-foreground outline-none placeholder:text-muted-foreground" placeholder="Search dishes..." value={text} onChange={handleChange} {...props} />
         {text && (
           <button onClick={handleClear} className="ml-1 h-5 w-5 flex items-center justify-center rounded-full bg-muted-foreground/20 hover:bg-muted-foreground/30 cursor-pointer">
             <svg className="h-3 w-3 text-muted-foreground" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"><path d="M18 6L6 18M6 6l12 12" /></svg>

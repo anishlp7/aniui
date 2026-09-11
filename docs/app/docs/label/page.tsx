@@ -1,3 +1,4 @@
+import { getComponentSource } from "@/lib/registry-source";
 import { Heading } from "@/components/heading";
 import { PreviewLabel } from "@/components/preview/label";
 import { ComponentPlayground } from "@/components/highlighted-playground";
@@ -18,21 +19,7 @@ export function MyScreen() {
     </View>
   );
 }`;
-const sourceCode = `import React from "react";
-import { Text } from "react-native";
-import { cn } from "@/lib/utils";
-
-export interface LabelProps extends React.ComponentPropsWithoutRef<typeof Text> {
-  className?: string;
-}
-export function Label({ className, ...props }: LabelProps) {
-  return (
-    <Text
-      className={cn("text-sm font-medium text-foreground leading-none", className)}
-      {...props}
-    />
-  );
-}`;
+const sourceCode = getComponentSource("label");
 export default function LabelPage() {
   return (
     <div className="space-y-10">

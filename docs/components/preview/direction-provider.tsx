@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import { cn } from "@/lib/utils";
 
 const languages = [
-  { code: "en", name: "English", dir: "ltr" as const, greeting: "Hello World", placeholder: "Search...", button: "Submit", description: "This is a left-to-right layout example." },
+  { code: "en", name: "English", dir: "ltr" as const, greeting: "Hello World", placeholder: "Search...", button: "Go", description: "This is a left-to-right layout example." },
   { code: "ar", name: "العربية", dir: "rtl" as const, greeting: "مرحبا بالعالم", placeholder: "بحث...", button: "إرسال", description: "هذا مثال على تخطيط من اليمين إلى اليسار." },
   { code: "he", name: "עברית", dir: "rtl" as const, greeting: "שלום עולם", placeholder: "חיפוש...", button: "שלח", description: "זוהי דוגמה לפריסה מימין לשמאל." },
   { code: "fa", name: "فارسی", dir: "rtl" as const, greeting: "سلام دنیا", placeholder: "جستجو...", button: "ارسال", description: "این یک نمونه طرح‌بندی از راست به چپ است." },

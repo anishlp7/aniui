@@ -7,6 +7,7 @@ import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
 import { ADSENSE_CLIENT } from "@/lib/ads";
 import { consentInitScript } from "@/lib/consent";
+import { themeInitScript } from "@/lib/theme-init";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -25,7 +26,7 @@ export const metadata: Metadata = {
     default: "AniUI — Beautiful React Native Components",
     template: "%s | AniUI",
   },
-  description: "shadcn/ui for React Native. 101 accessible components built with Uniwind or NativeWind, rn-primitives, and TypeScript. Copy. Paste. Ship.",
+  description: "shadcn/ui for React Native. 148 accessible components built with Uniwind or NativeWind, rn-primitives, and TypeScript. Copy. Paste. Ship.",
   keywords: ["react native", "components", "nativewind", "tailwind", "mobile", "ios", "android", "shadcn", "ui library", "expo", "uniwind", "rn-primitives", "accessible"],
   authors: [{ name: "Anish", url: "https://aniui.dev" }],
   creator: "Anish",
@@ -39,13 +40,13 @@ export const metadata: Metadata = {
     url: "https://aniui.dev",
     siteName: "AniUI",
     title: "AniUI — Beautiful React Native Components",
-    description: "shadcn/ui for React Native. 101 accessible components. Copy. Paste. Ship.",
+    description: "shadcn/ui for React Native. 148 accessible components. Copy. Paste. Ship.",
     images: [{ url: "https://aniui.dev/og.png", width: 1200, height: 630, alt: "AniUI — Beautiful React Native Components" }],
   },
   twitter: {
     card: "summary_large_image",
     title: "AniUI — Beautiful React Native Components",
-    description: "shadcn/ui for React Native. 101 accessible components. Copy. Paste. Ship.",
+    description: "shadcn/ui for React Native. 148 accessible components. Copy. Paste. Ship.",
     creator: "@anishlp7",
     images: ["https://aniui.dev/og.png"],
   },
@@ -72,6 +73,9 @@ export default function RootLayout({
       <head>
         <link rel="icon" href="/favicon-light.ico" media="(prefers-color-scheme: light)" />
         <link rel="icon" href="/favicon-dark.ico" media="(prefers-color-scheme: dark)" />
+        {/* Runs before paint so the page's first frame already matches the
+            visitor's stored theme or system preference — no light-then-dark flash. */}
+        <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
         {/* Ahead of the ad script below, which is the whole point of putting it
             here: it is what stops a cookie being set in Europe in the moment
             before Google's consent dialog has loaded. */}

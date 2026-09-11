@@ -118,34 +118,50 @@ Already on RNR / NativeWind / Uniwind? Components drop in with **zero extra setu
 
 ## Components
 
-**101 components** — all listed alphabetically. Each component's docs page tells you if it needs extra dependencies. Component icons come from [lucide-react-native](https://lucide.dev) (installed automatically by `aniui init`/`add`); icon props (`icon`, `leadingIcon`, …) accept any ReactNode, so you can bring your own.
+**148 components** — all listed alphabetically. Each component's docs page tells you if it needs extra dependencies. Component icons come from [lucide-react-native](https://lucide.dev) (installed automatically by `aniui init`/`add`); icon props (`icon`, `leadingIcon`, …) accept any ReactNode, so you can bring your own.
 
 Building an AI app? Pair [Prompt Input](https://aniui.dev/docs/prompt-input) (ChatGPT/Claude-style composer with toolbar slots), [Streaming Text](https://aniui.dev/docs/streaming-text), [Chat Bubble](https://aniui.dev/docs/chat-bubble), [Typing Indicator](https://aniui.dev/docs/typing-indicator), and [Waveform](https://aniui.dev/docs/waveform) (voice recording) for a complete chat UI.
 
 | Component | Description |
 |-----------|-------------|
 | [Accordion](https://aniui.dev/docs/accordion) | Expand/collapse content sections |
+| [Action Rail](https://aniui.dev/docs/action-rail) | Expandable icon toolbar with its own palette system |
 | [Action Sheet](https://aniui.dev/docs/action-sheet) | Action sheet with options |
 | [Animate](https://aniui.dev/docs/animate) | Animation presets, spring configs, and hooks |
+| [Animated Header ScrollView](https://aniui.dev/docs/animated-header-scrollview) | Collapsing large-title header with a blur backdrop on scroll |
+| [Animated Input Bar](https://aniui.dev/docs/animated-input-bar) | Text input with a per-character animated cycling placeholder |
 | [Alert](https://aniui.dev/docs/alert) | Alert with default, destructive, success, warning |
 | [Alert Dialog](https://aniui.dev/docs/alert-dialog) | Confirmation dialog with Action/Cancel |
+| [Arc List](https://aniui.dev/docs/arc-list) | Items on a curved arc with proximity scale and snap-to-focus |
+| [Area Chart](https://aniui.dev/docs/area-chart) | Skia area chart with draw-on entrance and drag-to-scrub tooltip |
 | [Aspect Ratio](https://aniui.dev/docs/aspect-ratio) | Constrain content to a fixed width/height ratio |
 | [Avatar](https://aniui.dev/docs/avatar) | Image with fallback initials, 3 sizes |
 | [Avatar Group](https://aniui.dev/docs/avatar-group) | Overlapping avatar stack with +N overflow |
 | [Badge](https://aniui.dev/docs/badge) | Status indicator with 4 variants |
 | [Banner](https://aniui.dev/docs/banner) | Full-width notification with variants and dismiss |
+| [Bar Chart](https://aniui.dev/docs/bar-chart) | Skia bar chart with staggered grow-in and drag-to-scrub tooltip |
+| [Barcode Badge](https://aniui.dev/docs/barcode-badge) | Width-encoded barcode strip with a compound Root/Bars/Label API |
+| [Book Page](https://aniui.dev/docs/book-page) | Book cover with a spine gradient and an openAngle hinge |
 | [Bottom Sheet](https://aniui.dev/docs/bottom-sheet) | Bottom sheet overlay |
 | [Breadcrumb](https://aniui.dev/docs/breadcrumb) | Navigation trail for the current page's location |
 | [Button](https://aniui.dev/docs/button) | Pressable with 5 variants and 3 sizes |
 | [Calendar](https://aniui.dev/docs/calendar) | Month grid with single date and range selection |
 | [Card](https://aniui.dev/docs/card) | Card with Header, Title, Content, Footer |
 | [Carousel](https://aniui.dev/docs/carousel) | Horizontal scrollable carousel with pagination dots |
+| [Carousel 3D](https://aniui.dev/docs/carousel-3d) | Drag-rotated cylinder carousel with real perspective-projected faces |
+| [Carousel Circular](https://aniui.dev/docs/carousel-circular) | Scroll-driven coverflow with a blur fade on non-centered items |
+| [Carousel Parallax](https://aniui.dev/docs/carousel-parallax) | Inner-layer parallax translation with a haptic tick on release |
+| [Carousel Scale](https://aniui.dev/docs/carousel-scale) | Center-focused carousel where neighbors zoom up and rotate out |
+| [Carousel Tilt](https://aniui.dev/docs/carousel-tilt) | Z-axis fan carousel that rotates and lifts from a bottom pivot |
 | [Chat Bubble](https://aniui.dev/docs/chat-bubble) | Sent/received message bubbles with timestamps and status |
+| [Chart Tooltip](https://aniui.dev/docs/chart-tooltip) | Tooltip overlay for chart data points |
 | [Checkbox](https://aniui.dev/docs/checkbox) | Checkbox with checked/unchecked/disabled |
 | [Chip](https://aniui.dev/docs/chip) | Interactive tag for filters and multi-select |
 | [Combobox](https://aniui.dev/docs/combobox) | Searchable select with multi-select, groups, clear, and custom rendering |
 | [Connection Banner](https://aniui.dev/docs/connection-banner) | Animated online/offline connection status banner |
 | [Collapsible](https://aniui.dev/docs/collapsible) | Animated show/hide content |
+| [Coupon](https://aniui.dev/docs/coupon) | Two-section promo coupon with a real tear-line and ticket icon |
+| [Curved Bottom Tabs](https://aniui.dev/docs/curved-bottom-tabs) | Tab bar whose curved notch and floating button slide to the active tab |
 | [Data Table](https://aniui.dev/docs/data-table) | Sortable, filterable data table with pagination |
 | [Date Picker](https://aniui.dev/docs/date-picker) | Calendar popup picker with range support |
 | [Dialog](https://aniui.dev/docs/dialog) | Modal with fade + scale overlay |
@@ -153,12 +169,21 @@ Building an AI app? Pair [Prompt Input](https://aniui.dev/docs/prompt-input) (Ch
 | [Drawer](https://aniui.dev/docs/drawer) | Slide-in side navigation panel |
 | [Dropdown Menu](https://aniui.dev/docs/dropdown-menu) | Context menu with fade animation |
 | [Empty State](https://aniui.dev/docs/empty-state) | Placeholder for empty lists and error states |
+| [Event Ticket](https://aniui.dev/docs/event-ticket) | Notched ticket silhouette with a stub barcode |
+| [Expandable View](https://aniui.dev/docs/expandable-view) | Generic expand/collapse container with a slot API |
 | [FAB](https://aniui.dev/docs/fab) | Floating action button with positioning |
+| [Fan Menu](https://aniui.dev/docs/fan-menu) | Radial fan menu with staggered labeled pill actions |
 | [Field](https://aniui.dev/docs/field) | Form field with label, description, and error |
 | [File Picker](https://aniui.dev/docs/file-picker) | Upload UI with dashed border, preview, and remove |
+| [Filling Stack](https://aniui.dev/docs/filling-stack) | Vertically browsable card stack with fling gestures |
+| [Flexi Button](https://aniui.dev/docs/flexi-button) | Adaptive-width pill button that springs open to reveal a label |
+| [Flip Card](https://aniui.dev/docs/flip-card) | Tap-to-flip card with horizontal/vertical/depth 3D rotation |
 | [Form](https://aniui.dev/docs/form) | Form context with validation, error messages, compound components |
+| [Gooey Popover](https://aniui.dev/docs/gooey-popover) | Popover that morphs its trigger into the content panel |
+| [Gooey Search Tabs](https://aniui.dev/docs/gooey-search-tabs) | Pill that morphs between a search bar and a tab switcher |
 | [Gradient](https://aniui.dev/docs/gradient) | Linear gradient view with configurable colors and direction |
 | [Grid](https://aniui.dev/docs/grid) | FlatList-based grid layout with configurable columns |
+| [Hamburger](https://aniui.dev/docs/hamburger) | Animated hamburger ⇄ close icon morph |
 | [Header](https://aniui.dev/docs/header) | Navigation header with back button, title, and actions |
 | [Hover Card](https://aniui.dev/docs/hover-card) | Preview content card triggered by long-press |
 | [Image](https://aniui.dev/docs/image) | Image with loading, error fallback, rounded variants |
@@ -171,31 +196,53 @@ Building an AI app? Pair [Prompt Input](https://aniui.dev/docs/prompt-input) (Ch
 | [Keyboard View](https://aniui.dev/docs/keyboard-view) | Keyboard-avoiding wrapper so forms stay visible |
 | [Label](https://aniui.dev/docs/label) | Form field label |
 | [Labeled Separator](https://aniui.dev/docs/labeled-separator) | Horizontal separator with centered text label |
+| [Line Chart](https://aniui.dev/docs/line-chart) | Skia line chart with draw-on entrance and a scrubbing crosshair |
 | [List](https://aniui.dev/docs/list) | Styled list with ListItem, Title, Description |
+| [Loader](https://aniui.dev/docs/loader) | Bouncing dots or a segmented comet-tail ring |
+| [Marquee](https://aniui.dev/docs/marquee) | Infinite horizontal ticker for any content, tap-to-pause |
 | [Masked Input](https://aniui.dev/docs/masked-input) | Auto-format masks for credit cards, phones, dates |
+| [Matched Geometry](https://aniui.dev/docs/matched-geometry) | Shared-element layout transition primitive |
 | [Menubar](https://aniui.dev/docs/menubar) | Horizontal bar of menus with dropdown items |
+| [Mobile Dock](https://aniui.dev/docs/mobile-dock) | Finger-tracked fisheye dock that magnifies the icon under your touch |
+| [Morph Fab](https://aniui.dev/docs/morph-fab) | Gooey radial/directional FAB menu with staggered blob-merge |
+| [Morphing Tab Bar](https://aniui.dev/docs/morphing-tabbar) | Tab bar where each tab's corner radii morph to split off a pill |
 | [Number Input](https://aniui.dev/docs/number-input) | Numeric input with +/- buttons and min/max |
 | [Pagination](https://aniui.dev/docs/pagination) | Page navigation with numbered buttons and prev/next |
 | [Password Input](https://aniui.dev/docs/password-input) | Password with show/hide toggle and strength indicator |
 | [Phone Input](https://aniui.dev/docs/phone-input) | Phone number input with country code selector |
+| [Photo Stack](https://aniui.dev/docs/photo-stack) | Overlapping stacked photos with a press-lift-and-straighten spring |
+| [Pie Chart](https://aniui.dev/docs/pie-chart) | Skia pie/donut chart with drag-to-select slice push-out |
+| [Polaroid](https://aniui.dev/docs/polaroid) | Polaroid-style photo frame with a press-lift spring |
 | [Popover](https://aniui.dev/docs/popover) | Contextual overlay content |
 | [Price](https://aniui.dev/docs/price) | Formatted currency display with locale support |
+| [Profile Card](https://aniui.dev/docs/profile-card) | Cover image, overlapping avatar, and a press-scale action button |
 | [Progress](https://aniui.dev/docs/progress) | Progress bar |
 | [Progress Steps](https://aniui.dev/docs/progress-steps) | Multi-step wizard progress indicator |
 | [Prompt Input](https://aniui.dev/docs/prompt-input) | ChatGPT/Claude-style AI composer with attach, voice, send/stop |
+| [QR Code](https://aniui.dev/docs/qr-code) | Real, scannable QR code behind an expand/collapse reveal |
+| [Radar Chart](https://aniui.dev/docs/radar-chart) | Skia radar/spider chart with staggered grow-in and morphing |
+| [Radial Chart](https://aniui.dev/docs/radial-chart) | Skia concentric radial progress rings with drag-to-select |
 | [Radio Group](https://aniui.dev/docs/radio-group) | Radio button group with context |
 | [Rating](https://aniui.dev/docs/rating) | Star rating with interactive and read-only modes |
+| [Receipt Card](https://aniui.dev/docs/receipt-card) | Tilted, torn-edge receipt with dotted item leaders |
 | [Refresh Control](https://aniui.dev/docs/refresh-control) | Themed pull-to-refresh for ScrollView and FlatList |
+| [Rolling Counter](https://aniui.dev/docs/rolling-counter) | Odometer-style counter with motion-blur and squash/stretch |
 | [Safe Area](https://aniui.dev/docs/safe-area) | Styled SafeAreaView wrapper with theme variants |
+| [Save Button](https://aniui.dev/docs/save-button) | Idle → loading → success → done state-machine button |
 | [Search Bar](https://aniui.dev/docs/search-bar) | Search input with icon, clear, and cancel |
 | [Segmented Control](https://aniui.dev/docs/segmented-control) | iOS-style segmented control |
 | [Select](https://aniui.dev/docs/select) | Dropdown select |
 | [Separator](https://aniui.dev/docs/separator) | Horizontal or vertical divider |
+| [Shimmer](https://aniui.dev/docs/shimmer) | Content-aware skeleton with sweep/pulse variants |
 | [Sidebar](https://aniui.dev/docs/sidebar) | Collapsible side navigation panel with toggle |
 | [Skeleton](https://aniui.dev/docs/skeleton) | Animated loading placeholder |
 | [Slide to Confirm](https://aniui.dev/docs/slide-to-confirm) | Slide-to-pay/confirm control with spring-back |
 | [Slider](https://aniui.dev/docs/slider) | Draggable slider for numeric values |
+| [Social Button](https://aniui.dev/docs/social-button) | Branded sign-in button with default Google/Apple/GitHub/X marks |
+| [Spin Button](https://aniui.dev/docs/spin-button) | Toggle button with a custom SVG arc spinner |
 | [Spinner](https://aniui.dev/docs/spinner) | Loading spinner with 3 sizes |
+| [Split View](https://aniui.dev/docs/split-view) | Draggable, resizable top/bottom split pane with snap points |
+| [Stacked Chips](https://aniui.dev/docs/stacked-chips) | Nested, depth-aware expandable chip menu |
 | [Stat Card](https://aniui.dev/docs/stat-card) | KPI display with value, trend, and change percentage |
 | [Status Indicator](https://aniui.dev/docs/status-indicator) | Online/offline/away/busy status dot |
 | [Stepper](https://aniui.dev/docs/stepper) | Numeric increment/decrement with min/max/step |
@@ -209,12 +256,18 @@ Building an AI app? Pair [Prompt Input](https://aniui.dev/docs/prompt-input) (Ch
 | [Text](https://aniui.dev/docs/text) | Typography with h1–h4, p, lead, large, small, muted |
 | [Textarea](https://aniui.dev/docs/textarea) | Multi-line text input |
 | [Theme Provider](https://aniui.dev/docs/theme-provider) | Theme context with light/dark/system mode and toggle |
+| [Theme Switch](https://aniui.dev/docs/theme-switch) | Sun/moon icon-morph toggle with an optional full-screen wipe |
 | [Timeline](https://aniui.dev/docs/timeline) | Vertical timeline for events and order tracking |
 | [Toast](https://aniui.dev/docs/toast) | Slide-in notification with auto-dismiss |
 | [Toggle](https://aniui.dev/docs/toggle) | Two-state toggle button with variants |
 | [Toggle Group](https://aniui.dev/docs/toggle-group) | Exclusive selection group |
 | [Tooltip](https://aniui.dev/docs/tooltip) | Fade-in tooltip on press |
+| [Tray](https://aniui.dev/docs/tray) | Compound bottom-sheet tray with push/back navigation and detents |
 | [Typing Indicator](https://aniui.dev/docs/typing-indicator) | Animated typing dots for chat interfaces |
+| [Unfold Menu](https://aniui.dev/docs/unfold-menu) | Menu whose trigger unfolds into a full panel |
+| [Verified Badge](https://aniui.dev/docs/verified-badge) | Verified check badge with a Name/Handle layout |
+| [Vertical Flow Carousel](https://aniui.dev/docs/vertical-flow-carousel) | Vertical coverflow — cards scale, tilt, and blur as they scroll from center |
+| [Vertical Page Carousel](https://aniui.dev/docs/vertical-page-carousel) | Full-bleed vertical pager, one card per screen, with a haptic tick on release |
 | [Waveform](https://aniui.dev/docs/waveform) | Animated audio waveform bars for voice recording |
 
 ## Prerequisites
@@ -229,7 +282,10 @@ npm install nativewind tailwindcss@3 class-variance-authority clsx tailwind-merg
 npm install react-native-reanimated
 
 # For Tier 3 components (as needed)
-npm install @gorhom/bottom-sheet react-native-gesture-handler
+npm install @gorhom/bottom-sheet react-native-gesture-handler react-native-safe-area-context expo-blur expo-haptics react-native-qrcode-svg
+
+# For Tier 4 (Skia) components (as needed)
+npx expo install @shopify/react-native-skia
 ```
 
 **Supported platforms:** See [Compatibility](#compatibility) table above.
@@ -238,7 +294,7 @@ npm install @gorhom/bottom-sheet react-native-gesture-handler
 
 | Area | Status |
 |------|--------|
-| 101 components | ✅ |
+| 148 components | ✅ |
 | Component & CLI tests (Jest) | ✅ |
 | Accessibility audit | ✅ |
 | Performance benchmarks | ✅ |

@@ -2,6 +2,7 @@ import React from "react";
 import { View, Pressable, Text } from "react-native";
 import { CloudUpload, X } from "lucide-react-native";
 import { cn } from "@/lib/utils";
+import { useThemeColors } from "@/components/ui/theme-provider";
 
 export interface FileInfo {
   name: string;
@@ -33,6 +34,7 @@ export function FilePicker({
   label = "Tap to select a file",
   ...props
 }: FilePickerProps) {
+  const colors = useThemeColors();
   return (
     <View className={cn("", className)} {...props}>
       {!file ? (
@@ -44,7 +46,7 @@ export function FilePicker({
           className="min-h-24 items-center justify-center rounded-lg border-2 border-dashed border-input bg-background px-4 py-6"
         >
           <View className="mb-2">
-            <CloudUpload size={24} color="#71717a" />
+            <CloudUpload size={24} color={colors.mutedForeground} />
           </View>
           <Text className="text-sm text-muted-foreground text-center">{label}</Text>
         </Pressable>
@@ -64,7 +66,7 @@ export function FilePicker({
               accessibilityLabel="Remove file"
               className="min-h-8 min-w-8 items-center justify-center"
             >
-              <X size={24} color="#71717a" />
+              <X size={24} color={colors.mutedForeground} />
             </Pressable>
           )}
         </View>

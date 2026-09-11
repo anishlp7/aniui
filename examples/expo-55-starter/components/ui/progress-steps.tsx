@@ -1,7 +1,8 @@
 import React, { createContext, useContext } from "react";
-import { View, Text, useColorScheme } from "react-native";
+import { View, Text } from "react-native";
 import { Check } from "lucide-react-native";
 import { cn } from "@/lib/utils";
+import { useThemeColors } from "@/components/ui/theme-provider";
 
 const StepsContext = createContext<{ current: number }>({ current: 0 });
 
@@ -39,7 +40,7 @@ export interface ProgressStepProps extends React.ComponentPropsWithoutRef<typeof
 
 export function ProgressStep({ label, icon, className, _index = 0, ...props }: ProgressStepProps) {
   const { current } = useContext(StepsContext);
-  const dark = useColorScheme() === "dark";
+  const colors = useThemeColors();
   const isCompleted = _index < current;
   const isActive = _index === current;
 
@@ -53,7 +54,7 @@ export function ProgressStep({ label, icon, className, _index = 0, ...props }: P
       >
         {icon ??
           (isCompleted ? (
-            <Check size={14} color={dark ? "#18181b" : "#fafafa"} strokeWidth={3} />
+            <Check size={14} color={colors.primaryForeground} strokeWidth={3} />
           ) : (
             <Text
               className={cn(

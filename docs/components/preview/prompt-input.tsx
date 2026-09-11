@@ -53,18 +53,63 @@ export interface PreviewPromptInputProps {
   clearOnSend?: boolean;
   /** Renders the full Claude-style toolbar (+, model selector, mic, voice fallback). */
   fullToolbar?: boolean;
-  /** Wired to the + button — e.g. opens an attachment sheet. */
+  /** Wired to the + button — e.g. opens an attachment sheet. Defaults to an inline attach dropdown when omitted. */
   onAttach?: () => void;
+}
+
+const ATTACH_OPTIONS = ["Add photos", "Take a screenshot", "Files"];
+const MODEL_OPTIONS = ["Opus 4.8", "Sonnet 4.9", "Haiku 4.5"];
+
+function ToolbarDropdown({ align = "left", items, onSelect }: {
+  align?: "left" | "right"; items: string[]; onSelect: (item: string) => void;
+}) {
+  return (
+    <div
+      role="menu"
+      className={cn(
+        "absolute bottom-full z-10 mb-2 w-44 rounded-lg border border-border bg-card p-1 shadow-lg",
+        align === "left" ? "left-0" : "right-0"
+      )}
+    >
+      {items.map((item) => (
+        <button
+          key={item}
+          type="button"
+          role="menuitem"
+          onClick={() => onSelect(item)}
+          className="w-full cursor-pointer rounded-md px-3 py-2.5 text-left text-sm text-foreground transition-colors hover:bg-accent"
+        >
+          {item}
+        </button>
+      ))}
+    </div>
+  );
 }
 
 // Web mimic of the compound composer: auto-growing textarea on top, action
 // toolbar below. The trailing voice icon becomes a send arrow while typing.
+// "+" and "Choose model" open real dropdowns here — matching how PromptInputButton
+// composes with DropdownMenu in the actual RN component (see the code sample below).
 export function PreviewPromptInput({
   className, placeholder = "How can I help you today?", onSend, onStop, streaming, clearOnSend = true, fullToolbar, onAttach,
 }: PreviewPromptInputProps) {
   const [text, setText] = useState("");
   const ref = useRef<HTMLTextAreaElement>(null);
   const canSend = text.trim().length > 0;
+  const [attachOpen, setAttachOpen] = useState(false);
+  const [modelOpen, setModelOpen] = useState(false);
+  const [model, setModel] = useState(MODEL_OPTIONS[0]);
+
+  const handleAttachClick = () => {
+    if (onAttach) return onAttach();
+    setModelOpen(false);
+    setAttachOpen((v) => !v);
+  };
+  const handleModelClick = () => {
+    setAttachOpen(false);
+    setModelOpen((v) => !v);
+  };
+  const closeMenus = () => { setAttachOpen(false); setModelOpen(false); };
 
   const resize = () => {
     const el = ref.current;
@@ -87,7 +132,10 @@ export function PreviewPromptInput({
   };
 
   return (
-    <div className={cn("w-full max-w-sm rounded-3xl border border-input bg-background px-3 pt-3 pb-2", className)}>
+    <div className={cn("relative w-full max-w-sm rounded-3xl border border-input bg-background px-3 pt-3 pb-2", className)}>
+      {(attachOpen || modelOpen) && (
+        <div className="fixed inset-0 z-0" onClick={closeMenus} aria-hidden="true" />
+      )}
       <textarea
         ref={ref}
         rows={1}
@@ -99,15 +147,29 @@ export function PreviewPromptInput({
         }}
         className="max-h-[120px] w-full resize-none bg-transparent text-sm text-foreground outline-none placeholder:text-muted-foreground"
       />
-      <div className="flex items-center gap-1 pt-2">
-        <ToolbarButton label="Add attachment" onClick={onAttach}><PlusIcon /></ToolbarButton>
+      <div className="relative z-10 flex items-center gap-1 pt-2">
+        <div className="relative">
+          <ToolbarButton label="Add attachment" onClick={handleAttachClick}><PlusIcon /></ToolbarButton>
+          {attachOpen && (
+            <ToolbarDropdown align="left" items={ATTACH_OPTIONS} onSelect={() => setAttachOpen(false)} />
+          )}
+        </div>
         <div className="flex-1" />
         {fullToolbar && (
           <>
-            <ToolbarButton label="Choose model" className="px-2">
-              <span className="text-xs">Opus 4.8</span>
-              <ChevronDownIcon />
-            </ToolbarButton>
+            <div className="relative">
+              <ToolbarButton label="Choose model" className="px-2" onClick={handleModelClick}>
+                <span className="text-xs">{model}</span>
+                <ChevronDownIcon />
+              </ToolbarButton>
+              {modelOpen && (
+                <ToolbarDropdown
+                  align="right"
+                  items={MODEL_OPTIONS}
+                  onSelect={(m) => { setModel(m); setModelOpen(false); }}
+                />
+              )}
+            </div>
             <ToolbarButton label="Dictate"><MicIcon /></ToolbarButton>
           </>
         )}

@@ -5,6 +5,7 @@ import Link from "next/link";
 import { motion, AnimatePresence, useReducedMotion, type Variants } from "motion/react";
 import { ThemePreview } from "@/components/theme-preview";
 import { ThemeSelect } from "@/components/theme-select";
+import { FeaturedShowcase } from "@/components/featured-showcase";
 import { useTheme } from "@/components/theme-provider";
 import { type ColorDef, themeColors, radiusOptions, resolveVars, generateCSS, hsl, shuffleTheme } from "@/lib/theme-data";
 
@@ -87,7 +88,7 @@ const jsonLd = {
   name: "AniUI",
   applicationCategory: "DeveloperApplication",
   operatingSystem: "iOS, Android",
-  description: "shadcn/ui for React Native. 101 accessible components built with Uniwind or NativeWind and TypeScript. Now supports Expo SDK 57.",
+  description: "shadcn/ui for React Native. 148 accessible components built with Uniwind or NativeWind and TypeScript. Now supports Expo SDK 57.",
   url: "https://aniui.dev",
   author: { "@type": "Person", name: "Anish" },
   offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
@@ -208,7 +209,7 @@ export default function HomePage() {
               animate={prefersReducedMotion ? undefined : { scale: [1, 1.4, 1], opacity: [1, 0.7, 1] }}
               transition={{ duration: 1.8, ease: "easeInOut", repeat: Infinity }}
             />
-            <span className="text-xs font-medium text-muted-foreground">100+ components and counting</span>
+            <span className="text-xs font-medium text-muted-foreground"><span className="font-semibold text-foreground">148 components</span> and counting</span>
           </motion.div>
 
           <motion.h1
@@ -249,11 +250,26 @@ export default function HomePage() {
             ))}
           </motion.div>
 
+          {/* Stat strip */}
+          <motion.div variants={heroItem} className="flex flex-wrap items-center justify-center gap-x-8 gap-y-2 mt-8">
+            {[
+              { value: "148", label: "Components" },
+              { value: "15", label: "Screen Blocks" },
+              { value: "4", label: "Expo SDKs" },
+              { value: "MIT", label: "Licensed" },
+            ].map((stat) => (
+              <div key={stat.label} className="flex flex-col items-center">
+                <span className="text-2xl font-extrabold tracking-tight text-foreground">{stat.value}</span>
+                <span className="text-xs text-muted-foreground">{stat.label}</span>
+              </div>
+            ))}
+          </motion.div>
+
           {/* CTAs */}
           <motion.div variants={heroItem} className="flex flex-col sm:flex-row items-center gap-3 mt-8">
             <motion.div whileHover={prefersReducedMotion ? undefined : { scale: 1.03 }} whileTap={{ scale: 0.97 }} transition={{ type: "spring", stiffness: 320, damping: 20 }}>
               <Link
-                href="/docs/accordion"
+                href="/docs/components"
                 className="h-12 px-8 rounded-lg bg-primary text-primary-foreground text-sm font-semibold flex items-center hover:opacity-90 transition-opacity"
               >
                 View Components &rarr;
@@ -331,6 +347,28 @@ export default function HomePage() {
         ))}
       </motion.div>
 
+      {/* ── Featured showcase ─── */}
+      <motion.div
+        className="pb-16"
+        variants={sectionFade}
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true, margin: "-80px" }}
+      >
+        <div className="rounded-2xl border border-border bg-gradient-to-br from-card to-secondary/20 p-8 sm:p-10">
+          <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-6">
+            <div>
+              <h2 className="text-2xl font-bold tracking-tight text-foreground">Featured components</h2>
+              <p className="mt-2 text-muted-foreground max-w-xl">
+                Live web previews for carousels, motion, UI pieces, and Skia effects. CLI slugs stay stable — friendly names in docs only.
+              </p>
+            </div>
+            <Link href="/docs/components" className="text-sm font-medium text-primary hover:underline">Browse all 148 →</Link>
+          </div>
+          <FeaturedShowcase />
+        </div>
+      </motion.div>
+
       {/* ── Preview on device ─── */}
       <motion.div
         className="flex flex-col sm:flex-row items-center justify-center gap-6 rounded-xl border border-border bg-card/50 px-8 py-6 mb-16"
@@ -349,7 +387,7 @@ export default function HomePage() {
         <div className="text-center sm:text-left">
           <p className="text-base font-semibold text-foreground">Preview on your device</p>
           <p className="text-sm text-muted-foreground mt-1 max-w-sm">
-            Scan with Expo Go to try all 101 components live on a real device.
+            Scan with Expo Go to try all 148 components live on a real device.
           </p>
         </div>
       </motion.div>

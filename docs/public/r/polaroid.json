@@ -1,0 +1,23 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "polaroid",
+  "type": "registry:ui",
+  "title": "Polaroid",
+  "description": "Polaroid-style photo frame with a press-lift-and-straighten spring and optional washi-tape decoration",
+  "dependencies": [
+    "react-native-reanimated",
+    "clsx",
+    "tailwind-merge"
+  ],
+  "registryDependencies": [
+    "https://aniui.dev/r/utils.json"
+  ],
+  "files": [
+    {
+      "path": "components/ui/polaroid.tsx",
+      "type": "registry:ui",
+      "content": "import React from \"react\";\nimport { View, Text, Image, Pressable } from \"react-native\";\nimport Animated, { useSharedValue, useAnimatedStyle, withSpring } from \"react-native-reanimated\";\nimport { cn } from \"@/lib/utils\";\n\nconst TILT = -2;\nconst LIFT = 6;\nconst LIFT_SPRING = { damping: 16, stiffness: 220, mass: 0.6 };\n\nexport interface PolaroidTapeProps extends React.ComponentPropsWithoutRef<typeof View> {\n  className?: string;\n  width?: number;\n  height?: number;\n  rotate?: number;\n}\n\n// Decorative \"washi tape\" strip straddling the top edge of a Polaroid. Purely\n// visual, so it must never intercept touches or be announced by a screen reader.\nexport function PolaroidTape({ className, width = 96, height = 28, rotate = -3, ...props }: PolaroidTapeProps) {\n  return (\n    <View\n      className={cn(\"absolute z-10 rounded-sm border border-amber-200/70 bg-amber-100/90\", className)}\n      style={{ top: -12, left: \"50%\", marginLeft: -width / 2, width, height, transform: [{ rotate: `${rotate}deg` }] }}\n      pointerEvents=\"none\"\n      accessibilityElementsHidden\n      importantForAccessibility=\"no-hide-descendants\"\n      {...props}\n    />\n  );\n}\n\nexport interface PolaroidProps extends React.ComponentPropsWithoutRef<typeof View> {\n  className?: string;\n  source: { uri: string } | number;\n  caption?: string;\n  /** Small mono stamp under the caption, e.g. a date or location. */\n  meta?: string;\n  /** Resting tilt in degrees; straightens toward 0deg at full press. */\n  tilt?: number;\n  /** Renders a built-in <PolaroidTape /> across the top edge. */\n  tape?: boolean;\n  /** Called on press. Omit for a static, non-interactive card. */\n  onPress?: () => void;\n}\n\nconst AnimatedPressable = Animated.createAnimatedComponent(Pressable);\n\nexport function Polaroid({ className, source, caption, meta, tilt = TILT, tape, onPress, ...props }: PolaroidProps) {\n  const pressed = useSharedValue(0);\n\n  const liftStyle = useAnimatedStyle(() => ({\n    transform: [{ translateY: -LIFT * pressed.value }, { rotate: `${tilt * (1 - pressed.value)}deg` }],\n  }));\n\n  const content = (\n    <>\n      {tape ? <PolaroidTape /> : null}\n      <Image source={source} className=\"w-full aspect-square rounded-sm bg-muted\" resizeMode=\"cover\" accessibilityIgnoresInvertColors />\n      {caption ? <Text className=\"mt-3 text-center text-sm text-muted-foreground font-medium\">{caption}</Text> : null}\n      {meta ? <Text className=\"mt-0.5 text-center text-[11px] text-muted-foreground/70 font-mono\">{meta}</Text> : null}\n    </>\n  );\n\n  if (!onPress) {\n    return (\n      <Animated.View\n        className={cn(\"rounded-sm bg-card p-3 pb-8 shadow-sm border border-border\", className)}\n        style={liftStyle}\n        accessibilityRole=\"image\"\n        accessibilityLabel={caption ?? \"Polaroid photo\"}\n        {...props}\n      >\n        {content}\n      </Animated.View>\n    );\n  }\n\n  return (\n    <AnimatedPressable\n      className={cn(\"min-h-12 min-w-12 rounded-sm bg-card p-3 pb-8 shadow-sm border border-border\", className)}\n      style={liftStyle}\n      accessibilityRole=\"button\"\n      accessible\n      accessibilityLabel={caption ?? \"Polaroid photo\"}\n      onPress={onPress}\n      onPressIn={() => {\n        pressed.value = withSpring(1, LIFT_SPRING);\n      }}\n      onPressOut={() => {\n        pressed.value = withSpring(0, LIFT_SPRING);\n      }}\n      {...props}\n    >\n      {content}\n    </AnimatedPressable>\n  );\n}\n"
+    }
+  ],
+  "docs": "AniUI is React Native. On an existing RNR/NativeWind project, add and use directly — the tokens and aliases already match, no setup needed. On a fresh project, run `npx @aniui/cli init` first to configure NativeWind/Uniwind, theme tokens, and Metro/Babel."
+}

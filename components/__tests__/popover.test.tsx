@@ -1,7 +1,20 @@
 import React from "react";
 import { Text } from "react-native";
 import { render, fireEvent } from "@testing-library/react-native";
+import { SafeAreaProvider } from "react-native-safe-area-context";
 import { Popover, PopoverTrigger, PopoverContent } from "../ui/popover";
+
+// PopoverContent reads safe-area insets via useSafeAreaInsets(), which throws
+// when no SafeAreaProvider is mounted. Provide one with zeroed initial
+// metrics so the hook returns immediately in jest.
+const initialMetrics = {
+  frame: { x: 0, y: 0, width: 0, height: 0 },
+  insets: { top: 0, left: 0, right: 0, bottom: 0 },
+};
+
+const wrapper = ({ children }: { children: React.ReactNode }) => (
+  <SafeAreaProvider initialMetrics={initialMetrics}>{children}</SafeAreaProvider>
+);
 
 describe("Popover", () => {
   it("renders without crashing", () => {
@@ -13,7 +26,8 @@ describe("Popover", () => {
         <PopoverContent>
           <Text>Popover body</Text>
         </PopoverContent>
-      </Popover>
+      </Popover>,
+      { wrapper }
     );
     expect(toJSON()).toBeTruthy();
   });
@@ -27,7 +41,8 @@ describe("Popover", () => {
         <PopoverContent>
           <Text>Popover body</Text>
         </PopoverContent>
-      </Popover>
+      </Popover>,
+      { wrapper }
     );
     // With the passthrough mock, content is always in the tree;
     // real primitive controls visibility via open/closed state.
@@ -43,7 +58,8 @@ describe("Popover", () => {
         <PopoverContent>
           <Text>Popover body</Text>
         </PopoverContent>
-      </Popover>
+      </Popover>,
+      { wrapper }
     );
     fireEvent.press(getByRole("button"));
     expect(getByText("Popover body")).toBeTruthy();
@@ -58,7 +74,8 @@ describe("Popover", () => {
         <PopoverContent>
           <Text>Body</Text>
         </PopoverContent>
-      </Popover>
+      </Popover>,
+      { wrapper }
     );
     expect(getByRole("button")).toBeTruthy();
   });

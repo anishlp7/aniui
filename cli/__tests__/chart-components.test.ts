@@ -17,10 +17,12 @@ const chartNames = [
 const allChartNames = [...chartNames, "chart-tooltip"];
 
 describe("chart components", () => {
-  it.each(chartNames)("%s imports from react-native-svg", (name) => {
+  // Charts were rewritten onto @shopify/react-native-skia for real entrance/morph/scrub
+  // animation — they no longer render react-native-svg.
+  it.each(chartNames)("%s imports from @shopify/react-native-skia", (name) => {
     const filePath = path.join(repoRoot, registry[name].file);
     const content = fs.readFileSync(filePath, "utf-8");
-    expect(content).toMatch(/from\s+["']react-native-svg["']/);
+    expect(content).toMatch(/from\s+["']@shopify\/react-native-skia["']/);
   });
 
   it.each(chartNames)("%s has accessibilityRole image", (name) => {
@@ -40,22 +42,22 @@ describe("chart components", () => {
   });
 
   it.each(chartNames)(
-    "%s has react-native-svg in dependencies",
+    "%s has @shopify/react-native-skia in dependencies",
     (name) => {
-      expect(registry[name].dependencies).toContain("react-native-svg");
+      expect(registry[name].dependencies).toContain("@shopify/react-native-skia");
     }
   );
 
-  it("chart-tooltip is Tier 1 (no SVG dependency)", () => {
+  it("chart-tooltip is Tier 1 (no Skia dependency)", () => {
     const entry = registry["chart-tooltip"];
     expect(entry.tier).toBe(1);
-    expect(entry.dependencies).not.toContain("react-native-svg");
+    expect(entry.dependencies).not.toContain("@shopify/react-native-skia");
   });
 
-  it("chart-tooltip does not import react-native-svg", () => {
+  it("chart-tooltip does not import Skia or react-native-svg", () => {
     const filePath = path.join(repoRoot, registry["chart-tooltip"].file);
     const content = fs.readFileSync(filePath, "utf-8");
-    expect(content).not.toMatch(/react-native-svg/);
+    expect(content).not.toMatch(/react-native-svg|@shopify\/react-native-skia/);
   });
 
   it.each(allChartNames)("%s source file exists", (name) => {

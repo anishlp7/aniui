@@ -1,9 +1,10 @@
 import React, { createContext, useContext, useState } from "react";
-import { View, Pressable, useColorScheme } from "react-native";
+import { View, Pressable } from "react-native";
 import Animated, { useAnimatedStyle, withTiming } from "react-native-reanimated";
 import { Menu } from "lucide-react-native";
 import { duration } from "@/components/ui/animate";
 import { cn } from "@/lib/utils";
+import { useThemeColors } from "@/components/ui/theme-provider";
 
 interface SidebarCtx {
   open: boolean;
@@ -64,7 +65,7 @@ export interface SidebarTriggerProps extends React.ComponentPropsWithoutRef<type
 
 export function SidebarTrigger({ className, children, ...props }: SidebarTriggerProps) {
   const { toggle } = useSidebar();
-  const dark = useColorScheme() === "dark";
+  const colors = useThemeColors();
   return (
     <Pressable
       onPress={toggle}
@@ -73,7 +74,7 @@ export function SidebarTrigger({ className, children, ...props }: SidebarTrigger
       className={cn("min-h-12 min-w-12 items-center justify-center", className)}
       {...props}
     >
-      {children ?? <Menu size={18} color={dark ? "#fafafa" : "#18181b"} />}
+      {children ?? <Menu size={18} color={colors.foreground} />}
     </Pressable>
   );
 }

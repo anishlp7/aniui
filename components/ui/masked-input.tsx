@@ -2,6 +2,7 @@ import React, { useCallback } from "react";
 import { TextInput, useColorScheme } from "react-native";
 import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
+import { useThemeColors } from "@/components/ui/theme-provider";
 
 const maskedVariants = cva(
   "rounded-md border py-2 text-foreground placeholder:text-muted-foreground",
@@ -79,13 +80,14 @@ export const MaskedInput = React.forwardRef<
   );
 
   const dark = useColorScheme() === "dark";
-  const caret = dark ? "#fafafa" : "#18181b";
+  const colors = useThemeColors();
+  const caret = colors.foreground;
 
   return (
     <TextInput
       ref={ref}
       className={cn(maskedVariants({ variant, size }), className)}
-      placeholderTextColor={dark ? "#a1a1aa" : "#71717a"}
+      placeholderTextColor={colors.mutedForeground}
       keyboardAppearance={dark ? "dark" : "light"}
       selectionColor={caret}
       cursorColor={caret}

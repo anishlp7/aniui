@@ -6,7 +6,9 @@ import Animated, {
   withRepeat,
   withSequence,
   withTiming,
+  cancelAnimation,
 } from "react-native-reanimated";
+import { useReducedMotion } from "@/components/ui/animate";
 import { cn } from "@/lib/utils";
 
 export interface SkeletonProps extends React.ComponentPropsWithoutRef<typeof View> {
@@ -15,8 +17,15 @@ export interface SkeletonProps extends React.ComponentPropsWithoutRef<typeof Vie
 
 export function Skeleton({ className, ...props }: SkeletonProps) {
   const opacity = useSharedValue(1);
+  const reducedMotion = useReducedMotion();
 
   useEffect(() => {
+    if (reducedMotion) {
+      // A static dim instead of a pulsing loop — still reads as "loading"
+      // without the motion a reduced-motion user asked to avoid.
+      opacity.value = 0.6;
+      return;
+    }
     opacity.value = withRepeat(
       withSequence(
         withTiming(0.4, { duration: 800 }),
@@ -25,7 +34,8 @@ export function Skeleton({ className, ...props }: SkeletonProps) {
       -1,
       false
     );
-  }, [opacity]);
+    return () => cancelAnimation(opacity);
+  }, [opacity, reducedMotion]);
 
   const animatedStyle = useAnimatedStyle(() => ({
     opacity: opacity.value,

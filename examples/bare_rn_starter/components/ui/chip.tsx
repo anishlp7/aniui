@@ -1,8 +1,9 @@
 import React from "react";
-import { Text, Pressable, useColorScheme } from "react-native";
+import { Text, Pressable } from "react-native";
 import { cva, type VariantProps } from "class-variance-authority";
 import { X } from "lucide-react-native";
 import { cn } from "@/lib/utils";
+import { useThemeColors } from "@/components/ui/theme-provider";
 
 const chipVariants = cva(
   "flex-row items-center rounded-full min-h-8",
@@ -49,12 +50,12 @@ export interface ChipProps
 
 export function Chip({ variant, size, className, textClassName, children, selected, onClose, ...props }: ChipProps) {
   const v = selected ? "default" : (variant ?? "outline");
-  const dark = useColorScheme() === "dark";
+  const colors = useThemeColors();
   const closeColor =
-    v === "outline" ? (dark ? "#a1a1aa" : "#71717a")
-    : v === "default" ? (dark ? "#18181b" : "#fafafa")
-    : v === "secondary" ? (dark ? "#fafafa" : "#18181b")
-    : "#fafafa";
+    v === "outline" ? colors.mutedForeground
+    : v === "default" ? colors.primaryForeground
+    : v === "secondary" ? colors.foreground
+    : colors.destructiveForeground;
   return (
     <Pressable className={cn(chipVariants({ variant: v, size }), className)} accessible={true} accessibilityRole="button" accessibilityState={{ selected }} {...props}>
       <Text className={cn(chipTextVariants({ variant: v, size }), textClassName)}>{children}</Text>

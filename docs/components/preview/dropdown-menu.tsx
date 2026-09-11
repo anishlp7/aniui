@@ -30,7 +30,6 @@ export function PreviewDropdownMenu({ className }: { className?: string }) {
         <div className="absolute left-0 top-full mt-1.5 z-50 min-w-[180px] rounded-xl border border-border bg-card p-1 shadow-lg animate-in fade-in-0 zoom-in-95">
           <button onClick={() => setOpen(false)} className="w-full text-left rounded-lg px-3 py-2 text-sm text-foreground hover:bg-accent cursor-pointer transition-colors">Edit</button>
           <button onClick={() => setOpen(false)} className="w-full text-left rounded-lg px-3 py-2 text-sm text-foreground hover:bg-accent cursor-pointer transition-colors">Duplicate</button>
-          <button onClick={() => setOpen(false)} className="w-full text-left rounded-lg px-3 py-2 text-sm text-foreground hover:bg-accent cursor-pointer transition-colors">Share</button>
           <div className="my-1 h-px bg-border mx-2" />
           <button onClick={() => setOpen(false)} className="w-full text-left rounded-lg px-3 py-2 text-sm text-destructive hover:bg-destructive/10 cursor-pointer transition-colors">Delete</button>
         </div>

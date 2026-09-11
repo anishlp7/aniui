@@ -3,11 +3,12 @@
 import React, { useState, useRef, useEffect } from "react";
 import { cn } from "@/lib/utils";
 
-function BellIcon({ className }: { className?: string }) {
+function InfoIcon({ className }: { className?: string }) {
   return (
     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
-      <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9" />
-      <path d="M13.73 21a2 2 0 0 1-3.46 0" />
+      <circle cx="12" cy="12" r="10" />
+      <line x1="12" y1="16" x2="12" y2="12" />
+      <line x1="12" y1="8" x2="12.01" y2="8" />
     </svg>
   );
 }
@@ -27,34 +28,28 @@ export function PreviewPopoverDemo() {
   }, [open]);
 
   return (
-    <div className="relative" ref={ref}>
+    <div className="relative flex items-center gap-2" ref={ref}>
+      <span className="text-sm text-foreground">Monthly budget</span>
       <button
         type="button"
-        className="inline-flex items-center gap-2 justify-center rounded-md border border-input bg-background px-4 py-2 text-sm font-medium text-foreground hover:bg-accent cursor-pointer"
+        className="inline-flex items-center justify-center text-muted-foreground hover:text-foreground cursor-pointer"
         onClick={() => setOpen(!open)}
       >
-        <BellIcon />
-        Notifications
+        <InfoIcon />
       </button>
       {open && (
-        <div className="absolute left-1/2 -translate-x-1/2 z-50 mt-2 w-64 rounded-xl border border-border bg-card p-3 shadow-lg">
-          <p className="text-sm font-semibold text-card-foreground mb-2">Notifications</p>
-          <div className="space-y-2">
-            {[
-              { title: "New message", desc: "Alex sent you a photo", time: "2m" },
-              { title: "Reminder", desc: "Meeting in 30 minutes", time: "15m" },
-              { title: "Update", desc: "App version 2.1 available", time: "1h" },
-            ].map((n) => (
-              <div key={n.title} className="flex items-start gap-2 rounded-lg p-2 hover:bg-accent/50 cursor-pointer">
-                <div className="h-2 w-2 mt-1.5 rounded-full bg-primary shrink-0" />
-                <div className="flex-1 min-w-0">
-                  <p className="text-xs font-medium text-foreground">{n.title}</p>
-                  <p className="text-xs text-muted-foreground truncate">{n.desc}</p>
-                </div>
-                <span className="text-xs text-muted-foreground shrink-0">{n.time}</span>
-              </div>
-            ))}
-          </div>
+        <div className="absolute left-1/2 top-full -translate-x-1/2 z-50 mt-2 w-64 rounded-xl border border-border bg-card p-3 shadow-lg">
+          <p className="text-sm font-semibold text-card-foreground">How this is calculated</p>
+          <p className="mt-1 text-xs text-muted-foreground">
+            Your budget resets on the 1st of each month and includes all linked accounts.
+          </p>
+          <button
+            type="button"
+            onClick={() => setOpen(false)}
+            className="mt-3 inline-flex items-center justify-center rounded-md border border-input bg-background px-3 py-1.5 text-xs font-medium text-foreground hover:bg-accent cursor-pointer"
+          >
+            Got it
+          </button>
         </div>
       )}
     </div>

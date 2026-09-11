@@ -2,6 +2,7 @@ import React from "react";
 import { View, TextInput, Pressable, Text, useColorScheme } from "react-native";
 import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
+import { useThemeColors } from "@/components/ui/theme-provider";
 import { Search, X } from "lucide-react-native";
 
 const searchBarVariants = cva(
@@ -39,18 +40,19 @@ export const SearchBar = React.forwardRef<
 ) {
   const iconSize = iconSizes[size ?? "md"];
   const dark = useColorScheme() === "dark";
-  const caret = dark ? "#fafafa" : "#18181b";
+  const colors = useThemeColors();
+  const caret = colors.foreground;
 
   return (
     <View className="flex-row items-center gap-2">
       <View className={cn(searchBarVariants({ size }), className)}>
         <View className="me-2">
-          {icon ?? <Search size={iconSize} color="#71717a" />}
+          {icon ?? <Search size={iconSize} color={colors.mutedForeground} />}
         </View>
         <TextInput
           ref={ref}
           className="flex-1 text-base text-foreground p-0"
-          placeholderTextColor={dark ? "#a1a1aa" : "#71717a"}
+          placeholderTextColor={colors.mutedForeground}
           keyboardAppearance={dark ? "dark" : "light"}
           selectionColor={caret}
           cursorColor={caret}
@@ -60,8 +62,8 @@ export const SearchBar = React.forwardRef<
           {...props}
         />
         {value ? (
-          <Pressable onPress={() => { onClear?.(); props.onChangeText?.(""); }} className="ms-1 h-6 w-6 items-center justify-center rounded-full bg-muted-foreground/20" accessible={true} accessibilityRole="button" accessibilityLabel="Clear search">
-            <X size={14} color="#71717a" />
+          <Pressable onPress={() => { onClear?.(); props.onChangeText?.(""); }} className="ms-1 h-6 w-6 items-center justify-center rounded-full bg-muted-foreground/20" accessible={true} accessibilityRole="button" accessibilityLabel="Clear search" hitSlop={{ top: 12, bottom: 12, left: 12, right: 12 }}>
+            <X size={14} color={colors.mutedForeground} />
           </Pressable>
         ) : null}
       </View>

@@ -5,8 +5,9 @@ import React, { useState } from "react";
 type Msg = { text: string; sent: boolean; time: string };
 
 const initial: Msg[] = [
-  { text: "Hey, how are you?", sent: false, time: "2:30 PM" },
-  { text: "I'm doing great, thanks!", sent: true, time: "2:31 PM" },
+  { text: "Hi! I'm Ava from support — how can I help?", sent: false, time: "2:30 PM" },
+  { text: "My order #4821 hasn't shipped yet.", sent: true, time: "2:31 PM" },
+  { text: "Let me check that for you now.", sent: false, time: "2:32 PM" },
 ];
 
 export function PreviewChatBubbleDemo() {

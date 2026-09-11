@@ -20,7 +20,7 @@ export function PreviewMenubar({ className, ...props }: PreviewMenubarProps) {
       </div>
       <div className="min-w-40 rounded-md border border-border bg-card p-1">
         <div className="flex min-h-10 items-center rounded-sm px-2 text-sm text-foreground hover:bg-secondary cursor-pointer">
-          New File
+          New Document
         </div>
         <div className="flex min-h-10 items-center rounded-sm px-2 text-sm text-foreground hover:bg-secondary cursor-pointer">
           Open…

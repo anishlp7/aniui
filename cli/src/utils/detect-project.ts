@@ -19,6 +19,16 @@ export interface ProjectInfo {
   sdkGeneration: SDKGeneration;
   expoMajor: number;
   nativewindMajor: number;
+  /** Expo SDK 56 introduced react-native-worklets as a separate Reanimated peer. */
+  sdk56Plus: boolean;
+  /**
+   * Expo SDK 57 support today is an inclusive side effect of the sdk56Plus
+   * threshold (nothing in init.ts/doctor.ts branches on 57 specifically yet).
+   * This field is a named seam for the day SDK 58 needs its own carve-out the
+   * way 56 diverged from 55 by adding worklets — add an `sdk58Plus` alongside
+   * it then, rather than introducing the first >= check from scratch.
+   */
+  sdk57Plus: boolean;
 }
 
 function parseUserAgent(ua: string | undefined): PackageManager | null {
@@ -81,6 +91,24 @@ export function getInstallCommand(pm: PackageManager, packages: string[]): strin
   }
 }
 
+/**
+ * Install command for packages that may need native linking (Reanimated,
+ * Skia, expo-blur, expo-haptics, gesture-handler, qrcode-svg, etc.). On Expo
+ * projects this routes through `expo install`, which resolves the version
+ * compatible with the project's installed SDK instead of whatever a plain
+ * `npm install` would pull from the registry's "latest" tag — the same
+ * distinction `init.ts` already draws for its own setup dependencies. Safe to
+ * use even for packages Expo's compatibility list doesn't track: `expo
+ * install` falls back to a normal install for anything it doesn't recognize,
+ * so this is never worse than `getInstallCommand`, only sometimes better.
+ */
+export function getNativeInstallCommand(pm: PackageManager, isExpo: boolean, packages: string[]): string {
+  if (isExpo) {
+    return getDlxCommand(pm, `expo install ${packages.join(" ")}`);
+  }
+  return getInstallCommand(pm, packages);
+}
+
 export function getRunCommand(pm: PackageManager, script: string): string {
   switch (pm) {
     case "pnpm":
@@ -114,7 +142,7 @@ export async function detectProject(cwd: string): Promise<ProjectInfo> {
   const packageManager = await detectPackageManager(cwd);
 
   if (!await fs.pathExists(pkgPath)) {
-    return { type: "unknown", root: cwd, packageManager, hasNativewind: false, hasUniwind: false, hasReanimated: false, hasTailwind: false, sdkGeneration: "v4", expoMajor: 0, nativewindMajor: 0 };
+    return { type: "unknown", root: cwd, packageManager, hasNativewind: false, hasUniwind: false, hasReanimated: false, hasTailwind: false, sdkGeneration: "v4", expoMajor: 0, nativewindMajor: 0, sdk56Plus: false, sdk57Plus: false };
   }
 
   const pkg = await fs.readJson(pkgPath);
@@ -143,6 +171,8 @@ export async function detectProject(cwd: string): Promise<ProjectInfo> {
     sdkGeneration,
     expoMajor,
     nativewindMajor,
+    sdk56Plus: expoMajor >= 56,
+    sdk57Plus: expoMajor >= 57,
   };
 }
 

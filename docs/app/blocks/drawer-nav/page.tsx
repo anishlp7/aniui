@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { CodeBlock } from "@/components/code-block";
+import { CodeBlock } from "@/components/code-block-server";
 
 // SVG icons — Lucide-style, 20x20, strokeWidth 1.5
 // Reference: https://lucide.dev

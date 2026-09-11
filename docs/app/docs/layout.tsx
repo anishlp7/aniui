@@ -9,7 +9,7 @@ export const metadata: Metadata = {
     default: "Components",
     template: "%s | AniUI",
   },
-  description: "Browse 101 React Native components. Button, Card, Dialog, Select, Toast, Data Table, Command Menu, and more. Built with Uniwind or NativeWind and rn-primitives. AniUI.",
+  description: "Browse 148 React Native components. Button, Card, Dialog, Select, Toast, Data Table, Command Menu, and more. Built with Uniwind or NativeWind and rn-primitives. AniUI.",
 };
 
 export default function DocsLayout({

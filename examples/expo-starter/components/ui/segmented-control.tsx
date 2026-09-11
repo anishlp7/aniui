@@ -1,6 +1,7 @@
 import React from "react";
 import { View, Pressable, Text, useColorScheme } from "react-native";
 import { cn } from "@/lib/utils";
+import { useThemeColors } from "@/components/ui/theme-provider";
 
 const heights = { sm: 36, md: 44, lg: 56 } as const;
 
@@ -35,9 +36,10 @@ export function SegmentedControl<T extends string | number = string>({
   ...rest
 }: SegmentedControlProps<T>) {
   const dark = useColorScheme() === "dark";
+  const colors = useThemeColors();
   const activeBg = dark ? "#37373a" : "#ffffff";
-  const activeFg = dark ? "#fafafa" : "#09090b";
-  const inactiveFg = dark ? "#a1a1aa" : "#71717a";
+  const activeFg = colors.foreground;
+  const inactiveFg = colors.mutedForeground;
   const disabledFg = dark ? "#52525b" : "#d4d4d8";
 
   const items: SegmentedOption<T>[] = options.map((o, i) =>

@@ -106,8 +106,8 @@ export function PreviewSlideToConfirmDemo() {
       {/* Remount via key to reset — same pattern as the native component */}
       <PreviewSlideToConfirm
         key={attempt}
-        label="Slide to pay $49.00"
-        confirmedLabel="Payment confirmed"
+        label="Slide to pay $12.00"
+        confirmedLabel="Payment sent!"
         onConfirm={() => setPaid(true)}
       />
       {paid && (

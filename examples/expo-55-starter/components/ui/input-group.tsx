@@ -1,7 +1,8 @@
 import React, { createContext, useContext, useState, useCallback } from "react";
-import { View, Text, TextInput, Pressable, useColorScheme } from "react-native";
+import { View, Text, TextInput, Pressable } from "react-native";
 import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
+import { useThemeColors } from "@/components/ui/theme-provider";
 
 // Focus context — container shows ring when child input is focused
 const FocusCtx = createContext<{ focused: boolean; setFocused: (v: boolean) => void }>({
@@ -59,7 +60,7 @@ export interface InputGroupInputProps extends React.ComponentPropsWithoutRef<typ
 
 export function InputGroupInput({ className, onFocus, onBlur, ...props }: InputGroupInputProps) {
   const { setFocused } = useContext(FocusCtx);
-  const dark = useColorScheme() === "dark";
+  const colors = useThemeColors();
   const handleFocus = useCallback((e: Parameters<NonNullable<typeof onFocus>>[0]) => {
     setFocused(true);
     onFocus?.(e);
@@ -72,7 +73,7 @@ export function InputGroupInput({ className, onFocus, onBlur, ...props }: InputG
   return (
     <TextInput
       className={cn("flex-1 min-h-12 px-3 text-base text-foreground", className)}
-      placeholderTextColor={dark ? "#a1a1aa" : "#71717a"}
+      placeholderTextColor={colors.mutedForeground}
       onFocus={handleFocus}
       onBlur={handleBlur}
       {...props}
@@ -86,7 +87,7 @@ export interface InputGroupTextareaProps extends React.ComponentPropsWithoutRef<
 
 export function InputGroupTextarea({ className, onFocus, onBlur, ...props }: InputGroupTextareaProps) {
   const { setFocused } = useContext(FocusCtx);
-  const dark = useColorScheme() === "dark";
+  const colors = useThemeColors();
   const handleFocus = useCallback((e: Parameters<NonNullable<typeof onFocus>>[0]) => {
     setFocused(true);
     onFocus?.(e);
@@ -99,7 +100,7 @@ export function InputGroupTextarea({ className, onFocus, onBlur, ...props }: Inp
   return (
     <TextInput
       className={cn("flex-1 min-h-24 px-3 py-3 text-base text-foreground", className)}
-      placeholderTextColor={dark ? "#a1a1aa" : "#71717a"}
+      placeholderTextColor={colors.mutedForeground}
       multiline
       textAlignVertical="top"
       onFocus={handleFocus}

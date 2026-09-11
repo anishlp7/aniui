@@ -1,7 +1,8 @@
 import React from "react";
-import { View, Text, useColorScheme } from "react-native";
+import { View, Text } from "react-native";
 import { cva, type VariantProps } from "class-variance-authority";
 import { Check, CheckCheck } from "lucide-react-native";
+import { useThemeColors } from "@/components/ui/theme-provider";
 import { cn } from "@/lib/utils";
 
 const bubbleVariants = cva("max-w-[80%] rounded-2xl px-4 py-2.5", {
@@ -42,8 +43,8 @@ export function ChatBubble({
   ...props
 }: ChatBubbleProps) {
   const isSent = variant === "sent";
-  const dark = useColorScheme() === "dark";
-  const tick = dark ? "#18181b99" : "#fafafa99";
+  const colors = useThemeColors();
+  const tick = `${colors.primaryForeground}99`;
 
   return (
     <View className={cn(bubbleVariants({ variant }), className)} {...props}>

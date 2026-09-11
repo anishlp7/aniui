@@ -6,13 +6,14 @@
   "description": "Themed pull-to-refresh control for ScrollView and FlatList",
   "dependencies": [],
   "registryDependencies": [
-    "https://aniui.dev/r/utils.json"
+    "https://aniui.dev/r/utils.json",
+    "https://aniui.dev/r/theme-provider.json"
   ],
   "files": [
     {
       "path": "components/ui/refresh-control.tsx",
       "type": "registry:ui",
-      "content": "import React from \"react\";\nimport { RefreshControl as RNRefreshControl, useColorScheme } from \"react-native\";\n\nexport interface RefreshControlProps extends React.ComponentPropsWithoutRef<typeof RNRefreshControl> {\n  refreshing: boolean;\n  onRefresh: () => void;\n  tintColor?: string;\n  colors?: string[];\n}\n\nexport function RefreshControl({ refreshing, onRefresh, tintColor, colors, ...props }: RefreshControlProps) {\n  const dark = useColorScheme() === \"dark\";\n  const tint = tintColor ?? (dark ? \"#fafafa\" : \"#18181b\");\n\n  return (\n    <RNRefreshControl\n      refreshing={refreshing}\n      onRefresh={onRefresh}\n      tintColor={tint}\n      colors={colors ?? [tint]}\n      {...props}\n    />\n  );\n}\n"
+      "content": "import React from \"react\";\nimport { RefreshControl as RNRefreshControl } from \"react-native\";\nimport { useThemeColors } from \"@/components/ui/theme-provider\";\n\nexport interface RefreshControlProps extends React.ComponentPropsWithoutRef<typeof RNRefreshControl> {\n  refreshing: boolean;\n  onRefresh: () => void;\n  tintColor?: string;\n  colors?: string[];\n}\n\nexport function RefreshControl({ refreshing, onRefresh, tintColor, colors, ...props }: RefreshControlProps) {\n  const themeColors = useThemeColors();\n  const tint = tintColor ?? themeColors.foreground;\n\n  return (\n    <RNRefreshControl\n      refreshing={refreshing}\n      onRefresh={onRefresh}\n      tintColor={tint}\n      colors={colors ?? [tint]}\n      {...props}\n    />\n  );\n}\n"
     }
   ],
   "docs": "AniUI is React Native. On an existing RNR/NativeWind project, add and use directly — the tokens and aliases already match, no setup needed. On a fresh project, run `npx @aniui/cli init` first to configure NativeWind/Uniwind, theme tokens, and Metro/Babel."

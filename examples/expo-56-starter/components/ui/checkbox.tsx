@@ -1,8 +1,9 @@
 import React from "react";
-import { Pressable, View, useColorScheme } from "react-native";
+import { Pressable, View } from "react-native";
 import * as CheckboxPrimitive from "@rn-primitives/checkbox";
 import { Check } from "lucide-react-native";
 import { cn } from "@/lib/utils";
+import { useThemeColors } from "@/components/ui/theme-provider";
 
 export interface CheckboxProps extends React.ComponentPropsWithoutRef<typeof Pressable> {
   className?: string;
@@ -11,7 +12,7 @@ export interface CheckboxProps extends React.ComponentPropsWithoutRef<typeof Pre
 }
 
 export function Checkbox({ checked = false, onCheckedChange, className, disabled, ...props }: CheckboxProps) {
-  const dark = useColorScheme() === "dark";
+  const colors = useThemeColors();
   return (
     <CheckboxPrimitive.Root
       checked={checked}
@@ -36,7 +37,7 @@ export function Checkbox({ checked = false, onCheckedChange, className, disabled
           )}
         >
           <CheckboxPrimitive.Indicator>
-            <Check size={14} color={dark ? "#18181b" : "#fafafa"} strokeWidth={3} />
+            <Check size={14} color={colors.primaryForeground} strokeWidth={3} />
           </CheckboxPrimitive.Indicator>
         </View>
       </Pressable>

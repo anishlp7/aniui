@@ -1,37 +1,10 @@
 import path from "path";
 import fs from "fs-extra";
 import prompts from "prompts";
-import { detectProject, getInstallCommand, getDlxCommand, type StyleEngine } from "../utils/detect-project";
+import { detectProject, getInstallCommand, getNativeInstallCommand, getDlxCommand, type StyleEngine } from "../utils/detect-project";
 import { copyTemplate, copyUtilFile, getPackageRoot } from "../utils/file-ops";
 import { logger } from "../utils/logger";
-
-interface ThemePreset {
-  light: Record<string, string>;
-  dark: Record<string, string>;
-}
-
-const THEME_PRESETS: Record<string, ThemePreset> = {
-  default: {
-    light: { "--primary": "240 5.9% 10%", "--primary-foreground": "0 0% 98%" },
-    dark:  { "--primary": "0 0% 98%", "--primary-foreground": "240 5.9% 10%" },
-  },
-  blue: {
-    light: { "--primary": "221.2 83.2% 53.3%", "--primary-foreground": "210 40% 98%" },
-    dark:  { "--primary": "217.2 91.2% 59.8%", "--primary-foreground": "222.2 47.4% 11.2%" },
-  },
-  green: {
-    light: { "--primary": "142.1 76.2% 36.3%", "--primary-foreground": "355.7 100% 97.3%" },
-    dark:  { "--primary": "142.1 70.6% 45.3%", "--primary-foreground": "144.9 80.4% 10%" },
-  },
-  orange: {
-    light: { "--primary": "24.6 95% 53.1%", "--primary-foreground": "60 9.1% 97.8%" },
-    dark:  { "--primary": "20.5 90.2% 48.2%", "--primary-foreground": "60 9.1% 97.8%" },
-  },
-  rose: {
-    light: { "--primary": "346.8 77.2% 49.8%", "--primary-foreground": "355.7 100% 97.3%" },
-    dark:  { "--primary": "346.8 77.2% 49.8%", "--primary-foreground": "355.7 100% 97.3%" },
-  },
-};
+import { getPreset, toCssVarMap, type PresetName } from "../theme-presets";
 
 export async function initCommand(opts?: { style?: string; nw?: string; yes?: boolean }): Promise<void> {
   const cwd = process.cwd();
@@ -227,7 +200,9 @@ export async function initCommand(opts?: { style?: string; nw?: string; yes?: bo
   // Step 2: Auto-install missing dependencies
   const hasStyleEngine = isChosenUniwind ? project.hasUniwind : project.hasNativewind;
 
-  const isSdk56Plus = project.expoMajor >= 56;
+  // project.sdk57Plus is also available here — currently identical behavior to
+  // sdk56Plus, but named so a future SDK58 divergence has a seam to attach to.
+  const isSdk56Plus = project.sdk56Plus;
   const pkgJson = await fs.readJson(path.join(cwd, "package.json"));
   const allDeps = { ...pkgJson.dependencies, ...pkgJson.devDependencies };
   const hasWorklets = !!allDeps["react-native-worklets"];
@@ -263,7 +238,7 @@ export async function initCommand(opts?: { style?: string; nw?: string; yes?: bo
 
     logger.break();
     logger.info("Missing dependencies detected. Installing...");
-    logger.info(`  ${getInstallCommand(pm, missing)}`);
+    logger.info(`  ${getNativeInstallCommand(pm, project.type === "expo", missing)}`);
     logger.break();
 
     let confirm = true;
@@ -297,7 +272,7 @@ export async function initCommand(opts?: { style?: string; nw?: string; yes?: bo
         logger.success("Dependencies installed!");
       } catch {
         logger.error("Failed to install dependencies. Install them manually:");
-        logger.info(`  ${getInstallCommand(pm, missing)}`);
+        logger.info(`  ${getNativeInstallCommand(pm, project.type === "expo", missing)}`);
         process.exit(1);
       }
     } else {
@@ -365,7 +340,9 @@ export async function initCommand(opts?: { style?: string; nw?: string; yes?: bo
     globalCss = `@import "tailwindcss";\n@import "uniwind";\n\n@theme {\n  --radius: ${radius};\n}\n\n@layer theme {\n  :root {\n    @variant light {\n${lightLines}\n    }\n\n    @variant dark {\n${darkLines}\n    }\n  }\n}\n`;
   }
 
-  const preset = THEME_PRESETS[response.theme] || THEME_PRESETS.default;
+  const presetName = (response.theme as PresetName) || "default";
+  const presetTokens = getPreset(presetName);
+  const preset = { light: toCssVarMap(presetTokens.light), dark: toCssVarMap(presetTokens.dark) };
   const isV5 = gen === "v5";
 
   // Apply theme preset to both light and dark sections

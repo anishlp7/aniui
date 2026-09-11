@@ -1,5 +1,6 @@
 import React from "react";
 import { View, Pressable } from "react-native";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 import * as HoverCardPrimitive from "@rn-primitives/hover-card";
 import Animated from "react-native-reanimated";
 import { entering, exiting } from "@/components/ui/animate";
@@ -34,8 +35,15 @@ export interface HoverCardTriggerProps extends React.ComponentPropsWithoutRef<ty
 export function HoverCardTrigger({ className, children, ...props }: HoverCardTriggerProps) {
   return (
     <HoverCardPrimitive.Trigger asChild>
+      {/* rn-primitives measures this exact box to position HoverCardContent
+          below it — min-h-12/min-w-12 would force a 48x48 measured box even
+          for a small icon child, opening the content ~48px below the
+          trigger's top edge instead of just past the icon. hitSlop expands
+          the tappable area to the 48dp minimum without inflating what gets
+          measured. */}
       <Pressable
-        className={cn("min-h-12 min-w-12", className)}
+        hitSlop={14}
+        className={cn("", className)}
         accessible={true}
         accessibilityRole="button"
         {...props}
@@ -62,6 +70,7 @@ export function HoverCardContent({
   align = "center",
   ...props
 }: HoverCardContentProps) {
+  const insets = useSafeAreaInsets();
   return (
     <HoverCardPrimitive.Portal>
       <HoverCardPrimitive.Overlay className="absolute inset-0" />
@@ -70,6 +79,7 @@ export function HoverCardContent({
         sideOffset={sideOffset}
         align={align}
         avoidCollisions
+        insets={insets}
       >
         <Animated.View entering={entering.fadeIn} exiting={exiting.fadeOut}>
           <View

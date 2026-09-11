@@ -1,20 +1,18 @@
 "use client";
 
-import React, { useState, useMemo } from "react";
-import { highlight } from "sugar-high";
+import React, { useState } from "react";
 
 interface ComponentPlaygroundProps {
   code: string;
-  /** Pre-rendered highlighted HTML from server-side shiki */
-  highlightedCode?: string;
-  children: React.ReactNode;
-  /** Use "inline" for overlay components (dialog, drawer, toast) that escape containment */
-  variant?: "phone" | "inline";
+  /** Pre-rendered highlighted HTML from server-side shiki — the sole caller
+   * (highlighted-playground.tsx) always computes and passes this. */
+  highlightedCode: string;
+  children?: React.ReactNode;
   /** Optional Expo Snack URL for real device preview */
   snackUrl?: string;
 }
 
-export function ComponentPlaygroundClient({ code, highlightedCode, children, variant = "phone", snackUrl }: ComponentPlaygroundProps) {
+export function ComponentPlaygroundClient({ code, highlightedCode, children, snackUrl }: ComponentPlaygroundProps) {
   const [copied, setCopied] = useState(false);
 
   const handleCopy = () => {
@@ -25,41 +23,30 @@ export function ComponentPlaygroundClient({ code, highlightedCode, children, var
 
   return (
     <div className="w-full rounded-lg border border-border overflow-hidden">
-      {/* Preview area */}
-      <div className="flex items-center justify-center bg-[repeating-linear-gradient(45deg,var(--color-secondary)_0,var(--color-secondary)_1px,transparent_0,transparent_50%)] bg-[length:6px_6px] bg-secondary/20 p-4 sm:p-8">
-        {variant === "phone" ? (
-          /* Phone frame mockup */
-          <div className="relative w-full max-w-[320px] overflow-hidden rounded-[2.75rem] border-[3px] border-foreground/[0.08] bg-background shadow-xl shadow-black/10 ring-1 ring-black/5 dark:border-foreground/[0.14] dark:ring-white/5">
-            {/* Dynamic Island */}
-            <div className="flex justify-center pt-2.5 pb-1.5">
-              <div className="h-[22px] w-[84px] rounded-full bg-zinc-950 ring-1 ring-white/5 dark:bg-black dark:ring-white/10" />
-            </div>
-            {/* Screen content */}
-            <div className="flex min-h-[220px] items-center justify-center px-5 py-5">
+      {children ? (
+        <>
+          {/* Preview area — a plain, generously-sized canvas. No device-frame
+              chrome: a fixed phone bezel squeezed every preview into ~270px
+              regardless of what the component actually needed, which made
+              wide/horizontal components (carousels, tab bars, etc.) look
+              cramped and hard to read. */}
+          <div className="flex items-center justify-center bg-[repeating-linear-gradient(45deg,var(--color-secondary)_0,var(--color-secondary)_1px,transparent_0,transparent_50%)] bg-[length:6px_6px] bg-secondary/20 p-6 sm:p-10">
+            <div className="flex min-h-[260px] w-full max-w-2xl items-center justify-center rounded-xl border border-border/60 bg-background p-8 shadow-sm">
               {children}
             </div>
-            {/* Home indicator */}
-            <div className="flex justify-center pb-2.5 pt-1.5">
-              <div className="h-1 w-28 rounded-full bg-foreground/20" />
-            </div>
           </div>
-        ) : (
-          /* Inline preview for overlay components */
-          <div className="w-full min-h-[200px] flex items-center justify-center rounded-lg bg-background p-6">
-            {children}
-          </div>
-        )}
-      </div>
 
-      {/* Web preview disclaimer */}
-      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-1 px-4 py-2 border-t border-border bg-muted/30 text-xs text-muted-foreground">
-        <span>Web preview — components render natively on iOS &amp; Android</span>
-        {snackUrl && (
-          <a href={snackUrl} target="_blank" rel="noopener noreferrer" className="text-primary hover:underline font-medium">
-            Open in Expo Snack →
-          </a>
-        )}
-      </div>
+          {/* Web preview disclaimer */}
+          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-1 px-4 py-2 border-t border-border bg-muted/30 text-xs text-muted-foreground">
+            <span>Web preview — components render natively on iOS &amp; Android</span>
+            {snackUrl && (
+              <a href={snackUrl} target="_blank" rel="noopener noreferrer" className="text-primary hover:underline font-medium">
+                Open in Expo Snack →
+              </a>
+            )}
+          </div>
+        </>
+      ) : null}
 
       {/* Code section */}
       <div className="relative border-t border-border">
@@ -69,25 +56,12 @@ export function ComponentPlaygroundClient({ code, highlightedCode, children, var
         >
           {copied ? "Copied!" : "Copy"}
         </button>
-        {highlightedCode ? (
-          <div
-            className="shiki-wrapper overflow-x-auto bg-secondary/50 p-4 text-sm leading-relaxed [&_pre]:!bg-transparent [&_code]:font-mono"
-            dangerouslySetInnerHTML={{ __html: highlightedCode }}
-          />
-        ) : (
-          <SugarHighBlock code={code} />
-        )}
+        <div
+          className="shiki-wrapper overflow-x-auto bg-secondary/50 p-4 text-sm leading-relaxed [&_pre]:!bg-transparent [&_code]:font-mono"
+          dangerouslySetInnerHTML={{ __html: highlightedCode }}
+        />
       </div>
     </div>
-  );
-}
-
-function SugarHighBlock({ code }: { code: string }) {
-  const html = useMemo(() => highlight(code), [code]);
-  return (
-    <pre className="overflow-x-auto bg-secondary/50 p-4 text-sm leading-relaxed">
-      <code className="font-mono" dangerouslySetInnerHTML={{ __html: html }} />
-    </pre>
   );
 }
 

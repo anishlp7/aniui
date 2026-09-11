@@ -3,79 +3,8 @@ import fs from "fs-extra";
 import prompts from "prompts";
 import { logger } from "../utils/logger";
 import { detectPackageManager, getDlxCommand } from "../utils/detect-project";
-
-const THEMES: Record<string, { light: Record<string, string>; dark: Record<string, string> }> = {
-  default: {
-    light: {
-      "--background": "0 0% 100%",
-      "--foreground": "240 10% 3.9%",
-      "--primary": "240 5.9% 10%",
-      "--primary-foreground": "0 0% 98%",
-      "--secondary": "240 4.8% 95.9%",
-      "--secondary-foreground": "240 5.9% 10%",
-      "--muted": "240 4.8% 95.9%",
-      "--muted-foreground": "240 3.8% 46.1%",
-      "--accent": "240 4.8% 95.9%",
-      "--accent-foreground": "240 5.9% 10%",
-      "--destructive": "0 84.2% 60.2%",
-      "--destructive-foreground": "0 0% 98%",
-    },
-    dark: {
-      "--background": "240 10% 3.9%",
-      "--foreground": "0 0% 98%",
-      "--primary": "0 0% 98%",
-      "--primary-foreground": "240 5.9% 10%",
-      "--secondary": "240 3.7% 15.9%",
-      "--secondary-foreground": "0 0% 98%",
-      "--muted": "240 3.7% 15.9%",
-      "--muted-foreground": "240 5% 64.9%",
-      "--accent": "240 3.7% 15.9%",
-      "--accent-foreground": "0 0% 98%",
-      "--destructive": "0 62.8% 30.6%",
-      "--destructive-foreground": "0 0% 98%",
-    },
-  },
-  blue: {
-    light: {
-      "--primary": "221.2 83.2% 53.3%",
-      "--primary-foreground": "210 40% 98%",
-    },
-    dark: {
-      "--primary": "217.2 91.2% 59.8%",
-      "--primary-foreground": "222.2 47.4% 11.2%",
-    },
-  },
-  green: {
-    light: {
-      "--primary": "142.1 76.2% 36.3%",
-      "--primary-foreground": "355.7 100% 97.3%",
-    },
-    dark: {
-      "--primary": "142.1 70.6% 45.3%",
-      "--primary-foreground": "144.9 80.4% 10%",
-    },
-  },
-  orange: {
-    light: {
-      "--primary": "24.6 95% 53.1%",
-      "--primary-foreground": "60 9.1% 97.8%",
-    },
-    dark: {
-      "--primary": "20.5 90.2% 48.2%",
-      "--primary-foreground": "60 9.1% 97.8%",
-    },
-  },
-  rose: {
-    light: {
-      "--primary": "346.8 77.2% 49.8%",
-      "--primary-foreground": "355.7 100% 97.3%",
-    },
-    dark: {
-      "--primary": "346.8 77.2% 49.8%",
-      "--primary-foreground": "355.7 100% 97.3%",
-    },
-  },
-};
+import { getPreset, toCssVarMap, type PresetName } from "../theme-presets";
+import { patchThemeColorsBlock } from "../utils/theme-colors-block";
 
 export async function themeCommand(): Promise<void> {
   const cwd = process.cwd();
@@ -107,7 +36,9 @@ export async function themeCommand(): Promise<void> {
   }
 
   let css = await fs.readFile(globalCssPath, "utf-8");
-  const theme = THEMES[response.theme];
+  const presetName = response.theme as PresetName;
+  const preset = getPreset(presetName);
+  const theme = { light: toCssVarMap(preset.light), dark: toCssVarMap(preset.dark) };
 
   // Split CSS into :root and .dark sections to apply overrides independently
   const darkBlockMatch = css.match(/(\.dark\s*\{)([\s\S]*?)(\})/);
@@ -137,10 +68,25 @@ export async function themeCommand(): Promise<void> {
 
   // Update .aniui.json
   const configPath = path.join(cwd, ".aniui.json");
+  let componentsDir = "components/ui";
   if (await fs.pathExists(configPath)) {
     const config = await fs.readJson(configPath);
     config.theme = response.theme;
+    componentsDir = config.componentsDir || componentsDir;
     await fs.writeJson(configPath, config, { spaces: 2 });
+  }
+
+  // If theme-provider.tsx is already installed, keep its THEME_COLORS (the
+  // hex values native props/Skia canvases read, since they can't use
+  // className tokens) in sync with the newly chosen preset.
+  const themeProviderPath = path.join(cwd, componentsDir, "theme-provider.tsx");
+  if (await fs.pathExists(themeProviderPath)) {
+    const content = await fs.readFile(themeProviderPath, "utf-8");
+    const patched = patchThemeColorsBlock(content, presetName);
+    if (patched !== content) {
+      await fs.writeFile(themeProviderPath, patched, "utf-8");
+      logger.success("Synced theme-provider.tsx's THEME_COLORS to the new preset");
+    }
   }
 
   logger.success(`Theme updated to "${response.theme}"`);

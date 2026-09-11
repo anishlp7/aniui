@@ -4,7 +4,7 @@ import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import { useTheme } from "./theme-provider";
 import { PrefetchLink } from "./prefetch-link";
-import { gettingStartedItems, componentItems, chartItems, blockItems } from "@/lib/nav-data";
+import { flattenSectionItems, gettingStartedItems, sidebarSections } from "@/lib/nav-data";
 import { CommandSearch } from "./command-search";
 
 function SunIcon() {
@@ -59,7 +59,7 @@ function GitHubIcon() {
 }
 
 export function Navbar() {
-  const { theme, toggleTheme } = useTheme();
+  const { toggleTheme } = useTheme();
   const [mobileOpen, setMobileOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
 
@@ -86,19 +86,19 @@ export function Navbar() {
           </button>
 
           <PrefetchLink href="/" className="flex items-center">
-            <Image
-              src={theme === "dark" ? "/logo-dark.png" : "/logo-light.png"}
-              alt="AniUI"
-              width={90}
-              height={90}
-            />
+            {/* Both logos always render; dark: is a static className (not
+                driven by theme state) so server and client markup match —
+                only CSS decides which one is visible, same as the favicon
+                <link media="(prefers-color-scheme)"> tags in layout.tsx. */}
+            <Image src="/logo-light.png" alt="AniUI" width={90} height={90} className="dark:hidden" />
+            <Image src="/logo-dark.png" alt="AniUI" width={90} height={90} className="hidden dark:block" />
           </PrefetchLink>
 
           <nav className="hidden md:flex items-center gap-6 text-sm font-medium">
             <PrefetchLink href="/docs" className="text-muted-foreground hover:text-foreground transition-colors">
               Docs
             </PrefetchLink>
-            <PrefetchLink href="/docs/accordion" className="text-muted-foreground hover:text-foreground transition-colors">
+            <PrefetchLink href="/docs/components" className="text-muted-foreground hover:text-foreground transition-colors">
               Components
             </PrefetchLink>
             <PrefetchLink href="/charts" className="text-muted-foreground hover:text-foreground transition-colors">
@@ -160,7 +160,10 @@ export function Navbar() {
               onClick={toggleTheme}
               className="inline-flex items-center justify-center rounded-md p-2 text-muted-foreground hover:text-foreground hover:bg-accent transition-colors"
             >
-              {theme === "dark" ? <SunIcon /> : <MoonIcon />}
+              {/* Both icons always render; dark: is a static className (not
+                  driven by theme state) so server and client markup match. */}
+              <span className="dark:hidden"><MoonIcon /></span>
+              <span className="hidden dark:block"><SunIcon /></span>
             </button>
           </div>
         </div>
@@ -199,30 +202,18 @@ export function Navbar() {
                 {item.title}
               </PrefetchLink>
             ))}
-            <div className="border-t border-border pt-4 mt-4">
-              <p className="text-xs font-semibold text-foreground mb-2">Components</p>
-              {componentItems.map((item, i) => (
-                <PrefetchLink key={item.href} href={item.href} className={`block text-sm text-muted-foreground hover:text-foreground${i > 0 ? " mt-2" : ""}`} onClick={() => setMobileOpen(false)}>
-                  {item.title}
-                </PrefetchLink>
+            {sidebarSections
+              .filter((section) => section.title !== "Getting Started")
+              .map((section) => (
+                <div key={section.title} className="border-t border-border pt-4 mt-4">
+                  <p className="text-xs font-semibold text-foreground mb-2">{section.title}</p>
+                  {flattenSectionItems(section).map((item, i) => (
+                    <PrefetchLink key={item.href} href={item.href} className={`block text-sm text-muted-foreground hover:text-foreground${i > 0 ? " mt-2" : ""}`} onClick={() => setMobileOpen(false)}>
+                      {item.title}
+                    </PrefetchLink>
+                  ))}
+                </div>
               ))}
-            </div>
-            <div className="border-t border-border pt-4 mt-4">
-              <p className="text-xs font-semibold text-foreground mb-2">Charts</p>
-              {chartItems.map((item, i) => (
-                <PrefetchLink key={item.href} href={item.href} className={`block text-sm text-muted-foreground hover:text-foreground${i > 0 ? " mt-2" : ""}`} onClick={() => setMobileOpen(false)}>
-                  {item.title}
-                </PrefetchLink>
-              ))}
-            </div>
-            <div className="border-t border-border pt-4 mt-4">
-              <p className="text-xs font-semibold text-foreground mb-2">Blocks</p>
-              {blockItems.map((item, i) => (
-                <PrefetchLink key={item.href} href={item.href} className={`block text-sm text-muted-foreground hover:text-foreground${i > 0 ? " mt-2" : ""}`} onClick={() => setMobileOpen(false)}>
-                  {item.title}
-                </PrefetchLink>
-              ))}
-            </div>
           </nav>
         </div>
       )}
