@@ -44,7 +44,7 @@ export function ThemeProvider({
   const [theme, setThemeState] = useState<Theme>(defaultTheme);
 
   const resolvedTheme: "light" | "dark" =
-    theme === "system" ? (systemScheme ?? "light") : theme;
+    theme === "system" ? (systemScheme === "dark" ? "dark" : "light") : theme;
 
   const applyTheme = useCallback((resolved: "light" | "dark") => {
     if (uniwindSetTheme) {
@@ -58,13 +58,13 @@ export function ThemeProvider({
 
   const setTheme = useCallback((newTheme: Theme) => {
     setThemeState(newTheme);
-    const resolved = newTheme === "system" ? (systemScheme ?? "light") : newTheme;
+    const resolved = newTheme === "system" ? (systemScheme === "dark" ? "dark" : "light") : newTheme;
     applyTheme(resolved);
   }, [systemScheme, applyTheme]);
 
   const toggleTheme = useCallback(() => {
     setThemeState((prev) => {
-      const current = prev === "system" ? (systemScheme ?? "light") : prev;
+      const current = prev === "system" ? (systemScheme === "dark" ? "dark" : "light") : prev;
       const next = current === "dark" ? "light" : "dark";
       applyTheme(next);
       return next;
