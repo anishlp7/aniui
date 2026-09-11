@@ -10,7 +10,7 @@ import { Text } from "react-native";
 
 <GooeyPopover side="bottom" align="center">
   <GooeyPopoverTrigger>Options</GooeyPopoverTrigger>
-  <GooeyPopoverContent>
+  <GooeyPopoverContent className="min-w-[210px]">
     <Text className="text-sm text-foreground">Popover content goes here.</Text>
   </GooeyPopoverContent>
 </GooeyPopover>`;

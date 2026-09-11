@@ -307,7 +307,7 @@ export function GooeyPopoverContent({ children, className }: GooeyPopoverContent
   return (
     <>
       <View pointerEvents="none" style={{ position: "absolute", left: 0, top: 0, opacity: 0, zIndex: -2 }}>
-        <View className={cn("max-w-[320px] p-4", className)} onLayout={onMeasure}>
+        <View className={cn("max-w-[350px] p-4", className)} onLayout={onMeasure}>
           {children}
         </View>
       </View>

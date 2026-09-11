@@ -3551,7 +3551,7 @@ const demos: Record<string, () => React.ReactElement> = {
           <GooeyPopoverTrigger>
             <Text className="text-sm font-medium text-primary-foreground">Options</Text>
           </GooeyPopoverTrigger>
-          <GooeyPopoverContent>
+          <GooeyPopoverContent className="min-w-[210px]">
             <Text className="text-sm" style={{ color: dark ? "#fafafa" : "#18181b" }}>Popover content goes here.</Text>
           </GooeyPopoverContent>
         </GooeyPopover>
