@@ -46,6 +46,7 @@ npx @aniui/cli add button text input card
 - ContextMenu: `import { ContextMenu, ContextMenuTrigger, ContextMenuContent, ContextMenuItem, ContextMenuSeparator } from "@/components/ui/context-menu"` — needs @rn-primitives/context-menu, react-native-reanimated
 - DataTable: `import { DataTable } from "@/components/ui/data-table"` — Sortable, filterable data table with pagination and custom cell rendering
 - DatePicker: `import { DatePicker, DateRangePicker } from "@/components/ui/date-picker"` — Calendar popup picker with range support
+- TimePicker: `import { TimePicker, DateTimePicker } from "@/components/ui/time-picker"` — Native time and datetime picker, needs @react-native-community/datetimepicker
 - Dialog: `import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter } from "@/components/ui/dialog"`
 - DirectionProvider: `import { DirectionProvider, useDirection } from "@/components/ui/direction-provider"` — RTL/LTR direction context with I18nManager integration
 - Drawer: `import { Drawer, DrawerContent } from "@/components/ui/drawer"` — needs react-native-reanimated

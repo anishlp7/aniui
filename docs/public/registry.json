@@ -916,6 +916,12 @@
       "description": "Sun/moon icon-morph theme toggle with an optional full-screen circular wipe transition"
     },
     {
+      "name": "time-picker",
+      "type": "registry:ui",
+      "title": "TimePicker",
+      "description": "Native time and datetime picker powered by @react-native-community/datetimepicker"
+    },
+    {
       "name": "timeline",
       "type": "registry:ui",
       "title": "Timeline",

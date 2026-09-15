@@ -1,0 +1,26 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "time-picker",
+  "type": "registry:ui",
+  "title": "TimePicker",
+  "description": "Native time and datetime picker powered by @react-native-community/datetimepicker",
+  "dependencies": [
+    "@react-native-community/datetimepicker",
+    "lucide-react-native",
+    "react-native-svg",
+    "clsx",
+    "tailwind-merge"
+  ],
+  "registryDependencies": [
+    "https://aniui.dev/r/utils.json",
+    "https://aniui.dev/r/theme-provider.json"
+  ],
+  "files": [
+    {
+      "path": "components/ui/time-picker.tsx",
+      "type": "registry:ui",
+      "content": "import React, { useState } from \"react\";\nimport { Text, Pressable, Modal, Platform } from \"react-native\";\nimport RNDateTimePicker, { type DateTimePickerEvent } from \"@react-native-community/datetimepicker\";\nimport { Clock, CalendarClock, type LucideIcon } from \"lucide-react-native\";\nimport { cn } from \"@/lib/utils\";\nimport { useTheme, useThemeColors } from \"@/components/ui/theme-provider\";\n\ntype MinuteInterval = 1 | 2 | 3 | 4 | 5 | 6 | 10 | 12 | 15 | 20 | 30;\ntype PickerMode = \"time\" | \"datetime\";\n\ninterface BasePickerProps {\n  className?: string;\n  value?: Date;\n  onChange?: (date: Date) => void;\n  placeholder?: string;\n  is24Hour?: boolean;\n  minuteInterval?: MinuteInterval;\n}\n\nexport interface TimePickerProps extends BasePickerProps { formatTime?: (date: Date) => string; }\nexport interface DateTimePickerProps extends BasePickerProps { min?: Date; max?: Date; formatDateTime?: (date: Date) => string; }\n\nfunction defaultTime(date: Date, is24Hour?: boolean) {\n  return date.toLocaleTimeString([], { hour: \"numeric\", minute: \"2-digit\", hour12: !is24Hour });\n}\n\nfunction NativePicker(props: {\n  mode: PickerMode; className?: string; value?: Date; onChange?: (date: Date) => void; placeholder: string;\n  is24Hour?: boolean; minuteInterval?: MinuteInterval; min?: Date; max?: Date;\n  formatValue: (date: Date) => string; Icon: LucideIcon;\n}) {\n  const { mode, className, value, onChange, placeholder, is24Hour, minuteInterval, min, max, formatValue, Icon } = props;\n  const colors = useThemeColors();\n  const { resolvedTheme } = useTheme();\n  const [open, setOpen] = useState(false);\n  const [draft, setDraft] = useState(value ?? new Date());\n  const onAndroidChange = (event: DateTimePickerEvent, selected?: Date) => {\n    setOpen(false);\n    if (event.type !== \"dismissed\" && selected) onChange?.(selected);\n  };\n  const picker = (\n    <RNDateTimePicker value={Platform.OS === \"ios\" ? draft : (value ?? new Date())} mode={mode}\n      display={Platform.OS === \"ios\" ? \"spinner\" : \"default\"}\n      onChange={Platform.OS === \"ios\" ? (_e, d) => d && setDraft(d) : onAndroidChange}\n      is24Hour={is24Hour} minuteInterval={minuteInterval} minimumDate={min} maximumDate={max} themeVariant={resolvedTheme} />\n  );\n  return (\n    <>\n      <Pressable className={cn(\"flex-row items-center rounded-md border border-input bg-background px-4 min-h-12\", className)}\n        onPress={() => { setDraft(value ?? new Date()); setOpen(true); }} accessible={true} accessibilityRole=\"button\">\n        <Text className={cn(\"flex-1 text-base\", value ? \"text-foreground\" : \"text-muted-foreground\")}>\n          {value ? formatValue(value) : placeholder}\n        </Text>\n        <Icon size={16} color={colors.mutedForeground} />\n      </Pressable>\n      {Platform.OS === \"ios\" ? (\n        <Modal visible={open} transparent animationType=\"fade\" onRequestClose={() => setOpen(false)}>\n          <Pressable className=\"flex-1 items-center justify-center bg-black/50\" onPress={() => setOpen(false)}>\n            <Pressable onPress={() => {}} className=\"mx-6 w-full max-w-sm rounded-xl bg-card p-4 shadow-xl\">\n              {open ? picker : null}\n              <Pressable onPress={() => { onChange?.(draft); setOpen(false); }} className=\"mt-2 items-center py-2\" accessibilityRole=\"button\">\n                <Text className=\"text-sm font-medium text-primary\">Done</Text>\n              </Pressable>\n            </Pressable>\n          </Pressable>\n        </Modal>\n      ) : open ? picker : null}\n    </>\n  );\n}\n\nexport function TimePicker({ placeholder = \"Select time...\", formatTime, is24Hour, ...rest }: TimePickerProps) {\n  return <NativePicker {...rest} mode=\"time\" placeholder={placeholder} is24Hour={is24Hour}\n    formatValue={formatTime ?? ((d) => defaultTime(d, is24Hour))} Icon={Clock} />;\n}\n\nexport function DateTimePicker({ placeholder = \"Select date & time...\", formatDateTime, is24Hour, min, max, ...rest }: DateTimePickerProps) {\n  return <NativePicker {...rest} mode=\"datetime\" placeholder={placeholder} is24Hour={is24Hour} min={min} max={max}\n    formatValue={formatDateTime ?? ((d) => `${d.toLocaleDateString()} ${defaultTime(d, is24Hour)}`)} Icon={CalendarClock} />;\n}\n"
+    }
+  ],
+  "docs": "AniUI is React Native. On an existing RNR/NativeWind project, add and use directly — the tokens and aliases already match, no setup needed. On a fresh project, run `npx @aniui/cli init` first to configure NativeWind/Uniwind, theme tokens, and Metro/Babel."
+}

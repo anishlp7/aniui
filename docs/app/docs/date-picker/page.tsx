@@ -122,8 +122,8 @@ export default function DatePickerPage() {
       <div className="space-y-4">
         <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Accessibility</Heading>
         <ul className="list-disc list-inside space-y-2 text-sm text-muted-foreground">
-          <li>Powered by <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">@react-native-community/datetimepicker</code> native picker.</li>
-          <li>Uses the platform's native date picker which has built-in accessibility support.</li>
+          <li>Trigger button uses <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">accessibilityRole="button"</code> with a 48dp minimum touch target.</li>
+          <li>Calendar day cells are pressable with button semantics. For native time selection, use <a href="/docs/time-picker" className="text-primary underline underline-offset-2">TimePicker</a>.</li>
         </ul>
       </div>
       {/* Source */}

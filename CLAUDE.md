@@ -145,6 +145,7 @@ aniui/
 │       ├── action-sheet.tsx
 │       ├── select.tsx
 │       ├── date-picker.tsx
+│       ├── time-picker.tsx
 │       ├── slider.tsx
 │       ├── toggle.tsx
 │       ├── toggle-group.tsx
@@ -414,6 +415,7 @@ All component-internal icons come from **`lucide-react-native`** (peer: `react-n
 | 73 | bottom-sheet | @gorhom/bottom-sheet |
 | 74 | action-sheet | @gorhom/bottom-sheet |
 | 75 | swipeable-list-item | react-native-gesture-handler |
+| 136 | time-picker | @react-native-community/datetimepicker |
 | 109 | carousel-3d | react-native-gesture-handler (real perspective-matrix projected faces) |
 | 110 | carousel-circular | expo-blur (scroll-driven coverflow, blur fade on non-centered items) |
 | 135 | vertical-flow-carousel | expo-blur (vertical coverflow, blur fade on non-centered cards) |

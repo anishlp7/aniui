@@ -31,7 +31,7 @@ describe("component props interfaces", () => {
   );
 
   // These components destructure specific props without ...rest spread
-  const noSpreadComponents = new Set(["select", "date-picker", "connection-banner", "theme-provider", "animate"]);
+  const noSpreadComponents = new Set(["select", "date-picker", "time-picker", "connection-banner", "theme-provider", "animate"]);
 
   it.each(names.filter((n) => !noSpreadComponents.has(n)))(
     "%s spreads remaining props",

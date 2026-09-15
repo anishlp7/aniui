@@ -32,6 +32,7 @@ import { PasswordInput } from "@/components/ui/password-input";
 import { MaskedInput } from "@/components/ui/masked-input";
 import { NumberInput } from "@/components/ui/number-input";
 import { DatePicker } from "@/components/ui/date-picker";
+import { TimePicker } from "@/components/ui/time-picker";
 import { PhoneInput } from "@/components/ui/phone-input";
 import { Combobox } from "@/components/ui/combobox";
 import { CommandMenu } from "@/components/ui/command-menu";
@@ -728,6 +729,22 @@ const demos: Record<string, () => React.ReactElement> = {
             <Label>Preferred date</Label>
             <DatePicker value={appointment} onChange={setAppointment} placeholder="Choose a date" min={today} />
             {appointment && <Text variant="muted">Appointment set for {appointment.toLocaleDateString()}</Text>}
+          </View>
+        </View>
+      </View>
+    );
+  },
+  "time-picker": () => {
+    const [meetingTime, setMeetingTime] = useState<Date | undefined>(undefined);
+    return (
+      <View className="gap-6">
+        <Text className="text-sm text-muted-foreground">A native time picker powered by @react-native-community/datetimepicker — used here to set a meeting start time.</Text>
+        <View className="gap-2">
+          <Text className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Schedule Meeting</Text>
+          <View className="rounded-xl border border-border bg-card p-4 gap-3">
+            <Label>Start time</Label>
+            <TimePicker value={meetingTime} onChange={setMeetingTime} placeholder="Choose a time" />
+            {meetingTime && <Text variant="muted">Meeting at {meetingTime.toLocaleTimeString([], { hour: "numeric", minute: "2-digit" })}</Text>}
           </View>
         </View>
       </View>

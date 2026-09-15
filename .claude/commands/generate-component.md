@@ -54,6 +54,6 @@ export function Component({ variant, size, className, ...props }: ComponentProps
 ## Dependencies Available
 - Tier 1: React Native core + NativeWind + cva + clsx + tailwind-merge
 - Tier 2: + react-native-reanimated v3 (for animations)
-- Tier 3: + @gorhom/bottom-sheet, @react-native-community/datetimepicker
+- Tier 3: + @gorhom/bottom-sheet, @react-native-community/datetimepicker (time-picker only)
 
 Generate the component file and place it at `components/ui/{name}.tsx`. Then update `cli/src/registry.ts` to add the new entry.

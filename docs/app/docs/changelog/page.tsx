@@ -26,6 +26,16 @@ const typeBadge: Record<ChangeType, { label: string; className: string }> = {
 
 const releases: Release[] = [
   {
+    version: "Unreleased",
+    date: "2026-09-15",
+    title: "Time Picker and docs corrections",
+    changes: [
+      { type: "feat", text: "New TimePicker and DateTimePicker components powered by @react-native-community/datetimepicker — native time and datetime selection alongside the existing calendar-based DatePicker.", link: "/docs/time-picker" },
+      { type: "docs", text: "DatePicker docs no longer incorrectly claim @react-native-community/datetimepicker; calendar DatePicker and native TimePicker are documented separately.", link: "/docs/date-picker" },
+      { type: "fix", text: "Corrected stale @react-native-community/datetimepicker references in Claude command templates (build-screen, generate-component)." },
+    ],
+  },
+  {
     version: "0.7.0",
     date: "2026-09-08",
     title: "Production-readiness pass: new native dependencies, CLI install fixes",

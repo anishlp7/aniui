@@ -52,6 +52,7 @@ const components = [
   { name: "Segmented Control", section: "Forms & Inputs" },
   { name: "Search Bar", section: "Forms & Inputs" },
   { name: "Date Picker", section: "Forms & Inputs" },
+  { name: "Time Picker", section: "Forms & Inputs" },
   { name: "Input OTP", section: "Forms & Inputs" },
   { name: "Password Input", section: "Forms & Inputs" },
   { name: "Masked Input", section: "Forms & Inputs" },

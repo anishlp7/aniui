@@ -164,6 +164,7 @@ Building an AI app? Pair [Prompt Input](https://aniui.dev/docs/prompt-input) (Ch
 | [Curved Bottom Tabs](https://aniui.dev/docs/curved-bottom-tabs) | Tab bar whose curved notch and floating button slide to the active tab |
 | [Data Table](https://aniui.dev/docs/data-table) | Sortable, filterable data table with pagination |
 | [Date Picker](https://aniui.dev/docs/date-picker) | Calendar popup picker with range support |
+| [Time Picker](https://aniui.dev/docs/time-picker) | Native time and datetime picker |
 | [Dialog](https://aniui.dev/docs/dialog) | Modal with fade + scale overlay |
 | [Direction Provider](https://aniui.dev/docs/direction-provider) | RTL/LTR direction context with I18nManager |
 | [Drawer](https://aniui.dev/docs/drawer) | Slide-in side navigation panel |

@@ -137,6 +137,7 @@ import { PreviewTabsDemo } from "@/components/preview/tabs";
 import { PreviewText } from "@/components/preview/text";
 import { PreviewTextarea } from "@/components/preview/textarea";
 import { PreviewThemeProviderDemo } from "@/components/preview/theme-provider";
+import { PreviewTimePickerDemo } from "@/components/preview/time-picker";
 import { PreviewThemeSwitch } from "@/components/preview/theme-switch";
 import { PreviewTimelineDemo } from "@/components/preview/timeline";
 import { PreviewToastProvider } from "@/components/preview/toast";
@@ -287,6 +288,7 @@ const previewMap = {
   text: PreviewText,
   textarea: PreviewTextarea,
   "theme-provider": PreviewThemeProviderDemo,
+  "time-picker": PreviewTimePickerDemo,
   "theme-switch": PreviewThemeSwitch,
   timeline: PreviewTimelineDemo,
   toast: PreviewToastProvider,

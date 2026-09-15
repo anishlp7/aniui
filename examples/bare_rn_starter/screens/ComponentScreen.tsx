@@ -25,6 +25,7 @@ import { PasswordInput } from "../components/ui/password-input";
 import { MaskedInput } from "../components/ui/masked-input";
 import { NumberInput } from "../components/ui/number-input";
 import { DatePicker } from "../components/ui/date-picker";
+import { TimePicker } from "../components/ui/time-picker";
 import { PhoneInput } from "../components/ui/phone-input";
 import { Combobox } from "../components/ui/combobox";
 import { CommandMenu } from "../components/ui/command-menu";
@@ -562,6 +563,22 @@ const demos: Record<string, () => React.ReactElement> = {
             <Label>Date of birth</Label>
             <DatePicker value={dob} onChange={setDob} placeholder="Pick your birthday" />
             {dob && <Text variant="muted">Birthday: {dob.toLocaleDateString()}</Text>}
+          </View>
+        </View>
+      </View>
+    );
+  },
+  "time-picker": () => {
+    const [time, setTime] = useState<Date | undefined>(undefined);
+    return (
+      <View className="gap-6">
+        <Text className="text-sm text-muted-foreground">A native time picker via @react-native-community/datetimepicker. Opens the platform time dialog or spinner.</Text>
+        <View className="gap-2">
+          <Text className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Default</Text>
+          <View className="rounded-xl border border-border bg-card p-4 gap-3">
+            <Label>Meeting time</Label>
+            <TimePicker value={time} onChange={setTime} placeholder="Pick a time" />
+            {time && <Text variant="muted">Selected: {time.toLocaleTimeString([], { hour: "numeric", minute: "2-digit" })}</Text>}
           </View>
         </View>
       </View>

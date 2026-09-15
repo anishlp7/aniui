@@ -79,6 +79,8 @@ Compound components export multiple named pieces (for example `Card` + `CardHead
 
 **DatePicker** — `import { DatePicker } from "@/components/ui/date-picker"`
 
+**TimePicker** — `import { TimePicker } from "@/components/ui/time-picker"`
+
 **Dialog** — `import { Dialog } from "@/components/ui/dialog"`
 
 **EmptyState** — `import { EmptyState } from "@/components/ui/empty-state"`
