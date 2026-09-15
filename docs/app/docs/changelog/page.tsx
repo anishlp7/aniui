@@ -26,7 +26,7 @@ const typeBadge: Record<ChangeType, { label: string; className: string }> = {
 
 const releases: Release[] = [
   {
-    version: "Unreleased",
+    version: "0.7.1",
     date: "2026-09-15",
     title: "Time Picker and docs corrections",
     changes: [
