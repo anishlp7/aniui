@@ -25,6 +25,7 @@ import { PasswordInput } from "../components/ui/password-input";
 import { MaskedInput } from "../components/ui/masked-input";
 import { NumberInput } from "../components/ui/number-input";
 import { DatePicker } from "../components/ui/date-picker";
+import { TimePicker, DateAndTimePicker } from "../components/ui/time-picker";
 import { PhoneInput } from "../components/ui/phone-input";
 import { Combobox } from "../components/ui/combobox";
 import { CommandMenu } from "../components/ui/command-menu";
@@ -562,6 +563,38 @@ const demos: Record<string, () => React.ReactElement> = {
             <Label>Date of birth</Label>
             <DatePicker value={dob} onChange={setDob} placeholder="Pick your birthday" />
             {dob && <Text variant="muted">Birthday: {dob.toLocaleDateString()}</Text>}
+          </View>
+        </View>
+      </View>
+    );
+  },
+  "time-picker": () => {
+    const [time, setTime] = useState<Date | undefined>(undefined);
+    return (
+      <View className="gap-6">
+        <Text className="text-sm text-muted-foreground">Custom scroll-wheel time picker with hour, minute, and AM/PM columns.</Text>
+        <View className="gap-2">
+          <Text className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Time Only</Text>
+          <View className="rounded-xl border border-border bg-card p-4 gap-3">
+            <Label>Meeting time</Label>
+            <TimePicker value={time} onChange={setTime} placeholder="Pick a time" />
+            {time && <Text variant="muted">Selected: {time.toLocaleTimeString([], { hour: "numeric", minute: "2-digit" })}</Text>}
+          </View>
+        </View>
+      </View>
+    );
+  },
+  "date-and-time-picker": () => {
+    const [eventAt, setEventAt] = useState<Date | undefined>(undefined);
+    return (
+      <View className="gap-6">
+        <Text className="text-sm text-muted-foreground">AniUI Calendar combined with scroll-wheel time columns for full scheduling.</Text>
+        <View className="gap-2">
+          <Text className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Date &amp; Time</Text>
+          <View className="rounded-xl border border-border bg-card p-4 gap-3">
+            <Label>Event schedule</Label>
+            <DateAndTimePicker value={eventAt} onChange={setEventAt} placeholder="Schedule event" />
+            {eventAt && <Text variant="muted">Event: {eventAt.toLocaleString()}</Text>}
           </View>
         </View>
       </View>
@@ -1447,7 +1480,7 @@ const demos: Record<string, () => React.ReactElement> = {
               </View>
             </CollapsibleTrigger>
             <CollapsibleContent>
-              <View className="px-4 pb-3"><Text className="text-xs text-muted-foreground">A shadcn/ui-style component library for React Native with 148 components.</Text></View>
+              <View className="px-4 pb-3"><Text className="text-xs text-muted-foreground">A shadcn/ui-style component library for React Native with 149 components.</Text></View>
             </CollapsibleContent>
           </View>
         </Collapsible>

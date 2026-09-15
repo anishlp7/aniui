@@ -32,7 +32,6 @@
     "@babel/preset-react": "^7.28.5",
     "@babel/preset-typescript": "^7.28.5",
     "@gorhom/bottom-sheet": "^5.2.14",
-    "@react-native-community/datetimepicker": "^8.0.0",
     "@shopify/react-native-skia": "^2.11.2",
     "@testing-library/jest-native": "^5.4.3",
     "@testing-library/react-native": "^12.9.0",

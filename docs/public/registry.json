@@ -916,6 +916,12 @@
       "description": "Sun/moon icon-morph theme toggle with an optional full-screen circular wipe transition"
     },
     {
+      "name": "time-picker",
+      "type": "registry:ui",
+      "title": "TimePicker",
+      "description": "Custom time picker with scroll wheels plus DateAndTimePicker (calendar + time)"
+    },
+    {
       "name": "timeline",
       "type": "registry:ui",
       "title": "Timeline",

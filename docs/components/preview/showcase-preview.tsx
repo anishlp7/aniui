@@ -45,6 +45,7 @@ import { PreviewCoupon } from "@/components/preview/coupon";
 import { PreviewCurvedBottomTabs } from "@/components/preview/curved-bottom-tabs";
 import { PreviewDataTableDemo } from "@/components/preview/data-table";
 import { PreviewDatePickerDemo } from "@/components/preview/date-picker";
+import { PreviewDateAndTimePickerDemo } from "@/components/preview/time-picker";
 import { PreviewDialogDemo } from "@/components/preview/dialog";
 import { PreviewDirectionProviderDemo } from "@/components/preview/direction-provider";
 import { PreviewDrawer } from "@/components/preview/drawer";
@@ -137,6 +138,7 @@ import { PreviewTabsDemo } from "@/components/preview/tabs";
 import { PreviewText } from "@/components/preview/text";
 import { PreviewTextarea } from "@/components/preview/textarea";
 import { PreviewThemeProviderDemo } from "@/components/preview/theme-provider";
+import { PreviewTimePickerDemo } from "@/components/preview/time-picker";
 import { PreviewThemeSwitch } from "@/components/preview/theme-switch";
 import { PreviewTimelineDemo } from "@/components/preview/timeline";
 import { PreviewToastProvider } from "@/components/preview/toast";
@@ -194,6 +196,7 @@ const previewMap = {
   coupon: PreviewCoupon,
   "curved-bottom-tabs": PreviewCurvedBottomTabs,
   "data-table": PreviewDataTableDemo,
+  "date-and-time-picker": PreviewDateAndTimePickerDemo,
   "date-picker": PreviewDatePickerDemo,
   dialog: PreviewDialogDemo,
   "direction-provider": PreviewDirectionProviderDemo,
@@ -287,6 +290,7 @@ const previewMap = {
   text: PreviewText,
   textarea: PreviewTextarea,
   "theme-provider": PreviewThemeProviderDemo,
+  "time-picker": PreviewTimePickerDemo,
   "theme-switch": PreviewThemeSwitch,
   timeline: PreviewTimelineDemo,
   toast: PreviewToastProvider,

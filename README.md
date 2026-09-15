@@ -118,7 +118,7 @@ Already on RNR / NativeWind / Uniwind? Components drop in with **zero extra setu
 
 ## Components
 
-**148 components** — all listed alphabetically. Each component's docs page tells you if it needs extra dependencies. Component icons come from [lucide-react-native](https://lucide.dev) (installed automatically by `aniui init`/`add`); icon props (`icon`, `leadingIcon`, …) accept any ReactNode, so you can bring your own.
+**149 components** — all listed alphabetically. Each component's docs page tells you if it needs extra dependencies. Component icons come from [lucide-react-native](https://lucide.dev) (installed automatically by `aniui init`/`add`); icon props (`icon`, `leadingIcon`, …) accept any ReactNode, so you can bring your own.
 
 Building an AI app? Pair [Prompt Input](https://aniui.dev/docs/prompt-input) (ChatGPT/Claude-style composer with toolbar slots), [Streaming Text](https://aniui.dev/docs/streaming-text), [Chat Bubble](https://aniui.dev/docs/chat-bubble), [Typing Indicator](https://aniui.dev/docs/typing-indicator), and [Waveform](https://aniui.dev/docs/waveform) (voice recording) for a complete chat UI.
 
@@ -164,6 +164,8 @@ Building an AI app? Pair [Prompt Input](https://aniui.dev/docs/prompt-input) (Ch
 | [Curved Bottom Tabs](https://aniui.dev/docs/curved-bottom-tabs) | Tab bar whose curved notch and floating button slide to the active tab |
 | [Data Table](https://aniui.dev/docs/data-table) | Sortable, filterable data table with pagination |
 | [Date Picker](https://aniui.dev/docs/date-picker) | Calendar popup picker with range support |
+| [Time Picker](https://aniui.dev/docs/time-picker) | Custom scroll-wheel time picker |
+| [Date & Time Picker](https://aniui.dev/docs/date-and-time-picker) | Calendar + scroll-wheel time selection |
 | [Dialog](https://aniui.dev/docs/dialog) | Modal with fade + scale overlay |
 | [Direction Provider](https://aniui.dev/docs/direction-provider) | RTL/LTR direction context with I18nManager |
 | [Drawer](https://aniui.dev/docs/drawer) | Slide-in side navigation panel |
@@ -294,7 +296,7 @@ npx expo install @shopify/react-native-skia
 
 | Area | Status |
 |------|--------|
-| 148 components | ✅ |
+| 149 components | ✅ |
 | Component & CLI tests (Jest) | ✅ |
 | Accessibility audit | ✅ |
 | Performance benchmarks | ✅ |

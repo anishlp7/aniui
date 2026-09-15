@@ -5,8 +5,12 @@ import { Text } from "../components/ui/text";
 import { useAppTheme } from "../App";
 
 function toSlug(name: string) {
-  return name.toLowerCase().replace(/ /g, "-");
+  return slugOverrides[name] ?? name.toLowerCase().replace(/ /g, "-");
 }
+
+const slugOverrides: Record<string, string> = {
+  "Date & Time Picker": "date-and-time-picker",
+};
 
 const components = [
   { name: "Button", section: "Forms" },
@@ -25,6 +29,8 @@ const components = [
   { name: "Segmented Control", section: "Forms" },
   { name: "Search Bar", section: "Forms" },
   { name: "Date Picker", section: "Forms" },
+  { name: "Time Picker", section: "Forms" },
+  { name: "Date & Time Picker", section: "Forms" },
   { name: "Input OTP", section: "Forms" },
   { name: "Password Input", section: "Forms" },
   { name: "Masked Input", section: "Forms" },
@@ -122,7 +128,7 @@ export function HomeScreen({ onNavigate }: HomeScreenProps) {
           <View className="flex-row items-center justify-between">
             <View>
               <Text variant="h3" className="text-foreground">AniUI</Text>
-              <Text variant="small" className="text-muted-foreground">148 components</Text>
+              <Text variant="small" className="text-muted-foreground">149 components</Text>
             </View>
             <Pressable
               onPress={toggle}

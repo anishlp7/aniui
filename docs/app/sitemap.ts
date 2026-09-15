@@ -6,7 +6,7 @@ const componentPages = [
   "accordion", "action-sheet", "alert", "alert-dialog", "animate", "aspect-ratio", "avatar", "avatar-group", "badge",
   "banner", "bottom-sheet", "breadcrumb", "button", "calendar", "card", "carousel",
   "chat-bubble", "checkbox", "chip", "collapsible", "combobox", "command-menu",
-  "connection-banner", "context-menu", "data-table", "date-picker", "dialog", "direction-provider", "drawer",
+  "connection-banner", "context-menu", "data-table", "date-and-time-picker", "date-picker", "dialog", "direction-provider", "drawer",
   "dropdown-menu", "empty-state", "fab", "field", "file-picker", "form", "gradient", "grid",
   "header", "hover-card", "image", "image-gallery", "infinite-list", "input", "input-group", "input-otp",
   "kbd", "keyboard-view", "label", "labeled-separator", "list", "masked-input", "menubar", "number-input",
@@ -15,7 +15,7 @@ const componentPages = [
   "safe-area", "search-bar", "segmented-control", "select", "separator",
   "sidebar", "skeleton", "slide-to-confirm", "slider", "spinner", "stat-card", "status-indicator",
   "stepper", "streaming-text", "swipe-deck", "swipeable-list-item", "switch", "tab-bar", "table", "tabs",
-  "text", "textarea", "theme-provider", "timeline", "toast", "toggle",
+  "text", "textarea", "theme-provider", "time-picker", "timeline", "toast", "toggle",
   "toggle-group", "tooltip", "typing-indicator", "waveform",
 ];
 

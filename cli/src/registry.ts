@@ -292,6 +292,14 @@ export const registry: Record<string, ComponentEntry> = {
     registryDependencies: ["calendar", "theme-provider"],
     tier: 1,
   },
+  "time-picker": {
+    name: "TimePicker",
+    file: "components/ui/time-picker.tsx",
+    description: "Custom time picker with scroll wheels plus DateAndTimePicker (calendar + time)",
+    dependencies: ["lucide-react-native", "react-native-svg", "clsx", "tailwind-merge"],
+    registryDependencies: ["calendar", "theme-provider"],
+    tier: 1,
+  },
   slider: {
     name: "Slider",
     file: "components/ui/slider.tsx",

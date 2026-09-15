@@ -46,7 +46,8 @@ Ask the user what screen they want, then generate it using ONLY existing AniUI c
 - `BottomSheet` from bottom-sheet (needs @gorhom/bottom-sheet)
 - `ActionSheet` from action-sheet (needs @gorhom/bottom-sheet)
 - `Select` from select (needs @gorhom/bottom-sheet)
-- `DatePicker` from date-picker (needs @react-native-community/datetimepicker)
+- `DatePicker` from date-picker (calendar popup — no extra deps)
+- `TimePicker` from time-picker (custom scroll-wheel time picker — no extra deps)
 
 ## Theme Colors (Tailwind classes)
 bg-background, bg-primary, bg-secondary, bg-muted, bg-accent, bg-destructive, bg-card

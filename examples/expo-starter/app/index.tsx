@@ -15,6 +15,7 @@ function toSlug(name: string) {
 // rather than making every display name match its slug exactly.
 const slugOverrides: Record<string, string> = {
   "Morphing Tab Bar": "morphing-tabbar",
+  "Date & Time Picker": "date-and-time-picker",
 };
 
 const components = [
@@ -52,6 +53,8 @@ const components = [
   { name: "Segmented Control", section: "Forms & Inputs" },
   { name: "Search Bar", section: "Forms & Inputs" },
   { name: "Date Picker", section: "Forms & Inputs" },
+  { name: "Time Picker", section: "Forms & Inputs" },
+  { name: "Date & Time Picker", section: "Forms & Inputs" },
   { name: "Input OTP", section: "Forms & Inputs" },
   { name: "Password Input", section: "Forms & Inputs" },
   { name: "Masked Input", section: "Forms & Inputs" },

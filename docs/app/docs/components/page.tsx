@@ -1,5 +1,6 @@
 import { Heading } from "@/components/heading";
 import { PrefetchLink } from "@/components/prefetch-link";
+import { COMPONENT_COUNT } from "@/lib/constants";
 import { componentCategories, chartItems, type NavSection } from "@/lib/nav-data";
 
 function CategoryBlock({ category }: { category: NavSection }) {
@@ -38,7 +39,7 @@ export default function ComponentsIndexPage() {
       <div>
         <h1 className="text-3xl font-bold tracking-tight text-foreground">Components</h1>
         <p className="mt-2 text-lg text-muted-foreground">
-          155 AniUI components with nested categories — carousels, loaders, UI pieces, Skia effects, and more. Pick a category below, or use the sidebar.
+          {COMPONENT_COUNT} AniUI components with nested categories — carousels, loaders, UI pieces, Skia effects, and more. Pick a category below, or use the sidebar.
         </p>
       </div>
       {[...componentCategories, { title: "Charts", items: chartItems }].map((category) => (
