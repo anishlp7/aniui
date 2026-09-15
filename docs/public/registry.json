@@ -919,7 +919,7 @@
       "name": "time-picker",
       "type": "registry:ui",
       "title": "TimePicker",
-      "description": "Custom time picker with scroll wheels plus DateAndTimePicker (calendar + time)"
+      "description": "Animated scroll-snap wheel time picker with a spring modal and haptic tick, plus DateAndTimePicker (calendar + time)"
     },
     {
       "name": "timeline",

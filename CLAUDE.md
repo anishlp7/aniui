@@ -349,7 +349,6 @@ All component-internal icons come from **`lucide-react-native`** (peer: `react-n
 | 44 | file-picker | Pressable | Upload UI with dashed border and preview |
 | 45 | image-gallery | FlatList+Modal | Horizontal carousel with fullscreen viewer |
 | 46 | date-picker | View | Custom calendar-based picker — no external date-picker dependency |
-| 47 | time-picker | View+ScrollView | Custom scroll-wheel time picker; DateAndTimePicker adds Calendar |
 | 48 | carousel | FlatList | Paged horizontal carousel via native FlatList — no reanimated |
 | 48 | toggle | Pressable | Two-state toggle button — no reanimated |
 | 49 | toggle-group | View+Context | Group of exclusive toggle buttons — no reanimated |
@@ -393,6 +392,7 @@ All component-internal icons come from **`lucide-react-native`** (peer: `react-n
 | 106 | stacked-chips | Nested, depth-aware expandable chip menu |
 | 107 | hamburger | Hamburger ⇄ close icon morph |
 | 108 | theme-switch | Sun/moon icon morph, optional full-screen circular wipe |
+| 47 | time-picker | Scroll-snap wheel with center scale/opacity falloff and a haptic tick per selection change, spring-scale modal; DateAndTimePicker adds Calendar |
 
 ### Tier 3: Needs rn-primitives or external packages
 

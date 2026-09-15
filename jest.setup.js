@@ -145,6 +145,35 @@ jest.mock("@gorhom/bottom-sheet", () => {
   };
 });
 
+/* ── Mock expo-haptics ────────────────────────────────────── */
+// expo-haptics (and its expo-modules-core dependency) ships ESM and reaches
+// for a native EventEmitter at import time, which throws under Jest even
+// once transformIgnorePatterns lets the ESM through. Stub the exact API
+// surface AniUI components call (impactAsync, selectionAsync,
+// ImpactFeedbackStyle) as no-ops, same treatment as the other native-binding
+// packages in this file.
+jest.mock("expo-haptics", () => ({
+  __esModule: true,
+  impactAsync: jest.fn(),
+  selectionAsync: jest.fn(),
+  notificationAsync: jest.fn(),
+  ImpactFeedbackStyle: { Light: "light", Medium: "medium", Heavy: "heavy", Rigid: "rigid", Soft: "soft" },
+  NotificationFeedbackType: { Success: "success", Warning: "warning", Error: "error" },
+}));
+
+/* ── Mock expo-blur ───────────────────────────────────────── */
+// Same ESM/native-module issue as expo-haptics above. Renders as a plain
+// View — components using it for a depth/glass effect just lose that visual
+// under test, same tradeoff already made for Skia/SVG above.
+jest.mock("expo-blur", () => {
+  const React = require("react");
+  const { View } = require("react-native");
+  return {
+    __esModule: true,
+    BlurView: (props) => React.createElement(View, props),
+  };
+});
+
 /* ── Mock react-native-gesture-handler ──────────────────── */
 jest.mock("react-native-gesture-handler", () => {
   const React = require("react");
