@@ -167,13 +167,3 @@ jest.mock("react-native-gesture-handler", () => {
     GestureHandlerRootView: (props) => React.createElement(View, props),
   };
 });
-
-/* ── Mock @react-native-community/datetimepicker ─────────── */
-jest.mock("@react-native-community/datetimepicker", () => {
-  const React = require("react");
-  const { View } = require("react-native");
-  return {
-    __esModule: true,
-    default: (props) => React.createElement(View, { testID: "DateTimePicker", ...props }),
-  };
-});

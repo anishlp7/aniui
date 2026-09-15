@@ -123,7 +123,7 @@ export default function DatePickerPage() {
         <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Accessibility</Heading>
         <ul className="list-disc list-inside space-y-2 text-sm text-muted-foreground">
           <li>Trigger button uses <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">accessibilityRole="button"</code> with a 48dp minimum touch target.</li>
-          <li>Calendar day cells are pressable with button semantics. For native time selection, use <a href="/docs/time-picker" className="text-primary underline underline-offset-2">TimePicker</a>.</li>
+          <li>Calendar day cells are pressable with button semantics. For date + time, use <a href="/docs/date-and-time-picker" className="text-primary underline underline-offset-2">DateAndTimePicker</a>; for time only, use <a href="/docs/time-picker" className="text-primary underline underline-offset-2">TimePicker</a>.</li>
         </ul>
       </div>
       {/* Source */}

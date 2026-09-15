@@ -95,6 +95,7 @@ export const formsGroups: NavGroup[] = [
     items: [
       { title: "Date Picker", href: "/docs/date-picker" },
       { title: "Time Picker", href: "/docs/time-picker" },
+      { title: "Date & Time Picker", href: "/docs/date-and-time-picker" },
       { title: "Calendar", href: "/docs/calendar" },
       { title: "Select", href: "/docs/select" },
       { title: "Combobox", href: "/docs/combobox" },

@@ -5,7 +5,7 @@ import { CodeBlock } from "@/components/code-block-server";
 import { PropsTable } from "@/components/props-table";
 import { AddComponentTabs } from "@/components/package-manager-tabs";
 import { PreviewToggle } from "@/components/preview-toggle";
-import { DateTimePickerDemo, TimePickerDemo } from "./_demos";
+import { TimePickerDemo } from "./_demos";
 
 const usageCode = `import { TimePicker } from "@/components/ui/time-picker";
 import { useState } from "react";
@@ -21,21 +21,6 @@ export function MyScreen() {
     />
   );
 }`;
-const datetimeCode = `import { DateTimePicker } from "@/components/ui/time-picker";
-import { useState } from "react";
-
-export function MyScreen() {
-  const [when, setWhen] = useState<Date | undefined>();
-  return (
-    <DateTimePicker
-      value={when}
-      onChange={setWhen}
-      placeholder="Pick date & time..."
-      min={new Date()}
-    />
-  );
-}`;
-const installCode = `npx expo install @react-native-community/datetimepicker`;
 const sourceCode = getComponentSource("time-picker");
 
 export default function TimePickerPage() {
@@ -44,9 +29,10 @@ export default function TimePickerPage() {
       <div>
         <h1 className="text-3xl font-bold tracking-tight text-foreground">TimePicker</h1>
         <p className="mt-2 text-lg text-muted-foreground">
-          Native time and datetime pickers powered by{" "}
-          <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">@react-native-community/datetimepicker</code>.
-          For calendar-only date selection, use{" "}
+          Custom scroll-wheel time selection — hour, minute, and AM/PM columns in a modal. No external datetime package.
+          For date + time together, use{" "}
+          <a href="/docs/date-and-time-picker" className="text-primary underline underline-offset-2">DateAndTimePicker</a>.
+          For calendar-only dates, use{" "}
           <a href="/docs/date-picker" className="text-primary underline underline-offset-2">DatePicker</a>.
         </p>
       </div>
@@ -59,25 +45,16 @@ export default function TimePickerPage() {
         <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Installation</Heading>
         <AddComponentTabs names="time-picker" />
         <p className="text-sm text-muted-foreground">
-          After adding the component, install the native datetime picker dependency:
+          Also exports <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">DateAndTimePicker</code> — see the{" "}
+          <a href="/docs/date-and-time-picker" className="text-primary underline underline-offset-2">Date &amp; Time Picker</a> docs.
         </p>
-        <CodeBlock code={installCode} title="terminal" />
       </div>
       <div className="space-y-4">
         <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Usage</Heading>
         <CodeBlock code={usageCode} title="app/index.tsx" />
       </div>
       <div className="space-y-4">
-        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Date &amp; Time</Heading>
-        <p className="text-sm text-muted-foreground">
-          Use <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">DateTimePicker</code> for combined date and time selection.
-        </p>
-        <ComponentPlayground code={datetimeCode}>
-          <DateTimePickerDemo />
-        </ComponentPlayground>
-      </div>
-      <div className="space-y-4">
-        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">TimePicker Props</Heading>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Props</Heading>
         <PropsTable props={[
           { name: "value", type: "Date" },
           { name: "onChange", type: "(date: Date) => void" },
@@ -89,24 +66,10 @@ export default function TimePickerPage() {
         ]} />
       </div>
       <div className="space-y-4">
-        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">DateTimePicker Props</Heading>
-        <PropsTable props={[
-          { name: "value", type: "Date" },
-          { name: "onChange", type: "(date: Date) => void" },
-          { name: "placeholder", type: "string", default: "\"Select date & time...\"" },
-          { name: "is24Hour", type: "boolean" },
-          { name: "minuteInterval", type: "1 | 2 | 3 | 4 | 5 | 6 | 10 | 12 | 15 | 20 | 30" },
-          { name: "min", type: "Date" },
-          { name: "max", type: "Date" },
-          { name: "formatDateTime", type: "(date: Date) => string" },
-          { name: "className", type: "string" },
-        ]} />
-      </div>
-      <div className="space-y-4">
         <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">Accessibility</Heading>
         <ul className="list-disc list-inside space-y-2 text-sm text-muted-foreground">
           <li>Trigger button uses <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">accessibilityRole="button"</code> with a 48dp minimum touch target.</li>
-          <li>On iOS, the native spinner picker inherits platform accessibility. On Android, the system dialog picker is used.</li>
+          <li>Each hour, minute, and AM/PM cell is a pressable button with button semantics.</li>
         </ul>
       </div>
       <div className="space-y-4">

@@ -7,6 +7,7 @@ import { ThemePreview } from "@/components/theme-preview";
 import { ThemeSelect } from "@/components/theme-select";
 import { FeaturedShowcase } from "@/components/featured-showcase";
 import { useTheme } from "@/components/theme-provider";
+import { COMPONENT_COUNT } from "@/lib/constants";
 import { type ColorDef, themeColors, radiusOptions, resolveVars, generateCSS, hsl, shuffleTheme } from "@/lib/theme-data";
 
 /* ── Icons ─────────────────────────────────────────────────── */
@@ -88,7 +89,7 @@ const jsonLd = {
   name: "AniUI",
   applicationCategory: "DeveloperApplication",
   operatingSystem: "iOS, Android",
-  description: "shadcn/ui for React Native. 148 accessible components built with Uniwind or NativeWind and TypeScript. Now supports Expo SDK 57.",
+  description: `shadcn/ui for React Native. ${COMPONENT_COUNT} accessible components built with Uniwind or NativeWind and TypeScript. Now supports Expo SDK 57.`,
   url: "https://aniui.dev",
   author: { "@type": "Person", name: "Anish" },
   offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
@@ -209,7 +210,7 @@ export default function HomePage() {
               animate={prefersReducedMotion ? undefined : { scale: [1, 1.4, 1], opacity: [1, 0.7, 1] }}
               transition={{ duration: 1.8, ease: "easeInOut", repeat: Infinity }}
             />
-            <span className="text-xs font-medium text-muted-foreground"><span className="font-semibold text-foreground">148 components</span> and counting</span>
+            <span className="text-xs font-medium text-muted-foreground"><span className="font-semibold text-foreground">{COMPONENT_COUNT} components</span> and counting</span>
           </motion.div>
 
           <motion.h1
@@ -253,7 +254,7 @@ export default function HomePage() {
           {/* Stat strip */}
           <motion.div variants={heroItem} className="flex flex-wrap items-center justify-center gap-x-8 gap-y-2 mt-8">
             {[
-              { value: "148", label: "Components" },
+              { value: String(COMPONENT_COUNT), label: "Components" },
               { value: "15", label: "Screen Blocks" },
               { value: "4", label: "Expo SDKs" },
               { value: "MIT", label: "Licensed" },
@@ -363,7 +364,7 @@ export default function HomePage() {
                 Live web previews for carousels, motion, UI pieces, and Skia effects. CLI slugs stay stable — friendly names in docs only.
               </p>
             </div>
-            <Link href="/docs/components" className="text-sm font-medium text-primary hover:underline">Browse all 148 →</Link>
+            <Link href="/docs/components" className="text-sm font-medium text-primary hover:underline">Browse all {COMPONENT_COUNT} →</Link>
           </div>
           <FeaturedShowcase />
         </div>
@@ -387,7 +388,7 @@ export default function HomePage() {
         <div className="text-center sm:text-left">
           <p className="text-base font-semibold text-foreground">Preview on your device</p>
           <p className="text-sm text-muted-foreground mt-1 max-w-sm">
-            Scan with Expo Go to try all 148 components live on a real device.
+            Scan with Expo Go to try all {COMPONENT_COUNT} components live on a real device.
           </p>
         </div>
       </motion.div>

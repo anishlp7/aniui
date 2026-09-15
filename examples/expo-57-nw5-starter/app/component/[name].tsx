@@ -32,7 +32,7 @@ import { PasswordInput } from "@/components/ui/password-input";
 import { MaskedInput } from "@/components/ui/masked-input";
 import { NumberInput } from "@/components/ui/number-input";
 import { DatePicker } from "@/components/ui/date-picker";
-import { TimePicker } from "@/components/ui/time-picker";
+import { TimePicker, DateAndTimePicker } from "@/components/ui/time-picker";
 import { PhoneInput } from "@/components/ui/phone-input";
 import { Combobox } from "@/components/ui/combobox";
 import { CommandMenu } from "@/components/ui/command-menu";
@@ -738,13 +738,30 @@ const demos: Record<string, () => React.ReactElement> = {
     const [meetingTime, setMeetingTime] = useState<Date | undefined>(undefined);
     return (
       <View className="gap-6">
-        <Text className="text-sm text-muted-foreground">A native time picker powered by @react-native-community/datetimepicker — used here to set a meeting start time.</Text>
+        <Text className="text-sm text-muted-foreground">Custom scroll-wheel time picker — hour, minute, and AM/PM columns in a modal.</Text>
         <View className="gap-2">
-          <Text className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Schedule Meeting</Text>
+          <Text className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Start Time</Text>
           <View className="rounded-xl border border-border bg-card p-4 gap-3">
-            <Label>Start time</Label>
+            <Label>Meeting time</Label>
             <TimePicker value={meetingTime} onChange={setMeetingTime} placeholder="Choose a time" />
             {meetingTime && <Text variant="muted">Meeting at {meetingTime.toLocaleTimeString([], { hour: "numeric", minute: "2-digit" })}</Text>}
+          </View>
+        </View>
+      </View>
+    );
+  },
+  "date-and-time-picker": () => {
+    const [eventAt, setEventAt] = useState<Date | undefined>(undefined);
+    const today = new Date();
+    return (
+      <View className="gap-6">
+        <Text className="text-sm text-muted-foreground">Calendar plus scroll-wheel time columns — used here to schedule an event no earlier than today.</Text>
+        <View className="gap-2">
+          <Text className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Schedule Event</Text>
+          <View className="rounded-xl border border-border bg-card p-4 gap-3">
+            <Label>Date and time</Label>
+            <DateAndTimePicker value={eventAt} onChange={setEventAt} placeholder="Schedule event" min={today} />
+            {eventAt && <Text variant="muted">Event on {eventAt.toLocaleString()}</Text>}
           </View>
         </View>
       </View>
@@ -3129,7 +3146,7 @@ const demos: Record<string, () => React.ReactElement> = {
   "streaming-text": () => {
     const questions = ["What is AniUI?", "What's the default styling engine?"];
     const responses = [
-      "AniUI ships 148 components you copy into your own project — no npm dependency, no black box.",
+      "AniUI ships 149 components you copy into your own project — no npm dependency, no black box.",
       "Uniwind is the default styling engine on New Architecture — 2-3x faster than NativeWind.",
     ];
     const [index, setIndex] = useState(0);

@@ -104,7 +104,7 @@ aniui/
 │           └── logger.ts
 │
 ├── components/                # Source files — copied by CLI into user's project
-│   └── ui/                    # NOTE: this tree is illustrative, not exhaustive — 149
+│   └── ui/                    # NOTE: this tree is illustrative, not exhaustive — see registry.ts (149 components)
 │                               # components exist under components/ui/ today; cli/src/registry.ts
 │                               # is the authoritative list. Newer additions not yet folded
 │                               # into the tree below: tray.tsx, unfold-menu.tsx,
@@ -349,7 +349,8 @@ All component-internal icons come from **`lucide-react-native`** (peer: `react-n
 | 44 | file-picker | Pressable | Upload UI with dashed border and preview |
 | 45 | image-gallery | FlatList+Modal | Horizontal carousel with fullscreen viewer |
 | 46 | date-picker | View | Custom calendar-based picker — no external date-picker dependency |
-| 47 | carousel | FlatList | Paged horizontal carousel via native FlatList — no reanimated |
+| 47 | time-picker | View+ScrollView | Custom scroll-wheel time picker; DateAndTimePicker adds Calendar |
+| 48 | carousel | FlatList | Paged horizontal carousel via native FlatList — no reanimated |
 | 48 | toggle | Pressable | Two-state toggle button — no reanimated |
 | 49 | toggle-group | View+Context | Group of exclusive toggle buttons — no reanimated |
 | 83 | coupon | View+Text | Two-section promo coupon with tear-line, ticket icon, orientation prop |
@@ -415,7 +416,6 @@ All component-internal icons come from **`lucide-react-native`** (peer: `react-n
 | 73 | bottom-sheet | @gorhom/bottom-sheet |
 | 74 | action-sheet | @gorhom/bottom-sheet |
 | 75 | swipeable-list-item | react-native-gesture-handler |
-| 136 | time-picker | @react-native-community/datetimepicker |
 | 109 | carousel-3d | react-native-gesture-handler (real perspective-matrix projected faces) |
 | 110 | carousel-circular | expo-blur (scroll-driven coverflow, blur fade on non-centered items) |
 | 135 | vertical-flow-carousel | expo-blur (vertical coverflow, blur fade on non-centered cards) |

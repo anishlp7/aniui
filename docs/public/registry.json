@@ -919,7 +919,7 @@
       "name": "time-picker",
       "type": "registry:ui",
       "title": "TimePicker",
-      "description": "Native time and datetime picker powered by @react-native-community/datetimepicker"
+      "description": "Custom time picker with scroll wheels plus DateAndTimePicker (calendar + time)"
     },
     {
       "name": "timeline",

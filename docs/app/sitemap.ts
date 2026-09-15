@@ -6,7 +6,7 @@ const componentPages = [
   "accordion", "action-sheet", "alert", "alert-dialog", "animate", "aspect-ratio", "avatar", "avatar-group", "badge",
   "banner", "bottom-sheet", "breadcrumb", "button", "calendar", "card", "carousel",
   "chat-bubble", "checkbox", "chip", "collapsible", "combobox", "command-menu",
-  "connection-banner", "context-menu", "data-table", "date-picker", "dialog", "direction-provider", "drawer",
+  "connection-banner", "context-menu", "data-table", "date-and-time-picker", "date-picker", "dialog", "direction-provider", "drawer",
   "dropdown-menu", "empty-state", "fab", "field", "file-picker", "form", "gradient", "grid",
   "header", "hover-card", "image", "image-gallery", "infinite-list", "input", "input-group", "input-otp",
   "kbd", "keyboard-view", "label", "labeled-separator", "list", "masked-input", "menubar", "number-input",

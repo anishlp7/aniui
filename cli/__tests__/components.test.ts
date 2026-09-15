@@ -39,7 +39,7 @@ describe("component source files", () => {
     "event-ticket", "expandable-view", "fan-menu", "gooey-popover", "gooey-search-tabs",
     "loader", "marquee", "matched-geometry", "mobile-dock", "morph-fab",
     "morphing-tabbar", "profile-card", "qr-code", "receipt-card", "rolling-counter",
-    "save-button", "shimmer", "social-button", "split-view", "verified-badge",
+    "save-button", "shimmer", "social-button", "split-view", "time-picker", "verified-badge",
   ]);
   // Full compound multi-view systems (push/back navigation stacks, detent-driven bottom sheets) — a step
   // above the 320-line "large" tier, still single-file per CLAUDE.md, just genuinely bigger surface area.

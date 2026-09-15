@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Time Picker",
-  description: "AniUI Time Picker — native time and datetime selection for React Native via @react-native-community/datetimepicker.",
+  description: "AniUI Time Picker — custom scroll-wheel time selection and DateAndTimePicker (calendar + time) for React Native.",
   alternates: { canonical: "/docs/time-picker" },
 };
 

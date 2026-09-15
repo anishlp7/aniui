@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { DESCRIPTIONS } from "@/lib/constants";
 import { Sidebar } from "@/components/sidebar";
 import { DocsPagination } from "@/components/docs-pagination";
 import { ScrollToTop } from "@/components/scroll-to-top";
@@ -9,7 +10,7 @@ export const metadata: Metadata = {
     default: "Components",
     template: "%s | AniUI",
   },
-  description: "Browse 148 React Native components. Button, Card, Dialog, Select, Toast, Data Table, Command Menu, and more. Built with Uniwind or NativeWind and rn-primitives. AniUI.",
+  description: DESCRIPTIONS.docs,
 };
 
 export default function DocsLayout({

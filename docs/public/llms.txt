@@ -46,7 +46,8 @@ npx @aniui/cli add button text input card
 - ContextMenu: `import { ContextMenu, ContextMenuTrigger, ContextMenuContent, ContextMenuItem, ContextMenuSeparator } from "@/components/ui/context-menu"` — needs @rn-primitives/context-menu, react-native-reanimated
 - DataTable: `import { DataTable } from "@/components/ui/data-table"` — Sortable, filterable data table with pagination and custom cell rendering
 - DatePicker: `import { DatePicker, DateRangePicker } from "@/components/ui/date-picker"` — Calendar popup picker with range support
-- TimePicker: `import { TimePicker, DateTimePicker } from "@/components/ui/time-picker"` — Native time and datetime picker, needs @react-native-community/datetimepicker
+- TimePicker: `import { TimePicker } from "@/components/ui/time-picker"` — Custom scroll-wheel time picker (hour, minute, AM/PM)
+- DateAndTimePicker: `import { DateAndTimePicker, DateTimePicker } from "@/components/ui/time-picker"` — Calendar + time wheels; DateTimePicker is an alias. Installed via `aniui add time-picker`
 - Dialog: `import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter } from "@/components/ui/dialog"`
 - DirectionProvider: `import { DirectionProvider, useDirection } from "@/components/ui/direction-provider"` — RTL/LTR direction context with I18nManager integration
 - Drawer: `import { Drawer, DrawerContent } from "@/components/ui/drawer"` — needs react-native-reanimated
@@ -164,7 +165,7 @@ Copy-paste full screen templates. Install via `npx @aniui/cli add-block <name>`.
 ## Why AniUI
 
 - shadcn/ui approach: copy source files, own the code, no npm dependency lock-in
-- 101 components + 7 charts + 15 blocks
+- 149 components + 7 charts + 15 blocks
 - Works with Expo SDK 53-57, bare React Native 0.76+, New Architecture
 - Uniwind (recommended default on Expo SDK 55+) and NativeWind v4/v5 (supported, soft-deprecated) — same className API
 - Full RTL support for Arabic, Hebrew, Persian, Urdu

@@ -5,6 +5,7 @@ import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
+import { DESCRIPTIONS } from "@/lib/constants";
 import { ADSENSE_CLIENT } from "@/lib/ads";
 import { consentInitScript } from "@/lib/consent";
 import { themeInitScript } from "@/lib/theme-init";
@@ -26,7 +27,7 @@ export const metadata: Metadata = {
     default: "AniUI — Beautiful React Native Components",
     template: "%s | AniUI",
   },
-  description: "shadcn/ui for React Native. 148 accessible components built with Uniwind or NativeWind, rn-primitives, and TypeScript. Copy. Paste. Ship.",
+  description: DESCRIPTIONS.site,
   keywords: ["react native", "components", "nativewind", "tailwind", "mobile", "ios", "android", "shadcn", "ui library", "expo", "uniwind", "rn-primitives", "accessible"],
   authors: [{ name: "Anish", url: "https://aniui.dev" }],
   creator: "Anish",
@@ -40,13 +41,13 @@ export const metadata: Metadata = {
     url: "https://aniui.dev",
     siteName: "AniUI",
     title: "AniUI — Beautiful React Native Components",
-    description: "shadcn/ui for React Native. 148 accessible components. Copy. Paste. Ship.",
+    description: DESCRIPTIONS.og,
     images: [{ url: "https://aniui.dev/og.png", width: 1200, height: 630, alt: "AniUI — Beautiful React Native Components" }],
   },
   twitter: {
     card: "summary_large_image",
     title: "AniUI — Beautiful React Native Components",
-    description: "shadcn/ui for React Native. 148 accessible components. Copy. Paste. Ship.",
+    description: DESCRIPTIONS.og,
     creator: "@anishlp7",
     images: ["https://aniui.dev/og.png"],
   },

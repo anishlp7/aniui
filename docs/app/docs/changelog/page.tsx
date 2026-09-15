@@ -30,9 +30,11 @@ const releases: Release[] = [
     date: "2026-09-15",
     title: "Time Picker and docs corrections",
     changes: [
-      { type: "feat", text: "New TimePicker and DateTimePicker components powered by @react-native-community/datetimepicker — native time and datetime selection alongside the existing calendar-based DatePicker.", link: "/docs/time-picker" },
-      { type: "docs", text: "DatePicker docs no longer incorrectly claim @react-native-community/datetimepicker; calendar DatePicker and native TimePicker are documented separately.", link: "/docs/date-picker" },
-      { type: "fix", text: "Corrected stale @react-native-community/datetimepicker references in Claude command templates (build-screen, generate-component)." },
+      { type: "feat", text: "New TimePicker (custom scroll-wheel columns), DateAndTimePicker (AniUI Calendar + time wheels), and DateTimePicker alias — full date/time coverage with zero extra npm deps, alongside the calendar-based DatePicker.", link: "/docs/time-picker" },
+      { type: "docs", text: "Dedicated Date & Time Picker docs page at /docs/date-and-time-picker with usage, props, constraints, and live preview.", link: "/docs/date-and-time-picker" },
+      { type: "docs", text: "Component count updated to 149 across homepage, README, llms.txt, MCP docs, and example apps; Date & Time Picker added to starter demos.", link: "/docs/components" },
+      { type: "docs", text: "DatePicker docs no longer incorrectly claim @react-native-community/datetimepicker; all pickers are now custom AniUI source.", link: "/docs/date-picker" },
+      { type: "fix", text: "Corrected stale @react-native-community/datetimepicker references in Claude command templates and removed the unnecessary dependency from example apps." },
     ],
   },
   {
