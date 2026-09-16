@@ -295,10 +295,10 @@ export const registry: Record<string, ComponentEntry> = {
   "time-picker": {
     name: "TimePicker",
     file: "components/ui/time-picker.tsx",
-    description: "Custom time picker with scroll wheels plus DateAndTimePicker (calendar + time)",
-    dependencies: ["lucide-react-native", "react-native-svg", "clsx", "tailwind-merge"],
-    registryDependencies: ["calendar", "theme-provider"],
-    tier: 1,
+    description: "Animated scroll-snap wheel time picker with a spring modal and haptic tick, plus DateAndTimePicker (calendar + time)",
+    dependencies: ["react-native-reanimated", "expo-haptics", "lucide-react-native", "react-native-svg", "clsx", "tailwind-merge"],
+    registryDependencies: ["calendar", "theme-provider", "animate"],
+    tier: 2,
   },
   slider: {
     name: "Slider",
