@@ -3,6 +3,7 @@ import { View, Text, Pressable } from "react-native";
 import { cva, type VariantProps } from "class-variance-authority";
 import { X } from "lucide-react-native";
 import { cn } from "@/lib/utils";
+import { useThemeColors } from "@/components/ui/theme-provider";
 
 const bannerVariants = cva(
   "flex-row items-center rounded-xl px-4 py-3 gap-3 border",
@@ -52,6 +53,7 @@ export function Banner({
   onDismiss,
   ...props
 }: BannerProps) {
+  const colors = useThemeColors();
   return (
     <View
       className={cn(bannerVariants({ variant }), className)}
@@ -87,7 +89,7 @@ export function Banner({
           accessibilityRole="button"
           accessibilityLabel="Dismiss"
         >
-          <X size={16} color="#71717a" />
+          <X size={16} color={colors.mutedForeground} />
         </Pressable>
       )}
     </View>

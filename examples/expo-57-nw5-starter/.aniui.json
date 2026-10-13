@@ -18,7 +18,7 @@
     },
     "action-sheet": {
       "version": "0.7.1",
-      "hash": "5fb854dc",
+      "hash": "8dd525da",
       "addedAt": "2026-10-13T00:00:00.000Z"
     },
     "alert-dialog": {
@@ -83,7 +83,7 @@
     },
     "banner": {
       "version": "0.7.1",
-      "hash": "204c4b4e",
+      "hash": "f86d3ac5",
       "addedAt": "2026-10-13T00:00:00.000Z"
     },
     "bar-chart": {
@@ -103,22 +103,22 @@
     },
     "bottom-sheet": {
       "version": "0.7.1",
-      "hash": "250cdfc7",
+      "hash": "422efcb2",
       "addedAt": "2026-10-13T00:00:00.000Z"
     },
     "breadcrumb": {
       "version": "0.7.1",
-      "hash": "c8aa12be",
+      "hash": "9d65e665",
       "addedAt": "2026-10-13T00:00:00.000Z"
     },
     "button": {
       "version": "0.7.1",
-      "hash": "a949db07",
+      "hash": "ee629df5",
       "addedAt": "2026-10-13T00:00:00.000Z"
     },
     "calendar": {
       "version": "0.7.1",
-      "hash": "9ab4db30",
+      "hash": "3f86ca11",
       "addedAt": "2026-10-13T00:00:00.000Z"
     },
     "card": {
@@ -353,7 +353,7 @@
     },
     "input-otp": {
       "version": "0.7.1",
-      "hash": "8eb7c759",
+      "hash": "1c75b005",
       "addedAt": "2026-10-13T00:00:00.000Z"
     },
     "input": {
@@ -438,7 +438,7 @@
     },
     "pagination": {
       "version": "0.7.1",
-      "hash": "54268eb6",
+      "hash": "4334da43",
       "addedAt": "2026-10-13T00:00:00.000Z"
     },
     "password-input": {
@@ -553,7 +553,7 @@
     },
     "segmented-control": {
       "version": "0.7.1",
-      "hash": "4758df04",
+      "hash": "536d12fd",
       "addedAt": "2026-10-13T00:00:00.000Z"
     },
     "select": {

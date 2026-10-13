@@ -2,6 +2,7 @@ import React from "react";
 import { View, Pressable, Text } from "react-native";
 import { cn } from "@/lib/utils";
 import { ChevronLeft, ChevronRight, Ellipsis } from "lucide-react-native";
+import { useThemeColors } from "@/components/ui/theme-provider";
 
 export interface PaginationProps extends React.ComponentPropsWithoutRef<typeof View> {
   className?: string;
@@ -31,6 +32,7 @@ export function Pagination({
   ...props
 }: PaginationProps) {
   const pages = getPages(total, current, siblings);
+  const colors = useThemeColors();
 
   return (
     <View className={cn("flex-row items-center justify-center gap-1", className)} {...props}>
@@ -42,12 +44,12 @@ export function Pagination({
         accessibilityLabel="Previous page"
         className="min-h-10 min-w-10 items-center justify-center rounded-md"
       >
-        <ChevronLeft size={24} color="#71717a" />
+        <ChevronLeft size={24} color={colors.mutedForeground} />
       </Pressable>
       {pages.map((page, i) =>
         page === "..." ? (
           <View key={`e${i}`} className="px-1">
-            <Ellipsis size={16} color="#71717a" />
+            <Ellipsis size={16} color={colors.mutedForeground} />
           </View>
         ) : (
           <Pressable
@@ -76,7 +78,7 @@ export function Pagination({
         accessibilityLabel="Next page"
         className="min-h-10 min-w-10 items-center justify-center rounded-md"
       >
-        <ChevronRight size={24} color="#71717a" />
+        <ChevronRight size={24} color={colors.mutedForeground} />
       </Pressable>
     </View>
   );

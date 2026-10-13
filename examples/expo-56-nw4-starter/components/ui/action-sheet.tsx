@@ -1,11 +1,12 @@
 import React, { forwardRef, useCallback } from "react";
-import { View, Pressable, Text, useColorScheme } from "react-native";
+import { View, Pressable, Text } from "react-native";
 import {
   BottomSheetModal,
   BottomSheetBackdrop,
   BottomSheetView,
 } from "@gorhom/bottom-sheet";
 import { cn } from "@/lib/utils";
+import { useThemeColors } from "@/components/ui/theme-provider";
 
 export interface ActionSheetAction {
   label: string;
@@ -22,7 +23,7 @@ export interface ActionSheetProps {
 
 export const ActionSheet = forwardRef<BottomSheetModal, ActionSheetProps>(
   ({ className, title, actions, onCancel }, ref) => {
-    const dark = useColorScheme() === "dark";
+    const colors = useThemeColors();
     const renderBackdrop = useCallback(
       (backdropProps: React.ComponentProps<typeof BottomSheetBackdrop>) => (
         <BottomSheetBackdrop {...backdropProps} disappearsOnIndex={-1} appearsOnIndex={0} opacity={0.5} />
@@ -36,8 +37,8 @@ export const ActionSheet = forwardRef<BottomSheetModal, ActionSheetProps>(
         enableDynamicSizing
         enablePanDownToClose
         backdropComponent={renderBackdrop}
-        backgroundStyle={{ backgroundColor: dark ? "#0a0a0a" : "#ffffff" }}
-        handleIndicatorStyle={{ backgroundColor: dark ? "#52525b" : "#a1a1aa" }}
+        backgroundStyle={{ backgroundColor: colors.background }}
+        handleIndicatorStyle={{ backgroundColor: colors.mutedForeground }}
       >
         <BottomSheetView>
           <View className={cn("pb-8 px-4", className)}>

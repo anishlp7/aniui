@@ -1,11 +1,12 @@
 import React, { forwardRef, useCallback } from "react";
-import { View, useColorScheme } from "react-native";
+import { View } from "react-native";
 import {
   BottomSheetModal,
   BottomSheetBackdrop,
   BottomSheetView,
 } from "@gorhom/bottom-sheet";
 import { cn } from "@/lib/utils";
+import { useThemeColors } from "@/components/ui/theme-provider";
 
 export interface BottomSheetProps {
   className?: string;
@@ -15,7 +16,7 @@ export interface BottomSheetProps {
 
 export const BottomSheet = forwardRef<BottomSheetModal, BottomSheetProps>(
   ({ className, children, snapPoints = ["25%", "50%"], ...props }, ref) => {
-    const dark = useColorScheme() === "dark";
+    const colors = useThemeColors();
     const renderBackdrop = useCallback(
       (backdropProps: React.ComponentProps<typeof BottomSheetBackdrop>) => (
         <BottomSheetBackdrop {...backdropProps} disappearsOnIndex={-1} appearsOnIndex={0} opacity={0.5} />
@@ -29,8 +30,8 @@ export const BottomSheet = forwardRef<BottomSheetModal, BottomSheetProps>(
         snapPoints={snapPoints}
         enablePanDownToClose
         backdropComponent={renderBackdrop}
-        backgroundStyle={{ backgroundColor: dark ? "#0a0a0a" : "#ffffff" }}
-        handleIndicatorStyle={{ backgroundColor: dark ? "#52525b" : "#a1a1aa" }}
+        backgroundStyle={{ backgroundColor: colors.background }}
+        handleIndicatorStyle={{ backgroundColor: colors.mutedForeground }}
         {...props}
       >
         <BottomSheetView>
