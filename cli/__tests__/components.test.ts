@@ -40,6 +40,10 @@ describe("component source files", () => {
     "loader", "marquee", "matched-geometry", "mobile-dock", "morph-fab",
     "morphing-tabbar", "profile-card", "qr-code", "receipt-card", "rolling-counter",
     "save-button", "shimmer", "social-button", "split-view", "time-picker", "verified-badge",
+    // Toast nudged over the 120-line baseline during the 0.8.0 type-safety sweep
+    // (type-correct SlideIn/Out union handling needs the `satisfies` wrapper +
+    // comment). Deliberately under the "large" limit, just needs explicit exemption.
+    "toast",
   ]);
   // Full compound multi-view systems (push/back navigation stacks, detent-driven bottom sheets) — a step
   // above the 320-line "large" tier, still single-file per CLAUDE.md, just genuinely bigger surface area.

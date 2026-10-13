@@ -11,9 +11,10 @@ describe("Timeline", () => {
       </Timeline>
     );
     expect(UNSAFE_getByProps({ accessibilityRole: "list" })).toBeTruthy();
-    // UNSAFE_getAllByProps picks up both the React component and its host
-    // counterpart, so count must be >= 2 (one or two per item).
-    expect(UNSAFE_getAllByProps({ accessibilityRole: "listitem" }).length).toBeGreaterThanOrEqual(2);
+    // TimelineItem advertises via the newer `role` prop (RN's
+    // accessibilityRole union doesn't include "listitem"), picked up by
+    // both the React component and its host counterpart.
+    expect(UNSAFE_getAllByProps({ role: "listitem" }).length).toBeGreaterThanOrEqual(2);
     expect(getByText("One")).toBeTruthy();
     expect(getByText("Two")).toBeTruthy();
   });

@@ -31,14 +31,15 @@ export interface ToastProviderProps {
   defaultFrom?: ToastFrom;
 }
 
-// Reanimated naming: SlideIn<Side> = the element STARTS on that side, so
-// `from: "top"` maps to SlideInUp; exits mirror in the same direction.
-const animationFor: Record<ToastFrom, { enter: typeof entering.slideInUp; exit: typeof exiting.slideOutUp }> = {
+// `from: "top"` maps to SlideInUp (Reanimated: SlideIn<Side> starts on that
+// side). `satisfies` validates the keyset without widening to a single
+// SlideIn type — Up/Down and Left/Right have different initial-value shapes.
+const animationFor = {
   top:    { enter: entering.slideInUp,    exit: exiting.slideOutUp },
   bottom: { enter: entering.slideInDown,  exit: exiting.slideOutDown },
   left:   { enter: entering.slideInLeft,  exit: exiting.slideOutLeft },
   right:  { enter: entering.slideInRight, exit: exiting.slideOutRight },
-};
+} satisfies Record<ToastFrom, { enter: unknown; exit: unknown }>;
 
 const containerStyles: Record<ToastPosition, string> = {
   top:    "absolute top-14 start-4 end-4 gap-2 z-50",
