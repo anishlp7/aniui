@@ -7,7 +7,7 @@ export type ComponentEntry = {
   description: string;
   dependencies: string[];
   registryDependencies: string[];
-  tier: 1 | 2 | 3;
+  tier: 1 | 2 | 3 | 4;
 };
 
 export const registry: Record<string, ComponentEntry> = {
