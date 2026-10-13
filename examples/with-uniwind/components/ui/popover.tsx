@@ -7,13 +7,13 @@ import { entering, exiting } from "@/components/ui/animate";
 import { cn } from "@/lib/utils";
 
 export interface PopoverProps {
-  open?: boolean;
   onOpenChange?: (open: boolean) => void;
   children: React.ReactNode;
 }
 
-export function Popover({ open, onOpenChange, children }: PopoverProps) {
-  return <PopoverPrimitive.Root open={open} onOpenChange={onOpenChange}>{children}</PopoverPrimitive.Root>;
+// @rn-primitives' Popover Root is uncontrolled — see context-menu.tsx.
+export function Popover({ onOpenChange, children }: PopoverProps) {
+  return <PopoverPrimitive.Root onOpenChange={onOpenChange}>{children}</PopoverPrimitive.Root>;
 }
 
 export interface PopoverTriggerProps extends React.ComponentPropsWithoutRef<typeof Pressable> {
@@ -39,7 +39,8 @@ export function PopoverTrigger({ className, children, ...props }: PopoverTrigger
 export interface PopoverContentProps extends React.ComponentPropsWithoutRef<typeof View> {
   className?: string;
   children?: React.ReactNode;
-  side?: "top" | "bottom" | "left" | "right";
+  // Primitive only supports vertical sides.
+  side?: "top" | "bottom";
   sideOffset?: number;
   align?: "start" | "center" | "end";
 }

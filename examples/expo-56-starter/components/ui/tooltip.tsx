@@ -8,12 +8,12 @@ import { cn } from "@/lib/utils";
 
 export interface TooltipProps {
   children: React.ReactNode;
-  open?: boolean;
   onOpenChange?: (open: boolean) => void;
 }
 
-export function Tooltip({ children, open, onOpenChange }: TooltipProps) {
-  return <TooltipPrimitive.Root open={open} onOpenChange={onOpenChange}>{children}</TooltipPrimitive.Root>;
+// @rn-primitives' Tooltip Root is uncontrolled — see context-menu.tsx.
+export function Tooltip({ children, onOpenChange }: TooltipProps) {
+  return <TooltipPrimitive.Root onOpenChange={onOpenChange}>{children}</TooltipPrimitive.Root>;
 }
 
 export interface TooltipTriggerProps extends React.ComponentPropsWithoutRef<typeof Pressable> {

@@ -25,7 +25,7 @@ import {
 } from "@/components/ui/dialog";
 import { ToastProvider, useToast } from "@/components/ui/toast";
 import { Banner } from "@/components/ui/banner";
-import { Tooltip } from "@/components/ui/tooltip";
+import { Tooltip, TooltipTrigger, TooltipContent } from "@/components/ui/tooltip";
 import { Popover, PopoverTrigger, PopoverContent } from "@/components/ui/popover";
 import {
   DropdownMenu,
@@ -204,11 +204,17 @@ function FeedbackContent() {
         <CardContent className="gap-3">
           <Text variant="muted">Press and hold the button to see tooltip.</Text>
           <View className="flex-row gap-4">
-            <Tooltip content="This adds a new item" side="bottom">
-              <Button variant="outline" size="sm">+ Add</Button>
+            <Tooltip>
+              <TooltipTrigger>
+                <Button variant="outline" size="sm">+ Add</Button>
+              </TooltipTrigger>
+              <TooltipContent side="bottom">This adds a new item</TooltipContent>
             </Tooltip>
-            <Tooltip content="Save your progress" side="bottom">
-              <Button variant="outline" size="sm">Save</Button>
+            <Tooltip>
+              <TooltipTrigger>
+                <Button variant="outline" size="sm">Save</Button>
+              </TooltipTrigger>
+              <TooltipContent side="bottom">Save your progress</TooltipContent>
             </Tooltip>
           </View>
         </CardContent>
@@ -273,7 +279,7 @@ function FeedbackContent() {
             variant="outline"
             onPress={() => setIsConnected(!isConnected)}
           >
-            Toggle: {isConnected ? "Online" : "Offline"}
+            {`Toggle: ${isConnected ? "Online" : "Offline"}`}
           </Button>
           <ConnectionBanner connected={isConnected} />
         </CardContent>

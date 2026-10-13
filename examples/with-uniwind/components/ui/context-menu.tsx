@@ -8,12 +8,16 @@ import { cn } from "@/lib/utils";
 
 export interface ContextMenuProps {
   children: React.ReactNode;
-  open?: boolean;
   onOpenChange?: (open: boolean) => void;
 }
 
-export function ContextMenu({ children, open, onOpenChange }: ContextMenuProps) {
-  return <ContextMenuPrimitive.Root open={open} onOpenChange={onOpenChange}>{children}</ContextMenuPrimitive.Root>;
+// @rn-primitives' ContextMenu Root is uncontrolled; it manages its own open
+// state internally and only emits via onOpenChange. There's no `open` prop
+// on the primitive to forward, so the wrapper doesn't take one either —
+// consumer-side controlled behavior would need to be rebuilt here with
+// the primitive's useRootContext() if we needed it later.
+export function ContextMenu({ children, onOpenChange }: ContextMenuProps) {
+  return <ContextMenuPrimitive.Root onOpenChange={onOpenChange}>{children}</ContextMenuPrimitive.Root>;
 }
 
 export function ContextMenuTrigger({ className, children, ...props }: React.ComponentPropsWithoutRef<typeof Pressable> & { className?: string; children: React.ReactNode }) {

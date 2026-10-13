@@ -8,16 +8,15 @@ import { cn } from "@/lib/utils";
 
 export interface HoverCardProps {
   children: React.ReactNode;
-  open?: boolean;
   onOpenChange?: (open: boolean) => void;
   openDelay?: number;
   closeDelay?: number;
 }
 
-export function HoverCard({ children, open, onOpenChange, openDelay, closeDelay }: HoverCardProps) {
+// @rn-primitives' HoverCard Root is uncontrolled — see context-menu.tsx.
+export function HoverCard({ children, onOpenChange, openDelay, closeDelay }: HoverCardProps) {
   return (
     <HoverCardPrimitive.Root
-      open={open}
       onOpenChange={onOpenChange}
       openDelay={openDelay}
       closeDelay={closeDelay}
@@ -57,7 +56,8 @@ export function HoverCardTrigger({ className, children, ...props }: HoverCardTri
 export interface HoverCardContentProps extends React.ComponentPropsWithoutRef<typeof View> {
   className?: string;
   children?: React.ReactNode;
-  side?: "top" | "bottom" | "left" | "right";
+  // Primitive only supports vertical sides.
+  side?: "top" | "bottom";
   sideOffset?: number;
   align?: "start" | "center" | "end";
 }

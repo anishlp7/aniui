@@ -15,12 +15,17 @@ export interface AccordionProps extends React.ComponentPropsWithoutRef<typeof Vi
 }
 
 export function Accordion({ className, defaultValue, children, type = "single", ...props }: AccordionProps) {
+  // Split by `type` so TS can narrow Root's SingleRootProps | MultipleRootProps
+  // discriminated union — a single-pass pass-through loses the discrimination.
+  if (type === "single") {
+    return (
+      <AccordionPrimitive.Root type="single" defaultValue={defaultValue} asChild>
+        <View className={cn("", className)} {...props}>{children}</View>
+      </AccordionPrimitive.Root>
+    );
+  }
   return (
-    <AccordionPrimitive.Root
-      type={type}
-      defaultValue={type === "single" ? defaultValue : defaultValue ? [defaultValue] : undefined}
-      asChild
-    >
+    <AccordionPrimitive.Root type="multiple" defaultValue={defaultValue ? [defaultValue] : undefined} asChild>
       <View className={cn("", className)} {...props}>{children}</View>
     </AccordionPrimitive.Root>
   );

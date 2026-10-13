@@ -56,7 +56,7 @@ export function TimelineItem({
   const isActive = variant === "active";
 
   return (
-    <View className={cn("flex-row", className)} accessibilityRole="listitem" {...props}>
+    <View className={cn("flex-row", className)} role="listitem" {...props}>
       {/* Dot + Line */}
       <View className="items-center w-6" style={{ paddingTop: 4 }}>
         {icon ?? (
