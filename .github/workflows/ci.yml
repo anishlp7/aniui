@@ -63,7 +63,10 @@ jobs:
         run: npm ci
 
       - name: Run component tests
-        run: npx jest --passWithNoTests --ci
+        # No --passWithNoTests: a missing test file must fail. If a component
+        # genuinely has no test coverage yet, add one to components/__tests__/
+        # (the a11y-audit.ts helper is enough for a smoke).
+        run: npx jest --ci
 
   docs-build:
     name: Docs Build
@@ -106,12 +109,18 @@ jobs:
         run: npm run registry:build
 
       - name: Fail if the committed registry is stale
+        # registry:build regenerates all three downstream artifacts from
+        # cli/src/registry.ts: docs/public/registry.json, docs/public/r/*,
+        # and mcp/src/registry-data.ts. All three must stay in sync; a
+        # stale MCP registry was the exact bug that let the tier-type
+        # (1|2|3 vs 1|2|3|4) drift unnoticed in 0.6/0.7.
         run: |
-          if ! git diff --exit-code docs/public/registry.json docs/public/r; then
-            echo "ERROR: docs/public/r is out of date. Run 'npm run registry:build' and commit the result."
+          if ! git diff --exit-code docs/public/registry.json docs/public/r mcp/src/registry-data.ts; then
+            echo "ERROR: generated registry files are out of date."
+            echo "Run 'npm run registry:build' and commit the result."
             exit 1
           fi
-          echo "OK: registry is up to date"
+          echo "OK: registry (docs + MCP) is up to date"
 
   lint-components:
     name: Lint Components
@@ -135,19 +144,84 @@ jobs:
           fi
           echo "OK: No default exports found"
 
-      - name: Component line count check (max 80 lines)
+      - name: Component line count check (max 80 lines, with allowlist)
+        # Hard-fails when a NEW component exceeds 80 lines. Legacy tall
+        # components that already exceeded the limit when this ratchet
+        # was introduced are listed in scripts/linelimit-allowlist.txt.
+        # Delete an entry from the allowlist as its component is refactored
+        # under 80 lines — the gate only moves one direction.
         run: |
           failed=0
+          allowlist_file=scripts/linelimit-allowlist.txt
+          # Strip comments and blank lines once; iterate the clean form.
+          allowed() { grep -vE '^\s*(#|$)' "$allowlist_file" | grep -qxF "$1"; }
           for f in components/ui/*.tsx; do
+            base=$(basename "$f")
             lines=$(wc -l < "$f")
             if [ "$lines" -gt 80 ]; then
-              echo "WARN: $f has $lines lines (limit: 80)"
-              failed=1
+              if allowed "$base"; then
+                :
+              else
+                echo "FAIL: $base has $lines lines (limit: 80, not in allowlist)"
+                failed=1
+              fi
             fi
           done
+          # Fail on stale allowlist entries (file now compliant or missing).
+          # Keeps the ratchet from rotting.
+          while IFS= read -r base; do
+            f="components/ui/$base"
+            if [ ! -f "$f" ]; then
+              echo "FAIL: allowlist entry $base no longer exists — remove it"
+              failed=1
+              continue
+            fi
+            lines=$(wc -l < "$f")
+            if [ "$lines" -le 80 ]; then
+              echo "FAIL: $base is $lines lines (<= 80) but still allowlisted — remove it"
+              failed=1
+            fi
+          done < <(grep -vE '^\s*(#|$)' "$allowlist_file")
           if [ "$failed" -eq 1 ]; then
-            echo ""
-            echo "WARNING: Some components exceed 80-line limit"
-            echo "Consider simplifying or splitting these components"
+            exit 1
           fi
-          echo "Line count check complete"
+          echo "Line count check passed (${PIPESTATUS[0]:-ok})"
+
+  example-apps-smoke:
+    name: Example Apps Smoke
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        starter:
+          - expo-starter
+          - expo-55-starter
+          - expo-56-starter
+          - expo-57-starter
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: ".nvmrc"
+          cache: "npm"
+          cache-dependency-path: "examples/${{ matrix.starter }}/package-lock.json"
+
+      - name: Install starter dependencies
+        working-directory: examples/${{ matrix.starter }}
+        # --no-audit --no-fund keeps the install log clean on CI; --legacy-peer-deps
+        # tolerates the SDK buckets where Reanimated / worklets peer ranges aren't
+        # yet unified across all transitives.
+        run: npm ci --no-audit --no-fund --legacy-peer-deps
+
+      - name: Verify Expo SDK consistency
+        working-directory: examples/${{ matrix.starter }}
+        # expo-doctor is advisory in CI (|| true) — any genuine config regression
+        # still surfaces in the log, but a transient registry blip or an upstream
+        # dep's momentary version drift doesn't red-X every PR. Switch to a hard
+        # fail once the four starters report clean on main for a few cycles.
+        run: npx -y expo-doctor || true
+
+      - name: Starter typecheck
+        working-directory: examples/${{ matrix.starter }}
+        run: npx tsc --noEmit
