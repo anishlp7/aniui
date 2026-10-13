@@ -2,6 +2,41 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.8.0] - 2026-10-13
+
+### Added
+
+- **100% canonical component test coverage** (149/149). Every `components/ui/*.tsx` now has a matching `components/__tests__/*.test.tsx` — the audit baseline was 77/149 (52%), reached in three ratchets:
+  - **Batch 1** (Tier 1, 30 tests): forms, nav primitives, skeuomorphic pieces, `theme-provider`.
+  - **Batch 2** (Tier 2, 23 tests): motion components (loader/shimmer/typing-indicator/marquee), button variants (save/spin/social/flexi), compound stacks (polaroid/photo-stack/profile-card/morphing-tabbar).
+  - **Batch 3** (Tier 3 + Tier 4, 21 tests): gesture-driven (tray/unfold-menu/action-rail/split-view/filling-stack/mobile-dock), carousels (3D/circular/vertical-flow), Skia gooey family (gooey-popover/gooey-search-tabs/morph-fab).
+- **CLI utility test layer** (7 files, 57 tests): `hash`, `color` (HSL→hex), `pkg` (CLI package resolution), `file-ops` (`stripTypes`, `transformForUniwind`, `getPackageRoot`), `theme-colors-block` (idempotent patch + round-trip), `inject-layout` (layout detection, idempotent import/JSX insertion), `theme-presets` (preset catalog + chrome-token sharing invariants).
+- **CLI command test layer** (4 files, 17 tests): `mcpCommand` (prints valid MCP config JSON + tool/resource inventory), `addCommand` (end-to-end copy with registryDeps resolution, skip-if-installed, exit-on-unknown, exit-when-uninitialized), `diffCommand` (identical/edited/unknown/not-installed), `statusCommand` (current/modified/not-installed row shapes).
+- **`useThemeColors()` migration** across 8 components (`pagination`, `calendar`, `breadcrumb`, `banner`, `button`, `input-otp`, `bottom-sheet`, `action-sheet`, `segmented-control`) — one source of truth for every native-prop color that can't read a className token. Button's dark-mode spinner (which was invisible against the primary bg) is now theme-correct.
+- **CI tightening** (`.github/workflows/ci.yml`):
+  - 80-line check is now a hard failure with a `scripts/linelimit-allowlist.txt` ratchet. The 84 components already over 80 lines are allowlisted — new components can't exceed 80, and refactored components get their allowlist entry removed. Guided by `feedback_line_limits_flexible.md`: the targets stay soft, we never compress for the sake of it.
+  - `test-components` dropped `--passWithNoTests` — a totally-empty suite can no longer drift past CI.
+  - `registry-drift` now also diffs `mcp/src/registry-data.ts`, closing the exact gap that let the tier-type bug ship in 0.6/0.7.
+  - New `example-apps-smoke` matrix job: `npm ci` + `expo-doctor` + `tsc --noEmit` across all 4 Expo SDK starters.
+- **Jest mocks** for `react-native-safe-area-context`, `react-native-qrcode-svg`, and an extended `react-native-gesture-handler` (via a chainable Proxy that covers `Gesture.Pan`/`Fling`/`Manual`/`Race`/`Tap`/`LongPress`/`Pinch`/`Rotation` and `Directions`), making every tier of component testable under the existing render harness.
+
+### Changed
+
+- **CLI bumped to `0.8.0`.**
+- CLI vitest suite: 6 → 17 files, 2340 → 2414 tests (+74). Component Jest suite: 230 → 304 files, 1299 → 1563 tests (+264).
+- **MCP registry type fixed**: `cli/scripts/sync-mcp-registry.js` now emits `tier: 1 | 2 | 3 | 4` to match the 3 Tier-4 Skia entries.
+- **Starter manifests regenerated**: each of the 8 `examples/*/.aniui.json` now lists all 149 components with real hashes + 0.8.0 version, replacing the stale 4-entry snapshot from July.
+
+### Fixed
+
+- `fix(gooey-popover)`: `max-w-[350px]` → `max-w-[320px]` in `expo-57-starter`, bringing it in line with the canonical component and the other 7 starters.
+- **CHANGELOG backfill**: entries for 0.4.0 → 0.7.1 were missing from the root `CHANGELOG.md` (last entry was 0.3.0 from May 2026); added them in Keep-a-Changelog format synthesized from the detailed docs changelog.
+
+### Notes
+
+- Deferred to a future release: command-level e2e for `init.ts` (27 KB monolith), `add-block.ts`, `theme.ts` (prompts-driven), `update.ts`, `doctor.ts`, `generate.ts`. Each needs significant per-scenario fs scaffolding.
+- The next focus is **documentation quality** (Track A per the Q4 2026 roadmap): unify the `/charts/` subsite onto the `/docs/` template, backfill `PropsTable` on the ~46 pages missing one, add Expo Snack embeds on high-traffic pages, add SDK 57 install templates.
+
 ## [0.7.1] - 2026-09-15
 
 ### Added
