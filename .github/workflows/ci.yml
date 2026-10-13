@@ -204,15 +204,19 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version-file: ".nvmrc"
-          cache: "npm"
-          cache-dependency-path: "examples/${{ matrix.starter }}/package-lock.json"
+          # No cache / cache-dependency-path here: examples/*/package-lock.json
+          # is gitignored (each starter is treated as a materialization of
+          # `aniui init` output, lockfiles kept out of the repo to avoid
+          # per-SDK merge-conflict and dependabot noise), so setup-node has
+          # nothing to compute a cache key off of.
 
       - name: Install starter dependencies
         working-directory: examples/${{ matrix.starter }}
-        # --no-audit --no-fund keeps the install log clean on CI; --legacy-peer-deps
-        # tolerates the SDK buckets where Reanimated / worklets peer ranges aren't
-        # yet unified across all transitives.
-        run: npm ci --no-audit --no-fund --legacy-peer-deps
+        # Use `npm install` (not `npm ci`): no committed lockfile — see the
+        # setup-node note above. --no-audit --no-fund keeps the log clean;
+        # --legacy-peer-deps tolerates the SDK buckets where Reanimated /
+        # worklets peer ranges aren't yet unified across all transitives.
+        run: npm install --no-audit --no-fund --legacy-peer-deps
 
       - name: Verify Expo SDK consistency
         working-directory: examples/${{ matrix.starter }}
