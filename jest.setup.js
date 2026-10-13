@@ -44,6 +44,11 @@ jest.mock("react-native-reanimated", () => {
   // literal "ADD ME IF NEEDED" placeholder) — components read it to skip
   // looping animations under reduced motion, so tests need a stable value.
   Reanimated.useReducedMotion = () => false;
+  // The library's mock doesn't ship useFrameCallback — Marquee uses it to
+  // tick a shared value every frame. A stub that never fires is enough for
+  // a jsdom-level render test (no animation to observe anyway under the
+  // mocked worklet runtime).
+  Reanimated.useFrameCallback = () => ({ setActive: () => {} });
   return Reanimated;
 });
 
