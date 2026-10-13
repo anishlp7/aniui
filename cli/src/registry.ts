@@ -17,7 +17,7 @@ export const registry: Record<string, ComponentEntry> = {
     file: "components/ui/button.tsx",
     description: "A pressable button with variants",
     dependencies: ["class-variance-authority", "clsx", "tailwind-merge"],
-    registryDependencies: [],
+    registryDependencies: ["theme-provider"],
     tier: 1,
   },
   text: {
@@ -89,7 +89,7 @@ export const registry: Record<string, ComponentEntry> = {
     file: "components/ui/breadcrumb.tsx",
     description: "Navigation trail: Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbPage, BreadcrumbSeparator",
     dependencies: ["lucide-react-native", "react-native-svg", "clsx", "tailwind-merge"],
-    registryDependencies: [],
+    registryDependencies: ["theme-provider"],
     tier: 1,
   },
   menubar: {
@@ -257,7 +257,7 @@ export const registry: Record<string, ComponentEntry> = {
     file: "components/ui/bottom-sheet.tsx",
     description: "Bottom sheet overlay",
     dependencies: ["@gorhom/bottom-sheet", "react-native-gesture-handler", "clsx", "tailwind-merge"],
-    registryDependencies: [],
+    registryDependencies: ["theme-provider"],
     tier: 3,
   },
   "action-sheet": {
@@ -265,7 +265,7 @@ export const registry: Record<string, ComponentEntry> = {
     file: "components/ui/action-sheet.tsx",
     description: "Action sheet with options",
     dependencies: ["@gorhom/bottom-sheet", "react-native-gesture-handler", "clsx", "tailwind-merge"],
-    registryDependencies: ["bottom-sheet"],
+    registryDependencies: ["bottom-sheet", "theme-provider"],
     tier: 3,
   },
   select: {
@@ -281,7 +281,7 @@ export const registry: Record<string, ComponentEntry> = {
     file: "components/ui/calendar.tsx",
     description: "Month calendar with single and range selection",
     dependencies: ["lucide-react-native", "react-native-svg", "clsx", "tailwind-merge"],
-    registryDependencies: [],
+    registryDependencies: ["theme-provider"],
     tier: 1,
   },
   "date-picker": {
@@ -443,7 +443,7 @@ export const registry: Record<string, ComponentEntry> = {
     file: "components/ui/banner.tsx",
     description: "Full-width notification banner with variants and dismiss",
     dependencies: ["lucide-react-native", "react-native-svg", "class-variance-authority", "clsx", "tailwind-merge"],
-    registryDependencies: [],
+    registryDependencies: ["theme-provider"],
     tier: 1,
   },
   "chart-tooltip": {
@@ -675,7 +675,7 @@ export const registry: Record<string, ComponentEntry> = {
     file: "components/ui/pagination.tsx",
     description: "Page navigation with numbered buttons and prev/next",
     dependencies: ["lucide-react-native", "react-native-svg", "clsx", "tailwind-merge"],
-    registryDependencies: ["button"],
+    registryDependencies: ["button", "theme-provider"],
     tier: 1,
   },
   "file-picker": {

@@ -106,7 +106,7 @@ describe("resolveRegistryDeps", () => {
   });
 
   it("returns input even if no registry deps", () => {
-    const resolved = resolveRegistryDeps(["button"]);
-    expect(resolved).toEqual(["button"]);
+    const resolved = resolveRegistryDeps(["text"]);
+    expect(resolved).toEqual(["text"]);
   });
 });
