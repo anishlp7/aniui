@@ -6,25 +6,750 @@
   "tsx": true,
   "sdkGeneration": "v5",
   "installed": {
-    "sidebar": {
-      "version": "0.3.0",
-      "hash": "8d31c480",
-      "addedAt": "2026-07-05T05:22:15.492Z"
+    "accordion": {
+      "version": "0.7.1",
+      "hash": "93ae0054",
+      "addedAt": "2026-10-13T00:00:00.000Z"
     },
-    "menubar": {
-      "version": "0.3.0",
-      "hash": "02d23340",
-      "addedAt": "2026-07-05T05:22:15.493Z"
+    "action-rail": {
+      "version": "0.7.1",
+      "hash": "b87381c9",
+      "addedAt": "2026-10-13T00:00:00.000Z"
     },
-    "breadcrumb": {
-      "version": "0.3.0",
-      "hash": "ebf01a23",
-      "addedAt": "2026-07-05T05:22:15.493Z"
+    "action-sheet": {
+      "version": "0.7.1",
+      "hash": "5fb854dc",
+      "addedAt": "2026-10-13T00:00:00.000Z"
+    },
+    "alert-dialog": {
+      "version": "0.7.1",
+      "hash": "cc82651f",
+      "addedAt": "2026-10-13T00:00:00.000Z"
+    },
+    "alert": {
+      "version": "0.7.1",
+      "hash": "5a0a8650",
+      "addedAt": "2026-10-13T00:00:00.000Z"
+    },
+    "animate": {
+      "version": "0.7.1",
+      "hash": "9b194e57",
+      "addedAt": "2026-10-13T00:00:00.000Z"
+    },
+    "animated-header-scrollview": {
+      "version": "0.7.1",
+      "hash": "a4a5f440",
+      "addedAt": "2026-10-13T00:00:00.000Z"
+    },
+    "animated-input-bar": {
+      "version": "0.7.1",
+      "hash": "18bced23",
+      "addedAt": "2026-10-13T00:00:00.000Z"
+    },
+    "arc-list": {
+      "version": "0.7.1",
+      "hash": "db858c10",
+      "addedAt": "2026-10-13T00:00:00.000Z"
+    },
+    "area-chart": {
+      "version": "0.7.1",
+      "hash": "ded0c298",
+      "addedAt": "2026-10-13T00:00:00.000Z"
     },
     "aspect-ratio": {
-      "version": "0.3.0",
+      "version": "0.7.1",
       "hash": "a7caf71f",
-      "addedAt": "2026-07-05T05:22:15.493Z"
+      "addedAt": "2026-10-13T00:00:00.000Z"
+    },
+    "autocomplete": {
+      "version": "0.7.1",
+      "hash": "45e601db",
+      "addedAt": "2026-10-13T00:00:00.000Z"
+    },
+    "avatar-group": {
+      "version": "0.7.1",
+      "hash": "8f6d60d2",
+      "addedAt": "2026-10-13T00:00:00.000Z"
+    },
+    "avatar": {
+      "version": "0.7.1",
+      "hash": "e1e5042d",
+      "addedAt": "2026-10-13T00:00:00.000Z"
+    },
+    "badge": {
+      "version": "0.7.1",
+      "hash": "3d0961be",
+      "addedAt": "2026-10-13T00:00:00.000Z"
+    },
+    "banner": {
+      "version": "0.7.1",
+      "hash": "204c4b4e",
+      "addedAt": "2026-10-13T00:00:00.000Z"
+    },
+    "bar-chart": {
+      "version": "0.7.1",
+      "hash": "0c6eb657",
+      "addedAt": "2026-10-13T00:00:00.000Z"
+    },
+    "barcode-badge": {
+      "version": "0.7.1",
+      "hash": "dbad79cd",
+      "addedAt": "2026-10-13T00:00:00.000Z"
+    },
+    "book-page": {
+      "version": "0.7.1",
+      "hash": "a7d2a278",
+      "addedAt": "2026-10-13T00:00:00.000Z"
+    },
+    "bottom-sheet": {
+      "version": "0.7.1",
+      "hash": "250cdfc7",
+      "addedAt": "2026-10-13T00:00:00.000Z"
+    },
+    "breadcrumb": {
+      "version": "0.7.1",
+      "hash": "c8aa12be",
+      "addedAt": "2026-10-13T00:00:00.000Z"
+    },
+    "button": {
+      "version": "0.7.1",
+      "hash": "a949db07",
+      "addedAt": "2026-10-13T00:00:00.000Z"
+    },
+    "calendar": {
+      "version": "0.7.1",
+      "hash": "9ab4db30",
+      "addedAt": "2026-10-13T00:00:00.000Z"
+    },
+    "card": {
+      "version": "0.7.1",
+      "hash": "01af7b1d",
+      "addedAt": "2026-10-13T00:00:00.000Z"
+    },
+    "carousel-3d": {
+      "version": "0.7.1",
+      "hash": "a2f2b0a8",
+      "addedAt": "2026-10-13T00:00:00.000Z"
+    },
+    "carousel-circular": {
+      "version": "0.7.1",
+      "hash": "320e3ecd",
+      "addedAt": "2026-10-13T00:00:00.000Z"
+    },
+    "carousel-parallax": {
+      "version": "0.7.1",
+      "hash": "07276f25",
+      "addedAt": "2026-10-13T00:00:00.000Z"
+    },
+    "carousel-scale": {
+      "version": "0.7.1",
+      "hash": "b681fb3c",
+      "addedAt": "2026-10-13T00:00:00.000Z"
+    },
+    "carousel-tilt": {
+      "version": "0.7.1",
+      "hash": "140a982a",
+      "addedAt": "2026-10-13T00:00:00.000Z"
+    },
+    "carousel": {
+      "version": "0.7.1",
+      "hash": "a9432384",
+      "addedAt": "2026-10-13T00:00:00.000Z"
+    },
+    "chart-tooltip": {
+      "version": "0.7.1",
+      "hash": "0037f512",
+      "addedAt": "2026-10-13T00:00:00.000Z"
+    },
+    "chat-bubble": {
+      "version": "0.7.1",
+      "hash": "39cdea81",
+      "addedAt": "2026-10-13T00:00:00.000Z"
+    },
+    "checkbox": {
+      "version": "0.7.1",
+      "hash": "c7811439",
+      "addedAt": "2026-10-13T00:00:00.000Z"
+    },
+    "chip": {
+      "version": "0.7.1",
+      "hash": "7e6e6ed0",
+      "addedAt": "2026-10-13T00:00:00.000Z"
+    },
+    "collapsible": {
+      "version": "0.7.1",
+      "hash": "25875ded",
+      "addedAt": "2026-10-13T00:00:00.000Z"
+    },
+    "combobox": {
+      "version": "0.7.1",
+      "hash": "ca273eed",
+      "addedAt": "2026-10-13T00:00:00.000Z"
+    },
+    "command-menu": {
+      "version": "0.7.1",
+      "hash": "3e8bda90",
+      "addedAt": "2026-10-13T00:00:00.000Z"
+    },
+    "connection-banner": {
+      "version": "0.7.1",
+      "hash": "6da33ec2",
+      "addedAt": "2026-10-13T00:00:00.000Z"
+    },
+    "context-menu": {
+      "version": "0.7.1",
+      "hash": "b5bd1bb6",
+      "addedAt": "2026-10-13T00:00:00.000Z"
+    },
+    "coupon": {
+      "version": "0.7.1",
+      "hash": "e87aaa7b",
+      "addedAt": "2026-10-13T00:00:00.000Z"
+    },
+    "curved-bottom-tabs": {
+      "version": "0.7.1",
+      "hash": "2076d491",
+      "addedAt": "2026-10-13T00:00:00.000Z"
+    },
+    "data-table": {
+      "version": "0.7.1",
+      "hash": "d051a1d1",
+      "addedAt": "2026-10-13T00:00:00.000Z"
+    },
+    "date-picker": {
+      "version": "0.7.1",
+      "hash": "64fe4c11",
+      "addedAt": "2026-10-13T00:00:00.000Z"
+    },
+    "dialog": {
+      "version": "0.7.1",
+      "hash": "d0456a2d",
+      "addedAt": "2026-10-13T00:00:00.000Z"
+    },
+    "direction-provider": {
+      "version": "0.7.1",
+      "hash": "32224a9c",
+      "addedAt": "2026-10-13T00:00:00.000Z"
+    },
+    "drawer": {
+      "version": "0.7.1",
+      "hash": "2565af93",
+      "addedAt": "2026-10-13T00:00:00.000Z"
+    },
+    "dropdown-menu": {
+      "version": "0.7.1",
+      "hash": "cd781861",
+      "addedAt": "2026-10-13T00:00:00.000Z"
+    },
+    "empty-state": {
+      "version": "0.7.1",
+      "hash": "2a265a86",
+      "addedAt": "2026-10-13T00:00:00.000Z"
+    },
+    "event-ticket": {
+      "version": "0.7.1",
+      "hash": "9bc67cb5",
+      "addedAt": "2026-10-13T00:00:00.000Z"
+    },
+    "expandable-view": {
+      "version": "0.7.1",
+      "hash": "cfb777c8",
+      "addedAt": "2026-10-13T00:00:00.000Z"
+    },
+    "fab": {
+      "version": "0.7.1",
+      "hash": "c0eb448a",
+      "addedAt": "2026-10-13T00:00:00.000Z"
+    },
+    "fan-menu": {
+      "version": "0.7.1",
+      "hash": "c1deb87d",
+      "addedAt": "2026-10-13T00:00:00.000Z"
+    },
+    "field": {
+      "version": "0.7.1",
+      "hash": "b0a86874",
+      "addedAt": "2026-10-13T00:00:00.000Z"
+    },
+    "file-picker": {
+      "version": "0.7.1",
+      "hash": "0617b5c5",
+      "addedAt": "2026-10-13T00:00:00.000Z"
+    },
+    "filling-stack": {
+      "version": "0.7.1",
+      "hash": "5ceda971",
+      "addedAt": "2026-10-13T00:00:00.000Z"
+    },
+    "flexi-button": {
+      "version": "0.7.1",
+      "hash": "096f77ae",
+      "addedAt": "2026-10-13T00:00:00.000Z"
+    },
+    "flip-card": {
+      "version": "0.7.1",
+      "hash": "c158ec96",
+      "addedAt": "2026-10-13T00:00:00.000Z"
+    },
+    "form": {
+      "version": "0.7.1",
+      "hash": "a4905977",
+      "addedAt": "2026-10-13T00:00:00.000Z"
+    },
+    "gooey-popover": {
+      "version": "0.7.1",
+      "hash": "3dbd0ea8",
+      "addedAt": "2026-10-13T00:00:00.000Z"
+    },
+    "gooey-search-tabs": {
+      "version": "0.7.1",
+      "hash": "9f5eaf1a",
+      "addedAt": "2026-10-13T00:00:00.000Z"
+    },
+    "gradient": {
+      "version": "0.7.1",
+      "hash": "f7c44ec0",
+      "addedAt": "2026-10-13T00:00:00.000Z"
+    },
+    "grid": {
+      "version": "0.7.1",
+      "hash": "dd09aa46",
+      "addedAt": "2026-10-13T00:00:00.000Z"
+    },
+    "hamburger": {
+      "version": "0.7.1",
+      "hash": "84a47624",
+      "addedAt": "2026-10-13T00:00:00.000Z"
+    },
+    "header": {
+      "version": "0.7.1",
+      "hash": "adfb11ab",
+      "addedAt": "2026-10-13T00:00:00.000Z"
+    },
+    "hover-card": {
+      "version": "0.7.1",
+      "hash": "da2f690d",
+      "addedAt": "2026-10-13T00:00:00.000Z"
+    },
+    "image-gallery": {
+      "version": "0.7.1",
+      "hash": "bfed3d1d",
+      "addedAt": "2026-10-13T00:00:00.000Z"
+    },
+    "image": {
+      "version": "0.7.1",
+      "hash": "cf367c41",
+      "addedAt": "2026-10-13T00:00:00.000Z"
+    },
+    "infinite-list": {
+      "version": "0.7.1",
+      "hash": "ffb6a523",
+      "addedAt": "2026-10-13T00:00:00.000Z"
+    },
+    "input-group": {
+      "version": "0.7.1",
+      "hash": "94b3ff6a",
+      "addedAt": "2026-10-13T00:00:00.000Z"
+    },
+    "input-otp": {
+      "version": "0.7.1",
+      "hash": "8eb7c759",
+      "addedAt": "2026-10-13T00:00:00.000Z"
+    },
+    "input": {
+      "version": "0.7.1",
+      "hash": "037d6e16",
+      "addedAt": "2026-10-13T00:00:00.000Z"
+    },
+    "kbd": {
+      "version": "0.7.1",
+      "hash": "4306b95d",
+      "addedAt": "2026-10-13T00:00:00.000Z"
+    },
+    "keyboard-view": {
+      "version": "0.7.1",
+      "hash": "b15a3b89",
+      "addedAt": "2026-10-13T00:00:00.000Z"
+    },
+    "label": {
+      "version": "0.7.1",
+      "hash": "1c32ae21",
+      "addedAt": "2026-10-13T00:00:00.000Z"
+    },
+    "labeled-separator": {
+      "version": "0.7.1",
+      "hash": "b480754d",
+      "addedAt": "2026-10-13T00:00:00.000Z"
+    },
+    "line-chart": {
+      "version": "0.7.1",
+      "hash": "51f55aca",
+      "addedAt": "2026-10-13T00:00:00.000Z"
+    },
+    "list": {
+      "version": "0.7.1",
+      "hash": "c3c71924",
+      "addedAt": "2026-10-13T00:00:00.000Z"
+    },
+    "loader": {
+      "version": "0.7.1",
+      "hash": "df6cb324",
+      "addedAt": "2026-10-13T00:00:00.000Z"
+    },
+    "marquee": {
+      "version": "0.7.1",
+      "hash": "af6c9244",
+      "addedAt": "2026-10-13T00:00:00.000Z"
+    },
+    "masked-input": {
+      "version": "0.7.1",
+      "hash": "be71654e",
+      "addedAt": "2026-10-13T00:00:00.000Z"
+    },
+    "matched-geometry": {
+      "version": "0.7.1",
+      "hash": "dfe6f3c8",
+      "addedAt": "2026-10-13T00:00:00.000Z"
+    },
+    "menubar": {
+      "version": "0.7.1",
+      "hash": "4488dda4",
+      "addedAt": "2026-10-13T00:00:00.000Z"
+    },
+    "mobile-dock": {
+      "version": "0.7.1",
+      "hash": "8d718e60",
+      "addedAt": "2026-10-13T00:00:00.000Z"
+    },
+    "morph-fab": {
+      "version": "0.7.1",
+      "hash": "66d4c322",
+      "addedAt": "2026-10-13T00:00:00.000Z"
+    },
+    "morphing-tabbar": {
+      "version": "0.7.1",
+      "hash": "b412f906",
+      "addedAt": "2026-10-13T00:00:00.000Z"
+    },
+    "number-input": {
+      "version": "0.7.1",
+      "hash": "cc034074",
+      "addedAt": "2026-10-13T00:00:00.000Z"
+    },
+    "pagination": {
+      "version": "0.7.1",
+      "hash": "54268eb6",
+      "addedAt": "2026-10-13T00:00:00.000Z"
+    },
+    "password-input": {
+      "version": "0.7.1",
+      "hash": "cc350c26",
+      "addedAt": "2026-10-13T00:00:00.000Z"
+    },
+    "phone-input": {
+      "version": "0.7.1",
+      "hash": "f5f56824",
+      "addedAt": "2026-10-13T00:00:00.000Z"
+    },
+    "photo-stack": {
+      "version": "0.7.1",
+      "hash": "4e674918",
+      "addedAt": "2026-10-13T00:00:00.000Z"
+    },
+    "pie-chart": {
+      "version": "0.7.1",
+      "hash": "79769e65",
+      "addedAt": "2026-10-13T00:00:00.000Z"
+    },
+    "polaroid": {
+      "version": "0.7.1",
+      "hash": "1adf4b7a",
+      "addedAt": "2026-10-13T00:00:00.000Z"
+    },
+    "popover": {
+      "version": "0.7.1",
+      "hash": "2f7f99bc",
+      "addedAt": "2026-10-13T00:00:00.000Z"
+    },
+    "price": {
+      "version": "0.7.1",
+      "hash": "98f64de5",
+      "addedAt": "2026-10-13T00:00:00.000Z"
+    },
+    "profile-card": {
+      "version": "0.7.1",
+      "hash": "64327f89",
+      "addedAt": "2026-10-13T00:00:00.000Z"
+    },
+    "progress-steps": {
+      "version": "0.7.1",
+      "hash": "9886652a",
+      "addedAt": "2026-10-13T00:00:00.000Z"
+    },
+    "progress": {
+      "version": "0.7.1",
+      "hash": "c0ec12f4",
+      "addedAt": "2026-10-13T00:00:00.000Z"
+    },
+    "prompt-input": {
+      "version": "0.7.1",
+      "hash": "b8665083",
+      "addedAt": "2026-10-13T00:00:00.000Z"
+    },
+    "qr-code": {
+      "version": "0.7.1",
+      "hash": "21eb6a2c",
+      "addedAt": "2026-10-13T00:00:00.000Z"
+    },
+    "radar-chart": {
+      "version": "0.7.1",
+      "hash": "4cd0877e",
+      "addedAt": "2026-10-13T00:00:00.000Z"
+    },
+    "radial-chart": {
+      "version": "0.7.1",
+      "hash": "0998c637",
+      "addedAt": "2026-10-13T00:00:00.000Z"
+    },
+    "radio-group": {
+      "version": "0.7.1",
+      "hash": "98951da1",
+      "addedAt": "2026-10-13T00:00:00.000Z"
+    },
+    "rating": {
+      "version": "0.7.1",
+      "hash": "4cb15108",
+      "addedAt": "2026-10-13T00:00:00.000Z"
+    },
+    "receipt-card": {
+      "version": "0.7.1",
+      "hash": "977520fa",
+      "addedAt": "2026-10-13T00:00:00.000Z"
+    },
+    "refresh-control": {
+      "version": "0.7.1",
+      "hash": "ffa0f05c",
+      "addedAt": "2026-10-13T00:00:00.000Z"
+    },
+    "rolling-counter": {
+      "version": "0.7.1",
+      "hash": "e563047a",
+      "addedAt": "2026-10-13T00:00:00.000Z"
+    },
+    "safe-area": {
+      "version": "0.7.1",
+      "hash": "62ab9887",
+      "addedAt": "2026-10-13T00:00:00.000Z"
+    },
+    "save-button": {
+      "version": "0.7.1",
+      "hash": "08681b18",
+      "addedAt": "2026-10-13T00:00:00.000Z"
+    },
+    "search-bar": {
+      "version": "0.7.1",
+      "hash": "fee92d73",
+      "addedAt": "2026-10-13T00:00:00.000Z"
+    },
+    "segmented-control": {
+      "version": "0.7.1",
+      "hash": "4758df04",
+      "addedAt": "2026-10-13T00:00:00.000Z"
+    },
+    "select": {
+      "version": "0.7.1",
+      "hash": "693f3084",
+      "addedAt": "2026-10-13T00:00:00.000Z"
+    },
+    "separator": {
+      "version": "0.7.1",
+      "hash": "288090ab",
+      "addedAt": "2026-10-13T00:00:00.000Z"
+    },
+    "shimmer": {
+      "version": "0.7.1",
+      "hash": "e31e62ab",
+      "addedAt": "2026-10-13T00:00:00.000Z"
+    },
+    "sidebar": {
+      "version": "0.7.1",
+      "hash": "f5a84970",
+      "addedAt": "2026-10-13T00:00:00.000Z"
+    },
+    "skeleton": {
+      "version": "0.7.1",
+      "hash": "425e540b",
+      "addedAt": "2026-10-13T00:00:00.000Z"
+    },
+    "slide-to-confirm": {
+      "version": "0.7.1",
+      "hash": "7d944b61",
+      "addedAt": "2026-10-13T00:00:00.000Z"
+    },
+    "slider": {
+      "version": "0.7.1",
+      "hash": "6d65c0e9",
+      "addedAt": "2026-10-13T00:00:00.000Z"
+    },
+    "social-button": {
+      "version": "0.7.1",
+      "hash": "a2774c3b",
+      "addedAt": "2026-10-13T00:00:00.000Z"
+    },
+    "spin-button": {
+      "version": "0.7.1",
+      "hash": "3161ba35",
+      "addedAt": "2026-10-13T00:00:00.000Z"
+    },
+    "spinner": {
+      "version": "0.7.1",
+      "hash": "9489129d",
+      "addedAt": "2026-10-13T00:00:00.000Z"
+    },
+    "split-view": {
+      "version": "0.7.1",
+      "hash": "104afa47",
+      "addedAt": "2026-10-13T00:00:00.000Z"
+    },
+    "stacked-chips": {
+      "version": "0.7.1",
+      "hash": "76e36f3b",
+      "addedAt": "2026-10-13T00:00:00.000Z"
+    },
+    "stat-card": {
+      "version": "0.7.1",
+      "hash": "3c7ec9f4",
+      "addedAt": "2026-10-13T00:00:00.000Z"
+    },
+    "status-indicator": {
+      "version": "0.7.1",
+      "hash": "3077cefa",
+      "addedAt": "2026-10-13T00:00:00.000Z"
+    },
+    "stepper": {
+      "version": "0.7.1",
+      "hash": "415bc861",
+      "addedAt": "2026-10-13T00:00:00.000Z"
+    },
+    "streaming-text": {
+      "version": "0.7.1",
+      "hash": "a59827c4",
+      "addedAt": "2026-10-13T00:00:00.000Z"
+    },
+    "swipe-deck": {
+      "version": "0.7.1",
+      "hash": "3efdf272",
+      "addedAt": "2026-10-13T00:00:00.000Z"
+    },
+    "swipeable-list-item": {
+      "version": "0.7.1",
+      "hash": "a7744960",
+      "addedAt": "2026-10-13T00:00:00.000Z"
+    },
+    "switch": {
+      "version": "0.7.1",
+      "hash": "05886896",
+      "addedAt": "2026-10-13T00:00:00.000Z"
+    },
+    "tab-bar": {
+      "version": "0.7.1",
+      "hash": "552d2ae3",
+      "addedAt": "2026-10-13T00:00:00.000Z"
+    },
+    "table": {
+      "version": "0.7.1",
+      "hash": "493d907f",
+      "addedAt": "2026-10-13T00:00:00.000Z"
+    },
+    "tabs": {
+      "version": "0.7.1",
+      "hash": "63595405",
+      "addedAt": "2026-10-13T00:00:00.000Z"
+    },
+    "text": {
+      "version": "0.7.1",
+      "hash": "e1729b9b",
+      "addedAt": "2026-10-13T00:00:00.000Z"
+    },
+    "textarea": {
+      "version": "0.7.1",
+      "hash": "21bf4d7b",
+      "addedAt": "2026-10-13T00:00:00.000Z"
+    },
+    "theme-provider": {
+      "version": "0.7.1",
+      "hash": "c44bc105",
+      "addedAt": "2026-10-13T00:00:00.000Z"
+    },
+    "theme-switch": {
+      "version": "0.7.1",
+      "hash": "d01f2221",
+      "addedAt": "2026-10-13T00:00:00.000Z"
+    },
+    "time-picker": {
+      "version": "0.7.1",
+      "hash": "57f1acf0",
+      "addedAt": "2026-10-13T00:00:00.000Z"
+    },
+    "timeline": {
+      "version": "0.7.1",
+      "hash": "e91dd7da",
+      "addedAt": "2026-10-13T00:00:00.000Z"
+    },
+    "toast": {
+      "version": "0.7.1",
+      "hash": "2dd25a4d",
+      "addedAt": "2026-10-13T00:00:00.000Z"
+    },
+    "toggle-group": {
+      "version": "0.7.1",
+      "hash": "bb3e37fc",
+      "addedAt": "2026-10-13T00:00:00.000Z"
+    },
+    "toggle": {
+      "version": "0.7.1",
+      "hash": "f576c283",
+      "addedAt": "2026-10-13T00:00:00.000Z"
+    },
+    "tooltip": {
+      "version": "0.7.1",
+      "hash": "3c2dbc7b",
+      "addedAt": "2026-10-13T00:00:00.000Z"
+    },
+    "tray": {
+      "version": "0.7.1",
+      "hash": "c003f9b9",
+      "addedAt": "2026-10-13T00:00:00.000Z"
+    },
+    "typing-indicator": {
+      "version": "0.7.1",
+      "hash": "cbeed3bc",
+      "addedAt": "2026-10-13T00:00:00.000Z"
+    },
+    "unfold-menu": {
+      "version": "0.7.1",
+      "hash": "d34e315b",
+      "addedAt": "2026-10-13T00:00:00.000Z"
+    },
+    "verified-badge": {
+      "version": "0.7.1",
+      "hash": "62c1da44",
+      "addedAt": "2026-10-13T00:00:00.000Z"
+    },
+    "vertical-flow-carousel": {
+      "version": "0.7.1",
+      "hash": "0481399b",
+      "addedAt": "2026-10-13T00:00:00.000Z"
+    },
+    "vertical-page-carousel": {
+      "version": "0.7.1",
+      "hash": "3af55c7f",
+      "addedAt": "2026-10-13T00:00:00.000Z"
+    },
+    "waveform": {
+      "version": "0.7.1",
+      "hash": "108993be",
+      "addedAt": "2026-10-13T00:00:00.000Z"
     }
   }
 }
