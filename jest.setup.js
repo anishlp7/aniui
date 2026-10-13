@@ -179,25 +179,68 @@ jest.mock("expo-blur", () => {
   };
 });
 
+/* ── Mock react-native-qrcode-svg ────────────────────────── */
+// Ships ESM at its entry point; transformIgnorePatterns doesn't include it,
+// so Jest sees `export { default } from ...` and chokes on parse. The real
+// QR renderer is unrunnable under a test anyway (needs react-native-svg's
+// native host), so stub it as a plain View that preserves its testable
+// props (value, size).
+jest.mock("react-native-qrcode-svg", () => {
+  const React = require("react");
+  const { View } = require("react-native");
+  const QRCode = (props) => React.createElement(View, { ...props, testID: "QRCode" });
+  QRCode.displayName = "QRCode";
+  return { __esModule: true, default: QRCode };
+});
+
+/* ── Mock react-native-safe-area-context ────────────────── */
+// SafeAreaContext throws when a component calls useSafeAreaInsets without a
+// <SafeAreaProvider> wrapping it; tests don't bother mounting the provider,
+// so give the hook a zero-inset fallback and let SafeAreaView render as a
+// plain <View>. Matches the pattern this file already uses for native-only
+// bindings (gesture-handler, haptics, skia).
+jest.mock("react-native-safe-area-context", () => {
+  const React = require("react");
+  const { View } = require("react-native");
+  const zero = { top: 0, right: 0, bottom: 0, left: 0 };
+  return {
+    __esModule: true,
+    SafeAreaProvider: ({ children }) => children,
+    SafeAreaView: (props) => React.createElement(View, props),
+    SafeAreaInsetsContext: { Consumer: ({ children }) => children(zero) },
+    useSafeAreaInsets: () => zero,
+    useSafeAreaFrame: () => ({ x: 0, y: 0, width: 375, height: 667 }),
+    initialWindowMetrics: { insets: zero, frame: { x: 0, y: 0, width: 375, height: 667 } },
+  };
+});
+
 /* ── Mock react-native-gesture-handler ──────────────────── */
 jest.mock("react-native-gesture-handler", () => {
   const React = require("react");
   const { View } = require("react-native");
+  // Chainable gesture builder stub — every method returns `this` so any
+  // call chain (`.enabled().onStart().onEnd()...`) resolves. Covers every
+  // Gesture.* factory the component library uses (Pan/Fling/Manual/
+  // Simultaneous/Race/Tap/LongPress/Pinch/Rotation) without having to list
+  // each method name.
+  const chainable = () => {
+    const proxy = new Proxy(function () {}, {
+      get(_target, _prop) {
+        return () => proxy;
+      },
+      apply() {
+        return proxy;
+      },
+    });
+    return proxy;
+  };
+  const Gesture = new Proxy({}, { get: () => chainable });
   return {
     __esModule: true,
-    Gesture: {
-      Pan: () => ({
-        activeOffsetX: function () { return this; },
-        enabled: function () { return this; },
-        onBegin: function () { return this; },
-        onStart: function () { return this; },
-        onUpdate: function () { return this; },
-        onEnd: function () { return this; },
-        onFinalize: function () { return this; },
-        minDistance: function () { return this; },
-      }),
-    },
+    Gesture,
     GestureDetector: ({ children }) => children,
     GestureHandlerRootView: (props) => React.createElement(View, props),
+    // Directions is a plain enum used alongside Gesture.Fling().direction(...)
+    Directions: { RIGHT: 1, LEFT: 2, UP: 4, DOWN: 8 },
   };
 });
