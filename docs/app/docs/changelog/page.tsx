@@ -26,6 +26,24 @@ const typeBadge: Record<ChangeType, { label: string; className: string }> = {
 
 const releases: Release[] = [
   {
+    version: "0.8.0",
+    date: "2026-10-16",
+    title: "iPhone Duo + Expo SDK 58, quality push",
+    changes: [
+      { type: "feat", text: "iPhone Duo + Expo SDK 58 support. New sdk58 bucket in cli/src/deps-versions.ts, sdk58Plus detection seam, examples/expo-58-starter, and compatibility matrix column. The CLI (init + doctor) branches on SDK 58 to hint at expo-hinge, warn when Node is below 22.13+, and suggest the fold-aware install.", link: "/docs/expo-58" },
+      { type: "feat", text: "New useFoldFeatures() hook (components/ui/fold.tsx, Tier 3). Reads iPhone Duo / Android foldable hinge state via expo-hinge (opt-in peer dep). Null-safe require() + try/catch — returns all-null fields on non-fold devices OR when the dep isn't installed, so consumers short-circuit back to pre-fold behavior at zero cost. Exposes isFolded, foldX, hingeAngle, postureHint.", link: "/docs/iphone-duo" },
+      { type: "feat", text: "Fold-aware positioning on 10 overlays: Dialog, AlertDialog, Popover, HoverCard, DropdownMenu, ContextMenu, Tooltip, BottomSheet, ActionSheet, Toast, CommandMenu. Each shifts away from the fold line when useFoldFeatures() reports an unfolded Duo. BottomSheet and ActionSheet also gain a new foldPane?: \"left\" | \"right\" | \"full\" prop (default \"left\"). Every overlay is a no-op on non-fold devices.", link: "/docs/iphone-duo" },
+      { type: "feat", text: "Horizontal safe-area insets now also read in animated-header-scrollview and tray (previously only applied .top/.bottom). On non-foldable devices the horizontal values are 0, so there's no visible change today — but on iPhone Duo and Android foldables the content respects reserved regions." },
+      { type: "feat", text: "100% canonical component test coverage (149/149 → 150/150 with fold). Every components/ui/*.tsx now has a matching components/__tests__/*.test.tsx — baseline was 77/149 (52%).", link: "/docs/components" },
+      { type: "feat", text: "CLI utility test layer (7 files, 57 tests) + CLI command test layer (4 files, 17 tests covering mcpCommand, addCommand, diffCommand, statusCommand).", link: "/docs/cli" },
+      { type: "feat", text: "useThemeColors() migration across 8 components (pagination, calendar, breadcrumb, banner, button, input-otp, bottom-sheet, action-sheet, segmented-control). Button's dark-mode spinner (previously invisible against the primary bg) is now theme-correct.", link: "/docs/theme-provider" },
+      { type: "feat", text: "CI tightening: 80-line check is now a hard failure with a scripts/linelimit-allowlist.txt ratchet. test-components dropped --passWithNoTests. registry-drift now also diffs mcp/src/registry-data.ts. New example-apps-smoke matrix job: npm install + expo-doctor + tsc --noEmit across all 5 Expo SDK starters." },
+      { type: "docs", text: "New /docs/iphone-duo guide (fold-awareness, useFoldFeatures() reference, foldPane prop, what's deferred to 0.8.1).", link: "/docs/iphone-duo" },
+      { type: "docs", text: "New /docs/expo-58 migration guide (scene lifecycle, Node 22.13+, expo-hinge install).", link: "/docs/expo-58" },
+      { type: "feat", text: "CLI bumped to 0.8.0." },
+    ],
+  },
+  {
     version: "0.7.1",
     date: "2026-09-15",
     title: "Time Picker and docs corrections",

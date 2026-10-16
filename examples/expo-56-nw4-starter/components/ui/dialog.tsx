@@ -1,6 +1,7 @@
 import React from "react";
 import { View, Pressable, Text, Modal } from "react-native";
 import { cn } from "@/lib/utils";
+import { useFoldFeatures } from "@/components/ui/fold";
 
 export interface DialogProps {
   open: boolean;
@@ -9,9 +10,14 @@ export interface DialogProps {
 }
 
 export function Dialog({ open, onOpenChange, children }: DialogProps) {
+  const fold = useFoldFeatures();
+  // On an unfolded iPhone Duo / foldable, center the dialog inside the left
+  // pane instead of across the fold line. foldX is null on every other device,
+  // so this is a no-op pre-fold.
+  const foldPadding = fold.foldX ? { paddingRight: fold.foldX } : undefined;
   return (
     <Modal visible={open} transparent animationType="fade" onRequestClose={() => onOpenChange(false)}>
-      <View className="flex-1 items-center justify-center bg-black/50">
+      <View className="flex-1 items-center justify-center bg-black/50" style={foldPadding}>
         <Pressable className="absolute inset-0" onPress={() => onOpenChange(false)} />
         {children}
       </View>

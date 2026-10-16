@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { View, Text, Pressable } from "react-native";
 import { ChevronLeft, ChevronRight } from "lucide-react-native";
 import { cn } from "@/lib/utils";
+import { useThemeColors } from "@/components/ui/theme-provider";
 
 export interface CalendarProps {
   className?: string; selected?: Date; onSelect?: (date: Date) => void;
@@ -18,6 +19,7 @@ export function Calendar({ className, selected, onSelect, rangeStart, rangeEnd, 
   const [viewing, setViewing] = useState(() => selected ?? rangeStart ?? new Date());
   const [mode, setMode] = useState<Mode>("days");
   const year = viewing.getFullYear(), month = viewing.getMonth();
+  const colors = useThemeColors();
 
   const handlePress = (day: number) => {
     const date = new Date(year, month, day);
@@ -39,13 +41,13 @@ export function Calendar({ className, selected, onSelect, rangeStart, rangeEnd, 
     <View className={cn("rounded-lg bg-background p-3", className)}>
       <View className="flex-row items-center justify-between mb-3">
         <Pressable onPress={() => mode === "days" ? setViewing(new Date(year, month - 1, 1)) : mode === "months" ? setViewing(new Date(year - 1, month, 1)) : setViewing(new Date(decadeStart - 12, month, 1))} className="h-12 w-12 items-center justify-center rounded-md" accessibilityRole="button" accessibilityLabel="Previous">
-          <ChevronLeft size={18} color="#71717a" />
+          <ChevronLeft size={18} color={colors.mutedForeground} />
         </Pressable>
         <Pressable onPress={handleHeaderPress} accessibilityRole="button">
           <Text className="text-sm font-semibold text-foreground">{mode === "days" ? label : mode === "months" ? `${year}` : `${decadeStart} – ${decadeStart + 11}`}</Text>
         </Pressable>
         <Pressable onPress={() => mode === "days" ? setViewing(new Date(year, month + 1, 1)) : mode === "months" ? setViewing(new Date(year + 1, month, 1)) : setViewing(new Date(decadeStart + 12, month, 1))} className="h-12 w-12 items-center justify-center rounded-md" accessibilityRole="button" accessibilityLabel="Next">
-          <ChevronRight size={18} color="#71717a" />
+          <ChevronRight size={18} color={colors.mutedForeground} />
         </Pressable>
       </View>
       {mode === "years" && (

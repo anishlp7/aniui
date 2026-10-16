@@ -37,7 +37,9 @@ export function SegmentedControl<T extends string | number = string>({
 }: SegmentedControlProps<T>) {
   const dark = useColorScheme() === "dark";
   const colors = useThemeColors();
-  const activeBg = dark ? "#37373a" : "#ffffff";
+  // Dark active segment is lifted one shade above colors.secondary (#27272a) so
+  // the active pill is visibly elevated against the muted track — see 0.2.26 changelog.
+  const activeBg = dark ? "#37373a" : colors.background;
   const activeFg = colors.foreground;
   const inactiveFg = colors.mutedForeground;
   const disabledFg = dark ? "#52525b" : "#d4d4d8";

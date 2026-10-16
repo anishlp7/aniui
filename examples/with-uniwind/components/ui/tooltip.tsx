@@ -4,16 +4,17 @@ import { useSafeAreaInsets } from "react-native-safe-area-context";
 import * as TooltipPrimitive from "@rn-primitives/tooltip";
 import Animated from "react-native-reanimated";
 import { entering, exiting } from "@/components/ui/animate";
+import { useFoldFeatures } from "@/components/ui/fold";
 import { cn } from "@/lib/utils";
 
 export interface TooltipProps {
   children: React.ReactNode;
-  open?: boolean;
   onOpenChange?: (open: boolean) => void;
 }
 
-export function Tooltip({ children, open, onOpenChange }: TooltipProps) {
-  return <TooltipPrimitive.Root open={open} onOpenChange={onOpenChange}>{children}</TooltipPrimitive.Root>;
+// @rn-primitives' Tooltip Root is uncontrolled — see context-menu.tsx.
+export function Tooltip({ children, onOpenChange }: TooltipProps) {
+  return <TooltipPrimitive.Root onOpenChange={onOpenChange}>{children}</TooltipPrimitive.Root>;
 }
 
 export interface TooltipTriggerProps extends React.ComponentPropsWithoutRef<typeof Pressable> {
@@ -44,13 +45,18 @@ export interface TooltipContentProps extends React.ComponentPropsWithoutRef<type
 
 export function TooltipContent({ className, children, side = "top", sideOffset = 8, ...props }: TooltipContentProps) {
   const insets = useSafeAreaInsets();
+  const fold = useFoldFeatures();
   // The default side="top" clamps against insets.top, and this primitive's
   // Trigger measures via measure() (not measureInWindow()) — the same
   // status-bar-offset inaccuracy documented elsewhere in this codebase —
   // which was pinning the tooltip at insets.top instead of near the trigger.
   // side="bottom" (Popover/HoverCard/DropdownMenu's default) clamps against
   // insets.bottom instead, so it never hits this; only zero out top here.
-  const tooltipInsets = { ...insets, top: 0 };
+  // Fold-aware: add the fold line as a horizontal inset so the tooltip stays
+  // within one pane on an unfolded Duo. See popover.tsx for the pattern.
+  const tooltipInsets = fold.foldX
+    ? { ...insets, top: 0, left: Math.max(insets.left, fold.foldX), right: Math.max(insets.right, fold.foldX) }
+    : { ...insets, top: 0 };
   return (
     <TooltipPrimitive.Portal>
       <TooltipPrimitive.Content side={side} sideOffset={sideOffset} avoidCollisions insets={tooltipInsets}>

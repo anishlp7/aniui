@@ -3,6 +3,7 @@ import { View, Text, Pressable } from "react-native";
 import Animated from "react-native-reanimated";
 import { Portal } from "@rn-primitives/portal";
 import { entering, exiting } from "@/components/ui/animate";
+import { useFoldFeatures } from "@/components/ui/fold";
 import { cn } from "@/lib/utils";
 
 type ToastVariant = "default" | "destructive" | "success";
@@ -31,14 +32,15 @@ export interface ToastProviderProps {
   defaultFrom?: ToastFrom;
 }
 
-// Reanimated naming: SlideIn<Side> = the element STARTS on that side, so
-// `from: "top"` maps to SlideInUp; exits mirror in the same direction.
-const animationFor: Record<ToastFrom, { enter: typeof entering.slideInUp; exit: typeof exiting.slideOutUp }> = {
+// `from: "top"` maps to SlideInUp (Reanimated: SlideIn<Side> starts on that
+// side). `satisfies` validates the keyset without widening to a single
+// SlideIn type — Up/Down and Left/Right have different initial-value shapes.
+const animationFor = {
   top:    { enter: entering.slideInUp,    exit: exiting.slideOutUp },
   bottom: { enter: entering.slideInDown,  exit: exiting.slideOutDown },
   left:   { enter: entering.slideInLeft,  exit: exiting.slideOutLeft },
   right:  { enter: entering.slideInRight, exit: exiting.slideOutRight },
-};
+} satisfies Record<ToastFrom, { enter: unknown; exit: unknown }>;
 
 const containerStyles: Record<ToastPosition, string> = {
   top:    "absolute top-14 start-4 end-4 gap-2 z-50",
@@ -69,6 +71,11 @@ export function ToastProvider({ children, defaultPosition = "top", defaultFrom }
     return () => pending.forEach(clearTimeout);
   }, []);
 
+  // Clamp toast banners to one pane on an unfolded Duo instead of spanning
+  // both. Null on non-fold devices — pre-fold behavior preserved.
+  const fold = useFoldFeatures();
+  const foldClamp = fold.foldX ? { right: fold.foldX } : undefined;
+
   return (
     <ToastContext.Provider value={{ toast }}>
       {children}
@@ -78,7 +85,7 @@ export function ToastProvider({ children, defaultPosition = "top", defaultFrom }
           const items = toasts.filter((t) => t.position === pos);
           if (items.length === 0) return null;
           return (
-            <View key={pos} className={containerStyles[pos]} pointerEvents="box-none">
+            <View key={pos} className={containerStyles[pos]} style={foldClamp} pointerEvents="box-none">
               {items.map((t) => (
                 <ToastItem key={t.id} data={t} onDismiss={() => dismiss(t.id)} />
               ))}

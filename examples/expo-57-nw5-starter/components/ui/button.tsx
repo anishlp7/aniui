@@ -2,6 +2,7 @@ import React from "react";
 import { Pressable, Text, ActivityIndicator } from "react-native";
 import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
+import { useThemeColors } from "@/components/ui/theme-provider";
 
 const buttonVariants = cva(
   "flex-row items-center justify-center rounded-md min-h-12 min-w-12",
@@ -54,7 +55,9 @@ export interface ButtonProps
 
 export function Button({ variant, size, className, textClassName, children, icon, iconAfter, loading, disabled, ...props }: ButtonProps) {
   const isDisabled = disabled || loading;
-  const light = variant === "default" || variant === "destructive";
+  const colors = useThemeColors();
+  const onFilledBg = variant === "default" || variant === "destructive";
+  const spinnerColor = onFilledBg ? colors.primaryForeground : colors.foreground;
 
   return (
     <Pressable
@@ -65,7 +68,7 @@ export function Button({ variant, size, className, textClassName, children, icon
       {...props}
     >
       {loading ? (
-        <ActivityIndicator size="small" color={light ? "#fafafa" : "#18181b"} />
+        <ActivityIndicator size="small" color={spinnerColor} />
       ) : icon ?? null}
       {children ? (
         <Text className={cn(buttonTextVariants({ variant, size }), textClassName)}>{children}</Text>

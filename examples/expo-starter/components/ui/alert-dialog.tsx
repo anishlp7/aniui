@@ -3,6 +3,7 @@ import { View, Pressable, Text, Modal } from "react-native";
 import Animated from "react-native-reanimated";
 import { entering, exiting } from "@/components/ui/animate";
 import { cn } from "@/lib/utils";
+import { useFoldFeatures } from "@/components/ui/fold";
 
 export interface AlertDialogProps {
   open: boolean;
@@ -11,9 +12,13 @@ export interface AlertDialogProps {
 }
 
 export function AlertDialog({ open, onOpenChange, children }: AlertDialogProps) {
+  const fold = useFoldFeatures();
+  // Match Dialog's fold-awareness: center inside the left pane on an
+  // unfolded Duo. No-op on every other device.
+  const foldPadding = fold.foldX ? { paddingRight: fold.foldX } : undefined;
   return (
     <Modal visible={open} transparent animationType="none" onRequestClose={() => onOpenChange(false)}>
-      <Animated.View entering={entering.fadeIn} exiting={exiting.fadeOut} className="flex-1 items-center justify-center bg-black/50">
+      <Animated.View entering={entering.fadeIn} exiting={exiting.fadeOut} className="flex-1 items-center justify-center bg-black/50" style={foldPadding}>
         <Animated.View entering={entering.zoomIn} exiting={exiting.zoomOut}>
           {children}
         </Animated.View>

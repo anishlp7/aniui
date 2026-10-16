@@ -45,7 +45,7 @@ export function ProgressStep({ label, icon, className, _index = 0, ...props }: P
   const isActive = _index === current;
 
   return (
-    <View className={cn("items-center gap-1", className)} accessibilityRole="listitem" {...props}>
+    <View className={cn("items-center gap-1", className)} role="listitem" {...props}>
       <View
         className={cn(
           "h-8 w-8 rounded-full items-center justify-center",

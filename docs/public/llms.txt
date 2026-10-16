@@ -165,8 +165,9 @@ Copy-paste full screen templates. Install via `npx @aniui/cli add-block <name>`.
 ## Why AniUI
 
 - shadcn/ui approach: copy source files, own the code, no npm dependency lock-in
-- 149 components + 7 charts + 15 blocks
-- Works with Expo SDK 53-57, bare React Native 0.76+, New Architecture
+- 150 components + 7 charts + 15 blocks
+- Works with Expo SDK 53-58, bare React Native 0.76+, New Architecture
+- Expo SDK 58 adds iPhone Duo support: `useFoldFeatures()` hook + 10 fold-aware overlays (Dialog, Popover, HoverCard, DropdownMenu, ContextMenu, Tooltip, BottomSheet, ActionSheet, Toast, CommandMenu) opt into fold-aware positioning when `expo-hinge` is installed. Zero behavioral change on non-fold devices or projects without `expo-hinge`.
 - Uniwind (recommended default on Expo SDK 55+) and NativeWind v4/v5 (supported, soft-deprecated) — same className API
 - Full RTL support for Arabic, Hebrew, Persian, Urdu
 - TypeScript strict, full accessibility (accessibilityRole on every interactive element)

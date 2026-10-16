@@ -9,7 +9,7 @@ describe("component props interfaces", () => {
   const names = getComponentNames();
 
   // Utility modules export constants/hooks, not component Props interfaces
-  const utilityModules = new Set(["animate"]);
+  const utilityModules = new Set(["animate", "fold"]);
 
   it.each(names.filter((n) => !utilityModules.has(n)))("%s exports a Props type or interface", (name) => {
     const filePath = path.join(repoRoot, registry[name].file);
@@ -19,7 +19,7 @@ describe("component props interfaces", () => {
   });
 
   // These components don't have a direct className prop
-  const noClassNameComponents = new Set(["toast", "refresh-control", "animate"]);
+  const noClassNameComponents = new Set(["toast", "refresh-control", "animate", "fold"]);
 
   it.each(names.filter((n) => !noClassNameComponents.has(n)))(
     "%s has className in props",
@@ -31,7 +31,7 @@ describe("component props interfaces", () => {
   );
 
   // These components destructure specific props without ...rest spread
-  const noSpreadComponents = new Set(["select", "date-picker", "time-picker", "connection-banner", "theme-provider", "animate"]);
+  const noSpreadComponents = new Set(["select", "date-picker", "time-picker", "connection-banner", "theme-provider", "animate", "fold"]);
 
   it.each(names.filter((n) => !noSpreadComponents.has(n)))(
     "%s spreads remaining props",

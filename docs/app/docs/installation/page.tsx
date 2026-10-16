@@ -553,6 +553,15 @@ export default function InstallationPage() {
         </p>
         <div className="mt-4 rounded-lg border border-primary/30 bg-primary/10 p-4">
           <p className="text-sm text-foreground">
+            <strong>New in 0.8.0:</strong> Expo SDK 58 and iPhone Duo are fully supported. SDK 58 ships with iOS 27&apos;s UIKit
+            scene-based lifecycle and requires Node 22.13+. Opt into fold-aware overlays by installing{" "}
+            <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">expo-hinge</code>. See the{" "}
+            <Link href="/docs/expo-58" className="text-primary hover:underline">Expo SDK 58 guide</Link> and{" "}
+            <Link href="/docs/iphone-duo" className="text-primary hover:underline">iPhone Duo guide</Link>.
+          </p>
+        </div>
+        <div className="mt-4 rounded-lg border border-primary/30 bg-primary/10 p-4">
+          <p className="text-sm text-foreground">
             <strong>Uniwind is the recommended engine</strong> on Expo SDK 55+ (faster, Tailwind v4, no Babel step) and is the
             default for <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">aniui init</code>. The manual
             NativeWind steps below still apply if you choose <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">--style nativewind</code>.

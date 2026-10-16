@@ -44,6 +44,11 @@ jest.mock("react-native-reanimated", () => {
   // literal "ADD ME IF NEEDED" placeholder) — components read it to skip
   // looping animations under reduced motion, so tests need a stable value.
   Reanimated.useReducedMotion = () => false;
+  // The library's mock doesn't ship useFrameCallback — Marquee uses it to
+  // tick a shared value every frame. A stub that never fires is enough for
+  // a jsdom-level render test (no animation to observe anyway under the
+  // mocked worklet runtime).
+  Reanimated.useFrameCallback = () => ({ setActive: () => {} });
   return Reanimated;
 });
 
@@ -145,25 +150,125 @@ jest.mock("@gorhom/bottom-sheet", () => {
   };
 });
 
-/* ── Mock react-native-gesture-handler ──────────────────── */
-jest.mock("react-native-gesture-handler", () => {
+/* ── Mock expo-haptics ────────────────────────────────────── */
+// expo-haptics (and its expo-modules-core dependency) ships ESM and reaches
+// for a native EventEmitter at import time, which throws under Jest even
+// once transformIgnorePatterns lets the ESM through. Stub the exact API
+// surface AniUI components call (impactAsync, selectionAsync,
+// ImpactFeedbackStyle) as no-ops, same treatment as the other native-binding
+// packages in this file.
+jest.mock("expo-haptics", () => ({
+  __esModule: true,
+  impactAsync: jest.fn(),
+  selectionAsync: jest.fn(),
+  notificationAsync: jest.fn(),
+  ImpactFeedbackStyle: { Light: "light", Medium: "medium", Heavy: "heavy", Rigid: "rigid", Soft: "soft" },
+  NotificationFeedbackType: { Success: "success", Warning: "warning", Error: "error" },
+}));
+
+/* ── Mock expo-hinge ──────────────────────────────────────── */
+// SDK 58 Tier 3 peer dep that reads iOS 27.1 / Android 11+ hinge angle +
+// open-state for iPhone Duo and foldables. The real module ships ESM and
+// native bindings that Jest can't load; components/ui/fold.tsx handles the
+// absence via try/catch, but tests that render fold-aware overlays benefit
+// from an explicit mock that reports a stable "unfolded Duo" posture by
+// default. Individual tests can override with jest.doMock if they need a
+// different hinge state.
+// virtual: true because expo-hinge isn't installed as a devDependency here —
+// the real module ships only in SDK 58+ projects. The mock stubs out just the
+// surface components/ui/fold.tsx reads.
+jest.mock(
+  "expo-hinge",
+  () => {
+    const listeners = new Set();
+    return {
+      __esModule: true,
+      useHinge: () => ({ angle: 180, isOpen: true }),
+      getHinge: () => ({ angle: 180, isOpen: true }),
+      addHingeListener: (cb) => {
+        listeners.add(cb);
+        return { remove: () => listeners.delete(cb) };
+      },
+    };
+  },
+  { virtual: true }
+);
+
+/* ── Mock expo-blur ───────────────────────────────────────── */
+// Same ESM/native-module issue as expo-haptics above. Renders as a plain
+// View — components using it for a depth/glass effect just lose that visual
+// under test, same tradeoff already made for Skia/SVG above.
+jest.mock("expo-blur", () => {
   const React = require("react");
   const { View } = require("react-native");
   return {
     __esModule: true,
-    Gesture: {
-      Pan: () => ({
-        activeOffsetX: function () { return this; },
-        enabled: function () { return this; },
-        onBegin: function () { return this; },
-        onStart: function () { return this; },
-        onUpdate: function () { return this; },
-        onEnd: function () { return this; },
-        onFinalize: function () { return this; },
-        minDistance: function () { return this; },
-      }),
-    },
+    BlurView: (props) => React.createElement(View, props),
+  };
+});
+
+/* ── Mock react-native-qrcode-svg ────────────────────────── */
+// Ships ESM at its entry point; transformIgnorePatterns doesn't include it,
+// so Jest sees `export { default } from ...` and chokes on parse. The real
+// QR renderer is unrunnable under a test anyway (needs react-native-svg's
+// native host), so stub it as a plain View that preserves its testable
+// props (value, size).
+jest.mock("react-native-qrcode-svg", () => {
+  const React = require("react");
+  const { View } = require("react-native");
+  const QRCode = (props) => React.createElement(View, { ...props, testID: "QRCode" });
+  QRCode.displayName = "QRCode";
+  return { __esModule: true, default: QRCode };
+});
+
+/* ── Mock react-native-safe-area-context ────────────────── */
+// SafeAreaContext throws when a component calls useSafeAreaInsets without a
+// <SafeAreaProvider> wrapping it; tests don't bother mounting the provider,
+// so give the hook a zero-inset fallback and let SafeAreaView render as a
+// plain <View>. Matches the pattern this file already uses for native-only
+// bindings (gesture-handler, haptics, skia).
+jest.mock("react-native-safe-area-context", () => {
+  const React = require("react");
+  const { View } = require("react-native");
+  const zero = { top: 0, right: 0, bottom: 0, left: 0 };
+  return {
+    __esModule: true,
+    SafeAreaProvider: ({ children }) => children,
+    SafeAreaView: (props) => React.createElement(View, props),
+    SafeAreaInsetsContext: { Consumer: ({ children }) => children(zero) },
+    useSafeAreaInsets: () => zero,
+    useSafeAreaFrame: () => ({ x: 0, y: 0, width: 375, height: 667 }),
+    initialWindowMetrics: { insets: zero, frame: { x: 0, y: 0, width: 375, height: 667 } },
+  };
+});
+
+/* ── Mock react-native-gesture-handler ──────────────────── */
+jest.mock("react-native-gesture-handler", () => {
+  const React = require("react");
+  const { View } = require("react-native");
+  // Chainable gesture builder stub — every method returns `this` so any
+  // call chain (`.enabled().onStart().onEnd()...`) resolves. Covers every
+  // Gesture.* factory the component library uses (Pan/Fling/Manual/
+  // Simultaneous/Race/Tap/LongPress/Pinch/Rotation) without having to list
+  // each method name.
+  const chainable = () => {
+    const proxy = new Proxy(function () {}, {
+      get(_target, _prop) {
+        return () => proxy;
+      },
+      apply() {
+        return proxy;
+      },
+    });
+    return proxy;
+  };
+  const Gesture = new Proxy({}, { get: () => chainable });
+  return {
+    __esModule: true,
+    Gesture,
     GestureDetector: ({ children }) => children,
     GestureHandlerRootView: (props) => React.createElement(View, props),
+    // Directions is a plain enum used alongside Gesture.Fling().direction(...)
+    Directions: { RIGHT: 1, LEFT: 2, UP: 4, DOWN: 8 },
   };
 });

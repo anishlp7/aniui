@@ -3,7 +3,7 @@ import { Heading } from "@/components/heading";
 import { CodeBlock } from "@/components/code-block-server";
 import { DEP_VERSIONS } from "../../../../cli/src/deps-versions";
 
-const reanimatedCell = (bucket: "sdk54" | "sdk55" | "sdk56" | "sdk57") => {
+const reanimatedCell = (bucket: "sdk54" | "sdk55" | "sdk56" | "sdk57" | "sdk58") => {
   const v = DEP_VERSIONS[bucket];
   return v.worklets ? `${v.reanimated} + worklets ${v.worklets}` : v.reanimated;
 };
@@ -101,7 +101,7 @@ export default function CompatibilityPage() {
       <div>
         <h1 className="text-3xl font-bold tracking-tight text-foreground">Compatibility</h1>
         <p className="mt-2 text-lg text-muted-foreground">
-          AniUI supports Expo SDK 53, 54, 55, 56, and 57, plus Bare React Native 0.76+. It works with two className engines: <a href="/docs/uniwind" className="text-primary hover:underline">Uniwind</a> (the recommended default on New-Arch projects) and NativeWind (fully supported, soft-deprecated). The CLI auto-detects your setup and defaults to Uniwind on Expo SDK 55+.
+          AniUI supports Expo SDK 53, 54, 55, 56, 57, and 58 (iOS 27 / iPhone Duo), plus Bare React Native 0.76+. It works with two className engines: <a href="/docs/uniwind" className="text-primary hover:underline">Uniwind</a> (the recommended default on New-Arch projects) and NativeWind (fully supported, soft-deprecated). The CLI auto-detects your setup and defaults to Uniwind on Expo SDK 55+.
         </p>
       </div>
 
@@ -117,6 +117,7 @@ export default function CompatibilityPage() {
                 <th className="text-left p-3 font-medium text-foreground">Expo SDK 55</th>
                 <th className="text-left p-3 font-medium text-foreground">Expo SDK 56</th>
                 <th className="text-left p-3 font-medium text-foreground">Expo SDK 57</th>
+                <th className="text-left p-3 font-medium text-foreground">Expo SDK 58</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-border">
@@ -126,6 +127,7 @@ export default function CompatibilityPage() {
                 <td className="p-3"><code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">v5</code></td>
                 <td className="p-3"><code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">v4</code> or <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">v5</code></td>
                 <td className="p-3"><code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">v4</code> or <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">v5</code></td>
+                <td className="p-3"><code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">v5</code></td>
               </tr>
               <tr>
                 <td className="p-3 font-medium text-muted-foreground">Tailwind CSS</td>
@@ -133,6 +135,7 @@ export default function CompatibilityPage() {
                 <td className="p-3"><code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">v4</code></td>
                 <td className="p-3"><code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">v3</code> or <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">v4</code></td>
                 <td className="p-3"><code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">v3</code> or <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">v4</code></td>
+                <td className="p-3"><code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">v4</code></td>
               </tr>
               <tr>
                 <td className="p-3 font-medium text-muted-foreground">Reanimated</td>
@@ -140,6 +143,7 @@ export default function CompatibilityPage() {
                 <td className="p-3"><code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">{reanimatedCell("sdk55")}</code></td>
                 <td className="p-3"><code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">{reanimatedCell("sdk56")}</code></td>
                 <td className="p-3"><code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">{reanimatedCell("sdk57")}</code></td>
+                <td className="p-3"><code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">{reanimatedCell("sdk58")}</code></td>
               </tr>
               <tr>
                 <td className="p-3 font-medium text-muted-foreground">React</td>
@@ -147,6 +151,7 @@ export default function CompatibilityPage() {
                 <td className="p-3"><code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">19.x</code></td>
                 <td className="p-3"><code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">19.2.3</code></td>
                 <td className="p-3"><code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">19.2.3</code></td>
+                <td className="p-3"><code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">19.3</code></td>
               </tr>
               <tr>
                 <td className="p-3 font-medium text-muted-foreground">React Native</td>
@@ -154,6 +159,7 @@ export default function CompatibilityPage() {
                 <td className="p-3"><code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">0.83</code></td>
                 <td className="p-3"><code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">0.85.3</code></td>
                 <td className="p-3"><code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">0.86</code></td>
+                <td className="p-3"><code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">0.88</code></td>
               </tr>
               <tr>
                 <td className="p-3 font-medium text-muted-foreground">Uniwind</td>
@@ -161,9 +167,11 @@ export default function CompatibilityPage() {
                 <td className="p-3">✅ Supported</td>
                 <td className="p-3">✅ Supported</td>
                 <td className="p-3">✅ Default</td>
+                <td className="p-3">✅ Default</td>
               </tr>
               <tr>
                 <td className="p-3 font-medium text-muted-foreground">rn-primitives</td>
+                <td className="p-3">✅ v1.3+</td>
                 <td className="p-3">✅ v1.3+</td>
                 <td className="p-3">✅ v1.3+</td>
                 <td className="p-3">✅ v1.3+</td>
@@ -175,6 +183,7 @@ export default function CompatibilityPage() {
                 <td className="p-3">✅ 0.83+</td>
                 <td className="p-3">✅ 0.85+</td>
                 <td className="p-3">✅ 0.86+</td>
+                <td className="p-3">✅ 0.88+</td>
               </tr>
               <tr>
                 <td className="p-3 font-medium text-muted-foreground">Architecture</td>
@@ -182,6 +191,15 @@ export default function CompatibilityPage() {
                 <td className="p-3">New only</td>
                 <td className="p-3">New only</td>
                 <td className="p-3">New only</td>
+                <td className="p-3">New only (scene-based)</td>
+              </tr>
+              <tr>
+                <td className="p-3 font-medium text-muted-foreground">iPhone Duo</td>
+                <td className="p-3">—</td>
+                <td className="p-3">—</td>
+                <td className="p-3">—</td>
+                <td className="p-3">—</td>
+                <td className="p-3">✅ Fold-aware overlays via <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">expo-hinge</code></td>
               </tr>
             </tbody>
           </table>

@@ -7,7 +7,11 @@ module.exports = {
   ],
   testMatch: ["**/components/__tests__/**/*.test.{ts,tsx}"],
   transformIgnorePatterns: [
-    "node_modules/(?!((jest-)?react-native|@react-native(-community)?|@react-native/.*|nativewind|react-native-reanimated|react-native-worklets|react-native-svg|lucide-react-native|class-variance-authority|clsx|tailwind-merge|@gorhom/bottom-sheet|react-native-gesture-handler|react-native-safe-area-context)/)",
+    // expo-haptics/expo-blur (and expo-modules-core, which both depend on)
+    // ship ESM — added when time-picker became the first tested component to
+    // actually import expo-haptics, surfacing that this allowlist had never
+    // needed them before.
+    "node_modules/(?!((jest-)?react-native|@react-native(-community)?|@react-native/.*|nativewind|react-native-reanimated|react-native-worklets|react-native-svg|lucide-react-native|class-variance-authority|clsx|tailwind-merge|@gorhom/bottom-sheet|react-native-gesture-handler|react-native-safe-area-context|expo-haptics|expo-blur|expo-modules-core)/)",
   ],
   moduleNameMapper: {
     "^@/(.*)$": "<rootDir>/$1",

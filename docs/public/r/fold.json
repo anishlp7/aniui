@@ -1,0 +1,21 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "fold",
+  "type": "registry:ui",
+  "title": "Fold",
+  "description": "useFoldFeatures() hook: iPhone Duo / Android foldable hinge state. Null-safe require of expo-hinge — returns null fields on non-fold devices and when the peer dep is absent, so consumers short-circuit back to pre-fold behavior.",
+  "dependencies": [
+    "expo-hinge"
+  ],
+  "registryDependencies": [
+    "https://aniui.dev/r/utils.json"
+  ],
+  "files": [
+    {
+      "path": "components/ui/fold.tsx",
+      "type": "registry:ui",
+      "content": "import { useEffect, useState } from \"react\";\nimport { useWindowDimensions } from \"react-native\";\n\n/**\n * Fold-aware primitive for iPhone Duo and Android foldables.\n *\n * Returns null for every field on non-fold devices (and whenever `expo-hinge`\n * isn't installed), so the overlay components that consume this short-circuit\n * back to their pre-fold behavior with zero runtime cost.\n *\n * - `isFolded`: true when the device is closed / posture is near-closed.\n *               false when open. null when unknown (not a foldable or dep missing).\n * - `foldX`: approximate x-coordinate of the fold line in window-dimension pixels.\n *            Set only when the device is a foldable AND currently unfolded.\n *            Overlays align themselves to one side of this value.\n * - `hingeAngle`: raw hinge angle in degrees (0 = closed, 180 = flat). null on\n *                 non-foldables. Exposed for consumers that want posture-reactive\n *                 behavior; the 10 fold-aware overlays don't use it directly.\n * - `postureHint`: coarse categorization of hingeAngle. \"closed\" < 15°,\n *                  \"half-open\" 15-150°, \"flat\" > 150°, null when unknown.\n */\nexport interface FoldFeatures {\n  isFolded: boolean | null;\n  foldX: number | null;\n  hingeAngle: number | null;\n  postureHint: \"flat\" | \"half-open\" | \"closed\" | null;\n}\n\nconst NULL_FEATURES: FoldFeatures = {\n  isFolded: null,\n  foldX: null,\n  hingeAngle: null,\n  postureHint: null,\n};\n\n// Static require with try/catch at module load — expo-hinge is a Tier 3 peer\n// dep, not auto-installed. If absent, every hook call returns NULL_FEATURES\n// without touching the module system again.\nlet hingeModule: {\n  useHinge?: () => { angle: number | null; isOpen: boolean | null };\n  getHinge?: () => { angle: number | null; isOpen: boolean | null };\n  addHingeListener?: (\n    cb: (e: { angle: number | null; isOpen: boolean | null }) => void\n  ) => { remove: () => void };\n} | null = null;\n\ntry {\n  hingeModule = require(\"expo-hinge\");\n} catch {\n  hingeModule = null;\n}\n\nfunction hintFromAngle(angle: number | null): FoldFeatures[\"postureHint\"] {\n  if (angle == null) return null;\n  if (angle < 15) return \"closed\";\n  if (angle > 150) return \"flat\";\n  return \"half-open\";\n}\n\nexport function useFoldFeatures(): FoldFeatures {\n  const { width } = useWindowDimensions();\n  const [state, setState] = useState<{ angle: number | null; isOpen: boolean | null }>(() => {\n    if (!hingeModule?.getHinge) return { angle: null, isOpen: null };\n    try {\n      return hingeModule.getHinge();\n    } catch {\n      return { angle: null, isOpen: null };\n    }\n  });\n\n  useEffect(() => {\n    if (!hingeModule?.addHingeListener) return;\n    const sub = hingeModule.addHingeListener((e) => setState(e));\n    return () => sub.remove();\n  }, []);\n\n  if (!hingeModule) return NULL_FEATURES;\n\n  const { angle, isOpen } = state;\n  if (angle == null && isOpen == null) return NULL_FEATURES;\n\n  const folded = isOpen == null ? null : !isOpen;\n  // Only expose foldX when the device is a foldable AND currently unfolded.\n  // Fold line sits at the midpoint of the window — Apple's reserved region is\n  // a thin strip there; aligning to width/2 is accurate enough for overlays.\n  const foldX = isOpen === true ? width / 2 : null;\n\n  return { isFolded: folded, foldX, hingeAngle: angle, postureHint: hintFromAngle(angle) };\n}\n"
+    }
+  ],
+  "docs": "AniUI is React Native. On an existing RNR/NativeWind project, add and use directly — the tokens and aliases already match, no setup needed. On a fresh project, run `npx @aniui/cli init` first to configure NativeWind/Uniwind, theme tokens, and Metro/Babel."
+}

@@ -1137,7 +1137,7 @@ const demos: Record<string, () => React.ReactElement> = {
             <Text className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Comment</Text>
             <View className="rounded-lg border border-border bg-card p-4 gap-1">
               <View className="flex-row items-center gap-1 flex-wrap">
-                <HoverCard open={open} onOpenChange={setOpen}>
+                <HoverCard onOpenChange={setOpen}>
                   <HoverCardTrigger>
                     <Text className="text-sm font-medium text-primary underline underline-offset-4">@aniui</Text>
                   </HoverCardTrigger>
@@ -2472,7 +2472,7 @@ const demos: Record<string, () => React.ReactElement> = {
           <Text className="text-sm text-muted-foreground">A small anchored panel for contextual help, without leaving the screen.</Text>
           <View className="flex-row items-center gap-2">
             <Text className="text-sm text-foreground">Monthly budget</Text>
-            <Popover open={open} onOpenChange={setOpen}>
+            <Popover onOpenChange={setOpen}>
               <PopoverTrigger>
                 <Info size={18} color="#71717a" />
               </PopoverTrigger>

@@ -24,11 +24,15 @@ export interface ProjectInfo {
   /**
    * Expo SDK 57 support today is an inclusive side effect of the sdk56Plus
    * threshold (nothing in init.ts/doctor.ts branches on 57 specifically yet).
-   * This field is a named seam for the day SDK 58 needs its own carve-out the
-   * way 56 diverged from 55 by adding worklets — add an `sdk58Plus` alongside
-   * it then, rather than introducing the first >= check from scratch.
    */
   sdk57Plus: boolean;
+  /**
+   * Expo SDK 58 — iOS 27 / UIKit scene-based lifecycle, Node 22.13+ required,
+   * `expo-hinge` available for iPhone Duo fold-state. Branched on in init
+   * (install expo-hinge for Duo-aware overlays) and doctor (warn when SDK ≥58
+   * but Node is below 22.13).
+   */
+  sdk58Plus: boolean;
 }
 
 function parseUserAgent(ua: string | undefined): PackageManager | null {
@@ -142,7 +146,7 @@ export async function detectProject(cwd: string): Promise<ProjectInfo> {
   const packageManager = await detectPackageManager(cwd);
 
   if (!await fs.pathExists(pkgPath)) {
-    return { type: "unknown", root: cwd, packageManager, hasNativewind: false, hasUniwind: false, hasReanimated: false, hasTailwind: false, sdkGeneration: "v4", expoMajor: 0, nativewindMajor: 0, sdk56Plus: false, sdk57Plus: false };
+    return { type: "unknown", root: cwd, packageManager, hasNativewind: false, hasUniwind: false, hasReanimated: false, hasTailwind: false, sdkGeneration: "v4", expoMajor: 0, nativewindMajor: 0, sdk56Plus: false, sdk57Plus: false, sdk58Plus: false };
   }
 
   const pkg = await fs.readJson(pkgPath);
@@ -173,6 +177,7 @@ export async function detectProject(cwd: string): Promise<ProjectInfo> {
     nativewindMajor,
     sdk56Plus: expoMajor >= 56,
     sdk57Plus: expoMajor >= 57,
+    sdk58Plus: expoMajor >= 58,
   };
 }
 

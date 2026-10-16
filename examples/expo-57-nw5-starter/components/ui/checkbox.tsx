@@ -13,11 +13,17 @@ export interface CheckboxProps extends React.ComponentPropsWithoutRef<typeof Pre
 
 export function Checkbox({ checked = false, onCheckedChange, className, disabled, ...props }: CheckboxProps) {
   const colors = useThemeColors();
+  // Primitive's Root requires a non-nullish onCheckedChange and a plain
+  // boolean checked (no boolean | "indeterminate"-style widening). Fall back
+  // to a no-op callback for the uncontrolled case so the Pressable below
+  // still drives the visual state via its own onPress.
   return (
     <CheckboxPrimitive.Root
       checked={checked}
-      onCheckedChange={onCheckedChange}
-      disabled={disabled}
+      onCheckedChange={onCheckedChange ?? (() => {})}
+      // Pressable's `disabled` is `boolean | null | undefined`; primitive
+      // only accepts `boolean | undefined`. Normalize null → false.
+      disabled={disabled ?? false}
       asChild
     >
       <Pressable

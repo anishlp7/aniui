@@ -33,8 +33,10 @@ export function InputOTP({ length = 6, value = "", onValueChange, className, ...
     }
   };
 
-  const bg = dark ? "#27272a" : "#ffffff";
-  const borderDefault = dark ? "#3f3f46" : "#e4e4e7";
+  const bg = dark ? colors.secondary : colors.background;
+  // Dark border is lifted one shade above the dark bg (which equals colors.secondary)
+  // so the box stays visible — colors.border in dark mode would blend into bg.
+  const borderDefault = dark ? "#3f3f46" : colors.input;
   const borderFocused = colors.foreground;
   const textColor = colors.foreground;
 

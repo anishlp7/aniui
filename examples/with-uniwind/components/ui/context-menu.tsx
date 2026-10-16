@@ -4,16 +4,21 @@ import { useSafeAreaInsets } from "react-native-safe-area-context";
 import * as ContextMenuPrimitive from "@rn-primitives/context-menu";
 import Animated from "react-native-reanimated";
 import { entering, exiting } from "@/components/ui/animate";
+import { useFoldFeatures } from "@/components/ui/fold";
 import { cn } from "@/lib/utils";
 
 export interface ContextMenuProps {
   children: React.ReactNode;
-  open?: boolean;
   onOpenChange?: (open: boolean) => void;
 }
 
-export function ContextMenu({ children, open, onOpenChange }: ContextMenuProps) {
-  return <ContextMenuPrimitive.Root open={open} onOpenChange={onOpenChange}>{children}</ContextMenuPrimitive.Root>;
+// @rn-primitives' ContextMenu Root is uncontrolled; it manages its own open
+// state internally and only emits via onOpenChange. There's no `open` prop
+// on the primitive to forward, so the wrapper doesn't take one either —
+// consumer-side controlled behavior would need to be rebuilt here with
+// the primitive's useRootContext() if we needed it later.
+export function ContextMenu({ children, onOpenChange }: ContextMenuProps) {
+  return <ContextMenuPrimitive.Root onOpenChange={onOpenChange}>{children}</ContextMenuPrimitive.Root>;
 }
 
 export function ContextMenuTrigger({ className, children, ...props }: React.ComponentPropsWithoutRef<typeof Pressable> & { className?: string; children: React.ReactNode }) {
@@ -33,10 +38,15 @@ export interface ContextMenuContentProps extends React.ComponentPropsWithoutRef<
 
 export function ContextMenuContent({ className, children, ...props }: ContextMenuContentProps) {
   const insets = useSafeAreaInsets();
+  const fold = useFoldFeatures();
+  // See popover.tsx for the pattern — fold line becomes a horizontal inset.
+  const foldInsets = fold.foldX
+    ? { ...insets, left: Math.max(insets.left, fold.foldX), right: Math.max(insets.right, fold.foldX) }
+    : insets;
   return (
     <ContextMenuPrimitive.Portal>
       <ContextMenuPrimitive.Overlay className="absolute inset-0" />
-      <ContextMenuPrimitive.Content avoidCollisions insets={insets}>
+      <ContextMenuPrimitive.Content avoidCollisions insets={foldInsets}>
         <Animated.View entering={entering.fadeIn} exiting={exiting.fadeOut}>
           <View className={cn("min-w-[180px] rounded-lg border border-border bg-card p-1 shadow-lg", className)} {...props}>
             {children}

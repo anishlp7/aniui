@@ -7,22 +7,25 @@ import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { BottomSheet } from "@/components/ui/bottom-sheet";
 import { ActionSheet } from "@/components/ui/action-sheet";
 import { FAB } from "@/components/ui/fab";
-import type GorhomBottomSheet from "@gorhom/bottom-sheet";
+import type { BottomSheetModal } from "@gorhom/bottom-sheet";
 
 export default function OverlaysScreen() {
-  const bottomSheetRef = useRef<GorhomBottomSheet>(null);
-  const actionSheetRef = useRef<GorhomBottomSheet>(null);
+  // BottomSheet / ActionSheet both wrap @gorhom/bottom-sheet's
+  // BottomSheetModal (not the base BottomSheet) — the ref type has to match
+  // the forwarded ref inside the component, which is BottomSheetModal.
+  const bottomSheetRef = useRef<BottomSheetModal>(null);
+  const actionSheetRef = useRef<BottomSheetModal>(null);
 
   const openBottomSheet = useCallback(() => {
-    bottomSheetRef.current?.expand();
+    bottomSheetRef.current?.present();
   }, []);
 
   const openActionSheet = useCallback(() => {
-    actionSheetRef.current?.expand();
+    actionSheetRef.current?.present();
   }, []);
 
   const closeActionSheet = useCallback(() => {
-    actionSheetRef.current?.close();
+    actionSheetRef.current?.dismiss();
   }, []);
 
   return (

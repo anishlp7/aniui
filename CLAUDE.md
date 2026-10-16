@@ -28,7 +28,7 @@
 DO NOT deviate from these versions. They are tested together.
 
 > **Source of truth: `cli/src/deps-versions.ts`.** The block below states the
-> loosest floor supported across all of SDK 54–57 (e.g. Reanimated v3 still
+> loosest floor supported across all of SDK 54–58 (e.g. Reanimated v3 still
 > works on SDK 54); it is not the version actually pinned in any given SDK
 > bucket's example app or `aniui init` output. Check the manifest for exact
 > per-SDK-bucket versions before assuming a number here is current.
@@ -57,13 +57,14 @@ DO NOT deviate from these versions. They are tested together.
 
 `aniui init` **defaults to Uniwind** on New-Arch-capable projects (Expo SDK ≥55); Old-Arch / Expo ≤54 / bare-RN fall back to NativeWind. NativeWind stays selectable via the prompt or `--style nativewind`; a soft-deprecation notice is shown. An already-installed engine always wins; `--style` is authoritative.
 
-**Quad-SDK Support:** AniUI supports four Expo generations:
+**Five-SDK Support:** AniUI supports five Expo generations:
 - **Expo SDK 54 (template family `v4`):** NativeWind v4 + Tailwind v3 + Reanimated v3 (Old + New Architecture). NativeWind default (Uniwind needs New Arch).
 - **Expo SDK 55 (template family `v5`):** Uniwind default; NativeWind v5 preview + Tailwind v4 + Reanimated v4 also available. New Architecture only.
 - **Expo SDK 56:** React 19.2 / RN 0.85.3 / Reanimated 4.3 + required peer `react-native-worklets ~0.8.3` / safe-area-context `~5.7.0`. New Architecture only. Uniwind default; NativeWind v5 preview **or** v4 stable available (`aniui init` prompts, or `--nw v4|v5`).
 - **Expo SDK 57:** React 19.2 / RN 0.86 / Reanimated ~4.5 / `react-native-worklets ~0.10` / gesture-handler ~2.32 / safe-area-context ~5.7. New Architecture only. Same engine choices as 56; Uniwind default. Native deps are pinned via `expo install` (including `react-native-worklets`).
+- **Expo SDK 58:** React 19.3 / RN 0.88 / Reanimated ~4.7 / `react-native-worklets ~0.13` / gesture-handler ~2.33 / safe-area-context ~5.8 / Skia 2.14. iOS 27 UIKit scene-based lifecycle. **Node 22.13+** required (or 24.3+ / 26+; odd-numbered Node not supported). Uniwind default. iPhone Duo ready via opt-in `expo-hinge` peer dep — 10 overlays become fold-aware via the `useFoldFeatures()` hook in `components/ui/fold.tsx`; non-fold devices and projects without `expo-hinge` installed see zero behavioral change (null-safe `require()` returns a shared `NULL_FEATURES` constant). RN 0.88's new Strict TypeScript API surfaces ref-type warnings on ~20 components — a mechanical `React.ElementRef<typeof X>` migration tracked for 0.8.1.
 
-The CLI auto-detects the SDK generation and engine, honouring an explicit `nativewind` / `uniwind` / `tailwindcss` dep over the Expo SDK bucket.
+The CLI auto-detects the SDK generation and engine, honouring an explicit `nativewind` / `uniwind` / `tailwindcss` dep over the Expo SDK bucket. SDK 58 detection also gates two things in `init`/`doctor`: a hint to install `expo-hinge` for fold-aware overlays, and a Node version check.
 
 ## Supported Platforms
 
@@ -71,11 +72,13 @@ The CLI auto-detects the SDK generation and engine, honouring an explicit `nativ
 - Expo SDK 55 (Uniwind default; or NativeWind v5 + Tailwind v4)
 - Expo SDK 56 (Uniwind default; or NativeWind v5 preview / v4 stable)
 - Expo SDK 57 (Uniwind default; or NativeWind v5 preview / v4 stable) — RN 0.86, Reanimated ~4.5, worklets ~0.10
+- Expo SDK 58 (Uniwind default) — RN 0.88, Reanimated ~4.7, worklets ~0.13, iOS 27 scene lifecycle, Node 22.13+, iPhone Duo ready via `expo-hinge`
 - Bare React Native CLI 0.76+
-- iOS 15+, Android API 24+
+- iOS 15+ (iOS 27 recommended for SDK 58 features), Android API 24+
 - Styling engines: Uniwind (primary/default on New Arch) and NativeWind (soft-deprecated, supported)
 - New Architecture: supported on all SDKs (required for Uniwind)
 - Old Architecture: supported on SDK 54 and earlier (NativeWind only)
+- iPhone Duo: SDK 58 ships 'ready on day one' per Expo; AniUI's 10 fold-aware overlays + `useFoldFeatures()` are opt-in via `expo-hinge`
 
 ## Repository Structure
 
@@ -104,7 +107,7 @@ aniui/
 │           └── logger.ts
 │
 ├── components/                # Source files — copied by CLI into user's project
-│   └── ui/                    # NOTE: this tree is illustrative, not exhaustive — see registry.ts (149 components)
+│   └── ui/                    # NOTE: this tree is illustrative, not exhaustive — see registry.ts (150 components)
 │                               # components exist under components/ui/ today; cli/src/registry.ts
 │                               # is the authoritative list. Newer additions not yet folded
 │                               # into the tree below: tray.tsx, unfold-menu.tsx,
@@ -349,7 +352,6 @@ All component-internal icons come from **`lucide-react-native`** (peer: `react-n
 | 44 | file-picker | Pressable | Upload UI with dashed border and preview |
 | 45 | image-gallery | FlatList+Modal | Horizontal carousel with fullscreen viewer |
 | 46 | date-picker | View | Custom calendar-based picker — no external date-picker dependency |
-| 47 | time-picker | View+ScrollView | Custom scroll-wheel time picker; DateAndTimePicker adds Calendar |
 | 48 | carousel | FlatList | Paged horizontal carousel via native FlatList — no reanimated |
 | 48 | toggle | Pressable | Two-state toggle button — no reanimated |
 | 49 | toggle-group | View+Context | Group of exclusive toggle buttons — no reanimated |
@@ -393,6 +395,7 @@ All component-internal icons come from **`lucide-react-native`** (peer: `react-n
 | 106 | stacked-chips | Nested, depth-aware expandable chip menu |
 | 107 | hamburger | Hamburger ⇄ close icon morph |
 | 108 | theme-switch | Sun/moon icon morph, optional full-screen circular wipe |
+| 47 | time-picker | Scroll-snap wheel with center scale/opacity falloff and a haptic tick per selection change, spring-scale modal; DateAndTimePicker adds Calendar |
 
 ### Tier 3: Needs rn-primitives or external packages
 

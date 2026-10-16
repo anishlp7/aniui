@@ -30,7 +30,7 @@ describe("registry", () => {
   });
 
   // Components that don't use clsx/tailwind-merge (thin wrappers or inline styles)
-  const inlineStyleComponents = new Set(["segmented-control", "stepper", "refresh-control", "animate"]);
+  const inlineStyleComponents = new Set(["segmented-control", "stepper", "refresh-control", "animate", "fold"]);
 
   it.each(names.filter((n) => !inlineStyleComponents.has(n)))("%s has clsx and tailwind-merge in dependencies", (name) => {
     const entry = registry[name];
@@ -106,7 +106,7 @@ describe("resolveRegistryDeps", () => {
   });
 
   it("returns input even if no registry deps", () => {
-    const resolved = resolveRegistryDeps(["button"]);
-    expect(resolved).toEqual(["button"]);
+    const resolved = resolveRegistryDeps(["text"]);
+    expect(resolved).toEqual(["text"]);
   });
 });

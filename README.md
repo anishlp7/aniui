@@ -42,7 +42,7 @@ Built with [Uniwind](https://uniwind.dev) (recommended) or [NativeWind](https://
 
 | | Status |
 |---|---|
-| Expo | ✅ SDK 53, 54, 55, 56 & **57** |
+| Expo | ✅ SDK 53, 54, 55, 56, 57 & **58** |
 | Bare React Native | ✅ 0.76+ |
 | Uniwind | ✅ **Recommended / default** on Expo 55+ |
 | NativeWind | ✅ v4 (stable) + v5 (preview) — supported |
@@ -55,7 +55,9 @@ Built with [Uniwind](https://uniwind.dev) (recommended) or [NativeWind](https://
 | iOS | ✅ 15+ |
 | Android | ✅ API 24+ |
 
-> **New: Expo SDK 57 + Uniwind is now the default →** On Expo SDK 55+ projects, `aniui init` now defaults to [Uniwind](https://uniwind.dev) (2–3× faster than NativeWind, Tailwind v4 CSS-first, no Babel transform). NativeWind stays fully supported via `--style nativewind`. Ships with Expo 57 starters for both engines (`examples/expo-57-starter`, `examples/expo-57-nw5-starter`). See [the Uniwind guide](https://aniui.dev/docs/uniwind) and [SDK compatibility](https://aniui.dev/docs/compatibility).
+> **New in 0.8.0: Expo SDK 58 + iPhone Duo ready →** Full support for Expo SDK 58 (React Native 0.88, iOS 27 scene lifecycle, Node 22.13+). All 149 components adapt to iPhone Duo's unfolded / folded displays automatically; 10 overlay components (Dialog, Popover, HoverCard, DropdownMenu, ContextMenu, Tooltip, BottomSheet, ActionSheet, Toast, CommandMenu) opt into fold-aware positioning via the new `useFoldFeatures()` hook when `expo-hinge` is installed — a no-op on every other device. See [the iPhone Duo guide](https://aniui.dev/docs/iphone-duo) and [Expo SDK 58 migration](https://aniui.dev/docs/expo-58).
+>
+> **Also current:** On Expo SDK 55+ projects, `aniui init` defaults to [Uniwind](https://uniwind.dev) (2–3× faster than NativeWind, Tailwind v4 CSS-first, no Babel transform). NativeWind stays fully supported via `--style nativewind`. See [the Uniwind guide](https://aniui.dev/docs/uniwind) and [SDK compatibility](https://aniui.dev/docs/compatibility).
 
 ## Quick Start
 
@@ -118,7 +120,7 @@ Already on RNR / NativeWind / Uniwind? Components drop in with **zero extra setu
 
 ## Components
 
-**149 components** — all listed alphabetically. Each component's docs page tells you if it needs extra dependencies. Component icons come from [lucide-react-native](https://lucide.dev) (installed automatically by `aniui init`/`add`); icon props (`icon`, `leadingIcon`, …) accept any ReactNode, so you can bring your own.
+**150 components** — all listed alphabetically. Each component's docs page tells you if it needs extra dependencies. Component icons come from [lucide-react-native](https://lucide.dev) (installed automatically by `aniui init`/`add`); icon props (`icon`, `leadingIcon`, …) accept any ReactNode, so you can bring your own.
 
 Building an AI app? Pair [Prompt Input](https://aniui.dev/docs/prompt-input) (ChatGPT/Claude-style composer with toolbar slots), [Streaming Text](https://aniui.dev/docs/streaming-text), [Chat Bubble](https://aniui.dev/docs/chat-bubble), [Typing Indicator](https://aniui.dev/docs/typing-indicator), and [Waveform](https://aniui.dev/docs/waveform) (voice recording) for a complete chat UI.
 
@@ -296,7 +298,7 @@ npx expo install @shopify/react-native-skia
 
 | Area | Status |
 |------|--------|
-| 149 components | ✅ |
+| 150 components | ✅ |
 | Component & CLI tests (Jest) | ✅ |
 | Accessibility audit | ✅ |
 | Performance benchmarks | ✅ |

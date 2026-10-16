@@ -17,7 +17,7 @@ export const registry: Record<string, ComponentEntry> = {
     file: "components/ui/button.tsx",
     description: "A pressable button with variants",
     dependencies: ["class-variance-authority", "clsx", "tailwind-merge"],
-    registryDependencies: [],
+    registryDependencies: ["theme-provider"],
     tier: 1,
   },
   text: {
@@ -89,7 +89,7 @@ export const registry: Record<string, ComponentEntry> = {
     file: "components/ui/breadcrumb.tsx",
     description: "Navigation trail: Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbPage, BreadcrumbSeparator",
     dependencies: ["lucide-react-native", "react-native-svg", "clsx", "tailwind-merge"],
-    registryDependencies: [],
+    registryDependencies: ["theme-provider"],
     tier: 1,
   },
   menubar: {
@@ -217,7 +217,7 @@ export const registry: Record<string, ComponentEntry> = {
     file: "components/ui/toast.tsx",
     description: "Notification toast with auto-dismiss, position (top/bottom), and slide-in direction (top/bottom/left/right)",
     dependencies: ["@rn-primitives/portal", "react-native-reanimated", "clsx", "tailwind-merge"],
-    registryDependencies: ["animate"],
+    registryDependencies: ["animate", "fold"],
     tier: 3,
   },
   dialog: {
@@ -225,7 +225,7 @@ export const registry: Record<string, ComponentEntry> = {
     file: "components/ui/dialog.tsx",
     description: "Modal dialog overlay",
     dependencies: ["clsx", "tailwind-merge"],
-    registryDependencies: [],
+    registryDependencies: ["fold"],
     tier: 1,
   },
   "alert-dialog": {
@@ -233,7 +233,7 @@ export const registry: Record<string, ComponentEntry> = {
     file: "components/ui/alert-dialog.tsx",
     description: "Confirmation dialog with actions",
     dependencies: ["react-native-reanimated", "clsx", "tailwind-merge"],
-    registryDependencies: ["animate"],
+    registryDependencies: ["animate", "fold"],
     tier: 2,
   },
   tooltip: {
@@ -241,7 +241,7 @@ export const registry: Record<string, ComponentEntry> = {
     file: "components/ui/tooltip.tsx",
     description: "Accessible tooltip with positioning",
     dependencies: ["@rn-primitives/tooltip", "@rn-primitives/portal", "react-native-reanimated", "clsx", "tailwind-merge"],
-    registryDependencies: ["animate"],
+    registryDependencies: ["animate", "fold"],
     tier: 3,
   },
   popover: {
@@ -249,7 +249,7 @@ export const registry: Record<string, ComponentEntry> = {
     file: "components/ui/popover.tsx",
     description: "Contextual overlay with trigger positioning",
     dependencies: ["@rn-primitives/popover", "@rn-primitives/portal", "react-native-reanimated", "clsx", "tailwind-merge"],
-    registryDependencies: ["animate"],
+    registryDependencies: ["animate", "fold"],
     tier: 3,
   },
   "bottom-sheet": {
@@ -257,7 +257,7 @@ export const registry: Record<string, ComponentEntry> = {
     file: "components/ui/bottom-sheet.tsx",
     description: "Bottom sheet overlay",
     dependencies: ["@gorhom/bottom-sheet", "react-native-gesture-handler", "clsx", "tailwind-merge"],
-    registryDependencies: [],
+    registryDependencies: ["theme-provider", "fold"],
     tier: 3,
   },
   "action-sheet": {
@@ -265,7 +265,7 @@ export const registry: Record<string, ComponentEntry> = {
     file: "components/ui/action-sheet.tsx",
     description: "Action sheet with options",
     dependencies: ["@gorhom/bottom-sheet", "react-native-gesture-handler", "clsx", "tailwind-merge"],
-    registryDependencies: ["bottom-sheet"],
+    registryDependencies: ["bottom-sheet", "theme-provider", "fold"],
     tier: 3,
   },
   select: {
@@ -281,7 +281,7 @@ export const registry: Record<string, ComponentEntry> = {
     file: "components/ui/calendar.tsx",
     description: "Month calendar with single and range selection",
     dependencies: ["lucide-react-native", "react-native-svg", "clsx", "tailwind-merge"],
-    registryDependencies: [],
+    registryDependencies: ["theme-provider"],
     tier: 1,
   },
   "date-picker": {
@@ -295,10 +295,10 @@ export const registry: Record<string, ComponentEntry> = {
   "time-picker": {
     name: "TimePicker",
     file: "components/ui/time-picker.tsx",
-    description: "Custom time picker with scroll wheels plus DateAndTimePicker (calendar + time)",
-    dependencies: ["lucide-react-native", "react-native-svg", "clsx", "tailwind-merge"],
-    registryDependencies: ["calendar", "theme-provider"],
-    tier: 1,
+    description: "Animated scroll-snap wheel time picker with a spring modal and haptic tick, plus DateAndTimePicker (calendar + time)",
+    dependencies: ["react-native-reanimated", "expo-haptics", "lucide-react-native", "react-native-svg", "clsx", "tailwind-merge"],
+    registryDependencies: ["calendar", "theme-provider", "animate"],
+    tier: 2,
   },
   slider: {
     name: "Slider",
@@ -385,7 +385,7 @@ export const registry: Record<string, ComponentEntry> = {
     file: "components/ui/dropdown-menu.tsx",
     description: "Dropdown menu with items, separators, and destructive actions",
     dependencies: ["@rn-primitives/dropdown-menu", "@rn-primitives/portal", "react-native-reanimated", "clsx", "tailwind-merge"],
-    registryDependencies: ["animate"],
+    registryDependencies: ["animate", "fold"],
     tier: 3,
   },
   "context-menu": {
@@ -393,7 +393,7 @@ export const registry: Record<string, ComponentEntry> = {
     file: "components/ui/context-menu.tsx",
     description: "Long-press context menu with items and separators",
     dependencies: ["@rn-primitives/context-menu", "@rn-primitives/portal", "react-native-reanimated", "clsx", "tailwind-merge"],
-    registryDependencies: ["animate"],
+    registryDependencies: ["animate", "fold"],
     tier: 3,
   },
   image: {
@@ -443,7 +443,7 @@ export const registry: Record<string, ComponentEntry> = {
     file: "components/ui/banner.tsx",
     description: "Full-width notification banner with variants and dismiss",
     dependencies: ["lucide-react-native", "react-native-svg", "class-variance-authority", "clsx", "tailwind-merge"],
-    registryDependencies: [],
+    registryDependencies: ["theme-provider"],
     tier: 1,
   },
   "chart-tooltip": {
@@ -675,7 +675,7 @@ export const registry: Record<string, ComponentEntry> = {
     file: "components/ui/pagination.tsx",
     description: "Page navigation with numbered buttons and prev/next",
     dependencies: ["lucide-react-native", "react-native-svg", "clsx", "tailwind-merge"],
-    registryDependencies: ["button"],
+    registryDependencies: ["button", "theme-provider"],
     tier: 1,
   },
   "file-picker": {
@@ -739,7 +739,7 @@ export const registry: Record<string, ComponentEntry> = {
     file: "components/ui/hover-card.tsx",
     description: "Preview content card triggered by hover or long-press",
     dependencies: ["@rn-primitives/hover-card", "@rn-primitives/portal", "react-native-reanimated", "clsx", "tailwind-merge"],
-    registryDependencies: ["animate"],
+    registryDependencies: ["animate", "fold"],
     tier: 3,
   },
   "direction-provider": {
@@ -758,6 +758,14 @@ export const registry: Record<string, ComponentEntry> = {
     registryDependencies: [],
     tier: 2,
   },
+  fold: {
+    name: "Fold",
+    file: "components/ui/fold.tsx",
+    description: "useFoldFeatures() hook: iPhone Duo / Android foldable hinge state. Null-safe require of expo-hinge — returns null fields on non-fold devices and when the peer dep is absent, so consumers short-circuit back to pre-fold behavior.",
+    dependencies: ["expo-hinge"],
+    registryDependencies: [],
+    tier: 3,
+  },
   "data-table": {
     name: "DataTable",
     file: "components/ui/data-table.tsx",
@@ -771,7 +779,7 @@ export const registry: Record<string, ComponentEntry> = {
     file: "components/ui/command-menu.tsx",
     description: "Spotlight/kbar-style command palette — portal-based overlay with rigorous Android keyboard handling, groups, and shortcuts",
     dependencies: ["lucide-react-native", "react-native-svg", "@rn-primitives/dialog", "@rn-primitives/portal", "react-native-reanimated", "clsx", "tailwind-merge"],
-    registryDependencies: ["animate", "theme-provider"],
+    registryDependencies: ["animate", "theme-provider", "fold"],
     tier: 3,
   },
   "avatar-group": {

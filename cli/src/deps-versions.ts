@@ -17,7 +17,7 @@
  * which points here as its source of truth.
  */
 
-export type SdkBucket = "sdk54" | "sdk55" | "sdk56" | "sdk57" | "bare";
+export type SdkBucket = "sdk54" | "sdk55" | "sdk56" | "sdk57" | "sdk58" | "bare";
 
 export interface VersionSet {
   reanimated: string;
@@ -25,6 +25,9 @@ export interface VersionSet {
   worklets?: string;
   gestureHandler: string;
   safeAreaContext: string;
+  /** react-native-screens — tracked for SDK 58+ where RN 0.88's Kotlin API
+   * forced a jump to ~4.30 (older versions fail compileDebugKotlin). */
+  screens?: string;
   svg: string;
   nativewindV4?: string;
   nativewindV5Preview?: string;
@@ -44,6 +47,8 @@ export interface VersionSet {
   expoHaptics: string;
   /** Real scannable QR encoding for qr-code.tsx. */
   qrcodeSvg: string;
+  /** iPhone Duo / foldable hinge angle + open-state (expo-hinge, SDK 58+). */
+  expoHinge?: string;
 }
 
 export const DEP_VERSIONS: Record<SdkBucket, VersionSet> = {
@@ -121,6 +126,37 @@ export const DEP_VERSIONS: Record<SdkBucket, VersionSet> = {
     expoBlur: "~57.0.2",
     expoHaptics: "~57.0.2",
     qrcodeSvg: "^6.3.22",
+  },
+  sdk58: {
+    // Pins mirror Expo SDK 58's bundledNativeModules.json. Deviating from
+    // these is what has broken the Android build on every iteration so far
+    // (ERESOLVE on Reanimated 4.6, Kotlin compile fail on screens 4.24,
+    // gesture-handler v2 vs the v3 Expo now ships, etc.). Treat
+    // https://raw.githubusercontent.com/expo/expo/sdk-58/packages/expo/bundledNativeModules.json
+    // as the source of truth and update here when it moves.
+    reanimated: "4.7.1",
+    worklets: "0.13.0",
+    gestureHandler: "~3.3.0",
+    safeAreaContext: "~5.10.1",
+    screens: "~4.30.0",
+    svg: "15.16.0",
+    uniwind: "^1.12.0",
+    nativewindV5Preview: "^5.0.0-preview.5",
+    tailwindV4: "^4.2.4",
+    bottomSheet: "^5.2.14",
+    tailwindMerge: "^3.7.0",
+    lucideReactNative: "^1.58.0",
+    classVarianceAuthority: "^0.7.1",
+    clsx: "^2.1.1",
+    skia: "2.14.0",
+    expoBlur: "~58.0.3",
+    expoHaptics: "~58.0.6",
+    qrcodeSvg: "^6.3.22",
+    // iPhone Duo + Android foldable support — opt-in peer dep consumed by
+    // components/ui/fold.tsx. Null-safe require, no runtime cost on non-fold
+    // devices. Apple's reserved-region API requires iOS 27.1 + Xcode 27.1.
+    // Published as expo-hinge@58.x (follows Expo SDK versioning, not a 0.x).
+    expoHinge: "~58.0.1",
   },
   bare: {
     reanimated: "^4.3.0",

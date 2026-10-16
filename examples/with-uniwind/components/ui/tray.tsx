@@ -623,7 +623,7 @@ export function TrayContent({ children, className }: TrayContentProps) {
           onPress={dismissOnBackdropPress ? close : undefined}
         />
 
-        <View className="px-2.5" style={{ paddingBottom: Math.max(insets.bottom, 12) }} pointerEvents="box-none">
+        <View className="px-2.5" style={{ paddingBottom: Math.max(insets.bottom, 12), paddingLeft: insets.left, paddingRight: insets.right }} pointerEvents="box-none">
           <GestureDetector gesture={pan}>
             <Animated.View
               className="border"

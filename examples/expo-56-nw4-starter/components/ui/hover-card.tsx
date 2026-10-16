@@ -4,20 +4,20 @@ import { useSafeAreaInsets } from "react-native-safe-area-context";
 import * as HoverCardPrimitive from "@rn-primitives/hover-card";
 import Animated from "react-native-reanimated";
 import { entering, exiting } from "@/components/ui/animate";
+import { useFoldFeatures } from "@/components/ui/fold";
 import { cn } from "@/lib/utils";
 
 export interface HoverCardProps {
   children: React.ReactNode;
-  open?: boolean;
   onOpenChange?: (open: boolean) => void;
   openDelay?: number;
   closeDelay?: number;
 }
 
-export function HoverCard({ children, open, onOpenChange, openDelay, closeDelay }: HoverCardProps) {
+// @rn-primitives' HoverCard Root is uncontrolled — see context-menu.tsx.
+export function HoverCard({ children, onOpenChange, openDelay, closeDelay }: HoverCardProps) {
   return (
     <HoverCardPrimitive.Root
-      open={open}
       onOpenChange={onOpenChange}
       openDelay={openDelay}
       closeDelay={closeDelay}
@@ -57,7 +57,8 @@ export function HoverCardTrigger({ className, children, ...props }: HoverCardTri
 export interface HoverCardContentProps extends React.ComponentPropsWithoutRef<typeof View> {
   className?: string;
   children?: React.ReactNode;
-  side?: "top" | "bottom" | "left" | "right";
+  // Primitive only supports vertical sides.
+  side?: "top" | "bottom";
   sideOffset?: number;
   align?: "start" | "center" | "end";
 }
@@ -71,6 +72,12 @@ export function HoverCardContent({
   ...props
 }: HoverCardContentProps) {
   const insets = useSafeAreaInsets();
+  const fold = useFoldFeatures();
+  // See popover.tsx for the pattern — treat the fold line as a horizontal
+  // inset so the content stays within one pane on an unfolded Duo.
+  const foldInsets = fold.foldX
+    ? { ...insets, left: Math.max(insets.left, fold.foldX), right: Math.max(insets.right, fold.foldX) }
+    : insets;
   return (
     <HoverCardPrimitive.Portal>
       <HoverCardPrimitive.Overlay className="absolute inset-0" />
@@ -79,7 +86,7 @@ export function HoverCardContent({
         sideOffset={sideOffset}
         align={align}
         avoidCollisions
-        insets={insets}
+        insets={foldInsets}
       >
         <Animated.View entering={entering.fadeIn} exiting={exiting.fadeOut}>
           <View

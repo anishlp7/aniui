@@ -4,16 +4,17 @@ import { useSafeAreaInsets } from "react-native-safe-area-context";
 import * as DropdownMenuPrimitive from "@rn-primitives/dropdown-menu";
 import Animated from "react-native-reanimated";
 import { entering, exiting } from "@/components/ui/animate";
+import { useFoldFeatures } from "@/components/ui/fold";
 import { cn } from "@/lib/utils";
 
 export interface DropdownMenuProps {
   children: React.ReactNode;
-  open?: boolean;
   onOpenChange?: (open: boolean) => void;
 }
 
-export function DropdownMenu({ children, open, onOpenChange }: DropdownMenuProps) {
-  return <DropdownMenuPrimitive.Root open={open} onOpenChange={onOpenChange}>{children}</DropdownMenuPrimitive.Root>;
+// @rn-primitives' DropdownMenu Root is uncontrolled — see context-menu.tsx.
+export function DropdownMenu({ children, onOpenChange }: DropdownMenuProps) {
+  return <DropdownMenuPrimitive.Root onOpenChange={onOpenChange}>{children}</DropdownMenuPrimitive.Root>;
 }
 
 export function DropdownMenuTrigger({ className, children, ...props }: React.ComponentPropsWithoutRef<typeof Pressable> & { className?: string; children: React.ReactNode }) {
@@ -34,17 +35,23 @@ export function DropdownMenuTrigger({ className, children, ...props }: React.Com
 export interface DropdownMenuContentProps extends React.ComponentPropsWithoutRef<typeof View> {
   className?: string;
   children?: React.ReactNode;
-  side?: "top" | "bottom" | "left" | "right";
+  // Primitive only supports vertical sides; "left" / "right" aren't valid here.
+  side?: "top" | "bottom";
   sideOffset?: number;
   align?: "start" | "center" | "end";
 }
 
 export function DropdownMenuContent({ className, children, side = "bottom", sideOffset = 4, align = "start", ...props }: DropdownMenuContentProps) {
   const insets = useSafeAreaInsets();
+  const fold = useFoldFeatures();
+  // See popover.tsx for the pattern — fold line becomes a horizontal inset.
+  const foldInsets = fold.foldX
+    ? { ...insets, left: Math.max(insets.left, fold.foldX), right: Math.max(insets.right, fold.foldX) }
+    : insets;
   return (
     <DropdownMenuPrimitive.Portal>
       <DropdownMenuPrimitive.Overlay className="absolute inset-0" />
-      <DropdownMenuPrimitive.Content side={side} sideOffset={sideOffset} align={align} avoidCollisions insets={insets}>
+      <DropdownMenuPrimitive.Content side={side} sideOffset={sideOffset} align={align} avoidCollisions insets={foldInsets}>
         <Animated.View entering={entering.fadeIn} exiting={exiting.fadeOut}>
           <View className={cn("min-w-[180px] rounded-lg border border-border bg-card p-1 shadow-lg", className)} {...props}>
             {children}

@@ -1,0 +1,85 @@
+import React from "react";
+import { View, Text, Pressable } from "react-native";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
+import * as DropdownMenuPrimitive from "@rn-primitives/dropdown-menu";
+import Animated from "react-native-reanimated";
+import { entering, exiting } from "@/components/ui/animate";
+import { useFoldFeatures } from "@/components/ui/fold";
+import { cn } from "@/lib/utils";
+
+export interface DropdownMenuProps {
+  children: React.ReactNode;
+  onOpenChange?: (open: boolean) => void;
+}
+
+// @rn-primitives' DropdownMenu Root is uncontrolled — see context-menu.tsx.
+export function DropdownMenu({ children, onOpenChange }: DropdownMenuProps) {
+  return <DropdownMenuPrimitive.Root onOpenChange={onOpenChange}>{children}</DropdownMenuPrimitive.Root>;
+}
+
+export function DropdownMenuTrigger({ className, children, ...props }: React.ComponentPropsWithoutRef<typeof Pressable> & { className?: string; children: React.ReactNode }) {
+  return (
+    <DropdownMenuPrimitive.Trigger asChild>
+      {/* rn-primitives measures this exact box to position the menu below it —
+          min-h-12/min-w-12 would force a 48x48 measured box even for a small
+          icon child, opening the menu ~48px below the trigger's top edge
+          instead of just past the icon. hitSlop expands the tappable area to
+          the 48dp minimum without inflating what gets measured. */}
+      <Pressable hitSlop={14} className={cn("", className)} accessible={true} accessibilityRole="button" {...props}>
+        {children}
+      </Pressable>
+    </DropdownMenuPrimitive.Trigger>
+  );
+}
+
+export interface DropdownMenuContentProps extends React.ComponentPropsWithoutRef<typeof View> {
+  className?: string;
+  children?: React.ReactNode;
+  // Primitive only supports vertical sides; "left" / "right" aren't valid here.
+  side?: "top" | "bottom";
+  sideOffset?: number;
+  align?: "start" | "center" | "end";
+}
+
+export function DropdownMenuContent({ className, children, side = "bottom", sideOffset = 4, align = "start", ...props }: DropdownMenuContentProps) {
+  const insets = useSafeAreaInsets();
+  const fold = useFoldFeatures();
+  // See popover.tsx for the pattern — fold line becomes a horizontal inset.
+  const foldInsets = fold.foldX
+    ? { ...insets, left: Math.max(insets.left, fold.foldX), right: Math.max(insets.right, fold.foldX) }
+    : insets;
+  return (
+    <DropdownMenuPrimitive.Portal>
+      <DropdownMenuPrimitive.Overlay className="absolute inset-0" />
+      <DropdownMenuPrimitive.Content side={side} sideOffset={sideOffset} align={align} avoidCollisions insets={foldInsets}>
+        <Animated.View entering={entering.fadeIn} exiting={exiting.fadeOut}>
+          <View className={cn("min-w-[180px] rounded-lg border border-border bg-card p-1 shadow-lg", className)} {...props}>
+            {children}
+          </View>
+        </Animated.View>
+      </DropdownMenuPrimitive.Content>
+    </DropdownMenuPrimitive.Portal>
+  );
+}
+
+export interface DropdownMenuItemProps extends React.ComponentPropsWithoutRef<typeof Pressable> {
+  className?: string;
+  children: React.ReactNode;
+  destructive?: boolean;
+}
+
+export function DropdownMenuItem({ className, children, destructive, ...props }: DropdownMenuItemProps) {
+  return (
+    <DropdownMenuPrimitive.Item asChild>
+      <Pressable className={cn("flex-row items-center rounded-md px-3 py-2.5 min-h-12", className)} accessible={true} accessibilityRole="menuitem" {...props}>
+        {typeof children === "string" ? (
+          <Text className={cn("text-sm", destructive ? "text-destructive" : "text-foreground")}>{children}</Text>
+        ) : children}
+      </Pressable>
+    </DropdownMenuPrimitive.Item>
+  );
+}
+
+export function DropdownMenuSeparator({ className }: { className?: string }) {
+  return <DropdownMenuPrimitive.Separator className={cn("my-1 h-px bg-border", className)} />;
+}
