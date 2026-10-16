@@ -166,6 +166,34 @@ jest.mock("expo-haptics", () => ({
   NotificationFeedbackType: { Success: "success", Warning: "warning", Error: "error" },
 }));
 
+/* ── Mock expo-hinge ──────────────────────────────────────── */
+// SDK 58 Tier 3 peer dep that reads iOS 27.1 / Android 11+ hinge angle +
+// open-state for iPhone Duo and foldables. The real module ships ESM and
+// native bindings that Jest can't load; components/ui/fold.tsx handles the
+// absence via try/catch, but tests that render fold-aware overlays benefit
+// from an explicit mock that reports a stable "unfolded Duo" posture by
+// default. Individual tests can override with jest.doMock if they need a
+// different hinge state.
+// virtual: true because expo-hinge isn't installed as a devDependency here —
+// the real module ships only in SDK 58+ projects. The mock stubs out just the
+// surface components/ui/fold.tsx reads.
+jest.mock(
+  "expo-hinge",
+  () => {
+    const listeners = new Set();
+    return {
+      __esModule: true,
+      useHinge: () => ({ angle: 180, isOpen: true }),
+      getHinge: () => ({ angle: 180, isOpen: true }),
+      addHingeListener: (cb) => {
+        listeners.add(cb);
+        return { remove: () => listeners.delete(cb) };
+      },
+    };
+  },
+  { virtual: true }
+);
+
 /* ── Mock expo-blur ───────────────────────────────────────── */
 // Same ESM/native-module issue as expo-haptics above. Renders as a plain
 // View — components using it for a depth/glass effect just lose that visual

@@ -58,7 +58,7 @@ describe("component source files", () => {
   });
 
   // Components that don't use cn() (thin wrappers or use inline styles)
-  const noCnComponents = new Set(["select", "stepper", "refresh-control", "animate"]);
+  const noCnComponents = new Set(["select", "stepper", "refresh-control", "animate", "fold"]);
 
   it.each(names.filter((n) => !noCnComponents.has(n)))("%s imports cn from utils", (name) => {
     const filePath = path.join(repoRoot, registry[name].file);

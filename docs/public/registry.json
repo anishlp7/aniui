@@ -364,6 +364,12 @@
       "description": "Tap-to-flip card with horizontal/vertical/depth 3D rotation, mid-flip glass blur, and haptic feedback"
     },
     {
+      "name": "fold",
+      "type": "registry:ui",
+      "title": "Fold",
+      "description": "useFoldFeatures() hook: iPhone Duo / Android foldable hinge state. Null-safe require of expo-hinge — returns null fields on non-fold devices and when the peer dep is absent, so consumers short-circuit back to pre-fold behavior."
+    },
+    {
       "name": "forgot-password",
       "type": "registry:block",
       "title": "ForgotPasswordScreen",
