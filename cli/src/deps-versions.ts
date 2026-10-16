@@ -125,27 +125,31 @@ export const DEP_VERSIONS: Record<SdkBucket, VersionSet> = {
     qrcodeSvg: "^6.3.22",
   },
   sdk58: {
-    reanimated: "~4.6.0",
-    worklets: "~0.11.0",
+    // Reanimated 4.6 only peers up to RN 0.87; SDK 58 ships RN 0.88 so the
+    // right pin is Reanimated ~4.7 (peer "0.86 - 0.88") + worklets ~0.13
+    // (its matching peer, declared in Reanimated 4.7's own peerDeps).
+    reanimated: "~4.7.0",
+    worklets: "~0.13.0",
     gestureHandler: "~2.33.0",
     safeAreaContext: "~5.8.0",
     svg: "15.16.0",
-    uniwind: "^1.7.0",
+    uniwind: "^1.12.0",
     nativewindV5Preview: "^5.0.0-preview.5",
     tailwindV4: "^4.2.4",
-    bottomSheet: "^5.3.0",
-    tailwindMerge: "^3.6.0",
-    lucideReactNative: "^1.24.0",
+    bottomSheet: "^5.2.14",
+    tailwindMerge: "^3.7.0",
+    lucideReactNative: "^1.58.0",
     classVarianceAuthority: "^0.7.1",
     clsx: "^2.1.1",
-    skia: "2.7.0",
+    skia: "2.14.0",
     expoBlur: "~58.0.0",
     expoHaptics: "~58.0.0",
     qrcodeSvg: "^6.3.22",
     // iPhone Duo + Android foldable support — opt-in peer dep consumed by
     // components/ui/fold.tsx. Null-safe require, no runtime cost on non-fold
     // devices. Apple's reserved-region API requires iOS 27.1 + Xcode 27.1.
-    expoHinge: "~0.1.0",
+    // Published as expo-hinge@58.x (follows Expo SDK versioning, not a 0.x).
+    expoHinge: "~58.0.0",
   },
   bare: {
     reanimated: "^4.3.0",
