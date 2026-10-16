@@ -25,6 +25,9 @@ export interface VersionSet {
   worklets?: string;
   gestureHandler: string;
   safeAreaContext: string;
+  /** react-native-screens — tracked for SDK 58+ where RN 0.88's Kotlin API
+   * forced a jump to ~4.30 (older versions fail compileDebugKotlin). */
+  screens?: string;
   svg: string;
   nativewindV4?: string;
   nativewindV5Preview?: string;
@@ -125,13 +128,17 @@ export const DEP_VERSIONS: Record<SdkBucket, VersionSet> = {
     qrcodeSvg: "^6.3.22",
   },
   sdk58: {
-    // Reanimated 4.6 only peers up to RN 0.87; SDK 58 ships RN 0.88 so the
-    // right pin is Reanimated ~4.7 (peer "0.86 - 0.88") + worklets ~0.13
-    // (its matching peer, declared in Reanimated 4.7's own peerDeps).
-    reanimated: "~4.7.0",
-    worklets: "~0.13.0",
-    gestureHandler: "~2.33.0",
-    safeAreaContext: "~5.8.0",
+    // Pins mirror Expo SDK 58's bundledNativeModules.json. Deviating from
+    // these is what has broken the Android build on every iteration so far
+    // (ERESOLVE on Reanimated 4.6, Kotlin compile fail on screens 4.24,
+    // gesture-handler v2 vs the v3 Expo now ships, etc.). Treat
+    // https://raw.githubusercontent.com/expo/expo/sdk-58/packages/expo/bundledNativeModules.json
+    // as the source of truth and update here when it moves.
+    reanimated: "4.7.1",
+    worklets: "0.13.0",
+    gestureHandler: "~3.3.0",
+    safeAreaContext: "~5.10.1",
+    screens: "~4.30.0",
     svg: "15.16.0",
     uniwind: "^1.12.0",
     nativewindV5Preview: "^5.0.0-preview.5",
@@ -142,14 +149,14 @@ export const DEP_VERSIONS: Record<SdkBucket, VersionSet> = {
     classVarianceAuthority: "^0.7.1",
     clsx: "^2.1.1",
     skia: "2.14.0",
-    expoBlur: "~58.0.0",
-    expoHaptics: "~58.0.0",
+    expoBlur: "~58.0.3",
+    expoHaptics: "~58.0.6",
     qrcodeSvg: "^6.3.22",
     // iPhone Duo + Android foldable support — opt-in peer dep consumed by
     // components/ui/fold.tsx. Null-safe require, no runtime cost on non-fold
     // devices. Apple's reserved-region API requires iOS 27.1 + Xcode 27.1.
     // Published as expo-hinge@58.x (follows Expo SDK versioning, not a 0.x).
-    expoHinge: "~58.0.0",
+    expoHinge: "~58.0.1",
   },
   bare: {
     reanimated: "^4.3.0",

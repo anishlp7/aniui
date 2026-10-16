@@ -6,13 +6,13 @@ const sdk58Versions = `# Pinned by Expo SDK 58 (expo@~58.0.0)
 expo                            ~58.0.0
 react                           19.3.0
 react-native                    0.88.0
-react-native-reanimated         ~4.6.0
-react-native-worklets           ~0.11.0  # required peer of Reanimated 4
-react-native-gesture-handler    ~2.33.0
-react-native-safe-area-context  ~5.8.0
-react-native-screens            ~4.24.0
-react-native-svg                15.16.x
-expo-hinge                      ~0.1.0   # optional: iPhone Duo / foldable support`;
+react-native-reanimated         4.7.1
+react-native-worklets           0.13.0   # required peer of Reanimated 4
+react-native-gesture-handler    ~3.3.0   # v3 — major jump from SDK 57's v2
+react-native-safe-area-context  ~5.10.1
+react-native-screens            ~4.30.0
+react-native-svg                15.16.0
+expo-hinge                      ~58.0.1  # optional: iPhone Duo / foldable support`;
 
 const freshInstall = `# Fresh Expo SDK 58 project — iOS 27, iPhone Duo ready
 npx create-expo-app@latest my-app --template default@sdk-58
@@ -32,11 +32,12 @@ const migrateFrom57 = `# Migration from Expo SDK 57 → 58
 #    (expo install pins the right versions for each SDK)
 npx expo install expo@~58 react@19.3.0 react-native@0.88.0
 
-# 2. Bump the animation stack: Reanimated 4.5 → ~4.6, worklets 0.10 → ~0.11
+# 2. Bump the animation stack: Reanimated 4.5 → 4.7.1, worklets 0.10 → 0.13
 npx expo install react-native-reanimated react-native-worklets
 
 # 3. Bump the rest of the native stack
-npx expo install react-native-gesture-handler react-native-safe-area-context react-native-svg
+#    Note: react-native-gesture-handler jumps from v2 to v3 on SDK 58.
+npx expo install react-native-gesture-handler react-native-safe-area-context react-native-screens react-native-svg
 
 # 4. (Optional) Install expo-hinge for iPhone Duo fold-aware overlays
 npx expo install expo-hinge
