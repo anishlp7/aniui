@@ -27,7 +27,6 @@
     },
     "plugins": [
       "expo-router",
-      "expo-hinge",
       [
         "expo-splash-screen",
         {
