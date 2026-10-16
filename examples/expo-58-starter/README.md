@@ -16,10 +16,24 @@ This is an [Expo](https://expo.dev) project created with [`create-expo-app`](htt
    npm install
    ```
 
-2. Start the app
+2. (First-time only) regenerate the native `android/` and `ios/` folders for SDK 58.
+
+   The committed native folders — if any ship — may be inherited from an earlier
+   SDK and have the wrong Gradle version pinned (SDK 58 requires Gradle 9.4.1+).
+   `expo prebuild --clean` regenerates both folders fresh with versions matched
+   to this starter's SDK:
+
+   ```bash
+   npx expo prebuild --clean
+   ```
+
+3. Start the app
 
    ```bash
    npx expo start
+   # Or build directly:
+   npx expo run:ios
+   npx expo run:android
    ```
 
 In the output, you'll find options to open the app in a
