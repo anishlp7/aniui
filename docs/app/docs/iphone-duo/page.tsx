@@ -49,7 +49,7 @@ export default function IPhoneDuoPage() {
       <div>
         <h1 className="text-3xl font-bold tracking-tight text-foreground">iPhone Duo</h1>
         <p className="mt-2 text-lg text-muted-foreground">
-          Apple&apos;s first foldable (ships 2026-10-23) presents a 7.6&quot; unfolded display with a reserved fold line down the middle, and a 5.4&quot; folded cover display. AniUI&apos;s 149 components adapt out of the box; 10 overlay components also opt into fold-aware positioning when <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">expo-hinge</code> is installed.
+          Apple&apos;s first foldable (ships 2026-10-23) presents a 7.6&quot; unfolded display with a reserved fold line down the middle, and a 5.4&quot; folded cover display. AniUI&apos;s 150 components adapt out of the box; 10 overlay components also opt into fold-aware positioning when <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">expo-hinge</code> is installed.
         </p>
       </div>
 

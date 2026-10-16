@@ -57,7 +57,7 @@ export default function Expo58Page() {
       <div>
         <h1 className="text-3xl font-bold tracking-tight text-foreground">Expo SDK 58</h1>
         <p className="mt-2 text-lg text-muted-foreground">
-          Expo SDK 58 targets iOS 27 and introduces the UIKit scene-based lifecycle. Apps built with SDK 58 are ready for <Link href="/docs/iphone-duo" className="text-primary hover:underline">iPhone Duo</Link> on day one, on both displays. AniUI&apos;s 149 components re-lay out automatically when the scene is resized.
+          Expo SDK 58 targets iOS 27 and introduces the UIKit scene-based lifecycle. Apps built with SDK 58 are ready for <Link href="/docs/iphone-duo" className="text-primary hover:underline">iPhone Duo</Link> on day one, on both displays. AniUI&apos;s 150 components re-lay out automatically when the scene is resized.
         </p>
       </div>
 
