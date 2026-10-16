@@ -109,7 +109,7 @@ export function AnimatedHeaderScrollView({
         onScroll={onScroll}
         scrollEventThrottle={16}
         showsVerticalScrollIndicator={false}
-        contentContainerStyle={[{ paddingTop: headerHeight + 8, paddingBottom: insets.bottom + 24 }, contentContainerStyle]}
+        contentContainerStyle={[{ paddingTop: headerHeight + 8, paddingBottom: insets.bottom + 24, paddingLeft: insets.left, paddingRight: insets.right }, contentContainerStyle]}
         {...props}
       >
         <Animated.View className={cn("px-4 pb-2", largeTitleClassName)} style={largeTitleStyle}>

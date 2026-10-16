@@ -6,6 +6,7 @@ import { entering, exiting } from "@/components/ui/animate";
 import { Search } from "lucide-react-native";
 import { cn } from "@/lib/utils";
 import { useThemeColors } from "@/components/ui/theme-provider";
+import { useFoldFeatures } from "@/components/ui/fold";
 
 export interface CommandItem {
   label: string;
@@ -44,6 +45,9 @@ export function CommandMenu({
   const [search, setSearch] = useState("");
   const colors = useThemeColors();
   const { height: winH } = useWindowDimensions();
+  // Fold-aware: on an unfolded Duo, keep the command menu inside the left pane
+  // instead of spanning the fold. Null on non-fold devices.
+  const fold = useFoldFeatures();
   const inputRef = useRef<TextInput>(null);
   const kb = useSharedValue(0);
 
@@ -109,7 +113,7 @@ export function CommandMenu({
     <DialogPrimitive.Root open={open} onOpenChange={onOpenChange}>
       <DialogPrimitive.Portal>
         <DialogPrimitive.Overlay closeOnPress className="absolute inset-0 bg-black/50" />
-        <DialogPrimitive.Content style={{ position: "absolute", top: TOP_OFFSET, left: 16, right: 16 }}>
+        <DialogPrimitive.Content style={{ position: "absolute", top: TOP_OFFSET, left: 16, right: fold.foldX ? fold.foldX + 16 : 16 }}>
           <DialogPrimitive.Title style={{ position: "absolute", width: 1, height: 1, opacity: 0 }}>
             Command menu
           </DialogPrimitive.Title>

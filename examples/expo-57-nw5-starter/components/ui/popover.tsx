@@ -4,6 +4,7 @@ import { useSafeAreaInsets } from "react-native-safe-area-context";
 import * as PopoverPrimitive from "@rn-primitives/popover";
 import Animated from "react-native-reanimated";
 import { entering, exiting } from "@/components/ui/animate";
+import { useFoldFeatures } from "@/components/ui/fold";
 import { cn } from "@/lib/utils";
 
 export interface PopoverProps {
@@ -47,10 +48,18 @@ export interface PopoverContentProps extends React.ComponentPropsWithoutRef<type
 
 export function PopoverContent({ className, children, side = "bottom", sideOffset = 8, align = "center", ...props }: PopoverContentProps) {
   const insets = useSafeAreaInsets();
+  const fold = useFoldFeatures();
+  // Teach the primitive's collision avoider about the fold line: treat it as
+  // a right-side inset so the panel stays within one pane. Both left/right
+  // kept as max(real inset, fold inset) so a trigger on the right pane also
+  // gets clamped on its *left* side correctly. Null on non-fold devices.
+  const foldInsets = fold.foldX
+    ? { ...insets, left: Math.max(insets.left, fold.foldX), right: Math.max(insets.right, fold.foldX) }
+    : insets;
   return (
     <PopoverPrimitive.Portal>
       <PopoverPrimitive.Overlay className="absolute inset-0" />
-      <PopoverPrimitive.Content side={side} sideOffset={sideOffset} align={align} avoidCollisions insets={insets}>
+      <PopoverPrimitive.Content side={side} sideOffset={sideOffset} align={align} avoidCollisions insets={foldInsets}>
         <Animated.View entering={entering.fadeIn} exiting={exiting.fadeOut}>
           <View className={cn("w-72 rounded-lg border border-border bg-card p-4 shadow-lg", className)} {...props}>
             {children}

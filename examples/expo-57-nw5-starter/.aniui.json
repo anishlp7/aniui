@@ -8,7 +8,7 @@
   "installed": {
     "accordion": {
       "version": "0.8.0",
-      "hash": "93ae0054",
+      "hash": "c527c735",
       "addedAt": "2026-10-13T00:00:00.000Z"
     },
     "action-rail": {
@@ -18,12 +18,12 @@
     },
     "action-sheet": {
       "version": "0.8.0",
-      "hash": "8dd525da",
+      "hash": "bbb2ee0d",
       "addedAt": "2026-10-13T00:00:00.000Z"
     },
     "alert-dialog": {
       "version": "0.8.0",
-      "hash": "cc82651f",
+      "hash": "6cd3a73c",
       "addedAt": "2026-10-13T00:00:00.000Z"
     },
     "alert": {
@@ -38,7 +38,7 @@
     },
     "animated-header-scrollview": {
       "version": "0.8.0",
-      "hash": "a4a5f440",
+      "hash": "3ffd1648",
       "addedAt": "2026-10-13T00:00:00.000Z"
     },
     "animated-input-bar": {
@@ -103,7 +103,7 @@
     },
     "bottom-sheet": {
       "version": "0.8.0",
-      "hash": "422efcb2",
+      "hash": "d40aeed0",
       "addedAt": "2026-10-13T00:00:00.000Z"
     },
     "breadcrumb": {
@@ -168,7 +168,7 @@
     },
     "checkbox": {
       "version": "0.8.0",
-      "hash": "c7811439",
+      "hash": "da121f59",
       "addedAt": "2026-10-13T00:00:00.000Z"
     },
     "chip": {
@@ -188,7 +188,7 @@
     },
     "command-menu": {
       "version": "0.8.0",
-      "hash": "3e8bda90",
+      "hash": "568e1e0c",
       "addedAt": "2026-10-13T00:00:00.000Z"
     },
     "connection-banner": {
@@ -198,7 +198,7 @@
     },
     "context-menu": {
       "version": "0.8.0",
-      "hash": "b5bd1bb6",
+      "hash": "feaf0deb",
       "addedAt": "2026-10-13T00:00:00.000Z"
     },
     "coupon": {
@@ -223,7 +223,7 @@
     },
     "dialog": {
       "version": "0.8.0",
-      "hash": "d0456a2d",
+      "hash": "447e81a5",
       "addedAt": "2026-10-13T00:00:00.000Z"
     },
     "direction-provider": {
@@ -238,7 +238,7 @@
     },
     "dropdown-menu": {
       "version": "0.8.0",
-      "hash": "cd781861",
+      "hash": "dd6f8d49",
       "addedAt": "2026-10-13T00:00:00.000Z"
     },
     "empty-state": {
@@ -291,6 +291,11 @@
       "hash": "c158ec96",
       "addedAt": "2026-10-13T00:00:00.000Z"
     },
+    "fold": {
+      "version": "0.8.0",
+      "hash": "3e2821d5",
+      "addedAt": "2026-10-13T00:00:00.000Z"
+    },
     "form": {
       "version": "0.8.0",
       "hash": "a4905977",
@@ -328,7 +333,7 @@
     },
     "hover-card": {
       "version": "0.8.0",
-      "hash": "da2f690d",
+      "hash": "610d7565",
       "addedAt": "2026-10-13T00:00:00.000Z"
     },
     "image-gallery": {
@@ -468,7 +473,7 @@
     },
     "popover": {
       "version": "0.8.0",
-      "hash": "2f7f99bc",
+      "hash": "cb4198c3",
       "addedAt": "2026-10-13T00:00:00.000Z"
     },
     "price": {
@@ -483,7 +488,7 @@
     },
     "progress-steps": {
       "version": "0.8.0",
-      "hash": "9886652a",
+      "hash": "d1a0e698",
       "addedAt": "2026-10-13T00:00:00.000Z"
     },
     "progress": {
@@ -648,7 +653,7 @@
     },
     "switch": {
       "version": "0.8.0",
-      "hash": "05886896",
+      "hash": "de0d17b2",
       "addedAt": "2026-10-13T00:00:00.000Z"
     },
     "tab-bar": {
@@ -693,12 +698,12 @@
     },
     "timeline": {
       "version": "0.8.0",
-      "hash": "e91dd7da",
+      "hash": "3692bbeb",
       "addedAt": "2026-10-13T00:00:00.000Z"
     },
     "toast": {
       "version": "0.8.0",
-      "hash": "2dd25a4d",
+      "hash": "ba7295de",
       "addedAt": "2026-10-13T00:00:00.000Z"
     },
     "toggle-group": {
@@ -713,12 +718,12 @@
     },
     "tooltip": {
       "version": "0.8.0",
-      "hash": "3c2dbc7b",
+      "hash": "4b7514cc",
       "addedAt": "2026-10-13T00:00:00.000Z"
     },
     "tray": {
       "version": "0.8.0",
-      "hash": "c003f9b9",
+      "hash": "51ab1225",
       "addedAt": "2026-10-13T00:00:00.000Z"
     },
     "typing-indicator": {
