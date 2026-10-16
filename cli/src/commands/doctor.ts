@@ -88,7 +88,6 @@ export async function doctorCommand(): Promise<void> {
   }
 
   // 6b. SDK 56+ requires react-native-worklets as a separate peer of Reanimated 4.3+.
-  // project.sdk57Plus is also available here for a future SDK58-specific check.
   if (project.sdk56Plus) {
     const workletsVer = getVersion("react-native-worklets");
     checks.push({
@@ -96,6 +95,37 @@ export async function doctorCommand(): Promise<void> {
       pass: !!workletsVer,
       detail: "Required by Reanimated 4.3+ on Expo SDK 56 and newer.",
       fix: `Install: ${getDlxCommand(pm, "expo install react-native-worklets")}`,
+    });
+  }
+
+  // 6c. SDK 58+ requires Node 22.13+ (or 24.3+, or 26+). Odd-numbered Node
+  // releases aren't supported. Checked here (not blocking) so the user sees
+  // the mismatch before `expo start` fails with a cryptic error.
+  if (project.sdk58Plus) {
+    const nodeVersion = process.versions.node;
+    const [maj, min] = nodeVersion.split(".").map((n) => parseInt(n, 10));
+    const nodeOk =
+      (maj === 22 && min >= 13) ||
+      (maj === 24 && min >= 3) ||
+      (maj >= 26 && maj % 2 === 0);
+    checks.push({
+      label: `Node ${nodeVersion}`,
+      pass: nodeOk,
+      detail: "Expo SDK 58 requires Node 22.13+, 24.3+, or 26+. Odd-numbered releases aren't supported.",
+      fix: "Upgrade via nvm (nvm install 22.13) or your system package manager.",
+    });
+
+    // expo-hinge is advisory on SDK 58+ — flags iPhone Duo / foldable
+    // fold-awareness. Null-safe in components/ui/fold.tsx, so an unmet check
+    // here is informational, not blocking.
+    const hingeVer = getVersion("expo-hinge");
+    checks.push({
+      label: `expo-hinge ${hingeVer ? `(${hingeVer})` : "(not installed, optional)"}`,
+      pass: true,
+      detail: hingeVer
+        ? "Fold-aware overlays will adapt to iPhone Duo / foldable devices."
+        : "Install expo-hinge to opt into iPhone Duo fold-aware overlay positioning. Not required for the components themselves to work.",
+      fix: hingeVer ? undefined : `Install: ${getNativeInstallCommand(pm, isExpo, ["expo-hinge"])}`,
     });
   }
 

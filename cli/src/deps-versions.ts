@@ -17,7 +17,7 @@
  * which points here as its source of truth.
  */
 
-export type SdkBucket = "sdk54" | "sdk55" | "sdk56" | "sdk57" | "bare";
+export type SdkBucket = "sdk54" | "sdk55" | "sdk56" | "sdk57" | "sdk58" | "bare";
 
 export interface VersionSet {
   reanimated: string;
@@ -44,6 +44,8 @@ export interface VersionSet {
   expoHaptics: string;
   /** Real scannable QR encoding for qr-code.tsx. */
   qrcodeSvg: string;
+  /** iPhone Duo / foldable hinge angle + open-state (expo-hinge, SDK 58+). */
+  expoHinge?: string;
 }
 
 export const DEP_VERSIONS: Record<SdkBucket, VersionSet> = {
@@ -121,6 +123,29 @@ export const DEP_VERSIONS: Record<SdkBucket, VersionSet> = {
     expoBlur: "~57.0.2",
     expoHaptics: "~57.0.2",
     qrcodeSvg: "^6.3.22",
+  },
+  sdk58: {
+    reanimated: "~4.6.0",
+    worklets: "~0.11.0",
+    gestureHandler: "~2.33.0",
+    safeAreaContext: "~5.8.0",
+    svg: "15.16.0",
+    uniwind: "^1.7.0",
+    nativewindV5Preview: "^5.0.0-preview.5",
+    tailwindV4: "^4.2.4",
+    bottomSheet: "^5.3.0",
+    tailwindMerge: "^3.6.0",
+    lucideReactNative: "^1.24.0",
+    classVarianceAuthority: "^0.7.1",
+    clsx: "^2.1.1",
+    skia: "2.7.0",
+    expoBlur: "~58.0.0",
+    expoHaptics: "~58.0.0",
+    qrcodeSvg: "^6.3.22",
+    // iPhone Duo + Android foldable support — opt-in peer dep consumed by
+    // components/ui/fold.tsx. Null-safe require, no runtime cost on non-fold
+    // devices. Apple's reserved-region API requires iOS 27.1 + Xcode 27.1.
+    expoHinge: "~0.1.0",
   },
   bare: {
     reanimated: "^4.3.0",

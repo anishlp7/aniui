@@ -203,6 +203,7 @@ export async function initCommand(opts?: { style?: string; nw?: string; yes?: bo
   // project.sdk57Plus is also available here — currently identical behavior to
   // sdk56Plus, but named so a future SDK58 divergence has a seam to attach to.
   const isSdk56Plus = project.sdk56Plus;
+  const isSdk58Plus = project.sdk58Plus;
   const pkgJson = await fs.readJson(path.join(cwd, "package.json"));
   const allDeps = { ...pkgJson.dependencies, ...pkgJson.devDependencies };
   const hasWorklets = !!allDeps["react-native-worklets"];
@@ -635,6 +636,17 @@ export async function initCommand(opts?: { style?: string; nw?: string; yes?: bo
   }
   logger.info(`   ${getDlxCommand(pm, "aniui add button card text")}`);
   logger.break();
+
+  // SDK 58+ hint: expo-hinge enables iPhone Duo / foldable fold-awareness in
+  // the overlay components (Dialog, Popover, BottomSheet, …). Non-fold devices
+  // are unaffected, so this is purely opt-in — components short-circuit back
+  // to today's behavior when the dep isn't installed.
+  if (isSdk58Plus) {
+    logger.info("iPhone Duo / foldable support: install expo-hinge to enable fold-aware overlays:");
+    logger.info(`   ${getNativeInstallCommand(pm, project.type === "expo", ["expo-hinge"])}`);
+    logger.break();
+  }
+
   logger.info("If something isn't working, run the diagnostic:");
   logger.info(`   ${getDlxCommand(pm, "@aniui/cli doctor")}`);
   logger.break();
