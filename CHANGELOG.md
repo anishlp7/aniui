@@ -2,11 +2,20 @@
 
 All notable changes to this project will be documented in this file.
 
-## [0.8.0] - 2026-10-13
+## [0.8.0] - 2026-10-16
 
 ### Added
 
-- **100% canonical component test coverage** (149/149). Every `components/ui/*.tsx` now has a matching `components/__tests__/*.test.tsx` — the audit baseline was 77/149 (52%), reached in three ratchets:
+- **iPhone Duo + Expo SDK 58 support** — new SDK bucket in `cli/src/deps-versions.ts`, `sdk58Plus` detection seam, `examples/expo-58-starter`, and compatibility matrix column. The CLI (`init` + `doctor`) now branches on SDK 58 to hint at `expo-hinge`, warn when Node is below the SDK 58 minimum (22.13+), and suggest the fold-aware install.
+- **`useFoldFeatures()` hook** (new `components/ui/fold.tsx`, Tier 3). Reads iPhone Duo / Android foldable hinge state via `expo-hinge` (opt-in peer dep). Null-safe `require()` + `try/catch` — returns all-null fields on non-fold devices OR when the dep isn't installed, so consumers short-circuit back to pre-fold behavior at zero cost. Exposes `isFolded`, `foldX`, `hingeAngle`, `postureHint`.
+- **Fold-aware overlay positioning** on ten overlays: `Dialog`, `AlertDialog`, `Popover`, `HoverCard`, `DropdownMenu`, `ContextMenu`, `Tooltip`, `BottomSheet`, `ActionSheet`, `Toast`, `CommandMenu`. Each one shifts away from the fold line when `useFoldFeatures()` reports an unfolded Duo. `BottomSheet` and `ActionSheet` also expose a new `foldPane?: "left" | "right" | "full"` prop (default `"left"`) for picking the pane to clamp to. Every overlay is a no-op on non-fold devices.
+- **Horizontal safe-area insets** are now also read in `animated-header-scrollview` and `tray`, which previously only applied `.top`/`.bottom`. On non-foldable devices the horizontal values are 0, so there's no visible change today — but on iPhone Duo and Android foldables the content respects reserved regions.
+- New Jest mock for `expo-hinge` (`jest.setup.js`) using `{ virtual: true }` so tests don't need the module installed. Shadow-returns an "unfolded Duo" posture by default.
+- New `fold.test.tsx` component test.
+- New docs guides: `/docs/iphone-duo` (what works day one, opt-in fold awareness, `useFoldFeatures()` reference, `foldPane` prop) and `/docs/expo-58` (migration from SDK 57, scene lifecycle note, Node 22.13+ requirement).
+- `example-apps-smoke` CI matrix extended to include `expo-58-starter`.
+
+- **100% canonical component test coverage** (149/149 → 150/150 with `fold`). Every `components/ui/*.tsx` now has a matching `components/__tests__/*.test.tsx` — the audit baseline was 77/149 (52%), reached in three ratchets:
   - **Batch 1** (Tier 1, 30 tests): forms, nav primitives, skeuomorphic pieces, `theme-provider`.
   - **Batch 2** (Tier 2, 23 tests): motion components (loader/shimmer/typing-indicator/marquee), button variants (save/spin/social/flexi), compound stacks (polaroid/photo-stack/profile-card/morphing-tabbar).
   - **Batch 3** (Tier 3 + Tier 4, 21 tests): gesture-driven (tray/unfold-menu/action-rail/split-view/filling-stack/mobile-dock), carousels (3D/circular/vertical-flow), Skia gooey family (gooey-popover/gooey-search-tabs/morph-fab).

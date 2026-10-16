@@ -21,7 +21,7 @@ const componentPages = [
 
 const guidePages = [
   "installation", "components", "theming", "dark-mode", "rtl", "compatibility",
-  "expo-57", "expo-56",
+  "iphone-duo", "expo-58", "expo-57", "expo-56",
   "cli", "mcp", "javascript", "android", "changelog", "uniwind", "shadcn-registry",
 ];
 

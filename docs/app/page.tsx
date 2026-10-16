@@ -256,7 +256,7 @@ export default function HomePage() {
             {[
               { value: String(COMPONENT_COUNT), label: "Components" },
               { value: "15", label: "Screen Blocks" },
-              { value: "4", label: "Expo SDKs" },
+              { value: "5", label: "Expo SDKs" },
               { value: "MIT", label: "Licensed" },
             ].map((stat) => (
               <div key={stat.label} className="flex flex-col items-center">
