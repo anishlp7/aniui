@@ -198,6 +198,7 @@ jobs:
           - expo-55-starter
           - expo-56-starter
           - expo-57-starter
+          - expo-58-starter
     steps:
       - uses: actions/checkout@v4
 

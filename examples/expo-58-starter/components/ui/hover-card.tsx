@@ -1,0 +1,102 @@
+import React from "react";
+import { View, Pressable } from "react-native";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
+import * as HoverCardPrimitive from "@rn-primitives/hover-card";
+import Animated from "react-native-reanimated";
+import { entering, exiting } from "@/components/ui/animate";
+import { useFoldFeatures } from "@/components/ui/fold";
+import { cn } from "@/lib/utils";
+
+export interface HoverCardProps {
+  children: React.ReactNode;
+  onOpenChange?: (open: boolean) => void;
+  openDelay?: number;
+  closeDelay?: number;
+}
+
+// @rn-primitives' HoverCard Root is uncontrolled — see context-menu.tsx.
+export function HoverCard({ children, onOpenChange, openDelay, closeDelay }: HoverCardProps) {
+  return (
+    <HoverCardPrimitive.Root
+      onOpenChange={onOpenChange}
+      openDelay={openDelay}
+      closeDelay={closeDelay}
+    >
+      {children}
+    </HoverCardPrimitive.Root>
+  );
+}
+
+export interface HoverCardTriggerProps extends React.ComponentPropsWithoutRef<typeof Pressable> {
+  className?: string;
+  children?: React.ReactNode;
+}
+
+export function HoverCardTrigger({ className, children, ...props }: HoverCardTriggerProps) {
+  return (
+    <HoverCardPrimitive.Trigger asChild>
+      {/* rn-primitives measures this exact box to position HoverCardContent
+          below it — min-h-12/min-w-12 would force a 48x48 measured box even
+          for a small icon child, opening the content ~48px below the
+          trigger's top edge instead of just past the icon. hitSlop expands
+          the tappable area to the 48dp minimum without inflating what gets
+          measured. */}
+      <Pressable
+        hitSlop={14}
+        className={cn("", className)}
+        accessible={true}
+        accessibilityRole="button"
+        {...props}
+      >
+        {children}
+      </Pressable>
+    </HoverCardPrimitive.Trigger>
+  );
+}
+
+export interface HoverCardContentProps extends React.ComponentPropsWithoutRef<typeof View> {
+  className?: string;
+  children?: React.ReactNode;
+  // Primitive only supports vertical sides.
+  side?: "top" | "bottom";
+  sideOffset?: number;
+  align?: "start" | "center" | "end";
+}
+
+export function HoverCardContent({
+  className,
+  children,
+  side = "bottom",
+  sideOffset = 8,
+  align = "center",
+  ...props
+}: HoverCardContentProps) {
+  const insets = useSafeAreaInsets();
+  const fold = useFoldFeatures();
+  // See popover.tsx for the pattern — treat the fold line as a horizontal
+  // inset so the content stays within one pane on an unfolded Duo.
+  const foldInsets = fold.foldX
+    ? { ...insets, left: Math.max(insets.left, fold.foldX), right: Math.max(insets.right, fold.foldX) }
+    : insets;
+  return (
+    <HoverCardPrimitive.Portal>
+      <HoverCardPrimitive.Overlay className="absolute inset-0" />
+      <HoverCardPrimitive.Content
+        side={side}
+        sideOffset={sideOffset}
+        align={align}
+        avoidCollisions
+        insets={foldInsets}
+      >
+        <Animated.View entering={entering.fadeIn} exiting={exiting.fadeOut}>
+          <View
+            className={cn("w-64 rounded-lg border border-border bg-card p-4 shadow-lg", className)}
+            {...props}
+          >
+            {children}
+          </View>
+        </Animated.View>
+      </HoverCardPrimitive.Content>
+    </HoverCardPrimitive.Portal>
+  );
+}
