@@ -8,6 +8,7 @@ export const metadata: Metadata = {
   twitter: { title: "CLI", description: "Use @aniui/cli to initialize projects, add components, add blocks, set themes, and sync existing installs." },
 };
 
+import Link from "next/link";
 import { Heading } from "@/components/heading";
 import { CodeBlock } from "@/components/code-block-server";
 
@@ -141,6 +142,47 @@ npx @aniui/cli generate "settings page" -o app/settings.tsx`}
         <CodeBlock code="npx @aniui/cli diff button" />
         <p className="text-muted-foreground">
           Outputs a colored unified diff (green for additions, red for removals). Only shows lines that differ.
+        </p>
+
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight pt-4">mcp</Heading>
+        <p className="text-muted-foreground">
+          Work with the AniUI MCP server config. Two subcommands:
+        </p>
+        <CodeBlock
+          code={`# Print the MCP config for manual setup (default)
+npx @aniui/cli mcp
+npx @aniui/cli mcp print
+
+# Auto-install the aniui MCP entry into your AI tools
+npx @aniui/cli mcp install`}
+        />
+        <p className="text-muted-foreground">
+          <strong>mcp install</strong> detects which clients you have on this machine — Cursor,
+          Claude Desktop, Claude Code, Windsurf — and writes the <code className="rounded bg-secondary px-1.5 py-0.5 text-sm font-mono">aniui</code> entry
+          into each config file. Idempotent: it preserves other <code className="rounded bg-secondary px-1.5 py-0.5 text-sm font-mono">mcpServers</code>{" "}
+          entries and asks before overwriting a differing <code className="rounded bg-secondary px-1.5 py-0.5 text-sm font-mono">aniui</code> one.
+        </p>
+        <CodeBlock
+          code={`# Install for specific clients only (skip the prompt)
+npx @aniui/cli mcp install --cursor --claude-code
+
+# Install for everything detected
+npx @aniui/cli mcp install --all --yes
+
+# Preview without writing
+npx @aniui/cli mcp install --cursor --dry-run`}
+        />
+        <p className="text-muted-foreground">
+          Config paths it writes to:
+        </p>
+        <ul className="list-disc pl-6 space-y-1 text-muted-foreground">
+          <li><strong>Cursor</strong> — <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">.cursor/mcp.json</code> (project)</li>
+          <li><strong>Claude Code</strong> — <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">.mcp.json</code> (project)</li>
+          <li><strong>Claude Desktop</strong> — OS-specific (<code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">~/Library/Application Support/Claude/…</code> on macOS, <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">%APPDATA%/Claude/…</code> on Windows)</li>
+          <li><strong>Windsurf</strong> — <code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">~/.codeium/windsurf/mcp_config.json</code></li>
+        </ul>
+        <p className="text-muted-foreground">
+          See <Link href="/docs/mcp" className="text-primary hover:underline">the MCP guide</Link> for the full tool inventory.
         </p>
 
         <Heading as="h2" className="text-2xl font-semibold tracking-tight pt-4">update</Heading>

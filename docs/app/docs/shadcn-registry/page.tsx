@@ -8,6 +8,7 @@ export const metadata: Metadata = {
   twitter: { title: "Shadcn-compatible registry", description: "Install any AniUI component with the shadcn CLI: npx shadcn@latest add https://aniui.dev/r/button.json. No AniUI CLI required." },
 };
 
+import Link from "next/link";
 import { Heading } from "@/components/heading";
 import { CodeBlock } from "@/components/code-block-server";
 
@@ -118,6 +119,37 @@ export default function ShadcnRegistryPage() {
           hand, this is the React-Native-appropriate shape (<code className="rounded bg-secondary px-1.5 py-0.5 text-xs font-mono">rsc: false</code>, RN aliases):
         </p>
         <CodeBlock code={componentsJson} title="components.json" />
+      </div>
+
+      <div className="space-y-4">
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight text-foreground">AniUI metadata (beyond the shadcn spec)</Heading>
+        <p className="text-sm text-muted-foreground">
+          AniUI&apos;s registry is a strict superset of the shadcn spec: everything the shadcn CLI expects is there,
+          plus an extra <code className="rounded bg-secondary px-1 py-0.5 text-xs font-mono">aniui</code> block that
+          lets AI agents reason about RN-specific compatibility without guesswork.
+        </p>
+        <CodeBlock
+          title="/r/button.json (excerpt)"
+          code={`{
+  "name": "button",
+  "type": "registry:ui",
+  "files": [ /* … */ ],
+  "aniui": {
+    "tier": 1,
+    "supportedSdks": [54, 55, 56, 57, 58],
+    "supportedEngines": ["uniwind", "nativewind-v4", "nativewind-v5"],
+    "supportedArch": ["old", "new"]
+  }
+}`}
+        />
+        <p className="text-sm text-muted-foreground">
+          The top-level <code className="rounded bg-secondary px-1 py-0.5 text-xs font-mono">/registry.json</code>{" "}
+          also carries a library-level <code className="rounded bg-secondary px-1 py-0.5 text-xs font-mono">aniui</code> block with the full
+          supported matrix and the engine-to-architecture requirements (<code className="rounded bg-secondary px-1 py-0.5 text-xs font-mono">engineRequiresArch</code>:{" "}
+          Uniwind requires New Arch). Agents using the <Link href="/docs/mcp" className="text-primary hover:underline">AniUI MCP</Link> can also call{" "}
+          <code className="rounded bg-secondary px-1 py-0.5 text-xs font-mono">list_sdk_support</code> and{" "}
+          <code className="rounded bg-secondary px-1 py-0.5 text-xs font-mono">check_arch_compatibility</code> directly instead of parsing the JSON.
+        </p>
       </div>
 
       <div className="space-y-4">

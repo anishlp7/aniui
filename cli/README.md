@@ -14,7 +14,7 @@
   <a href="https://www.npmjs.com/package/@aniui/cli"><img src="https://img.shields.io/npm/v/@aniui/cli?style=flat-square&color=000" alt="npm version" /></a>
   <a href="https://github.com/anishlp7/aniui/blob/main/LICENSE"><img src="https://img.shields.io/github/license/anishlp7/aniui?style=flat-square&color=000" alt="license" /></a>
   <img src="https://img.shields.io/badge/platform-iOS%20%7C%20Android-000?style=flat-square" alt="platform" />
-  <img src="https://img.shields.io/badge/Expo%20SDK-53%20%7C%2054%20%7C%2055%20%7C%2056%20%7C%2057-000?style=flat-square" alt="expo" />
+  <img src="https://img.shields.io/badge/Expo%20SDK-54%20%7C%2055%20%7C%2056%20%7C%2057%20%7C%2058-000?style=flat-square" alt="expo" />
 </p>
 
 ---
@@ -62,7 +62,8 @@ npx @aniui/cli add button card input text
 | `diff <name>` | Show differences between your local component and the latest upstream. |
 | `update <names...>` | Update installed components to the latest version. |
 | `doctor` | Diagnose setup — deps, config files, known conflicts — and tell you what to fix. |
-| `mcp` | Print MCP server configuration for AI tools. |
+| `mcp` | Print MCP server configuration for AI tools (same as `mcp print`). |
+| `mcp install` | **Auto-install** the aniui MCP entry into Cursor / Claude Desktop / Claude Code / Windsurf. Flags: `--cursor --claude-desktop --claude-code --windsurf --all --dry-run --yes`. |
 | `generate` | Generate a screen with AI (requires `ANTHROPIC_API_KEY`). |
 
 Supports TypeScript and JavaScript (`tsx: false`).
@@ -100,7 +101,7 @@ Plus **15 blocks** (full screens) via `add-block`.
 
 | | Status |
 |---|---|
-| Expo | ✅ SDK 53, 54, 55, 56, 57 & **58** (iPhone Duo ready) |
+| Expo | ✅ SDK **54+** (currently through 58; iPhone Duo on 58) |
 | Bare React Native | ✅ 0.76+ |
 | Uniwind | ✅ **Recommended / default** on Expo 55+ |
 | NativeWind | ✅ v4 (stable) + v5 (preview) — supported |
@@ -108,7 +109,7 @@ Plus **15 blocks** (full screens) via `add-block`.
 | TypeScript | ✅ Strict |
 | JavaScript | ✅ Via CLI (`tsx: false`) |
 | New Architecture | ✅ (required for Uniwind) |
-| Old Architecture | ✅ SDK 53/54 only (NativeWind) |
+| Old Architecture | ✅ SDK 54 only (NativeWind) |
 | iOS | ✅ 15+ |
 | Android | ✅ API 24+ |
 

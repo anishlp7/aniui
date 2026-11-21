@@ -34,12 +34,15 @@ See [`CLAUDE.md`](CLAUDE.md) for the full set.
 
 | Surface | Where | Purpose |
 |---|---|---|
-| MCP server (stdio) | `mcp/` (`npx -y @aniui/mcp`) | Direct tool access |
+| MCP server (stdio) | `mcp/` (`npx -y @aniui/mcp`, v0.3.0) | Direct tool access — 10 tools incl. `list_sdk_support`, `check_arch_compatibility` |
+| MCP installer | `npx @aniui/cli mcp install` | Auto-writes the MCP entry into Cursor / Claude Desktop / Claude Code / Windsurf |
 | Agent Skill | [`skills/aniui/mcp.md`](skills/aniui/mcp.md) | Auto-discovered by Cursor/Claude Code |
-| Shadcn registry | `https://aniui.dev/r/{name}.json` | `npx shadcn add` compatibility |
+| Shadcn registry | `https://aniui.dev/r/{name}.json` | `npx shadcn add` compatibility + per-item `aniui` block with SDK/engine/arch compat |
+| Registry index | `https://aniui.dev/registry.json` | Library-level `aniui` block: supported matrix + engineRequiresArch |
 | llms.txt | `https://aniui.dev/llms.txt` | Import map + rules |
-| llms-full.txt | `https://aniui.dev/llms-full.txt` | Every component's source in one file |
-| Sitemap | `https://aniui.dev/sitemap.xml` | Auto-generated from filesystem |
+| llms-full.txt | `https://aniui.dev/llms-full.txt` | Every component's source in one file (818 KB) |
+| Sitemap | `https://aniui.dev/sitemap.xml` | Auto-generated from filesystem; per-page unique metadata |
+| Agent bridge (proposed) | [`design/agent-bridge.md`](design/agent-bridge.md) | `createAniAgent()` — the RN equivalent of Vercel UI SDK's `createAgent()`; spec in, implementation pending |
 
 ## Working in this repo
 

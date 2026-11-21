@@ -17,6 +17,14 @@ AniUI is a copy-paste component library for React Native. Components are source 
 npx @aniui/cli init
 npx @aniui/cli add button text input card
 
+## MCP (for AI coding tools)
+npx @aniui/cli mcp install            # auto-wire into Cursor / Claude Desktop / Claude Code / Windsurf
+# or manually:
+#   { "mcpServers": { "aniui": { "command": "npx", "args": ["-y", "@aniui/mcp"] } } }
+# Tools: list_components, search_components, get_component, get_component_usage,
+#        list_blocks, get_block, get_theme_tokens, get_theme_preset,
+#        list_sdk_support, check_arch_compatibility
+
 ## Components (97 total, alphabetical)
 
 - Accordion: `import { Accordion, AccordionItem } from "@/components/ui/accordion"` — needs @rn-primitives/accordion, react-native-reanimated
