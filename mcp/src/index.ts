@@ -5,7 +5,16 @@ import { z } from "zod";
 import fs from "fs/promises";
 import path from "path";
 import { fileURLToPath } from "url";
-import { registry, getComponentNames } from "./registry-data.js";
+import {
+  registry,
+  getComponentNames,
+  checkCompat,
+  resolveCompat,
+  SUPPORTED_SDKS,
+  SUPPORTED_ENGINES,
+  SUPPORTED_ARCH,
+  ENGINE_REQUIRES_ARCH,
+} from "./registry-data.js";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 // When compiled, __dirname is dist/ — go up 1 level to package root
@@ -264,6 +273,69 @@ server.tool("get_theme_tokens", "Get all AniUI theme CSS variables and their Tai
 
   return { content: [{ type: "text", text: result }] };
 });
+
+server.tool(
+  "list_sdk_support",
+  "Return AniUI's library-level compatibility matrix: supported Expo SDKs, styling engines, RN architectures, and engine-to-arch requirements.",
+  {},
+  async () => ({
+    content: [
+      {
+        type: "text",
+        text: JSON.stringify(
+          {
+            supportedSdks: SUPPORTED_SDKS,
+            supportedEngines: SUPPORTED_ENGINES,
+            supportedArch: SUPPORTED_ARCH,
+            engineRequiresArch: ENGINE_REQUIRES_ARCH,
+            notes: [
+              "Uniwind requires the New Architecture.",
+              "NativeWind v4 (stable) and v5 (preview) both work on Old and New Arch.",
+              "The AniUI CLI auto-detects the project's SDK and engine on `aniui init`.",
+            ],
+          },
+          null,
+          2
+        ),
+      },
+    ],
+  })
+);
+
+server.tool(
+  "check_arch_compatibility",
+  "Check whether an AniUI component fits a project's SDK / engine / architecture. Returns pass/warn/fail with reasons. Fields in the project context are optional — supply what you know.",
+  {
+    name: z.string().describe("Component key, e.g. 'bottom-sheet', 'skeleton'"),
+    expoSdk: z.number().int().optional().describe("Project's Expo SDK major, e.g. 56"),
+    engine: z.enum(["uniwind", "nativewind-v4", "nativewind-v5"]).optional(),
+    arch: z.enum(["old", "new"]).optional(),
+  },
+  async ({ name, expoSdk, engine, arch }) => {
+    const result = checkCompat(name, { expoSdk, engine, arch });
+    const entry = registry[name];
+    const compat = entry ? resolveCompat(entry) : null;
+    return {
+      content: [
+        {
+          type: "text",
+          text: JSON.stringify(
+            {
+              component: name,
+              project: { expoSdk, engine, arch },
+              componentSupports: compat,
+              verdict: result.verdict,
+              reasons: result.reasons,
+            },
+            null,
+            2
+          ),
+        },
+      ],
+      isError: result.verdict === "fail",
+    };
+  }
+);
 
 // --- Resources ---
 

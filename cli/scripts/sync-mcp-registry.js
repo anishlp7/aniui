@@ -1,46 +1,27 @@
 /**
  * sync-mcp-registry.js — regenerate mcp/src/registry-data.ts from the
- * canonical cli/src/registry.ts (via the compiled dist/) so the MCP server's
- * inline copy can never drift in tiers, deps, or entries.
+ * canonical cli/src/registry.ts so the MCP server's inline copy can never
+ * drift in tiers, deps, entries, or SDK/engine/arch compatibility fields.
+ *
+ * We copy cli/src/registry.ts verbatim (plus an auto-gen header) because
+ * registry.ts has no external imports and is pure data + pure helpers — a
+ * byte-for-byte copy means a single edit to the source propagates
+ * automatically to the MCP package next build.
+ *
  * Runs as part of `npm run registry:build`.
  */
 const fs = require("fs");
 const path = require("path");
 
-const { registry } = require("../dist/src/registry.js");
-
+const SRC = path.resolve(__dirname, "..", "src", "registry.ts");
 const OUT = path.resolve(__dirname, "..", "..", "mcp", "src", "registry-data.ts");
 
-const key = (k) => (/^[A-Za-z_$][\w$]*$/.test(k) ? k : JSON.stringify(k));
-const arr = (a) => `[${a.map((d) => JSON.stringify(d)).join(", ")}]`;
+const header =
+  "// AUTO-GENERATED from cli/src/registry.ts by cli/scripts/sync-mcp-registry.js — do not edit by hand.\n" +
+  "// Regenerate with `npm run registry:build` in cli/.\n\n";
 
-const lines = Object.entries(registry).map(
-  ([slug, e]) =>
-    `  ${key(slug)}: { name: ${JSON.stringify(e.name)}, file: ${JSON.stringify(e.file)}, description: ${JSON.stringify(e.description)}, dependencies: ${arr(e.dependencies)}, registryDependencies: ${arr(e.registryDependencies)}, tier: ${e.tier} },`
-);
+const body = fs.readFileSync(SRC, "utf8");
+fs.writeFileSync(OUT, header + body);
 
-fs.writeFileSync(
-  OUT,
-  `// AUTO-GENERATED from cli/src/registry.ts by cli/scripts/sync-mcp-registry.js — do not edit by hand.
-// Regenerate with \`npm run registry:build\` in cli/.
-
-export type ComponentEntry = {
-  name: string;
-  file: string;
-  description: string;
-  dependencies: string[];
-  registryDependencies: string[];
-  tier: 1 | 2 | 3 | 4;
-};
-
-export const registry: Record<string, ComponentEntry> = {
-${lines.join("\n")}
-};
-
-export function getComponentNames(): string[] {
-  return Object.keys(registry).sort();
-}
-`
-);
-
-console.log(`Synced ${Object.keys(registry).length} components → mcp/src/registry-data.ts`);
+const count = (body.match(/^\s{2}(?:"[^"]+"|[a-zA-Z_][\w-]*)\s*:\s*\{/gm) || []).length;
+console.log(`Synced ${count} components (verbatim copy) → mcp/src/registry-data.ts`);

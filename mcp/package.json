@@ -1,6 +1,6 @@
 {
   "name": "@aniui/mcp",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "type": "module",
   "description": "AniUI MCP server — expose component registry, theme tokens, and code examples to AI tools",
   "license": "MIT",

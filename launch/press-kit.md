@@ -19,7 +19,7 @@ with Cursor, Claude Code, Windsurf, and v0 without any custom integration.
 - **150** components (across Tier 1 zero-dep, Tier 2 reanimated, Tier 3
   gesture/primitives, Tier 4 Skia)
 - **15** pre-built blocks (login, signup, chat, pricing, onboarding, …)
-- **5** Expo SDKs supported (54 → 58)
+- **Expo SDK 54+** supported (currently through SDK 58, iPhone Duo on 58)
 - **2** styling engines (Uniwind and NativeWind, same API)
 - **8** MCP tools
 - **1** 818 KB `llms-full.txt` with every component's source

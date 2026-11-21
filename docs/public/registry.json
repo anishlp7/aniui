@@ -2,6 +2,37 @@
   "$schema": "https://ui.shadcn.com/schema/registry.json",
   "name": "aniui",
   "homepage": "https://aniui.dev",
+  "aniui": {
+    "supportedSdks": [
+      54,
+      55,
+      56,
+      57,
+      58
+    ],
+    "supportedEngines": [
+      "uniwind",
+      "nativewind-v4",
+      "nativewind-v5"
+    ],
+    "supportedArch": [
+      "old",
+      "new"
+    ],
+    "engineRequiresArch": {
+      "uniwind": [
+        "new"
+      ],
+      "nativewind-v4": [
+        "old",
+        "new"
+      ],
+      "nativewind-v5": [
+        "old",
+        "new"
+      ]
+    }
+  },
   "items": [
     {
       "name": "accordion",

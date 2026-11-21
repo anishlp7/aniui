@@ -19,5 +19,24 @@
       "content": "import React from \"react\";\nimport { View, Text } from \"react-native\";\nimport { cn } from \"@/lib/utils\";\n\nexport interface CardProps extends React.ComponentPropsWithoutRef<typeof View> {\n  className?: string;\n  children?: React.ReactNode;\n}\n\nexport function Card({ className, ...props }: CardProps) {\n  return (\n    <View\n      className={cn(\"rounded-lg border border-border bg-card p-6\", className)}\n      {...props}\n    />\n  );\n}\n\nexport interface CardHeaderProps extends React.ComponentPropsWithoutRef<typeof View> {\n  className?: string;\n  children?: React.ReactNode;\n}\n\nexport function CardHeader({ className, ...props }: CardHeaderProps) {\n  return <View className={cn(\"pb-4\", className)} {...props} />;\n}\n\nexport interface CardTitleProps extends React.ComponentPropsWithoutRef<typeof Text> {\n  className?: string;\n}\n\nexport function CardTitle({ className, ...props }: CardTitleProps) {\n  return (\n    <Text\n      className={cn(\"text-2xl font-semibold text-card-foreground tracking-tight\", className)}\n      {...props}\n    />\n  );\n}\n\nexport interface CardDescriptionProps extends React.ComponentPropsWithoutRef<typeof Text> {\n  className?: string;\n}\n\nexport function CardDescription({ className, ...props }: CardDescriptionProps) {\n  return <Text className={cn(\"text-sm text-muted-foreground\", className)} {...props} />;\n}\n\nexport interface CardContentProps extends React.ComponentPropsWithoutRef<typeof View> {\n  className?: string;\n  children?: React.ReactNode;\n}\n\nexport function CardContent({ className, ...props }: CardContentProps) {\n  return <View className={cn(\"py-2\", className)} {...props} />;\n}\n\nexport interface CardFooterProps extends React.ComponentPropsWithoutRef<typeof View> {\n  className?: string;\n  children?: React.ReactNode;\n}\n\nexport function CardFooter({ className, ...props }: CardFooterProps) {\n  return <View className={cn(\"flex-row items-center pt-4\", className)} {...props} />;\n}\n"
     }
   ],
+  "aniui": {
+    "tier": 1,
+    "supportedSdks": [
+      54,
+      55,
+      56,
+      57,
+      58
+    ],
+    "supportedEngines": [
+      "uniwind",
+      "nativewind-v4",
+      "nativewind-v5"
+    ],
+    "supportedArch": [
+      "old",
+      "new"
+    ]
+  },
   "docs": "AniUI is React Native. On an existing RNR/NativeWind project, add and use directly — the tokens and aliases already match, no setup needed. On a fresh project, run `npx @aniui/cli init` first to configure NativeWind/Uniwind, theme tokens, and Metro/Babel."
 }

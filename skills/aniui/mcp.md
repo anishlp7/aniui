@@ -85,7 +85,7 @@ If no MCP is configured, fetch these URLs:
 
 ## SDK / engine awareness
 
-AniUI supports Expo SDK 54–58 and two styling engines (Uniwind and NativeWind).
+AniUI supports Expo SDK 54+ and two styling engines (Uniwind and NativeWind).
 When adding dependency-sensitive components (bottom-sheet, gesture-handler,
 reanimated), check the user's Expo SDK and architecture (Old vs New). The CLI
 auto-detects both and installs the right peer versions.

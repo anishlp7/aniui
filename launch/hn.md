@@ -44,7 +44,7 @@ What I'd love feedback on:
 2. Agent folks: are the MCP tool names and shapes right? I split
    `search_components` from `list_components` because agents seem to prefer
    search-first; happy to add more.
-3. I'm about to start on an SDK-aware registry (Expo 54–58 × Uniwind/NativeWind
+3. I'm about to start on an SDK-aware registry (Expo SDK 54+ × Uniwind/NativeWind
    × Old/New Arch, encoded so agents can't pick incompatible components). Is
    there prior art I should know about?
 
