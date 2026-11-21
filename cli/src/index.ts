@@ -4,6 +4,7 @@ import { addCommand } from "./commands/add";
 import { addBlockCommand } from "./commands/add-block";
 import { themeCommand } from "./commands/theme";
 import { mcpCommand } from "./commands/mcp";
+import { mcpInstallCommand } from "./commands/mcp-install";
 import { generateCommand } from "./commands/generate";
 import { doctorCommand } from "./commands/doctor";
 import { statusCommand } from "./commands/status";
@@ -51,11 +52,29 @@ program
     await themeCommand();
   });
 
-program
+const mcp = program
   .command("mcp")
+  .description("MCP server tools (default: print config; 'install' auto-writes it)");
+
+mcp
+  .command("print", { isDefault: true })
   .description("Print MCP server configuration for AI tools")
   .action(async () => {
     await mcpCommand();
+  });
+
+mcp
+  .command("install")
+  .description("Auto-install the AniUI MCP into Cursor / Claude Desktop / Claude Code / Windsurf")
+  .option("--cursor", "install for Cursor")
+  .option("--claude-desktop", "install for Claude Desktop")
+  .option("--claude-code", "install for Claude Code")
+  .option("--windsurf", "install for Windsurf")
+  .option("--all", "install for every supported client")
+  .option("--dry-run", "show what would be written without writing")
+  .option("-y, --yes", "skip confirmation prompts")
+  .action(async (opts: { cursor?: boolean; claudeDesktop?: boolean; claudeCode?: boolean; windsurf?: boolean; all?: boolean; dryRun?: boolean; yes?: boolean }) => {
+    await mcpInstallCommand(opts);
   });
 
 program

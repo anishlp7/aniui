@@ -97,7 +97,7 @@ works out of the box.
 
 Phase 2 (the moats nobody else can copy quickly in RN):
 
-- **SDK/engine-aware registry.** 5 Expo SDKs × 2 styling engines × 4 tiers —
+- **SDK/engine-aware registry.** Expo SDK 54+ × 2 styling engines × 4 tiers —
   encoded as structured data so agents stop picking `bottom-sheet` on Expo 54
   Old Arch.
 - **HTTP/SSE MCP endpoint** at `https://aniui.dev/mcp` — no npm install.

@@ -2,10 +2,10 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Compatibility",
-  description: "Which Expo SDKs, React Native versions, and styling engines AniUI supports. Expo 54 through 58, Uniwind and NativeWind, Old and New Architecture.",
+  description: "Which Expo SDKs, React Native versions, and styling engines AniUI supports. Expo SDK 54+ (iOS 27 / iPhone Duo via SDK 58), Uniwind and NativeWind, Old and New Architecture.",
   alternates: { canonical: "/docs/compatibility" },
-  openGraph: { title: "Compatibility", description: "Which Expo SDKs, React Native versions, and styling engines AniUI supports. Expo 54 through 58, Uniwind and NativeWind, Old and New Architecture.", url: "/docs/compatibility" },
-  twitter: { title: "Compatibility", description: "Which Expo SDKs, React Native versions, and styling engines AniUI supports. Expo 54 through 58, Uniwind and NativeWind, Old and New Architecture." },
+  openGraph: { title: "Compatibility", description: "Which Expo SDKs, React Native versions, and styling engines AniUI supports. Expo SDK 54+ (iOS 27 / iPhone Duo via SDK 58), Uniwind and NativeWind, Old and New Architecture.", url: "/docs/compatibility" },
+  twitter: { title: "Compatibility", description: "Which Expo SDKs, React Native versions, and styling engines AniUI supports. Expo SDK 54+ (iOS 27 / iPhone Duo via SDK 58), Uniwind and NativeWind, Old and New Architecture." },
 };
 
 import { Heading } from "@/components/heading";
@@ -111,7 +111,7 @@ export default function CompatibilityPage() {
       <div>
         <h1 className="text-3xl font-bold tracking-tight text-foreground">Compatibility</h1>
         <p className="mt-2 text-lg text-muted-foreground">
-          AniUI supports Expo SDK 53, 54, 55, 56, 57, and 58 (iOS 27 / iPhone Duo), plus Bare React Native 0.76+. It works with two className engines: <a href="/docs/uniwind" className="text-primary hover:underline">Uniwind</a> (the recommended default on New-Arch projects) and NativeWind (fully supported, soft-deprecated). The CLI auto-detects your setup and defaults to Uniwind on Expo SDK 55+.
+          AniUI supports Expo SDK 54+ (currently through SDK 58, with iOS 27 / iPhone Duo on SDK 58), plus Bare React Native 0.76+. It works with two className engines: <a href="/docs/uniwind" className="text-primary hover:underline">Uniwind</a> (the recommended default on New-Arch projects) and NativeWind (fully supported, soft-deprecated). The CLI auto-detects your setup and defaults to Uniwind on Expo SDK 55+.
         </p>
       </div>
 

@@ -1,3 +1,33 @@
+/** Styling engine identifier. Mirrors `init`'s `--style` and `--nw` options. */
+export type StylingEngine = "uniwind" | "nativewind-v4" | "nativewind-v5";
+
+/** React Native architecture. */
+export type RNArch = "old" | "new";
+
+/** Every Expo SDK AniUI supports today. Floor is 54 — see deps-versions.ts. */
+export const SUPPORTED_SDKS: readonly number[] = [54, 55, 56, 57, 58];
+
+/** Every styling engine AniUI supports today. */
+export const SUPPORTED_ENGINES: readonly StylingEngine[] = [
+  "uniwind",
+  "nativewind-v4",
+  "nativewind-v5",
+];
+
+/** Every RN architecture AniUI supports today. */
+export const SUPPORTED_ARCH: readonly RNArch[] = ["old", "new"];
+
+/**
+ * Project-level compatibility constraint, independent of any component:
+ * Uniwind requires React Native's New Architecture. Encode it here so the
+ * `check_arch_compatibility` MCP tool and `aniui doctor` agree on the answer.
+ */
+export const ENGINE_REQUIRES_ARCH: Record<StylingEngine, RNArch[]> = {
+  uniwind: ["new"],
+  "nativewind-v4": ["old", "new"],
+  "nativewind-v5": ["old", "new"],
+};
+
 export type ComponentEntry = {
   name: string;
   file: string;
@@ -9,6 +39,16 @@ export type ComponentEntry = {
   group?: string;
   /** Docs sidebar section, e.g. "Motion & Effects" */
   category?: string;
+  /**
+   * SDKs this component is known to work on. Absent = works on every entry
+   * in SUPPORTED_SDKS. Set only when a component has a real floor (e.g. uses
+   * an API that first appeared in SDK 56).
+   */
+  supportedSdks?: readonly number[];
+  /** Engines this component works with. Absent = all of SUPPORTED_ENGINES. */
+  supportedEngines?: readonly StylingEngine[];
+  /** Architectures this component works on. Absent = both. */
+  supportedArch?: readonly RNArch[];
 };
 
 export const registry: Record<string, ComponentEntry> = {
@@ -1332,4 +1372,68 @@ export function resolveRegistryDeps(names: string[]): string[] {
   }
 
   return Array.from(resolved);
+}
+
+/** Resolved (default-expanded) compatibility fields for a registry entry. */
+export interface ResolvedCompat {
+  sdks: readonly number[];
+  engines: readonly StylingEngine[];
+  arch: readonly RNArch[];
+}
+
+export function resolveCompat(entry: ComponentEntry): ResolvedCompat {
+  return {
+    sdks: entry.supportedSdks ?? SUPPORTED_SDKS,
+    engines: entry.supportedEngines ?? SUPPORTED_ENGINES,
+    arch: entry.supportedArch ?? SUPPORTED_ARCH,
+  };
+}
+
+export interface ProjectContext {
+  expoSdk?: number;
+  engine?: StylingEngine;
+  arch?: RNArch;
+}
+
+export type CompatVerdict = "pass" | "warn" | "fail";
+
+export interface CompatCheckResult {
+  verdict: CompatVerdict;
+  reasons: string[];
+}
+
+/**
+ * Evaluate whether a component fits a project's SDK / engine / arch. Unknown
+ * project fields are skipped — so a partial context still returns useful
+ * partial answers rather than refusing to answer.
+ */
+export function checkCompat(name: string, project: ProjectContext): CompatCheckResult {
+  const entry = registry[name];
+  if (!entry) return { verdict: "fail", reasons: [`Unknown component: ${name}`] };
+  const compat = resolveCompat(entry);
+  const reasons: string[] = [];
+  let verdict: CompatVerdict = "pass";
+
+  if (project.expoSdk != null && !compat.sdks.includes(project.expoSdk)) {
+    verdict = "fail";
+    reasons.push(`${entry.name} supports Expo SDK ${compat.sdks.join("/")}, project is on ${project.expoSdk}`);
+  }
+  if (project.engine && !compat.engines.includes(project.engine)) {
+    verdict = "fail";
+    reasons.push(`${entry.name} supports ${compat.engines.join("/")}, project uses ${project.engine}`);
+  }
+  if (project.arch && !compat.arch.includes(project.arch)) {
+    verdict = "fail";
+    reasons.push(`${entry.name} requires ${compat.arch.join("/")} architecture, project is on ${project.arch}`);
+  }
+  if (project.engine && project.arch) {
+    const archesForEngine = ENGINE_REQUIRES_ARCH[project.engine];
+    if (!archesForEngine.includes(project.arch)) {
+      verdict = verdict === "pass" ? "warn" : verdict;
+      reasons.push(`Engine ${project.engine} requires ${archesForEngine.join("/")} architecture (project arch: ${project.arch}) — this is a project-level issue, not a component one`);
+    }
+  }
+
+  if (verdict === "pass" && reasons.length === 0) reasons.push("All checks pass for the supplied project context.");
+  return { verdict, reasons };
 }

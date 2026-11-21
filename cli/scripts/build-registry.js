@@ -12,7 +12,15 @@
 const fs = require("fs");
 const path = require("path");
 
-const { registry, resolveRegistryDeps } = require("../dist/src/registry.js");
+const {
+  registry,
+  resolveRegistryDeps,
+  resolveCompat,
+  SUPPORTED_SDKS,
+  SUPPORTED_ENGINES,
+  SUPPORTED_ARCH,
+  ENGINE_REQUIRES_ARCH,
+} = require("../dist/src/registry.js");
 const { blockRegistry } = require("../dist/src/block-registry.js");
 
 const REPO_ROOT = path.resolve(__dirname, "..", "..");
@@ -92,6 +100,7 @@ writeItem("utils", {
 
 // 3. components (registry:ui) — no target (→ consumer aliases.ui), no cssVars.
 for (const [slug, entry] of Object.entries(registry)) {
+  const compat = resolveCompat(entry);
   writeItem(slug, {
     $schema: SCHEMA_ITEM,
     name: slug,
@@ -101,6 +110,12 @@ for (const [slug, entry] of Object.entries(registry)) {
     dependencies: entry.dependencies,
     registryDependencies: [url("utils"), ...entry.registryDependencies.map(url)],
     files: [{ path: entry.file, type: "registry:ui", content: read(entry.file) }],
+    aniui: {
+      tier: entry.tier,
+      supportedSdks: compat.sdks,
+      supportedEngines: compat.engines,
+      supportedArch: compat.arch,
+    },
     docs: DOCS_MSG,
   });
 }
@@ -125,11 +140,28 @@ for (const [slug, block] of Object.entries(blockRegistry)) {
   });
 }
 
-// 5. index (registry.json)
+// 5. index (registry.json) — plus a library-level `aniui` block so agents can
+// learn AniUI's whole supported matrix from one fetch instead of having to
+// read every item.
 items.sort((a, b) => a.name.localeCompare(b.name));
 fs.writeFileSync(
   path.join(OUT_DIR, "registry.json"),
-  JSON.stringify({ $schema: SCHEMA_REG, name: "aniui", homepage: BASE, items }, null, 2) + "\n"
+  JSON.stringify(
+    {
+      $schema: SCHEMA_REG,
+      name: "aniui",
+      homepage: BASE,
+      aniui: {
+        supportedSdks: SUPPORTED_SDKS,
+        supportedEngines: SUPPORTED_ENGINES,
+        supportedArch: SUPPORTED_ARCH,
+        engineRequiresArch: ENGINE_REQUIRES_ARCH,
+      },
+      items,
+    },
+    null,
+    2
+  ) + "\n"
 );
 
 // 6. dependency-closure guard: every registryDependencies slug must be an emitted item.
