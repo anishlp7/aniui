@@ -1,3 +1,13 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Progress",
+  description: "Progress bar",
+  alternates: { canonical: "/docs/progress" },
+  openGraph: { title: "Progress", description: "Progress bar", url: "/docs/progress" },
+  twitter: { title: "Progress", description: "Progress bar" },
+};
+
 import { getComponentSource } from "@/lib/registry-source";
 import { Heading } from "@/components/heading";
 import { PreviewProgress } from "@/components/preview/progress";

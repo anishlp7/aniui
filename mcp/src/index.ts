@@ -115,6 +115,119 @@ server.tool(
   }
 );
 
+server.tool(
+  "search_components",
+  "Search AniUI components by name, description, or keyword — returns matches ranked by relevance",
+  { query: z.string().describe("Search term (e.g. 'modal', 'picker', 'chart', 'chat')") },
+  async ({ query }) => {
+    const q = query.toLowerCase().trim();
+    if (!q) {
+      return { content: [{ type: "text", text: "Empty query — call list_components for everything." }], isError: true };
+    }
+    const scored = Object.entries(registry)
+      .map(([key, entry]) => {
+        const hay = `${key} ${entry.name} ${entry.description}`.toLowerCase();
+        let score = 0;
+        if (key === q || entry.name.toLowerCase() === q) score += 100;
+        else if (key.includes(q) || entry.name.toLowerCase().includes(q)) score += 50;
+        if (entry.description.toLowerCase().includes(q)) score += 10;
+        for (const token of q.split(/\s+/)) {
+          if (token && hay.includes(token)) score += 1;
+        }
+        return { key, entry, score };
+      })
+      .filter((r) => r.score > 0)
+      .sort((a, b) => b.score - a.score)
+      .slice(0, 20)
+      .map((r) => ({ key: r.key, name: r.entry.name, description: r.entry.description, tier: r.entry.tier }));
+
+    if (!scored.length) {
+      return { content: [{ type: "text", text: `No components match "${query}". Try list_components.` }] };
+    }
+    return { content: [{ type: "text", text: JSON.stringify(scored, null, 2) }] };
+  }
+);
+
+server.tool("list_blocks", "List all AniUI blocks (pre-built full-screen compositions)", {}, async () => {
+  try {
+    const files = (await fs.readdir(path.join(REPO_ROOT, "blocks")))
+      .filter((f) => f.endsWith(".tsx"))
+      .sort();
+    const blocks = files.map((f) => ({
+      key: path.basename(f, ".tsx"),
+      file: `blocks/${f}`,
+      registry: `https://aniui.dev/r/${path.basename(f, ".tsx")}.json`,
+    }));
+    return { content: [{ type: "text", text: JSON.stringify(blocks, null, 2) }] };
+  } catch {
+    return { content: [{ type: "text", text: "Could not read blocks directory" }], isError: true };
+  }
+});
+
+server.tool(
+  "get_block",
+  "Get the full source code of an AniUI block (a pre-built screen)",
+  { name: z.string().describe("Block key (e.g. 'login', 'chat', 'home', 'pricing')") },
+  async ({ name }) => {
+    const file = path.join(REPO_ROOT, "blocks", `${name}.tsx`);
+    try {
+      const source = await fs.readFile(file, "utf-8");
+      return { content: [{ type: "text", text: `// blocks/${name}.tsx\n${source}` }] };
+    } catch {
+      return { content: [{ type: "text", text: `Unknown block: ${name}. Try list_blocks.` }], isError: true };
+    }
+  }
+);
+
+const THEME_PRESETS = {
+  default: {
+    light: { primary: "240 5.9% 10%", primaryForeground: "0 0% 98%" },
+    dark: { primary: "0 0% 98%", primaryForeground: "240 5.9% 10%" },
+  },
+  blue: {
+    light: { primary: "221.2 83.2% 53.3%", primaryForeground: "210 40% 98%" },
+    dark: { primary: "217.2 91.2% 59.8%", primaryForeground: "222.2 47.4% 11.2%" },
+  },
+  green: {
+    light: { primary: "142.1 76.2% 36.3%", primaryForeground: "355.7 100% 97.3%" },
+    dark: { primary: "142.1 70.6% 45.3%", primaryForeground: "144.9 80.4% 10%" },
+  },
+  orange: {
+    light: { primary: "24.6 95% 53.1%", primaryForeground: "60 9.1% 97.8%" },
+    dark: { primary: "20.5 90.2% 48.2%", primaryForeground: "60 9.1% 97.8%" },
+  },
+  rose: {
+    light: { primary: "346.8 77.2% 49.8%", primaryForeground: "355.7 100% 97.3%" },
+    dark: { primary: "346.8 77.2% 49.8%", primaryForeground: "355.7 100% 97.3%" },
+  },
+} as const;
+
+server.tool(
+  "get_theme_preset",
+  "Get the primary color HSL values (light + dark) for a built-in AniUI theme preset. Non-primary tokens are shared across presets — use get_theme_tokens for those.",
+  { name: z.enum(["default", "blue", "green", "orange", "rose"]).describe("Preset name") },
+  async ({ name }) => {
+    const preset = THEME_PRESETS[name];
+    return {
+      content: [
+        {
+          type: "text",
+          text: JSON.stringify(
+            {
+              preset: name,
+              overrides: preset,
+              applyWith: "Replace --primary and --primary-foreground in global.css :root (light) and .dark blocks with these HSL values. All other tokens stay as the base theme.",
+              configureVia: "npx @aniui/cli theme " + name,
+            },
+            null,
+            2
+          ),
+        },
+      ],
+    };
+  }
+);
+
 server.tool("get_theme_tokens", "Get all AniUI theme CSS variables and their Tailwind class mappings", {}, async () => {
   let css: string;
   try {

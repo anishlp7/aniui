@@ -1,3 +1,13 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "SpinButton",
+  description: "Toggle button with a custom SVG arc spinner and crossfading label on press",
+  alternates: { canonical: "/docs/spin-button" },
+  openGraph: { title: "SpinButton", description: "Toggle button with a custom SVG arc spinner and crossfading label on press", url: "/docs/spin-button" },
+  twitter: { title: "SpinButton", description: "Toggle button with a custom SVG arc spinner and crossfading label on press" },
+};
+
 import { getComponentSource } from "@/lib/registry-source";
 import { Heading } from "@/components/heading";
 import { ComponentPlayground } from "@/components/highlighted-playground";

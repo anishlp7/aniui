@@ -1,3 +1,13 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "ThemeSwitch",
+  description: "Sun/moon icon-morph theme toggle with an optional full-screen circular wipe transition",
+  alternates: { canonical: "/docs/theme-switch" },
+  openGraph: { title: "ThemeSwitch", description: "Sun/moon icon-morph theme toggle with an optional full-screen circular wipe transition", url: "/docs/theme-switch" },
+  twitter: { title: "ThemeSwitch", description: "Sun/moon icon-morph theme toggle with an optional full-screen circular wipe transition" },
+};
+
 import { getComponentSource } from "@/lib/registry-source";
 import { Heading } from "@/components/heading";
 import { ComponentPlayground } from "@/components/highlighted-playground";

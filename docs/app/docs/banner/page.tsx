@@ -1,3 +1,13 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Banner",
+  description: "Full-width notification banner with variants and dismiss",
+  alternates: { canonical: "/docs/banner" },
+  openGraph: { title: "Banner", description: "Full-width notification banner with variants and dismiss", url: "/docs/banner" },
+  twitter: { title: "Banner", description: "Full-width notification banner with variants and dismiss" },
+};
+
 import { getComponentSource } from "@/lib/registry-source";
 import { Heading } from "@/components/heading";
 import React from "react";

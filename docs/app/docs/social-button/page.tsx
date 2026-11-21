@@ -1,3 +1,13 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "SocialButton",
+  description: "Branded social sign-in button with default Google/Apple/GitHub/X marks, outline/filled/ghost variants, and a press-scale spring",
+  alternates: { canonical: "/docs/social-button" },
+  openGraph: { title: "SocialButton", description: "Branded social sign-in button with default Google/Apple/GitHub/X marks, outline/filled/ghost variants, and a press-scale spring", url: "/docs/social-button" },
+  twitter: { title: "SocialButton", description: "Branded social sign-in button with default Google/Apple/GitHub/X marks, outline/filled/ghost variants, and a press-scale spring" },
+};
+
 import { getComponentSource } from "@/lib/registry-source";
 import { Heading } from "@/components/heading";
 import { ComponentPlayground } from "@/components/highlighted-playground";

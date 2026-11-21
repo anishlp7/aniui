@@ -1,3 +1,13 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "PhoneInput",
+  description: "Phone number input with country code selector",
+  alternates: { canonical: "/docs/phone-input" },
+  openGraph: { title: "PhoneInput", description: "Phone number input with country code selector", url: "/docs/phone-input" },
+  twitter: { title: "PhoneInput", description: "Phone number input with country code selector" },
+};
+
 import { getComponentSource } from "@/lib/registry-source";
 import { Heading } from "@/components/heading";
 import { PreviewPhoneInputDemo } from "@/components/preview/phone-input";

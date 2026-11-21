@@ -1,3 +1,13 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "InputOTP",
+  description: "One-time password input with individual cells",
+  alternates: { canonical: "/docs/input-otp" },
+  openGraph: { title: "InputOTP", description: "One-time password input with individual cells", url: "/docs/input-otp" },
+  twitter: { title: "InputOTP", description: "One-time password input with individual cells" },
+};
+
 import { getComponentSource } from "@/lib/registry-source";
 import { Heading } from "@/components/heading";
 import { PreviewInputOTP } from "@/components/preview/input-otp";

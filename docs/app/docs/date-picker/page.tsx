@@ -1,3 +1,13 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "DatePicker",
+  description: "Date picker with calendar popup and range support",
+  alternates: { canonical: "/docs/date-picker" },
+  openGraph: { title: "DatePicker", description: "Date picker with calendar popup and range support", url: "/docs/date-picker" },
+  twitter: { title: "DatePicker", description: "Date picker with calendar popup and range support" },
+};
+
 import { getComponentSource } from "@/lib/registry-source";
 import { Heading } from "@/components/heading";
 import { ComponentPlayground } from "@/components/highlighted-playground";

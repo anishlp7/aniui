@@ -1,3 +1,13 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "CarouselTilt",
+  description: "Z-axis fan carousel — slides rotate and lift from a bottom pivot, with an optional blur overlay",
+  alternates: { canonical: "/docs/carousel-tilt" },
+  openGraph: { title: "CarouselTilt", description: "Z-axis fan carousel — slides rotate and lift from a bottom pivot, with an optional blur overlay", url: "/docs/carousel-tilt" },
+  twitter: { title: "CarouselTilt", description: "Z-axis fan carousel — slides rotate and lift from a bottom pivot, with an optional blur overlay" },
+};
+
 import { getComponentSource } from "@/lib/registry-source";
 import { Heading } from "@/components/heading";
 import { ComponentPlayground } from "@/components/highlighted-playground";

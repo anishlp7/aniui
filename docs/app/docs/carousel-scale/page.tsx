@@ -1,3 +1,13 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "CarouselScale",
+  description: "Center-focused carousel where neighbors zoom up and rotate out, with a haptic tick on release",
+  alternates: { canonical: "/docs/carousel-scale" },
+  openGraph: { title: "CarouselScale", description: "Center-focused carousel where neighbors zoom up and rotate out, with a haptic tick on release", url: "/docs/carousel-scale" },
+  twitter: { title: "CarouselScale", description: "Center-focused carousel where neighbors zoom up and rotate out, with a haptic tick on release" },
+};
+
 import { getComponentSource } from "@/lib/registry-source";
 import { Heading } from "@/components/heading";
 import { ComponentPlayground } from "@/components/highlighted-playground";

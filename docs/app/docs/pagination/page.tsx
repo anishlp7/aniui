@@ -1,3 +1,13 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Pagination",
+  description: "Page navigation with numbered buttons and prev/next",
+  alternates: { canonical: "/docs/pagination" },
+  openGraph: { title: "Pagination", description: "Page navigation with numbered buttons and prev/next", url: "/docs/pagination" },
+  twitter: { title: "Pagination", description: "Page navigation with numbered buttons and prev/next" },
+};
+
 import { getComponentSource } from "@/lib/registry-source";
 import { Heading } from "@/components/heading";
 import { PreviewPaginationDemo } from "@/components/preview/pagination";

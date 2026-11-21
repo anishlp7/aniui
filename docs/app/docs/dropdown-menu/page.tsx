@@ -1,3 +1,13 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "DropdownMenu",
+  description: "Dropdown menu with items, separators, and destructive actions",
+  alternates: { canonical: "/docs/dropdown-menu" },
+  openGraph: { title: "DropdownMenu", description: "Dropdown menu with items, separators, and destructive actions", url: "/docs/dropdown-menu" },
+  twitter: { title: "DropdownMenu", description: "Dropdown menu with items, separators, and destructive actions" },
+};
+
 import { getComponentSource } from "@/lib/registry-source";
 import { Heading } from "@/components/heading";
 import React from "react";

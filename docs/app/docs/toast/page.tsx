@@ -1,3 +1,13 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Toast",
+  description: "Notification toast with auto-dismiss, position (top/bottom), and slide-in direction (top/bottom/left/right)",
+  alternates: { canonical: "/docs/toast" },
+  openGraph: { title: "Toast", description: "Notification toast with auto-dismiss, position (top/bottom), and slide-in direction (top/bottom/left/right)", url: "/docs/toast" },
+  twitter: { title: "Toast", description: "Notification toast with auto-dismiss, position (top/bottom), and slide-in direction (top/bottom/left/right)" },
+};
+
 import { getComponentSource } from "@/lib/registry-source";
 import { Heading } from "@/components/heading";
 import { ComponentPlayground } from "@/components/highlighted-playground";

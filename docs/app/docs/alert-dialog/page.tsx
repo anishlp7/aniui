@@ -1,3 +1,13 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "AlertDialog",
+  description: "Confirmation dialog with actions",
+  alternates: { canonical: "/docs/alert-dialog" },
+  openGraph: { title: "AlertDialog", description: "Confirmation dialog with actions", url: "/docs/alert-dialog" },
+  twitter: { title: "AlertDialog", description: "Confirmation dialog with actions" },
+};
+
 import { getComponentSource } from "@/lib/registry-source";
 import { Heading } from "@/components/heading";
 import { ComponentPlayground } from "@/components/highlighted-playground";

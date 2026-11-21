@@ -1,3 +1,13 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Skeleton",
+  description: "Animated loading placeholder",
+  alternates: { canonical: "/docs/skeleton" },
+  openGraph: { title: "Skeleton", description: "Animated loading placeholder", url: "/docs/skeleton" },
+  twitter: { title: "Skeleton", description: "Animated loading placeholder" },
+};
+
 import { getComponentSource } from "@/lib/registry-source";
 import { Heading } from "@/components/heading";
 import { PreviewSkeleton } from "@/components/preview/skeleton";

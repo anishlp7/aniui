@@ -1,3 +1,13 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Spinner",
+  description: "Loading spinner with sizes",
+  alternates: { canonical: "/docs/spinner" },
+  openGraph: { title: "Spinner", description: "Loading spinner with sizes", url: "/docs/spinner" },
+  twitter: { title: "Spinner", description: "Loading spinner with sizes" },
+};
+
 import { getComponentSource } from "@/lib/registry-source";
 import { Heading } from "@/components/heading";
 import { PreviewSpinner } from "@/components/preview/spinner";

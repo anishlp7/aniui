@@ -1,3 +1,13 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Badge",
+  description: "Small status indicator",
+  alternates: { canonical: "/docs/badge" },
+  openGraph: { title: "Badge", description: "Small status indicator", url: "/docs/badge" },
+  twitter: { title: "Badge", description: "Small status indicator" },
+};
+
 import { getComponentSource } from "@/lib/registry-source";
 import { Heading } from "@/components/heading";
 import { PreviewBadge } from "@/components/preview/badge";

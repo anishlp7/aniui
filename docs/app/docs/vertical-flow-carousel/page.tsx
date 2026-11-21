@@ -1,3 +1,13 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "VerticalFlowCarousel",
+  description: "Vertical coverflow — cards scale, tilt, and fade as they scroll away from center, with a blur overlay on unfocused cards",
+  alternates: { canonical: "/docs/vertical-flow-carousel" },
+  openGraph: { title: "VerticalFlowCarousel", description: "Vertical coverflow — cards scale, tilt, and fade as they scroll away from center, with a blur overlay on unfocused cards", url: "/docs/vertical-flow-carousel" },
+  twitter: { title: "VerticalFlowCarousel", description: "Vertical coverflow — cards scale, tilt, and fade as they scroll away from center, with a blur overlay on unfocused cards" },
+};
+
 import { getComponentSource } from "@/lib/registry-source";
 import { Heading } from "@/components/heading";
 import { ComponentPlayground } from "@/components/highlighted-playground";

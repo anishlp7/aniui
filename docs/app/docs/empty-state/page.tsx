@@ -1,3 +1,13 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "EmptyState",
+  description: "Placeholder for empty screens and error states",
+  alternates: { canonical: "/docs/empty-state" },
+  openGraph: { title: "EmptyState", description: "Placeholder for empty screens and error states", url: "/docs/empty-state" },
+  twitter: { title: "EmptyState", description: "Placeholder for empty screens and error states" },
+};
+
 import { getComponentSource } from "@/lib/registry-source";
 import { Heading } from "@/components/heading";
 import React from "react";

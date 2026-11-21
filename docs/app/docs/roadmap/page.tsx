@@ -1,3 +1,13 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Roadmap",
+  description: "What's next for AniUI — upcoming components, blocks, SDK support, and agent-native features.",
+  alternates: { canonical: "/docs/roadmap" },
+  openGraph: { title: "Roadmap", description: "What's next for AniUI — upcoming components, blocks, SDK support, and agent-native features.", url: "/docs/roadmap" },
+  twitter: { title: "Roadmap", description: "What's next for AniUI — upcoming components, blocks, SDK support, and agent-native features." },
+};
+
 import { Heading } from "@/components/heading";
 
 const phases = [

@@ -1,3 +1,13 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Shimmer",
+  description: "Content-aware skeleton with sweep/pulse variants, 4 directions, named color presets, and isLoading reveal",
+  alternates: { canonical: "/docs/shimmer" },
+  openGraph: { title: "Shimmer", description: "Content-aware skeleton with sweep/pulse variants, 4 directions, named color presets, and isLoading reveal", url: "/docs/shimmer" },
+  twitter: { title: "Shimmer", description: "Content-aware skeleton with sweep/pulse variants, 4 directions, named color presets, and isLoading reveal" },
+};
+
 import { getComponentSource } from "@/lib/registry-source";
 import { Heading } from "@/components/heading";
 import { ComponentPlayground } from "@/components/highlighted-playground";

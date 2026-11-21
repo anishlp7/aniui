@@ -1,3 +1,13 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Alert",
+  description: "Alert message with variants",
+  alternates: { canonical: "/docs/alert" },
+  openGraph: { title: "Alert", description: "Alert message with variants", url: "/docs/alert" },
+  twitter: { title: "Alert", description: "Alert message with variants" },
+};
+
 import { getComponentSource } from "@/lib/registry-source";
 import { Heading } from "@/components/heading";
 import { PreviewAlert } from "@/components/preview/alert";

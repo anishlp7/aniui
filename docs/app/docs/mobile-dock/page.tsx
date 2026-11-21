@@ -1,3 +1,13 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "MobileDock",
+  description: "Finger-tracked fisheye dock — drag across icons to magnify the one under your touch, release to tap the nearest one",
+  alternates: { canonical: "/docs/mobile-dock" },
+  openGraph: { title: "MobileDock", description: "Finger-tracked fisheye dock — drag across icons to magnify the one under your touch, release to tap the nearest one", url: "/docs/mobile-dock" },
+  twitter: { title: "MobileDock", description: "Finger-tracked fisheye dock — drag across icons to magnify the one under your touch, release to tap the nearest one" },
+};
+
 import { getComponentSource } from "@/lib/registry-source";
 import { Heading } from "@/components/heading";
 import { ComponentPlayground } from "@/components/highlighted-playground";

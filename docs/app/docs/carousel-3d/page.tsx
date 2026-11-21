@@ -1,3 +1,13 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Carousel3D",
+  description: "3D cylindrical carousel with real perspective-projected faces, pan gestures, and snap physics",
+  alternates: { canonical: "/docs/carousel-3d" },
+  openGraph: { title: "Carousel3D", description: "3D cylindrical carousel with real perspective-projected faces, pan gestures, and snap physics", url: "/docs/carousel-3d" },
+  twitter: { title: "Carousel3D", description: "3D cylindrical carousel with real perspective-projected faces, pan gestures, and snap physics" },
+};
+
 import { getComponentSource } from "@/lib/registry-source";
 import { Heading } from "@/components/heading";
 import { ComponentPlayground } from "@/components/highlighted-playground";

@@ -1,3 +1,13 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "FlexiButton",
+  description: "Adaptive-width pill button that springs open to reveal a label, with a dimension-change callback",
+  alternates: { canonical: "/docs/flexi-button" },
+  openGraph: { title: "FlexiButton", description: "Adaptive-width pill button that springs open to reveal a label, with a dimension-change callback", url: "/docs/flexi-button" },
+  twitter: { title: "FlexiButton", description: "Adaptive-width pill button that springs open to reveal a label, with a dimension-change callback" },
+};
+
 import { getComponentSource } from "@/lib/registry-source";
 import { Heading } from "@/components/heading";
 import { ComponentPlayground } from "@/components/highlighted-playground";

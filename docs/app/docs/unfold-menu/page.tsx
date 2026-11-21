@@ -1,3 +1,13 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "UnfoldMenu",
+  description: "Menu whose trigger unfolds into a full panel, its label morphing into the panel's title as it expands",
+  alternates: { canonical: "/docs/unfold-menu" },
+  openGraph: { title: "UnfoldMenu", description: "Menu whose trigger unfolds into a full panel, its label morphing into the panel's title as it expands", url: "/docs/unfold-menu" },
+  twitter: { title: "UnfoldMenu", description: "Menu whose trigger unfolds into a full panel, its label morphing into the panel's title as it expands" },
+};
+
 import { getComponentSource } from "@/lib/registry-source";
 import { Heading } from "@/components/heading";
 import { ComponentPlayground } from "@/components/highlighted-playground";

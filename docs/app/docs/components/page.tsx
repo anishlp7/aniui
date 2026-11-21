@@ -1,3 +1,13 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Components",
+  description: "Browse all 150 AniUI components — buttons, inputs, dialogs, sheets, charts, carousels, and more.",
+  alternates: { canonical: "/docs/components" },
+  openGraph: { title: "Components", description: "Browse all 150 AniUI components — buttons, inputs, dialogs, sheets, charts, carousels, and more.", url: "/docs/components" },
+  twitter: { title: "Components", description: "Browse all 150 AniUI components — buttons, inputs, dialogs, sheets, charts, carousels, and more." },
+};
+
 import { Heading } from "@/components/heading";
 import { PrefetchLink } from "@/components/prefetch-link";
 import { COMPONENT_COUNT } from "@/lib/constants";

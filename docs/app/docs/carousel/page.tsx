@@ -1,3 +1,13 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Carousel",
+  description: "Horizontal scrollable carousel with pagination dots",
+  alternates: { canonical: "/docs/carousel" },
+  openGraph: { title: "Carousel", description: "Horizontal scrollable carousel with pagination dots", url: "/docs/carousel" },
+  twitter: { title: "Carousel", description: "Horizontal scrollable carousel with pagination dots" },
+};
+
 import { getComponentSource } from "@/lib/registry-source";
 import { Heading } from "@/components/heading";
 import { PreviewCarousel } from "@/components/preview/carousel";

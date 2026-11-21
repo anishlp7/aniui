@@ -1,3 +1,13 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Collapsible",
+  description: "Animated show/hide content",
+  alternates: { canonical: "/docs/collapsible" },
+  openGraph: { title: "Collapsible", description: "Animated show/hide content", url: "/docs/collapsible" },
+  twitter: { title: "Collapsible", description: "Animated show/hide content" },
+};
+
 import { getComponentSource } from "@/lib/registry-source";
 import { Heading } from "@/components/heading";
 import { PreviewCollapsible, PreviewCollapsibleTrigger, PreviewCollapsibleContent } from "@/components/preview/collapsible";

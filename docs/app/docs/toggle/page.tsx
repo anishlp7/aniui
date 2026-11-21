@@ -1,3 +1,13 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Toggle",
+  description: "Two-state toggle button",
+  alternates: { canonical: "/docs/toggle" },
+  openGraph: { title: "Toggle", description: "Two-state toggle button", url: "/docs/toggle" },
+  twitter: { title: "Toggle", description: "Two-state toggle button" },
+};
+
 import { getComponentSource } from "@/lib/registry-source";
 import { Heading } from "@/components/heading";
 import { ComponentPlayground } from "@/components/highlighted-playground";

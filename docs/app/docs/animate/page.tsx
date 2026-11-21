@@ -1,3 +1,13 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Animate",
+  description: "Animation presets, spring configs, easing, and hooks for Reanimated 4",
+  alternates: { canonical: "/docs/animate" },
+  openGraph: { title: "Animate", description: "Animation presets, spring configs, easing, and hooks for Reanimated 4", url: "/docs/animate" },
+  twitter: { title: "Animate", description: "Animation presets, spring configs, easing, and hooks for Reanimated 4" },
+};
+
 import { getComponentSource } from "@/lib/registry-source";
 import { Heading } from "@/components/heading";
 import { PreviewAnimateDemo } from "@/components/preview/animate";

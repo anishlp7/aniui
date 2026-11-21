@@ -1,3 +1,13 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Coupon",
+  description: "Two-section promotional coupon with a real tear-line, ticket icon, and orientation prop",
+  alternates: { canonical: "/docs/coupon" },
+  openGraph: { title: "Coupon", description: "Two-section promotional coupon with a real tear-line, ticket icon, and orientation prop", url: "/docs/coupon" },
+  twitter: { title: "Coupon", description: "Two-section promotional coupon with a real tear-line, ticket icon, and orientation prop" },
+};
+
 import { getComponentSource } from "@/lib/registry-source";
 import { Heading } from "@/components/heading";
 import { ComponentPlayground } from "@/components/highlighted-playground";

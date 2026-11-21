@@ -1,3 +1,13 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Calendar",
+  description: "Month calendar with single and range selection",
+  alternates: { canonical: "/docs/calendar" },
+  openGraph: { title: "Calendar", description: "Month calendar with single and range selection", url: "/docs/calendar" },
+  twitter: { title: "Calendar", description: "Month calendar with single and range selection" },
+};
+
 import { getComponentSource } from "@/lib/registry-source";
 import { Heading } from "@/components/heading";
 import { PreviewCalendar } from "@/components/preview/calendar";

@@ -1,3 +1,13 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "SafeArea",
+  description: "Styled SafeAreaView wrapper with theme variants",
+  alternates: { canonical: "/docs/safe-area" },
+  openGraph: { title: "SafeArea", description: "Styled SafeAreaView wrapper with theme variants", url: "/docs/safe-area" },
+  twitter: { title: "SafeArea", description: "Styled SafeAreaView wrapper with theme variants" },
+};
+
 import { getComponentSource } from "@/lib/registry-source";
 import { Heading } from "@/components/heading";
 import { PreviewSafeAreaDemo } from "@/components/preview/safe-area";

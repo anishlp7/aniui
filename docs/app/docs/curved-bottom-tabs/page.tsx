@@ -1,3 +1,13 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "CurvedBottomTabs",
+  description: "Bottom tab bar whose curved notch and floating gradient button slide to track the active tab, with badge support and keyboard auto-hide",
+  alternates: { canonical: "/docs/curved-bottom-tabs" },
+  openGraph: { title: "CurvedBottomTabs", description: "Bottom tab bar whose curved notch and floating gradient button slide to track the active tab, with badge support and keyboard auto-hide", url: "/docs/curved-bottom-tabs" },
+  twitter: { title: "CurvedBottomTabs", description: "Bottom tab bar whose curved notch and floating gradient button slide to track the active tab, with badge support and keyboard auto-hide" },
+};
+
 import { getComponentSource } from "@/lib/registry-source";
 import { Heading } from "@/components/heading";
 import { ComponentPlayground } from "@/components/highlighted-playground";

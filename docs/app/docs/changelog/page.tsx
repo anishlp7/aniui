@@ -1,3 +1,13 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Changelog",
+  description: "What changed in each AniUI release — new components, breaking changes, and fixes.",
+  alternates: { canonical: "/docs/changelog" },
+  openGraph: { title: "Changelog", description: "What changed in each AniUI release — new components, breaking changes, and fixes.", url: "/docs/changelog" },
+  twitter: { title: "Changelog", description: "What changed in each AniUI release — new components, breaking changes, and fixes." },
+};
+
 
 import { Heading } from "@/components/heading";
 import Link from "next/link";

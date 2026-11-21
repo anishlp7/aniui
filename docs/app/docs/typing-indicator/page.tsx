@@ -1,3 +1,13 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "TypingIndicator",
+  description: "Animated typing dots for chat interfaces",
+  alternates: { canonical: "/docs/typing-indicator" },
+  openGraph: { title: "TypingIndicator", description: "Animated typing dots for chat interfaces", url: "/docs/typing-indicator" },
+  twitter: { title: "TypingIndicator", description: "Animated typing dots for chat interfaces" },
+};
+
 import { getComponentSource } from "@/lib/registry-source";
 import { Heading } from "@/components/heading";
 import { PreviewTypingIndicatorDemo } from "@/components/preview/typing-indicator";

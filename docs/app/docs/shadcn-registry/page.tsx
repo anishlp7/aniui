@@ -1,3 +1,13 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Shadcn-compatible registry",
+  description: "Install any AniUI component with the shadcn CLI: npx shadcn@latest add https://aniui.dev/r/button.json. No AniUI CLI required.",
+  alternates: { canonical: "/docs/shadcn-registry" },
+  openGraph: { title: "Shadcn-compatible registry", description: "Install any AniUI component with the shadcn CLI: npx shadcn@latest add https://aniui.dev/r/button.json. No AniUI CLI required.", url: "/docs/shadcn-registry" },
+  twitter: { title: "Shadcn-compatible registry", description: "Install any AniUI component with the shadcn CLI: npx shadcn@latest add https://aniui.dev/r/button.json. No AniUI CLI required." },
+};
+
 import { Heading } from "@/components/heading";
 import { CodeBlock } from "@/components/code-block-server";
 

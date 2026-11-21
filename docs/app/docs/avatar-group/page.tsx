@@ -1,3 +1,13 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "AvatarGroup",
+  description: "Overlapping avatar stack with max count and +N overflow bubble",
+  alternates: { canonical: "/docs/avatar-group" },
+  openGraph: { title: "AvatarGroup", description: "Overlapping avatar stack with max count and +N overflow bubble", url: "/docs/avatar-group" },
+  twitter: { title: "AvatarGroup", description: "Overlapping avatar stack with max count and +N overflow bubble" },
+};
+
 import { getComponentSource } from "@/lib/registry-source";
 import { Heading } from "@/components/heading";
 import { PreviewAvatar } from "@/components/preview/avatar";

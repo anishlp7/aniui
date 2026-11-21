@@ -1,3 +1,13 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "CommandMenu",
+  description: "Spotlight/kbar-style command palette — portal-based overlay with rigorous Android keyboard handling, groups, and shortcuts",
+  alternates: { canonical: "/docs/command-menu" },
+  openGraph: { title: "CommandMenu", description: "Spotlight/kbar-style command palette — portal-based overlay with rigorous Android keyboard handling, groups, and shortcuts", url: "/docs/command-menu" },
+  twitter: { title: "CommandMenu", description: "Spotlight/kbar-style command palette — portal-based overlay with rigorous Android keyboard handling, groups, and shortcuts" },
+};
+
 import { getComponentSource } from "@/lib/registry-source";
 import { Heading } from "@/components/heading";
 import { PreviewCommandMenuDemo } from "@/components/preview/command-menu";

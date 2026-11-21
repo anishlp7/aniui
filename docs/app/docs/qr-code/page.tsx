@@ -1,3 +1,13 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "QrCode",
+  description: "Real, scannable QR code behind an expand/collapse reveal with copy/close actions",
+  alternates: { canonical: "/docs/qr-code" },
+  openGraph: { title: "QrCode", description: "Real, scannable QR code behind an expand/collapse reveal with copy/close actions", url: "/docs/qr-code" },
+  twitter: { title: "QrCode", description: "Real, scannable QR code behind an expand/collapse reveal with copy/close actions" },
+};
+
 import { getComponentSource } from "@/lib/registry-source";
 import { Heading } from "@/components/heading";
 import { ComponentPlayground } from "@/components/highlighted-playground";

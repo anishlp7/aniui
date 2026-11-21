@@ -1,3 +1,13 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Card",
+  description: "Card container with header, content, footer",
+  alternates: { canonical: "/docs/card" },
+  openGraph: { title: "Card", description: "Card container with header, content, footer", url: "/docs/card" },
+  twitter: { title: "Card", description: "Card container with header, content, footer" },
+};
+
 import { getComponentSource } from "@/lib/registry-source";
 import { Heading } from "@/components/heading";
 import { PreviewCard, PreviewCardHeader, PreviewCardTitle, PreviewCardDescription, PreviewCardContent, PreviewCardFooter } from "@/components/preview/card";

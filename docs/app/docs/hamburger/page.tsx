@@ -1,3 +1,13 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Hamburger",
+  description: "Animated hamburger ⇄ close icon morph driven by a single progress value",
+  alternates: { canonical: "/docs/hamburger" },
+  openGraph: { title: "Hamburger", description: "Animated hamburger ⇄ close icon morph driven by a single progress value", url: "/docs/hamburger" },
+  twitter: { title: "Hamburger", description: "Animated hamburger ⇄ close icon morph driven by a single progress value" },
+};
+
 import { getComponentSource } from "@/lib/registry-source";
 import { Heading } from "@/components/heading";
 import { ComponentPlayground } from "@/components/highlighted-playground";

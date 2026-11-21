@@ -1,3 +1,13 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "MorphingTabBar",
+  description: "Segmented tab bar where each tab's own corner radii and spacing morph to split the active tab into a separated pill",
+  alternates: { canonical: "/docs/morphing-tabbar" },
+  openGraph: { title: "MorphingTabBar", description: "Segmented tab bar where each tab's own corner radii and spacing morph to split the active tab into a separated pill", url: "/docs/morphing-tabbar" },
+  twitter: { title: "MorphingTabBar", description: "Segmented tab bar where each tab's own corner radii and spacing morph to split the active tab into a separated pill" },
+};
+
 import { getComponentSource } from "@/lib/registry-source";
 import { Heading } from "@/components/heading";
 import { ComponentPlayground } from "@/components/highlighted-playground";

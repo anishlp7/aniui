@@ -1,3 +1,13 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "SegmentedControl",
+  description: "iOS-style segmented control for view switching",
+  alternates: { canonical: "/docs/segmented-control" },
+  openGraph: { title: "SegmentedControl", description: "iOS-style segmented control for view switching", url: "/docs/segmented-control" },
+  twitter: { title: "SegmentedControl", description: "iOS-style segmented control for view switching" },
+};
+
 import { getComponentSource } from "@/lib/registry-source";
 import { Heading } from "@/components/heading";
 import { ComponentPlayground } from "@/components/highlighted-playground";

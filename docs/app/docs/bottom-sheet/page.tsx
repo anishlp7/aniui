@@ -1,3 +1,13 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "BottomSheet",
+  description: "Bottom sheet overlay",
+  alternates: { canonical: "/docs/bottom-sheet" },
+  openGraph: { title: "BottomSheet", description: "Bottom sheet overlay", url: "/docs/bottom-sheet" },
+  twitter: { title: "BottomSheet", description: "Bottom sheet overlay" },
+};
+
 import { getComponentSource } from "@/lib/registry-source";
 import { Heading } from "@/components/heading";
 import { PreviewBottomSheet } from "@/components/preview/bottom-sheet";

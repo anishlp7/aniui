@@ -1,3 +1,13 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Kbd",
+  description: "Keyboard key display with grouping and separator",
+  alternates: { canonical: "/docs/kbd" },
+  openGraph: { title: "Kbd", description: "Keyboard key display with grouping and separator", url: "/docs/kbd" },
+  twitter: { title: "Kbd", description: "Keyboard key display with grouping and separator" },
+};
+
 import { getComponentSource } from "@/lib/registry-source";
 import { Heading } from "@/components/heading";
 import { PreviewKbdDemo, PreviewKbdGroupDemo, PreviewKbdSizes } from "@/components/preview/kbd";

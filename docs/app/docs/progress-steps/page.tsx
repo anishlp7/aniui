@@ -1,3 +1,13 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "ProgressSteps",
+  description: "Multi-step progress indicator for wizards and onboarding",
+  alternates: { canonical: "/docs/progress-steps" },
+  openGraph: { title: "ProgressSteps", description: "Multi-step progress indicator for wizards and onboarding", url: "/docs/progress-steps" },
+  twitter: { title: "ProgressSteps", description: "Multi-step progress indicator for wizards and onboarding" },
+};
+
 import { getComponentSource } from "@/lib/registry-source";
 import { Heading } from "@/components/heading";
 import { PreviewProgressStepsDemo } from "@/components/preview/progress-steps";

@@ -1,3 +1,13 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "AnimatedHeaderScrollView",
+  description: "iOS-style collapsing large-title header ScrollView with blur backdrop on scroll",
+  alternates: { canonical: "/docs/animated-header-scrollview" },
+  openGraph: { title: "AnimatedHeaderScrollView", description: "iOS-style collapsing large-title header ScrollView with blur backdrop on scroll", url: "/docs/animated-header-scrollview" },
+  twitter: { title: "AnimatedHeaderScrollView", description: "iOS-style collapsing large-title header ScrollView with blur backdrop on scroll" },
+};
+
 import { getComponentSource } from "@/lib/registry-source";
 import { Heading } from "@/components/heading";
 import { ComponentPlayground } from "@/components/highlighted-playground";

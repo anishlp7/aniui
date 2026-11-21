@@ -1,3 +1,13 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "FanMenu",
+  description: "Radial fan menu that staggers labeled pill actions out from a FAB trigger, with tap-outside-to-dismiss backdrop and per-item blur",
+  alternates: { canonical: "/docs/fan-menu" },
+  openGraph: { title: "FanMenu", description: "Radial fan menu that staggers labeled pill actions out from a FAB trigger, with tap-outside-to-dismiss backdrop and per-item blur", url: "/docs/fan-menu" },
+  twitter: { title: "FanMenu", description: "Radial fan menu that staggers labeled pill actions out from a FAB trigger, with tap-outside-to-dismiss backdrop and per-item blur" },
+};
+
 import { getComponentSource } from "@/lib/registry-source";
 import { Heading } from "@/components/heading";
 import { ComponentPlayground } from "@/components/highlighted-playground";

@@ -1,3 +1,13 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "List",
+  description: "Styled list items",
+  alternates: { canonical: "/docs/list" },
+  openGraph: { title: "List", description: "Styled list items", url: "/docs/list" },
+  twitter: { title: "List", description: "Styled list items" },
+};
+
 import { getComponentSource } from "@/lib/registry-source";
 import { Heading } from "@/components/heading";
 import { PreviewList, PreviewListItem, PreviewListItemTitle, PreviewListItemDescription } from "@/components/preview/list";

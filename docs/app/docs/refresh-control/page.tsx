@@ -1,3 +1,13 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "RefreshControl",
+  description: "Themed pull-to-refresh control for ScrollView and FlatList",
+  alternates: { canonical: "/docs/refresh-control" },
+  openGraph: { title: "RefreshControl", description: "Themed pull-to-refresh control for ScrollView and FlatList", url: "/docs/refresh-control" },
+  twitter: { title: "RefreshControl", description: "Themed pull-to-refresh control for ScrollView and FlatList" },
+};
+
 import { getComponentSource } from "@/lib/registry-source";
 import { Heading } from "@/components/heading";
 import { PreviewRefreshControlDemo } from "@/components/preview/refresh-control";

@@ -1,3 +1,13 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "StatCard",
+  description: "KPI display card with value, trend indicator, and change percentage",
+  alternates: { canonical: "/docs/stat-card" },
+  openGraph: { title: "StatCard", description: "KPI display card with value, trend indicator, and change percentage", url: "/docs/stat-card" },
+  twitter: { title: "StatCard", description: "KPI display card with value, trend indicator, and change percentage" },
+};
+
 import { getComponentSource } from "@/lib/registry-source";
 import { Heading } from "@/components/heading";
 import { PreviewStatCardDemo } from "@/components/preview/stat-card";

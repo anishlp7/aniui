@@ -1,3 +1,13 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Dialog",
+  description: "Modal dialog overlay",
+  alternates: { canonical: "/docs/dialog" },
+  openGraph: { title: "Dialog", description: "Modal dialog overlay", url: "/docs/dialog" },
+  twitter: { title: "Dialog", description: "Modal dialog overlay" },
+};
+
 import { getComponentSource } from "@/lib/registry-source";
 import { Heading } from "@/components/heading";
 import { ComponentPlayground } from "@/components/highlighted-playground";

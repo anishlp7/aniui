@@ -1,3 +1,13 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Price",
+  description: "Formatted currency display with locale and strikethrough support",
+  alternates: { canonical: "/docs/price" },
+  openGraph: { title: "Price", description: "Formatted currency display with locale and strikethrough support", url: "/docs/price" },
+  twitter: { title: "Price", description: "Formatted currency display with locale and strikethrough support" },
+};
+
 import { getComponentSource } from "@/lib/registry-source";
 import { Heading } from "@/components/heading";
 import { PreviewPriceDemo } from "@/components/preview/price";

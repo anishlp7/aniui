@@ -1,3 +1,13 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Rating",
+  description: "Star rating with interactive and read-only modes",
+  alternates: { canonical: "/docs/rating" },
+  openGraph: { title: "Rating", description: "Star rating with interactive and read-only modes", url: "/docs/rating" },
+  twitter: { title: "Rating", description: "Star rating with interactive and read-only modes" },
+};
+
 import { getComponentSource } from "@/lib/registry-source";
 import { Heading } from "@/components/heading";
 import { PreviewRating } from "@/components/preview/rating";

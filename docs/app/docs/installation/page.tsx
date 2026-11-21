@@ -1,3 +1,13 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Installation",
+  description: "Install AniUI in a fresh or existing Expo / React Native project. One command for a new project, three for an existing one.",
+  alternates: { canonical: "/docs/installation" },
+  openGraph: { title: "Installation", description: "Install AniUI in a fresh or existing Expo / React Native project. One command for a new project, three for an existing one.", url: "/docs/installation" },
+  twitter: { title: "Installation", description: "Install AniUI in a fresh or existing Expo / React Native project. One command for a new project, three for an existing one." },
+};
+
 import { Heading } from "@/components/heading";
 import { CodeBlock } from "@/components/code-block-server";
 import Link from "next/link";

@@ -1,3 +1,13 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "GooeySearchTabs",
+  description: "Skia gooey pill that morphs between a search bar and a tab switcher",
+  alternates: { canonical: "/docs/gooey-search-tabs" },
+  openGraph: { title: "GooeySearchTabs", description: "Skia gooey pill that morphs between a search bar and a tab switcher", url: "/docs/gooey-search-tabs" },
+  twitter: { title: "GooeySearchTabs", description: "Skia gooey pill that morphs between a search bar and a tab switcher" },
+};
+
 import { getComponentSource } from "@/lib/registry-source";
 import { Heading } from "@/components/heading";
 import { ComponentPlayground } from "@/components/highlighted-playground";

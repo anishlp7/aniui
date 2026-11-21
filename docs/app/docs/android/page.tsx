@@ -1,3 +1,13 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Android setup notes",
+  description: "Android-specific setup for AniUI components — gesture handler, elevation, and ripple feedback.",
+  alternates: { canonical: "/docs/android" },
+  openGraph: { title: "Android setup notes", description: "Android-specific setup for AniUI components — gesture handler, elevation, and ripple feedback.", url: "/docs/android" },
+  twitter: { title: "Android setup notes", description: "Android-specific setup for AniUI components — gesture handler, elevation, and ripple feedback." },
+};
+
 import { Heading } from "@/components/heading";
 import { CodeBlock } from "@/components/code-block-server";
 

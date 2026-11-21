@@ -1,3 +1,13 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Textarea",
+  description: "Multi-line text input",
+  alternates: { canonical: "/docs/textarea" },
+  openGraph: { title: "Textarea", description: "Multi-line text input", url: "/docs/textarea" },
+  twitter: { title: "Textarea", description: "Multi-line text input" },
+};
+
 import { getComponentSource } from "@/lib/registry-source";
 import { Heading } from "@/components/heading";
 import { PreviewTextarea } from "@/components/preview/textarea";

@@ -1,3 +1,13 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Select",
+  description: "Dropdown select with search support",
+  alternates: { canonical: "/docs/select" },
+  openGraph: { title: "Select", description: "Dropdown select with search support", url: "/docs/select" },
+  twitter: { title: "Select", description: "Dropdown select with search support" },
+};
+
 import { getComponentSource } from "@/lib/registry-source";
 import { Heading } from "@/components/heading";
 import { ComponentPlayground } from "@/components/highlighted-playground";

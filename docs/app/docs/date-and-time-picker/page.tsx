@@ -1,3 +1,13 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "DateAndTimePicker",
+  description: "Calendar + scroll-wheel time picker for React Native. Combines AniUI's DatePicker and TimePicker into a single screen. Installed via aniui add time-picker.",
+  alternates: { canonical: "/docs/date-and-time-picker" },
+  openGraph: { title: "DateAndTimePicker", description: "Calendar + scroll-wheel time picker for React Native. Combines AniUI's DatePicker and TimePicker into a single screen. Installed via aniui add time-picker.", url: "/docs/date-and-time-picker" },
+  twitter: { title: "DateAndTimePicker", description: "Calendar + scroll-wheel time picker for React Native. Combines AniUI's DatePicker and TimePicker into a single screen. Installed via aniui add time-picker." },
+};
+
 import { getComponentSource } from "@/lib/registry-source";
 import { Heading } from "@/components/heading";
 import { ComponentPlayground } from "@/components/highlighted-playground";

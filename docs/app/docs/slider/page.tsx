@@ -1,3 +1,13 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Slider",
+  description: "Draggable slider for numeric values",
+  alternates: { canonical: "/docs/slider" },
+  openGraph: { title: "Slider", description: "Draggable slider for numeric values", url: "/docs/slider" },
+  twitter: { title: "Slider", description: "Draggable slider for numeric values" },
+};
+
 import { getComponentSource } from "@/lib/registry-source";
 import { Heading } from "@/components/heading";
 import { PreviewSlider } from "@/components/preview/slider";

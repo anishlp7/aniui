@@ -1,3 +1,13 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "VerticalPageCarousel",
+  description: "Full-bleed vertical pager — one card fills the screen at a time, neighbors scale/fade out, with a haptic tick on release",
+  alternates: { canonical: "/docs/vertical-page-carousel" },
+  openGraph: { title: "VerticalPageCarousel", description: "Full-bleed vertical pager — one card fills the screen at a time, neighbors scale/fade out, with a haptic tick on release", url: "/docs/vertical-page-carousel" },
+  twitter: { title: "VerticalPageCarousel", description: "Full-bleed vertical pager — one card fills the screen at a time, neighbors scale/fade out, with a haptic tick on release" },
+};
+
 import { getComponentSource } from "@/lib/registry-source";
 import { Heading } from "@/components/heading";
 import { ComponentPlayground } from "@/components/highlighted-playground";

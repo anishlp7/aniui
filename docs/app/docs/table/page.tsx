@@ -1,3 +1,13 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Table",
+  description: "Data table with header, body, rows, and cells",
+  alternates: { canonical: "/docs/table" },
+  openGraph: { title: "Table", description: "Data table with header, body, rows, and cells", url: "/docs/table" },
+  twitter: { title: "Table", description: "Data table with header, body, rows, and cells" },
+};
+
 import { getComponentSource } from "@/lib/registry-source";
 import { Heading } from "@/components/heading";
 import { PreviewTable } from "@/components/preview/table";

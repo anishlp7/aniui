@@ -1,3 +1,13 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "ChatBubble",
+  description: "Message bubble for chat with sent/received variants and status",
+  alternates: { canonical: "/docs/chat-bubble" },
+  openGraph: { title: "ChatBubble", description: "Message bubble for chat with sent/received variants and status", url: "/docs/chat-bubble" },
+  twitter: { title: "ChatBubble", description: "Message bubble for chat with sent/received variants and status" },
+};
+
 import { getComponentSource } from "@/lib/registry-source";
 import { Heading } from "@/components/heading";
 import { PreviewChatBubbleDemo } from "@/components/preview/chat-bubble";

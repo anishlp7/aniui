@@ -1,3 +1,13 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "ThemeProvider",
+  description: "Theme context provider with light/dark/system mode and toggle",
+  alternates: { canonical: "/docs/theme-provider" },
+  openGraph: { title: "ThemeProvider", description: "Theme context provider with light/dark/system mode and toggle", url: "/docs/theme-provider" },
+  twitter: { title: "ThemeProvider", description: "Theme context provider with light/dark/system mode and toggle" },
+};
+
 import { getComponentSource } from "@/lib/registry-source";
 import { Heading } from "@/components/heading";
 import { PreviewThemeProviderDemo } from "@/components/preview/theme-provider";

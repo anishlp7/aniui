@@ -1,3 +1,13 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "AutoComplete",
+  description: "Free-text input with inline filtered suggestions, keyboard-safe dropdown, and async loading state",
+  alternates: { canonical: "/docs/autocomplete" },
+  openGraph: { title: "AutoComplete", description: "Free-text input with inline filtered suggestions, keyboard-safe dropdown, and async loading state", url: "/docs/autocomplete" },
+  twitter: { title: "AutoComplete", description: "Free-text input with inline filtered suggestions, keyboard-safe dropdown, and async loading state" },
+};
+
 import { getComponentSource } from "@/lib/registry-source";
 import Link from "next/link";
 import { Heading } from "@/components/heading";

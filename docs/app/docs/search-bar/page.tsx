@@ -1,3 +1,13 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "SearchBar",
+  description: "Search input with icon, clear button, and cancel",
+  alternates: { canonical: "/docs/search-bar" },
+  openGraph: { title: "SearchBar", description: "Search input with icon, clear button, and cancel", url: "/docs/search-bar" },
+  twitter: { title: "SearchBar", description: "Search input with icon, clear button, and cancel" },
+};
+
 import { getComponentSource } from "@/lib/registry-source";
 import Link from "next/link";
 import { Heading } from "@/components/heading";

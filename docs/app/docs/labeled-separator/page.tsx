@@ -1,3 +1,13 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "LabeledSeparator",
+  description: "Horizontal separator with centered text label",
+  alternates: { canonical: "/docs/labeled-separator" },
+  openGraph: { title: "LabeledSeparator", description: "Horizontal separator with centered text label", url: "/docs/labeled-separator" },
+  twitter: { title: "LabeledSeparator", description: "Horizontal separator with centered text label" },
+};
+
 import { getComponentSource } from "@/lib/registry-source";
 import { Heading } from "@/components/heading";
 import { PreviewLabeledSeparatorDemo } from "@/components/preview/labeled-separator";

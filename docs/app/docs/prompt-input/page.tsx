@@ -1,3 +1,13 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "PromptInput",
+  description: "ChatGPT/Claude-style AI composer — compound: PromptInput, Textarea, Toolbar, Button, Send (stop while streaming)",
+  alternates: { canonical: "/docs/prompt-input" },
+  openGraph: { title: "PromptInput", description: "ChatGPT/Claude-style AI composer — compound: PromptInput, Textarea, Toolbar, Button, Send (stop while streaming)", url: "/docs/prompt-input" },
+  twitter: { title: "PromptInput", description: "ChatGPT/Claude-style AI composer — compound: PromptInput, Textarea, Toolbar, Button, Send (stop while streaming)" },
+};
+
 import { getComponentSource } from "@/lib/registry-source";
 import Link from "next/link";
 import { Heading } from "@/components/heading";

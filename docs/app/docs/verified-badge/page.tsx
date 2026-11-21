@@ -1,3 +1,13 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "VerifiedBadge",
+  description: "Verified check badge with Name/Handle layout and palette overrides",
+  alternates: { canonical: "/docs/verified-badge" },
+  openGraph: { title: "VerifiedBadge", description: "Verified check badge with Name/Handle layout and palette overrides", url: "/docs/verified-badge" },
+  twitter: { title: "VerifiedBadge", description: "Verified check badge with Name/Handle layout and palette overrides" },
+};
+
 import { getComponentSource } from "@/lib/registry-source";
 import { Heading } from "@/components/heading";
 import { ComponentPlayground } from "@/components/highlighted-playground";

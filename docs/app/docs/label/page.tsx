@@ -1,3 +1,13 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Label",
+  description: "Form field label",
+  alternates: { canonical: "/docs/label" },
+  openGraph: { title: "Label", description: "Form field label", url: "/docs/label" },
+  twitter: { title: "Label", description: "Form field label" },
+};
+
 import { getComponentSource } from "@/lib/registry-source";
 import { Heading } from "@/components/heading";
 import { PreviewLabel } from "@/components/preview/label";

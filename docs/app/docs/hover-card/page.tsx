@@ -1,3 +1,13 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "HoverCard",
+  description: "Preview content card triggered by hover or long-press",
+  alternates: { canonical: "/docs/hover-card" },
+  openGraph: { title: "HoverCard", description: "Preview content card triggered by hover or long-press", url: "/docs/hover-card" },
+  twitter: { title: "HoverCard", description: "Preview content card triggered by hover or long-press" },
+};
+
 import { getComponentSource } from "@/lib/registry-source";
 import { Heading } from "@/components/heading";
 import { PreviewHoverCardDemo } from "@/components/preview/hover-card";

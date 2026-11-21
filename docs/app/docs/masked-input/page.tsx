@@ -1,3 +1,13 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "MaskedInput",
+  description: "Text input with mask formatting for credit cards, phones, dates",
+  alternates: { canonical: "/docs/masked-input" },
+  openGraph: { title: "MaskedInput", description: "Text input with mask formatting for credit cards, phones, dates", url: "/docs/masked-input" },
+  twitter: { title: "MaskedInput", description: "Text input with mask formatting for credit cards, phones, dates" },
+};
+
 import { getComponentSource } from "@/lib/registry-source";
 import { Heading } from "@/components/heading";
 import { PreviewMaskedInputDemo } from "@/components/preview/masked-input";

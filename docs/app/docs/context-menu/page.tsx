@@ -1,3 +1,13 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "ContextMenu",
+  description: "Long-press context menu with items and separators",
+  alternates: { canonical: "/docs/context-menu" },
+  openGraph: { title: "ContextMenu", description: "Long-press context menu with items and separators", url: "/docs/context-menu" },
+  twitter: { title: "ContextMenu", description: "Long-press context menu with items and separators" },
+};
+
 import { getComponentSource } from "@/lib/registry-source";
 import { Heading } from "@/components/heading";
 import { ComponentPlayground } from "@/components/highlighted-playground";

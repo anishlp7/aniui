@@ -1,3 +1,13 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "NumberInput",
+  description: "Numeric input with increment/decrement buttons and min/max",
+  alternates: { canonical: "/docs/number-input" },
+  openGraph: { title: "NumberInput", description: "Numeric input with increment/decrement buttons and min/max", url: "/docs/number-input" },
+  twitter: { title: "NumberInput", description: "Numeric input with increment/decrement buttons and min/max" },
+};
+
 import { getComponentSource } from "@/lib/registry-source";
 import { Heading } from "@/components/heading";
 import { PreviewNumberInputDemo } from "@/components/preview/number-input";

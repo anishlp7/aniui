@@ -1,3 +1,13 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Form",
+  description: "Form context with validation, error handling, and compound components",
+  alternates: { canonical: "/docs/form" },
+  openGraph: { title: "Form", description: "Form context with validation, error handling, and compound components", url: "/docs/form" },
+  twitter: { title: "Form", description: "Form context with validation, error handling, and compound components" },
+};
+
 import { getComponentSource } from "@/lib/registry-source";
 import { Heading } from "@/components/heading";
 import { PreviewFormDemo } from "@/components/preview/form";

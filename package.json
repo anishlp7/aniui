@@ -20,6 +20,7 @@
     "test:all": "npm test && jest",
     "bundle-size": "node scripts/bundle-size.js",
     "sync:examples": "node scripts/sync-examples.js",
+    "build:llms-full": "node scripts/build-llms-full.js",
     "registry:build": "cd cli && npm run registry:build",
     "build:cli": "cd cli && npm run build",
     "build:mcp": "cd mcp && npm run build",

@@ -1,3 +1,13 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "StreamingText",
+  description: "Typewriter-style streaming AI response text with a blinking cursor",
+  alternates: { canonical: "/docs/streaming-text" },
+  openGraph: { title: "StreamingText", description: "Typewriter-style streaming AI response text with a blinking cursor", url: "/docs/streaming-text" },
+  twitter: { title: "StreamingText", description: "Typewriter-style streaming AI response text with a blinking cursor" },
+};
+
 import { getComponentSource } from "@/lib/registry-source";
 import { Heading } from "@/components/heading";
 import {

@@ -1,3 +1,13 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "MCP Server",
+  description: "Give Cursor, Claude Code, and Windsurf direct access to AniUI's 150 components, 15 blocks, and theme tokens via the Model Context Protocol.",
+  alternates: { canonical: "/docs/mcp" },
+  openGraph: { title: "MCP Server", description: "Give Cursor, Claude Code, and Windsurf direct access to AniUI's 150 components, 15 blocks, and theme tokens via the Model Context Protocol.", url: "/docs/mcp" },
+  twitter: { title: "MCP Server", description: "Give Cursor, Claude Code, and Windsurf direct access to AniUI's 150 components, 15 blocks, and theme tokens via the Model Context Protocol." },
+};
+
 import { Heading } from "@/components/heading";
 import { CodeBlock } from "@/components/code-block-server";
 
@@ -91,6 +101,10 @@ export default function MCPPage() {
                 <td className="py-2">List all 150 components with names, descriptions, and tiers</td>
               </tr>
               <tr className="border-b border-border">
+                <td className="py-2 pr-4 font-mono text-xs text-foreground">search_components</td>
+                <td className="py-2">Natural-language search ranked by name/description relevance</td>
+              </tr>
+              <tr className="border-b border-border">
                 <td className="py-2 pr-4 font-mono text-xs text-foreground">get_component</td>
                 <td className="py-2">Get the full source code of any component</td>
               </tr>
@@ -99,8 +113,20 @@ export default function MCPPage() {
                 <td className="py-2">Get import path, variants, props, and dependencies</td>
               </tr>
               <tr className="border-b border-border">
+                <td className="py-2 pr-4 font-mono text-xs text-foreground">list_blocks</td>
+                <td className="py-2">List all pre-built full-screen compositions (login, chat, pricing, …)</td>
+              </tr>
+              <tr className="border-b border-border">
+                <td className="py-2 pr-4 font-mono text-xs text-foreground">get_block</td>
+                <td className="py-2">Get the full source of a block</td>
+              </tr>
+              <tr className="border-b border-border">
                 <td className="py-2 pr-4 font-mono text-xs text-foreground">get_theme_tokens</td>
                 <td className="py-2">Get all theme CSS variables and Tailwind class mappings</td>
+              </tr>
+              <tr className="border-b border-border">
+                <td className="py-2 pr-4 font-mono text-xs text-foreground">get_theme_preset</td>
+                <td className="py-2">Primary color HSLs for a built-in preset (default, blue, green, orange, rose)</td>
               </tr>
             </tbody>
           </table>

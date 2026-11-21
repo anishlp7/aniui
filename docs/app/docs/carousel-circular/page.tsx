@@ -1,3 +1,13 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "CarouselCircular",
+  description: "Scroll-driven coverflow carousel with per-item lift, tilt, and a blur fade on non-centered items",
+  alternates: { canonical: "/docs/carousel-circular" },
+  openGraph: { title: "CarouselCircular", description: "Scroll-driven coverflow carousel with per-item lift, tilt, and a blur fade on non-centered items", url: "/docs/carousel-circular" },
+  twitter: { title: "CarouselCircular", description: "Scroll-driven coverflow carousel with per-item lift, tilt, and a blur fade on non-centered items" },
+};
+
 import { getComponentSource } from "@/lib/registry-source";
 import { Heading } from "@/components/heading";
 import { ComponentPlayground } from "@/components/highlighted-playground";
