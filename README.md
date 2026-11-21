@@ -14,13 +14,14 @@
   <a href="https://www.npmjs.com/package/@aniui/cli"><img src="https://img.shields.io/npm/v/@aniui/cli?style=flat-square&color=000" alt="npm version" /></a>
   <a href="https://github.com/anishlp7/aniui/blob/main/LICENSE"><img src="https://img.shields.io/github/license/anishlp7/aniui?style=flat-square&color=000" alt="license" /></a>
   <img src="https://img.shields.io/badge/platform-iOS%20%7C%20Android-000?style=flat-square" alt="platform" />
-  <img src="https://img.shields.io/badge/Expo%20SDK-53%20%7C%2054%20%7C%2055%20%7C%2056%20%7C%2057-000?style=flat-square" alt="expo" />
+  <img src="https://img.shields.io/badge/Expo%20SDK-54%20%7C%2055%20%7C%2056%20%7C%2057%20%7C%2058-000?style=flat-square" alt="expo" />
 </p>
 
 <p align="center">
   <a href="https://www.youtube.com/shorts/KxHLlLk8YkA">Demo</a> &nbsp;&bull;&nbsp;
   <a href="#quick-start">Quick Start</a> &nbsp;&bull;&nbsp;
   <a href="#components">Components</a> &nbsp;&bull;&nbsp;
+  <a href="#ai-agents">AI Agents</a> &nbsp;&bull;&nbsp;
   <a href="#documentation">Docs</a> &nbsp;&bull;&nbsp;
   <a href="#philosophy">Philosophy</a> &nbsp;&bull;&nbsp;
   <a href="#contributing">Contributing</a>
@@ -42,7 +43,7 @@ Built with [Uniwind](https://uniwind.dev) (recommended) or [NativeWind](https://
 
 | | Status |
 |---|---|
-| Expo | ✅ SDK 53, 54, 55, 56, 57 & **58** |
+| Expo | ✅ SDK **54+** (currently through 58; iPhone Duo on 58) |
 | Bare React Native | ✅ 0.76+ |
 | Uniwind | ✅ **Recommended / default** on Expo 55+ |
 | NativeWind | ✅ v4 (stable) + v5 (preview) — supported |
@@ -50,12 +51,15 @@ Built with [Uniwind](https://uniwind.dev) (recommended) or [NativeWind](https://
 | TypeScript | ✅ Strict |
 | JavaScript | ✅ Via CLI (`tsx: false`) |
 | npm / pnpm / yarn / bun | ✅ All supported |
-| New Architecture | ✅ |
-| Old Architecture | ✅ SDK 53/54 only |
+| New Architecture | ✅ (required for Uniwind) |
+| Old Architecture | ✅ SDK 54 only (NativeWind) |
 | iOS | ✅ 15+ |
 | Android | ✅ API 24+ |
+| AI agents (MCP, shadcn-spec registry, llms-full.txt) | ✅ First-class — see [AI agents](#ai-agents) |
 
-> **New in 0.8.0: Expo SDK 58 + iPhone Duo ready →** Full support for Expo SDK 58 (React Native 0.88, iOS 27 scene lifecycle, Node 22.13+). All 149 components adapt to iPhone Duo's unfolded / folded displays automatically; 10 overlay components (Dialog, Popover, HoverCard, DropdownMenu, ContextMenu, Tooltip, BottomSheet, ActionSheet, Toast, CommandMenu) opt into fold-aware positioning via the new `useFoldFeatures()` hook when `expo-hinge` is installed — a no-op on every other device. See [the iPhone Duo guide](https://aniui.dev/docs/iphone-duo) and [Expo SDK 58 migration](https://aniui.dev/docs/expo-58).
+> **New in 0.9.0: Agent-native — the full stack →** AniUI is the first React Native component library with a complete AI-agent surface: an [MCP server](https://aniui.dev/docs/mcp) with 10 tools (incl. `search_components`, `list_blocks`, `check_arch_compatibility`), a [shadcn-spec registry](https://aniui.dev/docs/shadcn-registry) at `aniui.dev/r/{name}.json`, an [`llms-full.txt`](https://aniui.dev/llms-full.txt) with every component's source in one file, and a one-command installer (`npx @aniui/cli mcp install`) that auto-wires the MCP into Cursor / Claude Desktop / Claude Code / Windsurf. See the [AI agents](#ai-agents) section below.
+>
+> **Still current — 0.8.0: Expo SDK 58 + iPhone Duo ready →** Full support for Expo SDK 58 (React Native 0.88, iOS 27 scene lifecycle, Node 22.13+). All 150 components adapt to iPhone Duo's unfolded / folded displays automatically; 10 overlay components (Dialog, Popover, HoverCard, DropdownMenu, ContextMenu, Tooltip, BottomSheet, ActionSheet, Toast, CommandMenu) opt into fold-aware positioning via the new `useFoldFeatures()` hook when `expo-hinge` is installed — a no-op on every other device. See [the iPhone Duo guide](https://aniui.dev/docs/iphone-duo) and [Expo SDK 58 migration](https://aniui.dev/docs/expo-58).
 >
 > **Also current:** On Expo SDK 55+ projects, `aniui init` defaults to [Uniwind](https://uniwind.dev) (2–3× faster than NativeWind, Tailwind v4 CSS-first, no Babel transform). NativeWind stays fully supported via `--style nativewind`. See [the Uniwind guide](https://aniui.dev/docs/uniwind) and [SDK compatibility](https://aniui.dev/docs/compatibility).
 
@@ -312,6 +316,41 @@ npx expo install @shopify/react-native-skia
 | CI/CD (GitHub Actions) | 🔜 Coming |
 | VS Code extension | 🔜 Coming |
 | Discord | 🔜 At 500 stars |
+
+## AI agents
+
+AniUI is the first React Native component library built for the agent-native era. Cursor, Claude Code, Claude Desktop, Windsurf — they can all discover and install AniUI components without hallucinating.
+
+**One-command MCP install** — detects every MCP client on your machine and wires AniUI into each one:
+
+```bash
+npx @aniui/cli mcp install
+```
+
+That installs the AniUI MCP server (`@aniui/mcp`) into any combination of Cursor (`.cursor/mcp.json`), Claude Code (`.mcp.json`), Claude Desktop (OS-specific), and Windsurf (`~/.codeium/windsurf/mcp_config.json`). Idempotent; preserves other `mcpServers` entries.
+
+**10 MCP tools** — direct access to source code, usage, blocks, theme tokens, and SDK compatibility:
+
+| Tool | Purpose |
+|---|---|
+| `list_components` / `search_components` | Enumerate or search 150 components |
+| `get_component` / `get_component_usage` | Full source + import, variants, props |
+| `list_blocks` / `get_block` | 15 pre-built screens (login, chat, pricing, …) |
+| `get_theme_tokens` / `get_theme_preset` | Color tokens + 5 built-in palettes |
+| `list_sdk_support` | Library-level compatibility matrix |
+| `check_arch_compatibility` | pass / warn / fail verdict for a component against `{expoSdk, engine, arch}` |
+
+**No MCP?** The registry is [shadcn-spec compatible](https://aniui.dev/docs/shadcn-registry), so:
+
+```bash
+npx shadcn@latest add https://aniui.dev/r/login.json
+```
+
+works in any Expo project, no AniUI CLI required. Every item in `/r/*.json` ships an extra `aniui` block with `supportedSdks / supportedEngines / supportedArch` so agents can reason about RN-specific compatibility without guesswork.
+
+**Context seeding** — `https://aniui.dev/llms-full.txt` (818 KB) contains every component's full source in one file. Agents fetch it once and never hallucinate an AniUI import again.
+
+**Auto-discovery** — a shadcn-convention Agent Skill at [`skills/aniui/mcp.md`](skills/aniui/mcp.md) is auto-discovered by Cursor / Claude Code / Windsurf. See [AGENTS.md](AGENTS.md) for the full surface.
 
 ## Documentation
 
