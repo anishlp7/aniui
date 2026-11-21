@@ -1,3 +1,13 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "ToggleGroup",
+  description: "Group of exclusive toggle buttons",
+  alternates: { canonical: "/docs/toggle-group" },
+  openGraph: { title: "ToggleGroup", description: "Group of exclusive toggle buttons", url: "/docs/toggle-group" },
+  twitter: { title: "ToggleGroup", description: "Group of exclusive toggle buttons" },
+};
+
 import { getComponentSource } from "@/lib/registry-source";
 import { Heading } from "@/components/heading";
 import { PreviewToggleGroup, PreviewToggleGroupItem } from "@/components/preview/toggle-group";

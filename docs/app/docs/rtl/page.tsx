@@ -1,3 +1,13 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "RTL support",
+  description: "Right-to-left layout support in AniUI with React Native I18nManager and a direction-aware context provider.",
+  alternates: { canonical: "/docs/rtl" },
+  openGraph: { title: "RTL support", description: "Right-to-left layout support in AniUI with React Native I18nManager and a direction-aware context provider.", url: "/docs/rtl" },
+  twitter: { title: "RTL support", description: "Right-to-left layout support in AniUI with React Native I18nManager and a direction-aware context provider." },
+};
+
 import { Heading } from "@/components/heading";
 import { PreviewDirectionProviderDemo } from "@/components/preview/direction-provider";
 import { ComponentPlayground } from "@/components/highlighted-playground";

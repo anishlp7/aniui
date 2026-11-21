@@ -1,3 +1,13 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Tray",
+  description: "Compound bottom-sheet/navigation-tray system with multi-view push/back navigation, draggable detents, and scroll hand-off",
+  alternates: { canonical: "/docs/tray" },
+  openGraph: { title: "Tray", description: "Compound bottom-sheet/navigation-tray system with multi-view push/back navigation, draggable detents, and scroll hand-off", url: "/docs/tray" },
+  twitter: { title: "Tray", description: "Compound bottom-sheet/navigation-tray system with multi-view push/back navigation, draggable detents, and scroll hand-off" },
+};
+
 import { getComponentSource } from "@/lib/registry-source";
 import { Heading } from "@/components/heading";
 import { ComponentPlayground } from "@/components/highlighted-playground";

@@ -1,3 +1,13 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "BookPage",
+  description: "Book cover with spine gradient, page-edge texture, and an openAngle-driven hinge",
+  alternates: { canonical: "/docs/book-page" },
+  openGraph: { title: "BookPage", description: "Book cover with spine gradient, page-edge texture, and an openAngle-driven hinge", url: "/docs/book-page" },
+  twitter: { title: "BookPage", description: "Book cover with spine gradient, page-edge texture, and an openAngle-driven hinge" },
+};
+
 import { getComponentSource } from "@/lib/registry-source";
 import { Heading } from "@/components/heading";
 import { ComponentPlayground } from "@/components/highlighted-playground";

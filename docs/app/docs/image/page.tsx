@@ -1,3 +1,13 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Image",
+  description: "Image with loading placeholder, error fallback, and rounded variants",
+  alternates: { canonical: "/docs/image" },
+  openGraph: { title: "Image", description: "Image with loading placeholder, error fallback, and rounded variants", url: "/docs/image" },
+  twitter: { title: "Image", description: "Image with loading placeholder, error fallback, and rounded variants" },
+};
+
 import { getComponentSource } from "@/lib/registry-source";
 import { Heading } from "@/components/heading";
 import React from "react";

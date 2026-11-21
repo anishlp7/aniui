@@ -1,3 +1,13 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "ArcList",
+  description: "Items laid out along a curved arc with proximity scale/opacity, snap-to-focus, and a haptic tick on snap",
+  alternates: { canonical: "/docs/arc-list" },
+  openGraph: { title: "ArcList", description: "Items laid out along a curved arc with proximity scale/opacity, snap-to-focus, and a haptic tick on snap", url: "/docs/arc-list" },
+  twitter: { title: "ArcList", description: "Items laid out along a curved arc with proximity scale/opacity, snap-to-focus, and a haptic tick on snap" },
+};
+
 import { getComponentSource } from "@/lib/registry-source";
 import { Heading } from "@/components/heading";
 import { ComponentPlayground } from "@/components/highlighted-playground";

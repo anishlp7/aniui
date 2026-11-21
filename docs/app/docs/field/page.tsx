@@ -1,3 +1,13 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Field",
+  description: "Layout-focused form field with label, description, and error",
+  alternates: { canonical: "/docs/field" },
+  openGraph: { title: "Field", description: "Layout-focused form field with label, description, and error", url: "/docs/field" },
+  twitter: { title: "Field", description: "Layout-focused form field with label, description, and error" },
+};
+
 import { getComponentSource } from "@/lib/registry-source";
 import { Heading } from "@/components/heading";
 import { PreviewFieldDemo, PreviewFieldHorizontal, PreviewFieldError } from "@/components/preview/field";

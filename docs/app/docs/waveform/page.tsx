@@ -1,3 +1,13 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Waveform",
+  description: "Audio waveform bars — driven by real amplitude levels, with an ambient recording fallback",
+  alternates: { canonical: "/docs/waveform" },
+  openGraph: { title: "Waveform", description: "Audio waveform bars — driven by real amplitude levels, with an ambient recording fallback", url: "/docs/waveform" },
+  twitter: { title: "Waveform", description: "Audio waveform bars — driven by real amplitude levels, with an ambient recording fallback" },
+};
+
 import { getComponentSource } from "@/lib/registry-source";
 import Link from "next/link";
 import { Heading } from "@/components/heading";

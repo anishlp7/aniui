@@ -1,3 +1,13 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "StatusIndicator",
+  description: "Colored dot for online/offline/away/busy status",
+  alternates: { canonical: "/docs/status-indicator" },
+  openGraph: { title: "StatusIndicator", description: "Colored dot for online/offline/away/busy status", url: "/docs/status-indicator" },
+  twitter: { title: "StatusIndicator", description: "Colored dot for online/offline/away/busy status" },
+};
+
 import { getComponentSource } from "@/lib/registry-source";
 import { Heading } from "@/components/heading";
 import { PreviewStatusIndicatorDemo } from "@/components/preview/status-indicator";

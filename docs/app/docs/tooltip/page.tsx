@@ -1,3 +1,13 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Tooltip",
+  description: "Accessible tooltip with positioning",
+  alternates: { canonical: "/docs/tooltip" },
+  openGraph: { title: "Tooltip", description: "Accessible tooltip with positioning", url: "/docs/tooltip" },
+  twitter: { title: "Tooltip", description: "Accessible tooltip with positioning" },
+};
+
 import { getComponentSource } from "@/lib/registry-source";
 import { Heading } from "@/components/heading";
 import { PreviewTooltip } from "@/components/preview/tooltip";

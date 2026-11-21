@@ -1,3 +1,13 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Text",
+  description: "Typography with heading and body variants",
+  alternates: { canonical: "/docs/text" },
+  openGraph: { title: "Text", description: "Typography with heading and body variants", url: "/docs/text" },
+  twitter: { title: "Text", description: "Typography with heading and body variants" },
+};
+
 import { getComponentSource } from "@/lib/registry-source";
 import { Heading } from "@/components/heading";
 import { PreviewText } from "@/components/preview/text";

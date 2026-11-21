@@ -1,3 +1,13 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Polaroid",
+  description: "Polaroid-style photo frame with a press-lift-and-straighten spring and optional washi-tape decoration",
+  alternates: { canonical: "/docs/polaroid" },
+  openGraph: { title: "Polaroid", description: "Polaroid-style photo frame with a press-lift-and-straighten spring and optional washi-tape decoration", url: "/docs/polaroid" },
+  twitter: { title: "Polaroid", description: "Polaroid-style photo frame with a press-lift-and-straighten spring and optional washi-tape decoration" },
+};
+
 import { getComponentSource } from "@/lib/registry-source";
 import { Heading } from "@/components/heading";
 import { ComponentPlayground } from "@/components/highlighted-playground";

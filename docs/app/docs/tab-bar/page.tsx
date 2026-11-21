@@ -1,3 +1,13 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "TabBar",
+  description: "Bottom tab bar with badge support and active states",
+  alternates: { canonical: "/docs/tab-bar" },
+  openGraph: { title: "TabBar", description: "Bottom tab bar with badge support and active states", url: "/docs/tab-bar" },
+  twitter: { title: "TabBar", description: "Bottom tab bar with badge support and active states" },
+};
+
 import { getComponentSource } from "@/lib/registry-source";
 import { Heading } from "@/components/heading";
 import { PreviewTabBarDemo } from "@/components/preview/tab-bar";

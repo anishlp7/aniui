@@ -1,3 +1,13 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Combobox",
+  description: "Searchable select with multi-select, groups, clear, and custom rendering",
+  alternates: { canonical: "/docs/combobox" },
+  openGraph: { title: "Combobox", description: "Searchable select with multi-select, groups, clear, and custom rendering", url: "/docs/combobox" },
+  twitter: { title: "Combobox", description: "Searchable select with multi-select, groups, clear, and custom rendering" },
+};
+
 import { getComponentSource } from "@/lib/registry-source";
 import { Heading } from "@/components/heading";
 import { ComponentPlayground } from "@/components/highlighted-playground";

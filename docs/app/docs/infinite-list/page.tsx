@@ -1,3 +1,13 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "InfiniteList",
+  description: "FlatList with auto-loading more items on scroll",
+  alternates: { canonical: "/docs/infinite-list" },
+  openGraph: { title: "InfiniteList", description: "FlatList with auto-loading more items on scroll", url: "/docs/infinite-list" },
+  twitter: { title: "InfiniteList", description: "FlatList with auto-loading more items on scroll" },
+};
+
 import { getComponentSource } from "@/lib/registry-source";
 import { Heading } from "@/components/heading";
 import { PreviewInfiniteListDemo } from "@/components/preview/infinite-list";

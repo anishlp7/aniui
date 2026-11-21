@@ -1,3 +1,13 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "SwipeableListItem",
+  description: "Swipeable list item revealing action buttons on swipe",
+  alternates: { canonical: "/docs/swipeable-list-item" },
+  openGraph: { title: "SwipeableListItem", description: "Swipeable list item revealing action buttons on swipe", url: "/docs/swipeable-list-item" },
+  twitter: { title: "SwipeableListItem", description: "Swipeable list item revealing action buttons on swipe" },
+};
+
 import { getComponentSource } from "@/lib/registry-source";
 import { Heading } from "@/components/heading";
 import { PreviewSwipeableListItem } from "@/components/preview/swipeable-list-item";

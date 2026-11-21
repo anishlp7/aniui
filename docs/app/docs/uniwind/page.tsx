@@ -1,3 +1,13 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Uniwind",
+  description: "Use AniUI with Uniwind — the Tailwind v4, CSS-first styling engine from the Unistyles team. Primary styling engine, ~2–3× faster than NativeWind.",
+  alternates: { canonical: "/docs/uniwind" },
+  openGraph: { title: "Uniwind", description: "Use AniUI with Uniwind — the Tailwind v4, CSS-first styling engine from the Unistyles team. Primary styling engine, ~2–3× faster than NativeWind.", url: "/docs/uniwind" },
+  twitter: { title: "Uniwind", description: "Use AniUI with Uniwind — the Tailwind v4, CSS-first styling engine from the Unistyles team. Primary styling engine, ~2–3× faster than NativeWind." },
+};
+
 import { Heading } from "@/components/heading";
 import { CodeBlock } from "@/components/code-block-server";
 import { PackageManagerTabs } from "@/components/package-manager-tabs";

@@ -1,3 +1,13 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Expo SDK 58",
+  description: "Set up AniUI on Expo SDK 58 (RN 0.88, Reanimated ~4.7, Node 22.13+, iPhone Duo ready via expo-hinge).",
+  alternates: { canonical: "/docs/expo-58" },
+  openGraph: { title: "Expo SDK 58", description: "Set up AniUI on Expo SDK 58 (RN 0.88, Reanimated ~4.7, Node 22.13+, iPhone Duo ready via expo-hinge).", url: "/docs/expo-58" },
+  twitter: { title: "Expo SDK 58", description: "Set up AniUI on Expo SDK 58 (RN 0.88, Reanimated ~4.7, Node 22.13+, iPhone Duo ready via expo-hinge)." },
+};
+
 import Link from "next/link";
 import { Heading } from "@/components/heading";
 import { CodeBlock } from "@/components/code-block-server";

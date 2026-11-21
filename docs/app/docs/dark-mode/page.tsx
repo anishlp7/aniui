@@ -1,3 +1,13 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Dark mode",
+  description: "Ship dark mode in a React Native app with AniUI — one class-based toggle, zero flicker on first paint.",
+  alternates: { canonical: "/docs/dark-mode" },
+  openGraph: { title: "Dark mode", description: "Ship dark mode in a React Native app with AniUI — one class-based toggle, zero flicker on first paint.", url: "/docs/dark-mode" },
+  twitter: { title: "Dark mode", description: "Ship dark mode in a React Native app with AniUI — one class-based toggle, zero flicker on first paint." },
+};
+
 import { Heading } from "@/components/heading";
 import { CodeBlock } from "@/components/code-block-server";
 

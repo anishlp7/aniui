@@ -1,3 +1,13 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Avatar",
+  description: "User avatar with image and fallback",
+  alternates: { canonical: "/docs/avatar" },
+  openGraph: { title: "Avatar", description: "User avatar with image and fallback", url: "/docs/avatar" },
+  twitter: { title: "Avatar", description: "User avatar with image and fallback" },
+};
+
 import { getComponentSource } from "@/lib/registry-source";
 import { Heading } from "@/components/heading";
 import { PreviewAvatar } from "@/components/preview/avatar";

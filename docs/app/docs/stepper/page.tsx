@@ -1,3 +1,13 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Stepper",
+  description: "Numeric increment/decrement control with min/max/step",
+  alternates: { canonical: "/docs/stepper" },
+  openGraph: { title: "Stepper", description: "Numeric increment/decrement control with min/max/step", url: "/docs/stepper" },
+  twitter: { title: "Stepper", description: "Numeric increment/decrement control with min/max/step" },
+};
+
 import { getComponentSource } from "@/lib/registry-source";
 import { Heading } from "@/components/heading";
 import { ComponentPlayground } from "@/components/highlighted-playground";

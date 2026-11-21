@@ -1,3 +1,13 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "SplitView",
+  description: "Draggable, resizable top/bottom split pane with snap points and spring physics",
+  alternates: { canonical: "/docs/split-view" },
+  openGraph: { title: "SplitView", description: "Draggable, resizable top/bottom split pane with snap points and spring physics", url: "/docs/split-view" },
+  twitter: { title: "SplitView", description: "Draggable, resizable top/bottom split pane with snap points and spring physics" },
+};
+
 import { getComponentSource } from "@/lib/registry-source";
 import { Heading } from "@/components/heading";
 import { ComponentPlayground } from "@/components/highlighted-playground";

@@ -1,3 +1,13 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "RollingCounter",
+  description: "Animated odometer-style rolling number counter with motion-blur, squash/stretch, staggered digits, and correct wrap-around rollover",
+  alternates: { canonical: "/docs/rolling-counter" },
+  openGraph: { title: "RollingCounter", description: "Animated odometer-style rolling number counter with motion-blur, squash/stretch, staggered digits, and correct wrap-around rollover", url: "/docs/rolling-counter" },
+  twitter: { title: "RollingCounter", description: "Animated odometer-style rolling number counter with motion-blur, squash/stretch, staggered digits, and correct wrap-around rollover" },
+};
+
 import { getComponentSource } from "@/lib/registry-source";
 import { Heading } from "@/components/heading";
 import { ComponentPlayground } from "@/components/highlighted-playground";

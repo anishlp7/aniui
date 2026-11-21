@@ -1,3 +1,13 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "FilePicker",
+  description: "File upload UI with dashed border, preview, and remove button",
+  alternates: { canonical: "/docs/file-picker" },
+  openGraph: { title: "FilePicker", description: "File upload UI with dashed border, preview, and remove button", url: "/docs/file-picker" },
+  twitter: { title: "FilePicker", description: "File upload UI with dashed border, preview, and remove button" },
+};
+
 import { getComponentSource } from "@/lib/registry-source";
 import { Heading } from "@/components/heading";
 import { PreviewFilePickerDemo } from "@/components/preview/file-picker";

@@ -1,3 +1,13 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Tabs",
+  description: "Tab navigation with filled/line variants, sizes, vertical, disabled, and icon support",
+  alternates: { canonical: "/docs/tabs" },
+  openGraph: { title: "Tabs", description: "Tab navigation with filled/line variants, sizes, vertical, disabled, and icon support", url: "/docs/tabs" },
+  twitter: { title: "Tabs", description: "Tab navigation with filled/line variants, sizes, vertical, disabled, and icon support" },
+};
+
 import { getComponentSource } from "@/lib/registry-source";
 import { Heading } from "@/components/heading";
 import { PreviewTabsDemo, PreviewTabsLine, PreviewTabsVertical, PreviewTabsDisabled, PreviewTabsIcons, PreviewTabsSizes, PreviewTabsRTL } from "@/components/preview/tabs";

@@ -1,3 +1,13 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "JavaScript (non-TypeScript) setup",
+  description: "Use AniUI in a plain JavaScript React Native project without TypeScript — the CLI strips types on install.",
+  alternates: { canonical: "/docs/javascript" },
+  openGraph: { title: "JavaScript (non-TypeScript) setup", description: "Use AniUI in a plain JavaScript React Native project without TypeScript — the CLI strips types on install.", url: "/docs/javascript" },
+  twitter: { title: "JavaScript (non-TypeScript) setup", description: "Use AniUI in a plain JavaScript React Native project without TypeScript — the CLI strips types on install." },
+};
+
 import { Heading } from "@/components/heading";
 import { CodeBlock } from "@/components/code-block-server";
 

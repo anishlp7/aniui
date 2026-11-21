@@ -1,3 +1,13 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Accordion",
+  description: "Expandable content sections",
+  alternates: { canonical: "/docs/accordion" },
+  openGraph: { title: "Accordion", description: "Expandable content sections", url: "/docs/accordion" },
+  twitter: { title: "Accordion", description: "Expandable content sections" },
+};
+
 import { getComponentSource } from "@/lib/registry-source";
 import { Heading } from "@/components/heading";
 import { PreviewAccordion, PreviewAccordionItem } from "@/components/preview/accordion";

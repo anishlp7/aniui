@@ -1,3 +1,13 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "FAB",
+  description: "Floating action button for primary screen actions",
+  alternates: { canonical: "/docs/fab" },
+  openGraph: { title: "FAB", description: "Floating action button for primary screen actions", url: "/docs/fab" },
+  twitter: { title: "FAB", description: "Floating action button for primary screen actions" },
+};
+
 import { getComponentSource } from "@/lib/registry-source";
 import { Heading } from "@/components/heading";
 import React from "react";

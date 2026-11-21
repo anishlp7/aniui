@@ -1,3 +1,13 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Gradient",
+  description: "Linear gradient view with configurable colors and direction",
+  alternates: { canonical: "/docs/gradient" },
+  openGraph: { title: "Gradient", description: "Linear gradient view with configurable colors and direction", url: "/docs/gradient" },
+  twitter: { title: "Gradient", description: "Linear gradient view with configurable colors and direction" },
+};
+
 import { getComponentSource } from "@/lib/registry-source";
 import { Heading } from "@/components/heading";
 import { PreviewGradient } from "@/components/preview/gradient";

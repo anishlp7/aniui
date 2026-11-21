@@ -1,3 +1,13 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "MatchedGeometry",
+  description: "SwiftUI-style shared-element layout transition primitive — morphs one tagged view into another's position and size when they swap",
+  alternates: { canonical: "/docs/matched-geometry" },
+  openGraph: { title: "MatchedGeometry", description: "SwiftUI-style shared-element layout transition primitive — morphs one tagged view into another's position and size when they swap", url: "/docs/matched-geometry" },
+  twitter: { title: "MatchedGeometry", description: "SwiftUI-style shared-element layout transition primitive — morphs one tagged view into another's position and size when they swap" },
+};
+
 import { getComponentSource } from "@/lib/registry-source";
 import { Heading } from "@/components/heading";
 import { ComponentPlayground } from "@/components/highlighted-playground";

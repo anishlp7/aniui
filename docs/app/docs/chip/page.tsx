@@ -1,3 +1,13 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Chip",
+  description: "Interactive tag for filters and multi-select",
+  alternates: { canonical: "/docs/chip" },
+  openGraph: { title: "Chip", description: "Interactive tag for filters and multi-select", url: "/docs/chip" },
+  twitter: { title: "Chip", description: "Interactive tag for filters and multi-select" },
+};
+
 import { getComponentSource } from "@/lib/registry-source";
 import { Heading } from "@/components/heading";
 import { PreviewChip } from "@/components/preview/chip";

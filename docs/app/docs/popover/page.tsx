@@ -1,3 +1,13 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Popover",
+  description: "Contextual overlay with trigger positioning",
+  alternates: { canonical: "/docs/popover" },
+  openGraph: { title: "Popover", description: "Contextual overlay with trigger positioning", url: "/docs/popover" },
+  twitter: { title: "Popover", description: "Contextual overlay with trigger positioning" },
+};
+
 import { getComponentSource } from "@/lib/registry-source";
 import { Heading } from "@/components/heading";
 import { PreviewPopoverDemo } from "@/components/preview/popover";

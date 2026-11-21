@@ -1,3 +1,13 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Loader",
+  description: "Animated loading indicator — segmented comet-tail ring or bouncing dots",
+  alternates: { canonical: "/docs/loader" },
+  openGraph: { title: "Loader", description: "Animated loading indicator — segmented comet-tail ring or bouncing dots", url: "/docs/loader" },
+  twitter: { title: "Loader", description: "Animated loading indicator — segmented comet-tail ring or bouncing dots" },
+};
+
 import { getComponentSource } from "@/lib/registry-source";
 import { Heading } from "@/components/heading";
 import { ComponentPlayground } from "@/components/highlighted-playground";

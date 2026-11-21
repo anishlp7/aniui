@@ -1,3 +1,13 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Grid",
+  description: "FlatList-based grid layout with configurable columns and gap",
+  alternates: { canonical: "/docs/grid" },
+  openGraph: { title: "Grid", description: "FlatList-based grid layout with configurable columns and gap", url: "/docs/grid" },
+  twitter: { title: "Grid", description: "FlatList-based grid layout with configurable columns and gap" },
+};
+
 import { getComponentSource } from "@/lib/registry-source";
 import { Heading } from "@/components/heading";
 import { PreviewGridDemo } from "@/components/preview/grid";

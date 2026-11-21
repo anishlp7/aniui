@@ -1,3 +1,13 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Timeline",
+  description: "Vertical timeline for events, order tracking, activity feeds",
+  alternates: { canonical: "/docs/timeline" },
+  openGraph: { title: "Timeline", description: "Vertical timeline for events, order tracking, activity feeds", url: "/docs/timeline" },
+  twitter: { title: "Timeline", description: "Vertical timeline for events, order tracking, activity feeds" },
+};
+
 import { getComponentSource } from "@/lib/registry-source";
 import { Heading } from "@/components/heading";
 import { PreviewTimelineDemo } from "@/components/preview/timeline";

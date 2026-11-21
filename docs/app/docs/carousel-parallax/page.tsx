@@ -1,3 +1,13 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "CarouselParallax",
+  description: "Horizontal carousel with real inner-layer parallax translation and a haptic tick on release",
+  alternates: { canonical: "/docs/carousel-parallax" },
+  openGraph: { title: "CarouselParallax", description: "Horizontal carousel with real inner-layer parallax translation and a haptic tick on release", url: "/docs/carousel-parallax" },
+  twitter: { title: "CarouselParallax", description: "Horizontal carousel with real inner-layer parallax translation and a haptic tick on release" },
+};
+
 import { getComponentSource } from "@/lib/registry-source";
 import { Heading } from "@/components/heading";
 import { ComponentPlayground } from "@/components/highlighted-playground";

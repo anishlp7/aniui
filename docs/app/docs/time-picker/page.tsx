@@ -1,3 +1,13 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "TimePicker",
+  description: "Animated scroll-snap wheel time picker with a spring modal and haptic tick, plus DateAndTimePicker (calendar + time)",
+  alternates: { canonical: "/docs/time-picker" },
+  openGraph: { title: "TimePicker", description: "Animated scroll-snap wheel time picker with a spring modal and haptic tick, plus DateAndTimePicker (calendar + time)", url: "/docs/time-picker" },
+  twitter: { title: "TimePicker", description: "Animated scroll-snap wheel time picker with a spring modal and haptic tick, plus DateAndTimePicker (calendar + time)" },
+};
+
 import { getComponentSource } from "@/lib/registry-source";
 import { Heading } from "@/components/heading";
 import { ComponentPlayground } from "@/components/highlighted-playground";

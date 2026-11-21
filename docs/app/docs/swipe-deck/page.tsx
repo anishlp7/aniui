@@ -1,3 +1,13 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "SwipeDeck",
+  description: "Tinder-style swipeable card stack with fling physics and swipe callbacks",
+  alternates: { canonical: "/docs/swipe-deck" },
+  openGraph: { title: "SwipeDeck", description: "Tinder-style swipeable card stack with fling physics and swipe callbacks", url: "/docs/swipe-deck" },
+  twitter: { title: "SwipeDeck", description: "Tinder-style swipeable card stack with fling physics and swipe callbacks" },
+};
+
 import { getComponentSource } from "@/lib/registry-source";
 import { Heading } from "@/components/heading";
 import { PreviewSwipeDeckDemo } from "@/components/preview/swipe-deck";

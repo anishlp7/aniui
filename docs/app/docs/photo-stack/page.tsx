@@ -1,3 +1,13 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "PhotoStack",
+  description: "Overlapping stacked photos with a press-lift-and-straighten spring, and optional per-photo onPress",
+  alternates: { canonical: "/docs/photo-stack" },
+  openGraph: { title: "PhotoStack", description: "Overlapping stacked photos with a press-lift-and-straighten spring, and optional per-photo onPress", url: "/docs/photo-stack" },
+  twitter: { title: "PhotoStack", description: "Overlapping stacked photos with a press-lift-and-straighten spring, and optional per-photo onPress" },
+};
+
 import { getComponentSource } from "@/lib/registry-source";
 import { Heading } from "@/components/heading";
 import { ComponentPlayground } from "@/components/highlighted-playground";

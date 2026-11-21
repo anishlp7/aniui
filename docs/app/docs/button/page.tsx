@@ -1,3 +1,13 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Button",
+  description: "A pressable button with variants",
+  alternates: { canonical: "/docs/button" },
+  openGraph: { title: "Button", description: "A pressable button with variants", url: "/docs/button" },
+  twitter: { title: "Button", description: "A pressable button with variants" },
+};
+
 import { getComponentSource } from "@/lib/registry-source";
 import { Heading } from "@/components/heading";
 import { PreviewButton } from "@/components/preview/button";

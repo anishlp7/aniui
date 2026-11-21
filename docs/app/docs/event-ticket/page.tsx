@@ -1,3 +1,13 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "EventTicket",
+  description: "Event ticket card with perforated edge, date, venue, and seat",
+  alternates: { canonical: "/docs/event-ticket" },
+  openGraph: { title: "EventTicket", description: "Event ticket card with perforated edge, date, venue, and seat", url: "/docs/event-ticket" },
+  twitter: { title: "EventTicket", description: "Event ticket card with perforated edge, date, venue, and seat" },
+};
+
 import { getComponentSource } from "@/lib/registry-source";
 import { Heading } from "@/components/heading";
 import { ComponentPlayground } from "@/components/highlighted-playground";

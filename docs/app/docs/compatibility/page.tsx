@@ -1,3 +1,13 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Compatibility",
+  description: "Which Expo SDKs, React Native versions, and styling engines AniUI supports. Expo 54 through 58, Uniwind and NativeWind, Old and New Architecture.",
+  alternates: { canonical: "/docs/compatibility" },
+  openGraph: { title: "Compatibility", description: "Which Expo SDKs, React Native versions, and styling engines AniUI supports. Expo 54 through 58, Uniwind and NativeWind, Old and New Architecture.", url: "/docs/compatibility" },
+  twitter: { title: "Compatibility", description: "Which Expo SDKs, React Native versions, and styling engines AniUI supports. Expo 54 through 58, Uniwind and NativeWind, Old and New Architecture." },
+};
+
 import { Heading } from "@/components/heading";
 
 import { CodeBlock } from "@/components/code-block-server";

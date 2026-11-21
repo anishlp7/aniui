@@ -1,3 +1,13 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "FillingStack",
+  description: "Vertically browsable card stack with fling gestures and a blur \"filling\" transition between cards",
+  alternates: { canonical: "/docs/filling-stack" },
+  openGraph: { title: "FillingStack", description: "Vertically browsable card stack with fling gestures and a blur \"filling\" transition between cards", url: "/docs/filling-stack" },
+  twitter: { title: "FillingStack", description: "Vertically browsable card stack with fling gestures and a blur \"filling\" transition between cards" },
+};
+
 import { getComponentSource } from "@/lib/registry-source";
 import { Heading } from "@/components/heading";
 import { ComponentPlayground } from "@/components/highlighted-playground";

@@ -1,3 +1,13 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "DirectionProvider",
+  description: "RTL/LTR direction context with I18nManager integration",
+  alternates: { canonical: "/docs/direction-provider" },
+  openGraph: { title: "DirectionProvider", description: "RTL/LTR direction context with I18nManager integration", url: "/docs/direction-provider" },
+  twitter: { title: "DirectionProvider", description: "RTL/LTR direction context with I18nManager integration" },
+};
+
 import { getComponentSource } from "@/lib/registry-source";
 import { Heading } from "@/components/heading";
 import { PreviewDirectionProviderDemo } from "@/components/preview/direction-provider";

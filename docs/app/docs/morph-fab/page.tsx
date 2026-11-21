@@ -1,3 +1,13 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "MorphFab",
+  description: "Skia gooey radial/directional FAB menu with staggered blob-merge spring animation",
+  alternates: { canonical: "/docs/morph-fab" },
+  openGraph: { title: "MorphFab", description: "Skia gooey radial/directional FAB menu with staggered blob-merge spring animation", url: "/docs/morph-fab" },
+  twitter: { title: "MorphFab", description: "Skia gooey radial/directional FAB menu with staggered blob-merge spring animation" },
+};
+
 import { getComponentSource } from "@/lib/registry-source";
 import { Heading } from "@/components/heading";
 import { ComponentPlayground } from "@/components/highlighted-playground";

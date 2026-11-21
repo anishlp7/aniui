@@ -1,3 +1,13 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Checkbox",
+  description: "Checkbox with checked state",
+  alternates: { canonical: "/docs/checkbox" },
+  openGraph: { title: "Checkbox", description: "Checkbox with checked state", url: "/docs/checkbox" },
+  twitter: { title: "Checkbox", description: "Checkbox with checked state" },
+};
+
 import { getComponentSource } from "@/lib/registry-source";
 import { Heading } from "@/components/heading";
 import { PreviewCheckbox } from "@/components/preview/checkbox";

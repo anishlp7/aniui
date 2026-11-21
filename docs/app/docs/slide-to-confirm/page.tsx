@@ -1,3 +1,13 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "SlideToConfirm",
+  description: "Slide-to-pay/confirm control with spring-back and confirmed state",
+  alternates: { canonical: "/docs/slide-to-confirm" },
+  openGraph: { title: "SlideToConfirm", description: "Slide-to-pay/confirm control with spring-back and confirmed state", url: "/docs/slide-to-confirm" },
+  twitter: { title: "SlideToConfirm", description: "Slide-to-pay/confirm control with spring-back and confirmed state" },
+};
+
 import { getComponentSource } from "@/lib/registry-source";
 import { Heading } from "@/components/heading";
 import {

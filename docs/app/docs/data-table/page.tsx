@@ -1,3 +1,13 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "DataTable",
+  description: "Sortable, filterable data table with pagination and custom cell rendering",
+  alternates: { canonical: "/docs/data-table" },
+  openGraph: { title: "DataTable", description: "Sortable, filterable data table with pagination and custom cell rendering", url: "/docs/data-table" },
+  twitter: { title: "DataTable", description: "Sortable, filterable data table with pagination and custom cell rendering" },
+};
+
 import { getComponentSource } from "@/lib/registry-source";
 import { Heading } from "@/components/heading";
 import { PreviewDataTableDemo, PreviewDataTableSort, PreviewDataTableSearch, PreviewDataTablePagination, PreviewDataTableCustomCell, PreviewDataTableStriped } from "@/components/preview/data-table";

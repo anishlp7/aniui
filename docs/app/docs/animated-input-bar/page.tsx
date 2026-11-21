@@ -1,3 +1,13 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "AnimatedInputBar",
+  description: "Text input with a per-character animated placeholder that cycles through multiple strings",
+  alternates: { canonical: "/docs/animated-input-bar" },
+  openGraph: { title: "AnimatedInputBar", description: "Text input with a per-character animated placeholder that cycles through multiple strings", url: "/docs/animated-input-bar" },
+  twitter: { title: "AnimatedInputBar", description: "Text input with a per-character animated placeholder that cycles through multiple strings" },
+};
+
 import { getComponentSource } from "@/lib/registry-source";
 import { Heading } from "@/components/heading";
 import { ComponentPlayground } from "@/components/highlighted-playground";

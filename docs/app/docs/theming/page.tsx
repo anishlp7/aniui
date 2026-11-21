@@ -1,3 +1,13 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Theming",
+  description: "Customize AniUI's color tokens, typography, and radii. Five built-in presets (default, blue, green, orange, rose) or roll your own.",
+  alternates: { canonical: "/docs/theming" },
+  openGraph: { title: "Theming", description: "Customize AniUI's color tokens, typography, and radii. Five built-in presets (default, blue, green, orange, rose) or roll your own.", url: "/docs/theming" },
+  twitter: { title: "Theming", description: "Customize AniUI's color tokens, typography, and radii. Five built-in presets (default, blue, green, orange, rose) or roll your own." },
+};
+
 import { Heading } from "@/components/heading";
 import { CodeBlock } from "@/components/code-block-server";
 import { PropsTable } from "@/components/props-table";

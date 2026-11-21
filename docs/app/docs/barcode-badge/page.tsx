@@ -1,3 +1,13 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "BarcodeBadge",
+  description: "Width-encoded barcode strip with compound Root/Bars/Label API and palette overrides",
+  alternates: { canonical: "/docs/barcode-badge" },
+  openGraph: { title: "BarcodeBadge", description: "Width-encoded barcode strip with compound Root/Bars/Label API and palette overrides", url: "/docs/barcode-badge" },
+  twitter: { title: "BarcodeBadge", description: "Width-encoded barcode strip with compound Root/Bars/Label API and palette overrides" },
+};
+
 import { getComponentSource } from "@/lib/registry-source";
 import { Heading } from "@/components/heading";
 import { ComponentPlayground } from "@/components/highlighted-playground";

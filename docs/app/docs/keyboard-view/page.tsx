@@ -1,3 +1,13 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "KeyboardView",
+  description: "Keyboard-avoiding wrapper so forms stay visible above the keyboard",
+  alternates: { canonical: "/docs/keyboard-view" },
+  openGraph: { title: "KeyboardView", description: "Keyboard-avoiding wrapper so forms stay visible above the keyboard", url: "/docs/keyboard-view" },
+  twitter: { title: "KeyboardView", description: "Keyboard-avoiding wrapper so forms stay visible above the keyboard" },
+};
+
 import { getComponentSource } from "@/lib/registry-source";
 import { Heading } from "@/components/heading";
 import { PreviewKeyboardViewDemo } from "@/components/preview/keyboard-view";

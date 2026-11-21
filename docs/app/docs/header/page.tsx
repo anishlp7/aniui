@@ -1,3 +1,13 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Header",
+  description: "Navigation header with back button, title, and right actions",
+  alternates: { canonical: "/docs/header" },
+  openGraph: { title: "Header", description: "Navigation header with back button, title, and right actions", url: "/docs/header" },
+  twitter: { title: "Header", description: "Navigation header with back button, title, and right actions" },
+};
+
 import { getComponentSource } from "@/lib/registry-source";
 import { Heading } from "@/components/heading";
 import { PreviewHeaderDemo } from "@/components/preview/header";

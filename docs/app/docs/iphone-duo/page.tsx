@@ -1,3 +1,13 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "iPhone Duo (foldable)",
+  description: "Fold-aware React Native overlays for iPhone Duo via the useFoldFeatures() hook. Ten AniUI overlays opt into expo-hinge; non-fold devices see zero change.",
+  alternates: { canonical: "/docs/iphone-duo" },
+  openGraph: { title: "iPhone Duo (foldable)", description: "Fold-aware React Native overlays for iPhone Duo via the useFoldFeatures() hook. Ten AniUI overlays opt into expo-hinge; non-fold devices see zero change.", url: "/docs/iphone-duo" },
+  twitter: { title: "iPhone Duo (foldable)", description: "Fold-aware React Native overlays for iPhone Duo via the useFoldFeatures() hook. Ten AniUI overlays opt into expo-hinge; non-fold devices see zero change." },
+};
+
 import Link from "next/link";
 import { Heading } from "@/components/heading";
 import { CodeBlock } from "@/components/code-block-server";

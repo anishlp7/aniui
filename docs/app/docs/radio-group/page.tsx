@@ -1,3 +1,13 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "RadioGroup",
+  description: "Radio button group",
+  alternates: { canonical: "/docs/radio-group" },
+  openGraph: { title: "RadioGroup", description: "Radio button group", url: "/docs/radio-group" },
+  twitter: { title: "RadioGroup", description: "Radio button group" },
+};
+
 import { getComponentSource } from "@/lib/registry-source";
 import { Heading } from "@/components/heading";
 import { ComponentPlayground } from "@/components/highlighted-playground";

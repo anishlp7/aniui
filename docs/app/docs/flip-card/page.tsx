@@ -1,3 +1,13 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "FlipCard",
+  description: "Tap-to-flip card with horizontal/vertical/depth 3D rotation, mid-flip glass blur, and haptic feedback",
+  alternates: { canonical: "/docs/flip-card" },
+  openGraph: { title: "FlipCard", description: "Tap-to-flip card with horizontal/vertical/depth 3D rotation, mid-flip glass blur, and haptic feedback", url: "/docs/flip-card" },
+  twitter: { title: "FlipCard", description: "Tap-to-flip card with horizontal/vertical/depth 3D rotation, mid-flip glass blur, and haptic feedback" },
+};
+
 import { getComponentSource } from "@/lib/registry-source";
 import { Heading } from "@/components/heading";
 import { ComponentPlayground } from "@/components/highlighted-playground";

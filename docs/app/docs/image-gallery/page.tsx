@@ -1,3 +1,13 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "ImageGallery",
+  description: "Horizontal image carousel with fullscreen modal and pagination",
+  alternates: { canonical: "/docs/image-gallery" },
+  openGraph: { title: "ImageGallery", description: "Horizontal image carousel with fullscreen modal and pagination", url: "/docs/image-gallery" },
+  twitter: { title: "ImageGallery", description: "Horizontal image carousel with fullscreen modal and pagination" },
+};
+
 import { getComponentSource } from "@/lib/registry-source";
 import { Heading } from "@/components/heading";
 import { PreviewImageGalleryDemo } from "@/components/preview/image-gallery";

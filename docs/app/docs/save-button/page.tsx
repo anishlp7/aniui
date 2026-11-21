@@ -1,3 +1,13 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "SaveButton",
+  description: "Idle → loading → success → done state-machine save button with animated phase transitions",
+  alternates: { canonical: "/docs/save-button" },
+  openGraph: { title: "SaveButton", description: "Idle → loading → success → done state-machine save button with animated phase transitions", url: "/docs/save-button" },
+  twitter: { title: "SaveButton", description: "Idle → loading → success → done state-machine save button with animated phase transitions" },
+};
+
 import { getComponentSource } from "@/lib/registry-source";
 import { Heading } from "@/components/heading";
 import { ComponentPlayground } from "@/components/highlighted-playground";

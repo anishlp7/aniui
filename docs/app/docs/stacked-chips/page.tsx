@@ -1,3 +1,13 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "StackedChips",
+  description: "Nested, depth-aware expandable chip menu — a trigger reveals further stacked chips",
+  alternates: { canonical: "/docs/stacked-chips" },
+  openGraph: { title: "StackedChips", description: "Nested, depth-aware expandable chip menu — a trigger reveals further stacked chips", url: "/docs/stacked-chips" },
+  twitter: { title: "StackedChips", description: "Nested, depth-aware expandable chip menu — a trigger reveals further stacked chips" },
+};
+
 import { getComponentSource } from "@/lib/registry-source";
 import { Heading } from "@/components/heading";
 import { ComponentPlayground } from "@/components/highlighted-playground";

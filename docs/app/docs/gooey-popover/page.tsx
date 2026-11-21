@@ -1,3 +1,13 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "GooeyPopover",
+  description: "Skia gooey popover that morphs its trigger into the content panel",
+  alternates: { canonical: "/docs/gooey-popover" },
+  openGraph: { title: "GooeyPopover", description: "Skia gooey popover that morphs its trigger into the content panel", url: "/docs/gooey-popover" },
+  twitter: { title: "GooeyPopover", description: "Skia gooey popover that morphs its trigger into the content panel" },
+};
+
 import { getComponentSource } from "@/lib/registry-source";
 import { Heading } from "@/components/heading";
 import { ComponentPlayground } from "@/components/highlighted-playground";

@@ -1,3 +1,13 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Marquee",
+  description: "Infinite horizontal ticker for any content — reverse direction, tap-to-pause, and hold-to-speed-up",
+  alternates: { canonical: "/docs/marquee" },
+  openGraph: { title: "Marquee", description: "Infinite horizontal ticker for any content — reverse direction, tap-to-pause, and hold-to-speed-up", url: "/docs/marquee" },
+  twitter: { title: "Marquee", description: "Infinite horizontal ticker for any content — reverse direction, tap-to-pause, and hold-to-speed-up" },
+};
+
 import { getComponentSource } from "@/lib/registry-source";
 import { Heading } from "@/components/heading";
 import { ComponentPlayground } from "@/components/highlighted-playground";

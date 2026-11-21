@@ -1,3 +1,13 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Input",
+  description: "Text input with variants and states",
+  alternates: { canonical: "/docs/input" },
+  openGraph: { title: "Input", description: "Text input with variants and states", url: "/docs/input" },
+  twitter: { title: "Input", description: "Text input with variants and states" },
+};
+
 import { getComponentSource } from "@/lib/registry-source";
 import Link from "next/link";
 import { Heading } from "@/components/heading";

@@ -1,3 +1,13 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Expo SDK 57",
+  description: "Set up AniUI on Expo SDK 57 (React Native 0.86, Reanimated ~4.5, worklets ~0.10). Uniwind default or NativeWind v4/v5.",
+  alternates: { canonical: "/docs/expo-57" },
+  openGraph: { title: "Expo SDK 57", description: "Set up AniUI on Expo SDK 57 (React Native 0.86, Reanimated ~4.5, worklets ~0.10). Uniwind default or NativeWind v4/v5.", url: "/docs/expo-57" },
+  twitter: { title: "Expo SDK 57", description: "Set up AniUI on Expo SDK 57 (React Native 0.86, Reanimated ~4.5, worklets ~0.10). Uniwind default or NativeWind v4/v5." },
+};
+
 import Link from "next/link";
 import { Heading } from "@/components/heading";
 import { CodeBlock } from "@/components/code-block-server";

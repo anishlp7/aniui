@@ -1,3 +1,13 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "ExpandableView",
+  description: "Generic expand/collapse container with spring-driven width/height/corner-radius morphing and a slot API",
+  alternates: { canonical: "/docs/expandable-view" },
+  openGraph: { title: "ExpandableView", description: "Generic expand/collapse container with spring-driven width/height/corner-radius morphing and a slot API", url: "/docs/expandable-view" },
+  twitter: { title: "ExpandableView", description: "Generic expand/collapse container with spring-driven width/height/corner-radius morphing and a slot API" },
+};
+
 import { getComponentSource } from "@/lib/registry-source";
 import { Heading } from "@/components/heading";
 import { ComponentPlayground } from "@/components/highlighted-playground";

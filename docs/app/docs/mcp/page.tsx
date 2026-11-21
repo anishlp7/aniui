@@ -1,3 +1,13 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "MCP Server",
+  description: "Give Cursor, Claude Code, and Windsurf direct access to AniUI's 150 components, 15 blocks, and theme tokens via the Model Context Protocol.",
+  alternates: { canonical: "/docs/mcp" },
+  openGraph: { title: "MCP Server", description: "Give Cursor, Claude Code, and Windsurf direct access to AniUI's 150 components, 15 blocks, and theme tokens via the Model Context Protocol.", url: "/docs/mcp" },
+  twitter: { title: "MCP Server", description: "Give Cursor, Claude Code, and Windsurf direct access to AniUI's 150 components, 15 blocks, and theme tokens via the Model Context Protocol." },
+};
+
 import { Heading } from "@/components/heading";
 import { CodeBlock } from "@/components/code-block-server";
 

@@ -1,3 +1,13 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "CLI",
+  description: "Use @aniui/cli to initialize projects, add components, add blocks, set themes, and sync existing installs.",
+  alternates: { canonical: "/docs/cli" },
+  openGraph: { title: "CLI", description: "Use @aniui/cli to initialize projects, add components, add blocks, set themes, and sync existing installs.", url: "/docs/cli" },
+  twitter: { title: "CLI", description: "Use @aniui/cli to initialize projects, add components, add blocks, set themes, and sync existing installs." },
+};
+
 import { Heading } from "@/components/heading";
 import { CodeBlock } from "@/components/code-block-server";
 

@@ -1,3 +1,13 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "ActionRail",
+  description: "Expandable icon toolbar that reveals labeled actions, with its own light/dark palette system",
+  alternates: { canonical: "/docs/action-rail" },
+  openGraph: { title: "ActionRail", description: "Expandable icon toolbar that reveals labeled actions, with its own light/dark palette system", url: "/docs/action-rail" },
+  twitter: { title: "ActionRail", description: "Expandable icon toolbar that reveals labeled actions, with its own light/dark palette system" },
+};
+
 import { getComponentSource } from "@/lib/registry-source";
 import { Heading } from "@/components/heading";
 import { ComponentPlayground } from "@/components/highlighted-playground";

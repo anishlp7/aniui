@@ -1,3 +1,13 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Drawer",
+  description: "Slide-in side navigation panel",
+  alternates: { canonical: "/docs/drawer" },
+  openGraph: { title: "Drawer", description: "Slide-in side navigation panel", url: "/docs/drawer" },
+  twitter: { title: "Drawer", description: "Slide-in side navigation panel" },
+};
+
 import { getComponentSource } from "@/lib/registry-source";
 import { Heading } from "@/components/heading";
 import { ComponentPlayground } from "@/components/highlighted-playground";

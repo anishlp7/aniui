@@ -1,3 +1,13 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "ConnectionBanner",
+  description: "Animated banner showing online/offline connection status",
+  alternates: { canonical: "/docs/connection-banner" },
+  openGraph: { title: "ConnectionBanner", description: "Animated banner showing online/offline connection status", url: "/docs/connection-banner" },
+  twitter: { title: "ConnectionBanner", description: "Animated banner showing online/offline connection status" },
+};
+
 import { getComponentSource } from "@/lib/registry-source";
 import { Heading } from "@/components/heading";
 import { PreviewConnectionBannerDemo } from "@/components/preview/connection-banner";

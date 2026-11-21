@@ -1,3 +1,13 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "PasswordInput",
+  description: "Password input with show/hide toggle and strength indicator",
+  alternates: { canonical: "/docs/password-input" },
+  openGraph: { title: "PasswordInput", description: "Password input with show/hide toggle and strength indicator", url: "/docs/password-input" },
+  twitter: { title: "PasswordInput", description: "Password input with show/hide toggle and strength indicator" },
+};
+
 import { getComponentSource } from "@/lib/registry-source";
 import { Heading } from "@/components/heading";
 import { PreviewPasswordInputDemo } from "@/components/preview/password-input";

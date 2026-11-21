@@ -1,3 +1,13 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "ReceiptCard",
+  description: "Tilted, torn-edge receipt card with dotted item leaders and a printed barcode",
+  alternates: { canonical: "/docs/receipt-card" },
+  openGraph: { title: "ReceiptCard", description: "Tilted, torn-edge receipt card with dotted item leaders and a printed barcode", url: "/docs/receipt-card" },
+  twitter: { title: "ReceiptCard", description: "Tilted, torn-edge receipt card with dotted item leaders and a printed barcode" },
+};
+
 import { getComponentSource } from "@/lib/registry-source";
 import { Heading } from "@/components/heading";
 import { ComponentPlayground } from "@/components/highlighted-playground";

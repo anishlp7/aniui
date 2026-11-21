@@ -1,3 +1,13 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "ProfileCard",
+  description: "Profile card with a cover image, overlapping avatar, location row, and a press-scale action button",
+  alternates: { canonical: "/docs/profile-card" },
+  openGraph: { title: "ProfileCard", description: "Profile card with a cover image, overlapping avatar, location row, and a press-scale action button", url: "/docs/profile-card" },
+  twitter: { title: "ProfileCard", description: "Profile card with a cover image, overlapping avatar, location row, and a press-scale action button" },
+};
+
 import { getComponentSource } from "@/lib/registry-source";
 import { Heading } from "@/components/heading";
 import { ComponentPlayground } from "@/components/highlighted-playground";

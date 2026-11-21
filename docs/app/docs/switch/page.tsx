@@ -1,3 +1,13 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Switch",
+  description: "Toggle switch",
+  alternates: { canonical: "/docs/switch" },
+  openGraph: { title: "Switch", description: "Toggle switch", url: "/docs/switch" },
+  twitter: { title: "Switch", description: "Toggle switch" },
+};
+
 import { getComponentSource } from "@/lib/registry-source";
 import { Heading } from "@/components/heading";
 import { PreviewSwitch } from "@/components/preview/switch";

@@ -1,3 +1,13 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "InputGroup",
+  description: "Compose inputs with addons, buttons, text, and focus-aware container",
+  alternates: { canonical: "/docs/input-group" },
+  openGraph: { title: "InputGroup", description: "Compose inputs with addons, buttons, text, and focus-aware container", url: "/docs/input-group" },
+  twitter: { title: "InputGroup", description: "Compose inputs with addons, buttons, text, and focus-aware container" },
+};
+
 import { getComponentSource } from "@/lib/registry-source";
 import { Heading } from "@/components/heading";
 import { PreviewInputGroupDemo, PreviewInputGroupSuffix, PreviewInputGroupButton } from "@/components/preview/input-group";

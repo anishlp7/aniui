@@ -1,3 +1,13 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "ActionSheet",
+  description: "Action sheet with options",
+  alternates: { canonical: "/docs/action-sheet" },
+  openGraph: { title: "ActionSheet", description: "Action sheet with options", url: "/docs/action-sheet" },
+  twitter: { title: "ActionSheet", description: "Action sheet with options" },
+};
+
 import { getComponentSource } from "@/lib/registry-source";
 import { Heading } from "@/components/heading";
 import { PreviewActionSheet } from "@/components/preview/action-sheet";
