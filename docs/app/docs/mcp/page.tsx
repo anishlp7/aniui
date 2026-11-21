@@ -56,7 +56,20 @@ export default function MCPPage() {
           </ul>
         </div>
 
-        <Heading as="h2" className="text-2xl font-semibold tracking-tight pt-4">Setup for Cursor</Heading>
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight pt-4">One-command setup</Heading>
+        <p className="text-muted-foreground">
+          The fastest path — the AniUI CLI auto-detects installed MCP clients and writes the config for you.
+          No JSON hand-editing, no finding OS-specific paths.
+        </p>
+        <CodeBlock code="npx @aniui/cli mcp install" />
+        <p className="text-muted-foreground">
+          Picks any combination of <strong>Cursor</strong>, <strong>Claude Desktop</strong>, <strong>Claude Code</strong>, and{" "}
+          <strong>Windsurf</strong> interactively, or pass flags for scripted use:{" "}
+          <code className="rounded bg-secondary px-1 py-0.5 text-xs font-mono">--cursor --claude-desktop --claude-code --windsurf --all --dry-run --yes</code>.
+          Idempotent: preserves other mcpServers entries, asks before overwriting a differing <code className="rounded bg-secondary px-1 py-0.5 text-xs font-mono">aniui</code> entry.
+        </p>
+
+        <Heading as="h2" className="text-2xl font-semibold tracking-tight pt-4">Manual setup — Cursor</Heading>
         <p className="text-muted-foreground">
           Create a <code className="rounded bg-secondary px-1.5 py-0.5 text-sm font-mono">.cursor/mcp.json</code> file
           in your project root:
@@ -127,6 +140,14 @@ export default function MCPPage() {
               <tr className="border-b border-border">
                 <td className="py-2 pr-4 font-mono text-xs text-foreground">get_theme_preset</td>
                 <td className="py-2">Primary color HSLs for a built-in preset (default, blue, green, orange, rose)</td>
+              </tr>
+              <tr className="border-b border-border">
+                <td className="py-2 pr-4 font-mono text-xs text-foreground">list_sdk_support</td>
+                <td className="py-2">Library-level matrix: supported Expo SDKs, engines, architectures, and engine-to-arch requirements</td>
+              </tr>
+              <tr className="border-b border-border">
+                <td className="py-2 pr-4 font-mono text-xs text-foreground">check_arch_compatibility</td>
+                <td className="py-2">Pass/warn/fail verdict for a component against a project context (<code className="rounded bg-secondary px-1 py-0.5 text-xs font-mono">{"{expoSdk, engine, arch}"}</code>)</td>
               </tr>
             </tbody>
           </table>

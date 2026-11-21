@@ -39,7 +39,18 @@ Install via one of three equivalent paths:
 
 ## Using the MCP server
 
-Add to the user's MCP config:
+**One-command setup** (the fast path — writes config into every detected
+client):
+
+```bash
+npx @aniui/cli mcp install
+```
+
+Flags: `--cursor --claude-desktop --claude-code --windsurf --all --dry-run --yes`.
+Idempotent (preserves other `mcpServers` entries, asks before overwriting a
+differing `aniui` one).
+
+**Manual config:**
 
 ```json
 {
@@ -59,6 +70,11 @@ Tools you can call:
 - `get_block(name)` — full source for one block.
 - `get_theme_tokens` — HSL CSS variables + their Tailwind class mappings.
 - `get_theme_preset(name)` — tokens for a named preset (default, blue, green, …).
+- `list_sdk_support` — library-level compatibility matrix (supported Expo SDKs,
+  engines, architectures, and engine-to-arch requirements).
+- `check_arch_compatibility(name, {expoSdk?, engine?, arch?})` — pass / warn /
+  fail verdict with reasons, for a component against a project context. Use
+  this *before* suggesting a component to confirm it fits the project.
 
 Resources: `aniui://registry`, `aniui://theme`, `aniui://pattern`.
 
